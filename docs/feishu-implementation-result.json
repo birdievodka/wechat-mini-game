@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+    "log_id": "2026111119061943F0D4CF0F72DEC6BC69",
+    "message": "文档更新成功（append模式）",
+    "mode": "append",
+    "success": true
+  }
+}

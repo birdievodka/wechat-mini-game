@@ -1,0 +1,292 @@
+{
+  "assets/arsenal/weapons.png": {
+    "sourceSha": "7b62a1597e699cb4d9a4ae4c858580d9324de2abb8820fbbf2adf4b1d7c07b67",
+    "outputSha": "f2639553cbb4222433d7d1919c8cc60dfd10015930e6beaca92c806ed295ab7c",
+    "sourceBytes": 2207782,
+    "outputBytes": 687952,
+    "width": 1536,
+    "height": 1024,
+    "rgbRmse": 4.9866,
+    "alpha": "identical"
+  },
+  "assets/battle/characters/liubei-bean-body.png": {
+    "sourceSha": "a9bc5e507123bfafa76c1033aa7b5e5712769f533946b355c2556ddb62f9523a",
+    "outputSha": "da3cb081c10629c2ba22724b08d5a7ba9720e0a6600844a05a52dfd38a9c8c11",
+    "sourceBytes": 967848,
+    "outputBytes": 599116,
+    "width": 1303,
+    "height": 1207,
+    "rgbRmse": 0.8551,
+    "alpha": "identical"
+  },
+  "assets/battle/characters/soldier-hoe-actions.png": {
+    "sourceSha": "1c3a35942afa15e2ceee902f644a3a9bf8bfbd2c7cedfb77ac337ad6ee545a32",
+    "outputSha": "60512704f89f8e0b22fed890a296a354fe8ec6ecd3066308a60df071ee641544",
+    "sourceBytes": 1545039,
+    "outputBytes": 788248,
+    "width": 1448,
+    "height": 1086,
+    "rgbRmse": 1.8504,
+    "alpha": "identical"
+  },
+  "assets/battle/characters/soldier-sickle-actions.png": {
+    "sourceSha": "3c8cf3cd97901218627111298effc09521e28bf8a68f8a6de98ff480f311e79b",
+    "outputSha": "70510f5119c5097e2400f6bbd3062ad15490fa1f7d983dc99e448e59215ab8e8",
+    "sourceBytes": 1477662,
+    "outputBytes": 786652,
+    "width": 1448,
+    "height": 1086,
+    "rgbRmse": 1.805,
+    "alpha": "identical"
+  },
+  "assets/campaign/camp-paper.png": {
+    "sourceSha": "2d55154fd06c3cafcda23b4db43d9ee9131db4c53e3fdd8d562831253dda8813",
+    "outputSha": "a5bfd6b38f78521377478f119670417b7e1c8e653f3acfe64bfd8ee3cbf5011d",
+    "sourceBytes": 244700,
+    "outputBytes": 171215,
+    "width": 341,
+    "height": 512,
+    "rgbRmse": 0.5966,
+    "alpha": "identical"
+  },
+  "assets/campaign/camp-stats.png": {
+    "sourceSha": "51d883141040f3beb3282337e45f1e7249a00fe8c2e31f21b56561ed09f62669",
+    "outputSha": "310c8bcfc08385ba06a4716dadd14f217bb0b5604c1e8322188e9c164ac50924",
+    "sourceBytes": 512069,
+    "outputBytes": 220388,
+    "width": 768,
+    "height": 576,
+    "rgbRmse": 3.2211,
+    "alpha": "identical"
+  },
+  "assets/campaign/camp-titles.png": {
+    "sourceSha": "5552c9903f9ad822e37a1150160cfae304ba3d9f9a55e2deacb1c4c4d295ad50",
+    "outputSha": "643ab8d7715712c1013ab64472e922eae04a49894baa4b760bb042be1019fbb9",
+    "sourceBytes": 223315,
+    "outputBytes": 152495,
+    "width": 1024,
+    "height": 512,
+    "rgbRmse": 0.9176,
+    "alpha": "identical"
+  },
+  "assets/campaign/cavalry.png": {
+    "sourceSha": "c4670ae8458a6412a5570cdafbf17e817b6cd9e114d217830a0c0cb2935d5143",
+    "outputSha": "1071f1f90dfccdd863eac3b83f4c924d92b9384e1671b1d2b07fbfa40b30e5f5",
+    "sourceBytes": 173184,
+    "outputBytes": 85040,
+    "width": 384,
+    "height": 384,
+    "rgbRmse": 1.492,
+    "alpha": "identical"
+  },
+  "assets/campaign/chief.png": {
+    "sourceSha": "3ebbe0522639293895256b9f7a415f6fbaaeea94f9c9a191643ae67d2702bf38",
+    "outputSha": "bf9a56344a3a2bc0a569127fb6b1372eede07a1bbb8faa9aafdafbb0417ecc46",
+    "sourceBytes": 192173,
+    "outputBytes": 91074,
+    "width": 361,
+    "height": 384,
+    "rgbRmse": 1.3228,
+    "alpha": "identical"
+  },
+  "assets/campaign/guanyu.png": {
+    "sourceSha": "52bfaef2f8c20379d60c718dff0bf6841d75502f590f6faebd722d20ae00a064",
+    "outputSha": "9c0e3d941ff85d96e7b232a2c18b7e6d0cba66fed401857b01b25025bf2dba1d",
+    "sourceBytes": 189300,
+    "outputBytes": 89798,
+    "width": 379,
+    "height": 384,
+    "rgbRmse": 1.4668,
+    "alpha": "identical"
+  },
+  "assets/campaign/guanyu_body.png": {
+    "sourceSha": "f76d1377b4a9c08a8819c109bad23daf71c7b732c66b5c9202e51f9ef93f2232",
+    "outputSha": "6408c79af73dd283550b37c68f8b7eaac65661744d4676429b1c45a11472bfd8",
+    "sourceBytes": 144177,
+    "outputBytes": 76061,
+    "width": 359,
+    "height": 384,
+    "rgbRmse": 1.23,
+    "alpha": "identical"
+  },
+  "assets/campaign/items.png": {
+    "sourceSha": "ced5daa61b1d24bacc50ad8474b28c84e73c357d472d1efd02b6f27c032cadcf",
+    "outputSha": "28b0370fbab3e0a44181a8502560a7e12efd43adc63c9aafe666d3cd78390301",
+    "sourceBytes": 542992,
+    "outputBytes": 219947,
+    "width": 768,
+    "height": 576,
+    "rgbRmse": 2.9701,
+    "alpha": "identical"
+  },
+  "assets/campaign/liubei.png": {
+    "sourceSha": "70faca252d9d5b322308a792117f2e7dfad68a02aca14be018fb4c3bcea905f5",
+    "outputSha": "de3e60034dd98353e122381817f01cdf8cd4d051ccf78bddcb32633296576a1e",
+    "sourceBytes": 161409,
+    "outputBytes": 85764,
+    "width": 384,
+    "height": 355,
+    "rgbRmse": 1.1322,
+    "alpha": "identical"
+  },
+  "assets/campaign/spearman.png": {
+    "sourceSha": "0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195",
+    "outputSha": "954290219a6922ad01c999b340ee568d8cb92133331610706a4218befb8b367b",
+    "sourceBytes": 137499,
+    "outputBytes": 69137,
+    "width": 351,
+    "height": 384,
+    "rgbRmse": 1.1944,
+    "alpha": "identical"
+  },
+  "assets/campaign/zhangfei.png": {
+    "sourceSha": "5d650e2c5f7290edbdb150cb5f07b88de32b5840900d6d3b19e70ef4278ba529",
+    "outputSha": "2eadcc0cbdb851d0e86b1368de8eeed5e81e544cca4e391a08e90c3c7da7e069",
+    "sourceBytes": 149952,
+    "outputBytes": 76667,
+    "width": 351,
+    "height": 384,
+    "rgbRmse": 1.2719,
+    "alpha": "identical"
+  },
+  "assets/campaign/zhangfei_body.png": {
+    "sourceSha": "de0b847af749c660582f99d6ca496d1a975e35585468e85567daeb40c84b9249",
+    "outputSha": "27733ecdcb67ea3e408bddc845272b0add6bd6dea0392e55cdca40b9fc6ed814",
+    "sourceBytes": 135592,
+    "outputBytes": 75735,
+    "width": 351,
+    "height": 384,
+    "rgbRmse": 1.0238,
+    "alpha": "identical"
+  },
+  "assets/enemies/archer-actions.png": {
+    "sourceSha": "db32ce1a119d0e27825bc5f9231c105fb5bc01adbf278fc9848151e017f4ffbb",
+    "outputSha": "91a34e954df4db395f838b877ee7c747cb95cf22ef2b705d772c95c095260412",
+    "sourceBytes": 948417,
+    "outputBytes": 473008,
+    "width": 1024,
+    "height": 768,
+    "rgbRmse": 1.8399,
+    "alpha": "identical"
+  },
+  "assets/enemies/cavalry-actions.png": {
+    "sourceSha": "949e69360f75b0ada705cf3ac717305f0904bc418a6d6a5445608720cc6a139f",
+    "outputSha": "5b6bdb061fbfe21b64f912eb57af6bb33396623bdaeae5e6d3d918f138619929",
+    "sourceBytes": 909528,
+    "outputBytes": 444389,
+    "width": 1024,
+    "height": 768,
+    "rgbRmse": 2.219,
+    "alpha": "identical"
+  },
+  "assets/enemies/zhangjiao-actions.png": {
+    "sourceSha": "e9031748c089f1a4a1e23c4c185e53611ebcc405d2b74110bcec77674ef1343d",
+    "outputSha": "ed63e36e3ba8db7fdccd04422ac766ba2eb9f62b8e0e4d95bdd4d3d0272365d9",
+    "sourceBytes": 1026170,
+    "outputBytes": 504968,
+    "width": 1024,
+    "height": 768,
+    "rgbRmse": 2.0118,
+    "alpha": "identical"
+  },
+  "assets/hero-menu/atlas.png": {
+    "sourceSha": "a6c50bd87ee1cd3df928bd75a0bfc07b09e50a00222aa843b94ace88920aa66a",
+    "outputSha": "30c3099f05681e742ba9f9e4ecb306caa21c979ef5804ab6a2263e53b97d2e8c",
+    "sourceBytes": 1766104,
+    "outputBytes": 457911,
+    "width": 1536,
+    "height": 1024,
+    "rgbRmse": 3.5148,
+    "alpha": "identical"
+  },
+  "assets/hero-menu/background.png": {
+    "sourceSha": "9ef627bb47a9949ab96d7df192c77dfe83518d2d3d2f2a903403c374cad11418",
+    "outputSha": "9833ca330181c9aee3edab0b079cefd0d3dbcf1f11a84fb0d9f9d113235eb76f",
+    "sourceBytes": 972628,
+    "outputBytes": 308268,
+    "width": 1024,
+    "height": 575,
+    "rgbRmse": 3.4336,
+    "alpha": "identical"
+  },
+  "assets/meadow/ground.png": {
+    "sourceSha": "e7867054c4d2e94a5ac52c0ad9aca92132ae0dd1abd893d5d04f0e2ba7f65a96",
+    "outputSha": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d",
+    "sourceBytes": 1619972,
+    "outputBytes": 1536743,
+    "width": 1254,
+    "height": 1254,
+    "rgbRmse": 0.5722,
+    "alpha": "identical"
+  },
+  "assets/orchard/decor.png": {
+    "sourceSha": "f60a340fff8caa90d5447b68b72aec3747278654cbfd9ccdf8df3b3a3286153d",
+    "outputSha": "7a578779eaefc9e2c799cfbc61dd4fad0e35ec3b209095ff2172d3c447e37971",
+    "sourceBytes": 2113866,
+    "outputBytes": 698497,
+    "width": 1536,
+    "height": 1024,
+    "rgbRmse": 4.2367,
+    "alpha": "identical"
+  },
+  "assets/presentation/butcher-knife.png": {
+    "sourceSha": "4b7ebc25235b99a76bee3e277951b72b7b037ed7129d84e1f2a610368005d117",
+    "outputSha": "d7be489d3c992535342cc05956bc2deedbd03545e3fd09406d857b7c3735aa01",
+    "sourceBytes": 54694,
+    "outputBytes": 27992,
+    "width": 384,
+    "height": 384,
+    "rgbRmse": 1.4434,
+    "alpha": "identical"
+  },
+  "assets/presentation/heroes.png": {
+    "sourceSha": "3f75e7e41ad867493b74cd4fb6e78263634455218f3f264f82867ad9628a1844",
+    "outputSha": "25c4b2cb112bcd82f6829d0e11f4c30405f95d1d1ec07647031f8cef00148ebf",
+    "sourceBytes": 1274896,
+    "outputBytes": 593693,
+    "width": 1263,
+    "height": 1246,
+    "rgbRmse": 1.8642,
+    "alpha": "identical"
+  },
+  "assets/presentation/icons.png": {
+    "sourceSha": "b616e6e7695ac459c693587f659b21edd19ce89f08054b26af1a8dd38906f7c3",
+    "outputSha": "d1bfcc9348da638fcb1bb3bd40d6d1d02e0bfae3caaf7e19233994f9398e302d",
+    "sourceBytes": 930742,
+    "outputBytes": 365831,
+    "width": 1024,
+    "height": 768,
+    "rgbRmse": 4.2402,
+    "alpha": "identical"
+  },
+  "assets/presentation/weapon-revision.png": {
+    "sourceSha": "8b73a1020075f299f3fadac0f9671323c971fff345f344953888b7cf9bc523d6",
+    "outputSha": "89e8846d6fa266228e0d0c79923ec599a8861bc86cbe6594ba9a9b701ff847c4",
+    "sourceBytes": 70509,
+    "outputBytes": 33581,
+    "width": 512,
+    "height": 256,
+    "rgbRmse": 1.8018,
+    "alpha": "identical"
+  },
+  "assets/results/portraits.png": {
+    "sourceSha": "f6633ef22e5de09133c54b7fd5ae7cea0b68222917b8d2082ef0232404af71fd",
+    "outputSha": "28664936717c159f938665de9369f43a8a2e8eb2883e6707a52cbd5f9c915502",
+    "sourceBytes": 1068744,
+    "outputBytes": 424724,
+    "width": 1152,
+    "height": 768,
+    "rgbRmse": 3.1084,
+    "alpha": "identical"
+  },
+  "assets/talismans/items.png": {
+    "sourceSha": "102be57c9416ba83b73446b25741ec35173efa18bd7305a785923a3945375177",
+    "outputSha": "73492d5b1628b2e6bc03ad68db16c1f8307a64919fb96b2f3b041b266e93946c",
+    "sourceBytes": 2267953,
+    "outputBytes": 1073381,
+    "width": 1448,
+    "height": 1086,
+    "rgbRmse": 5.4558,
+    "alpha": "identical"
+  }
+}

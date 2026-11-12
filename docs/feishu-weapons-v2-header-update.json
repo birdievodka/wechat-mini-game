@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+    "log_id": "202611120447434B63CFCED7F67AEAF3C7",
+    "message": "文档更新成功（replace_range模式）",
+    "mode": "replace_range",
+    "success": true
+  }
+}

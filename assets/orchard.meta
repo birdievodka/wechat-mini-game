@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "71efafab-5d94-4bf2-9baf-5be1fbafccd5",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "battle-subpackage",
+    "bundleName": "orchard",
+    "priority": 8
+  }
+}

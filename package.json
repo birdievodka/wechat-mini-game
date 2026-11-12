@@ -1,0 +1,23 @@
+{
+  "name": "wechat-mini-game",
+  "uuid": "7ca280aa-fa8d-4345-804e-a7f097d44a45",
+  "version": "0.1.0",
+  "private": true,
+  "creator": {
+    "version": "3.8.8"
+  },
+  "description": "Cocos Creator 微信小游戏",
+  "scripts": {
+    "check": "node scripts/check.cjs && node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs --check",
+    "skill:sync": "node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
+    "skill:check": "node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs --check",
+    "typecheck": "tsc --noEmit",
+    "build:wechat": "node scripts/build-wechat.cjs",
+    "test": "node scripts/test-presentation-art.cjs && node scripts/test-result-art.cjs && node scripts/test-startup.cjs && node scripts/test-music.cjs && node scripts/test-weapon-sound.cjs && node scripts/test-weapons.cjs && node scripts/test-combat-effects.cjs && node scripts/test-combat.cjs && node scripts/test-campaign.cjs",
+    "assets:optimize": "node scripts/optimize-textures.cjs"
+  },
+  "devDependencies": {
+    "sharp": "0.35.5",
+    "typescript": "5.4.5"
+  }
+}

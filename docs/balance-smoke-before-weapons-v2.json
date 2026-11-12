@@ -1,0 +1,74 @@
+{
+  "note": "Seeded movement bot with normal health; not human playtesting or a win-rate estimate.",
+  "results": [
+    {
+      "hero": "liubei",
+      "result": "defeat",
+      "wave": 3,
+      "kills": 97,
+      "level": 4,
+      "hp": 0,
+      "seconds": 36.1,
+      "stats": {
+        "maxHp": 22,
+        "damage": 7.909999999999999,
+        "interval": 0.41904761904761906,
+        "speed": 227.95,
+        "armor": 2,
+        "crit": 0.1,
+        "range": 280,
+        "regen": 1,
+        "pickup": 90,
+        "xp": 0,
+        "stipend": 0,
+        "area": 75
+      }
+    },
+    {
+      "hero": "guanyu",
+      "result": "defeat",
+      "wave": 3,
+      "kills": 95,
+      "level": 4,
+      "hp": 0,
+      "seconds": 45,
+      "stats": {
+        "maxHp": 11,
+        "damage": 6.4,
+        "interval": 0.23703703703703702,
+        "speed": 230,
+        "armor": -1,
+        "crit": 0.030000000000000002,
+        "range": 355,
+        "regen": 1,
+        "pickup": 90,
+        "xp": 0,
+        "stipend": 0,
+        "area": 75
+      }
+    },
+    {
+      "hero": "zhangfei",
+      "result": "defeat",
+      "wave": 4,
+      "kills": 181,
+      "level": 6,
+      "hp": 0,
+      "seconds": 11.3,
+      "stats": {
+        "maxHp": 20,
+        "damage": 14.52,
+        "interval": 0.9,
+        "speed": 221.45000000000002,
+        "armor": 4,
+        "crit": 0.1,
+        "range": 320,
+        "regen": 4,
+        "pickup": 105,
+        "xp": 0,
+        "stipend": 0,
+        "area": 75
+      }
+    }
+  ]
+}

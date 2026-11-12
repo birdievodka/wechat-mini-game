@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": [
+    {
+      "kind": "sickle",
+      "prompt": "Use case: stylized-concept. Single full body game sprite of a funny cute incompetent Yellow Turban peasant soldier from Three Kingdoms, matching a simplified big-head Liu Bei chibi mobile game. Huge round head 65% of height, tiny bean-shaped muted ochre tunic body, exactly two tiny dark brown oval feet no legs, crooked yellow tied headband with two short tails, black short hair, uneven thick eyebrows, small determined cross-eyed eyes and a hilariously serious pout. Adorable silly enemy, not ugly grotesque. Both short arms and hands visibly grip ONE farmer sickle: SHORT wooden handle with curved crescent gray metal cutting blade clearly recognizable beside torso on viewer right, weapon held firmly, fully inside frame. No other weapon. Strong readable silhouette at 70 pixels tall. Clean thick dark brown outline, warm flat colors, one simple cel shadow, minimal clothing detail, polished 2D cartoon illustration. Front three-quarter view facing slightly left, same height and framing as a game sprite, character standing naturally. Transparent background, no ground shadow, no scene, no text, no panels, no motion effects. Entire character and weapon fit in square with 8% margin."
+    },
+    {
+      "kind": "hoe",
+      "prompt": "Use case: stylized-concept. Single full body game sprite of a funny cute incompetent Yellow Turban peasant soldier from Three Kingdoms, matching a simplified big-head Liu Bei chibi mobile game. Huge round head 65% of height, tiny bean-shaped muted ochre tunic body, exactly two tiny dark brown oval feet no legs, crooked yellow tied headband with two short tails, black short hair, uneven thick eyebrows, small determined cross-eyed eyes and a hilariously serious pout. Adorable silly enemy, not ugly grotesque. Both short arms and hands visibly grip ONE farmer hoe: wooden shaft, with broad rectangular gray metal blade set at a right angle to shaft, clearly recognizable hoe not axe beside torso on viewer right, weapon held firmly, fully inside frame. No other weapon. Strong readable silhouette at 70 pixels tall. Clean thick dark brown outline, warm flat colors, one simple cel shadow, minimal clothing detail, polished 2D cartoon illustration. Front three-quarter view facing slightly left, same height and framing as a game sprite, character standing naturally. Transparent background, no ground shadow, no scene, no text, no panels, no motion effects. Entire character and weapon fit in square with 8% margin."
+    }
+  ]
+}

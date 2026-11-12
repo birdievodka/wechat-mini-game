@@ -1,0 +1,5 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Edit this exact eight-frame Liu Bei sprite sheet for actual game use. Preserve the original 4 columns by 2 rows layout, each pose's placement, scale, character identity, double straw sandals, outlines, colors and frame sequence. Remove ALL beige background, grid lines, numbers 01-08, ground shadows and isolated motion/impact symbols. Make ALL space outside the character and his two held sandals genuinely transparent alpha, including enclosed gaps between arms and body. Keep opaque cream-white clothing and skin intact, do not remove those. Do not replace the background with a checkerboard illustration. Each cell is equal-sized and the feet share a baseline within each row. Eight full-body sprites only. Do not add text or change the poses. This must be a transparent PNG sprite sheet, not a presentation board.",
+  "output": "assets/resources/characters/liubei-attack-transparent.png"
+}

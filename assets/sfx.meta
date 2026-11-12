@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "9a204cbb-d356-4102-9309-c4315a4c5c46",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "battle-subpackage",
+    "bundleName": "sfx",
+    "priority": 8
+  }
+}

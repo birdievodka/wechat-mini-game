@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "d45a5766-ffb9-426d-aef6-e90e8f4358e8",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "battle-subpackage",
+    "bundleName": "talismans",
+    "priority": 8
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "e4cde92e-8a24-45f8-a49f-6db649d597c5",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "battle-subpackage",
+    "bundleName": "enemies",
+    "priority": 8
+  }
+}

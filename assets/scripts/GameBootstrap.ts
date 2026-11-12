@@ -1,0 +1,1896 @@
+import {
+  _decorator, assetManager, AssetManager, AudioClip, AudioSource, Camera, Canvas, Color, Component, EventKeyboard, EventTouch,
+  game, Game, Graphics, ImageAsset, input, Input, KeyCode, Label, Layers, Node,
+  Rect, ResolutionPolicy, Sprite, SpriteFrame, Texture2D,
+  UITransform, Vec3, view, sys,
+} from 'cc';
+import { DEBUG } from 'cc/env';
+import { BattleMusic } from './battle-music';
+import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound } from './weapon-sound';
+import { movement, sweepEllipseTime, sectorHitsCircle } from './combat-math';
+import { JOYSTICK, joystickCenter, joystickVector } from './joystick-input';
+import { CombatEffects, drawSwordTrail } from './combat-effects';
+import { CampaignView } from './CampaignView';
+import { LoadingView } from './LoadingView';
+import { StartupProgress, startupBridge, CAMPAIGN_ART, ENEMY_ART } from './startup-progress';
+import { ARCHER, CAVALRY, ZHANGJIAO, initialEnemyCooldown, enemyDirection, enemyAnimationCell, attackWindup } from './enemy-behavior';
+import { drawWeaponArt } from './weapon-art';
+import { addWeaponIcon, WEAPON_ICON_RECTS, WEAPON_ICON_PATCH_RECTS, BUTCHER_ICON_RECT, HERO_PART_RECTS } from './presentation-art';
+import { heroIdlePose } from './hero-idle';
+import { HERO_ARMS, relaxedWrist, drawHeroSleeve, drawHeroFist } from './hero-arms';
+import { WeaponId, EquippedWeapon, WeaponStats, WEAPON_LIMIT, WEAPONS, TIER_COLORS, weaponFor, starterFor } from './weapons';
+import { weaponStatsFor, weaponDps, combineWeapon, recycleWeapon, toggleOfferLock } from './campaign';
+import { drawLightningSpell, drawTaoistCast, LIGHTNING_AFTERGLOW } from './enemy-spell-effects';
+import { attachDesktopKeyboard, KeyboardSurface, WeChatKeyboard } from './desktop-keyboard';
+declare const wx: WeChatKeyboard | undefined;
+import { HeroId, EnemyKind, Phase, Run, Stats, Upgrade, ITEMS, WAVE_NAMES, WAVE_SECONDS,
+  createRun, heroFor, statsFor, gainXp, xpNeeded, damageTaken, regenPerSecond, buyItem, rollShop, rerollShop,
+  availableUpgrades, randomSample, chooseUpgrade, waveRule, enemyKind, enemyStats, stipendFor, waveOutcome } from './campaign';
+import { passiveBonuses, amount, PASSIVE_ITEMS } from './passive-items';
+import { WORLD, resizeWorld, spawnPoint, cameraTarget, orbitAnchor, HERO_SKILLS } from './world-rules';
+import { SUPPLY_SECONDS, MAJOR_SECONDS, BOSS_EVERY_WAVES, bossDue, clockText, spawnBudget, enemyCost, rollSupply, buySupply, rerollSupply, supplyCard, SURVIVAL_VERSION, repairSupply } from './survival';
+const { ccclass } = _decorator;
+const MOVE_SPEED = 235;
+const ENEMY_COUNT = 8;
+const TEST_HP = 10000;
+const TEST_ENEMIES: EnemyKind[] = ['soldier', 'spearman', 'cavalry', 'chief'];
+const TEST_SPAWN = { interval: 1.1, cap: 16 };
+interface Enemy {
+  stagger?:number; staggerCooldown?:number; elite?:boolean;
+  animal?: 'chicken' | 'rabbit' | 'pig' | 'tree'; animalArt?: Graphics; ttl?: number; bornTotal?: number; farAge?: number;
+  moving?: boolean; chargeHit?: boolean;
+  kind?: EnemyKind; maxHp?: number; damage?: number; born?: number; warning?: Graphics; skill?: number;
+  node: Node; art: Sprite; text: Label; weaponKind: number; direction: number; walk: number; attack: number; attackCooldown: number; attackAngle: number;
+  x: number; y: number; previousHitX?: number; previousHitY?: number; hp: number; flash: number; dead: number;
+  vx: number; vy: number; speed: number; feedback: number;
+}
+interface Coin { node: Node; art: Node; x: number; y: number; age: number; active: boolean; attracted: boolean; }
+interface Projectile { node: Node; x: number; y: number; angle: number; remaining: number; damage: number; weaponId: WeaponId; stats: WeaponStats; hit: Set<Enemy>; fxClock?:number; bounceLeft?: number; bounced?: boolean; secondary?: boolean; group?: {hits: Map<Enemy,number>; max: number}; }
+interface EnemyShot { node: Node; x: number; y: number; angle: number; remaining: number; speed: number; damage: number; }
+interface EnemyZone { source: Enemy; x: number; y: number; radius: number; age: number; delay: number; damage: number; fired: boolean; }
+interface Weapon {
+  strikeStarted?:boolean;impactPlayed?:boolean;
+  fist:Graphics;
+  orbitBlades?:Node[]; orbitPrevious?:{x:number;y:number}[]; orbitHits?:Map<Enemy,number>;
+  equipped?: EquippedWeapon; stats?: WeaponStats; cooldown: number; duration: number; damage: number; offhand: Node;
+  strikes?: number;
+  node: Node; shoe: Node; arm: Graphics; trail: Graphics; time: number; angle: number; side: number;
+  aimX?: number; aimY?: number; hit: Set<Enemy>; lastX: number; lastY: number;
+}
+
+@ccclass('GameBootstrap')
+export class GameBootstrap extends Component {
+  private readonly buildVersion = SURVIVAL_VERSION;
+  private phase: Phase = 'loading';
+  private testMode = false;
+  private run: Run = createRun('liubei');
+  private stats: Stats = statsFor(this.run);
+  private screens!: CampaignView;
+  private artFrames: Record<string, SpriteFrame> = {};
+  private itemFrames: SpriteFrame[] = [];
+  private ornaments: Node[] = [];
+  private heroName!: Label;
+  private xpBar!: Graphics;
+  private bossBar!: Graphics;
+  private bossLabel!: Label;
+  private remaining = WAVE_SECONDS;
+  private spawnClock = 0;
+  private spawnSerial = 0;
+  private chiefDead = false;
+  private victoryPending=false;
+  private bestClear=0;
+  private enemyShots: EnemyShot[] = [];
+  private roundKills = 0;
+  private roundSummary = '';
+  private bestWave = 0;
+  private bestSurvival = 0;
+  private nextSupply = SUPPLY_SECONDS;
+  private nextEvent = MAJOR_SECONDS;
+  private queuedKind: EnemyKind = 'soldier';
+  private respite = 0;
+  private resumeCountdown = 0;
+  private powerNotice = '';
+  private chainDepth = 0;
+  private peachBurstCooldown = 0;
+  private cleaverCounter = 0;
+  private lastDamage = 0;
+  private upgradeChoices: Upgrade[] = [];
+  private resources!: AssetManager.Bundle;
+  private root!: Node;
+  private camera!: Camera;
+  private battlefield!: Node;
+  private terrain!: Node;
+  private cameraX = 0;
+  private cameraY = 0;
+  private heading = 0;
+  private perks = passiveBonuses(this.run.inventory);
+  private skillButton!: Node;
+  private skillGraphic!: Graphics;
+  private skillLabel!: Label;
+  private skillCooldown = 0;
+  private skillAngle = 0;
+  private skillProtected = 0;
+  private skillSpeed = 0;
+  private skillBlooms: {x:number;y:number;delay:number;damage:number;hit:Set<Enemy>}[] = [];
+  private animalClock = 30;
+  private treeClock = 10;
+  private difficultyNotice = 0;
+  private difficultyLabel!: Label;
+  private meadowTiles:Node[]=[];
+  private hearts: { kind?:'heart'|'peach'; node:Node; x:number;y:number;age:number;active:boolean;attracted:boolean }[] = [];
+  private hintText!: Label;
+  private weaponHud!: Node;
+  private weaponHudKey = '';
+  private idleArms!: Graphics;
+  private naturalHands:Graphics[]=[];
+  private terrainNodes: Node[] = [];
+  private world!: Node;
+  private hero!: Node;
+  private body!: Sprite;
+  private head!: Sprite;
+  private headPivot!: Node;
+  private headOpen?: SpriteFrame;
+  private headClosed?: SpriteFrame;
+  private handBob = 0;
+  private feet: Node[] = [];
+  private walkPhase = 0;
+  private walkBlend = 0;
+  private lean = 0;
+  private torsoBob = 0;
+  private bodyFrame: SpriteFrame | null = null;
+  private soldierFrames: SpriteFrame[][] = [];
+  private enemyFrames: Partial<Record<EnemyKind, SpriteFrame[]>> = {};
+  private enemyZones: EnemyZone[] = [];
+  private dangerFx!: Graphics;
+  private spellFx!: Graphics;
+  private weapons: Weapon[] = [];
+  private projectiles: Projectile[] = [];
+  private coins: Coin[] = [];
+  private get coinTotal(): number { return this.run.gold; }
+  private set coinTotal(value: number) { this.run.gold = value; }
+  private coinPulse = 0;
+  private coinLabel!: Label;
+  private pickupText!: Label;
+  private enemies: Enemy[] = [];
+  private hud!: Label;
+  private joystick!: Graphics;
+  private pauseLabel!: Label;
+  private keys = new Set<KeyCode>();
+  private detachKeyboard?: () => void;
+  private touchId: number | null = null;
+  private origin = { x: 0, y: 0 };
+  private stick = { x: 0, y: 0 };
+  private px = 0;
+  private py = 0;
+  private age = 0;
+  private cooldown = 0;
+  private kills = 0;
+  private hits = 0;
+  private facing = 1;
+  private paused = false;
+  private ready = false;
+  private get playerHp(): number { return this.run.hearts; }
+  private set playerHp(value: number) { this.run.hearts = value; }
+  private regenCharge = 0;
+  private idleTime = 0;
+  private hurtTime = 0;
+  // Transition protection blocks damage without pretending the hero was hit.
+  private protectionTime = 0;
+  private playerVx = 0;
+  private playerVy = 0;
+  private playerBar!: Graphics;
+  private hurtText!: Label;
+  private fx!: Graphics;
+  private friendlyGroundFx!: Graphics;
+  private combatFx = new CombatEffects();
+  private shake = 0;
+  private weaponFreeze = 0;
+  private audioUnlocked = false;
+  private muted = false;
+  private music = new BattleMusic();
+  private musicMuted = false;
+  private backgrounded = false;
+  private musicLoading = false;
+  private musicLoaded = false;
+  private musicSource?: AudioSource;
+  private musicButton!: Label;
+  private soundSources: AudioSource[] = [];
+  private clips: Partial<Record<SoundId, AudioClip>> = {};
+  private soundGate = new SoundGate();
+  private loggedSounds = new Set<string>();
+  private soundButton!: Label;
+  private layoutReady = false;
+  private halfWidth = 667;
+  private halfHeight = 375;
+  private ui!: Node;
+  private statusPanel!: Node;
+  private menu!: Node;
+  private ground!: Graphics;
+  private avatar!: Sprite;
+  private avatarFrame: SpriteFrame | null = null;
+  private healthText!: Label;
+  private loadingScreen!: Node;
+  private loadingText!: Label;
+  private loadingView!: LoadingView;
+  private startupProgress=new StartupProgress();
+  private startupCanEnter=false;
+  private startupCompletePainted=false;
+  private startupTexture?:Texture2D;
+  private startupImage?:ImageAsset;
+
+  async start(): Promise<void> {
+    view.setDesignResolutionSize(1334, 750, ResolutionPolicy.FIXED_HEIGHT);
+    this.root = this.node2D(this.node, 'Canvas');
+    this.root.addComponent(UITransform).setContentSize(1334, 750);
+    const cameraNode = this.node2D(this.root, 'Camera');
+    cameraNode.setPosition(0, 0, 1000);
+    const camera = cameraNode.addComponent(Camera);
+    this.camera = camera;
+    camera.projection = Camera.ProjectionType.ORTHO;
+    camera.orthoHeight = 375; camera.near = 1; camera.far = 2000;
+    camera.visibility = Layers.Enum.UI_2D;
+    camera.clearColor = new Color('#e5ecd6');
+    const canvas = this.root.addComponent(Canvas);
+    canvas.cameraComponent = camera; canvas.alignCanvasWithScreen = true;
+    this.battlefield = this.node2D(this.root,'Battlefield');
+    this.ground = this.node2D(this.battlefield, 'Ground').addComponent(Graphics);
+    this.friendlyGroundFx = this.node2D(this.battlefield, 'FriendlyGroundEffects').addComponent(Graphics);
+    this.dangerFx = this.node2D(this.battlefield, 'EnemySpells').addComponent(Graphics);
+    this.world = this.node2D(this.battlefield, 'World');
+    this.spellFx = this.node2D(this.battlefield, 'EnemySpellBursts').addComponent(Graphics);
+    this.fx = this.node2D(this.battlefield, 'ImpactEffects').addComponent(Graphics);
+    this.terrain = this.node2D(this.battlefield,'Terrain'); this.terrain.setSiblingIndex(1);
+    this.hero = this.node2D(this.world, 'LiuBei');
+    const shadow = this.hero.addComponent(Graphics);
+    shadow.fillColor = new Color(65, 80, 40, 55); shadow.ellipse(0, -16, 31, 10); shadow.fill();
+    for (const side of [-1, 1]) {
+      const foot = this.node2D(this.hero, side < 0 ? 'LeftFoot' : 'RightFoot');
+      const g = foot.addComponent(Graphics);
+      g.strokeColor = new Color('#42291d'); g.lineWidth = 2;
+      g.fillColor = new Color('#654231');
+      g.ellipse(0, 0, 7, 5); g.fill(); g.stroke();
+      foot.setPosition(side * 9, -19);
+      this.feet.push(foot);
+    }
+    const bodyNode = this.node2D(this.hero, 'Body');
+    bodyNode.setPosition(0, 35);
+    this.idleArms=this.node2D(this.hero,'NaturalArms').addComponent(Graphics);
+    this.body = bodyNode.addComponent(Sprite); this.body.sizeMode = Sprite.SizeMode.CUSTOM;
+    bodyNode.getComponent(UITransform)!.setContentSize(112, 110);
+    this.headPivot=this.node2D(this.hero,'HeadPivot');
+    this.head=this.node2D(this.headPivot,'Head').addComponent(Sprite);this.head.sizeMode=Sprite.SizeMode.CUSTOM;
+    for(const side of [-1,1]){const hand=this.node2D(this.hero,side<0?'RelaxedLeftHand':'RelaxedRightHand').addComponent(Graphics);hand.node.setScale(.85,.85,1);hand.node.active=false;this.naturalHands.push(hand);}
+    for (let i = 0; i < WEAPON_LIMIT; i++) this.weapons.push(this.createWeapon(i % 2 ? 1 : -1));
+
+    this.hurtText = this.label(this.hero, '', 0, 116, 24, '#c44338');
+    for (let i = 0; i < ENEMY_COUNT; i++) this.enemies.push(this.createEnemy(i));
+    this.ui = this.node2D(this.root, 'HUD');
+    this.statusPanel = this.node2D(this.ui, 'PlayerStatus');
+    const panel = this.statusPanel.addComponent(Graphics);
+    panel.fillColor = new Color(35, 49, 34, 220); panel.roundRect(0, -105, 300, 105, 18); panel.fill();
+    panel.strokeColor = new Color('#d8c595'); panel.lineWidth = 2; panel.stroke();
+    this.avatar = this.node2D(this.statusPanel, 'Portrait').addComponent(Sprite);
+    this.avatar.sizeMode = Sprite.SizeMode.CUSTOM;
+    this.avatar.node.setPosition(43, -40); this.avatar.node.getComponent(UITransform)!.setContentSize(70, 64);
+    this.heroName = this.label(this.statusPanel, '刘备', 184, -21, 23, '#fff3d4');
+    this.heroName.node.getComponent(UITransform)!.setContentSize(202, 34);
+    this.playerBar = this.node2D(this.statusPanel, 'Health').addComponent(Graphics);
+    this.healthText = this.label(this.statusPanel, '', 237, -88, 14, '#ffffff');this.healthText.node.getComponent(UITransform)!.setContentSize(100,24);
+    this.drawPlayerHealth();
+    const coinIcon = this.node2D(this.statusPanel, 'CoinIcon'); coinIcon.setPosition(103, -88);
+    this.drawCoin(coinIcon.addComponent(Graphics)); coinIcon.setScale(0.75, 0.75, 1);
+    this.coinLabel = this.label(this.statusPanel, '0', 142, -88, 20, '#ffdc78');
+    this.pickupText = this.label(this.hero, '', 0, 91, 20, '#d89122');
+    this.hud = this.label(this.ui, '加载中…', 0, 335, 22, '#394b30');
+    this.xpBar = this.node2D(this.statusPanel, 'Experience').addComponent(Graphics); this.xpBar.node.active = false;
+    this.bossBar = this.node2D(this.ui, 'BossHealth').addComponent(Graphics);
+    this.bossLabel = this.label(this.ui, '', 0, 274, 18, '#613f29');
+    this.joystick = this.node2D(this.ui, 'FixedJoystick').addComponent(Graphics);
+    this.difficultyLabel=this.label(this.ui,'',0,105,42,'#fff0b9');this.difficultyLabel.isBold=true;
+    this.hintText = this.label(this.ui,'',0,-240,20,'#5b5232');
+    this.weaponHud = this.node2D(this.ui,'EquippedWeapons');
+    this.skillButton = this.node2D(this.ui,'HeroSkill'); this.skillButton.addComponent(UITransform).setContentSize(128,128);
+    this.skillGraphic = this.skillButton.addComponent(Graphics);
+    this.skillLabel = this.label(this.skillButton,'',0,-62,20,'#fff1bb'); this.skillLabel.node.getComponent(UITransform)!.setContentSize(170,40);
+    this.skillButton.on(Node.EventType.TOUCH_END,()=>this.castHeroSkill());
+    this.menu = this.node2D(this.ui, 'PauseMenu');
+    const shade = this.menu.addComponent(Graphics); shade.fillColor = new Color(20, 30, 20, 220);
+    shade.roundRect(-180, -300, 360, 455, 24); shade.fill();
+    this.label(this.menu, '桃园乱斗', 0, 110, 30, '#fff3d4');
+    this.button('继续战斗', 0, 40, () => { if (this.playerHp > 0) { this.paused = false; this.menu.active = false; this.drawStick(); this.unlockAudio(); this.music.resume(); } }, this.menu);
+    this.button('返回选人', 0, -35, () => this.showMainMenu(), this.menu);
+    this.soundButton = this.button('音效：开启', 0, -110, () => {
+      this.unlockAudio(); this.muted = !this.muted;
+      this.soundButton.string = this.muted ? '音效：关闭' : '音效：开启';
+      try { sys.localStorage.setItem('taoyuan-muted', String(this.muted)); } catch (_) { /* storage may be disabled */ }
+      if (this.muted) this.stopSounds();
+    }, this.menu);
+    this.musicButton = this.button('音乐：开启', 0, -185, () => {
+      this.unlockAudio(); this.musicMuted = !this.musicMuted;
+      this.music.setEnabled(!this.musicMuted);
+      this.musicButton.string = this.musicMuted ? '音乐：关闭' : '音乐：开启';
+      try { sys.localStorage.setItem('taoyuan-music-muted', String(this.musicMuted)); } catch (_) { /* optional */ }
+      if (!this.musicMuted) this.loadMusic();
+    }, this.menu);
+    this.menu.active = false;
+    this.pauseLabel = this.button('Ⅱ', 0, 0, () => {
+      if (this.phase !== 'battle') return;
+      this.paused = true; this.clearInput(); this.stopSounds(); this.music.pause(); this.menu.active = true;
+    }, this.ui, 58);
+    // No battlefield or HUD may be visible before the user chooses a hero and starts.
+    this.setBattleVisible(false);
+    this.loadingScreen = this.node2D(this.ui, 'LoadingScreen');
+    this.loadingView=new LoadingView(this.loadingScreen);this.loadingText=this.loadingView.status;
+    const startup=startupBridge();this.startupProgress=new StartupProgress(startup?.progress);
+    if(startup?.image){
+      this.startupImage=new ImageAsset(startup.image);const texture=this.startupTexture=new Texture2D();texture.image=this.startupImage;
+      const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,startup.image.width,startup.image.height);
+      this.artFrames.poster=frame;this.loadingView.setPoster(frame,startup.image.width,startup.image.height);this.markStartup('campaign:poster');
+    }
+    this.drawStartupProgress();
+    this.layoutBattlefield();
+    try {
+      this.resources = await new Promise<AssetManager.Bundle>((resolve, reject) => {
+        assetManager.loadBundle('battle', (error, bundle) => error ? reject(error) : resolve(bundle));
+      });
+      if (!this.isValid) return;
+      this.markStartup('battle');
+    } catch (error) {
+      this.failStartup('资源下载失败，请重新进入'); console.error(error); return;
+    }
+    for (let i = 0; i < SFX_VOICES; i++) {
+      const source = this.node2D(this.root, `Voice${i}`).addComponent(AudioSource);
+      source.playOnAwake = false; this.soundSources.push(source);
+      if (DEBUG) source.node.on(AudioSource.EventType.STARTED, () => {
+        const name = source.clip?.name;
+        if (name && !this.loggedSounds.has(name)) { this.loggedSounds.add(name); console.info('[sfx] started', name); }
+      });
+    }
+    for (const name of ['sandal-hit-pcm'] as const) {
+      this.resources.load(`audio/${name}`, AudioClip, (error, clip) => {
+        if (!this.isValid) return;
+        if (error) { this.soundButton.string = '音效加载失败'; console.warn('音效加载失败', name, error); return; }
+        this.clips[name] = clip;
+        if (this.audioUnlocked && !this.muted) this.soundButton.string = '音效：开启';
+      });
+    }
+    this.loadMusic(); this.loadWeaponSounds(); this.loadOrchardArt();
+    input.on(Input.EventType.TOUCH_START, this.touchStart, this);
+    input.on(Input.EventType.TOUCH_MOVE, this.touchMove, this);
+    input.on(Input.EventType.TOUCH_END, this.touchEnd, this);
+    input.on(Input.EventType.TOUCH_CANCEL, this.touchEnd, this);
+    input.on(Input.EventType.KEY_DOWN, this.keyDown, this);
+    input.on(Input.EventType.KEY_UP, this.keyUp, this);
+    this.detachKeyboard = attachDesktopKeyboard(
+      typeof window === 'undefined' ? undefined : window as unknown as KeyboardSurface,
+      typeof wx === 'undefined' ? undefined : wx,
+      () => this.phase === 'battle' && !this.paused && this.playerHp > 0,
+      code => this.keyDown({ keyCode: code } as EventKeyboard),
+      code => this.keyUp({ keyCode: code } as EventKeyboard), () => this.clearInput(),
+    );
+    game.on(Game.EVENT_HIDE, this.onBackground, this);
+    game.on(Game.EVENT_SHOW, this.onForeground, this);
+    ['sickle', 'hoe'].forEach((kind, index) => {
+      this.resources.load(`characters/soldier-${kind}-actions/texture`, Texture2D, (error, texture) => {
+        if (!this.isValid) return;
+        if (error) { this.failStartup('小兵资源加载失败，请重新进入'); console.error(error); return; }
+        const frames: SpriteFrame[] = [];
+        for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
+          const frame = new SpriteFrame(); frame.texture = texture;
+          frame.rect = new Rect(col * texture.width / 4, row * texture.height / 3, texture.width / 4, texture.height / 3);
+          frames.push(frame);
+        }
+        this.soldierFrames[index] = frames;
+        this.markStartup('soldier:'+kind);
+        this.enemies.forEach(e => this.drawEnemy(e));
+        this.checkReady();
+      });
+    });
+    this.resources.load('characters/liubei-bean-body/texture', Texture2D, (error, texture) => {
+      if (!this.isValid) return;
+      if (error) { this.failStartup('角色资源加载失败，请重新进入'); console.error(error); return; }
+      const frame = new SpriteFrame(); frame.texture = texture;
+      // 新图仅含大头和短袍，手臂、握鞋和小脚豆独立驱动。
+      frame.rect = new Rect(0, 0, texture.width, texture.height);
+      this.bodyFrame = frame; this.artFrames.liubei_body = frame; this.body.spriteFrame = frame;
+      this.avatarFrame = new SpriteFrame(); this.avatarFrame.texture = texture;
+      this.avatarFrame.rect = new Rect(0, 0, texture.width, texture.height * 0.78);
+      this.avatar.spriteFrame = this.avatarFrame; this.markStartup('liubei-body'); this.checkReady();
+    });
+    try {
+      const bundle = await new Promise<AssetManager.Bundle>((resolve, reject) => assetManager.loadBundle('campaign', (error, b) => error ? reject(error) : resolve(b)));
+      if(!this.isValid)return;this.markStartup('campaign');
+      await Promise.all(CAMPAIGN_ART.filter(name=>name!=='poster'||!this.artFrames.poster).map(name => new Promise<void>((resolve, reject) => {
+        bundle.load(`${name}/texture`, Texture2D, (error, texture) => {
+          if (error) { reject(error); return; }
+          if (!this.isValid) { resolve(); return; }
+          const frame = new SpriteFrame(); frame.texture = texture; frame.rect = new Rect(0, 0, texture.width, texture.height); this.artFrames[name] = frame;
+          if(name==='poster')this.loadingView.setPoster(frame,texture.width,texture.height);
+          if (name === 'camp-paper') { frame.insetLeft = 44; frame.insetRight = 44; frame.insetTop = 44; frame.insetBottom = 44; }
+          if (name === 'camp-stats') ['hp', 'power', 'damage', 'haste', 'speed', 'armor', 'crit', 'range', 'regen', 'pickup', 'area', 'coin'].forEach((key, index) => {
+            const icon = new SpriteFrame(); icon.texture = texture;
+            icon.rect = new Rect(index % 4 * texture.width / 4, Math.floor(index / 4) * texture.height / 3, texture.width / 4, texture.height / 3);
+            this.artFrames['ui-' + key] = icon;
+          });
+          if (name === 'camp-titles') ['upgrade', 'shop'].forEach((key, index) => {
+            const title = new SpriteFrame(); title.texture = texture;
+            title.rect = new Rect(index * texture.width / 2, texture.height * (index ? .35 : .28), texture.width / 2, texture.height * (index ? .3 : .46));
+            this.artFrames['title-' + key] = title;
+          });
+          if (name === 'items') for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
+            const icon = new SpriteFrame(); icon.texture = texture; icon.rect = new Rect(col * texture.width / 4, row * texture.height / 3, texture.width / 4, texture.height / 3); this.itemFrames.push(icon);
+          }
+          this.markStartup('campaign:'+name);resolve();
+        });
+      })));
+      const enemyBundle = await new Promise<AssetManager.Bundle>((resolve, reject) => assetManager.loadBundle('enemies', (error, b) => error ? reject(error) : resolve(b)));
+      if(!this.isValid)return;this.markStartup('enemies');
+      await Promise.all(ENEMY_ART.map(([kind, name]) => new Promise<void>((resolve, reject) => {
+        enemyBundle.load(`${name}/texture`, Texture2D, (error, texture) => {
+          if (error) { reject(error); return; }
+          if (!this.isValid) { resolve(); return; }
+          const frames: SpriteFrame[] = [];
+          for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
+            const frame = new SpriteFrame(); frame.texture = texture;
+            frame.rect = new Rect(col * texture.width / 4, row * texture.height / 3, texture.width / 4, texture.height / 3); frames.push(frame);
+          }
+          this.enemyFrames[kind] = frames;this.markStartup('enemy:'+kind); resolve();
+        });
+      })));
+      if (!this.isValid) return;
+      await Promise.all([
+        this.loadResultArt(),
+        this.loadPresentationArt(),
+        this.loadHeroMenuArt().catch(error=>{this.startupProgress.skipMenuArt();this.drawStartupProgress();console.warn('选角素材加载失败，使用基础布局',error);}),
+      ]);
+      if(!this.isValid)return;
+      this.artFrames.liubei_body = this.bodyFrame!;
+      this.screens = new CampaignView(this.ui, this.artFrames, this.itemFrames);
+      this.screens.resize(this.halfWidth * 2, this.halfHeight * 2);
+      try { this.bestClear=Number(sys.localStorage.getItem('taoyuan-clear-best'))||0; this.bestSurvival = Number(sys.localStorage.getItem('taoyuan-survival-best')) || 0; this.bestWave = Number(sys.localStorage.getItem('taoyuan-best')) || 0; this.muted = sys.localStorage.getItem('taoyuan-muted') === 'true'; this.musicMuted = sys.localStorage.getItem('taoyuan-music-muted') === 'true'; } catch (_) { /* optional local persistence */ }
+      this.soundButton.string = this.muted ? '音效：关闭' : '音效：开启';
+      this.musicButton.string = this.musicMuted ? '音乐：关闭' : '音乐：开启'; this.music.setEnabled(!this.musicMuted);
+      this.checkReady();
+    } catch (error) { this.failStartup('角色资源加载失败，请重新进入'); console.error(error); }
+  }
+
+  private async loadHeroMenuArt():Promise<void> {
+    const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('hero-menu',(error,b)=>error?reject(error):resolve(b)));
+    if(!this.isValid)return;this.markStartup('hero-menu');
+    await Promise.all(['background','atlas'].map(name=>new Promise<void>((resolve,reject)=>{
+      bundle.load(name+'/texture',Texture2D,(error,texture)=>{
+        if(error){reject(error);return;}if(!this.isValid){resolve();return;}
+        if(name==='background'){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,texture.width,texture.height);this.artFrames['hero-menu-background']=frame;}
+        else{
+          const cw=texture.width/3,ch=texture.height/2;
+          ['liubei','guanyu','zhangfei','logo','title','start'].forEach((key,i)=>{const frame=new SpriteFrame();frame.texture=texture;frame.rect=i<3?new Rect(i*cw,0,cw,ch):new Rect((i-3)*cw,ch+ch*.25,cw,ch*.5);this.artFrames['hero-menu-'+key]=frame;});
+        }this.markStartup('menu:'+name);resolve();
+      });
+    })));
+  }
+
+  private async loadResultArt():Promise<void> {
+    const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('results',(error,b)=>error?reject(error):resolve(b)));
+    if(!this.isValid)return;this.markStartup('results');
+    const texture=await new Promise<Texture2D>((resolve,reject)=>bundle.load('portraits/texture',Texture2D,(error,t)=>error?reject(error):resolve(t)));
+    if(!this.isValid)return;
+    const width=texture.width/3,height=texture.height/2;
+    (['liubei','guanyu','zhangfei'] as const).forEach((id,i)=>{
+      for(const [row,prefix] of [[0,'hero-select-'],[1,'result-']] as const){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(i*width,row*height,width,height);this.artFrames[prefix+id]=frame;}
+    });
+    this.markStartup('results:portraits');
+  }
+
+  private async loadPresentationArt():Promise<void> {
+    const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('presentation',(error,b)=>error?reject(error):resolve(b)));
+    if(!this.isValid)return;this.markStartup('presentation');
+    await Promise.all(['icons','weapon-revision','butcher-knife','heroes'].map(name=>new Promise<void>((resolve,reject)=>{
+      bundle.load(name+'/texture',Texture2D,(error,texture)=>{
+        if(error){reject(error);return;}if(!this.isValid){resolve();return;}
+        const frame=(key:string,rect:number[]):void=>{const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(rect[0],rect[1],rect[2],rect[3]);this.artFrames[key]=f;};
+        if(name==='icons')Object.keys(WEAPON_ICON_RECTS).forEach(id=>frame('icon-'+id,WEAPON_ICON_RECTS[id as WeaponId]!));
+        else if(name==='weapon-revision')for(const id of ['pole'] as const)frame('icon-'+id,WEAPON_ICON_PATCH_RECTS[id]);
+        else if(name==='butcher-knife')frame('icon-cleaver',BUTCHER_ICON_RECT);
+        else Object.keys(HERO_PART_RECTS).forEach(id=>HERO_PART_RECTS[id].forEach((rect,i)=>frame('hero-'+id+'-'+['open','closed','torso'][i],rect)));
+        this.markStartup('presentation:'+name);resolve();
+      });
+    })));
+  }
+
+  private applyHeroPresentation():void {
+    const id=this.run.heroId;
+    this.body.spriteFrame=this.artFrames['hero-'+id+'-torso'];
+    this.headOpen=this.artFrames['hero-'+id+'-open'];this.headClosed=this.artFrames['hero-'+id+'-closed'];this.head.spriteFrame=this.headOpen!;
+    const rect=HERO_PART_RECTS[id];
+    this.body.node.getComponent(UITransform)!.setContentSize(49,49*rect[2][3]/rect[2][2]);
+    this.head.node.getComponent(UITransform)!.setContentSize(100,100*rect[0][3]/rect[0][2]);
+    this.head.node.setPosition(0,id==='guanyu'?24:id==='zhangfei'?25:26);
+    this.animateWalk(0,0,0,0,0);
+  }
+
+  private tintHero(color:string):void {
+    this.body.color=new Color(color);if(this.head)this.head.color=new Color(color);
+  }
+
+  private checkReady(): void {
+    if (this.ready || this.startupCanEnter || this.startupProgress.error || !this.startupProgress.allSettled || !this.screens || !this.bodyFrame || !this.soldierFrames[0] || !this.soldierFrames[1]) return;
+    this.startupProgress.complete();this.startupCanEnter=true;this.drawStartupProgress();
+  }
+
+  private drawStartupProgress():void {
+    this.loadingView.setProgress(this.startupProgress.value,this.startupProgress.error);
+    const startup=startupBridge();if(startup)startup.progress=this.startupProgress.value;
+  }
+  private markStartup(id:string):void {this.startupProgress.mark(id);this.drawStartupProgress();}
+  private failStartup(message:string):void {this.startupProgress.fail(message);this.drawStartupProgress();}
+
+  /** Local browser art review only; release WeChat builds remove this DEBUG branch. */
+  private openCampReview(): void {
+    const params = new URLSearchParams(window.location.search), screen = params.get('camp');
+    if (params.get('weapons') === 'review') {
+      this.restart(true); this.run.weapons = WEAPONS.filter(w=>['smg','shotgun','rocket','sword','thunder','gourd'].indexOf(w.id)>=0).map((w, i) => ({ id: w.id, tier: 2, uid: i + 1 })); this.run.nextWeaponUid = 7;
+      this.refreshStats(); this.syncWeapons(); return;
+    }
+    if (params.get('enemies') === 'review') { this.openEnemyReview(params.get('pose') || ''); return; }
+    if (screen !== 'upgrade' && screen !== 'shop') return;
+    const id = params.get('hero'); this.run = createRun(id === 'guanyu' || id === 'zhangfei' ? id : 'liubei');
+    this.run.wave = 2; this.run.level = 6; this.run.gold = 150; this.run.survivalSeconds = screen === 'upgrade' ? 90 : 30;
+    this.run.supplyCount = screen === 'upgrade' ? 3 : 1; this.run.supplyMode = screen === 'upgrade' ? 'major' : 'normal';
+    this.run.weapons.push({ id: 'peach', tier: 1, uid: 2 }); this.run.nextWeaponUid = 3;
+    if (params.get('weapons') === 'full') { this.run.weapons = WEAPONS.filter(w=>['smg','shotgun','rocket','sword','thunder','gourd'].indexOf(w.id)>=0).map((w, i) => ({ id: w.id, tier: 2, uid: i + 1 })); this.run.nextWeaponUid = 7; }
+    this.stats = this.currentStats(); this.clearBattle(); this.setBattleVisible(true); rollSupply(this.run); this.showShop();
+  }
+
+  /** Separate local QA route; normal startup always stays on the hero selection screen. */
+  private openEnemyReview(pose: string): void {
+    this.restart(); this.clearBattle(); this.run.wave = 2;
+    this.run.bonus.hp = 90; this.refreshStats(); this.playerHp = this.stats.maxHp;
+    this.cooldown = 999; this.spawnClock = 999; this.px = -120; this.py = -100; this.hero.setPosition(this.px, this.py);
+    const entries: [EnemyKind, number, number, number][] = [['spearman', -400, 60, .8], ['cavalry', 330, -100, 2.2], ['chief', 100, 140, 3]];
+    for (const [kind, x, y, cooldown] of entries) {
+      this.spawnNext(kind); const e = this.enemies.find(v => v.hp > 0 && v.kind === kind)!;
+      e.x = x; e.y = y; e.born = 0; e.attackCooldown = pose ? 0 : cooldown; e.node.setPosition(x, y);
+    }
+    if (pose === 'warning' || pose === 'impact') {
+      for (let i = 0; i < (pose === 'warning' ? 36 : 112); i++) this.simulate(1 / 120);
+      this.updateEffects(0); this.paused = true; this.menu.active = false;
+    }
+    this.drawPlayerHealth(); this.drawProgress();
+  }
+
+  update(delta: number): void {
+    this.layoutBattlefield();
+    if(!this.ready&&this.phase==='loading'){
+      if(this.startupCanEnter){
+        if(this.startupCompletePainted){
+          this.ready=true;this.loadingScreen.active=false;this.showMainMenu();
+          const startup=startupBridge();if(startup)delete startup.image;
+          if(DEBUG&&sys.isBrowser)this.openCampReview();
+        }else this.startupCompletePainted=true;
+      }
+      return;
+    }
+    if(this.ready&&this.phase==='battle'&&this.finishVictory())return;
+    if(this.ready&&(this.phase==='defeat'||this.phase==='victory')){this.screens.update(delta);return;}
+    // The music clock continues while shopping/counting down; combat remains frozen.
+    if(this.ready&&!this.paused&&!this.backgrounded&&(this.phase==='battle'||this.phase==='shop'))
+      this.music.update(Math.min(Math.max(delta,0),.08));
+    if (!this.ready || this.paused || this.backgrounded || this.phase !== 'battle') return;
+    // Only simulated foreground time counts; stalls and returning from background never skip danger.
+    const elapsed = Math.min(Math.max(delta, 0), .08);
+    if (this.resumeCountdown > 0) {
+      this.resumeCountdown = Math.max(0, this.resumeCountdown - elapsed);
+      this.hud.string = this.resumeCountdown > .4 ? this.powerNotice : '开打！';
+      if (this.resumeCountdown === 0) this.music.resume();
+      return;
+    }
+    this.soundGate.update(elapsed);
+    let remaining = elapsed;
+    while (remaining > .000001 && this.phase === 'battle') {
+      const boundary = this.testMode ? remaining : this.run.wave === 1 ? this.remaining : this.nextSupply - this.run.survivalSeconds;
+      if (boundary <= .000001) { if (this.run.wave === 1) this.finishWave(); else this.openSupply(); break; }
+      const dt = Math.min(remaining, 1 / 120, boundary);
+      if (!this.testMode) { if (this.run.wave === 1) this.remaining = Math.max(0, this.remaining - dt); else this.run.survivalSeconds += dt; }
+      this.simulate(dt); remaining -= dt;
+      if (this.playerHp <= 0) break;
+    }
+    if (this.phase !== 'battle') return;
+    if (!this.testMode && this.run.wave === 1 && this.remaining <= .000001) { this.finishWave(); return; }
+    if (!this.testMode && this.run.wave === 2 && this.run.survivalSeconds + .000001 >= this.nextSupply) { this.openSupply(); return; }
+    this.followCamera(elapsed); this.updateEffects(elapsed); this.drawProgress();
+    [...this.enemies.filter(e => e.node.active).map(e => e.node), ...this.projectiles.filter(p => p.remaining > 0).map(p => p.node), ...this.enemyShots.filter(p => p.remaining > 0).map(p => p.node), ...this.coins.filter(c => c.active).map(c => c.node), this.hero]
+      .sort((a, b) => b.position.y - a.position.y).forEach((node, i) => node.setSiblingIndex(i));
+    this.fx.node.setSiblingIndex(this.world.getSiblingIndex()+1); this.dangerFx.node.setSiblingIndex(this.fx.node.getSiblingIndex()+1); this.spellFx.node.setSiblingIndex(this.dangerFx.node.getSiblingIndex()+1);
+  }
+
+  private simulate(dt: number): void {
+    this.combatFx.update(dt);
+    this.updateHeroSkill(dt);if(this.finishVictory())return;this.updateWildlife(dt);
+    this.difficultyNotice=Math.max(0,this.difficultyNotice-dt);if(this.difficultyLabel)this.difficultyLabel.string=this.difficultyNotice>0?(this.run.bossEncounter?'张角来袭':'难度升级'):'';
+    this.age += dt; this.peachBurstCooldown = Math.max(0, this.peachBurstCooldown - dt);
+    const rule = this.testMode ? TEST_SPAWN : waveRule(this.run.wave);
+    this.respite = Math.max(0, this.respite - dt);
+    this.spawnClock -= dt;
+    if (this.spawnClock <= 0 && (this.testMode||!this.run.bossEncounter)) {
+      const alive = this.enemies.filter(e => e.hp > 0 && !e.animal).length;
+      if (this.testMode) { this.spawnClock = rule.interval; if (alive < rule.cap) this.spawnTestEnemy(); }
+      else if (this.run.wave === 1) { this.spawnClock = rule.interval; if (alive < rule.cap) this.spawnNext('soldier'); }
+      else {
+        if (alive < 80) this.spawnNext(this.queuedKind);
+        this.queuedKind = enemyKind(2, Math.random, this.run.survivalSeconds);
+        this.spawnClock = enemyCost(this.queuedKind) / spawnBudget(this.run.survivalSeconds) * (this.respite > 0 ? 1.8 : 1);
+      }
+    }
+    this.hurtTime = Math.max(0, this.hurtTime - dt);
+    this.protectionTime = Math.max(0, this.protectionTime - dt);
+    const blink = this.hurtTime > 0 && Math.floor(this.hurtTime * 18) % 2 === 0;
+    this.tintHero(blink ? '#ff8479' : '#ffffff');
+    this.hurtText.string = this.hurtTime > 0.45 ? `-${this.lastDamage}` : '';
+    this.hurtText.node.setPosition(0, 116 + (1.2 - this.hurtTime) * 40);
+    let x = this.stick.x, y = this.stick.y;
+    if (this.keys.size) {
+      x = Number(this.keys.has(KeyCode.KEY_D) || this.keys.has(KeyCode.ARROW_RIGHT))
+        - Number(this.keys.has(KeyCode.KEY_A) || this.keys.has(KeyCode.ARROW_LEFT));
+      y = Number(this.keys.has(KeyCode.KEY_W) || this.keys.has(KeyCode.ARROW_UP))
+        - Number(this.keys.has(KeyCode.KEY_S) || this.keys.has(KeyCode.ARROW_DOWN));
+    }
+    const direction = movement(x, y);
+    const oldX = this.px, oldY = this.py;
+    this.px = this.clamp(this.px + (direction.x * this.stats.speed * (this.hurtTime > Math.max(0,1.2-this.perks.hurtDuration) ? 1+this.perks.hurtSpeed : 1) * (this.skillSpeed>0?1.15:1) + this.playerVx) * dt, -WORLD.halfWidth + 45, WORLD.halfWidth - 45);
+    this.py = this.clamp(this.py + (direction.y * this.stats.speed * (this.hurtTime > Math.max(0,1.2-this.perks.hurtDuration) ? 1+this.perks.hurtSpeed : 1) * (this.skillSpeed>0?1.15:1) + this.playerVy) * dt, -WORLD.halfHeight + 40, WORLD.halfHeight - 50);
+    this.playerVx *= Math.exp(-12 * dt); this.playerVy *= Math.exp(-12 * dt);
+    if(Math.hypot(direction.x,direction.y)>.05) this.heading=Math.atan2(direction.y,direction.x);
+    if (Math.abs(direction.x) > 0.05) this.facing = direction.x > 0 ? 1 : -1;
+    this.hero.setPosition(this.px, this.py);
+    this.animateWalk(dt, this.px - oldX, this.py - oldY, direction.x, direction.y);
+    for (const e of this.enemies) {
+      const center = this.enemyHitCenter(e);
+      e.previousHitX = center.x; e.previousHitY = center.y;
+      this.updateEnemy(e, dt);
+    }
+    // 软分离防止小兵重叠成一个点。
+    for (let i = 0; i < this.enemies.length; i++) for (let j = i + 1; j < this.enemies.length; j++) {
+      const a = this.enemies[i], b = this.enemies[j];
+      if (a.hp <= 0 || b.hp <= 0) continue;
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
+      if (d < 42 && d > 0.001) {
+        const push = (42 - d) * 3 * dt / d;
+        a.x -= dx * push; a.y -= dy * push; b.x += dx * push; b.y += dy * push;
+      }
+    }
+    for (const e of this.enemies) {
+      if (e.hp > 0 && !e.animal && (e.born || 0) <= 0 && Math.hypot(e.x - this.px, e.y - this.py) < (e.kind === 'chief' ? 42 : 24) * (1-this.perks.hitbox)) this.hurtPlayer(e.x, e.y, e.damage);
+    }
+    if (this.playerHp <= 0) return;
+    this.cooldown = Math.max(0, this.cooldown - dt);
+    for (const w of this.weapons) {
+      if (!w.equipped || !w.stats) { if (w === this.weapons[1]) this.updateFreeHand(); continue; }
+      if(w.equipped.id==='sword'){this.updateWeapon(w,dt);continue;}
+      w.cooldown = Math.max(0, w.cooldown - dt);
+      if (this.cooldown <= 0 && w.cooldown <= 0 && w.time >= w.duration) {
+        let target: Enemy | undefined, nearest = w.stats.range;
+        for (const e of this.enemies) {
+          const distance = Math.hypot(e.x - this.px, e.y - this.py);
+          if (e.hp > 0 && (e.born || 0) <= 0 && (!e.animal || this.playerHp < 5) && distance < nearest) { nearest = distance; target = e; }
+        }
+        if (!target) target = this.enemies.find(e=>e.animal && e.hp>0 && (e.born||0)<=0 && Math.hypot(e.x-this.px,e.y-this.py)<w.stats!.range);
+        if (target) {
+          w.strikes = (w.strikes || 0)+1;
+          w.stats = weaponStatsFor(this.run, w.equipped);
+          if (w.equipped.id === 'cleaver' && this.perks.cleaverThird > 0 && w.strikes % 3 === 0) {
+            w.stats.range *= 1.4; w.stats.arc *= 1.4; w.stats.damage *= 1+this.perks.cleaverThird;
+          }
+          w.time = 0; w.hit.clear();w.strikeStarted=false;w.impactPlayed=false; w.duration = Math.min(.38, w.stats.interval * .8);
+          const aim = this.enemyHitCenter(target); w.aimX = aim.x; w.aimY = aim.y;
+          w.angle = Math.atan2(target.y - this.py, target.x - this.px);
+          w.damage = Math.round(w.stats.damage * (Math.random() < w.stats.crit ? w.stats.critMultiplier : 1));
+          w.cooldown = w.stats.interval;
+        }
+      }
+      this.updateWeapon(w, dt);
+    }
+    if(this.finishVictory())return;
+    this.updateProjectiles(dt);if(this.finishVictory())return;
+    this.updateEnemyShots(dt);
+    if (this.playerHp <= 0) return;
+    this.updateEnemyZones(dt);
+    if (this.playerHp <= 0) return;
+    this.updateCoins(dt);
+    this.weaponFreeze = Math.max(0, this.weaponFreeze - dt);
+  }
+
+  private drawPlayerHealth(): void {
+    const g = this.playerBar; g.clear(); this.healthText.string = this.testMode ? '生命'+Math.ceil(this.playerHp) : '';
+    for (let i = 0; i < 5; i++) {
+      const x = 106 + i * 37, y = -55, full = this.playerHp > i;
+      g.fillColor = new Color(full ? '#ef665b' : '#63705b'); g.strokeColor = new Color(full ? '#ffb393' : '#9a9f80'); g.lineWidth = 1.5;
+      g.moveTo(x, y - 10); g.bezierCurveTo(x - 23, y + 5, x - 9, y + 22, x, y + 9); g.bezierCurveTo(x + 9, y + 22, x + 23, y + 5, x, y - 10); g.close(); g.fill(); g.stroke();
+    }
+  }
+
+  // 接触伤害与后续敌方攻击共用同一受伤入口。
+  private hurtPlayer(sourceX: number, sourceY: number, raw = 2): void {
+    if (this.phase!=='battle'||this.victoryPending||this.playerHp <= 0 || this.hurtTime > 0 || this.protectionTime > 0 || this.skillProtected > 0) return;
+    this.lastDamage = 1;
+    this.playerHp = Math.max(0, this.playerHp - this.lastDamage); this.hurtTime = 1.2 + this.perks.invincible;
+    this.refreshStats(); this.pushNearbyEnemies();
+    const dx = this.px - sourceX, dy = this.py - sourceY, distance = Math.hypot(dx, dy);
+    this.playerVx = (distance > 0.001 ? dx / distance : -this.facing) * 230 * (1-this.perks.resist);
+    this.playerVy = (distance > 0.001 ? dy / distance : 0) * 230 * (1-this.perks.resist);
+    this.tintHero('#ff8479');
+    this.hurtText.string = `-${this.lastDamage}`; this.drawPlayerHealth();
+    this.shake = Math.max(this.shake, 0.055);
+    this.playSound('sandal-hit-pcm', 0.48, 2);
+    if (this.playerHp === 0) {
+      this.clearInput(); this.hero.angle = -18;
+      this.weapons.forEach(w => w.trail.clear());
+      this.endRun(false);
+    }
+  }
+
+  private animateWalk(dt: number, dx: number, dy: number, moveX: number, moveY: number): void {
+    this.idleTime += dt;
+    const distance = Math.hypot(dx, dy);
+    const moving = distance > 0.0001;
+    const speed = moving && dt>0 ? Math.min(1, distance / (MOVE_SPEED * dt)) : 0;
+    const smoothing = 1 - Math.exp(-16 * dt);
+    this.walkBlend += (speed - this.walkBlend) * smoothing;
+    // 步频由实际路程驱动，慢推摇杆走小步；贴墙不再原地跑。
+    this.walkPhase += distance / 84 * Math.PI * 2;
+    this.lean += ((moving ? -moveX * 4 : 0) - this.lean) * smoothing;
+    const pose=heroIdlePose(this.run.heroId,this.idleTime,this.walkBlend,this.hurtTime>0||this.skillSpeed>0||this.skillProtected>0);
+    this.handBob=pose.handBob;
+    this.torsoBob = Math.abs(Math.sin(this.walkPhase)) * 1.8 * this.walkBlend + pose.headY*.45;
+    const sway = Math.sin(this.walkPhase) * 1.4 * this.walkBlend;
+    this.body.node.setPosition(sway, -1 + this.torsoBob);
+    this.body.node.angle = this.lean + Math.sin(this.walkPhase) * 2.5 * this.walkBlend + pose.bodyAngle;
+    const squash = Math.cos(this.walkPhase * 2) * 0.025 * this.walkBlend - pose.breath;
+    this.body.node.setScale(this.facing * (1 + squash), 1 - squash, 1);
+    if(this.headPivot){
+      this.headPivot.setPosition(sway+pose.headX,18+this.torsoBob+pose.headY);
+      this.headPivot.angle=this.lean*.6+Math.sin(this.walkPhase)*1.8*this.walkBlend+pose.headAngle*this.facing;
+      this.headPivot.setScale(this.facing,1,1);
+      const frame=pose.eyesClosed?this.headClosed:this.headOpen;if(frame&&this.head.spriteFrame!==frame)this.head.spriteFrame=frame;
+    }
+    this.updateRestingArms();
+    this.feet.forEach((foot, index) => {
+      const side = index === 0 ? -1 : 1;
+      const phase = this.walkPhase + index * Math.PI;
+      const stride = Math.sin(phase) * this.walkBlend;
+      const lift = Math.max(0, Math.cos(phase)) * 3 * this.walkBlend;
+      foot.setPosition(side * 9 + stride * (Math.abs(moveX) > 0.1 ? moveX * 4 : 1.5),
+        -19 + stride * (Math.abs(moveY) > 0.1 ? moveY * 4 : 1.5) + lift);
+      foot.angle = -stride * 9 * (moveX < -0.1 ? -1 : 1);
+      foot.setScale(1 + Math.max(0, -Math.cos(phase)) * 0.07 * this.walkBlend,
+        1 - lift * 0.014, 1);
+    });
+  }
+
+  private placeArmBehindHead(node:Node):void {
+    if(!this.headPivot)return;
+    const head=this.headPivot.getSiblingIndex(),current=node.getSiblingIndex();
+    node.setSiblingIndex(head-(current<head?1:0));
+  }
+
+  private updateRestingArms():void {
+    const arms=this.idleArms;if(!arms)return;arms.clear();
+    const active=this.run.weapons.length>1||this.run.weapons[0]?.id==='sword';arms.node.active=active;
+    this.naturalHands.forEach(hand=>hand.node.active=active);
+    if(!active)return;
+    this.placeArmBehindHead(arms.node);
+    for(let i=0;i<2;i++){
+      const side=(i===0?-1:1)*this.facing,wrist=relaxedWrist(side,this.torsoBob,this.handBob,this.walkPhase,this.walkBlend);
+      drawHeroSleeve(arms,side,wrist,this.torsoBob,heroFor(this.run).color,this.run.heroId);
+      const hand=this.naturalHands[i];if(hand){drawHeroFist(hand,this.run.heroId,side,false);hand.node.setPosition(wrist.x,wrist.y);hand.node.setSiblingIndex(this.hero.children.length-1);}
+    }
+  }
+
+  private createWeapon(side: number): Weapon {
+    const limb = this.node2D(this.hero, 'WeaponArm'), arm = limb.addComponent(Graphics);
+    const node = this.node2D(this.hero, 'Grip'), shoe = this.node2D(node, 'HeldWeapon'); shoe.addComponent(Graphics);
+    node.addComponent(Graphics); // Root remains available for the sword/orbit renderer.
+    const fist=this.node2D(node,'GripFist').addComponent(Graphics);drawHeroFist(fist,this.run.heroId,side,true);
+    const offhand = this.node2D(limb, 'ThrowingHand'), smallFist = offhand.addComponent(Graphics);
+    smallFist.fillColor = new Color('#f2c69c'); smallFist.strokeColor = new Color('#493522'); smallFist.lineWidth = 2;
+    smallFist.circle(0, 0, 7); smallFist.fill(); smallFist.stroke(); offhand.active = false;
+    const trail = this.node2D(this.hero, 'SwingTrail').addComponent(Graphics);
+    return { node, shoe, fist, offhand, arm, trail, time: .38, duration: .38, cooldown: 0, damage: 0, angle: 0, side, hit: new Set(), lastX: 0, lastY: 0 };
+  }
+
+  private syncWeapons(): void {
+    const old = this.menu.children.find(n => n.name === 'PauseWeapons'); if (old) { old.removeFromParent(); old.destroy(); }
+    const bar = this.node2D(this.menu, 'PauseWeapons');
+    this.run.weapons.forEach((equipped, i) => {
+      const n = this.node2D(bar, 'PauseWeapon' + i); n.setPosition(-130 + i * 52, -253); n.setScale(.65, .65, 1);
+      addWeaponIcon(n,this.artFrames,equipped.id,equipped.tier,64);
+    });
+    this.weapons.forEach((w, i) => {
+      for(const blade of w.orbitBlades||[]){blade.removeFromParent();blade.destroy();}w.orbitBlades=[];w.orbitPrevious=undefined;w.orbitHits=new Map();
+      w.equipped = this.run.weapons[i]; w.arm.node.active = this.run.weapons.length===1 && (!!w.equipped || i===1); w.trail.node.active = !!w.equipped;
+      w.node.getComponent(Graphics)!.clear();w.fist.node.active=this.run.weapons.length===1&&w.equipped?.id!=='sword';
+      drawHeroFist(w.fist,this.run.heroId,w.side*this.facing,!!w.equipped);
+      w.offhand.active = false; w.trail.clear();w.strikeStarted=false;w.impactPlayed=false; w.node.active=!!w.equipped || (i===1 && this.run.weapons.length===1); w.time = w.duration; w.cooldown = i * .06;
+      if (!w.equipped) { w.stats = undefined; w.shoe.active = false; return; }
+      w.stats = weaponStatsFor(this.run, w.equipped);
+      drawWeaponArt(w.shoe.getComponent(Graphics)!, w.equipped.id, w.equipped.tier);
+      const existing=w.shoe.children.find(n=>n.name==='WeaponSprite');if(existing){existing.removeFromParent();existing.destroy();}
+      const frame=this.artFrames['weapon-'+w.equipped.id];if(frame){w.shoe.getComponent(Graphics)!.clear();const n=this.node2D(w.shoe,'WeaponSprite'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(78,78);n.setPosition(0,18);if(['smg','shotgun','rocket'].indexOf(w.equipped.id)>=0)n.angle=45;}
+      w.shoe.setPosition(0, 0); w.shoe.active = true;
+    });
+    for (const w of this.weapons) if (w.equipped) this.updateWeapon(w, 0);
+    this.updateFreeHand();this.updateRestingArms();if(this.weaponHud){this.weaponHudKey='';this.drawWeaponHud();}
+  }
+
+  /** An empty equipment slot is not a missing arm. Only the first pair are anatomical hands. */
+  private updateFreeHand(): void {
+    if (this.run.weapons.length !== 1) return;
+    const hand = this.weapons[1], held = this.weapons[0]; if (!hand || !held) return;
+    if(held.equipped?.id==='sword'){hand.arm.node.active=false;hand.node.active=false;return;}
+    const side=this.facing,wrist=relaxedWrist(side,this.torsoBob,this.handBob,this.walkPhase,this.walkBlend);
+    const {x,y}=wrist;
+    hand.arm.node.active = true; hand.shoe.active = false; hand.offhand.active = false;
+    const g = hand.arm;g.clear();drawHeroSleeve(g,side,wrist,this.torsoBob,heroFor(this.run).color,this.run.heroId);
+    if(hand.fist){hand.fist.node.active=true;drawHeroFist(hand.fist,this.run.heroId,side,false);}
+    hand.node.setPosition(x, y); hand.node.setScale(.85, .85, 1);
+    hand.node.angle = -side*8;
+    this.placeArmBehindHead(hand.arm.node);
+    hand.node.setSiblingIndex(this.hero.children.length-1);
+  }
+
+  private updateWeapon(w: Weapon, dt: number): void {
+    if (!w.equipped || !w.stats) return;
+    if(w.equipped.id==='sword'){this.updateOrbitSword(w,dt);return;}
+    const index = this.weapons.indexOf(w), def = weaponFor(w.equipped.id), melee = def.category === 'melee';
+    const oldTime = w.time; w.time = Math.min(w.duration, w.time + dt); const t = w.time / w.duration;
+    const side=w.side*this.facing;
+    const sway = Math.sin(this.walkPhase + index * 1.3) * this.walkBlend * 3 + Math.sin(this.idleTime * 2 + index) * 1.2;
+    const orbit = this.run.weapons.length>1, anchor = orbitAnchor(index,this.run.weapons.length,this.age);
+    const idleX = orbit ? anchor.x : side*HERO_ARMS.heldX, idleY = orbit ? anchor.y + this.torsoBob : HERO_ARMS.heldY+this.torsoBob+sway;
+    const active = t < 1;
+    const extend = active ? Math.sin(t * Math.PI) * (melee ? HERO_ARMS.meleeReach : HERO_ARMS.rangedReach) : 0;
+    const sweep = w.angle + (melee ? (t - .45) * w.stats.arc * Math.PI / 180 : 0);
+    const hx = idleX + Math.cos(sweep) * extend, hy = idleY + Math.sin(sweep) * extend;
+    const arm = w.arm; arm.clear();
+    if(!orbit)drawHeroSleeve(arm,side,{x:hx,y:hy},this.torsoBob,heroFor(this.run).color,this.run.heroId);
+    arm.node.active=!orbit;
+    w.node.setPosition(hx, hy); w.node.angle = active ? sweep * 180 / Math.PI - 90 : w.side * -12;
+    w.node.setScale(orbit ? .78 : .85,orbit ? .78 : .85,1); w.node.setSiblingIndex(orbit && anchor.behind ? 1 : this.hero.children.length-1);
+    if(!orbit)this.placeArmBehindHead(w.arm.node);
+    if(w.fist){w.fist.node.active=!orbit;drawHeroFist(w.fist,this.run.heroId,side,true);}
+    w.trail.clear();
+    if (melee && t > .2 && t < .7) {
+      const r = w.stats.range * .78; w.trail.strokeColor = new Color(255, 238, 182, 165); w.trail.lineWidth = 4;
+      for (let i = 0; i <= 8; i++) {
+        const a = sweep - .42 + i * .105, x = Math.cos(a) * r, yy = 16 + Math.sin(a) * r;
+        if (!i) w.trail.moveTo(x, yy); else w.trail.lineTo(x, yy);
+      } w.trail.stroke();
+    }
+    const release = w.duration * .35;
+    if(melee&&oldTime<w.duration*.7&&w.time>=w.duration*.2)this.meleeStrike(w);
+    w.offhand.active = false;
+    if (w.offhand.active) w.offhand.setPosition(hx - w.side * (14 + extend), hy + 19);
+    if (oldTime < release && w.time >= release) {
+      if (!melee) {
+        const x = this.px + hx, yy = this.py + hy + 15;
+        const angle = Math.atan2((w.aimY ?? yy) - yy, (w.aimX ?? x) - x);
+        this.releaseWeapon(x,yy,angle,w);
+      }
+    }
+    w.shoe.active = w.equipped.id !== 'sandal' || w.time < release || w.time >= w.duration;
+    w.lastX = this.px + hx; w.lastY = this.py + hy;
+  }
+
+  private updateOrbitSword(w:Weapon,dt:number):void {
+    const stats=w.stats!,equipped=w.equipped!,count=Math.min(6,stats.shotCount||3),radius=stats.range;
+    w.orbitBlades=w.orbitBlades||[];w.orbitHits=w.orbitHits||new Map();
+    while(w.orbitBlades.length<count){const n=this.node2D(w.node,'OrbitSword');drawWeaponArt(n.addComponent(Graphics),'sword',equipped.tier,true);w.orbitBlades.push(n);}
+    while(w.orbitBlades.length>count){const n=w.orbitBlades.pop()!;n.removeFromParent();n.destroy();}
+    w.arm.node.active=false;w.offhand.active=false;w.shoe.active=false;w.node.getComponent(Graphics)!.clear();
+    w.node.setPosition(0,35);w.node.setScale(1,1,1);w.node.angle=0;w.node.setSiblingIndex(this.hero.children.length-1);
+    const trail=w.trail;trail.clear();const points:{x:number;y:number}[]=[];let connected=false;
+    for(let i=0;i<count;i++){
+      const a=this.age*(stats.orbitSpeed||4.2)+i*Math.PI*2/count+equipped.uid*2.39996;
+      const x=Math.cos(a)*radius,y=Math.sin(a)*radius,n=w.orbitBlades[i];n.setPosition(x,y);n.angle=a*180/Math.PI;n.setScale(.88,.88,1);
+      const current={x:this.px+x,y:this.py+35+y},previous=w.orbitPrevious?.[i]||current;points.push(current);
+      // A short, bright cutting arc follows each rigid blade; no soft homing trail.
+      drawSwordTrail(trail,a,radius,equipped.tier);
+      if(dt<=0)continue;
+      for(const e of this.enemies){
+        if(e.hp<=0||(e.born||0)>0||(w.orbitHits.get(e)||0)>this.age)continue;
+        const center=this.enemyHitCenter(e),large=e.kind==='chief'?1.65:e.kind==='cavalry'?1.2:1;
+        const hit=sweepEllipseTime(previous.x-(e.previousHitX??center.x),previous.y-(e.previousHitY??center.y),current.x-center.x,current.y-center.y,28*large+14,31*large+14);
+        if(hit===null)continue;
+        w.orbitHits.set(e,this.age+stats.interval);connected=true;
+        const damage=stats.damage*(Math.random()<stats.crit?stats.critMultiplier:1);
+        this.hitEnemy(e,Math.atan2(e.y-this.py,e.x-this.px),damage,stats.knockback,'sword',false);
+      }
+    }
+    w.orbitPrevious=points;
+    for(const [enemy,next]of w.orbitHits)if(enemy.hp<=0||next<this.age-2)w.orbitHits.delete(enemy);
+    if(connected)this.playWeaponSound('sword','hit');
+  }
+
+  private meleeStrike(w: Weapon): void {
+    const stats = w.stats!, weaponId = w.equipped!.id;
+    if(!w.strikeStarted){this.combatFx.slash(weaponId,this.px,this.py+16,w.angle,stats.range,stats.arc);this.playWeaponSound(weaponId,'attack');w.strikeStarted=true;}
+    let hit = false;
+    for (const e of this.enemies) {
+      if (e.hp <= 0 || (e.born || 0) > 0 || w.hit.has(e)) continue;
+      const at=this.enemyHitCenter(e),dx=at.x-this.px,dy=at.y-this.py-16;
+      const angle = Math.atan2(dy,dx),radius=e.animal?18:e.kind==='chief'?48:e.kind==='cavalry'?34:26;
+      if (sectorHitsCircle(dx,dy,stats.range,w.angle,stats.arc,radius)) {
+        w.hit.add(e); hit = true; this.hitEnemy(e, angle, w.damage, stats.knockback, weaponId, false);
+      }
+    }
+    if (hit&&!w.impactPlayed){this.playWeaponSound(weaponId,'hit');w.impactPlayed=true;}
+  }
+
+  private launchProjectile(x: number, y: number, angle: number, weapon: EquippedWeapon, stats: WeaponStats, damage: number, secondary = false, group?: {hits:Map<Enemy,number>;max:number}): void {
+    let shot = this.projectiles.find(p => p.remaining <= 0);
+    if (!shot) {
+      if (this.projectiles.length >= 160) return;
+      const node = this.node2D(this.world, 'HeroProjectile'); node.addComponent(Graphics);
+      shot = { node, x, y, angle, remaining: 0, damage, weaponId: weapon.id, stats: { ...stats }, hit: new Set() }; this.projectiles.push(shot);
+    }
+    drawWeaponArt(shot.node.getComponent(Graphics)!, weapon.id, weapon.tier, true);
+    const scale = weapon.id === 'sandal' || weapon.id === 'firecracker' ? .7 : 1;
+    shot.node.setScale(scale, scale, 1); shot.weaponId = weapon.id; shot.stats = { ...stats }; shot.hit.clear();
+    shot.secondary=secondary;shot.group=group;
+    shot.bounceLeft = stats.bounce||0; shot.bounced = false;
+    shot.damage = damage; shot.x = x; shot.y = y; shot.angle = angle; shot.remaining = stats.range;
+    shot.fxClock = 0;
+    shot.node.active = true; shot.node.angle = angle * 180 / Math.PI - 90; shot.node.setPosition(x, y);
+    this.playWeaponSound(weapon.id, 'attack');
+
+  }
+
+  private explodeProjectile(shot: Projectile, x: number, y: number, direct?: Enemy): void {
+    this.playWeaponSound(shot.weaponId, 'hit');
+    this.combatFx.burst(shot.weaponId,x,y,shot.stats.area);
+    for (const e of this.enemies) {
+      if (e.hp <= 0 || (e.born || 0) > 0) continue;
+      const at = this.enemyHitCenter(e);
+      if (e === direct || Math.hypot(at.x - x, at.y - y) <= shot.stats.area) {
+        if(shot.group){const hits=shot.group.hits.get(e)||0;if(hits>=shot.group.max)continue;shot.group.hits.set(e,hits+1);}
+        this.hitEnemy(e, Math.atan2(at.y - y, at.x - x), shot.damage*(e===direct?1:shot.stats.splashFactor||.55), shot.stats.knockback, shot.weaponId, false,!!shot.secondary);
+      }
+    }
+    shot.remaining = 0;
+  }
+
+  private updateProjectiles(dt: number): void {
+    for (const shot of this.projectiles) {
+      if (shot.remaining <= 0) continue;
+      const step = Math.min(shot.remaining, shot.stats.speed * dt);
+      const nx = shot.x + Math.cos(shot.angle) * step, ny = shot.y + Math.sin(shot.angle) * step;
+      const contacts: { e: Enemy; t: number }[] = [];
+      for (const e of this.enemies) {
+        if (e.hp <= 0 || (e.born || 0) > 0 || shot.hit.has(e)) continue;
+        const center = this.enemyHitCenter(e), large = e.kind === 'chief' ? 1.65 : e.kind === 'cavalry' ? 1.2 : 1;
+        const t = sweepEllipseTime(shot.x - (e.previousHitX ?? center.x), shot.y - (e.previousHitY ?? center.y), nx - center.x, ny - center.y, 33 * large, 47 * large);
+        if (t !== null) contacts.push({ e, t });
+      }
+      contacts.sort((a, b) => a.t - b.t); shot.remaining = Math.max(0, shot.remaining - step);
+      let travel = 1, exploded = false;
+      for (const contact of contacts) {
+        const target = contact.e; if (target.hp <= 0) continue;
+        if(shot.group && (shot.group.hits.get(target)||0)>=shot.group.max){shot.hit.add(target);continue;}
+        if (shot.stats.area > 0) {
+          const center = this.enemyHitCenter(target); this.explodeProjectile(shot, center.x, center.y, target);
+          exploded = true; travel = contact.t; break;
+        }
+        if(shot.group)shot.group.hits.set(target,(shot.group.hits.get(target)||0)+1);
+        this.hitEnemy(target, shot.angle, Math.max(1, Math.round(shot.damage * (shot.hit.size && !shot.bounced ? shot.stats.pierceFactor||.7 : 1))), shot.stats.knockback, shot.weaponId,true,!!shot.secondary);
+        shot.hit.add(target);
+        if ((shot.bounceLeft || 0) > 0) {
+          const hx = shot.x + (nx - shot.x) * contact.t, hy = shot.y + (ny - shot.y) * contact.t;
+          const next = this.enemies.filter(e => e.hp > 0 && (e.born || 0) <= 0 && !shot.hit.has(e) && Math.hypot(e.x - hx, e.y + 34 - hy) < 260).sort((a, b) => Math.hypot(a.x - hx, a.y + 34 - hy) - Math.hypot(b.x - hx, b.y + 34 - hy))[0];
+          if (next) {
+            const at = this.enemyHitCenter(next); shot.angle = Math.atan2(at.y - hy, at.x - hx); shot.bounceLeft!--;
+            if (!shot.bounced) { shot.damage = Math.max(1, Math.round(shot.damage * (shot.stats.bounceFactor||.6))); shot.bounced = true; }
+            shot.remaining = 260; travel = contact.t; break;
+          }
+        }
+        if (shot.hit.size > shot.stats.pierce) { shot.remaining = 0; travel = contact.t; break; }
+      }
+      shot.x += (nx - shot.x) * travel; shot.y += (ny - shot.y) * travel;
+      shot.fxClock=(shot.fxClock||0)+dt;
+      if(shot.remaining>0&&shot.fxClock>=.045){this.combatFx.trail(shot.weaponId,shot.x,shot.y,shot.angle);shot.fxClock=0;}
+      if (!exploded && shot.remaining === 0 && !contacts.length && (shot.weaponId === 'firecracker'||shot.weaponId==='rocket')) this.explodeProjectile(shot, shot.x, shot.y);
+      shot.node.setPosition(shot.x, shot.y);
+      if(shot.weaponId==='sandal')shot.node.angle+=dt*780;
+      else if(shot.weaponId==='peach'||shot.weaponId==='firecracker')shot.node.angle+=dt*100;
+      else shot.node.angle=shot.angle*180/Math.PI-90;
+      shot.node.active = shot.remaining > 0;
+    }
+  }
+
+  private enemyHitCenter(e: Enemy): { x: number; y: number } {
+    const pose = e.art?.node.position;
+    return { x: e.x + (pose?.x ?? 0), y: e.y + (e.animal ? 18 : e.kind === 'chief' ? 60 : e.kind === 'cavalry' ? 42 : 34) + (pose?.y ?? 0) };
+  }
+
+  private createEnemy(index: number): Enemy {
+    const node = this.node2D(this.world, `Soldier${index}`);
+    const art = this.node2D(node, 'SoldierArt').addComponent(Sprite);
+    art.sizeMode = Sprite.SizeMode.CUSTOM;
+    art.node.getComponent(UITransform)!.setAnchorPoint(0.5, 0.06);
+    art.node.getComponent(UITransform)!.setContentSize(78, 78);
+    const e: Enemy = { node, art, weaponKind: 0, direction: 0, walk: 0, attack: -1, attackCooldown: 0, attackAngle: 0,
+      text: this.label(node, '', 0, 70, 21, '#b64e2a'),
+      x: 0, y: 0, hp: 50, flash: 0, dead: 0, vx: 0, vy: 0, speed: 35 + index * 3, feedback: 0 };
+    e.warning = this.node2D(node, 'AttackWarning').addComponent(Graphics); e.warning.node.setSiblingIndex(0);
+    e.hp = 0; e.node.active = false; return e;
+  }
+
+  private spawnEnemy(e: Enemy, index: number): void {
+    let at=spawnPoint(this.px,this.py,e.kind||'soldier',Math.random,this.heading);for(let attempt=0;attempt<10&&this.terrainNodes.some(n=>Math.hypot(n.position.x-at.x,n.position.y-at.y)<85);attempt++)at=spawnPoint(this.px,this.py,e.kind||'soldier',Math.random,this.heading);const point=[at.x,at.y];
+    e.animal=undefined; e.animalArt && (e.animalArt.node.active=false); e.art.node.active=true; e.farAge=0;
+    e.direction = 0; e.walk = 0; e.moving = false; e.chargeHit = false; e.attack = -1;
+    e.attackCooldown = initialEnemyCooldown(e.kind || 'soldier', index); e.attackAngle = 0;
+    e.weaponKind = Math.random() < 0.5 ? 0 : 1;
+    const s = enemyStats(e.kind || 'soldier', this.run.wave, this.run.survivalSeconds);
+    e.x = point[0]; e.y = point[1]; e.hp = s.hp; e.maxHp = s.hp; e.speed = s.speed; e.damage = s.damage; e.bornTotal = e.kind==='chief'?1.5:e.kind==='cavalry'?1.1:.9; e.born=e.bornTotal; e.skill = 0; e.dead = 0; e.flash = 0;e.stagger=0;e.staggerCooldown=0;e.elite=false;
+    e.warning?.clear();
+    e.feedback = 0; e.vx = 0; e.vy = 0; e.node.active = true; e.text.string = '';
+    e.node.setScale(1, 1, 1); e.art.node.angle = 0; e.art.node.setPosition(0, 0); e.art.node.setScale(1, 1, 1); e.text.node.setScale(1, 1, 1);
+    e.node.angle = 0; e.node.setPosition(e.x, e.y);
+    const size = e.kind === 'chief' ? 145 : e.kind === 'cavalry' ? 100 : 78;
+    e.art.node.getComponent(UITransform)!.setContentSize(size, size);
+    e.previousHitX = e.x; e.previousHitY = e.y + 34; this.drawEnemy(e);
+  }
+
+  private updateEnemy(e: Enemy, dt: number): void {
+    if (e.hp <= 0) {
+      e.dead -= dt; e.node.active = e.dead > 1.15;
+      // 击败后仍沿命中方向滑出，小兵侧倒后消失。
+      e.x = this.clamp(e.x + e.vx * dt, -WORLD.halfWidth + 30, WORLD.halfWidth - 30);
+      e.y = this.clamp(e.y + e.vy * dt, -WORLD.halfHeight + 20, WORLD.halfHeight - 80);
+      e.vx *= Math.exp(-12 * dt); e.vy *= Math.exp(-12 * dt);
+      e.node.setPosition(e.x, e.y);
+      const collapse = Math.min(1, (1.5 - e.dead) / 0.25);
+      e.art.node.angle = (e.vx < 0 ? 1 : -1) * collapse * 75;
+      e.art.node.setScale(1 - collapse * 0.15, 1 - collapse * 0.15, 1);
+      e.warning?.clear();
+      return;
+    }
+    if ((e.born || 0) > 0) {
+      e.born = Math.max(0,(e.born||0)-dt); const p=1-e.born/(e.bornTotal||.9), g=e.warning!;g.clear();
+      g.strokeColor=new Color(211,173,84,Math.round(190*(1-p)));g.lineWidth=2;g.ellipse(0,0,28+p*18,12+p*8);g.stroke();
+      g.fillColor=new Color(219,190,119,Math.round((1-p)*140));for(let i=0;i<5;i++){const a=i*1.257;g.circle(Math.cos(a)*30,Math.sin(a)*12+12*p,3+p*3);g.fill();}
+      e.art.node.active=!e.animal&&p>.32;if(e.animalArt)e.animalArt.node.active=!!e.animal&&p>.32;e.node.setScale(.75+.25*p,.75+.25*p,1);
+      if(e.born===0){e.art.node.active=!e.animal;g.clear();e.attackCooldown=Math.max(.2,e.attackCooldown);}
+      return;
+    }
+    if(e.animal){this.updateAnimal(e,dt);return;}
+    e.stagger=Math.max(0,(e.stagger||0)-dt);e.staggerCooldown=Math.max(0,(e.staggerCooldown||0)-dt);
+    const far=Math.hypot(e.x-this.px,e.y-this.py)>1400;e.farAge=far?(e.farAge||0)+dt:0;
+    if((e.farAge||0)>8 && e.kind==='soldier' && e.attack<0){const at=spawnPoint(this.px,this.py,'soldier',Math.random,this.heading);e.x=at.x;e.y=at.y;e.born=.9;e.bornTotal=.9;e.farAge=0;e.node.setPosition(e.x,e.y);return;}
+    e.node.setScale(1, 1, 1);
+    if (e.kind && e.kind !== 'soldier') { this.updateSpecialEnemy(e, dt); return; }
+    const dx = this.px - e.x, dy = this.py - e.y, distance = Math.hypot(dx, dy);
+    e.moving = false;
+    e.attackCooldown = Math.max(0, e.attackCooldown - dt);
+    if ((e.stagger||0) > 0) { e.attack = -1; e.attackCooldown = Math.max(e.attackCooldown, 0.3); }
+    if (e.attack < 0) {
+      if (distance > 1) e.direction = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0);
+      if (distance < 66 && e.attackCooldown <= 0 && (e.stagger||0) <= 0) {
+        e.attack = 0; e.attackAngle = Math.atan2(dy, dx);
+      } else if (distance > 45 && (e.stagger||0) <= 0) {
+        e.x += dx / distance * e.speed * dt; e.y += dy / distance * e.speed * dt;
+        e.walk += e.speed * dt / 12;
+        e.moving = true;
+      }
+    }
+    if (e.attack >= 0) {
+      const previous = e.attack; e.attack += dt;
+      // 先蓄力0.32秒；出手只判定一次，锁定方向，允许玩家走出攻击扇区。
+      if (previous < 0.32 && e.attack >= 0.32 && this.enemyStrikeHits(e)) this.hurtPlayer(e.x, e.y, e.damage);
+      if (e.attack >= 0.65) { e.attack = -1; e.attackCooldown = e.weaponKind === 0 ? 0.65 : 0.9; }
+    }
+    e.x = this.clamp(e.x + e.vx * dt, -WORLD.halfWidth + 30, WORLD.halfWidth - 30); e.y = this.clamp(e.y + e.vy * dt, -WORLD.halfHeight + 20, WORLD.halfHeight - 80);
+    e.vx *= Math.exp(-12 * dt); e.vy *= Math.exp(-12 * dt);
+    const flashing = e.flash > 0; e.flash = Math.max(0, e.flash - dt);
+    if (flashing && e.flash === 0) this.drawEnemy(e);
+    e.node.setPosition(e.x, e.y);
+    e.feedback = Math.max(0, e.feedback - dt);
+    e.text.node.setPosition(0, 65 + (0.45 - e.feedback) * 45);
+    const pop = 1 + Math.max(0, e.feedback - 0.25) * 3;
+    e.text.node.setScale(pop, pop, 1);
+    const hitAge = 0.45 - e.feedback;
+    const wobble = e.feedback > 0 ? Math.cos(hitAge * 32) * Math.exp(-hitAge * 10) * 0.08 : 0;
+    const idle = Math.sin(this.age * 7 + e.speed) * 0.015;
+    e.art.node.setScale((e.direction === 3 ? -1 : 1) * (1 + wobble + idle), 1 - wobble - idle, 1);
+    const lunge = e.attack >= 0.32 ? Math.sin(Math.min(1, (e.attack - 0.32) / 0.33) * Math.PI) * 7 : 0;
+    e.art.node.setPosition(Math.cos(e.attackAngle) * lunge, Math.sin(e.attackAngle) * lunge);
+    this.drawEnemy(e);
+    e.art.node.angle = e.feedback > 0 ? Math.sin(hitAge * 32) * Math.exp(-hitAge * 10) * -9 : 0;
+    if (e.feedback === 0) e.text.string = '';
+  }
+
+  private hitEnemy(e: Enemy, angle: number, damage = this.stats.damage, knockback = weaponStatsFor(this.run, this.run.weapons[0]).knockback, weaponId: WeaponId = this.run.weapons[0].id, audible = true, secondary = false): void {
+    if (e.hp <= 0||this.victoryPending) return;
+    if(e.animal&&e.animal!=='tree') damage *= 1+this.perks.animalDamage;
+    else if(!secondary) damage *= 1+(e.kind==='chief'||e.elite?this.perks.elite:0)+(e.hp<e.maxHp!*.3?this.perks.execute:0)+(Math.hypot(e.x-this.px,e.y-this.py)<180?this.perks.close:0);
+    damage=Math.max(1,Math.round(damage)); e.hp = Math.max(0,e.hp-damage); e.flash = 0.1; e.feedback = 0.45; e.text.string = `-${damage}`; this.hits++;
+    const charging = e.kind === 'cavalry' && e.attack >= CAVALRY.windup && e.attack < CAVALRY.windup + CAVALRY.duration;
+    if(!e.animal&&e.kind!=='chief'&&!charging&&(e.staggerCooldown||0)<=0){e.stagger=weaponId==='smg'?.018:e.kind==='cavalry'?.025:.07;e.staggerCooldown=e.kind==='cavalry'?.5:.28;}
+    const force = knockback * (e.kind === 'chief' ? .06 : e.kind==='cavalry' ? (charging?.10:.35) : 1);
+    e.vx = Math.cos(angle) * force; e.vy = Math.sin(angle) * force;
+    this.drawEnemy(e);
+    this.weaponFreeze = 0.035;
+    this.shake = Math.max(this.shake, e.hp <= 0 ? 0.055 : 0);
+    const at=this.enemyHitCenter(e);this.combatFx.hit(weaponId,at.x,at.y,angle,e.hp<=0);
+    if (audible) this.playWeaponSound(weaponId, 'hit');
+    if (e.hp <= 0) {
+      if(e.animal){e.dead=1.5; e.art.node.active=false; if(e.animalArt)e.animalArt.node.active=false; this.dropHeart(e.x,e.y,e.animal==='tree'?'peach':'heart'); return;}
+      this.kills++; e.dead = 1.5; e.text.string = `-${damage}`; e.warning?.clear();
+      const reward = enemyStats(e.kind || 'soldier', this.run.wave, this.run.survivalSeconds);
+      if (gainXp(this.run, reward.xp) > 0) this.refreshStats();
+      this.run.economyRemainder += reward.coins * (this.perks.income + ((this.run.augments.indexOf('rich') >= 0) ? .3 : 0));
+      const extra = Math.floor(this.run.economyRemainder); this.run.economyRemainder -= extra;
+      for (let i = 0; i < reward.coins + extra; i++) this.dropCoin(e.x + Math.sin(i * 2.4) * i * 4, e.y + Math.cos(i * 2.4) * i * 4);
+      if (!secondary && weaponId === 'peach' && (this.run.augments.indexOf('chain-peach') >= 0 || this.perks.peachChain>0) && this.chainDepth === 0 && this.peachBurstCooldown <= 0) {
+        this.peachBurstCooldown = .12; this.chainDepth++;
+        const radius=90*(1+Math.min(.5,Math.max(0,this.perks.peachChain-1)*.04)); this.combatFx.burst('peach',e.x,e.y+34,radius);
+        for (const other of this.enemies) if (other.hp > 0 && (other.born || 0) <= 0 && Math.hypot(other.x - e.x, other.y - e.y) <= radius) this.hitEnemy(other, Math.atan2(other.y - e.y, other.x - e.x), Math.max(1, Math.round(damage * (this.perks.peachFactor+(this.run.augments.indexOf('chain-peach')>=0&&this.perks.peachChain>0?.1:0)))), knockback * .5, 'peach', false, true);
+        this.chainDepth--;
+      }
+      if (e.kind === 'chief'){this.chiefDead=true;if(this.run.bossEncounter&&!this.testMode)this.victoryPending=true;}
+      this.enemyZones = this.enemyZones.filter(zone => zone.source !== e);
+    }
+  }
+
+  private drawCoin(g: Graphics): void {
+    g.fillColor = new Color('#efb938'); g.strokeColor = new Color('#97601f'); g.lineWidth = 2;
+    g.circle(0, 0, 11); g.fill(); g.stroke();
+    g.strokeColor = new Color('#ffe799'); g.lineWidth = 2; g.circle(0, 0, 7.5); g.stroke();
+    g.fillColor = new Color('#97601f'); g.rect(-3, -3, 6, 6); g.fill();
+  }
+
+  private dropCoin(x: number, y: number): void {
+    let coin = this.coins.find(c => !c.active);
+    if (!coin) {
+      const node = this.node2D(this.world, 'DroppedCoin');
+      const shadow = node.addComponent(Graphics); shadow.fillColor = new Color(74, 64, 24, 55);
+      shadow.ellipse(0, -3, 10, 3); shadow.fill();
+      const art = this.node2D(node, 'CopperCoin'); this.drawCoin(art.addComponent(Graphics));
+      coin = { node, art, x, y, age: 0, active: false, attracted: false }; this.coins.push(coin);
+    }
+    coin.x = x; coin.y = y; coin.age = 0; coin.active = true; coin.attracted = false;
+    coin.node.active = true; coin.node.setPosition(x, y); coin.art.setPosition(0, 0); coin.art.setScale(1, 1, 1);
+  }
+
+  private updateCoins(dt: number): void {
+    this.coinPulse = Math.max(0, this.coinPulse - dt);
+    for (const coin of this.coins) {
+      if (!coin.active) continue;
+      coin.age += dt;
+      const dx = this.px - coin.x, dy = this.py - coin.y, distance = Math.hypot(dx, dy);
+      // 先弹出落地，再吸附；吸附锁定后不会因玩家跑开而突然停住。
+      if (coin.age >= 0.28 && distance <= this.stats.pickup) coin.attracted = true;
+      if (coin.attracted) {
+        const step = Math.min(distance, 560 * dt);
+        if (distance > 0) { coin.x += dx / distance * step; coin.y += dy / distance * step; }
+        if (distance - step <= 14) {
+          coin.active = false; coin.node.active = false; this.coinTotal++; this.coinPulse = 0.45;
+          this.coinLabel.string = `${this.coinTotal}`;
+          continue;
+        }
+      }
+      coin.node.setPosition(coin.x, coin.y);
+      const bounce = coin.age < 0.28 ? Math.sin(coin.age / 0.28 * Math.PI) * 26 : 3 + Math.sin(coin.age * 4) * 2;
+      coin.art.setPosition(0, bounce);
+      coin.art.setScale(0.65 + Math.abs(Math.cos(coin.age * 4)) * 0.35, 1, 1);
+    }
+    const scale = 1 + this.coinPulse / 0.45 * 0.12;
+    this.coinLabel.node.setScale(scale, scale, 1);
+    this.pickupText.string = this.coinPulse > 0 ? '+1' : '';
+    this.pickupText.node.setPosition(0, 91 + (0.45 - this.coinPulse) * 30);
+  }
+
+  private enemyStrikeHits(e: Enemy): boolean {
+    const dx = this.px - e.x, dy = this.py - e.y, distance = Math.hypot(dx, dy);
+    const reach = e.weaponKind === 0 ? 70 : 78;
+    return distance <= reach && (distance < 1 || (dx * Math.cos(e.attackAngle) + dy * Math.sin(e.attackAngle)) / distance >= 0.5);
+  }
+
+  private drawEnemy(e: Enemy): void {
+    const kind = e.kind || 'soldier', cell = enemyAnimationCell(kind, e.direction, e.walk, e.moving !== false, e.attack);
+    e.art.spriteFrame = kind === 'soldier' ? this.soldierFrames[e.weaponKind]?.[cell] || null : this.enemyFrames[kind]?.[cell] || null;
+    e.art.color = new Color(e.flash > 0 ? '#ffb3a3' : '#ffffff');
+  }
+
+  private spawnNext(kind: EnemyKind = enemyKind(this.run.wave, Math.random, this.run.survivalSeconds)): Enemy {
+    let e = this.enemies.find(v => v.hp <= 0 && v.dead <= 0);
+    if (!e) { e = this.createEnemy(this.enemies.length); this.enemies.push(e); }
+    e.kind = kind; this.spawnEnemy(e, this.testMode ? Math.floor(Math.random() * 8) : this.spawnSerial++); return e;
+  }
+
+  private spawnTestEnemy(): void {
+    const bossAlive = this.enemies.some(e => e.hp > 0 && e.kind === 'chief');
+    const kinds = TEST_ENEMIES.filter(kind => kind !== 'chief' || !bossAlive);
+    this.spawnNext(kinds[Math.floor(Math.random() * kinds.length)]);
+  }
+
+  private updateSpecialEnemy(e: Enemy, dt: number): void {
+    const dx = this.px - e.x, dy = this.py - e.y, distance = Math.hypot(dx, dy);
+    const oldX = e.x, oldY = e.y, kind = e.kind!;
+    const boss = kind === 'chief', cavalry = kind === 'cavalry';
+    const windup = attackWindup(kind), g = e.warning!;
+    g.clear(); e.moving = false;
+    e.attackCooldown = Math.max(0, e.attackCooldown - dt);
+    // A committed shot/cast is not reset by each damage flash. Death still cancels it.
+    if (e.attack < 0) {
+      e.direction = enemyDirection(dx, dy, e.direction);
+      const range = boss ? ZHANGJIAO.range : cavalry ? CAVALRY.range : ARCHER.range;
+      const activeSpecial = this.enemies.filter(other => other !== e && other.hp > 0 && other.kind === kind && other.attack >= 0).length;
+      const mayAttack = boss || activeSpecial < (cavalry ? 2 : 4);
+      if (distance < range && e.attackCooldown <= 0 && mayAttack) {
+        e.attack = 0; e.attackAngle = Math.atan2(dy, dx); e.chargeHit = false;
+        if (boss) { e.skill = (e.skill || 0) + 1; this.beginLightning(e); }
+      } else if (distance > 1 && (e.stagger||0) <= 0) {
+        const direction = boss ? (distance > 230 ? 1 : 0) : cavalry ? (distance > 65 ? 1 : 0) : distance > 290 ? 1 : distance < 165 ? -1 : 0;
+        e.x += dx / distance * e.speed * dt * direction; e.y += dy / distance * e.speed * dt * direction;
+        if (direction) e.direction = enemyDirection(dx * direction, dy * direction, e.direction);
+      }
+    }
+    if (e.attack >= 0) {
+      const previous = e.attack; e.attack += dt;
+      e.direction = enemyDirection(Math.cos(e.attackAngle), Math.sin(e.attackAngle), e.direction);
+      // Archers only play their brief draw/release animation: no aiming line.
+      if (boss && e.attack < windup) drawTaoistCast(g, this.age, e.attack / windup);
+      if (!boss && !cavalry && previous < windup && e.attack >= windup) this.fireEnemyShot(e, e.attackAngle, ARCHER.speed);
+      if (cavalry) {
+        const chargeTime = Math.max(0, Math.min(e.attack, windup + CAVALRY.duration) - Math.max(previous, windup));
+        if (chargeTime > 0) {
+          e.x = this.clamp(e.x + Math.cos(e.attackAngle) * CAVALRY.speed * chargeTime, -WORLD.halfWidth + 35, WORLD.halfWidth - 35);
+          e.y = this.clamp(e.y + Math.sin(e.attackAngle) * CAVALRY.speed * chargeTime, -WORLD.halfHeight + 24, WORLD.halfHeight - 85);
+          if (!e.chargeHit && sweepEllipseTime(oldX - this.px, oldY - this.py, e.x - this.px, e.y - this.py, 34, 30) !== null) {
+            e.chargeHit = true; this.hurtPlayer(e.x, e.y, e.damage);
+          }
+          g.fillColor = new Color(173, 139, 87, 105);
+          for (let i = 0; i < 3; i++) { const r = 14 + i * 12; g.ellipse(-Math.cos(e.attackAngle) * r, -Math.sin(e.attackAngle) * r, 7 - i, 4); g.fill(); }
+        }
+      }
+      const duration = cavalry ? CAVALRY.duration + CAVALRY.recovery : boss ? ZHANGJIAO.recovery : ARCHER.recovery;
+      if (e.attack >= windup + duration) {
+        e.attack = -1;
+        e.attackCooldown = boss ? (e.hp < e.maxHp! * .5 ? ZHANGJIAO.enragedCooldown : ZHANGJIAO.cooldown) : cavalry ? CAVALRY.cooldown : ARCHER.cooldown;
+      }
+    }
+    const travel = Math.hypot(e.x - oldX, e.y - oldY);
+    e.moving = travel > .0001; e.walk += travel / (cavalry ? 22 : 12);
+    e.x = this.clamp(e.x + e.vx * dt, -WORLD.halfWidth + 35, WORLD.halfWidth - 35);
+    e.y = this.clamp(e.y + e.vy * dt, -WORLD.halfHeight + 24, WORLD.halfHeight - 85);
+    e.vx *= Math.exp(-12 * dt); e.vy *= Math.exp(-12 * dt); e.flash = Math.max(0, e.flash - dt); e.feedback = Math.max(0, e.feedback - dt);
+    e.node.setPosition(e.x, e.y);
+    const sign = e.direction === 3 ? -1 : 1, step = Math.sin(e.walk * Math.PI);
+    const charging = cavalry && e.attack >= windup && e.attack < windup + CAVALRY.duration;
+    const gathering = cavalry && e.attack >= 0 && e.attack < windup;
+    const brace = gathering ? Math.sin(e.attack / windup * Math.PI * .5) : 0;
+    const hit = e.feedback > 0 ? Math.sin((.45 - e.feedback) * 32) * e.feedback * .13 : 0;
+    const breath = Math.sin(this.age * 4 + e.speed) * .008;
+    const bob = e.moving ? Math.abs(step) * (cavalry ? (charging ? 3 : 1.8) : 1.2) : 0;
+    const recoil = !cavalry && e.attack >= windup ? Math.sin(Math.min(1, (e.attack - windup) / (boss ? .4 : .16)) * Math.PI) * (boss ? 3 : 4) : 0;
+    e.art.node.setPosition(-Math.cos(e.attackAngle) * (recoil + brace * 5), bob - Math.sin(e.attackAngle) * recoil - brace * 3);
+    e.art.node.setScale(sign * (1 + hit + breath + brace * .04), 1 - hit - breath - brace * .06, 1);
+    e.art.node.angle = charging ? -7 * sign : gathering ? 5 * sign * brace : e.moving ? step * 1.8 * sign : 0;
+    e.text.node.setPosition(0, (boss ? 140 : 90) + (.45 - e.feedback) * 35);
+    if (!e.feedback) e.text.string = ''; this.drawEnemy(e);
+  }
+
+  private beginLightning(e: Enemy): void {
+    const triple = (e.skill || 0) % 2 === 0;
+    const nx = -Math.sin(e.attackAngle), ny = Math.cos(e.attackAngle);
+    const offsets = triple ? [0, -155, 155] : [0];
+    offsets.forEach((offset, i) => {
+      if (this.enemyZones.length >= 12) return;
+      const radius = triple ? ZHANGJIAO.tripleRadius : ZHANGJIAO.radius;
+      // Freeze world positions immediately; the player can leave the marked circles.
+      const x = this.clamp(this.px + nx * offset, -WORLD.halfWidth + radius, WORLD.halfWidth - radius);
+      const y = this.clamp(this.py + ny * offset, -WORLD.halfHeight + radius, WORLD.halfHeight - radius - 60);
+      if (this.enemyZones.some(z => z.source === e && !z.fired && Math.hypot(z.x - x, z.y - y) < radius * 1.4)) return;
+      this.enemyZones.push({ source: e, x, y, radius, age: 0, delay: ZHANGJIAO.windup + i * .16, damage: e.damage || 4, fired: false });
+    });
+  }
+
+  private updateEnemyZones(dt: number): void {
+    for (const zone of this.enemyZones) {
+      if (zone.source.hp <= 0) continue;
+      zone.age += dt;
+      if (!zone.fired && zone.age >= zone.delay) {
+        zone.fired = true;
+        if (Math.hypot(this.px - zone.x, this.py - zone.y) <= zone.radius) this.hurtPlayer(zone.x, zone.y, zone.damage);
+      }
+      if (this.playerHp <= 0) break;
+    }
+    this.enemyZones = this.enemyZones.filter(z => z.source.hp > 0 && z.age < z.delay + LIGHTNING_AFTERGLOW);
+  }
+
+  private drawEnemyZones(): void {
+    this.dangerFx.clear(); this.spellFx.clear();
+    for (const zone of this.enemyZones) drawLightningSpell(this.dangerFx, this.spellFx, zone);
+  }
+
+  private fireEnemyShot(e: Enemy, angle: number, speed: number): void {
+    let shot = this.enemyShots.find(s => s.remaining <= 0);
+    if (!shot) {
+      if (this.enemyShots.length >= 80) return;
+      const node = this.node2D(this.world, 'EnemyArrow'), g = node.addComponent(Graphics);
+      g.strokeColor = new Color('#75472b'); g.lineWidth = 3; g.moveTo(-16, 0); g.lineTo(14, 0); g.stroke();
+      g.strokeColor = new Color('#e5cf94'); g.lineWidth = 2; g.moveTo(-15, 0); g.lineTo(-20, 5); g.moveTo(-15, 0); g.lineTo(-20, -5); g.stroke();
+      g.fillColor = new Color('#ebc482'); g.strokeColor = new Color('#b0492d'); g.lineWidth = 2;
+      g.moveTo(21, 0); g.lineTo(12, 4); g.lineTo(12, -4); g.close(); g.fill(); g.stroke();
+      shot = { node, x: 0, y: 0, angle, speed, damage: 10, remaining: 0 }; this.enemyShots.push(shot);
+    }
+    shot.x = e.x; shot.y = e.y + 24; shot.angle = angle; shot.speed = speed; shot.damage = e.damage || 2; shot.remaining = 650;
+    shot.node.active = true; shot.node.angle = angle * 180 / Math.PI; shot.node.setPosition(shot.x, shot.y);
+  }
+
+  private updateEnemyShots(dt: number): void {
+    for (const s of this.enemyShots) {
+      if (s.remaining <= 0) continue;
+      const travel = Math.min(s.remaining, s.speed * dt), x = s.x + Math.cos(s.angle) * travel, y = s.y + Math.sin(s.angle) * travel;
+      if (sweepEllipseTime(s.x - this.px, s.y - this.py - 24, x - this.px, y - this.py - 24, 23, 29) !== null) {
+        this.hurtPlayer(s.x, s.y - 24, s.damage); s.remaining = 0;
+      } else s.remaining -= travel;
+      s.x = x; s.y = y; s.node.setPosition(x, y); s.node.active = s.remaining > 0;
+      if (this.playerHp <= 0) break;
+    }
+  }
+
+  private loadWeaponSounds(): void {
+    assetManager.loadBundle('sfx', (error, bundle) => {
+      if (!this.isValid) return;
+      if (error) { console.warn('武器音效分包加载失败', error); return; }
+      for (const name of GENERATED_SOUNDS) bundle.load(name, AudioClip, (loadError, clip) => {
+        if (!this.isValid) return;
+        if (loadError) { console.warn('武器音效加载失败', name, loadError); return; }
+        this.clips[name] = clip;
+      });
+    });
+  }
+
+  private loadMusic(): void {
+    if (this.musicLoading || this.musicLoaded) return;
+    this.musicLoading = true;
+    assetManager.loadBundle('music', (error, bundle) => {
+      if (!this.isValid) return;
+      if (error) { this.musicLoading = false; console.warn('音乐分包加载失败', error); return; }
+      bundle.load('taoyuan-kaida', AudioClip, (loadError, clip) => {
+        if (!this.isValid) return;
+        this.musicLoading = false;
+        if (loadError) { console.warn('战斗音乐加载失败', loadError); return; }
+        this.musicLoaded = true;
+        this.musicSource = this.node2D(this.root, 'BattleMusic').addComponent(AudioSource);
+        this.musicSource.playOnAwake = false; this.musicSource.clip = clip;
+        if (DEBUG) this.musicSource.node.on(AudioSource.EventType.STARTED, () => {
+          console.info('[music] 桃园开打 started', this.musicSource!.currentTime.toFixed(2), 'duration', this.musicSource!.duration);
+        });
+        this.music.attach(this.musicSource);
+      });
+    });
+  }
+  private unlockAudio(): void { this.audioUnlocked = true; this.music.unlock(); }
+
+  private playWeaponSound(weapon: WeaponId, event: SoundEvent): void {
+    const name = weaponSound(weapon, event);
+    if (name) this.playSound(name, SOUND_CUES[name].volume);
+  }
+  private playSound(name: SoundId, volume: number, priority: number = SOUND_CUES[name].priority): void {
+    const clip = this.clips[name];
+    if (!this.audioUnlocked || this.muted || !clip || !this.soundSources.length) return;
+    const index = this.soundGate.acquire(name, priority); if (index === undefined) return;
+    const source = this.soundSources[index];
+    source.stop(); source.clip = clip; source.volume = volume; source.play();
+  }
+  private stopSounds(): void { for (const source of this.soundSources) source.stop(); this.soundGate.reset(); }
+  private onBackground(): void { this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
+  private onForeground(): void {
+    this.backgrounded = false;
+    if(this.phase==='shop'&&!this.paused)this.music.resume();
+    else if (this.paused || this.phase !== 'battle') { this.music.pause(); this.stopSounds(); }
+  }
+
+  private updateEffects(dt: number): void {
+    this.shake = Math.max(0, this.shake - dt);
+    const intensity = Math.min(1, this.shake / 0.055) * 1.2;
+    // 只震动战场层，摇杆和UI保持稳定，触摸坐标不受影响。
+    this.world.setPosition(Math.sin(this.age * 170) * intensity, Math.cos(this.age * 135) * intensity * 0.65);
+    this.fx.node.setPosition(this.world.position);
+    this.dangerFx.node.setPosition(this.world.position); this.spellFx.node.setPosition(this.world.position); this.drawEnemyZones();
+    this.friendlyGroundFx.node.setPosition(this.world.position);
+    this.fx.clear(); this.friendlyGroundFx.clear();
+    this.combatFx.draw(this.friendlyGroundFx,this.fx,this.cameraX,this.cameraY,this.halfWidth,this.halfHeight);
+    for(const shot of this.projectiles)if(shot.remaining>0 && Math.abs(shot.x-this.cameraX)<this.halfWidth+80 && Math.abs(shot.y-this.cameraY)<this.halfHeight+80)
+      this.combatFx.flight(this.fx,shot.weaponId,shot.x,shot.y,shot.angle);
+  }
+
+  private localPoint(event: EventTouch): Vec3 {
+    // getUILocation 是左下角原点的 UI 坐标，不能直接当作世界坐标。
+    // 使用摄像机投影，兼容居中的 Canvas、屏幕比例和像素比。
+    const p = event.getLocation();
+    const world = this.camera.screenToWorld(new Vec3(p.x, p.y, 0));
+    return this.root.getComponent(UITransform)!.convertToNodeSpaceAR(world);
+  }
+  private touchStart(event: EventTouch): void {
+    if (this.touchId !== null || this.paused || this.playerHp <= 0 || this.phase !== 'battle') return;
+    const p = this.localPoint(event);
+    if (Math.abs(p.x) > this.halfWidth || Math.abs(p.y) > this.halfHeight) return;
+    const center=joystickCenter(this.halfWidth,this.halfHeight);
+    if(Math.hypot(p.x-center.x,p.y-center.y)>JOYSTICK.activation)return;
+    this.unlockAudio();
+    this.touchId=event.getID();this.origin=center;
+    this.stick=joystickVector(p.x-center.x,p.y-center.y);this.drawStick();
+  }
+  private touchMove(event: EventTouch): void {
+    if (event.getID() !== this.touchId) return;
+    const p = this.localPoint(event);
+    this.stick=joystickVector(p.x-this.origin.x,p.y-this.origin.y);this.drawStick();
+  }
+  private touchEnd(event: EventTouch): void { if (event.getID() === this.touchId) this.clearTouch(); }
+  private keyDown(event: EventKeyboard): void {
+    this.unlockAudio();
+    if (!this.muted && this.clips['sandal-hit-pcm']) this.soundButton.string = '音效：开启';
+    if (this.paused || this.phase !== 'battle') return;
+    if(event.keyCode===32 || event.keyCode===69){this.castHeroSkill();return;}
+    if ([KeyCode.KEY_W, KeyCode.KEY_A, KeyCode.KEY_S, KeyCode.KEY_D,
+      KeyCode.ARROW_UP, KeyCode.ARROW_LEFT, KeyCode.ARROW_DOWN, KeyCode.ARROW_RIGHT].indexOf(event.keyCode) !== -1) {
+      this.keys.add(event.keyCode);
+    }
+  }
+  private keyUp(event: EventKeyboard): void { this.keys.delete(event.keyCode); }
+  private clearTouch(): void { this.touchId = null; this.stick = { x: 0, y: 0 }; if (this.joystick) this.drawStick(); }
+  private clearInput(): void { this.keys.clear(); this.clearTouch(); }
+  private drawStick(): void {
+    const g=this.joystick;g.clear();
+    g.node.active=this.phase==='battle'&&!this.paused;
+    if(!g.node.active)return;
+    const active=this.touchId!==null,center=joystickCenter(this.halfWidth,this.halfHeight);this.origin=center;
+    const {x,y}=center;
+    g.fillColor=new Color(34,52,38,active?130:90);g.circle(x,y,JOYSTICK.radius);g.fill();
+    g.strokeColor=new Color(245,225,177,active?190:105);g.lineWidth=2;g.circle(x,y,JOYSTICK.radius);g.stroke();
+    g.strokeColor=new Color(154,185,122,active?145:65);g.lineWidth=1;g.circle(x,y,JOYSTICK.radius*.88);g.stroke();
+    for(let i=0;i<4;i++){const a=i*Math.PI/2,c=Math.cos(a),s=Math.sin(a),r=JOYSTICK.radius*.76;g.fillColor=new Color(243,229,195,active?160:95);
+      g.moveTo(x+c*(r+5),y+s*(r+5));g.lineTo(x+c*(r-3)-s*4,y+s*(r-3)+c*4);g.lineTo(x+c*(r-3)+s*4,y+s*(r-3)-c*4);g.close();g.fill();}
+    const kx=x+this.stick.x*JOYSTICK.travel,ky=y+this.stick.y*JOYSTICK.travel;
+    g.fillColor=new Color(28,43,31,90);g.circle(kx+2,ky-4,JOYSTICK.knob+2);g.fill();
+    g.fillColor=new Color(active?'#d9e5ba':'#d3d8b9');g.strokeColor=new Color('#fff0c8');g.lineWidth=2;g.circle(kx,ky,JOYSTICK.knob);g.fill();g.stroke();
+    g.strokeColor=new Color('#99ad7c');g.lineWidth=2;g.circle(kx,ky,JOYSTICK.knob*.76);g.stroke();
+  }
+  private layoutBattlefield(): void {
+    const size = view.getVisibleSize();
+    const hw = size.width / 2, hh = size.height / 2;
+    if (this.layoutReady && this.halfWidth === hw && this.halfHeight === hh) return;
+    this.layoutReady = true;
+    this.halfWidth = hw; this.halfHeight = hh;resizeWorld(size.width,size.height);
+    this.root.getComponent(UITransform)!.setContentSize(size.width, size.height);
+    this.statusPanel.setPosition(-hw + 32, hh - 25);
+    this.hud.node.setPosition(0, hh - 42);
+    // Keep the game's pause button left of WeChat's native capsule.
+    this.pauseLabel.node.parent!.setPosition(hw - 240, hh - 48);
+    this.bossLabel.node.setPosition(0,hh-86); this.skillButton.setPosition(hw-100,joystickCenter(hw,hh).y); this.weaponHud.setPosition(0,-hh+96); this.hintText.node.setPosition(0,-hh+148);
+    this.screens?.resize(size.width, size.height);
+    this.loadingView?.resize(size.width,size.height);
+    this.origin=joystickCenter(hw,hh);this.clearInput();
+    this.rebuildMeadow();
+  }
+
+  private setBattleVisible(visible: boolean): void {
+    this.ground.node.active = visible; this.dangerFx.node.active = visible; this.spellFx.node.active = visible; this.world.active = visible; this.fx.node.active = visible; this.statusPanel.active = visible;
+    this.battlefield.active=visible; this.hud.node.active = visible; this.xpBar.node.active = false; this.skillButton.active=visible; this.weaponHud.active=visible; this.hintText.node.active=visible;this.difficultyLabel.node.active=visible;
+    this.bossBar.node.active = visible; this.bossLabel.node.active = visible; this.pauseLabel.node.parent!.active = visible;
+    this.menu.active = false; this.clearInput();
+  }
+
+  private showMainMenu(): void {
+    if (!this.ready) return;
+    this.phase = 'menu'; this.testMode = false; this.paused = false; this.stopSounds(); this.clearBattle(); this.setBattleVisible(false);
+    this.screens.menu(this.run.heroId,id=>{if(this.phase!=='menu')return;this.unlockAudio();this.run=createRun(id);this.restart(false);});
+  }
+
+  private restart(testMode = this.testMode): void {
+    const id = this.run.heroId, starter = this.run.starter;
+    this.testMode = testMode; this.run = createRun(id, starter);
+    if (testMode) this.run.wave = 2;
+    this.stats = this.currentStats(); this.playerHp = this.stats.maxHp;
+    this.kills = 0; this.hits = 0; this.roundKills = 0; this.chiefDead = false;
+    this.applyHeroPresentation();
+    this.avatar.spriteFrame = this.artFrames['hero-select-'+id]||this.artFrames[id]; this.heroName.string = heroFor(this.run).name;
+    this.syncWeapons();
+    this.updateOrnaments(); this.startWave();
+  }
+
+  private clearBattle(): void {
+    this.victoryPending=false;
+    this.coins.forEach(c => { c.active = false; c.node.active = false; });
+    this.projectiles.forEach(p => { p.remaining = 0; p.node.active = false; });
+    this.enemyShots.forEach(p => { p.remaining = 0; p.node.active = false; });
+    this.enemies.forEach(e => { e.hp = 0; e.dead = 0; e.node.active = false; e.warning?.clear(); });
+    this.combatFx.clear(); this.fx.clear(); this.friendlyGroundFx.clear();
+    this.enemyZones = []; this.dangerFx.clear(); this.spellFx.clear();
+    this.stopSounds(); this.music.stop(); this.weaponFreeze = 0; this.shake = 0; this.world.setPosition(0, 0);
+    this.hurtTime=0;this.protectionTime=0;this.tintHero('#ffffff');this.hurtText.string='';
+    this.hearts.forEach(h=>{h.active=false;h.node.active=false;});this.skillBlooms=[];this.gourdCasts=[];this.weaponHudKey='';this.difficultyNotice=0;this.difficultyLabel.string='';
+    this.clearInput();
+  }
+
+  private startWave(): void {
+    this.clearBattle(); this.phase = 'battle'; this.paused = false; this.screens.hide(); this.setBattleVisible(true);
+    this.px = 0; this.py = 0; this.cameraX=0;this.cameraY=0;this.skillCooldown=0;this.skillProtected=0;this.skillSpeed=0;this.animalClock=25+Math.random()*15;this.treeClock=8+Math.random()*4; this.hero.setPosition(0, 0); this.cooldown = .1;
+    this.hurtTime = 0; this.regenCharge = 0; this.idleTime = 0; this.playerVx = 0; this.playerVy = 0; this.hero.angle = 0; this.tintHero('#ffffff'); this.hurtText.string = '';
+    this.coinPulse = 0; this.coinLabel.string = `${this.coinTotal}`; this.coinLabel.node.setScale(1, 1, 1); this.pickupText.string = '';
+    this.walkPhase = 0; this.walkBlend = 0; this.lean = 0; this.torsoBob = 0;
+    this.animateWalk(0,0,0,0,0);
+    this.syncWeapons();
+    this.weapons.forEach(w => { w.hit.clear(); w.trail.clear(); });
+    this.remaining = WAVE_SECONDS; this.roundKills = this.kills;
+    this.resumeCountdown = 0; this.respite = 0;
+    if (this.run.wave === 2) { this.nextSupply = 30; this.nextEvent = 90; this.queuedKind = 'soldier'; }
+    this.cleaverCounter = 0;
+    if (this.testMode) {
+      this.spawnClock = TEST_SPAWN.interval;
+      // All types appear immediately; subsequent types and spawn edges are random.
+      for (const kind of randomSample(TEST_ENEMIES, TEST_ENEMIES.length)) this.spawnNext(kind);
+      for (let i = 0; i < 2; i++) this.spawnTestEnemy();
+    } else {
+      this.spawnClock = waveRule(this.run.wave).interval;
+      for (let i = 0; i < waveRule(this.run.wave).initial; i++) this.spawnNext();
+
+      this.bestWave = Math.max(this.bestWave, this.run.wave);
+      try { sys.localStorage.setItem('taoyuan-best', String(this.bestWave)); } catch (_) { /* optional */ }
+    }
+    this.drawPlayerHealth(); this.drawProgress(); this.music.begin();
+  }
+
+  private collectAllCoins(): void {
+    this.coinTotal += this.coins.filter(c => c.active).length;
+    this.coins.forEach(c => { c.active = false; c.node.active = false; });
+    this.coinLabel.string = String(this.coinTotal);
+  }
+
+  private pushNearbyEnemies(): void {
+    for (const e of this.enemies) {
+      if (e.hp <= 0) continue;
+      const dx = e.x - this.px, dy = e.y - this.py, d = Math.hypot(dx, dy);
+      if (d < 125 && !(e.kind === 'cavalry' && e.attack >= 0)) { e.vx = (d > .001 ? dx / d : 1) * 340; e.vy = (d > .001 ? dy / d : 0) * 340; }
+    }
+  }
+
+  private finishWave(): void {
+    if(this.phase!=='battle'||this.run.wave!==1)return;
+    this.collectAllCoins();this.coinTotal+=30;this.coinLabel.string=String(this.coinTotal);this.playerHp=5;
+    // Freeze the existing battlefield for preparation before increasing difficulty.
+    this.run.supplyMode='departure';this.run.supplyCount=0;this.run.purchasedOffers=[];this.run.rerolls=0;
+    this.clearInput();this.stopSounds();this.refreshStats();rollSupply(this.run);this.showShop();
+  }
+
+  private openSupply(): void {
+    if (this.phase !== 'battle' || this.run.wave !== 2||this.run.bossEncounter) return;
+    this.collectAllCoins(); this.coinTotal += 12;
+    this.run.supplyCount = Math.round(this.nextSupply / SUPPLY_SECONDS);
+    this.run.wavesCleared=Math.min(BOSS_EVERY_WAVES,this.run.supplyCount);
+    this.run.supplyMode = this.run.supplyCount % 3 === 0 ? 'major' : 'normal';
+    this.run.purchasedOffers = []; this.run.rerolls = 0;
+    this.clearInput(); this.stopSounds(); rollSupply(this.run); this.showShop();
+  }
+
+  private showUpgradesOrShop(): void { this.showShop(); }
+
+  private resumeSupply(notice: string): void {
+    if(this.phase!=='shop')return;
+    this.unlockAudio();
+    if (this.run.supplyMode === 'departure') {
+      // Continue in place: no spawn reset, teleport or free weapon.
+      this.run.wave=2;this.run.survivalSeconds=0;this.run.wavesCleared=0;this.run.bossEncounter=false;this.run.supplyMode='normal';this.nextSupply=SUPPLY_SECONDS;this.nextEvent=BOSS_EVERY_WAVES*SUPPLY_SECONDS;this.queuedKind='soldier';
+      this.difficultyNotice=2.6;this.difficultyLabel.string='难度升级';this.skillCooldown=0;this.spawnClock=Math.min(this.spawnClock,1.2);
+    } else {
+      if(bossDue(this.run.wavesCleared))this.beginBossEncounter();
+      else this.nextSupply += SUPPLY_SECONDS;
+    }
+    this.refreshStats(); this.syncWeapons(); this.screens.hide(); this.phase = 'battle'; this.paused = false; this.setBattleVisible(true);
+    this.powerNotice = notice; this.resumeCountdown = 1.2; this.protectionTime = Math.max(1.2, this.protectionTime); this.respite = 8;
+    this.pushNearbyEnemies(); this.clearInput(); this.drawProgress();
+  }
+
+  private beginBossEncounter():void {
+    if(this.run.bossEncounter)return;
+    this.run.bossEncounter=true;this.nextSupply=Infinity;
+    // Zhang Jiao joins the existing battlefield; surviving minions and their attacks remain.
+    if(!this.enemies.some(e=>e.hp>0&&e.kind==='chief'))this.spawnNext('chief');
+    this.difficultyNotice=2.6;this.difficultyLabel.string='张角来袭';
+  }
+
+  private finishVictory():boolean {
+    if(!this.victoryPending||this.phase!=='battle')return false;
+    this.endRun(true);return true;
+  }
+
+  private refreshStats(): void {
+    this.perks=passiveBonuses(this.run.inventory);
+    const previous = this.stats.maxHp; this.stats = this.currentStats();
+    this.playerHp = Math.min(this.stats.maxHp, this.playerHp + Math.max(0, this.stats.maxHp - previous));
+    this.drawPlayerHealth(); this.updateOrnaments();
+    this.weapons.forEach(w => { if (w.equipped) w.stats = weaponStatsFor(this.run, w.equipped); });
+  }
+
+  private currentStats(): Stats {
+    const stats = statsFor(this.run);
+    if (this.testMode) stats.maxHp = TEST_HP;
+    return stats;
+  }
+
+  private showShop(): void {
+    this.phase = 'shop';this.drawStick();this.weaponHud.active=false;this.hintText.node.active=false;this.hud.node.active=false;this.bossBar.node.active=false;this.bossLabel.node.active=false;this.coinLabel.string=String(this.coinTotal);
+    this.screens.supply(this.run, (id,replaceUid) => {
+      if (this.phase !== 'shop') return;
+      if (buySupply(this.run, id, replaceUid)) {
+        this.refreshStats(); this.syncWeapons(); repairSupply(this.run); this.showShop();
+      }
+    }, () => { if (this.phase === 'shop' && rerollSupply(this.run)) this.showShop(); }, () => {
+      if (this.phase === 'shop') this.resumeSupply('准备迎敌');
+    }, () => {
+      if (this.phase !== 'shop' || this.run.supplyMode !== 'major') return;
+      this.run.supplyMode = 'normal'; rollSupply(this.run); this.showShop();
+    }, (action, uid) => {
+      if (this.phase !== 'shop') return;
+      if (action === 'combine' ? combineWeapon(this.run, uid) : recycleWeapon(this.run, uid)) { repairSupply(this.run); this.refreshStats(); this.syncWeapons(); this.showShop(); }
+    });
+  }
+
+  private endRun(won: boolean): void {
+    if (this.phase !== 'battle') return;
+    this.phase = won?'victory':'defeat'; this.collectAllCoins();
+    const elapsed=WAVE_SECONDS+this.run.survivalSeconds;
+    const record=won&&!this.testMode&&(!this.bestClear||elapsed<this.bestClear);
+    if(record){this.bestClear=elapsed;try{sys.localStorage.setItem('taoyuan-clear-best',String(this.bestClear));}catch(_){} }
+    this.clearBattle(); this.setBattleVisible(false); this.paused = false;
+    this.screens.survivalResult(this.run,this.kills,this.bestClear,record,()=>this.restart(),()=>this.showMainMenu(),this.testMode,WAVE_SECONDS-this.remaining,won);
+  }
+
+  private updateOrnaments(): void {
+    this.ornaments.forEach(n => { n.removeFromParent(); n.destroy(); }); this.ornaments = [];
+    this.run.acquired.slice(-3).forEach((id, order) => {
+      const index = ITEMS.findIndex(i => i.id === id), item = ITEMS[index];
+      if(!item) return;
+      const n = this.node2D(this.hero, 'Equipped-' + id), sprite = n.addComponent(Sprite);
+      sprite.spriteFrame = this.itemFrames[index] || this.artFrames['ui-power']; sprite.sizeMode = Sprite.SizeMode.CUSTOM; n.getComponent(UITransform)!.setContentSize(25, 25);
+      n.setPosition(item.slot === 'head' ? (order - 1) * 24 : item.slot === 'feet' ? 17 : (order - 1) * 24, item.slot === 'head' ? 87 : item.slot === 'feet' ? -15 : item.slot === 'back' ? 10 : -2);
+      this.ornaments.push(n);
+    });
+  }
+
+  private drawProgress(): void {
+    this.hud.string=this.testMode?'测试模式 · 不限时':this.run.wave===1?`热身  ${Math.ceil(this.remaining)}s`:this.run.bossEncounter?`首领战 · 张角  ${clockText(Math.max(0,this.run.survivalSeconds-BOSS_EVERY_WAVES*SUPPLY_SECONDS))}`:`第${Math.min(BOSS_EVERY_WAVES,this.run.wavesCleared+1)}波 / ${BOSS_EVERY_WAVES}  ${Math.ceil(Math.max(0,this.nextSupply-this.run.survivalSeconds))}s`;
+    this.heroName.string = heroFor(this.run).name;
+    this.xpBar.clear();this.xpBar.node.active=false;this.drawSkillButton();this.drawWeaponHud();
+    this.bossBar.clear();
+    const boss = this.enemies.find(e => e.kind === 'chief' && e.hp > 0);
+    this.bossLabel.string = boss ? `张角 · 大贤良师  ${Math.ceil(boss.hp)}/${boss.maxHp}` : '';
+    if (boss) {
+      this.bossBar.fillColor = new Color('#63483a'); this.bossBar.rect(-180, this.halfHeight - 111, 360, 12); this.bossBar.fill();
+      this.bossBar.fillColor = new Color('#d97745'); this.bossBar.rect(-180, this.halfHeight - 111, 360 * boss.hp / boss.maxHp!, 12); this.bossBar.fill();
+    }
+  }
+  private followCamera(dt: number): void {
+    const at=cameraTarget(this.px,this.py,this.halfWidth,this.halfHeight), blend=1-Math.exp(-10*dt);
+    this.cameraX+=(at.x-this.cameraX)*blend;this.cameraY+=(at.y-this.cameraY)*blend;
+    this.battlefield.setPosition(-this.cameraX,-this.cameraY);
+    this.terrainNodes.forEach(n=>{n.active=Math.abs(n.position.x-this.cameraX)<this.halfWidth+230 && Math.abs(n.position.y-this.cameraY)<this.halfHeight+280;});
+  }
+
+  private drawTerrainFallback():void {
+    const g=this.ground;g.clear();
+    if(!this.artFrames['world-ground']){g.fillColor=new Color('#b7ca8f');g.rect(-WORLD.halfWidth,-WORLD.halfHeight,WORLD.width,WORLD.height);g.fill();}
+    // Sparse ground-level flowers only; no roads, fences, boulders or permanent large props.
+    const count=Math.round(WORLD.width*WORLD.height/45000);
+    for(let i=0;i<count;i++){
+      const x=-WORLD.halfWidth+35+(i*281+93)%(WORLD.width-70),y=-WORLD.halfHeight+35+(i*173+41)%(WORLD.height-70);
+      g.strokeColor=new Color(101,145,78,120);g.lineWidth=1.5;g.moveTo(x,y-3);g.lineTo(x+1,y+4);g.stroke();
+      g.fillColor=new Color(i%3===0?'#efb3c0':'#fff0c4');for(let j=0;j<4;j++){const a=j*Math.PI/2;g.circle(x+Math.cos(a)*2.7,y+3+Math.sin(a)*2.7,2);g.fill();}
+      g.fillColor=new Color('#e2be60');g.circle(x,y+3,1.4);g.fill();
+    }
+  }
+
+  private rebuildMeadow():void {
+    for(const n of this.meadowTiles){n.removeFromParent();n.destroy();}this.meadowTiles=[];
+    const frame=this.artFrames['world-ground'];if(frame){
+      const cols=Math.ceil(WORLD.width/520),rows=Math.ceil(WORLD.height/470),w=WORLD.width/cols,h=WORLD.height/rows;
+      for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
+        const n=this.node2D(this.battlefield,'MeadowTile'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(w+.5,h+.5);
+        n.setPosition(-WORLD.halfWidth+(col+.5)*w,-WORLD.halfHeight+(row+.5)*h);n.setSiblingIndex(0);this.meadowTiles.push(n);
+      }
+    }this.ground.node.setSiblingIndex(this.meadowTiles.length);this.drawTerrainFallback();
+  }
+
+  private loadOrchardArt(): void {
+    // Independent small bundles keep the WeChat main package within its limit.
+    const load=(bundle:string,name:string,apply:(t:Texture2D)=>void):void=>{
+      assetManager.loadBundle(bundle,(err,b)=>{if(err){console.warn('桃园素材加载失败',bundle,err);return;}b.load(name+'/texture',Texture2D,(error,t)=>{if(error||!this.isValid)return;apply(t);});});
+    };
+    load('meadow','ground',t=>{const f=new SpriteFrame();f.texture=t;this.artFrames['world-ground']=f;this.rebuildMeadow();});
+    load('orchard','decor',t=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(0,0,t.width/3,t.height/2);this.artFrames['peach-tree']=f;});
+    load('talismans','items',t=>{for(let i=0;i<48;i++){const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%8*t.width/8,Math.floor(i/8)*t.height/6,t.width/8,t.height/6);this.artFrames['item-'+PASSIVE_ITEMS[i].id]=f;}if(this.phase==='shop')this.showShop();});
+    load('arsenal','weapons',t=>{
+      ['smg','shotgun','rocket','sword','thunder','gourd'].forEach((id,i)=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%3*t.width/3,Math.floor(i/3)*t.height/2,t.width/3,t.height/2);this.artFrames['weapon-'+id]=f;});
+      if(this.ready){this.syncWeapons();if(this.phase==='shop')this.showShop();}
+    });
+  }
+
+  private releaseWeapon(x:number,y:number,angle:number,w:Weapon):void {
+    const id=w.equipped!.id,stats=w.stats!;
+    if(id==='sword')return;
+    this.combatFx.muzzle(id,x,y,angle);
+    if(id==='thunder'){
+      this.playWeaponSound(id,'attack');let from={x,y};const used=new Set<Enemy>();
+      for(let i=0;i<(stats.chainTargets||3);i++){
+        const e=this.enemies.filter(e=>e.hp>0 && !e.animal && (e.born||0)<=0 && !used.has(e) && Math.hypot(e.x-from.x,e.y+34-from.y)<(i?260:stats.range)).sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y))[0];
+        if(!e)break;used.add(e);this.combatFx.beam('thunder',from.x,from.y,e.x,e.y+34);this.hitEnemy(e,angle,Math.round(w.damage*(i?.5:1)),stats.knockback,id,false);from={x:e.x,y:e.y+34};
+      }this.playWeaponSound(id,'hit');return;
+    }
+    if(id==='gourd'){
+      const pulses=stats.pulses||6;this.gourdCasts.push({life:pulses*.1,next:0,ticks:0,maxTicks:pulses,maxTargets:stats.targets||6,damage:w.damage,range:stats.range,angle});this.playWeaponSound(id,'attack');return;
+    }
+    const n=stats.shotCount||1,spread=(id==='shotgun'?.68/Math.max(1,n-1):id==='peach'?.22:0)*(stats.spread||1),group={hits:new Map<Enemy,number>(),max:id==='shotgun'?4:1};
+    for(let i=0;i<n;i++)this.launchProjectile(x,y,angle+(i-(n-1)/2)*spread,w.equipped!,stats,w.damage,false,group);
+
+  }
+
+  private gourdCasts:{life:number;next:number;ticks:number;maxTicks:number;maxTargets:number;damage:number;range:number;angle:number}[]=[];
+  private updateGourds(dt:number):void {
+    for(const cast of this.gourdCasts){cast.life-=dt;cast.next-=dt;if(cast.ticks>=cast.maxTicks || cast.next>0)continue;cast.ticks++;cast.next+=.1;
+      const targets=this.enemies.filter(e=>e.hp>0&&(e.born||0)<=0&&Math.hypot(e.x-this.px,e.y-this.py)<cast.range).slice(0,cast.maxTargets);if(cast.ticks===1&&targets.length)this.playWeaponSound('gourd','hit');
+      for(const e of targets){const dx=e.x-this.px,dy=e.y-this.py,d=Math.hypot(dx,dy);this.hitEnemy(e,Math.atan2(dy,dx),cast.damage,0,'gourd',false);
+        if(e.kind!=='chief'&&d>90){e.vx=-dx/d*Math.min(150,80*this.perks.pull);e.vy=-dy/d*Math.min(150,80*this.perks.pull);}
+        this.combatFx.beam('gourd',e.x,e.y+28,this.px+Math.cos(cast.angle)*70,this.py+30);
+      }
+    }this.gourdCasts=this.gourdCasts.filter(c=>c.life>0&&c.ticks<c.maxTicks);
+  }
+
+  private castHeroSkill():void {
+    if(this.phase!=='battle'||this.paused||this.resumeCountdown>0||this.skillCooldown>0||this.playerHp<=0)return;
+    this.unlockAudio();const def=HERO_SKILLS[this.run.heroId];this.skillCooldown=def.cooldown/(1+this.perks.skillHaste);this.skillAngle=this.heading;
+    let power=0;for(const w of this.run.weapons)power+=weaponDps(this.run,w);
+    power*=1+this.perks.skillDamage;
+    const candidates=this.enemies.filter(e=>e.hp>0&&!e.animal&&(e.born||0)<=0);
+    if(this.run.heroId==='guanyu'){
+      let best=-1;for(const e of candidates.slice().sort((a,b)=>Math.hypot(a.x-this.px,a.y-this.py)-Math.hypot(b.x-this.px,b.y-this.py)).slice(0,3)){
+        const angle=Math.atan2(e.y-this.py,e.x-this.px),score=candidates.filter(v=>Math.hypot(v.x-this.px,v.y-this.py)<520&&Math.abs(Math.atan2(Math.sin(Math.atan2(v.y-this.py,v.x-this.px)-angle),Math.cos(Math.atan2(v.y-this.py,v.x-this.px)-angle)))<.655).length;
+        if(score>best){best=score;this.skillAngle=angle;}
+      }
+    }
+    this.combatFx.hero(this.run.heroId,this.px,this.py,this.skillAngle,def.range);
+    this.shake=Math.max(this.shake,.07);
+    if(this.run.heroId==='liubei'){this.skillProtected=.35;this.skillSpeed=2;}
+    let hits=0;for(const e of candidates){
+      const dx=e.x-this.px,dy=e.y-this.py,d=Math.hypot(dx,dy),a=Math.atan2(dy,dx),delta=Math.atan2(Math.sin(a-this.skillAngle),Math.cos(a-this.skillAngle));
+      if(d>def.range||this.run.heroId==='guanyu'&&Math.abs(delta)>.655||hits>=(this.run.heroId==='zhangfei'?16:12))continue;hits++;
+      this.hitEnemy(e,a,Math.max(1,Math.round(power*def.factor)),this.run.heroId==='guanyu'?100:350,this.run.starter,false,true);
+      if(e.kind!=='chief'&&!(e.kind==='cavalry'&&e.attack>=0)){e.stagger=Math.max(e.stagger||0,this.run.heroId==='liubei'?.5:.2);e.flash=Math.max(e.flash,.1);e.attack=-1;e.attackCooldown=Math.max(e.attackCooldown,.5);}
+    }
+    if(this.run.heroId!=='guanyu')for(const shot of this.enemyShots)if(shot.remaining>0&&Math.hypot(shot.x-this.px,shot.y-this.py)<150){shot.remaining=0;shot.node.active=false;}
+    if(this.run.heroId==='zhangfei'){
+      const used=new Set<Enemy>();for(const e of candidates.filter(e=>e.hp>0).slice(0,2))this.skillBlooms.push({x:e.x,y:e.y+34,delay:.35,damage:power*.35,hit:used});
+    }
+    this.playWeaponSound(this.run.heroId==='liubei'?'sandal':this.run.heroId==='guanyu'?'pole':'firecracker','hit');this.drawSkillButton();
+  }
+
+  private updateHeroSkill(dt:number):void {
+    this.skillCooldown=Math.max(0,this.skillCooldown-dt);this.skillProtected=Math.max(0,this.skillProtected-dt);this.skillSpeed=Math.max(0,this.skillSpeed-dt);
+    for(const bloom of this.skillBlooms){bloom.delay-=dt;if(bloom.delay>0||bloom.delay<=-99)continue;bloom.delay=-100;this.combatFx.burst('peach',bloom.x,bloom.y,85,true);
+      for(const e of this.enemies)if(e.hp>0&&!e.animal&&(e.born||0)<=0&&!bloom.hit.has(e)&&Math.hypot(e.x-bloom.x,e.y+34-bloom.y)<85){bloom.hit.add(e);this.hitEnemy(e,0,Math.round(bloom.damage),100,'peach',false,true);}
+    }this.skillBlooms=this.skillBlooms.filter(b=>b.delay>-99);this.updateGourds(dt);
+  }
+
+  private drawSkillButton():void {
+    if(!this.skillGraphic)return;const g=this.skillGraphic,def=HERO_SKILLS[this.run.heroId];g.clear();g.fillColor=new Color(40,66,48,235);g.strokeColor=new Color(this.skillCooldown>0?'#879375':'#f4ce74');g.lineWidth=3;g.circle(0,0,51);g.fill();g.stroke();
+    g.fillColor=new Color(def.color);
+    if(this.run.heroId==='liubei'){g.ellipse(0,4,14,27);g.fill();g.strokeColor=new Color('#9d7137');g.lineWidth=2;for(let y=-13;y<24;y+=8){g.moveTo(-10,y);g.lineTo(10,y);}g.stroke();}
+    else if(this.run.heroId==='guanyu'){g.strokeColor=new Color('#e6b85c');g.lineWidth=10;g.moveTo(-25,-15);g.lineTo(25,27);g.stroke();g.strokeColor=new Color('#c94d2e');g.lineWidth=5;g.moveTo(-20,-9);g.lineTo(-14,-15);g.moveTo(15,21);g.lineTo(21,15);g.stroke();}
+    else {g.circle(0,6,24);g.fill();g.fillColor=new Color('#493123');g.ellipse(0,-1,11,15);g.fill();g.strokeColor=new Color('#f9e2ad');g.moveTo(-18,23);g.lineTo(-5,18);g.moveTo(18,23);g.lineTo(5,18);g.stroke();}
+    if(this.skillCooldown>0){const ratio=Math.min(1,this.skillCooldown/(def.cooldown/(1+this.perks.skillHaste)));g.fillColor=new Color(15,25,19,160);g.moveTo(0,0);g.arc(0,0,49,Math.PI/2,Math.PI/2+Math.PI*2*ratio,false);g.close();g.fill();}
+    this.skillLabel.string=this.skillCooldown>0?`${def.name} ${Math.ceil(this.skillCooldown)}s`:def.name+' · 就绪';
+  }
+
+  private drawWeaponHud():void {
+    const key=this.run.weapons.map(w=>w.uid+':'+w.id+':'+w.tier).join('|');if(key===this.weaponHudKey&&this.weaponHud.children.length===6)return;this.weaponHudKey=key;
+    for(const n of [...this.weaponHud.children]){n.removeFromParent();n.destroy();}
+    for(let i=0;i<6;i++){const w=this.run.weapons[i],n=this.node2D(this.weaponHud,'Slot'+i);n.setPosition((i-2.5)*75,0);const g=n.addComponent(Graphics);g.fillColor=w?new Color(255,239,205,235):new Color(40,61,42,180);g.strokeColor=new Color(w?TIER_COLORS[w.tier-1]:'#80916c');g.lineWidth=w?2.5:1.5;g.roundRect(-33,-29,66,58,10);g.fill();g.stroke();
+      if(w){addWeaponIcon(n,this.artFrames,w.id,w.tier,50);this.label(n,['I','II','III','IV'][w.tier-1],25,-20,11,'#674c31').node.getComponent(UITransform)!.setContentSize(20,16);const title=({smg:'突突枪',shotgun:'霰弹枪',rocket:'火箭筒'} as Partial<Record<WeaponId,string>>)[w.id]||weaponFor(w.id).name;const label=this.label(n,title,0,-42,13,'#fff0c4');label.node.getComponent(UITransform)!.setContentSize(80,22);}
+    }
+  }
+
+  private spawnAnimal(kind:'chicken'|'rabbit'|'pig'=['chicken','rabbit','pig'][Math.floor(Math.random()*3)] as 'chicken'|'rabbit'|'pig'):Enemy {
+    const e=this.spawnNext('soldier'),a=Math.random()*Math.PI*2,r=270+Math.random()*250;
+    e.animal=kind;e.x=this.clamp(this.px+Math.cos(a)*r,-WORLD.halfWidth+70,WORLD.halfWidth-70);e.y=this.clamp(this.py+Math.sin(a)*r,-WORLD.halfHeight+70,WORLD.halfHeight-70);e.hp=Math.max(4,Math.round(enemyStats('soldier',2,this.run.survivalSeconds).hp*.4));e.maxHp=e.hp;e.born=.5;e.bornTotal=.5;e.ttl=25;e.art.node.active=false;
+    if(!e.animalArt)e.animalArt=this.node2D(e.node,'Animal').addComponent(Graphics);e.animalArt.node.active=true;this.drawAnimal(e);e.node.setPosition(e.x,e.y);return e;
+  }
+
+  private drawAnimal(e:Enemy):void {
+    const g=e.animalArt!;g.clear();const old=g.node.children.find(n=>n.name==='TreeSprite');if(old){old.removeFromParent();old.destroy();}
+    if(e.animal==='tree'){
+      const frame=this.artFrames['peach-tree'];if(frame){const n=this.node2D(g.node,'TreeSprite'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(82,86);n.setPosition(0,28);}
+      else{g.strokeColor=new Color('#6e5132');g.lineWidth=9;g.moveTo(0,0);g.lineTo(0,36);g.stroke();g.fillColor=new Color('#83ad6b');g.circle(-16,37,20);g.circle(16,38,20);g.circle(0,53,18);g.fill();g.fillColor=new Color('#f0a1b8');for(const [x,y]of [[-17,39],[11,49],[16,32]]){g.circle(x,y,6);g.fill();}}
+      return;
+    }g.lineWidth=2.5;g.strokeColor=new Color('#65513b');g.fillColor=new Color(e.animal==='pig'?'#efa5aa':'#fff3d3');
+    g.ellipse(0,13,e.animal==='pig'?24:18,17);g.fill();g.stroke();g.circle(10,29,12);g.fill();g.stroke();
+    if(e.animal==='chicken'){g.fillColor=new Color('#d45843');g.circle(6,42,5);g.circle(13,43,5);g.fill();g.fillColor=new Color('#dfad49');g.moveTo(21,32);g.lineTo(30,28);g.lineTo(21,25);g.close();g.fill();g.stroke();g.lineWidth=3;g.moveTo(-7,0);g.lineTo(-9,-7);g.moveTo(8,0);g.lineTo(10,-7);g.stroke();}
+    else if(e.animal==='rabbit'){g.fillColor=new Color('#fff3d3');g.ellipse(6,47,5,15);g.ellipse(19,45,5,15);g.fill();g.stroke();g.fillColor=new Color('#edb9b7');g.ellipse(6,48,2,9);g.ellipse(19,46,2,9);g.fill();}
+    else{g.fillColor=new Color('#e18b98');g.ellipse(22,25,9,7);g.fill();g.stroke();g.ellipse(-12,-1,6,5);g.ellipse(10,-1,6,5);g.fill();}
+    g.fillColor=new Color('#493123');g.circle(14,33,2);g.fill();
+  }
+
+  private updateAnimal(e:Enemy,dt:number):void {
+    e.ttl=(e.ttl||0)-dt;if(e.ttl<=0){e.hp=0;e.dead=0;e.node.active=false;return;}
+    if(e.animal==='tree'){e.flash=Math.max(0,e.flash-dt);e.animalArt!.node.angle=e.flash>0?Math.sin(e.flash*90)*7:Math.sin(this.age*1.6+e.x)*1.5;e.node.setPosition(e.x,e.y);e.art.node.active=false;return;}
+    const d=Math.hypot(e.x-this.px,e.y-this.py),flee=d<180||e.flash>0,angle=flee?Math.atan2(e.y-this.py,e.x-this.px):Math.sin(this.age*.7+e.x*.01)*Math.PI;
+    const speed=flee?105:22;e.x=this.clamp(e.x+Math.cos(angle)*speed*dt,-WORLD.halfWidth+40,WORLD.halfWidth-40);e.y=this.clamp(e.y+Math.sin(angle)*speed*dt,-WORLD.halfHeight+40,WORLD.halfHeight-40);e.flash=Math.max(0,e.flash-dt);e.node.setPosition(e.x,e.y);
+    e.animalArt!.node.setPosition(0,Math.abs(Math.sin(this.age*(flee?15:5)))*3);e.art.node.active=false;
+    if(e.text)e.text.string='';
+  }
+
+  private spawnPeachTree():Enemy|undefined {
+    if(this.enemies.filter(e=>e.hp>0&&e.animal==='tree').length>=2)return;
+    let point:{x:number;y:number}|undefined;
+    for(let i=0;i<12;i++){const a=Math.random()*Math.PI*2,r=180+Math.random()*220,x=this.clamp(this.px+Math.cos(a)*r,-WORLD.halfWidth+70,WORLD.halfWidth-70),y=this.clamp(this.py+Math.sin(a)*r,-WORLD.halfHeight+70,WORLD.halfHeight-70);
+      if(Math.hypot(x-this.px,y-this.py)<150||this.enemies.some(e=>e.hp>0&&Math.hypot(x-e.x,y-e.y)<(e.animal==='tree'?180:60)))continue;point={x,y};break;
+    }if(!point)return;
+    const e=this.spawnAnimal('pig');e.animal='tree';e.x=point.x;e.y=point.y;e.hp=Math.max(8,Math.round(enemyStats('soldier',2,this.run.survivalSeconds).hp*.45));e.maxHp=e.hp;e.ttl=35;e.born=.6;e.bornTotal=.6;this.drawAnimal(e);e.node.setPosition(e.x,e.y);return e;
+  }
+
+  private dropHeart(x:number,y:number,kind:'heart'|'peach'='heart'):void {
+    if(this.hearts.filter(h=>h.active).length>=4)return;let h=this.hearts.find(h=>!h.active);
+    if(!h){const node=this.node2D(this.world,'LifeHeart');node.addComponent(Graphics);h={node,x,y,age:0,active:false,attracted:false};this.hearts.push(h);}
+    const g=h.node.getComponent(Graphics)!;g.clear();g.strokeColor=new Color('#fff1cf');g.lineWidth=2.5;
+    if(kind==='peach'){
+      g.fillColor=new Color('#f1a3b1');g.moveTo(0,1);g.bezierCurveTo(-27,9,-17,36,0,27);g.bezierCurveTo(17,36,27,9,0,1);g.close();g.fill();g.stroke();
+      g.strokeColor=new Color('#d77c98');g.lineWidth=1.5;g.moveTo(0,5);g.bezierCurveTo(5,14,4,21,0,27);g.stroke();g.fillColor=new Color('#78ad60');g.moveTo(0,27);g.bezierCurveTo(0,39,14,40,17,36);g.bezierCurveTo(13,29,7,28,0,27);g.fill();
+    }else{g.fillColor=new Color('#f17c75');g.moveTo(0,0);g.bezierCurveTo(-30,18,-10,42,0,26);g.bezierCurveTo(10,42,30,18,0,0);g.close();g.fill();g.stroke();}
+    h.node.name=kind==='peach'?'HealingPeach':'LifeHeart';Object.assign(h,{kind,x,y,age:0,active:true,attracted:false});h.node.active=true;h.node.setPosition(x,y);
+  }
+
+  private updateWildlife(dt:number):void {
+    this.treeClock-=dt;if(this.treeClock<=0){this.treeClock=40+Math.random()*20;this.spawnPeachTree();}
+    if(this.run.wave===2){this.animalClock-=dt;if(this.animalClock<=0){this.animalClock=45+Math.random()*20;if(this.enemies.filter(e=>e.animal&&e.animal!=='tree'&&e.hp>0).length<2&&this.hearts.filter(h=>h.active).length<2)this.spawnAnimal();}}
+    for(const h of this.hearts){if(!h.active)continue;h.age+=dt;if(h.age>this.perks.heartLife){h.active=false;h.node.active=false;continue;}
+      const dx=this.px-h.x,dy=this.py-h.y,d=Math.hypot(dx,dy);if(h.age>.25&&d<this.perks.heartPickup)h.attracted=true;
+      if(h.attracted){const step=Math.min(d,500*dt);if(d>0){h.x+=dx/d*step;h.y+=dy/d*step;}if(d-step<20){this.playerHp=Math.min(this.stats.maxHp,this.playerHp+1);h.active=false;h.node.active=false;this.refreshStats();this.playWeaponSound('peach','hit');continue;}}
+      h.node.setPosition(h.x,h.y+Math.sin(h.age*4)*4);const s=1+Math.sin(h.age*5)*.08;h.node.setScale(s,s,1);
+    }
+    const target=this.hearts.find(h=>h.active&&this.playerHp<5)||this.enemies.find(e=>e.hp>0&&e.animal&&this.playerHp<5);
+    this.hintText.string=target&&Math.hypot(target.x-this.px,target.y-this.py)>350?'回血目标 '+(target.x>this.px?'→':'←'):'';
+  }
+
+  onDestroy(): void {
+    input.off(Input.EventType.TOUCH_START, this.touchStart, this); input.off(Input.EventType.TOUCH_MOVE, this.touchMove, this);
+    input.off(Input.EventType.TOUCH_END, this.touchEnd, this); input.off(Input.EventType.TOUCH_CANCEL, this.touchEnd, this);
+    input.off(Input.EventType.KEY_DOWN, this.keyDown, this); input.off(Input.EventType.KEY_UP, this.keyUp, this);
+    this.detachKeyboard?.();
+    game.off(Game.EVENT_HIDE, this.onBackground, this);
+    game.off(Game.EVENT_SHOW, this.onForeground, this);
+    this.stopSounds(); this.music.stop();
+    this.enemies.forEach(e => e.art.spriteFrame = null);
+    this.soldierFrames.forEach(frames => frames.forEach(frame => frame.destroy()));
+    Object.keys(this.enemyFrames).forEach(kind => this.enemyFrames[kind as EnemyKind]?.forEach(frame => frame.destroy()));
+    if (this.avatar) this.avatar.spriteFrame = null; this.avatarFrame?.destroy();
+    if (this.body) this.body.spriteFrame = null; this.bodyFrame?.destroy();
+    if(this.head)this.head.spriteFrame=null;
+    Object.keys(this.artFrames).forEach(key => { if (this.artFrames[key] !== this.bodyFrame) this.artFrames[key].destroy(); }); this.itemFrames.forEach(f => f.destroy());
+    this.startupTexture?.destroy();this.startupImage?.destroy();
+  }
+  private clamp(n: number, min: number, max: number): number { return Math.max(min, Math.min(max, n)); }
+  private node2D(parent: Node, name: string): Node { const n = new Node(name); n.layer = Layers.Enum.UI_2D; parent.addChild(n); return n; }
+  private label(parent: Node, text: string, x: number, y: number, size: number, color = '#37432c'): Label {
+    const n = this.node2D(parent, text); n.setPosition(x, y); n.addComponent(UITransform).setContentSize(700, size * 1.5);
+    const label = n.addComponent(Label); label.string = text; label.fontSize = size; label.lineHeight = size * 1.3;
+    label.color = new Color(color); label.horizontalAlign = Label.HorizontalAlign.CENTER; label.verticalAlign = Label.VerticalAlign.CENTER;
+    return label;
+  }
+  private button(text: string, x: number, y: number, action: () => void, parent: Node = this.root, width = 230): Label {
+    const n = this.node2D(parent, text); n.setPosition(x, y); n.addComponent(UITransform).setContentSize(width, 58);
+    const g = n.addComponent(Graphics); g.fillColor = new Color('#456442'); g.roundRect(-width / 2, -29, width, 58, 14); g.fill();
+    const label = this.label(n, text, 0, 0, 26, '#fff9e8'); label.node.getComponent(UITransform)!.setContentSize(width, 58);
+    n.on(Node.EventType.TOUCH_END, action, this); return label;
+  }
+}

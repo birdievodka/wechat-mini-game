@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "53eb04d2-10a8-4a5b-8981-2bdbaeab575b",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "battle-subpackage",
+    "bundleName": "campaign",
+    "priority": 8
+  }
+}

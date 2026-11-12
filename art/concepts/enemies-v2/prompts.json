@@ -1,0 +1,40 @@
+{
+  "created": "2026-11-11",
+  "images": [
+    {
+      "id": "archer-actions",
+      "prompt": "Use case: stylized-concept. Production 2D game sprite sheet, transparent background. Match the reference infantry's cute chibi anime game art: huge head, tiny feet, very short body, thick dark-brown outlines, clean simple flat colors, minimal highlights, readable at 80 screen pixels. EXACTLY 12 non-overlapping full-body sprites in an evenly spaced 4-column by 3-row grid on a 4:3 landscape image (1536x1152). Every cell same size and scale, generous transparent margins, soles at the same baseline 90% down each cell. Row 1 faces DOWN toward viewer, row 2 faces RIGHT profile, row 3 faces UP away from viewer, true back view. LEFT is mirrored in the game. Columns 1 and 2 are two visibly DIFFERENT alternating walk cycle contact poses: left foot forward/right back then right foot forward/left back, opposite arm swing and robe hem. Column 3 is attack windup, column 4 attack release. SAME character design in all cells. No text, no labels, no grid lines, no backgrounds, no floor shadow, no motion trails baked in, no crop, no merged cells. The first reference is the layout/style reference. The second is the old enemy identity reference. Turn this yellow-turban foot soldier into a comical YELLOW TURBAN ARCHER, no spear: retain black short hair/topknot, small dark moustache, yellow headband/robe, brown belt, tiny brown boots, add compact wooden bow and a back quiver of thin arrows. Walk columns hold bow down at side; column 3 draws bowstring toward cheek with one arrow nocked; column 4 releases with bow extended and string relaxed, empty drawing hand recoils, no arrow flying outside the cell. Maintain clear bow silhouette and four readable direction/attack poses.",
+      "referenceImages": [
+        "/Users/bytedance/workspace/z-private/wechat-mini-game/assets/battle/characters/soldier-sickle-actions.png",
+        "/Users/bytedance/workspace/z-private/wechat-mini-game/art/concepts/campaign/spearman.png"
+      ],
+      "mode": "built-in image_gen",
+      "generatedPath": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-5e675788-4f45-44d5-8b1a-386f42cc25cf.png",
+      "savedPath": "/Users/bytedance/workspace/z-private/wechat-mini-game/art/concepts/enemies-v2/archer-actions.png",
+      "runtimePath": "/Users/bytedance/workspace/z-private/wechat-mini-game/assets/enemies/archer-actions.png"
+    },
+    {
+      "id": "cavalry-actions",
+      "prompt": "Use case: stylized-concept. Production 2D game sprite sheet, transparent background. Match the reference infantry's cute chibi anime game art: huge head, tiny feet, very short body, thick dark-brown outlines, clean simple flat colors, minimal highlights, readable at 80 screen pixels. EXACTLY 12 non-overlapping full-body sprites in an evenly spaced 4-column by 3-row grid on a 4:3 landscape image (1536x1152). Every cell same size and scale, generous transparent margins, soles at the same baseline 90% down each cell. Row 1 faces DOWN toward viewer, row 2 faces RIGHT profile, row 3 faces UP away from viewer, true back view. LEFT is mirrored in the game. Columns 1 and 2 are two visibly DIFFERENT alternating walk cycle contact poses: left foot forward/right back then right foot forward/left back, opposite arm swing and robe hem. Column 3 is attack windup, column 4 attack release. SAME character design in all cells. No text, no labels, no grid lines, no backgrounds, no floor shadow, no motion trails baked in, no crop, no merged cells. The first reference gives style/layout, second reference is cavalry identity to preserve: same comically determined yellow-headband rider atop a stubby frightened brown pony, small spear in hand. All 12 cells contain BOTH entire horse and rider. Walk columns are true opposing horse trot steps with opposite fore/hind legs visibly moving, rider bobs and reins/cloth sway. Attack column 3 pony plants hind legs, front hoof lifted, rider lowers spear to aim; column 4 horse gallops with front legs extended and rear tucked, rider leans forward with spear pointing in the row direction. Keep rider/horse scale identical between cells, clean simple shapes, no speed streaks outside cells.",
+      "referenceImages": [
+        "/Users/bytedance/workspace/z-private/wechat-mini-game/assets/battle/characters/soldier-sickle-actions.png",
+        "/Users/bytedance/workspace/z-private/wechat-mini-game/art/concepts/campaign/cavalry.png"
+      ],
+      "mode": "built-in image_gen",
+      "generatedPath": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-4cbf1cd5-e845-4bba-bb86-8ac4d8868b6f.png",
+      "savedPath": "/Users/bytedance/workspace/z-private/wechat-mini-game/art/concepts/enemies-v2/cavalry-actions.png",
+      "runtimePath": "/Users/bytedance/workspace/z-private/wechat-mini-game/assets/enemies/cavalry-actions.png"
+    },
+    {
+      "id": "zhangjiao-actions",
+      "prompt": "Use case: stylized-concept. Production 2D game sprite sheet, transparent background. Match the reference infantry's cute chibi anime game art: huge head, tiny feet, very short body, thick dark-brown outlines, clean simple flat colors, minimal highlights, readable at 80 screen pixels. EXACTLY 12 non-overlapping full-body sprites in an evenly spaced 4-column by 3-row grid on a 4:3 landscape image (1536x1152). Every cell same size and scale, generous transparent margins, soles at the same baseline 90% down each cell. Row 1 faces DOWN toward viewer, row 2 faces RIGHT profile, row 3 faces UP away from viewer, true back view. LEFT is mirrored in the game. Columns 1 and 2 are two visibly DIFFERENT alternating walk cycle contact poses: left foot forward/right back then right foot forward/left back, opposite arm swing and robe hem. Column 3 is attack windup, column 4 attack release. SAME character design in all cells. No text, no labels, no grid lines, no backgrounds, no floor shadow, no motion trails baked in, no crop, no merged cells. Reference is infantry animation layout and art style only. Create new boss ZHANG JIAO, a funny Three Kingdoms Taoist sorcerer: huge older face, bushy black eyebrows, long drooping thin moustache and pointed dark beard, yellow Taoist crown with a tiny red seal, mustard-yellow short Taoist robe with dark teal collar/sash and a simple dark yin-yang emblem, bean-sized brown shoes. Slim wooden ritual staff topped by a brass ring and yellow talisman in one hand; folded red-marked yellow paper talismans in other. Mischievous self-important expression, face easy to read. Avoid armor and hammers. Walk columns visibly alternate tiny steps, staff tilts subtly and robe swings. Column3 raises staff vertically and gathers talisman at chest; column4 points staff forward and flicks talisman with extended other hand, animated wide mouth. No magical effect obscures his silhouette; effects added by game code. Back row must show back of robe and hat, never eyes.",
+      "referenceImages": [
+        "/Users/bytedance/workspace/z-private/wechat-mini-game/assets/battle/characters/soldier-sickle-actions.png"
+      ],
+      "mode": "built-in image_gen",
+      "generatedPath": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-55ae84ce-262f-4f4f-a1dd-9a35b077669a.png",
+      "savedPath": "/Users/bytedance/workspace/z-private/wechat-mini-game/art/concepts/enemies-v2/zhangjiao-actions.png",
+      "runtimePath": "/Users/bytedance/workspace/z-private/wechat-mini-game/assets/enemies/zhangjiao-actions.png"
+    }
+  ]
+}

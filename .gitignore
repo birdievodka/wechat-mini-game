@@ -1,0 +1,10 @@
+node_modules/
+project.private.config.json
+.DS_Store
+*.log
+library/
+temp/
+local/
+profiles/
+build/
+native/

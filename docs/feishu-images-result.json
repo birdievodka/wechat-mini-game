@@ -1,0 +1,42 @@
+[
+  {
+    "file": "art/concepts/campaign/poster.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnHEFVBj97uXA01N4JrPH9Xg\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"EyZrbtTS2on3e8xs0hAcNBjJnse\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/characters/liubei-v8-bean-feet-grip.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcn9XbNStBF3qpbJagYpT8ysd\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"Ii4DbCu0voqFHRx67PscGxdHnRc\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/campaign/guanyu.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnclURFZgucV4RyGh3A6wHoc\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"HrhHbwMnYovNcKxg8bNcuQtznde\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/campaign/zhangfei.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnnUPf7shHVnmapF0hlOAbuc\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"GIUrbRx4ooLUVKxkpnZcOfKJnUe\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/campaign/spearman.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcn9A28aObmJwP6GHV7sdZRAc\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"Pm50bg6nBopb32xZbrVcbdY6n3e\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/campaign/cavalry.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnYXR0FMon9sSkkQr3ee8Ynf\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"JOpabCZguoX9Nhxm6nUcrqvIn0w\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/campaign/chief.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnTcFHkIRAZJM59tog1YdqCd\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"FfdZbtKjhonDSBx31CpcWxNLnWh\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  },
+  {
+    "file": "art/concepts/campaign/items.png",
+    "result": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnVGM0UOjXQBcEIku1bG51TP\",\n    \"document_id\": \"Xb21d7jXnoLvUixnxu1cWSAXnIc\",\n    \"file_token\": \"NVphbyJ8ZoJ8ztxizJ4c9egCn1d\",\n    \"type\": \"image\"\n  }\n}\n",
+    "status": 0
+  }
+]

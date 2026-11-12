@@ -1,0 +1,32 @@
+[
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "block_id": "doxcndOouLYvt5yz8fojnoAuang",
+      "document_id": "LhGid0n41ojlJWxc6KfcuPL7n7b",
+      "file_token": "Utq1bdCK5owo6cxXfqFcEvfcnJe",
+      "type": "image"
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "block_id": "doxcnunASW8xxUexvuXykwktFLe",
+      "document_id": "LhGid0n41ojlJWxc6KfcuPL7n7b",
+      "file_token": "ZPvobQNiooPsfFxoN33cpYuNnde",
+      "type": "image"
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "block_id": "doxcnUZDPZzBh4MGfG3h3rwRGmd",
+      "document_id": "LhGid0n41ojlJWxc6KfcuPL7n7b",
+      "file_token": "SCVAb6rCLoepKwxXx4jcS23inCd",
+      "type": "image"
+    }
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "name": "wechat-mini-game",
+  "platform": "wechatgame",
+  "buildPath": "project://build",
+  "outputName": "wechatgame",
+  "startScene": "d6a28486-5ad9-4b5f-95ea-f6a2b8827e3e",
+  "scenes": [
+    {
+      "url": "db://assets/scenes/Main.scene",
+      "uuid": "d6a28486-5ad9-4b5f-95ea-f6a2b8827e3e"
+    }
+  ],
+  "debug": false,
+  "packages": {
+    "wechatgame": {
+      "appid": "wxbf455170a0f5ea11",
+      "orientation": "landscape"
+    }
+  },
+  "sourceMaps": false,
+  "includeModules": [
+    "base",
+    "gfx-webgl",
+    "2d",
+    "ui",
+    "graphics",
+    "audio",
+    "affine-transform",
+    "intersection-2d"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "format": "PCM16 mono 24000 Hz",
+  "generated": [
+    {
+      "id": "beans-attack",
+      "seconds": 0.1,
+      "bytes": 4844,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -18.34
+    },
+    {
+      "id": "beans-hit",
+      "seconds": 0.085,
+      "bytes": 4124,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -19.48
+    },
+    {
+      "id": "peach-attack",
+      "seconds": 0.18,
+      "bytes": 8684,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -15.96
+    },
+    {
+      "id": "peach-hit",
+      "seconds": 0.26,
+      "bytes": 12524,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -19.27
+    },
+    {
+      "id": "cleaver-attack",
+      "seconds": 0.07,
+      "bytes": 3404,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -19.28
+    },
+    {
+      "id": "cleaver-hit",
+      "seconds": 0.15,
+      "bytes": 7244,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -21.6
+    },
+    {
+      "id": "rollingpin-attack",
+      "seconds": 0.08,
+      "bytes": 3884,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -17.81
+    },
+    {
+      "id": "rollingpin-hit",
+      "seconds": 0.2,
+      "bytes": 9644,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -18.51
+    },
+    {
+      "id": "firecracker-attack",
+      "seconds": 0.14,
+      "bytes": 6764,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -21.01
+    },
+    {
+      "id": "firecracker-hit",
+      "seconds": 0.33,
+      "bytes": 15884,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -24.14
+    }
+  ],
+  "previewOrder": [
+    "草鞋",
+    "绿豆袋",
+    "桃枝",
+    "杀猪刀",
+    "擀面杖",
+    "爆竹"
+  ],
+  "previewSectionSeconds": 3,
+  "origin": "All generated effects use original synthesis. Sandal impact is the unchanged user-supplied clip."
+}

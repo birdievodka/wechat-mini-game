@@ -1,0 +1,68 @@
+[
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+      "log_id": "202611112013029F79B974C897D9F7734B",
+      "message": "文档更新成功（replace_range模式）",
+      "mode": "replace_range",
+      "success": true
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+      "log_id": "20261111201304D3BDF5506AF560C541B2",
+      "message": "文档更新成功（replace_range模式）",
+      "mode": "replace_range",
+      "success": true
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+      "log_id": "20261111201306CEB188D9F0A6D1EF0CDC",
+      "message": "文档更新成功（replace_range模式）",
+      "mode": "replace_range",
+      "success": true
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+      "log_id": "20261111201308C77911CADFE138EC724F",
+      "message": "文档更新成功（replace_range模式）",
+      "mode": "replace_range",
+      "success": true
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+      "log_id": "202611112013104FC16EBB46F43CD486C5",
+      "message": "文档更新成功（replace_range模式）",
+      "mode": "replace_range",
+      "success": true
+    }
+  },
+  {
+    "ok": true,
+    "identity": "user",
+    "data": {
+      "doc_id": "Xb21d7jXnoLvUixnxu1cWSAXnIc",
+      "log_id": "20261111201312920B86DFD69F2AD9B751",
+      "message": "文档更新成功（replace_range模式）",
+      "mode": "replace_range",
+      "success": true
+    }
+  }
+]

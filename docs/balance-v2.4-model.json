@@ -1,0 +1,285 @@
+{
+  "version": "orchard-v2.4-sword-balance",
+  "assumptions": "白/蓝品质，无技能、弹射或多目标收益；霰弹最多4颗同时命中，葫芦6段，剑阵按命中冷却上限。实际输出受走位、分散索敌、穿透及命中率影响。",
+  "baseWeapons": [
+    {
+      "id": "sandal",
+      "name": "草鞋",
+      "dps": 17.08,
+      "role": "飞鞋打脸 · 强力击退"
+    },
+    {
+      "id": "beans",
+      "name": "绿豆袋",
+      "dps": 15.77,
+      "role": "豆袋留手 · 穿透两人"
+    },
+    {
+      "id": "peach",
+      "name": "桃枝",
+      "dps": 16.4,
+      "role": "桃花爆开 · 范围伤害"
+    },
+    {
+      "id": "cleaver",
+      "name": "杀猪刀",
+      "dps": 27.38,
+      "role": "扇形快砍 · 双倍暴击"
+    },
+    {
+      "id": "rollingpin",
+      "name": "擀面杖",
+      "dps": 23.74,
+      "role": "横扫一片 · 重击退敌"
+    },
+    {
+      "id": "firecracker",
+      "name": "爆竹",
+      "dps": 18.38,
+      "role": "炸响一片 · 大范围爆破"
+    },
+    {
+      "id": "smg",
+      "name": "桃园突突枪",
+      "dps": 19.22,
+      "role": "快速点射 · 轻击退"
+    },
+    {
+      "id": "shotgun",
+      "name": "村口霰弹枪",
+      "dps": 22.78,
+      "role": "五发散弹 · 近身破围"
+    },
+    {
+      "id": "rocket",
+      "name": "二踢脚火箭筒",
+      "dps": 24.6,
+      "role": "大范围爆炸 · 慢速重击"
+    },
+    {
+      "id": "sword",
+      "name": "青莲飞剑",
+      "dps": 20.5,
+      "role": "三剑环身 · 旋转接触伤害"
+    },
+    {
+      "id": "thunder",
+      "name": "五雷符",
+      "dps": 22.96,
+      "role": "连锁落雷 · 跳跃三人"
+    },
+    {
+      "id": "gourd",
+      "name": "吞天葫芦",
+      "dps": 11.53,
+      "role": "六段吸风 · 轻聚怪"
+    }
+  ],
+  "enemyCurve": [
+    {
+      "seconds": 0,
+      "footHp": 24,
+      "archerHp": 22,
+      "cavalryHp": 110,
+      "bossHp": 3000,
+      "archerPercent": 25,
+      "cavalryPercent": 10,
+      "spawnBudget": 2.5
+    },
+    {
+      "seconds": 60,
+      "footHp": 31,
+      "archerHp": 28,
+      "cavalryHp": 141,
+      "bossHp": 3840,
+      "archerPercent": 28.33,
+      "cavalryPercent": 16.67,
+      "spawnBudget": 2.9
+    },
+    {
+      "seconds": 180,
+      "footHp": 50,
+      "archerHp": 46,
+      "cavalryHp": 231,
+      "bossHp": 6291,
+      "archerPercent": 35,
+      "cavalryPercent": 30,
+      "spawnBudget": 3.9
+    },
+    {
+      "seconds": 300,
+      "footHp": 82,
+      "archerHp": 76,
+      "cavalryHp": 378,
+      "bossHp": 10308,
+      "archerPercent": 40,
+      "cavalryPercent": 30,
+      "spawnBudget": 5.25
+    },
+    {
+      "seconds": 480,
+      "footHp": 173,
+      "archerHp": 159,
+      "cavalryHp": 793,
+      "bossHp": 21617,
+      "archerPercent": 40,
+      "cavalryPercent": 30,
+      "spawnBudget": 7.5
+    },
+    {
+      "seconds": 600,
+      "footHp": 315,
+      "archerHp": 289,
+      "cavalryHp": 1445,
+      "bossHp": 39397,
+      "archerPercent": 40,
+      "cavalryPercent": 30,
+      "spawnBudget": 7.5
+    }
+  ],
+  "builds": [
+    {
+      "name": "开局一武器",
+      "seconds": 0,
+      "gear": [
+        {
+          "id": "sandal",
+          "tier": 1,
+          "uid": 1
+        }
+      ],
+      "items": {},
+      "dps": 17.08,
+      "cavalryFocusSeconds": 6.44,
+      "bossHp": 3000,
+      "bossFocusSeconds": 175.61
+    },
+    {
+      "name": "一分钟三武器",
+      "seconds": 60,
+      "gear": [
+        {
+          "id": "sandal",
+          "tier": 1,
+          "uid": 1
+        },
+        {
+          "id": "beans",
+          "tier": 1,
+          "uid": 2
+        },
+        {
+          "id": "smg",
+          "tier": 1,
+          "uid": 3
+        }
+      ],
+      "items": {
+        "A01": 1,
+        "A02": 1,
+        "D09": 1
+      },
+      "dps": 94.09,
+      "cavalryFocusSeconds": 1.5,
+      "bossHp": 3840,
+      "bossFocusSeconds": 40.81
+    },
+    {
+      "name": "三分钟六武器",
+      "seconds": 180,
+      "gear": [
+        {
+          "id": "sandal",
+          "tier": 2,
+          "uid": 1
+        },
+        {
+          "id": "beans",
+          "tier": 2,
+          "uid": 2
+        },
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 3
+        },
+        {
+          "id": "shotgun",
+          "tier": 2,
+          "uid": 4
+        },
+        {
+          "id": "sword",
+          "tier": 2,
+          "uid": 5
+        },
+        {
+          "id": "peach",
+          "tier": 2,
+          "uid": 6
+        }
+      ],
+      "items": {
+        "A01": 2,
+        "A02": 2,
+        "D09": 1,
+        "D10": 1,
+        "D11": 1,
+        "F05": 1
+      },
+      "dps": 413.6,
+      "cavalryFocusSeconds": 0.56,
+      "bossHp": 6291,
+      "bossFocusSeconds": 15.21
+    },
+    {
+      "name": "三分钟成型专精",
+      "seconds": 180,
+      "gear": [
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 1
+        },
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 2
+        },
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 3
+        },
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 4
+        },
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 5
+        },
+        {
+          "id": "smg",
+          "tier": 2,
+          "uid": 6
+        }
+      ],
+      "items": {
+        "A01": 3,
+        "A02": 3,
+        "D09": 3,
+        "D10": 3,
+        "D11": 2,
+        "F05": 2,
+        "A05": 3
+      },
+      "dps": 1048.6,
+      "cavalryFocusSeconds": 0.22,
+      "bossHp": 6291,
+      "bossFocusSeconds": 6
+    }
+  ]
+}
