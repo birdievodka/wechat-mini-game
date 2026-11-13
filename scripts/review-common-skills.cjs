@@ -92,7 +92,7 @@ async function main(){
  }
  const compose=async(files,cols,width,height,header,target)=>{
   const rows=Math.ceil(files.length/cols),w=cols*720+(cols-1)*20+64,h=rows*450+(rows-1)*20+header+32;
-  let base=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#152b25"/>${text(width||'桃园乱斗 当前技能总览',32,58,40,'#ffe3a2',600)}${text(height||'24项通用技能 · 综合威力升序 · 基础击杀充能',32,101,25,'#c4d1b8')}${text('当前代码定帧预览  ·  统一缩放  ·  静态参照兵  ·  非微信实机截图',32,135,20,'#9eaf99')}</svg>`;
+  let base=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#152b25"/>${text(width||'桃园小英雄 当前技能总览',32,58,40,'#ffe3a2',600)}${text(height||'24项通用技能 · 综合威力升序 · 基础击杀充能',32,101,25,'#c4d1b8')}${text('当前代码定帧预览  ·  统一缩放  ·  静态参照兵  ·  非微信实机截图',32,135,20,'#9eaf99')}</svg>`;
   await sharp(Buffer.from(base)).composite(files.map((input,i)=>({input,left:32+i%cols*740,top:header+Math.floor(i/cols)*470}))).png().toFile(target);
  };
  await compose(cards,4,'','',165,path.join(OUT,'技能总览.png'));
@@ -100,7 +100,7 @@ async function main(){
  fs.writeFileSync(path.join(OUT,'skills.json'),JSON.stringify(data,null,2)+'\n');
  const cloudPath=path.join(OUT,'feishu-document.json'),cloud=fs.existsSync(cloudPath)?JSON.parse(fs.readFileSync(cloudPath,'utf8')):undefined;
  const cloudLine=cloud?`飞书评审文档：${cloud.doc_url}（云端为先前评审快照，本次本地清理未修改云文档）。\n\n`:'';
- fs.writeFileSync(path.join(OUT,'README.md'),`# 桃园乱斗当前技能评审\n\n版本 ${VERSION}，${data.date}。\n\n${cloudLine}共24项全部开放。本目录只保留当前代码生成的汇总；横扫六合已采用A金锋回旋。\n\n[整体预览](技能总览.png) · [结构化数据](skills.json)\n\n预览执行当前 CommonSkillRuntime / CommonSkillEffects / CombatEffects，在固定场景取代表帧，Graphics路径经SVG栅格化。兵与英雄为静态参照，背景使用当前草地。与Cocos的抗锯齿和动态表现有差异，不能当作微信实机截图；一帧不能展示完整的多段攻击或受击反馈。\n\nS为施法时已装备武器的理论单目标DPS合计乘技能伤害加成，不是单武器攻击力。威力阶是综合效用顺序，不是严格DPS或实测胜率。\n\n|顺序|技能|阶|基础击杀|数值|范围|描述|\n|---|---|---|---|---|---|---|\n`+records.map(s=>`|${s.powerRank}|${s.name}|${s.powerTier}|${s.killCharge}|${s.damage}|${s.range}|${s.effect} ${s.detail}|`).join('\n')+'\n\n## 当前表现评审\n\n'+records.map(s=>`### ${s.name}\n\n现有效果：${s.visual}。\n\n重做重点：${s.issue}\n`).join('\n'));
+ fs.writeFileSync(path.join(OUT,'README.md'),`# 桃园小英雄当前技能评审\n\n版本 ${VERSION}，${data.date}。\n\n${cloudLine}共24项全部开放。本目录只保留当前代码生成的汇总；横扫六合已采用A金锋回旋。\n\n[整体预览](技能总览.png) · [结构化数据](skills.json)\n\n预览执行当前 CommonSkillRuntime / CommonSkillEffects / CombatEffects，在固定场景取代表帧，Graphics路径经SVG栅格化。兵与英雄为静态参照，背景使用当前草地。与Cocos的抗锯齿和动态表现有差异，不能当作微信实机截图；一帧不能展示完整的多段攻击或受击反馈。\n\nS为施法时已装备武器的理论单目标DPS合计乘技能伤害加成，不是单武器攻击力。威力阶是综合效用顺序，不是严格DPS或实测胜率。\n\n|顺序|技能|阶|基础击杀|数值|范围|描述|\n|---|---|---|---|---|---|---|\n`+records.map(s=>`|${s.powerRank}|${s.name}|${s.powerTier}|${s.killCharge}|${s.damage}|${s.range}|${s.effect} ${s.detail}|`).join('\n')+'\n\n## 当前表现评审\n\n'+records.map(s=>`### ${s.name}\n\n现有效果：${s.visual}。\n\n重做重点：${s.issue}\n`).join('\n'));
  console.log(JSON.stringify({output:OUT,skills:records.length,skillsRendered:cards.length,intermediateFiles:0}));
 }
 module.exports={load,GraphicsSVG};

@@ -1,10 +1,12 @@
+import {TrainingView} from './TrainingView';
+import {GAME_NAME} from './game-brand';
 import {COMMON_SKILLS,DEFAULT_SKILL,availableSkill,commonSkillFor,skillKillRequirement} from './common-skills';
 import {CommonSkillRuntime} from './CommonSkillRuntime';
 import {CommonSkillEffects} from './CommonSkillEffects';
 import {loadChronicleArt} from './chronicle-art';
 import {CHAPTERS,CHRONICLE_ENEMIES,chapterFor,archetypeFor,scaledEnemy,chapterThreat,pickChapterEnemy,chapterInflation,BOSS_ACTIONS,BossAction} from './chronicles';
 import {isExtraWeapon,extraHitFactor} from './extra-weapons';
-import {ChronicleSave,SavePoint,SAVE_KEY,readSave,copyPoint} from './chronicle-save';
+import {ChronicleSave,SavePoint,SAVE_KEY,copyPoint} from './chronicle-save';
 import {
   _decorator, assetManager, AssetManager, AudioClip, AudioSource, Camera, Canvas, Color, Component, EventKeyboard, EventTouch,
   game, Game, Graphics, ImageAsset, input, Input, KeyCode, Label, Layers, Node,
@@ -52,7 +54,7 @@ const TEST_ENEMIES: EnemyKind[] = ['soldier', 'spearman', 'cavalry', 'chief'];
 const TEST_SPAWN = { interval: 1.1, cap: 16 };
 export interface Enemy {
   nextCycleUntil?:number;specialCooldown?:number;sidestepLeft?:number;
-  archetype?:string;bossSkin?:string;bossTimers?:number[];bossMove?:BossAction;bossAge?:number;bossNext?:number;fired?:boolean;object?:'flag'|'clone'|'eye';slowUntil?:number;slowFactor?:number;firstHits?:Map<number,number>;rigParts?:Sprite[];rigKey?:string;rigSize?:number;rigTint?:string;
+  encounterChapter?:number;archetype?:string;bossSkin?:string;bossTimers?:number[];bossMove?:BossAction;bossAge?:number;bossNext?:number;fired?:boolean;object?:'flag'|'clone'|'eye';slowUntil?:number;slowFactor?:number;firstHits?:Map<number,number>;rigParts?:Sprite[];rigKey?:string;rigSize?:number;rigTint?:string;
   stagger?:number; staggerCooldown?:number; elite?:boolean;
   animal?: 'chicken' | 'rabbit' | 'pig' | 'tree'; animalArt?: Graphics; ttl?: number; bornTotal?: number; farAge?: number;
   birthRig?:Node;birthSprites?:Sprite[];warningDrawn?:boolean;visualHit?:boolean;moving?: boolean; chargeHit?: boolean;
@@ -94,6 +96,9 @@ private playerSlowUntil=0;
   private particleSprites!:ParticleSprites;
   private battleSprites!:BattleSpriteAtlas;
   private testMode = false;
+  private trainingMode=false;
+  private trainingPanel?:TrainingView;
+  private trainingButton?:Label;
   private run: Run = createRun('liubei');
   private stats: Stats = statsFor(this.run);
   private screens!: CampaignView;
@@ -343,7 +348,7 @@ private playerSlowUntil=0;
     this.menu = this.node2D(this.ui, 'PauseMenu');
     const shade = this.menu.addComponent(Graphics); shade.fillColor = new Color(20, 30, 20, 220);
     shade.roundRect(-180, -300, 360, 455, 24); shade.fill();
-    this.label(this.menu, '桃园乱斗', 0, 110, 30, '#fff3d4');
+    this.label(this.menu, GAME_NAME, 0, 110, 30, '#fff3d4');
     this.button('继续战斗', 0, 40, () => { if (this.playerHp > 0) { this.paused = false; this.menu.active = false; this.drawStick(); this.unlockAudio(); this.music.resume(); } }, this.menu);
     this.button('返回选人', 0, -35, () => this.showMainMenu(), this.menu);
     this.soundButton = this.button('音效：开启', 0, -110, () => {
@@ -364,6 +369,11 @@ private playerSlowUntil=0;
       if (this.phase !== 'battle') return;
       this.paused = true; this.clearInput(); this.stopSounds(); this.music.pause(); this.menu.active = true;
     }, this.ui, 58);
+    const pause=this.pauseLabel.node.parent!;pause.name='PauseButton';pause.getComponent(UITransform)!.setContentSize(64,64);
+    this.pauseLabel.string='';const pg=pause.getComponent(Graphics)!;pg.clear();pg.fillColor=new Color('#355e40');pg.strokeColor=new Color('#d7c58f');pg.lineWidth=1.5;pg.circle(0,0,24);pg.fill();pg.stroke();
+    pg.fillColor=new Color('#fff0d2');pg.roundRect(-7,-9,4,18,1);pg.roundRect(3,-9,4,18,1);pg.fill();
+    this.trainingButton=this.button('演武配置',0,0,()=>this.openTrainingPanel(),this.ui,160);
+    this.trainingButton.node.parent!.name='OpenTrainingPanel';
     // No battlefield or HUD may be visible before the user chooses a hero and starts.
     this.setBattleVisible(false);
     this.loadingScreen = this.node2D(this.ui, 'LoadingScreen');
@@ -411,7 +421,7 @@ private playerSlowUntil=0;
     this.detachKeyboard = attachDesktopKeyboard(
       typeof window === 'undefined' ? undefined : window as unknown as KeyboardSurface,
       typeof wx === 'undefined' ? undefined : wx,
-      () => this.phase === 'battle' && !this.paused && this.playerHp > 0,
+      () => this.phase === 'battle' && !this.paused && !this.trainingPanel?.root.active && this.playerHp > 0,
       code => this.keyDown({ keyCode: code } as EventKeyboard),
       code => this.keyUp({ keyCode: code } as EventKeyboard), () => this.clearInput(),
     );
@@ -505,13 +515,13 @@ private playerSlowUntil=0;
   private async loadHeroMenuArt():Promise<void> {
     const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('hero-menu',(error,b)=>error?reject(error):resolve(b)));
     if(!this.isValid)return;this.markStartup('hero-menu');
-    await Promise.all(['background','atlas'].map(name=>new Promise<void>((resolve,reject)=>{
+    await Promise.all(['background','atlas','logo'].map(name=>new Promise<void>((resolve,reject)=>{
       bundle.load((name==='background'?'training-ground':name)+'/texture',Texture2D,(error,texture)=>{
         if(error){reject(error);return;}if(!this.isValid){resolve();return;}
-        if(name==='background'){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,texture.width,texture.height);this.artFrames['hero-menu-background']=frame;}
+        if(name==='background'||name==='logo'){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,texture.width,texture.height);this.artFrames['hero-menu-'+name]=frame;}
         else{
           const cw=texture.width/3,ch=texture.height/2;
-          ['liubei','guanyu','zhangfei','logo','title','start'].forEach((key,i)=>{const frame=new SpriteFrame();frame.texture=texture;frame.rect=i<3?new Rect(i*cw,0,cw,ch):new Rect((i-3)*cw,ch+ch*.25,cw,ch*.5);this.artFrames['hero-menu-'+key]=frame;});
+          ['liubei','guanyu','zhangfei','logo','title','start'].forEach((key,i)=>{if(key==='logo')return;const frame=new SpriteFrame();frame.texture=texture;frame.rect=i<3?new Rect(i*cw,0,cw,ch):new Rect((i-3)*cw,ch+ch*.25,cw,ch*.5);this.artFrames['hero-menu-'+key]=frame;});
         }this.markStartup('menu:'+name);resolve();
       });
     })));
@@ -629,7 +639,7 @@ private playerSlowUntil=0;
     // The music clock continues while shopping/counting down; combat remains frozen.
     if(this.ready&&!this.paused&&!this.backgrounded&&(this.phase==='battle'||this.phase==='shop'))
       this.music.update(Math.min(Math.max(delta,0),.08));
-    if (!this.ready || this.paused || this.backgrounded || this.phase !== 'battle') return;
+    if (!this.ready || this.paused || this.backgrounded || this.phase !== 'battle' || this.trainingPanel?.root.active) return;
     // Only simulated foreground time counts; stalls and returning from background never skip danger.
     const elapsed = Math.min(Math.max(delta, 0), .08);
     if (this.resumeCountdown > 0) {
@@ -674,8 +684,8 @@ private playerSlowUntil=0;
     this.age += dt; this.peachBurstCooldown = Math.max(0, this.peachBurstCooldown - dt);
     const rule = this.testMode ? TEST_SPAWN : waveRule(this.run.wave);
     this.respite = Math.max(0, this.respite - dt);
-    this.spawnClock -= dt;
-    if (this.spawnClock <= 0) {
+    if(!this.trainingMode)this.spawnClock -= dt;
+    if (!this.trainingMode && this.spawnClock <= 0) {
       const alive = this.enemies.filter(e => e.hp > 0 && !e.animal).length;
       if (this.testMode) { this.spawnClock = rule.interval; if (alive < rule.cap) this.spawnTestEnemy(); }
       else if (this.run.wave === 1) { this.spawnClock = rule.interval; if (alive < rule.cap){const id=this.run.chapter===1?'E01':this.pickArchetype(0);if(id)this.spawnNext(archetypeFor(id).kind,id);} }
@@ -767,7 +777,7 @@ private playerSlowUntil=0;
   }
 
   private drawPlayerHealth(): void {
-    const g = this.playerBar; g.clear(); this.healthText.string = this.testMode ? '生命'+Math.ceil(this.playerHp) : '';
+    const g = this.playerBar; g.clear(); this.healthText.string = this.trainingMode ? '生命 ∞' : this.testMode ? '生命'+Math.ceil(this.playerHp) : '';
     for (let i = 0; i < 5; i++) {
       const x = 106 + i * 37, y = -55, full = this.playerHp > i;
       g.fillColor = new Color(full ? '#ef665b' : '#63705b'); g.strokeColor = new Color(full ? '#ffb393' : '#9a9f80'); g.lineWidth = 1.5;
@@ -779,6 +789,7 @@ private playerSlowUntil=0;
   private hurtPlayer(sourceX: number, sourceY: number, raw = 2): void {
     if (this.phase!=='battle'||this.victoryPending||this.playerHp <= 0 || this.hurtTime > 0 || this.protectionTime > 0 ) return;
     if(this.commonSkill.block())return;
+    if(this.trainingMode)return;
     this.lastDamage = 1;
     this.playerHp = Math.max(0, this.playerHp - this.lastDamage); this.hurtTime = 1.2 + this.perks.invincible;
     this.refreshStats(); this.pushNearbyEnemies();
@@ -807,17 +818,17 @@ private playerSlowUntil=0;
     this.walkPhase += distance / 84 * Math.PI * 2;
     this.lean += ((moving ? -moveX * 4 : 0) - this.lean) * smoothing;
     const pose=heroIdlePose(this.run.heroId,this.idleTime,this.walkBlend,this.hurtTime>0);
-    const sweep=this.commonSkill?.sweepPose||0;
-    this.handBob=pose.handBob+sweep*2;
-    this.torsoBob = Math.abs(Math.sin(this.walkPhase)) * 1.8 * this.walkBlend + pose.headY*.45-Math.abs(sweep)*1.5;
+    const sweep=this.commonSkill?.sweepPose||0,cast=this.commonSkill?.castPose;
+    this.handBob=pose.handBob+sweep*2+(cast?.hand||0);
+    this.torsoBob = Math.abs(Math.sin(this.walkPhase)) * 1.8 * this.walkBlend + pose.headY*.45-Math.abs(sweep)*1.5+(cast?.bob||0);
     const sway = Math.sin(this.walkPhase) * 1.4 * this.walkBlend;
     this.body.node.setPosition(sway, -1 + this.torsoBob);
-    this.body.node.angle = this.lean + Math.sin(this.walkPhase) * 2.5 * this.walkBlend + pose.bodyAngle+sweep*12*this.facing;
-    const squash = Math.cos(this.walkPhase * 2) * 0.025 * this.walkBlend - pose.breath+Math.abs(sweep)*.025;
+    this.body.node.angle = this.lean + Math.sin(this.walkPhase) * 2.5 * this.walkBlend + pose.bodyAngle+(sweep*12+(cast?.body||0))*this.facing;
+    const squash = Math.cos(this.walkPhase * 2) * 0.025 * this.walkBlend - pose.breath+Math.abs(sweep)*.025+(cast?.squash||0);
     this.body.node.setScale(this.facing * (1 + squash), 1 - squash, 1);
     if(this.headPivot){
       this.headPivot.setPosition(sway+pose.headX+sweep*2*this.facing,18+this.torsoBob+pose.headY);
-      this.headPivot.angle=this.lean*.6+Math.sin(this.walkPhase)*1.8*this.walkBlend+(pose.headAngle-sweep*5)*this.facing;
+      this.headPivot.angle=this.lean*.6+Math.sin(this.walkPhase)*1.8*this.walkBlend+(pose.headAngle-sweep*5+(cast?.head||0))*this.facing;
       this.headPivot.setScale(this.facing,1,1);
       const frame=pose.eyesClosed?this.headClosed:this.headOpen;if(frame&&this.head.spriteFrame!==frame)this.head.spriteFrame=frame;
     }
@@ -1110,12 +1121,13 @@ private playerSlowUntil=0;
 
   private spawnEnemy(e: Enemy, index: number): void {
     let at=spawnPoint(this.px,this.py,e.kind||'soldier',Math.random,this.heading);for(let attempt=0;attempt<10&&this.terrainNodes.some(n=>Math.hypot(n.position.x-at.x,n.position.y-at.y)<85);attempt++)at=spawnPoint(this.px,this.py,e.kind||'soldier',Math.random,this.heading);const point=[at.x,at.y];
-    e.rigTint=undefined;e.art.enabled=true;e.rigParts?.forEach(sp=>sp.node.active=false);
+    e.rigTint=undefined;e.art.enabled=true;e.art.spriteFrame=null;e.rigParts?.forEach(sp=>sp.node.active=false);
+    if(e.birthRig)e.birthRig.active=false;
     e.animal=undefined; e.animalArt && (e.animalArt.node.active=false); e.art.node.active=true; e.farAge=0;
     e.direction = 0; e.walk = 0; e.moving = false; e.chargeHit = false; e.attack = -1;
     e.attackCooldown = initialEnemyCooldown(e.kind || 'soldier', index); e.attackAngle = 0;
     e.weaponKind = Math.random() < 0.5 ? 0 : 1;
-    const s = e.kind==='chief'?{hp:chapterFor(this.run.chapter).bossHp,speed:chapterFor(this.run.chapter).bossSpeed,damage:1}:e.archetype?scaledEnemy(e.archetype,this.run.chapter,this.run.wave===1?0:Math.min(3,this.run.wavesCleared+1),this.run.bossEncounter):enemyStats(e.kind || 'soldier', this.run.wave, this.run.survivalSeconds);
+    const s = e.kind==='chief'?{hp:chapterFor(e.encounterChapter||this.run.chapter).bossHp,speed:chapterFor(e.encounterChapter||this.run.chapter).bossSpeed,damage:1}:e.archetype?scaledEnemy(e.archetype,e.encounterChapter||this.run.chapter,this.run.wave===1?0:Math.min(3,this.run.wavesCleared+1),this.run.bossEncounter):enemyStats(e.kind || 'soldier', this.run.wave, this.run.survivalSeconds);
     e.x = point[0]; e.y = point[1]; e.hp = s.hp; e.maxHp = s.hp; e.speed = s.speed; e.damage = s.damage; e.bornTotal = e.kind==='chief'?1.5:e.kind==='cavalry'?1.1:.9; e.born=e.bornTotal; e.skill = 0; e.dead = 0; e.flash = 0;e.stagger=0;e.staggerCooldown=0;e.elite=false;e.object=undefined;e.bossTimers=[0,1.4,2.8];e.bossMove=undefined;e.bossNext=0;e.bossAge=0;e.fired=false;e.slowUntil=0;e.slowFactor=0;e.nextCycleUntil=0;e.firstHits=new Map();e.specialCooldown=2.8;e.sidestepLeft=0;
     e.warning?.clear();e.warningDrawn=false;e.visualHit=undefined;
     e.feedback = 0; e.vx = 0; e.vy = 0; e.node.active = true; e.text.string = '';
@@ -1123,7 +1135,10 @@ private playerSlowUntil=0;
     e.node.angle = 0; e.node.setPosition(e.x, e.y);
     const size = e.kind === 'chief' ? 145 : e.kind === 'cavalry' ? 100 : 78;
     e.art.node.getComponent(UITransform)!.setContentSize(size, size);
-    e.previousHitX = e.x; e.previousHitY = e.y + 34; this.drawEnemy(e);
+    e.previousHitX = e.x; e.previousHitY = e.y + 34;
+    // A pooled enemy can spawn on a non-presenting physics substep. Initialize its
+    // new sprite/rig once now; the birth branch does not otherwise redraw the body.
+    this.drawEnemy(e,true);e.art.node.active=false;
   }
 
   private updateEnemy(e: Enemy, dt: number): void {
@@ -1149,6 +1164,9 @@ private playerSlowUntil=0;
       else if(this.presentSubstep){g.clear();e.warningDrawn=true;
       g.strokeColor=new Color(211,173,84,Math.round(190*(1-p)));g.lineWidth=2;g.ellipse(0,0,28+p*18,12+p*8);g.stroke();
       g.fillColor=new Color(219,190,119,Math.round((1-p)*140));for(let i=0;i<5;i++){const a=i*1.257;g.circle(Math.cos(a)*30,Math.sin(a)*12+12*p,3+p*3);g.fill();}}
+      // Summoned clones/eyes set their final identity after spawnNext; prepare that
+      // identity before the first visible birth frame, never after materializing.
+      if(!e.animal&&p>.32&&!e.art.node.active)this.drawEnemy(e,true);
       e.art.node.active=!e.animal&&p>.32;if(e.animalArt)e.animalArt.node.active=!!e.animal&&p>.32;e.node.setScale(.75+.25*p,.75+.25*p,1);
       if(e.born===0){e.art.node.active=!e.animal;if(e.warningDrawn){g.clear();e.warningDrawn=false;}e.attackCooldown=Math.max(.2,e.attackCooldown);}
       return;
@@ -1292,8 +1310,9 @@ private playerSlowUntil=0;
     return distance <= reach && (distance < 1 || (dx * Math.cos(e.attackAngle) + dy * Math.sin(e.attackAngle)) / distance >= 0.5);
   }
 
-  private drawEnemy(e: Enemy): void {
-    if(!this.presentSubstep)return;
+  private drawEnemy(e: Enemy, initialize=false): void {
+    if(!this.presentSubstep&&!initialize)return;
+    if((e.born||0)<=0)e.art.node.active=!e.animal;
     const kind = e.kind || 'soldier', cell = enemyAnimationCell(kind, e.direction, e.walk, e.moving !== false, e.attack);
     if(e.archetype||e.bossSkin){this.drawChronicleEnemy(e);return;}
     const frame=kind==='soldier'?this.soldierFrames[e.weaponKind]?.[cell]||null:this.enemyFrames[kind]?.[cell]||null;
@@ -1301,10 +1320,10 @@ private playerSlowUntil=0;
     const hit=e.flash>0;if(e.visualHit!==hit){e.art.color=hit?ENEMY_HIT:ENEMY_NORMAL;e.visualHit=hit;}
   }
 
-  private spawnNext(kind: EnemyKind = enemyKind(this.run.wave, Math.random, this.run.survivalSeconds),archetype?:string): Enemy {
+  private spawnNext(kind: EnemyKind = enemyKind(this.run.wave, Math.random, this.run.survivalSeconds),archetype?:string,encounterChapter?:number): Enemy {
     let e = this.enemies.find(v => v.hp <= 0 && v.dead <= 0);
     if (!e) { e = this.createEnemy(this.enemies.length); this.enemies.push(e); }
-    e.kind = kind;e.archetype=archetype;e.bossSkin=kind==='chief'?chapterFor(this.run.chapter).bossId:undefined; this.spawnEnemy(e, this.testMode ? Math.floor(Math.random() * 8) : this.spawnSerial++); return e;
+    e.kind = kind;e.encounterChapter=encounterChapter;e.archetype=archetype;e.bossSkin=kind==='chief'?chapterFor(encounterChapter||this.run.chapter).bossId:undefined; this.spawnEnemy(e, this.testMode ? Math.floor(Math.random() * 8) : this.spawnSerial++); return e;
   }
 
   private spawnTestEnemy(): void {
@@ -1512,7 +1531,8 @@ private playerSlowUntil=0;
   private onBackground(): void { this.health?.record('background');this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
   private onForeground(): void {
     this.backgrounded = false;this.health?.record('foreground');
-    if(this.phase==='shop'&&!this.paused)this.music.resume();
+    if(this.trainingMode&&this.trainingPanel?.root.active){this.paused=false;this.menu.active=false;this.music.resume();}
+    else if(this.phase==='shop'&&!this.paused)this.music.resume();
     else if (this.paused || this.phase !== 'battle') { this.music.pause(); this.stopSounds(); }
   }
 
@@ -1541,7 +1561,7 @@ private playerSlowUntil=0;
     return this.root.getComponent(UITransform)!.convertToNodeSpaceAR(world);
   }
   private touchStart(event: EventTouch): void {
-    if (this.touchId !== null || this.paused || this.playerHp <= 0 || this.phase !== 'battle') return;
+    if (this.touchId !== null || this.paused || this.trainingPanel?.root.active || this.playerHp <= 0 || this.phase !== 'battle') return;
     const p = this.localPoint(event);
     if (Math.abs(p.x) > this.halfWidth || Math.abs(p.y) > this.halfHeight) return;
     const center=joystickCenter(this.halfWidth,this.halfHeight);
@@ -1571,7 +1591,7 @@ private playerSlowUntil=0;
   private clearInput(): void { this.keys.clear(); this.clearTouch(); }
   private drawStick(): void {
     const g=this.joystick;g.clear();
-    g.node.active=this.phase==='battle'&&!this.paused;
+    g.node.active=this.phase==='battle'&&!this.paused&&!this.trainingPanel?.root.active;
     if(!g.node.active)return;
     const active=this.touchId!==null,center=joystickCenter(this.halfWidth,this.halfHeight);this.origin=center;
     const {x,y}=center;
@@ -1594,8 +1614,9 @@ private playerSlowUntil=0;
     this.root.getComponent(UITransform)!.setContentSize(size.width, size.height);
     this.statusPanel.setPosition(-hw + 32, hh - 25);
     this.hud.node.setPosition(0, hh - 42);
-    // Keep the game's pause button left of WeChat's native capsule.
-    this.pauseLabel.node.parent!.setPosition(hw - 240, hh - 48);
+    // Left status card is 305 wide; leave a 16px gap before the 48px pause circle.
+    this.pauseLabel.node.parent!.setPosition(-hw + 32 + 305 + 16 + 24, hh - 25 - 56);
+    this.trainingButton?.node.parent!.setPosition(hw-134,hh-160);this.trainingPanel?.resize(size.width,size.height);
     this.bossLabel.node.setPosition(0,hh-86); this.skillButton.setPosition(hw-100,joystickCenter(hw,hh).y); this.weaponHud.setPosition(0,-hh+96); this.hintText.node.setPosition(0,-hh+148);
     this.screens?.resize(size.width, size.height);
     this.loadingView?.resize(size.width,size.height);
@@ -1603,17 +1624,69 @@ private playerSlowUntil=0;
     this.rebuildMeadow();
   }
 
+  private setBattleHudVisible(visible:boolean):void {
+    if(this.trainingButton)this.trainingButton.node.parent!.active=visible&&this.trainingMode;
+    this.statusPanel.active=visible;this.hud.node.active=visible;this.xpBar.node.active=false;
+    this.skillButton.active=visible;this.weaponHud.active=visible;this.hintText.node.active=visible;this.difficultyLabel.node.active=visible;
+    this.bossBar.node.active=visible;this.bossLabel.node.active=visible;this.pauseLabel.node.parent!.active=visible;
+  }
+
   private setBattleVisible(visible: boolean): void {
-    this.ground.node.active = visible; this.dangerFx.node.active = visible; this.spellFx.node.active = visible; this.world.active = visible; this.fx.node.active = visible; this.statusPanel.active = visible;
-    this.battlefield.active=visible; this.hud.node.active = visible; this.xpBar.node.active = false; this.skillButton.active=visible; this.weaponHud.active=visible; this.hintText.node.active=visible;this.difficultyLabel.node.active=visible;
-    this.bossBar.node.active = visible; this.bossLabel.node.active = visible; this.pauseLabel.node.parent!.active = visible;
-    this.menu.active = false; this.clearInput();
+    this.ground.node.active=visible;this.dangerFx.node.active=visible;this.spellFx.node.active=visible;this.world.active=visible;this.fx.node.active=visible;this.battlefield.active=visible;
+    this.setBattleHudVisible(visible);this.menu.active=false;this.clearInput();
   }
 
   private showMainMenu(): void {
     if (!this.ready) return;
+    this.trainingPanel?.hide();this.trainingMode=false;
     this.phase = 'menu'; this.testMode = false; this.paused = false; this.stopSounds(); this.clearBattle(); this.setBattleVisible(false);
-    this.screens.menu(this.run.heroId,(id,skill)=>{if(this.phase!=='menu')return;const saved=readSave(sys.localStorage);if(saved)this.screens.resumePrompt(chapterFor(saved.point.run.chapter).name,()=>this.restoreCampaign(saved),()=>{this.unlockAudio();this.run=createRun(id,starterFor(id),skill);this.restart(false);});else{this.unlockAudio();this.run=createRun(id,starterFor(id),skill);this.restart(false);}},()=>this.screens.codex(()=>this.showMainMenu()),this.run.skillId);
+    this.screens.menu(this.run.heroId,(id,skill)=>{
+      if(this.phase!=='menu')return;
+      this.unlockAudio();this.run=createRun(id,starterFor(id),skill);this.restart(false);
+    },()=>this.screens.codex(()=>this.showMainMenu()),this.run.skillId,(id,skill)=>this.startTraining(id,skill));
+  }
+
+  private startTraining(id:HeroId,skill:string):void {
+    if(this.phase!=='menu')return;
+    this.trainingMode=true;this.unlockAudio();this.run=createRun(id,starterFor(id),skill);this.restart(true);this.openTrainingPanel();
+  }
+  private trainingAlive():number {return this.enemies.filter(e=>e.hp>0&&!e.animal).length;}
+  private openTrainingPanel():void {
+    if(!this.trainingMode||this.phase!=='battle')return;
+    if(this.paused){this.paused=false;this.music.resume();}
+    if(!this.trainingPanel)this.trainingPanel=new TrainingView(this.ui,this.artFrames,{
+      snapshot:()=>({weapons:this.run.weapons,skillId:this.run.skillId,alive:this.trainingAlive()}),
+      spawn:(id,count,boss)=>this.addTrainingEnemies(id,count,boss),
+      equip:(id,tier,slot)=>this.equipTrainingWeapon(id,tier,slot),
+      remove:slot=>{
+        if(!this.trainingMode||!Number.isInteger(slot)||!this.run.weapons[slot]||this.run.weapons.length<=1)return '至少保留一把武器';
+        this.run.weapons.splice(slot,1);this.syncWeapons();this.refreshStats();return '武器已卸下';
+      },
+      skill:id=>{
+        if(!this.trainingMode||!COMMON_SKILLS.some(s=>s.id===id))return '技能不存在';
+        this.commonSkill.reset();this.run.skillId=id;this.run.skillHealChapter=0;this.skillCharge=this.skillRequirement();this.skillDrawKey='';this.drawSkillButton();return '已装配 '+commonSkillFor(id).name;
+      },
+      clear:()=>{if(!this.trainingMode)return '';this.clearBattle(true);this.syncWeapons();this.drawProgress();return '战场已清空，装备保留';},
+      refill:()=>{if(!this.trainingMode)return '';this.skillCharge=this.skillRequirement();this.run.skillHealChapter=0;this.skillDrawKey='';this.drawSkillButton();return '主动技能已就绪';},
+      close:()=>{if(!this.trainingMode)return;this.trainingPanel?.hide();this.setBattleHudVisible(true);this.clearInput();},
+      exit:()=>this.showMainMenu(),
+    });
+    this.trainingPanel.resize(this.halfWidth*2,this.halfHeight*2);this.trainingPanel.show();this.menu.active=false;this.setBattleHudVisible(false);this.clearInput();
+  }
+  private addTrainingEnemies(id:string,count:number,boss:boolean):string {
+    if(!this.trainingMode||!Number.isInteger(count)||count<1||count>80)return '数量需在1至80之间';
+    const chapter=boss?CHAPTERS.find(c=>String(c.id)===id):undefined,d=boss?undefined:CHRONICLE_ENEMIES.find(e=>e.id===id);
+    if(boss?!chapter:!d)return '目标不存在';
+    const amount=Math.min(count,80-this.trainingAlive());
+    for(let i=0;i<amount;i++)this.spawnNext(boss?'chief':d!.kind,boss?undefined:d!.id,chapter?.id);
+    this.drawProgress();return amount?`已加入 ${chapter?.boss||d!.name} ×${amount}`:'战场已满（80名），请先清空或击败敌军';
+  }
+  private equipTrainingWeapon(id:string,tier:Tier,slot:number):string {
+    const d=WEAPONS.find(w=>w.id===id);
+    if(!this.trainingMode||!d||[1,2,3,4].indexOf(tier)<0||!Number.isInteger(slot)||slot<0||slot>5||slot>this.run.weapons.length)return '请选择有效的武器、品级和装备槽';
+    const weapon={id:d.id,tier,uid:this.run.nextWeaponUid++};
+    if(slot<this.run.weapons.length)this.run.weapons[slot]=weapon;else this.run.weapons.push(weapon);
+    this.syncWeapons();this.refreshStats();this.drawWeaponHud();return `已装备 ${d.name} · ${['I','II','III','IV'][tier-1]}`;
   }
 
   private restart(testMode = this.testMode): void {
@@ -1656,7 +1729,7 @@ private playerSlowUntil=0;
     this.resumeCountdown = 0; this.respite = 0;
     if (this.run.wave === 2) { this.nextSupply = 30; this.nextEvent = 90; this.queuedKind = 'soldier'; }
     this.cleaverCounter = 0;
-    if (this.testMode) {
+    if(this.trainingMode){this.spawnClock=Infinity;}else if (this.testMode) {
       this.spawnClock = TEST_SPAWN.interval;
       // All types appear immediately; subsequent types and spawn edges are random.
       for (const kind of randomSample(TEST_ENEMIES, TEST_ENEMIES.length)) this.spawnNext(kind);
@@ -1746,12 +1819,12 @@ private playerSlowUntil=0;
 
   private currentStats(): Stats {
     const stats = statsFor(this.run);
-    if (this.testMode) stats.maxHp = TEST_HP;
+    if (this.testMode&&!this.trainingMode) stats.maxHp = TEST_HP;
     return stats;
   }
 
   private showShop(): void {
-    this.phase = 'shop';this.drawStick();this.weaponHud.active=false;this.hintText.node.active=false;this.hud.node.active=false;this.bossBar.node.active=false;this.bossLabel.node.active=false;this.coinLabel.string=String(this.coinTotal);this.saveCheckpoint('shop');
+    this.phase = 'shop';this.clearInput();this.setBattleHudVisible(false);this.menu.active=false;this.coinLabel.string=String(this.coinTotal);this.saveCheckpoint('shop');
     this.screens.supply(this.run, (id,replaceUid) => {
       if (this.phase !== 'shop') return;
       if (buySupply(this.run, id, replaceUid)) {
@@ -1769,7 +1842,7 @@ private playerSlowUntil=0;
   }
 
   private endRun(won: boolean): void {
-    if (this.phase !== 'battle') return;
+    if (this.phase !== 'battle'||this.trainingMode) return;
     this.phase = won?'victory':'defeat'; this.collectAllCoins();
     const elapsed=this.run.elapsed;
     const record=won&&!this.testMode&&(!this.bestClear||elapsed<this.bestClear);
@@ -1792,13 +1865,13 @@ private playerSlowUntil=0;
   }
 
   private drawProgress(): void {
-    this.hud.string=this.testMode?'测试模式 · 不限时':this.run.wave===1?`战斗  ${Math.ceil(this.remaining)}s`:this.run.bossEncounter?`首领战 · ${chapterFor(this.run.chapter).boss}  ${clockText(Math.max(0,this.run.chapterTime-WAVE_SECONDS-BOSS_EVERY_WAVES*SUPPLY_SECONDS))}`:`战斗  ${Math.ceil(Math.max(0,this.nextSupply-this.run.survivalSeconds))}s`;
+    this.hud.string=this.trainingMode?`演武场 · 敌军 ${this.trainingAlive()}`:this.testMode?'测试模式 · 不限时':this.run.wave===1?`战斗  ${Math.ceil(this.remaining)}s`:this.run.bossEncounter?`首领战 · ${chapterFor(this.run.chapter).boss}  ${clockText(Math.max(0,this.run.chapterTime-WAVE_SECONDS-BOSS_EVERY_WAVES*SUPPLY_SECONDS))}`:`战斗  ${Math.ceil(Math.max(0,this.nextSupply-this.run.survivalSeconds))}s`;
     this.heroName.string = heroFor(this.run).name;
     this.xpBar.node.active=false;this.drawSkillButton();
     const boss = this.enemies.find(e => e.kind === 'chief' && e.hp > 0);
-    const bossKey=`${boss?.hp||0}:${boss?.maxHp||0}:${this.halfHeight}`;
+    const bossKey=`${boss?.hp||0}:${boss?.maxHp||0}:${boss?.encounterChapter||this.run.chapter}:${this.halfHeight}`;
     if(bossKey===this.bossDrawKey)return;this.bossDrawKey=bossKey;this.bossBar.clear();
-    this.bossLabel.string = boss ? `${chapterFor(this.run.chapter).boss}  ${Math.ceil(boss.hp)}/${boss.maxHp}` : '';
+    this.bossLabel.string = boss ? `${chapterFor(boss.encounterChapter||this.run.chapter).boss}  ${Math.ceil(boss.hp)}/${boss.maxHp}` : '';
     if (boss) {
       this.bossBar.fillColor = new Color('#63483a'); this.bossBar.rect(-180, this.halfHeight - 111, 360, 12); this.bossBar.fill();
       this.bossBar.fillColor = new Color('#d97745'); this.bossBar.rect(-180, this.halfHeight - 111, 360 * boss.hp / boss.maxHp!, 12); this.bossBar.fill();
@@ -1887,14 +1960,14 @@ private playerSlowUntil=0;
       protect:seconds=>g.protectionTime=Math.max(g.protectionTime,seconds),clearSlow:()=>g.playerSlowUntil=0,
       hit:(e,angle,damage,knockback,style)=>g.hitEnemy(e,angle,damage,knockback,style,false,true),
       impact:()=>{g.shake=Math.max(g.shake,.035);},
-      canHeal:()=>g.playerHp<5&&g.run.skillHealChapter!==g.run.chapter,
+      canHeal:()=>g.trainingMode||g.playerHp<5&&g.run.skillHealChapter!==g.run.chapter,
       heal:()=>{g.playerHp=Math.min(5,g.playerHp+1);g.run.hearts=g.playerHp;g.run.skillHealChapter=g.run.chapter;g.refreshStats();g.drawPlayerHealth();},sound:style=>g.playWeaponSound(style,'hit'),
     },this.commonEffects);
   }
   private enemyAim(e:Enemy):{x:number;y:number}{this.playerAim.x=this.px;this.playerAim.y=this.py;return this.commonSkill?.decoyFor(e)||this.playerAim;}
   private skillRequirement():number{return skillKillRequirement(this.run.skillId||DEFAULT_SKILL,this.perks.skillHaste+(this.run.heroId==='kongming'?.1:0));}
   private castSkill():void {
-    if(this.phase!=='battle'||this.paused||this.backgrounded||this.resumeCountdown>0||this.playerHp<=0||this.skillCharge<this.skillRequirement())return;
+    if(this.phase!=='battle'||this.paused||this.trainingPanel?.root.active||this.backgrounded||this.resumeCountdown>0||this.playerHp<=0||this.skillCharge<this.skillRequirement())return;
     this.unlockAudio();let power=0;for(const w of this.run.weapons)power+=weaponDps(this.run,w);power*=1+this.perks.skillDamage;
     if(this.commonSkill.cast(this.run.skillId,power)){this.skillCharge=0;this.skillDrawKey='';this.drawSkillButton();}
   }
@@ -1965,6 +2038,7 @@ private playerSlowUntil=0;
   }
 
   private updateWildlife(dt:number):void {
+    if(this.trainingMode)return;
     this.treeClock-=dt;if(this.treeClock<=0){this.treeClock=40+Math.random()*20;this.spawnPeachTree();}
     if(this.run.wave===2){this.animalClock-=dt;if(this.animalClock<=0){this.animalClock=45+Math.random()*20;if(this.enemies.filter(e=>e.animal&&e.animal!=='tree'&&e.hp>0).length<2&&this.hearts.filter(h=>h.active).length<2)this.spawnAnimal();}}
     for(const h of this.hearts){if(!h.active)continue;h.age+=dt;if(h.age>this.perks.heartLife){h.active=false;h.node.active=false;continue;}
@@ -2023,12 +2097,12 @@ private playerSlowUntil=0;
     if(e.rigKey!==key){let parts=this.rigFrames[key];if(!parts){const r=frame.rect;parts=[[0,0,1,.65],[0,.65,1,.2],[0,.85,.5,.15],[.5,.85,.5,.15]].map(([x,y,w,h])=>{const f=new SpriteFrame();f.texture=frame.texture;f.rect=new Rect(r.x+x*r.width,r.y+y*r.height,w*r.width,h*r.height);return f;});this.rigFrames[key]=parts;}e.rigKey=key;e.rigParts.forEach((sp,i)=>sp.spriteFrame=parts[i]);}
     e.art.enabled=false;const size=e.kind==='chief'?145:e.kind==='cavalry'||e.archetype&&archetypeFor(e.archetype).group.indexOf('器械')>=0?100:78;
     const step=e.moving?Math.sin(e.walk*Math.PI):0,resize=e.rigSize!==size;
-    const tint=(e.flash>0?'hit':e.object==='clone'?'clone':'normal')+':'+this.run.chapter+':'+!!e.bossSkin,recolor=e.rigTint!==tint;
+    const tint=(e.flash>0?'hit':e.object==='clone'?'clone':'normal')+':'+(e.encounterChapter||this.run.chapter)+':'+!!e.bossSkin,recolor=e.rigTint!==tint;
     for(let i=0;i<4;i++){const sp=e.rigParts[i];sp.node.active=true;
       if(resize){sp.node.getComponent(UITransform)!.setContentSize(size*(i<2?1:.5),size*(i===0?.65:i===1?.2:.15));}
       sp.node.setPosition(i<2?0:(i===2?-.25:.25)*size,(i===0?.615:i===1?.19:.015)*size+(i>=2?Math.max(0,step*(i===2?1:-1))*2.4:0));
       sp.node.angle=i===0?Math.sin(this.age*2+e.speed)*.9:i===1&&e.attack>=0?Math.sin(e.attack*8)*3:0;
-      if(recolor)sp.color=e.flash>0?ENEMY_HIT:e.object==='clone'?CLONE_TINT:i===1&&!e.bossSkin?FACTION_TINTS[chapterFor(this.run.chapter).volume-1]:ENEMY_NORMAL;
+      if(recolor)sp.color=e.flash>0?ENEMY_HIT:e.object==='clone'?CLONE_TINT:i===1&&!e.bossSkin?FACTION_TINTS[chapterFor(e.encounterChapter||this.run.chapter).volume-1]:ENEMY_NORMAL;
     }e.rigSize=size;e.rigTint=tint;
   }
   private chronicleDamage(e:Enemy,angle:number,damage:number,id:WeaponId,quality?:Tier):number{
@@ -2111,8 +2185,8 @@ private playerSlowUntil=0;
     }
   }
   private updateChronicleBoss(e:Enemy,dt:number,dist:number,angle:number){
-    const actions=BOSS_ACTIONS[this.run.chapter-1],timers=e.bossTimers!;for(let i=0;i<timers.length;i++)timers[i]=Math.max(0,timers[i]-dt*(this.enemies.some(v=>v.hp>0&&v.object==='flag')?1.15:1));
-    if(e.attack<0){const enabled=e.hp<e.maxHp!*(this.run.chapter===15?.7:.5)?3:2;let choice=-1;for(let j=0;j<enabled;j++){const k=((e.bossNext||0)+j)%enabled;if(timers[k]<=0&&actions[k].kind!=='enrage'&&(actions[k].kind!=='sector'||dist<=(actions[k].range||230)+80)&&(!(actions[k].kind==='zones'&&actions[k].range===0)||dist<=(actions[k].radius||100)+80)){choice=k;break;}}
+    const bossChapter=e.encounterChapter||this.run.chapter,actions=BOSS_ACTIONS[bossChapter-1],timers=e.bossTimers!;for(let i=0;i<timers.length;i++)timers[i]=Math.max(0,timers[i]-dt*(this.enemies.some(v=>v.hp>0&&v.object==='flag')?1.15:1));
+    if(e.attack<0){const enabled=e.hp<e.maxHp!*(bossChapter===15?.7:.5)?3:2;let choice=-1;for(let j=0;j<enabled;j++){const k=((e.bossNext||0)+j)%enabled;if(timers[k]<=0&&actions[k].kind!=='enrage'&&(actions[k].kind!=='sector'||dist<=(actions[k].range||230)+80)&&(!(actions[k].kind==='zones'&&actions[k].range===0)||dist<=(actions[k].radius||100)+80)){choice=k;break;}}
       if(choice>=0){const a=actions[choice];e.bossMove=a;e.bossNext=(choice+1)%enabled;e.attack=0;e.fired=false;e.attackAngle=angle;timers[choice]=(choice===0&&e.bossSkin==='zhangjiao'&&e.hp<e.maxHp!*.5?2:a.cd)/((e.bossAge||0)>90?1.2:1)/(e.bossSkin==='menghuo'&&e.hp<e.maxHp!*.35?1.15:1);if(a.kind==='zones'||a.kind==='lines'||a.kind==='waves'||a.kind==='moving'||a.kind==='sector'||a.kind==='ring'&&a.range)this.prepareBossZones(e,a);}
       else if(dist>240){e.x+=Math.cos(angle)*e.speed*dt;e.y+=Math.sin(angle)*e.speed*dt;}return;
     }
@@ -2126,10 +2200,10 @@ private playerSlowUntil=0;
     if(a.kind==='shots'||a.kind==='ring'&&!a.range){const count=a.count||3,gap=a.gap||0;for(let i=0;i<count;i++){const angle=a.kind==='ring'?e.attackAngle+(gap*Math.PI/180)/2+(Math.PI*2-gap*Math.PI/180)*(i+.5)/count:e.attackAngle+(i-(count-1)/2)*(a.arc||30)*Math.PI/180/Math.max(1,count-1);if(a.delay&&i&&this.pendingEnemyShots.length<24)this.pendingEnemyShots.push({source:e,angle:e.attackAngle,speed:a.speed||330,delay:i*a.delay});else this.fireEnemyShot(e,a.delay?e.attackAngle:angle,a.speed||330);}}
     if(a.name==='烈刃跳击'){const z=this.enemyZones.find(z=>z.source===e&&!z.fired);if(z){e.x=z.x;e.y=z.y;}}
     if(a.name==='号令变阵')this.formationUntil=this.age+16;
-    if(a.kind==='summon'){for(const id of a.units||[])this.spawnReinforcement(id);}
-    if(a.kind==='flag'||a.kind==='clone'){for(let i=0;i<(a.count||1);i++){if(this.enemies.filter(v=>v.hp>0&&!v.animal).length>=80)break;const unit=this.spawnNext('soldier',a.kind==='flag'?'E09':'E05');unit.object=a.kind==='clone'?'clone':this.run.chapter===17?'eye':'flag';unit.hp=unit.maxHp=e.maxHp!*(unit.object==='eye'?.04:a.kind==='clone'?.03:.02);if(a.kind==='clone')unit.bossSkin=e.bossSkin;unit.x=this.clamp(e.x+(i?120:-120),-WORLD.halfWidth+60,WORLD.halfWidth-60);unit.y=e.y;unit.born=1;unit.bornTotal=1;this.spawnClock+=2/chapterThreat(this.run.chapter,3,true);}}
+    if(a.kind==='summon'){for(const id of a.units||[])this.spawnReinforcement(id,e.encounterChapter);}
+    if(a.kind==='flag'||a.kind==='clone'){for(let i=0;i<(a.count||1);i++){if(this.enemies.filter(v=>v.hp>0&&!v.animal).length>=80)break;const unit=this.spawnNext('soldier',a.kind==='flag'?'E09':'E05',e.encounterChapter);unit.object=a.kind==='clone'?'clone':(e.encounterChapter||this.run.chapter)===17?'eye':'flag';unit.hp=unit.maxHp=e.maxHp!*(unit.object==='eye'?.04:a.kind==='clone'?.03:.02);if(a.kind==='clone')unit.bossSkin=e.bossSkin;unit.x=this.clamp(e.x+(i?120:-120),-WORLD.halfWidth+60,WORLD.halfWidth-60);unit.y=e.y;unit.born=1;unit.bornTotal=1;this.spawnClock+=2/chapterThreat(this.run.chapter,3,true);}}
   }
-  private spawnReinforcement(id:string){if(this.enemies.filter(e=>e.hp>0&&!e.animal).length>=80)return;const d=archetypeFor(id);if(d.kind==='cavalry'&&this.enemies.filter(e=>e.hp>0&&e.kind==='cavalry').length>=8)return;if(id==='E25'&&this.enemies.some(e=>e.hp>0&&e.archetype==='E25'))return;this.spawnNext(d.kind,id);this.spawnClock+=d.cost/chapterThreat(this.run.chapter,3,true);}
+  private spawnReinforcement(id:string,chapter?:number){if(this.enemies.filter(e=>e.hp>0&&!e.animal).length>=80)return;const d=archetypeFor(id);if(d.kind==='cavalry'&&this.enemies.filter(e=>e.hp>0&&e.kind==='cavalry').length>=8)return;if(id==='E25'&&this.enemies.some(e=>e.hp>0&&e.archetype==='E25'))return;this.spawnNext(d.kind,id,chapter);this.spawnClock+=d.cost/chapterThreat(this.run.chapter,3,true);}
   private addEnemyZone(source:Enemy,x:number,y:number,radius:number,delay:number,extra:Partial<EnemyZone>={}){const boss=source.kind==='chief';if(this.enemyZones.length>=6||!boss&&this.enemyZones.filter(z=>z.source.kind!=='chief').length>=3)return;const pad=35;x=this.clamp(x,-WORLD.halfWidth+pad,WORLD.halfWidth-pad);y=this.clamp(y,-WORLD.halfHeight+pad,WORLD.halfHeight-pad);this.enemyZones.push({source,x,y,radius,delay:Math.max(extra.shape==='sector'||extra.shape==='circle'&&source.archetype==='E06'?.08:.75,delay),age:0,damage:1,fired:false,...extra});}
 
   private extraMelee(w:Weapon,oldTime:number){const id=w.equipped!.id,q=w.equipped!.tier-1,stats=w.stats!,t=w.time/w.duration,previous=oldTime/w.duration;let factors=[1];

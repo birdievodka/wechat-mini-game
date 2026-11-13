@@ -1,5 +1,5 @@
 {
-  "name": "wechat-mini-game",
+  "name": "桃园小英雄",
   "platform": "wechatgame",
   "buildPath": "project://build",
   "outputName": "wechatgame",

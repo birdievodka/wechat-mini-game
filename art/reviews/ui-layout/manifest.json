@@ -1,0 +1,21 @@
+{
+  "version": "chronicles-v5.3-supply-ui",
+  "surface": "WeChat Developer Tools simulator",
+  "size": [
+    1280,
+    592
+  ],
+  "screens": [
+    "menu-wechat.jpg",
+    "shop-wechat.jpg",
+    "replacement-wechat.jpg",
+    "weapon-manage-wechat.jpg",
+    "inventory-wechat.jpg",
+    "battle-hud-wechat.jpg"
+  ],
+  "fixture": "scripts/fixtures/wechat-ui-layout-review.js",
+  "scope": "Engineering UI layout review. Sample wallet/loadout, not player gameplay.",
+  "restoredMenu": true,
+  "saveUnchanged": true,
+  "buildMiB": 18.7
+}

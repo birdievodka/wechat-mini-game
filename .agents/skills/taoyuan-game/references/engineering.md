@@ -5,6 +5,7 @@
 | 文件 | 当前职责 |
 | --- | --- |
 | `GameBootstrap.ts` | 引擎组件、正式入口、阶段流转、移动、战斗、敌军技能、碰撞、掉落、音频与素材生命周期 |
+| `TrainingView.ts` | 演武配置面板与分页，调用GameBootstrap受模式保护的生成/装备方法 |
 | `CampaignView.ts` | 五英雄菜单、半透明商店、武器替换/背包、结算；也保留未接入的旧升级/商店UI |
 | `campaign.ts` | Run、角色、属性合成、禁用经验、旧兼容敌人曲线、装备合成回收；下半有旧八关/商店兼容函数 |
 | `survival.ts` | 现行货架、价格、资格、交易、刷新、版本号与出兵预算 |
@@ -19,6 +20,7 @@
 | `presentation-art.ts`、`hero-idle.ts` | 36武器UI插画/实测裁格、五英雄分层头袍裁格与纯表现待机节奏 |
 | `ParticleSprites.ts`、`BattleSpriteAtlas.ts` | 280槽共享粒子四边形、启动烘焙金币/出生标记/双方弹体，免除逐对象Graphics大缓冲 |
 | `common-skills.ts`、`CommonSkillRuntime.ts`、`CommonSkillEffects.ts`、`SkillSelectView.ts` | 24通用技能同源定义/排序/击杀门槛、真实机制与有限表现、选人搭配面板 |
+| `skill-vfx-art.ts`、`sweep-effects.ts` | v5.2通用技能纯绘制与保留的G03 A金锋回旋；无伤害/时钟/节点创建 |
 | `HeroShowcase.ts` | 选人专用分层木偶、五种武器亮相、独立菜单时钟；不调用战斗 |
 | `hero-arms.ts` | 新短袍肩腕基准、弯袖/袖口/皮肤和独立握拳绘制；不参与伤害 |
 | `chronicles-data.ts`、`chronicles.ts` | 40兵/17章/24技能定义、固定强度、分段编组、Boss动作 |
@@ -45,7 +47,10 @@ npm run build:wechat
 
 按改动选择验证，不因文档改动重新打游戏包；已有检查通过后，无新变更/失败/顾虑不反复跑。生成器/维护检查改动要验证其生成、幂等与过期检测。
 
-- `test-campaign.cjs` 通过轻量Cocos桩实际启动组件，覆盖真实菜单与阶段、热身先购物、无尽事件、保护反馈、装备、掉落、敌兵技能和音乐。
+- `test-training.cjs` 覆盖演武全量配置、独立Boss形态、数量/槽位/输入边界、免伤、清场、正式存档与成绩隔离和退出恢复。
+- `test-enemy-birth.cjs` 覆盖40兵种、旧兵/骑兵/Boss跨类型复用，非显示子步出生、首次显形到出生结束贴图一致、召唤分身/天眼最终身份和共享出生标记清理；普通绘制仍按显示子步限频。
+- `test-ui-layout.cjs` 通过真实组件验证购物HUD隐藏/恢复、音乐续播、只读余额、六槽管理、替换未选/退款不足/取消/净额成交，以及武器与道具弹层。
+- `test-campaign.cjs` 通过轻量Cocos桩实际启动组件，覆盖真实菜单与阶段、有旧档/坏档均直接新开、英雄/技能选择与章内重试、热身先购物、无尽事件、保护反馈、装备、掉落、敌兵技能和音乐。
 - `test-combat.cjs` 覆盖触摸、位移、攻击方向、连续碰撞、掉落/受击边界。
 - `test-combat-effects.cjs` 覆盖固定容量/限频/技能预留、寿命回收、11武器/三技能绘制与屏外裁剪；`test-campaign.cjs` 还验证真实攻击接入和暂停/清场的表现生命周期。
 - `test-startup.cjs` 验证前置WebGL启动画面、跨阶段进度不回退、图片失败/资源释放；组件回归额外验证关键资源延迟/失败、100%完成帧后进入选人。测试调用 `await start()` 后需驱动两帧完成就绪切换，不能把异步函数返回等同首帧已显示菜单。
@@ -105,9 +110,14 @@ art/runtime-v4保留十张生成源图与prompts/manifest，供pack-chronicle-ar
 
 ## 当前验证记录
 
-- 当前技能程序评审：docs/skill-review，仅总览、机制JSON、README与飞书快照链接；生成命令node scripts/review-common-skills.cjs。
+- 最新v5.2通用特效：`docs/skill-vfx-v5.2.md`与`scripts/test-skill-vfx.cjs`；23项概念/真实Cocos浏览器画布保存在本次主交付目录。新增夹具`browser-skill-vfx-review.js`仅menu安装，120秒watchdog，保存/恢复Run引用与移动/待机状态，不写进度；上传后至少两次0dt渲染再导出完整GameCanvas。关键帧合成不是连续录屏；这次不证明手机FPS或微信客户端已刷新。
+- 当前技能程序评审：docs/skill-review为v5历史评审，仅总览、机制JSON、README与飞书快照链接；生成命令node scripts/review-common-skills.cjs。未经重采集不称最新v5.2还原证据。
 - 最新微信横扫A：docs/golden-sweep-v5.1.md与validation.json；GIF为代表帧合成，非连续录像或手机帧率测试。夹具只从菜单执行，有watchdog，结束恢复原存档和菜单。
 - 最新Node压力：docs/performance-node.json；最新保留的真实桌面渲染A/B：docs/performance-wechat-baseline.json。测量范围不能混用，详见performance.md。
 - 最新战役模型：docs/chronicle-balance.json，150条真实交易路径；无受伤/死亡模拟，不是生存胜率。
 
 运行assets和现有微信构建未在资源清理任务中改动；清理文档不重编、不刷新用户对局。改动游戏后需按最新源码重新构建，不拿旧二维码或旧截图证明新版已加载。
+
+### v5.4演武验收
+
+见art/reviews/training：真实界面配置和独立模式战斗，正式进度不改。优化截图曾重复返回旧帧而引擎实际正常；对不上运行时阶段时，使用simulator_screenshot --optimize false与新路径核对原始画面，不能据旧帧判定代码失败或无依据要求解锁。版本、阶段、模拟时钟和截图一起判断。

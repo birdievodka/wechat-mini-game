@@ -1,4 +1,4 @@
-# 桃园乱斗适配与横扫六合案例
+# 桃园小英雄适配与横扫六合案例
 
 先定位包含`assets/scripts/GameBootstrap.ts`的仓库，读取根`AGENTS.md`和`.agents/skills/taoyuan-game/SKILL.md`。下列路径均相对于**项目根目录**，不是skill目录；不依赖本机用户名。
 
@@ -18,13 +18,15 @@ node /path/to/cocos-game-vfx/scripts/inspect-taoyuan.cjs --project /path/to/wech
 | 统一排序、查找、击杀需求 | `assets/scripts/common-skills.ts` |
 | 真实施法、排程、一次/多次命中、姿态时钟 | `assets/scripts/CommonSkillRuntime.ts` |
 | Visual槽位、粒子事件、寿命与共享绘制 | `assets/scripts/CommonSkillEffects.ts` |
+| 23项通用技能纯绘制 | `assets/scripts/skill-vfx-art.ts`；当前还原与范围说明见`docs/skill-vfx-v5.2.md` |
 | 横扫实体刃、拖尾、接触楔形 | `assets/scripts/sweep-effects.ts` |
 | 施法入口、Host绑定、伤害/反馈与动作合成 | `assets/scripts/GameBootstrap.ts` 的 `castSkill/initCommonSkill/hitEnemy/animateWalk/updateEffects` |
 | 原命中样式和缓存颜色 | `assets/scripts/combat-effects.ts` |
 | 粒子物理、容量、私有RNG | `assets/scripts/combat-particles.ts` |
 | 共享粒子/弹体渲染 | `assets/scripts/ParticleSprites.ts`、`assets/scripts/BattleSpriteAtlas.ts` |
 | 版本与构建 | `assets/scripts/survival.ts` 的 `SURVIVAL_VERSION`；`npm run build:wechat` |
-| 行为与压力 | `scripts/test-common-skills.cjs`、`scripts/test-performance.cjs` |
+| 行为与压力 | `scripts/test-common-skills.cjs`、`scripts/test-skill-vfx.cjs`、`scripts/test-performance.cjs` |
+| 浏览器工程真实帧 | `scripts/fixtures/browser-skill-vfx-review.js`：menu/watchdog/restore；变更Graphics需上传后再取完整画布，普通视口可能裁切或陈旧 |
 
 不要把旧英雄专属技能或`combat-effects.ts`内未调用的历史原型当成当前入口。现有24通用技能全英雄选1个，开局就绪，击杀真实小兵充能；优化特效不恢复专属技能或秒数CD。
 

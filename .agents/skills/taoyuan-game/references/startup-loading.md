@@ -2,6 +2,8 @@
 
 当前 v2.8：启动画面和游戏Loading统一为刘关张战斗海报＋加载进度条；不显示默认Cocos Creator标识。加载后进入“选择英雄”，不自动进入战斗。
 
+展示名称由game-brand.ts的GAME_NAME统一提供。选人页加载独立hero-menu/logo透明图，menu:logo计入就绪与可选素材失败回退，避免使用旧atlas烘入的名称。
+
 ## 两个阶段
 
 1. **引擎之前**：`build-templates/wechatgame/first-screen.js`，由微信 `game.js` 先调用 `start/setProgress/end`。主包本地 `startup-poster.jpg` 不依赖分包或Cocos；同一主WebGL画布绘制海报和金边绿芯进度条，禁止先拿主画布2D上下文再给引擎WebGL。
@@ -17,7 +19,7 @@
 
 - 海报来源：`assets/campaign/poster.jpg`，已有刘关张合影，约342KiB；复用既定美术，不新增一套角色画风。
 - 等比cover铺满、顶部对齐，宽屏优先保留人物头部，裁底部空白；不要拉扁人物。
-- 引擎前置画面仅海报与进度条；Cocos Loading补“桃园乱斗”标题与“英雄集结中… n%”。文字由UI绘制，未烘入海报。
+- 引擎前置画面仅海报与进度条；Cocos Loading补“桃园小英雄”标题与“英雄集结中… n%”。文字由UI绘制，未烘入海报。
 - 横屏逻辑高度750；进度宽 `min(520,视野宽−112)`、中心距底为视野高10%，轨道20高，绿芯12高。前后画面位置衔接，避免重排跳动。
 - Loading盖住战场与HUD，不显示测试、选武器或其他跳转按钮。完毕再展示选人。
 

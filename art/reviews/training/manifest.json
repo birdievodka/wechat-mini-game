@@ -1,0 +1,24 @@
+{
+  "version": "chronicles-v5.4-training",
+  "surface": "WeChat Developer Tools simulator",
+  "review": "real training UI operations; read-only runtime assertions; not a formal campaign run",
+  "screens": [
+    "menu-wechat.jpg",
+    "config-wechat.jpg",
+    "bosses-wechat.jpg",
+    "weapons-wechat.jpg",
+    "skills-wechat.png",
+    "battle-wechat.jpg"
+  ],
+  "enemyTypes": 40,
+  "bossEncounters": 17,
+  "weaponTypes": 36,
+  "weaponTiers": 4,
+  "skills": 24,
+  "enemyLimit": 80,
+  "weaponLimit": 6,
+  "playerImmune": true,
+  "formalSaveUnchanged": true,
+  "finalPhase": "menu",
+  "buildMiB": 18.71
+}

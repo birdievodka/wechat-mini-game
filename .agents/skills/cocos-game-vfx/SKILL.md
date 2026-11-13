@@ -21,7 +21,7 @@ description: "设计并实现 Cocos Creator 2D 战斗特效，覆盖技能、武
 | 视觉方向、效果说明、概念图提示词 | [设计与交接说明](references/design.md) |
 | 渲染选型、生命周期、命中接入、角色动作、内存 | [代码落地](references/implementation.md) |
 | 行为回归、画面比较、定帧、构建和交付 | [验证](references/verification.md) |
-| 仓库含 `assets/scripts/CommonSkillRuntime.ts` 的《桃园乱斗》 | [项目适配与横扫六合案例](references/taoyuan-adapter.md)，并读取仓库的 `taoyuan-game` skill |
+| 仓库含 `assets/scripts/CommonSkillRuntime.ts` 的《桃园小英雄》 | [项目适配与横扫六合案例](references/taoyuan-adapter.md)，并读取仓库的 `taoyuan-game` skill |
 
 不默认读取全部参考；当前代码和项目规范优先于历史截图或本skill中的案例。
 

@@ -1,0 +1,30 @@
+const assert=require('node:assert/strict');
+const {newGame,click,cc,Label}=require('./test-campaign.cjs');
+const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolean);
+(async()=>{
+ const g=await newGame();
+ const pause=find(g.ui,'PauseButton');assert.equal(pause.getComponent(cc.UITransform).width,64);
+ assert.equal(pause.position.x-24-(g.statusPanel.position.x+305),16,'暂停键位于状态栏右侧并留间距');
+ assert.equal(g.skillButton.position.y,g.origin.y,'技能与摇杆同一基线');
+ g.run.weapons=Array.from({length:6},(_,i)=>({uid:i+1,id:i===1?'cleaver':'sandal',tier:i===1?3:1,invested:i===1?400:15}));g.run.nextWeaponUid=7;
+ g.run.gold=0;g.run.offers=['w:peach:2'];g.run.offerPrices={'w:peach:2':90};g.run.purchasedOffers=[];
+ // Use the real replacement/economy path, including refunds that can make a purchase affordable.
+ g.music.begin();const plays=g.musicSource.plays;g.showShop();
+ for(const n of [g.statusPanel,g.weaponHud,g.skillButton,pause,g.joystick.node,g.hud.node,g.bossLabel.node])assert.equal(n.active,false,'购物隐藏战斗控件 '+n.name);
+ assert.equal(g.world.active,true,'购物仍能看到战场');assert.equal(g.musicSource.playing,true);assert.equal(g.musicSource.plays,plays);
+ assert.ok(find(g.screens.root,'SupplyBalance'));assert.ok(!find(g.screens.root,'SupplyBalance').events.end,'余额只读');
+ const strip=find(g.screens.root,'SupplyEquipment');assert.equal(strip.children.filter(n=>/^SupplyWeapon-/.test(n.name)).length,6);
+ const refresh=find(g.screens.root,'SupplyRefresh'),skip=find(g.screens.root,'SupplySkip');assert.equal(refresh.position.y,skip.position.y);
+ const snapshot=JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]);
+ click(g.screens.root,'SupplyBuy-0');click(g.screens.root,'ConfirmReplacement');assert.equal(JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]),snapshot,'未选择不成交');
+ click(g.screens.root,'ReplaceWeapon-1');assert.match(find(g.screens.root,'ReplacementLedger').getComponent(Label).string,/余额 -/);
+ click(g.screens.root,'ConfirmReplacement');assert.equal(JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]),snapshot,'该件退款不足不成交');
+ click(g.screens.root,'CancelReplacement');assert.ok(!find(g.screens.root,'CampDialog'));assert.equal(JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]),snapshot,'取消不卖武器不扣钱');
+ click(g.screens.root,'SupplyBuy-0');click(g.screens.root,'ReplaceWeapon-2');assert.ok(!/余额 -/.test(find(g.screens.root,'ReplacementLedger').getComponent(Label).string));
+ click(g.screens.root,'ConfirmReplacement');assert.equal(g.run.weapons.length,6);assert.ok(!g.run.weapons.some(w=>w.uid===2));assert.ok(g.run.weapons.some(w=>w.id==='peach'&&w.tier===2));assert.equal(g.run.purchasedOffers.length,1);assert.ok(g.run.gold>=0);
+ assert.equal(find(g.screens.root,'SupplyBalance').getComponent(Label).string,String(g.run.gold));
+ click(g.screens.root,'SupplyWeapon-0');assert.ok(find(g.screens.root,'RecycleWeapon'));click(g.screens.root,'CloseDialog');
+ click(g.screens.root,'OpenInventory');assert.ok(find(g.screens.root,'BagNext'));click(g.screens.root,'CloseDialog');
+ click(g.screens.root,'SupplySkip');assert.equal(g.phase,'battle');for(const n of [g.statusPanel,g.skillButton,g.weaponHud,pause])assert.equal(n.active,true);
+ console.log('通过：补给布局、HUD隐藏恢复、音乐持续、满槽替换的未选/不足/取消/成交、武器和道具弹窗');
+})().catch(e=>{console.error(e);process.exitCode=1;});

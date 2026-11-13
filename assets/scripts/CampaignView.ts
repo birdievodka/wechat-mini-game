@@ -1,3 +1,4 @@
+import {GAME_NAME} from './game-brand';
 import {SkillSelectView} from './SkillSelectView';
 import {DEFAULT_SKILL,availableSkill,commonSkillFor} from './common-skills';
 import {HeroShowcase} from './HeroShowcase';
@@ -56,7 +57,7 @@ export class CampaignView {
     if (subtitle) this.text(this.content, subtitle, 0, 265, 20, '#e6d8bc', 1100, 36);
     return this.content;
   }
-  menu(selected: HeroId, start: (hero: HeroId,skill:string) => void, codex?:()=>void,skill=DEFAULT_SKILL): void {
+  menu(selected: HeroId, start: (hero: HeroId,skill:string) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void): void {
     this.resultView=undefined;this.heroShowcase=undefined;this.codexView=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.campMode=false;this.heroMenu=true;this.selection=selected;this.selectionSkill=availableSkill(skill);
@@ -67,10 +68,9 @@ export class CampaignView {
     // The environment provides its own contrast; retain a plain meadow fallback.
     if(!this.campBackground){shade.fillColor=new Color('#849354');shade.rect(-2500,-1500,5000,3000);shade.fill();}
     this.content=this.node(this.root,'ScreenContent');this.resize(this.width,this.height);const p=this.content;
-    const logo=this.sprite(p,this.frames['hero-menu-logo'],-516,297,224,112);
-    if(logo)logo.node.name='GameLogo';else this.bold(p,'桃园乱斗',-516,297,38,'#fff0cb',245,70);
-    const title=this.sprite(p,this.frames['hero-menu-title'],0,303,380,190);
-    if(title)title.node.name='选择英雄';else this.bold(p,'选择英雄',0,303,42,'#fff0cb',450,65);
+    const logoFrame=this.frames['hero-menu-logo'];
+    const logo=this.sprite(p,logoFrame,-516,297,244,logoFrame?244*logoFrame.rect.height/logoFrame.rect.width:80);
+    if(logo)logo.node.name='GameLogo';else this.bold(p,GAME_NAME,-516,297,34,'#fff0cb',245,70);
 
     this.heroShowcase=new HeroShowcase(p,this.frames);this.heroShowcase.root.setPosition(0,15);this.heroShowcase.root.setScale(2.2,2.2,1);
     const nameplate=this.node(p,'HeroNameplate').addComponent(Graphics);
@@ -111,10 +111,10 @@ export class CampaignView {
     button.on(Node.EventType.TOUCH_START,()=>{if(!starting)button.setScale(.97,.97,1);});button.on(Node.EventType.TOUCH_CANCEL,()=>button.setScale(1,1,1));
     button.on(Node.EventType.TOUCH_END,()=>{if(starting)return;starting=true;start(this.selection,this.selectionSkill);});
     if(codex)this.action(p,'图鉴',-516,-289,164,()=>codex());
+    if(training)this.action(p,'演武场',516,-289,164,()=>{if(starting||choosing)return;starting=true;training(this.selection,this.selectionSkill);});
   }
 
   codex(close:()=>void):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close);this.codexView.resize(this.width,this.height);}
-  resumePrompt(chapter:string,resume:()=>void,fresh:()=>void):void{const p=this.begin('继续征程','已保存：'+chapter);this.action(p,'继续征程',0,45,340,resume);this.action(p,'新征程',0,-65,340,fresh);this.text(p,'新征程会替换当前存档',0,-170,22,C.paper,500,48);}
   private action(parent:Node,label:string,x:number,y:number,width:number,action:()=>void):void{const n=this.node(parent,label);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(width,66);const g=n.addComponent(Graphics);g.fillColor=new Color(C.green);g.strokeColor=new Color('#ffda83');g.lineWidth=2;g.roundRect(-width/2,-33,width,66,17);g.fill();g.stroke();this.bold(n,label,0,0,27,C.paper,width-16,60);n.on(Node.EventType.TOUCH_END,action);}
 
   private previewHands(parent: Node, id: HeroId, weapon: EquippedWeapon, y: number, scale: number): void {
@@ -232,37 +232,40 @@ export class CampaignView {
     const scrim=this.node(this.root,'SupplyScrim');scrim.addComponent(UITransform).setContentSize(6000,4000);const shade=scrim.addComponent(Graphics);shade.fillColor=new Color(12,26,19,95);shade.rect(-3000,-2000,6000,4000);shade.fill();
     scrim.on(Node.EventType.TOUCH_END,()=>{});
     this.content=this.node(this.root,'SupplyContent');this.resize(this.width,this.height);const p=this.content;
-    const departure=run.supplyMode==='departure',major=run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
-    this.bold(p,departure?'桃 园 补 给':bossPrep?chapterFor(run.chapter).boss.split('').join(' ')+' 战 前 补 给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天 命 强 化':'桃 园 补 给',0,281,40,'#ffebac',700,60);
-    this.text(p,departure?'添一把趁手兵器，继续迎敌':bossPrep?'补给完成后迎战'+chapterFor(run.chapter).boss:'战斗已暂停 · 可购买多项 · 刷新补充新货',0,232,22,'#e6e3bf',840,38);
-    this.plaque(p,`${run.gold} 铜钱`,490,282,190,48,'#355e40','#ffe19a',25);
+    const major=run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
+    this.jadePanel(p,1140,650);
+    const title=bossPrep?chapterFor(run.chapter).boss+' · 战前补给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天命强化':'桃园补给';
+    this.bold(p,title,-315,278,34,'#ffedba',460,50);
+    this.text(p,'可购买多件',-437,238,18,'#c5d1b5',210,30);
+    this.sprite(p,this.frames['ui-coin'],414,274,34,34);
+    const balance=this.bold(p,String(run.gold),482,274,32,'#ffe1a0',90,46);balance.node.name='SupplyBalance';
+    if(major)this.campButton(p,'SupplyNormal','普通补给 ›',40,271,180,normal,'secondary');
     run.offers.forEach((id,i)=>{
-      const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-1)*340,4);n.addComponent(UITransform).setContentSize(316,392);
+      const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-1)*360,27);n.addComponent(UITransform).setContentSize(336,360);
       const g=n.addComponent(Graphics),color=card.major?'#e8bb65':card.weapon?TIER_COLORS[card.weapon.tier-1]:'#b8afdc';
-      g.fillColor=new Color(36,75,58,213);g.strokeColor=new Color(color);g.lineWidth=3;g.roundRect(-158,-196,316,392,23);g.fill();g.stroke();
-      g.strokeColor=new Color(230,220,155,80);g.lineWidth=1;g.roundRect(-150,-188,300,376,20);g.stroke();
-      this.text(n,card.tag,0,163,18,'#e8dca4',284,32);
-      if(card.weapon)this.weaponIcon(n,card.weapon.id,card.weapon.tier,0,70,1.45);
-      else this.itemIcon(n,id,0,84,1);
-      this.bold(n,card.title,0,6,27,'#fff0c8',288,44);
-      this.text(n,card.desc,0,-61,19,'#e9efcc',281,105);
+      g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=card.weapon?2+card.weapon.tier*.65:2;g.roundRect(-168,-180,336,360,19);g.fill();g.stroke();
+      if(card.weapon){const wash=new Color(color);wash.a=card.weapon.tier===1?10:22;g.fillColor=wash;g.roundRect(-162,-174,324,348,15);g.fill();this.tierBand(n,card.weapon.tier,0,149,310,card.from);}
+      else this.text(n,card.tag,0,149,17,'#e8dca4',300,32);
+      if(card.weapon)this.weaponIcon(n,card.weapon.id,card.weapon.tier,0,67,1.25);
+      else this.itemIcon(n,id,0,67,.95);
+      this.bold(n,card.title,0,3,26,'#fff0c8',302,40);
+      this.text(n,card.desc,0,-59,18,'#e4eacb',300,80);
       const enabled=canBuySupply(run,id),sold=run.purchasedOffers.indexOf(id)>=0,full=card.weapon&&parseWeaponOffer(id)&&run.weapons.length===6;
-      const title=sold?'已购入':!enabled?(run.gold<card.price?'金币不足':'暂不可购'):`${card.price} ${full?'替换':'购买'}`;
-      this.campButton(n,'SupplyBuy-'+i,title,0,-150,270,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
+      const title=sold?'已购入':!enabled?(run.gold<card.price?'铜钱不足':'暂不可购'):`${card.price} ${full?'替换':'购买'}`;
+      this.campButton(n,'SupplyBuy-'+i,title,0,-137,296,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
     });
+    const rail=this.node(p,'SupplyEquipment');rail.setPosition(0,-207);this.jadePanel(rail,1080,78,false);
+    this.bold(rail,`武器 ${run.weapons.length}/6`,-445,0,21,'#e9d9a4',160,40);
     for(let i=0;i<6;i++){
-      const w=run.weapons[i],n=this.node(p,'SupplyWeapon-'+i);n.setPosition((i-2.5)*90,-245);n.addComponent(UITransform).setContentSize(78,64);
-      const g=n.addComponent(Graphics);g.fillColor=new Color(35,56,42,220);g.strokeColor=new Color(w?TIER_COLORS[w.tier-1]:'#6b8065');g.lineWidth=2;g.roundRect(-39,-32,78,64,12);g.fill();g.stroke();
-      if(w){this.weaponIcon(n,w.id,w.tier,0,-10,.7);this.text(n,['I','II','III','IV'][w.tier-1],28,-19,14,'#f0d7a0',25,22);n.on(Node.EventType.TOUCH_END,()=>this.weaponDialog(run,w,manage));}
-      else this.text(n,'+',0,0,26,'#93a587',60,42);
+      const w=run.weapons[i],n=this.node(rail,'SupplyWeapon-'+i);n.setPosition(-282+i*90,0);n.addComponent(UITransform).setContentSize(76,60);
+      const g=n.addComponent(Graphics);g.fillColor=new Color(26,47,35,230);g.strokeColor=new Color(w?TIER_COLORS[w.tier-1]:'#6b8065');g.lineWidth=1.5;g.roundRect(-38,-30,76,60,10);g.fill();g.stroke();
+      if(w){this.weaponIcon(n,w.id,w.tier,0,-7,.66);this.bold(n,['I','II','III','IV'][w.tier-1],27,-18,14,'#f0dfb3',25,20);n.on(Node.EventType.TOUCH_END,()=>this.weaponDialog(run,w,manage));}
+      else this.text(n,'+',0,0,25,'#839879',60,40);
     }
-    this.campButton(p,'OpenInventory',`道具 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)}`, -444,-245,160,()=>this.inventoryDialog(run),'secondary');
-    {
-      const price=refreshPrice(run);this.campButton(p,'SupplyRefresh',`刷新 ${price}`,-347,-315,240,refresh,'secondary',run.gold>=price,true);
-      this.campButton(p,'SupplySkip','继续战斗',347,-315,250,skip,'primary');
-      if(major)this.campButton(p,'SupplyNormal','改选普通补给',0,-315,235,normal,'secondary');
-      else this.text(p,'道具自动生效 · 武器最多六件',0,-315,18,'#d5d5ae',430,40);
-    }
+    this.campButton(rail,'OpenInventory',`道具 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)} ›`,424,0,178,()=>this.inventoryDialog(run),'secondary');
+    const price=refreshPrice(run);
+    this.campButton(p,'SupplyRefresh',`刷新 ${price}`,-420,-285,240,refresh,'secondary',run.gold>=price,true);
+    this.campButton(p,'SupplySkip','继续战斗',390,-285,300,skip,'primary');
   }
 
   private itemIcon(parent:Node,id:string,x:number,y:number,scale:number):void {
@@ -289,10 +292,40 @@ export class CampaignView {
   }
 
   private replacementDialog(run:Run,id:string,buy:(id:string,uid?:number)=>void):void {
-    const card=supplyCard(run,id),p=this.dialog('选择要换下的武器',1000,420);let selected:EquippedWeapon|undefined;
-    const detail=this.text(p,'点击旧武器，确认后一次结算出售与购买',0,-90,22,C.green,900,70);
-    run.weapons.forEach((w,i)=>{const n=this.plaque(p,'', (i-2.5)*150,45,132,114,C.sand,C.ink);this.weaponIcon(n,w.id,w.tier,0,22,.85);this.text(n,weaponFor(w.id).name,0,-35,17,C.ink,126,30);n.on(Node.EventType.TOUCH_END,()=>{selected=w;detail.string=`出售 ${weaponFor(w.id).name} +${recycleValue(run,w.uid)} · 买入 ${card.title} −${card.price}\\n结算后余额 ${run.gold+recycleValue(run,w.uid)-card.price}`;});});
-    this.campButton(p,'ConfirmReplacement','确认替换',0,-156,280,()=>{if(selected&&run.gold+recycleValue(run,selected.uid)>=card.price)buy(id,selected.uid);},'primary');
+    const card=supplyCard(run,id),p=this.dialog('替换武器',1100,620),marks:Node[]=[];let selected:EquippedWeapon|undefined;
+    const incoming=this.node(p,'IncomingWeapon');incoming.setPosition(-263,120);this.jadePanel(incoming,498,176,false);
+    this.text(incoming,'换入',-194,60,17,'#c7d1b6',70,26);
+    if(card.weapon){this.weaponIcon(incoming,card.weapon.id,card.weapon.tier,-173,-2,1.15);this.bold(incoming,weaponFor(card.weapon.id).name,53,49,25,'#fff0d2',300,36);this.tierBand(incoming,card.weapon.tier,54,5,284,card.from);}
+    this.text(incoming,card.desc,55,-49,16,'#d8e1c3',300,53);
+    const outgoing=this.node(p,'OutgoingWeapon');outgoing.setPosition(263,120);this.jadePanel(outgoing,498,176,false);
+    this.text(outgoing,'换下',-194,60,17,'#c7d1b6',70,26);
+    const oldPreview=this.node(outgoing,'SelectedReplacement');
+    this.text(oldPreview,'从下方选择一件旧武器',0,-2,22,'#c7d1b6',420,62);
+    this.text(p,'选择要换下的武器',-350,8,18,'#dfd8b7',320,28);
+    const ledger=this.text(p,`当前 ${run.gold}  ·  购买 −${card.price}  ·  请选择换下武器`,0,-181,21,'#ead9ac',1010,48);ledger.node.name='ReplacementLedger';
+    const close=():void=>{const overlay=p.parent!;overlay.removeFromParent();overlay.destroy();};
+    const updateConfirm=():void=>{
+      const old=p.children.find(n=>n.name==='ConfirmReplacement');if(old){old.removeFromParent();old.destroy();}
+      const affordable=!!selected&&run.gold+recycleValue(run,selected.uid)>=card.price;
+      this.campButton(p,'ConfirmReplacement',selected&&!affordable?'铜钱不足':'确认替换',323,-253,350,()=>{if(selected&&canBuySupply(run,id)&&run.gold+recycleValue(run,selected.uid)>=card.price)buy(id,selected.uid);},'primary',affordable);
+    };
+    run.weapons.forEach((w,i)=>{
+      const n=this.node(p,'ReplaceWeapon-'+w.uid);n.setPosition((i-2.5)*166,-83);n.addComponent(UITransform).setContentSize(150,126);this.jadePanel(n,150,126,false);
+      const glow=this.node(n,'ReplaceChoice'),gg=glow.addComponent(Graphics);gg.strokeColor=new Color('#ffda83');gg.lineWidth=3;gg.roundRect(-73,-61,146,122,15);gg.stroke();glow.active=false;marks.push(glow);
+      this.weaponIcon(n,w.id,w.tier,0,23,.72);
+      this.bold(n,weaponFor(w.id).name,0,-17,17,'#fff0d2',140,27);
+      this.plaque(n,TIER_NAMES[w.tier-1],0,-46,130,25,TIER_COLORS[w.tier-1],w.tier===1?C.ink:'#ffffff',14);
+      n.on(Node.EventType.TOUCH_END,()=>{
+        selected=w;marks.forEach(m=>m.active=false);glow.active=true;
+        for(const child of [...oldPreview.children]){child.removeFromParent();child.destroy();}
+        this.weaponIcon(oldPreview,w.id,w.tier,-173,-2,1.15);
+        this.bold(oldPreview,weaponFor(w.id).name,53,49,25,'#fff0d2',300,36);this.tierBand(oldPreview,w.tier,54,5,284);
+        const refund=recycleValue(run,w.uid),left=run.gold+refund-card.price;
+        this.text(oldPreview,`出售返还 +${refund} 铜钱`,54,-48,20,'#d8e1c3',300,36);
+        ledger.string=`当前 ${run.gold}  ＋  回收 ${refund}  −  购买 ${card.price}  ＝  余额 ${left}`;ledger.color=new Color(left<0?'#f3a796':'#ead9ac');updateConfirm();
+      });
+    });
+    this.campButton(p,'CancelReplacement','取消',-323,-253,350,close,'secondary');updateConfirm();
   }
 
   survivalResult(run: Run, kills: number, best: number, record: boolean, retry: () => void, menu: () => void, testing: boolean, warmupElapsed=0,won=false): void {
@@ -307,13 +340,13 @@ export class CampaignView {
     const d = weaponFor(w.id), current = weaponStatsFor(run, w), pair = matchingWeapon(run, w.id, w.tier, w.uid);
     const p = this.dialog(`${d.name} · ${TIER_NAMES[w.tier - 1]}`, 880, 510);
     this.weaponIcon(p, w.id, w.tier, -280, 8, 2.8);
-    this.bold(p, `${CLASS_NAMES[d.category]}   伤害 ${formatStat(current.damage)}   间隔 ${current.interval.toFixed(2)}s`, 100, 100, 24, C.green, 600, 42);
-    this.text(p, `距离 ${current.range}   暴击 ${Math.round(current.crit * 100)}%   暴伤 ×${current.critMultiplier}`, 100, 53, 21, C.ink, 600, 40);
-    this.text(p, weaponEffectText(w.id,current), 100, 7, 20, C.ink, 600, 62);
+    this.bold(p, `${CLASS_NAMES[d.category]}   伤害 ${formatStat(current.damage)}   间隔 ${current.interval.toFixed(2)}s`, 100, 100, 24, '#dce4c1', 600, 42);
+    this.text(p, `距离 ${current.range}   暴击 ${Math.round(current.crit * 100)}%   暴伤 ×${current.critMultiplier}`, 100, 53, 21, '#fff0d2', 600, 40);
+    this.text(p, weaponEffectText(w.id,current), 100, 7, 20, '#fff0d2', 600, 62);
     if (pair) {
       const nextW = { ...w, tier: (w.tier + 1) as Tier }, nextRun = { ...run, weapons: run.weapons.filter(v => v.uid !== pair.uid).map(v => v.uid === w.uid ? nextW : v) }, future = weaponStatsFor(nextRun, nextW);
-      this.text(p, `合成后  ${TIER_NAMES[w.tier]} · 伤害 ${formatStat(future.damage)} · ${future.interval.toFixed(2)}s\n装备 ${run.weapons.length} → ${run.weapons.length - 1} 件，同类加成随数量变化`, 95, -72, 20, C.green, 610, 90);
-    } else this.text(p, w.tier === 4 ? '已达最高品质' : '再找到一件同款同品质，即可免费合成', 95, -69, 21, C.muted, 610, 60);
+      this.text(p, `合成后  ${TIER_NAMES[w.tier]} · 伤害 ${formatStat(future.damage)} · ${future.interval.toFixed(2)}s\n装备 ${run.weapons.length} → ${run.weapons.length - 1} 件，同类加成随数量变化`, 95, -72, 20, '#dce4c1', 610, 90);
+    } else this.text(p, w.tier === 4 ? '已达最高品质' : '再找到一件同款同品质，即可免费合成', 95, -69, 21, '#bdc9ae', 610, 60);
     this.campButton(p, 'CombineWeapon', '免费合成 ↑', -115, -187, 225, () => manage('combine', w.uid), 'primary', !!pair);
     this.campButton(p, 'RecycleWeapon', run.weapons.length > 1 ? `出售 +${recycleValue(run, w.uid)}` : '至少保留1件', 175, -187, 225, () => manage('recycle', w.uid), 'secondary', run.weapons.length > 1);
   }
@@ -360,12 +393,12 @@ export class CampaignView {
 
   private inventoryDialog(run:Run,selected?:string,category=-1,page=0):void {
     const p=this.dialog('我的道具 · 全部自动生效',1050,580),all=PASSIVE_ITEMS.filter(i=>(run.inventory[i.id]||0)>0&&(category<0||i.id.charCodeAt(0)-65===category)),pages=Math.max(1,Math.ceil(all.length/6));page=Math.min(page,pages-1);
-    this.text(p,`共 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)} 件 · ${PASSIVE_ITEMS.filter(i=>run.inventory[i.id]).length} 种 · 不占武器位`,0,190,19,C.green,850,32);
+    this.text(p,`共 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)} 件 · ${PASSIVE_ITEMS.filter(i=>run.inventory[i.id]).length} 种 · 不占武器位`,0,190,19,'#dce4c1',850,32);
     ['全部',...ITEM_CATEGORIES].forEach((name,i)=>this.campButton(p,'Category'+i,name,-425+i*140,140,130,()=>this.inventoryDialog(run,undefined,i-1,0),'secondary'));
-    const detail=this.text(p,'点击道具查看效果',0,-187,20,C.green,950,75);
+    const detail=this.text(p,'点击道具查看效果',0,-187,20,'#dce4c1',950,75);
     all.slice(page*6,page*6+6).forEach((item,i)=>{const n=this.plaque(p,'', (i%3-1)*310,43-Math.floor(i/3)*120,290,105,C.sand,C.ink);n.name='Inventory-'+item.id;this.itemIcon(n,item.id,-103,4,.6);this.bold(n,item.name,33,17,22,C.ink,210,34);this.text(n,'持有 ×'+run.inventory[item.id],33,-18,18,C.green,210,32);n.on(Node.EventType.TOUCH_END,()=>detail.string=passivePreview(run.inventory,item.id));});
     this.campButton(p,'BagPrevious','←',-310,-248,100,()=>this.inventoryDialog(run,undefined,category,Math.max(0,page-1)),'secondary',page>0);
-    this.text(p,`${page+1} / ${pages}`,0,-248,20,C.ink,150,32);this.campButton(p,'BagNext','→',310,-248,100,()=>this.inventoryDialog(run,undefined,category,page+1),'secondary',page+1<pages);
+    this.text(p,`${page+1} / ${pages}`,0,-248,20,'#fff0d2',150,32);this.campButton(p,'BagNext','→',310,-248,100,()=>this.inventoryDialog(run,undefined,category,page+1),'secondary',page+1<pages);
     if(selected)detail.string=passivePreview(run.inventory,selected);
   }
 
@@ -390,11 +423,23 @@ export class CampaignView {
     const shade = overlay.addComponent(Graphics); shade.fillColor = new Color(35, 45, 34, 170); shade.rect(-1500, -1000, 3000, 2000); shade.fill();
     const close = (): void => { overlay.removeFromParent(); overlay.destroy(); };
     overlay.on(Node.EventType.TOUCH_END, (event?: { target: Node }) => { if (!event || event.target === overlay) close(); });
-    const box = this.node(overlay, 'DialogPaper'); box.addComponent(UITransform).setContentSize(width, height); this.paper(box, width, height);
+    const box = this.node(overlay, 'DialogPaper'); box.addComponent(UITransform).setContentSize(width, height); if(this.content.name==='SupplyContent')this.jadePanel(box,width,height);else this.paper(box, width, height);
     box.on(Node.EventType.TOUCH_END, (event?: { propagationStopped: boolean }) => { if (event) event.propagationStopped = true; });
-    this.bold(box, title, 0, height / 2 - 50, 32, C.green, width - 150, 50);
-    this.campButton(box, 'CloseDialog', '×', width / 2 - 48, height / 2 - 48, 54, close, 'secondary');
+    this.bold(box, title, 0, height / 2 - 50, 32, this.content.name==='SupplyContent'?'#ffedba':C.green, width - 150, 50);
+    if(this.content.name==='SupplyContent'){
+      const button=this.node(box,'CloseDialog');button.setPosition(width/2-44,height/2-44);button.addComponent(UITransform).setContentSize(64,64);
+      const g=button.addComponent(Graphics);g.fillColor=new Color('#355e40');g.strokeColor=new Color('#c7ba82');g.lineWidth=1.5;g.circle(0,0,21);g.fill();g.stroke();
+      this.bold(button,'×',0,1,27,'#f4e7c0',42,42);button.on(Node.EventType.TOUCH_END,(event?:{propagationStopped:boolean})=>{if(event)event.propagationStopped=true;close();});
+    }else this.campButton(box, 'CloseDialog', '×', width / 2 - 48, height / 2 - 48, 54, close, 'secondary');
     return box;
+  }
+
+  private jadePanel(parent:Node,width:number,height:number,raised=true):void {
+    const g=this.node(parent,'JadePanel').addComponent(Graphics);
+    if(raised){g.fillColor=new Color(14,26,20,130);g.roundRect(-width/2,-height/2-6,width,height,25);g.fill();}
+    g.fillColor=new Color(30,55,42,raised?237:145);g.strokeColor=new Color(210,199,140,raised?210:95);g.lineWidth=raised?2:1;
+    g.roundRect(-width/2,-height/2,width,height,raised?24:14);g.fill();g.stroke();
+    if(raised){g.strokeColor=new Color(198,210,168,50);g.lineWidth=1;g.roundRect(-width/2+6,-height/2+6,width-12,height-12,19);g.stroke();}
   }
 
   private paper(parent: Node, width: number, height: number): void {
@@ -410,6 +455,25 @@ export class CampaignView {
   private plaque(parent: Node, title: string, x: number, y: number, w: number, h: number, color: string, textColor: string, size = 23): Node {
     const n = this.node(parent, title || 'Plaque'); n.setPosition(x, y); n.addComponent(UITransform).setContentSize(w, h);
     this.pill(n, w, h, color); if (title) this.bold(n, title, 0, 0, size, textColor, w - 12, h - 4); return n;
+  }
+  /** 品级色带：底色、描边厚度、金色菱形数量三重区分白/蓝/紫/红；升阶卡并列显示旧→新两段。 */
+  private tierBand(parent: Node, tier: Tier, x: number, y: number, width: number, from?: Tier): void {
+    const n = this.node(parent, 'TierBand-' + tier + (from ? '-from-' + from : '')); n.setPosition(x, y);
+    const g = n.addComponent(Graphics), rim = new Color('#2f2418'), pip = new Color('#ffe3a1');
+    const chip = (cx: number, w: number, t: Tier): void => {
+      const small = w < 180, step = small ? 9 : 11, r = small ? 4 : 5;
+      g.fillColor = rim; g.roundRect(cx - w / 2, -21, w, 42, 12); g.fill();
+      g.fillColor = new Color(TIER_COLORS[t - 1]); g.strokeColor = new Color(C.ink); g.lineWidth = 2;
+      g.roundRect(cx - w / 2, -18, w, 42, 12); g.fill(); g.stroke();
+      if (t >= 3) { g.strokeColor = new Color('#ffe6a8'); g.lineWidth = 1.5; g.roundRect(cx - w / 2 + 4, -14, w - 8, 34, 9); g.stroke(); }
+      g.fillColor = pip; g.strokeColor = rim; g.lineWidth = 1.2;
+      const start = cx - w / 2 + (small ? 14 : 17);
+      for (let i = 0; i < t; i++) { const px = start + i * step; g.moveTo(px, 2 + r + 1); g.lineTo(px + r, 2); g.lineTo(px, 2 - r - 1); g.lineTo(px - r, 2); g.close(); }
+      g.fill(); g.stroke();
+      this.bold(n, TIER_NAMES[t - 1], cx + (small ? 9 : 24), 2, small ? 14 : 18, t === 1 ? C.ink : '#ffffff', w - (small ? 50 : 70), 34);
+    };
+    if (from) { const w = width / 2 - 22; chip(-w / 2 - 8, w, from); chip(w / 2 + 8, w, tier); this.bold(n, '›', 0, 2, 22, '#ffe6a8', 18, 32); }
+    else chip(0, width, tier);
   }
   private tape(parent: Node, x: number, y: number, color: string, width: number): void {
     const n = this.node(parent, 'PaperTab'); n.setPosition(x, y); n.angle = -3;
@@ -428,7 +492,7 @@ export class CampaignView {
     n.on(Node.EventType.TOUCH_START, () => { if (enabled) n.setPosition(x, y - 3); });
     n.on(Node.EventType.TOUCH_CANCEL, () => n.setPosition(x, y));
     let fired = false;
-    n.on(Node.EventType.TOUCH_END, () => { if (enabled && !fired) { fired = true; n.setPosition(x, y); action(); fired = false; } });
+    n.on(Node.EventType.TOUCH_END, (event?: {propagationStopped:boolean}) => { if(event)event.propagationStopped=true; if (enabled && !fired) { fired = true; n.setPosition(x, y); action(); fired = false; } });
     return n;
   }
   result(run: Run, won: boolean, kills: number, reason: string, retry: () => void, menu: () => void, testMode = false): void {

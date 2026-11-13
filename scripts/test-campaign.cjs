@@ -87,7 +87,7 @@ if(require.main===module)(async () => {
     storage.delete('taoyuan-chronicle-v4');const menuGame=new GameBootstrap();await menuGame.start();finishStartup(menuGame);
     const nodes=()=>{const all=[];const walk=n=>{all.push(n);n.children.forEach(walk);};walk(menuGame.screens.root);return all;};
     assert.equal(menuGame.phase,'menu');assert.equal(menuGame.world.active,false);
-    assert.ok(nodes().some(n=>n.name==='选择英雄'));
+    assert.ok(!nodes().some(n=>n.name==='选择英雄'),'首页不再显示选择英雄标题');assert.ok(nodes().some(n=>n.name==='GameLogo'));
     for(const name of ['TestMode','ChooseWeapon','SelectedHero','LoadoutPreview','InitialSlot0'])assert.ok(!nodes().some(n=>n.name===name),name+' removed');
     const labels=nodes().map(n=>n.getComponent(Label)?.string||'').join('|');assert.ok(!/拾取范围|武器击退|五颗心|移速|测试模式|选择武器|lv\./i.test(labels));
     assert.equal(nodes().filter(n=>n.name==='HeroPortrait').length,5,'five head-only selection portraits');
@@ -602,7 +602,7 @@ if(require.main===module)(async () => {
     assert.ok(Math.max(...angles)-Math.min(...angles)>2,'head moves independently');assert.ok(Math.max(...ys)-Math.min(...ys)>1);
     assert.equal(lively.px,px);assert.equal(lively.py,py);assert.equal(lively.facing,facing);assert.equal(lively.walkPhase,walk,'idle does not fake footsteps');
     assert.ok(Math.abs(lively.headPivot.position.y-lively.body.node.position.y)>15,'head and torso remain independently rigged');
-    const time=lively.idleTime;const angle=lively.headPivot.angle;click(lively.ui,'Ⅱ');lively.update(1);assert.equal(lively.idleTime,time);assert.equal(lively.headPivot.angle,angle);click(lively.menu,'继续战斗');
+    const time=lively.idleTime;const angle=lively.headPivot.angle;click(lively.ui,'PauseButton');lively.update(1);assert.equal(lively.idleTime,time);assert.equal(lively.headPivot.angle,angle);click(lively.menu,'继续战斗');
     lively.hurtTime=.8;lively.animateWalk(.01,0,0,0,0);assert.equal(lively.head.spriteFrame,lively.headOpen,'hurt should not accidentally blink');
     lively.tintHero('#ff8479');assert.equal(lively.head.color.value,'#ff8479');assert.equal(lively.body.color.value,'#ff8479');
     lively.startWave();assert.equal(lively.head.color.value,'#ffffff');assert.equal(lively.head.spriteFrame,lively.headOpen,'restart resets visual state');
@@ -621,7 +621,7 @@ if(require.main===module)(async () => {
     assert.ok(nodes.some(n=>n.name==='ResultWeaponArt'&&n.getComponent(Sprite)?.spriteFrame===frame),'result shares same illustration');
   }
   console.log('通过：三英雄真实睁闭眼/独立头部/呼吸/动作不改位置面向或脚步、暂停冻结/受击同步/重开清理、11武器HUD商店结算统一插画及等比适配');
-  const musicGame=await newGame();const source=musicGame.musicSource;assert.ok(source.playing);click(musicGame.ui,'Ⅱ');assert.equal(source.playing,false);click(musicGame.menu,'继续战斗');assert.ok(source.playing);
+  const musicGame=await newGame();const source=musicGame.musicSource;assert.ok(source.playing);click(musicGame.ui,'PauseButton');assert.equal(source.playing,false);click(musicGame.menu,'继续战斗');assert.ok(source.playing);
   const shopPlays=source.plays;
   musicGame.remaining=.001;musicGame.update(.01);assert.equal(musicGame.phase,'shop');assert.equal(musicGame.run.wave,1);assert.ok(source.playing);
   const phrase=musicGame.music.elapsed,musicShopAge=musicGame.age;advance(musicGame,2);

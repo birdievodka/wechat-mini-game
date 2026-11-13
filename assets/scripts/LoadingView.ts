@@ -1,4 +1,5 @@
 import { Color, Graphics, Label, Layers, Node, Sprite, SpriteFrame, UITransform } from 'cc';
+import {GAME_NAME} from './game-brand';
 
 /** Same poster and bar placement as the early WeChat screen. No game/HUD beneath it. */
 export class LoadingView {
@@ -16,7 +17,7 @@ export class LoadingView {
   constructor(readonly node:Node){
     this.background=node.addComponent(Graphics);
     this.poster=this.child('LoadingPoster').addComponent(Sprite);this.poster.sizeMode=Sprite.SizeMode.CUSTOM;
-    this.title=this.text('桃园乱斗',58,'#ffe3a0');this.title.fontFamily='serif';this.title.isBold=true;
+    this.title=this.text(GAME_NAME,58,'#ffe3a0');this.title.fontFamily='serif';this.title.isBold=true;
     this.bar=this.child('LoadingProgress').addComponent(Graphics);
     this.status=this.text('',19,'#fff0cf');this.resize(this.width,this.height);
   }

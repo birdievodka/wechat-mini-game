@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'extra-weapons']);
+  const allowed = new Set(['game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'extra-weapons']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -175,7 +175,7 @@ function generate(root) {
     const prefix = f.path.slice(0, -5) + '/';
     return [{ path: prefix, ...meta.userData, sourceBytes: sources.filter(s => s.path.startsWith(prefix)).reduce((n, s) => n + s.bytes, 0) }];
   });
-  const catalog = clean({ schemaVersion: 2, game: { name: '桃园乱斗', version: s.SURVIVAL_VERSION,
+  const catalog = clean({ schemaVersion: 2, game: { name: load('game-brand').GAME_NAME, version: s.SURVIVAL_VERSION,
     creator: JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).creator.version },
     provenance: { fingerprint: hash(JSON.stringify(sources)), files: sources },
     counts: { heroes: heroes.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length, enemyArchetypes:chronicles.CHRONICLE_ENEMIES.length, bossEncounters:chronicles.CHAPTERS.length, bossPeople:new Set(chronicles.CHAPTERS.map(ch=>ch.bossId)).size, genericSkills:chronicles.GENERIC_SKILLS.length },
@@ -231,7 +231,7 @@ function generate(root) {
 try {
   const args = options(process.argv.slice(2));
   const root = args.project || findRoot(process.cwd()) || findRoot(__dirname);
-  if (!root || !fs.existsSync(path.join(root, 'assets/scripts/GameBootstrap.ts'))) throw Error('找不到桃园乱斗仓库，请提供 --project');
+  if (!root || !fs.existsSync(path.join(root, 'assets/scripts/GameBootstrap.ts'))) throw Error('找不到桃园小英雄仓库，请提供 --project');
   const destination = args.output || path.join(root, SKILL, 'references');
   const results = generate(root), stale = [];
   for (const [filename, expected] of Object.entries(results)) {

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "game": {
-    "name": "桃园乱斗",
-    "version": "chronicles-v5.1-golden-sweep",
+    "name": "桃园小英雄",
+    "version": "chronicles-v5.4-training",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "9c69575841b35dea8631f07ddfb9a07e4cd08e450fb219dc2dfaa2bfe4d789be",
+    "fingerprint": "1248496da4dd384e817838345ed422639f682424f57980bd96e658f51208a5f2",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -20,13 +20,13 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/implementation.md",
-        "bytes": 5905,
-        "sha256": "2776da9158473c19622e0d7af94fbf3e582f2dc96a38ded6aae51f47b7f912ef"
+        "bytes": 5908,
+        "sha256": "4934def1a4067fd65dcdbc63ad51b4a2dbdf8989e93ee39b0bec5134f55a2e78"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/taoyuan-adapter.md",
-        "bytes": 5542,
-        "sha256": "2bd1509a4c2596dbba94faf85d70e40c2588326d94e45e5dace23791a75d5ba4"
+        "bytes": 5885,
+        "sha256": "d61ea6980170d6bef5e71c69a4dd440e999c493d4750f9a393b1c235df8ce0eb"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/verification.md",
@@ -40,18 +40,18 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/SKILL.md",
-        "bytes": 5144,
-        "sha256": "4c316a508b051dabc9c5f0d792c2c2b716587a9165b7b523d355c44f37d04c78"
+        "bytes": 5147,
+        "sha256": "c34cd8615328e7e22234d441f9aec103543c9406bc2827f42d8c1bff7a792d4a"
       },
       {
         "path": ".agents/skills/taoyuan-game/agents/openai.yaml",
-        "bytes": 314,
-        "sha256": "fd00a5ea4081dc40b4f003636c80416e567a8bdff61e3f318f1b76d5ed2b8b0c"
+        "bytes": 320,
+        "sha256": "11221d6cd4b9025da3760e5244544bc0d708af0e4a3dcdbd91a874378eb3a95b"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 11377,
-        "sha256": "7acc48ad54fac4587dc95a84194cc3e32db913e7a436c763f6dbeb275f6a7506"
+        "bytes": 14813,
+        "sha256": "76016e56d7f3d886ea1a1cc0521d7f35f7163024c32db38252ce16c8f73f3018"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -60,28 +60,28 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/combat-effects.md",
-        "bytes": 8547,
-        "sha256": "8e3499c8fcec958839fa84cbbd03a4effe5b658329f78e452c9b11133617f88c"
+        "bytes": 10182,
+        "sha256": "e6706744646be1817484783f603e851fda03b4702505481ef0a9c5066be7a556"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 5144,
-        "sha256": "4566e6743bc5e961fcf73a7530f31d6aa776164206d703273f2ce11b5fda28ad"
+        "bytes": 5097,
+        "sha256": "ed0b8ac044347306afc0e2ace50193094600b0489e12e6d169893f8235e71b9b"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 11469,
-        "sha256": "f7adb219c7a16399f479ea91e134db132c0caba85e437cb9630fd33ccd2d98b8"
+        "bytes": 13280,
+        "sha256": "4d19c0e54a04135be2f556c2b85e11119ab3b06a4aad9d1f193c9fe04dfc8c3c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
-        "bytes": 4742,
-        "sha256": "eeeab98f1652e042cc2495c665b2f1eb6c84bcaeb608a0d96339f1bc925f2ac9"
+        "bytes": 4871,
+        "sha256": "fc910fe9840636f86a91252941beefdb7f84e87931b5dae777bcf592085bdd88"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/gameplay.md",
-        "bytes": 9814,
-        "sha256": "637aac0bd1a44dec5c6bd75b9ff3d9f15224ca62249a2cc952f1f0ec0637cc4b"
+        "bytes": 10518,
+        "sha256": "4fe373b867e3177bf40a64af2c9bb33f82530551b1e65ec30dfe9cb68cdfbcca"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/hero-arms.md",
@@ -100,13 +100,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 8509,
-        "sha256": "5dd4a6c8ca0baa42a7eb1605da5755387c9b4a4b85011914dd2526c6a466b5cb"
+        "bytes": 8726,
+        "sha256": "0841676c7b070c49ea31c8d282b1a14580619306de610b76f2fed92711825dfe"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
-        "bytes": 7675,
-        "sha256": "e19b5e50114e3a79a6fee9d161af976ea8ddabb752f845659e599d20cf46be1c"
+        "bytes": 8124,
+        "sha256": "0515f2dc3ea8ecb2f7a59fac161ca78c7ec722b6d285b0a22ca3d7c4829202fb"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
@@ -120,8 +120,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/startup-loading.md",
-        "bytes": 4620,
-        "sha256": "dbd99bf98286108000e91b177d1f8dcb8c8254284e03b91b0e7adaf5256ab8a3"
+        "bytes": 4816,
+        "sha256": "1d20629d09355efaa9e9047a36c862489a3f3b97925c3678a1bfe549df5ea674"
+      },
+      {
+        "path": ".agents/skills/taoyuan-game/references/training.md",
+        "bytes": 2750,
+        "sha256": "63a0c4d8094d7cd131a647496d4a0e5f8a128af1a96d82d7f6edbc68daaaeaf0"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapon-evolution.md",
@@ -135,13 +140,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 20834,
-        "sha256": "8eecf83b983590a3532d2735e5995f7b1b0eeb699d7724a46d681478a3bde983"
+        "bytes": 20864,
+        "sha256": "b9968a1ef0fef7282fd945734558b7c77e82961ce630e4ef4a556f2e7792f16c"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 7676,
-        "sha256": "4314f1ed992f91825d35f4a9e9e52873b42f2c5dd5f69a4cd0a6bb817f132892"
+        "bytes": 9196,
+        "sha256": "f58a239bd7b39229abebef862b1116488ee32983df780a1d05aa103bf29bfebc"
       },
       {
         "path": ".gitignore",
@@ -150,8 +155,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 2433,
-        "sha256": "1e659d75a02f33fbb498e481f33a926cd1f0989ff31e96974bb4675dba64e70d"
+        "bytes": 2699,
+        "sha256": "86cdb23777ae956c92bb372e43309b87bbfdc621e3473ed972bced449e91e70b"
       },
       {
         "path": "art/audio/taoyuan-kaida-battle.m4a",
@@ -177,6 +182,31 @@
         "path": "art/audio/weapon-sfx-preview.wav",
         "bytes": 864044,
         "sha256": "1d26fbbd7e30ccbd8572981a9d9fc4368ea7c1de9a9e4748ae86fd85b9067a54"
+      },
+      {
+        "path": "art/branding/avatar-source.png",
+        "bytes": 1973896,
+        "sha256": "bfb4a141fc114b544e1e5411c8a704b438a0f5647634a7d4bfcc18b30dd466f5"
+      },
+      {
+        "path": "art/branding/avatar.png",
+        "bytes": 459997,
+        "sha256": "186bfaa2ee9e6845e52632800794e045055709758b32ea7a2dd97a83698efad5"
+      },
+      {
+        "path": "art/branding/logo-source.png",
+        "bytes": 1437255,
+        "sha256": "ff8aef41fb048f53576542e373bd316fd31cf9b4f87486f56033414edea0d211"
+      },
+      {
+        "path": "art/branding/manifest.json",
+        "bytes": 5902,
+        "sha256": "0ec68f7b56d1c1008159b028405f69488c6a912da5631608fca8d8b8844c83d3"
+      },
+      {
+        "path": "art/branding/README.md",
+        "bytes": 1062,
+        "sha256": "4f0a0a7e53062aa6b8416da46b54d19402b71c1cf1c965bf714cfd344ce4a415"
       },
       {
         "path": "art/concepts/hero-select-v4.2/manifest.json",
@@ -224,6 +254,36 @@
         "sha256": "b360206226d48198a957188d36775f8a5743d6307db6e6c6ee17c93074b5a856"
       },
       {
+        "path": "art/concepts/ui-layout/battle-hud.png",
+        "bytes": 1797884,
+        "sha256": "c9195f7890621c4b4d0b8ad35ce04a3985c9e504db29427c82858e2806375e07"
+      },
+      {
+        "path": "art/concepts/ui-layout/menu.png",
+        "bytes": 2022007,
+        "sha256": "120501b22643648cfc5649aa37e333ec8ddc2a7e13a8d69d467c279632998848"
+      },
+      {
+        "path": "art/concepts/ui-layout/prompts.json",
+        "bytes": 12842,
+        "sha256": "a48777e7a061e9942a46bd8ed8dad7b72e5ec78560fc48f770d4d5844775652a"
+      },
+      {
+        "path": "art/concepts/ui-layout/README.md",
+        "bytes": 4317,
+        "sha256": "7ea76fc92e853550b358f4ff40508f9fa452d70e4af4be6a0111affc58715f0d"
+      },
+      {
+        "path": "art/concepts/ui-layout/reference-shop.png",
+        "bytes": 1457059,
+        "sha256": "2bafb88a1e6c8945b103df34c428f332688561d0c167992e7a336cbf654ad2c2"
+      },
+      {
+        "path": "art/concepts/ui-layout/shop.png",
+        "bytes": 1660492,
+        "sha256": "0b6ebd1388665eb15cfe72dfa1dd41197d6074a55b8304b5d0e0bd3d83c23082"
+      },
+      {
         "path": "art/concepts/weapons-v3.1/pointed-knife-source.png",
         "bytes": 375798,
         "sha256": "694437dba7bbb524a5a4372fe5768db65d4602db5e3b013d2cf66043ca4c3a2e"
@@ -249,6 +309,26 @@
         "sha256": "59fb1d3d94e171c459039aa2a896cc591bbb08df76d9d0e3d92219a90eaaf841"
       },
       {
+        "path": "art/reviews/enemy-birth/manifest.json",
+        "bytes": 954,
+        "sha256": "6bc123c6dc6a64dd7014f7e430829ac15bfd52674c0154372083ecd3f5890912"
+      },
+      {
+        "path": "art/reviews/enemy-birth/materialized-wechat.jpg",
+        "bytes": 69183,
+        "sha256": "fef7a7ad0dc243be4270b26c7e3e512fe2d9e1a86614d5ce68d4347ede4c2a69"
+      },
+      {
+        "path": "art/reviews/enemy-birth/materializing-wechat.jpg",
+        "bytes": 68504,
+        "sha256": "23810d92416a20c01459a29defb5f8905f6fd5b64e9bc103f3496093e7c06357"
+      },
+      {
+        "path": "art/reviews/enemy-birth/README.md",
+        "bytes": 1217,
+        "sha256": "97a409172cd18eb1f2fca93237f0890b2a9439b8a6ff6c7c7e570e541ef6d726"
+      },
+      {
         "path": "art/reviews/golden-sweep-v5.1/golden-sweep-wechat-preview.gif",
         "bytes": 4236569,
         "sha256": "218894517addc41f9ee81cbe9fb0677e2041ea8ca3caac54b1c431b0bd1bc8e7"
@@ -272,6 +352,86 @@
         "path": "art/reviews/performance-v4.3/manifest.json",
         "bytes": 286,
         "sha256": "a1660cfa021682a61c4c08c2f77abcb6ac57988018eef03e9e725a4db1a1cdad"
+      },
+      {
+        "path": "art/reviews/training/battle-wechat.jpg",
+        "bytes": 84838,
+        "sha256": "a648d0bd596cc0b4d05115e56e9460c59f57c84895598ba446e220f15ef20fce"
+      },
+      {
+        "path": "art/reviews/training/bosses-wechat.jpg",
+        "bytes": 63796,
+        "sha256": "dcc366cdcca1cd07e565d0cc19ae3ed8d4a1e1fa1e9303562f8266e10049cfed"
+      },
+      {
+        "path": "art/reviews/training/config-wechat.jpg",
+        "bytes": 74215,
+        "sha256": "ab5fc9e9b8747d2da5cbe4d31c83b098aafe3202a7c3830a17007c0f58884a92"
+      },
+      {
+        "path": "art/reviews/training/manifest.json",
+        "bytes": 602,
+        "sha256": "91a7ff3f4c3aa040719a2e41392ce008a912465cd19e7dda3b7bfdbfb0f71b36"
+      },
+      {
+        "path": "art/reviews/training/menu-wechat.jpg",
+        "bytes": 106519,
+        "sha256": "9d439a2a60a259c3a4075b461a8d9adce3edc96e63a9ada9fd169fa09d1e0b96"
+      },
+      {
+        "path": "art/reviews/training/README.md",
+        "bytes": 1757,
+        "sha256": "a8e72cd939347508ace46dd3cb30d38a6f4b01cb7b80922fc7e1d5b70f94a661"
+      },
+      {
+        "path": "art/reviews/training/skills-wechat.png",
+        "bytes": 643094,
+        "sha256": "a809b6a0742036fe60bec5c1408f08cf3db0ea3b630b31fb931dec0f9f742e42"
+      },
+      {
+        "path": "art/reviews/training/weapons-wechat.jpg",
+        "bytes": 76423,
+        "sha256": "6d13b44b2185e5589733821a9a7ac689253629054113ceb0d6030834194a74cf"
+      },
+      {
+        "path": "art/reviews/ui-layout/battle-hud-wechat.jpg",
+        "bytes": 68222,
+        "sha256": "4655f02feba7001a3af97ffada5e494e11c028926d3674444e482ababadd24d9"
+      },
+      {
+        "path": "art/reviews/ui-layout/inventory-wechat.jpg",
+        "bytes": 49498,
+        "sha256": "bedb39dd33732a422c2f4e97f188e20b6ac77ff24024966724846c6a3b75b235"
+      },
+      {
+        "path": "art/reviews/ui-layout/manifest.json",
+        "bytes": 530,
+        "sha256": "dd96ff7dd5dcc03a2f625cfb41a2befdde31dd46ace05bbbc77c8b8c8b2a696d"
+      },
+      {
+        "path": "art/reviews/ui-layout/menu-wechat.jpg",
+        "bytes": 105309,
+        "sha256": "2534316f07a02c91c639a882fb49816a0108ad890a7cac9be05c86610000d29f"
+      },
+      {
+        "path": "art/reviews/ui-layout/README.md",
+        "bytes": 1508,
+        "sha256": "e8f4797f486381a6b01d1831aedc1edd97bb9333d345c5f2a9ad1c73bf2b6774"
+      },
+      {
+        "path": "art/reviews/ui-layout/replacement-wechat.jpg",
+        "bytes": 58056,
+        "sha256": "0adeed0050d1b1baafa0f6533c517f44152fc4f00cb452a400ea99a03f5bce4c"
+      },
+      {
+        "path": "art/reviews/ui-layout/shop-wechat.jpg",
+        "bytes": 76226,
+        "sha256": "28cc1e6c905e7b6beebe70ce9362b27e64308557f76d4e631eb0d3950dca7da3"
+      },
+      {
+        "path": "art/reviews/ui-layout/weapon-manage-wechat.jpg",
+        "bytes": 45685,
+        "sha256": "38094e993d2c5d44068565c67636a2cb048336334f2811dd42c3976d2856c666"
       },
       {
         "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
@@ -904,6 +1064,16 @@
         "sha256": "8a56775f65d7e67d19cf41ff21cd8bfbf4ba7517e3d3f1e73a8e1cec305c8062"
       },
       {
+        "path": "assets/hero-menu/logo.png",
+        "bytes": 179248,
+        "sha256": "8e304969851f53233edf2ccdbfba09aa6a761f7d670d4507cd3e2ad3f942d530"
+      },
+      {
+        "path": "assets/hero-menu/logo.png.meta",
+        "bytes": 988,
+        "sha256": "842b884ff9d8970595b135d85bfc2ac631f25dda6a971e7be54ba9f934b5322c"
+      },
+      {
         "path": "assets/hero-menu/training-ground.jpg",
         "bytes": 169831,
         "sha256": "e0db9202f3c9c029651d7f0fae3c1651862d94a2f7e06d58f731b1ead535f7c7"
@@ -1080,8 +1250,8 @@
       },
       {
         "path": "assets/scripts/CampaignView.ts",
-        "bytes": 40608,
-        "sha256": "774dfa7f2978aad9cc9313fe3360cac80ee482c8a451be49be4d576aa6a36346"
+        "bytes": 45972,
+        "sha256": "3d6850736072ca455175e5c571d1b8751ab0e2e4a67b6241b83c1794216e2b2a"
       },
       {
         "path": "assets/scripts/CampaignView.ts.meta",
@@ -1180,8 +1350,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillEffects.ts",
-        "bytes": 12297,
-        "sha256": "256290d5bddfcf82e4072b2b4a9bbb76449e3ab1c140014465afcfdd13556c25"
+        "bytes": 8539,
+        "sha256": "ca223cee45f67e7c2b8a8d853c3cf471454782b1dc8bdd7a521d5a14cd7594e1"
       },
       {
         "path": "assets/scripts/CommonSkillEffects.ts.meta",
@@ -1190,8 +1360,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 12503,
-        "sha256": "0828f3600323ae44d1d5e893953f36de8ede5b30f808e2c8b9c1ae5396036b65"
+        "bytes": 14115,
+        "sha256": "f3369fe618b117f585e36dee5abea87e125f2c5639f112fda5d3c976072fbb06"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -1239,9 +1409,19 @@
         "sha256": "0d4f8dde71f16f1345a587b049ef630d4bcfb04b1b7a4a7dcbd6a2e468870ee8"
       },
       {
+        "path": "assets/scripts/game-brand.ts",
+        "bytes": 124,
+        "sha256": "ed2a0654434155d63b2a72e64e3c21e9d20277ecc87f45e1c286907eeded3d4b"
+      },
+      {
+        "path": "assets/scripts/game-brand.ts.meta",
+        "bytes": 171,
+        "sha256": "2954ddb6ef2467159a28b31d9d3cc978cd1f7d4259e4809c1568e6e000263409"
+      },
+      {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 168453,
-        "sha256": "d9617ddd870806dba387273fbd106d5e82bceff7f10a67f40e5f6c3a8ed39032"
+        "bytes": 174420,
+        "sha256": "ceae29b57cd6ede85275f7cf3d2c3358289bc6a826b8476ceae8272dba040e97"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -1290,8 +1470,8 @@
       },
       {
         "path": "assets/scripts/LoadingView.ts",
-        "bytes": 2982,
-        "sha256": "46e98a25cbb9d759c0a53010a0745159b099e8834e4ae48a6672349a3e238fe3"
+        "bytes": 3017,
+        "sha256": "3aed945d8de3ee89a2698537a09854b9bb9d2688038e7b7b13f63dba4e895cf8"
       },
       {
         "path": "assets/scripts/LoadingView.ts.meta",
@@ -1349,6 +1529,16 @@
         "sha256": "253ad3b66d2a6e4908fe22e18d478f19584bbd4c90fc5c0597f83d0d48bcee39"
       },
       {
+        "path": "assets/scripts/skill-vfx-art.ts",
+        "bytes": 16241,
+        "sha256": "4d6f070827a45f3a20c0338dd21837b232bfade60bfd6102e7df628cc708f3ca"
+      },
+      {
+        "path": "assets/scripts/skill-vfx-art.ts.meta",
+        "bytes": 171,
+        "sha256": "2530d1fe82910f1034384b9df32497cbaaf0fc78608026a6d49488b652f930b4"
+      },
+      {
         "path": "assets/scripts/SkillSelectView.ts",
         "bytes": 4316,
         "sha256": "feaa5d99ed621d884b32b8c0861dc4e0135e2244ac2486d543d75eca7c59c3a9"
@@ -1360,8 +1550,8 @@
       },
       {
         "path": "assets/scripts/startup-progress.ts",
-        "bytes": 1993,
-        "sha256": "78fc67323956c3824c293a6054a861536d52c146d7d74158039ccfa4d730304a"
+        "bytes": 2017,
+        "sha256": "5a7874e69b8fd913b93ccc66324291cf6c399b70ffbc3c0572af4bf5a632b8ee"
       },
       {
         "path": "assets/scripts/startup-progress.ts.meta",
@@ -1370,8 +1560,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 12832,
-        "sha256": "e4d55c0a5ca61f329fbcbc7877620304926a7d749dee3933ec4c90834aa660ef"
+        "bytes": 13079,
+        "sha256": "611ef9c8fbff93f926071578365c1ac7b63ddaa2cdf467501b7778ce891fa02e"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -1387,6 +1577,16 @@
         "path": "assets/scripts/sweep-effects.ts.meta",
         "bytes": 171,
         "sha256": "90c615035ffb98ba673bb8cedef723cbcc828853d60344a77e9a2be670ba1e94"
+      },
+      {
+        "path": "assets/scripts/TrainingView.ts",
+        "bytes": 10135,
+        "sha256": "5d827fd9fd1d0517758dc042f125ac9056f45159e562e46d3c8a1c4d1236672b"
+      },
+      {
+        "path": "assets/scripts/TrainingView.ts.meta",
+        "bytes": 171,
+        "sha256": "66ca4ed0f3d3daac1d7360b7b6c9f53196010477a41896c6710083a8cba2355d"
       },
       {
         "path": "assets/scripts/weapon-art.ts",
@@ -1560,8 +1760,8 @@
       },
       {
         "path": "config/build-wechat.json",
-        "bytes": 620,
-        "sha256": "9d333ea1e1aa35188eeca00dd11208deeaed794a566234c3e6b92a3a9260c028"
+        "bytes": 619,
+        "sha256": "e65a5ecc7f514f57b119b73833401c4de875ac4f5665c16aa0cab40217a3ef13"
       },
       {
         "path": "docs/battle-music.md",
@@ -1575,13 +1775,13 @@
       },
       {
         "path": "docs/common-skills.md",
-        "bytes": 5112,
-        "sha256": "a494d47f3bcc4ddd456a3ba0845482a4d7555c0046c6903e07c570340d40da0b"
+        "bytes": 5313,
+        "sha256": "b1bbb50be27b6772bf7e8666c45f31822cee2d975be32d5d0b30e8860a7c2aac"
       },
       {
         "path": "docs/design/01-campaign-and-bosses.md",
-        "bytes": 18869,
-        "sha256": "d689c33a10c70fa951c0ff4ee6bdeade198ea0ac30721f21ecb7a2b1fcb0b3dd"
+        "bytes": 18699,
+        "sha256": "bc12010bf5602f28756600fce9cd3221f237f3de851ed444f1c4e0e2b5d9cb98"
       },
       {
         "path": "docs/design/02-enemy-codex.md",
@@ -1600,8 +1800,8 @@
       },
       {
         "path": "docs/design/05-ui-production-and-balance.md",
-        "bytes": 14956,
-        "sha256": "7c856ecf0e12d8b154dfa6079c846414b4698b2b8dd0cdcb354daa1899ebdef1"
+        "bytes": 15025,
+        "sha256": "e2dddbda88a4c2b313fe69b70378c1e029930106ba6a848b8d6f1202bf570255"
       },
       {
         "path": "docs/design/06-sources-and-decisions.md",
@@ -1615,8 +1815,8 @@
       },
       {
         "path": "docs/design/README.md",
-        "bytes": 4427,
-        "sha256": "9166f8039c17fbc668f7c8bf2c848cfba871381772d4368a3da137f4a9a3cd19"
+        "bytes": 4430,
+        "sha256": "c5a709edb78acc022228a9802f712fff1a4975111bde41a0321e518aa87db67b"
       },
       {
         "path": "docs/golden-sweep-v5.1-validation.json",
@@ -1640,8 +1840,8 @@
       },
       {
         "path": "docs/resources.md",
-        "bytes": 1817,
-        "sha256": "8bb0a1d491d3c8118bb767334138f7da24c08432cdd5697be8a75f1410cac6c0"
+        "bytes": 1968,
+        "sha256": "72b026c5720a175829337b877ba4a5e10ec12c1dc0deb2bcd5f9aca2e33b0254"
       },
       {
         "path": "docs/skill-review/feishu-document.json",
@@ -1650,8 +1850,8 @@
       },
       {
         "path": "docs/skill-review/README.md",
-        "bytes": 8983,
-        "sha256": "ef538b6b972d875dd14f3b96a445c093dd595e5b508601033fec259c03cb6ae5"
+        "bytes": 9267,
+        "sha256": "b95aded1ec0757aaeff096ebf8a141d205e79df84d8730c07dbb64748dbbbac9"
       },
       {
         "path": "docs/skill-review/skills.json",
@@ -1662,6 +1862,11 @@
         "path": "docs/skill-review/技能总览.png",
         "bytes": 2374122,
         "sha256": "18cb2886a2cf0447f7374d05f9abab52e89a124eb6f8821354f648c8480dfbed"
+      },
+      {
+        "path": "docs/skill-vfx-v5.2.md",
+        "bytes": 7307,
+        "sha256": "e19fd458311241d85dcdae7abe85244783b61fbdc119105f67f67cd5d152414e"
       },
       {
         "path": "docs/weapon-sounds.md",
@@ -1675,18 +1880,18 @@
       },
       {
         "path": "package.json",
-        "bytes": 1235,
-        "sha256": "cbc1713055232f76ba85377cd4f1337e5b137e1474dc70b6d061dacf044878cd"
+        "bytes": 1395,
+        "sha256": "43ac9b7768f8f79b87c5e18cf1dbf801eb5163c84b6c486199825697ffaf9ddc"
       },
       {
         "path": "project.config.json",
-        "bytes": 795,
-        "sha256": "b71af7a402d465de51951b901ca7d1c46d3bc80f8415987d9c2d4e120ed86c15"
+        "bytes": 794,
+        "sha256": "cbe8b074fc8c5e56815f59786f3e198d4c3bef45202cd79209a7a1d3da7d8a82"
       },
       {
         "path": "README.md",
-        "bytes": 5965,
-        "sha256": "60139004793c03ca27251d1a82bc083d8d7258b9fba4dd80fefa38f772162c14"
+        "bytes": 6428,
+        "sha256": "ba0b4b22f94be3ae2efcda9812ac5f6ea1fcd6081b814878abc42d3aa82cdbe9"
       },
       {
         "path": "scripts/build-wechat.cjs",
@@ -1719,6 +1924,16 @@
         "sha256": "c2c59103483cbf497764751a2e029d699356f2156e5120034cdbd71a6abdb875"
       },
       {
+        "path": "scripts/fixtures/browser-skill-vfx-review.js",
+        "bytes": 3465,
+        "sha256": "c56fee8b323e43a951f2f5f0830dd497d529b382d251197f3677390d603ae356"
+      },
+      {
+        "path": "scripts/fixtures/skill-vfx-baseline.json",
+        "bytes": 320,
+        "sha256": "c4a339397b19886f84675c66919117de2e9c1299aa20d5291e09d39adf738f29"
+      },
+      {
         "path": "scripts/fixtures/wechat-cached-art-review.js",
         "bytes": 3728,
         "sha256": "66ee5ff7d6270fcdc3e885079c48a00c11307dbfd2e8667ba247af006d88e9c2"
@@ -1729,6 +1944,11 @@
         "sha256": "e9445ed3ebd1faca31bdccd12a161aff72489d7fa752ca5211b34bed5f33a6e0"
       },
       {
+        "path": "scripts/fixtures/wechat-enemy-birth-review.js",
+        "bytes": 2767,
+        "sha256": "33d50a208af39b71587ba4f6b46c6193dc3bd9d59533c219420270c69a170476"
+      },
+      {
         "path": "scripts/fixtures/wechat-golden-sweep-review.js",
         "bytes": 2913,
         "sha256": "d4cc9e81f9accae49f4aa57b5505580855c078b9018c934108a46859bbf8b4cc"
@@ -1737,6 +1957,11 @@
         "path": "scripts/fixtures/wechat-render-pressure.js",
         "bytes": 3312,
         "sha256": "d3f34f2ba2ace593f2025b9b1ee8f5ab22d6f8807c92ebdfa1c42633483ce50f"
+      },
+      {
+        "path": "scripts/fixtures/wechat-ui-layout-review.js",
+        "bytes": 2198,
+        "sha256": "4cc1114f2ee5aecc3abfcb9f1aff6dd5d0843799c2d878b8158e047088ad0866"
       },
       {
         "path": "scripts/optimize-textures.cjs",
@@ -1760,18 +1985,18 @@
       },
       {
         "path": "scripts/review-common-skills.cjs",
-        "bytes": 13496,
-        "sha256": "e268cbd79fca09daf909be36dc172b5b3936ac35789e36e1161fcbfe3cdf334e"
+        "bytes": 13502,
+        "sha256": "468aea67b484060791b5886414e4d380f31ebefe250eb2d93e836f9aa05ba17c"
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 87155,
-        "sha256": "c96fabc5bf62fede65c6d0186a20fa4cc7b899dff4a8570245f7ee9c57296370"
+        "bytes": 87259,
+        "sha256": "bb7e340394e2d20b1affc169989c55fe6999b096b1c20368aea71cc7da802901"
       },
       {
         "path": "scripts/test-chronicles.cjs",
-        "bytes": 10747,
-        "sha256": "4b49fa217169bf2d051cf7ba8ef88f0ce91079b8b5e4878b9c81f8bb5959cc30"
+        "bytes": 12417,
+        "sha256": "7930b16131a6fd818916cf68972b6d0bc3a4c0210521aca819a5f47240a6f48d"
       },
       {
         "path": "scripts/test-combat-effects.cjs",
@@ -1780,13 +2005,18 @@
       },
       {
         "path": "scripts/test-combat.cjs",
-        "bytes": 15446,
-        "sha256": "ea181738ceec6314c0d56d88ef7ac83f7bd0249bbfbc401f7b7296c4d27c4d6f"
+        "bytes": 15471,
+        "sha256": "f421c4d20b9c0b3d4067aec3fca6ee454e59c805ef6b7f5bd474c5efa39257b8"
       },
       {
         "path": "scripts/test-common-skills.cjs",
         "bytes": 8872,
         "sha256": "3af68d839d3ff3a5bcb29f16116dcaa1ea59dedfc8bbe19426f765446dd3b610"
+      },
+      {
+        "path": "scripts/test-enemy-birth.cjs",
+        "bytes": 3129,
+        "sha256": "ca050e9d97bfc8687a6e622ea285446c74106951b022ef5e4a270c16d96533ed"
       },
       {
         "path": "scripts/test-music.cjs",
@@ -1809,9 +2039,24 @@
         "sha256": "0cf1aba48a08a94ab62ab9a73d1f58b0f2c003265700334fa561646c5a0251e0"
       },
       {
+        "path": "scripts/test-skill-vfx.cjs",
+        "bytes": 6351,
+        "sha256": "68cb4253181782067a1e4893b8cb35bc0fece76016f12143b23a6a613c3d743a"
+      },
+      {
         "path": "scripts/test-startup.cjs",
-        "bytes": 5116,
-        "sha256": "55fc7c3681bd176d41165681ff988dcfa858f40d830b20d9d21760d29f7312fd"
+        "bytes": 5128,
+        "sha256": "6d0510a97f10ed2d85a6b8941a957d41da8c1e0c985d1ea3c189edd12ad9290f"
+      },
+      {
+        "path": "scripts/test-training.cjs",
+        "bytes": 6809,
+        "sha256": "a7c5f1072986c08dd2d29cdc4fa7e3c808ea13dd2430d19b9c5b9d58f1c59b25"
+      },
+      {
+        "path": "scripts/test-ui-layout.cjs",
+        "bytes": 3602,
+        "sha256": "52e529ad57b154b16ddc0a20369334e0a59998883612d1c1bcdce6646479597a"
       },
       {
         "path": "scripts/test-weapon-sound.cjs",
@@ -1956,7 +2201,8 @@
       "presentation:heroes",
       "hero-menu",
       "menu:background",
-      "menu:atlas"
+      "menu:atlas",
+      "menu:logo"
     ],
     "poster": "assets/campaign/poster.jpg",
     "template": "build-templates/wechatgame/first-screen.js"
@@ -23009,7 +23255,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "hero-menu",
         "priority": 8,
-        "sourceBytes": 629730
+        "sourceBytes": 809966
       },
       {
         "path": "assets/meadow/",
@@ -23078,6 +23324,27 @@
         "bytes": 864044
       },
       {
+        "path": "art/branding/avatar-source.png",
+        "bytes": 1973896,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/branding/avatar.png",
+        "bytes": 459997,
+        "width": 512,
+        "height": 512,
+        "colorType": 2
+      },
+      {
+        "path": "art/branding/logo-source.png",
+        "bytes": 1437255,
+        "width": 2172,
+        "height": 724,
+        "colorType": 6
+      },
+      {
         "path": "art/concepts/hero-select-v4.2/training-ground-source.png",
         "bytes": 1921152,
         "width": 1672,
@@ -23106,6 +23373,34 @@
         "colorType": 2
       },
       {
+        "path": "art/concepts/ui-layout/battle-hud.png",
+        "bytes": 1797884,
+        "width": 1816,
+        "height": 866,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/ui-layout/menu.png",
+        "bytes": 2022007,
+        "width": 1816,
+        "height": 866,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/ui-layout/reference-shop.png",
+        "bytes": 1457059,
+        "width": 1674,
+        "height": 784,
+        "colorType": 6
+      },
+      {
+        "path": "art/concepts/ui-layout/shop.png",
+        "bytes": 1660492,
+        "width": 1817,
+        "height": 866,
+        "colorType": 2
+      },
+      {
         "path": "art/concepts/weapons-v3.1/pointed-knife-source.png",
         "bytes": 375798,
         "width": 1254,
@@ -23131,6 +23426,13 @@
         "bytes": 2289817,
         "width": 1672,
         "height": 940,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/training/skills-wechat.png",
+        "bytes": 643094,
+        "width": 1722,
+        "height": 796,
         "colorType": 2
       },
       {
@@ -23681,6 +23983,13 @@
         "bytes": 457911,
         "width": 1536,
         "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "assets/hero-menu/logo.png",
+        "bytes": 179248,
+        "width": 640,
+        "height": 181,
         "colorType": 6
       },
       {

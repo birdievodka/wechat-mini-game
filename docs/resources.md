@@ -5,6 +5,7 @@
 | 目录 | 保留内容 |
 | --- | --- |
 | assets | 全部当前游戏运行素材与meta，本次未改动 |
+| art/branding | 当前小游戏头像、标题Logo源图、游戏名与简介及完整提示词；头像不进入运行包，Logo导出至hero-menu |
 | art/runtime-v4 | 当前战役十张源图、prompt与裁格manifest |
 | art/runtime-sources/png | 38张当前PNG的压缩前原图及哈希清单，避免重复量化失真 |
 | art/concepts/presentation-v3.0 | 当前三英雄分层与武器图标的生成源图 |

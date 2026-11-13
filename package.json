@@ -6,14 +6,14 @@
   "creator": {
     "version": "3.8.8"
   },
-  "description": "Cocos Creator 微信小游戏",
+  "description": "桃园小英雄 · Cocos Creator 微信小游戏",
   "scripts": {
     "check": "node scripts/check.cjs && node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs --check",
     "skill:sync": "node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
     "skill:check": "node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs --check",
     "typecheck": "tsc --noEmit",
     "build:wechat": "node scripts/build-wechat.cjs",
-    "test": "node scripts/test-presentation-art.cjs && node scripts/test-result-art.cjs && node scripts/test-startup.cjs && node scripts/test-music.cjs && node scripts/test-weapon-sound.cjs && node scripts/test-weapons.cjs && node scripts/test-combat-effects.cjs && node scripts/test-combat.cjs && node scripts/test-campaign.cjs && node scripts/test-performance.cjs && node scripts/test-chronicles.cjs && node scripts/test-common-skills.cjs",
+    "test": "node scripts/test-presentation-art.cjs && node scripts/test-result-art.cjs && node scripts/test-startup.cjs && node scripts/test-music.cjs && node scripts/test-weapon-sound.cjs && node scripts/test-weapons.cjs && node scripts/test-combat-effects.cjs && node scripts/test-combat.cjs && node scripts/test-campaign.cjs && node scripts/test-performance.cjs && node scripts/test-chronicles.cjs && node scripts/test-common-skills.cjs && node scripts/test-skill-vfx.cjs && node scripts/test-ui-layout.cjs && node scripts/test-enemy-birth.cjs && node scripts/test-training.cjs",
     "assets:optimize": "node scripts/optimize-textures.cjs",
     "profile:battle": "node scripts/profile-battle.cjs"
   },

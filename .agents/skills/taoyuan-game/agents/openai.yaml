@@ -1,4 +1,4 @@
 interface:
-  display_name: "桃园乱斗项目规范"
-  short_description: "维护桃园乱斗的画风、玩法、角色装备数值与微信构建，并同步后续变更"
+  display_name: "桃园小英雄项目规范"
+  short_description: "维护桃园小英雄的画风、玩法、角色装备数值与微信构建，并同步后续变更"
   default_prompt: "使用 $taoyuan-game，按项目当前画风与玩法完成这次变更，并同步相关规范和代码生成目录。"

@@ -167,7 +167,7 @@ for (const angle of [0, Math.PI / 2, Math.PI, -Math.PI / 2, Math.PI / 4]) {
 }
 attackDemo.soldierFrames = [Array.from({ length: 12 }, (_, i) => i + 1)];
 for (const direction of [0, 1, 2, 3]) {
-  const fighter = { direction, weaponKind: 0, attack: 0.1, walk: 0, flash: 0, art: {} };
+  const fighter = { direction, weaponKind: 0, attack: 0.1, walk: 0, flash: 0, art: { node: { active: false } } };
   attackDemo.drawEnemy(fighter);
   const windup = fighter.art.spriteFrame;
   fighter.attack = 0.33; attackDemo.drawEnemy(fighter);

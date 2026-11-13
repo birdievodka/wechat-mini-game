@@ -4,7 +4,7 @@ import { PASSIVE_ITEMS, eligiblePassive, passivePreview, passiveBonuses } from '
 import { Run, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BUDGET } from './campaign';
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 
-export const SURVIVAL_VERSION = 'chronicles-v5.1-golden-sweep';
+export const SURVIVAL_VERSION = 'chronicles-v5.4-training';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;
@@ -27,13 +27,15 @@ export const AUGMENTS: Augment[] = [
   { id: 'drummer', name: '战鼓擂起来', desc: '所有武器攻速+40%\n攻击速度加法叠加', icon: 'haste' },
   { id: 'rich', name: '财神上身', desc: '金币收入+30%\n吸钱范围+60', icon: 'coin' },
 ];
-export interface SupplyCard { id: string; title: string; desc: string; price: number; tag: string; icon: string; weapon?: { id: typeof WEAPONS[number]['id']; tier: Tier }; major: boolean; }
+export interface SupplyCard { id: string; title: string; desc: string; price: number; tag: string; icon: string; weapon?: { id: typeof WEAPONS[number]['id']; tier: Tier }; from?: Tier; major: boolean; }
 export function supplyCard(run: Run, id: string): SupplyCard {
   const w = parseWeaponOffer(id), upgrade = id.startsWith('u:') ? run.weapons.find(w => w.uid === Number(id.split(':')[1])) : undefined;
   if(id.startsWith('u:')&&!upgrade&&run.purchasedOffers.indexOf(id)>=0)return {id,title:'武器升阶',desc:'该升阶已购买',price:run.offerPrices[id],tag:'已购入',icon:'power',major:false};
   if (w || upgrade) {
     const weapon = w || { id: upgrade!.id, tier: Number(id.split(':')[2]) as Tier }, stats = weaponStatsFor(run, weapon), d = weaponFor(weapon.id);
-    return { id, title: upgrade ? `${d.name} · 升阶` : d.name, desc: `伤害 ${Math.round(stats.damage * 10) / 10} · ${stats.interval.toFixed(2)}秒\n${weaponEffectText(weapon.id,stats)}`, price: run.offerPrices[id] ?? 28, tag: TIER_NAMES[weapon.tier - 1], icon: 'power', weapon, major: false };
+    // 升阶卡的 from 是本件当前品级，商店据此展示“旧 → 新”而不是只有目标品级。
+    const next = Number(id.split(':')[2]), from = upgrade && next > 1 && next <= 4 ? (next - 1) as Tier : undefined;
+    return { id, title: upgrade ? `${d.name} · 升阶` : d.name, desc: `伤害 ${Math.round(stats.damage * 10) / 10} · ${stats.interval.toFixed(2)}秒\n${weaponEffectText(weapon.id,stats)}`, price: run.offerPrices[id] ?? 28, tag: TIER_NAMES[weapon.tier - 1], icon: 'power', weapon, from, major: false };
   }
   if (id === 'r:power' || id === 'r:speed') return { id, title: id === 'r:power' ? '磨刀不误工' : '小步快跑', desc: id === 'r:power' ? '增加基础武器伤害\n可重复购买，收益递减' : '增加移动速度\n可重复购买，收益递减', price: run.offerPrices[id] ?? 12, tag: '基础修炼', icon: id === 'r:power' ? 'power' : 'speed', major: false };
   const aug = AUGMENTS.find(a => id === 'a:' + a.id), item = ITEMS.find(i => i.id === id);

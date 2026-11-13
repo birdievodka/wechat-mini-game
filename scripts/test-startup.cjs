@@ -7,7 +7,7 @@ for(const id of STARTUP_TASKS.filter(id=>id!=='liubei-body'))loading.mark(id);
 assert.equal(loading.allSettled,false);loading.complete();assert.ok(loading.value<1,'缺角色资源不允许假100%');
 loading.mark('liubei-body');assert.equal(loading.allSettled,true);assert.equal(loading.value,.98);loading.complete();assert.equal(loading.value,1);
 const failed=new StartupProgress();for(const id of STARTUP_TASKS)failed.mark(id);failed.fail('error');failed.complete();assert.ok(failed.value<1);
-const optional=new StartupProgress();for(const id of STARTUP_TASKS.filter(id=>!['hero-menu','menu:background','menu:atlas'].includes(id)))optional.mark(id);optional.skipMenuArt();optional.complete();assert.equal(optional.value,1,'可选菜单图失败可以进入基础布局');
+const optional=new StartupProgress();for(const id of STARTUP_TASKS.filter(id=>!['hero-menu','menu:background','menu:atlas','menu:logo'].includes(id)))optional.mark(id);optional.skipMenuArt();optional.complete();assert.equal(optional.value,1,'可选菜单图失败可以进入基础布局');
 console.log('通过：真实资源计数、单调/幂等推进、关键资源缺失与错误不假100%、可选图失败降级');
 
 async function testFirstScreen(imageFails,uploadFails=false){
