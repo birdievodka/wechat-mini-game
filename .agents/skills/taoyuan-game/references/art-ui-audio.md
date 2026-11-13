@@ -20,20 +20,20 @@
 
 ## 视觉基准和资产
 
-已确认选人稿：`art/concepts/hero-select-v2.5/03-select-hero-simple.png`。前两张01/02是迭代历史，不应恢复属性条、测试入口或选武器按钮。
+当前选人实际画面见 `art/reviews/golden-sweep-v5.1/menu-wechat.jpg`。不恢复属性条、测试入口或选武器按钮。
 
 当前选人实装素材：
 
-- `assets/hero-menu/training-ground.jpg`：独立的无人物桃园演武场，1536×864 JPEG；原图和提示词在art/concepts/hero-select-v4.2。旧背景已移出assets归档，Loading仍用campaign/poster.jpg。
+- `assets/hero-menu/training-ground.jpg`：独立的无人物桃园演武场，1536×864 JPEG；原图和提示词在art/concepts/hero-select-v4.2。旧菜单背景已清理，Loading仍用campaign/poster.jpg。
 - `assets/hero-menu/atlas.png`：3列×2行真透明图集，上排刘关张，下排标识、标题、无字按钮底板。人物取完整单格；下排取中央半高。
-- 提示词 `art/concepts/hero-select-v2.5/runtime-prompts.json`；不要让将来的生成稿重新烘入微信胶囊或按钮文字，交互文本需要可控。
+- 演武场提示词见 `art/concepts/hero-select-v4.2/manifest.json`；不要让将来的生成稿重新烘入微信胶囊或按钮文字，交互文本需要可控。
 - 关张战斗身体 `assets/campaign/*_body.png`，刘备身体 `assets/battle/characters/liubei-bean-body.png`；菜单插画与战斗身体有各自用途。
 - 敌军动作分别在 `assets/battle`、`assets/enemies`；普通兵保留镰刀/锄头两套动作。
 - 地面 `assets/meadow/ground.png`；小桃树取 `assets/orchard/decor.png` 的第一个单格，不重新摆回整组大型装饰。
 - 六种现代/修仙持握武器 `assets/arsenal/weapons.png` 为3×2图集。道具 `assets/talismans/items.png` 为8×6原始48格；原ID顺序不可随意插入，后加D09–D20使用绘制图标。
 - 十一武器UI图集 `assets/presentation/icons.png` 与分层英雄 `heroes.png` 使用实测裁格；独立presentation分包。所有武器栏/商店/结算使用统一插画，不再缩小简笔握持图。
 
-新素材沿用已有轮廓、配色和比例。适合代码绘制的边框/提示/简图继续绘制；需要新增位图角色或场景时用可用的 imagegen 技能，保留透明通道、非破坏式保存版本、记录提示词和来源，不引入新画风。
+新素材沿用已有轮廓、配色和比例。适合代码绘制的边框/提示/简图继续绘制；需要新增位图角色或场景时用可用的 imagegen 技能，保留透明通道、保留当前生成源图、记录提示词和来源；已被替代的版本按resources规则清理，不引入新画风。
 
 ## UI
 
@@ -59,7 +59,7 @@
 
 普通受击闪白不是硬直；玩家保护期不复用受击红闪。代码中的 `weaponFreeze` 目前没有接入真正停顿，见已知差异，不能仅凭赋值宣称已有命中停帧。
 
-v2.7技能与11武器采用有预算的程序粒子、短亮线和分层图形；具体外观、预算、生命周期与研究取舍见 `combat-effects.md`。普通命中短促，英雄技能有独立剪影；友方地面表现不能盖住敌人预警圈。
+v2.7技能与11武器采用有预算的程序粒子、短亮线和分层图形；具体外观、预算、生命周期与研究取舍见 `combat-effects.md`。普通命中短促，通用技能有独立剪影；友方地面表现不能盖住敌人预警圈。
 
 ## 声音
 

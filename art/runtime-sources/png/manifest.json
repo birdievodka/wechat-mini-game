@@ -199,16 +199,6 @@
     "rgbRmse": 3.5148,
     "alpha": "identical"
   },
-  "assets/hero-menu/background.png": {
-    "sourceSha": "9ef627bb47a9949ab96d7df192c77dfe83518d2d3d2f2a903403c374cad11418",
-    "outputSha": "9833ca330181c9aee3edab0b079cefd0d3dbcf1f11a84fb0d9f9d113235eb76f",
-    "sourceBytes": 972628,
-    "outputBytes": 308268,
-    "width": 1024,
-    "height": 575,
-    "rgbRmse": 3.4336,
-    "alpha": "identical"
-  },
   "assets/meadow/ground.png": {
     "sourceSha": "e7867054c4d2e94a5ac52c0ad9aca92132ae0dd1abd893d5d04f0e2ba7f65a96",
     "outputSha": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d",

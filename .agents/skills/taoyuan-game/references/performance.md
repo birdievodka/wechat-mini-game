@@ -1,4 +1,4 @@
-# 性能与 iOS 战斗稳定性（v4.3，保留历史证据）
+# 性能与 iOS 战斗稳定性
 
 用户反馈iOS战斗中闪退，未获得机型或系统终止日志。下面是已经验证的性能热点和减压措施，不能据此断言已查明那次闪退根因，也不能用桌面测试保证所有iPhone稳60帧。
 
@@ -32,10 +32,8 @@
 ## 验证与指标
 
 - `npm test`包括test-performance：静态拳头缓存失效、万元掉落守恒、128金币复用、CHAR伤害字、慢帧只画一次、80敌/六剑阵3600帧、弹体满载12轮、故障记录限长和监听注销、告警保留技能粒子。
-- `npm run profile:battle -- /tmp/report.json`：同一Cocos桩、固定种子、80敌＋100金币，分别六剑阵/六机关枪/混装，480帧，后360帧统计CPU。实测报告在`docs/performance-v3.4.json`：CPU中位耗时下降23%–35%、Graphics.clear下降88%–94%、setSiblingIndex下降82%–85%。这是Node CPU/绘图调用夹具，**不是iOS FPS、GPU内存或真实通关成绩**。
+- `npm run profile:battle -- docs/performance-node.json`保留当前Node/Cocos桩CPU与绘图调用采样，含六剑阵、六枪、混装和chronicle-mixed；这是CPU夹具，不是iOS FPS、GPU内存或真人通关成绩。
 - 真实引擎核对需另记录版本、特效、素材/脚本错误、压力后池大小和恢复选人结果；工程夹具不冒充真人试玩。手机实际闪退是否消失仍需原设备复测。
-
-本次交付状态：v3.4类型/完整回归/压力检查/微信构建通过，总包16.10MiB；create_preview_qrcode成功，服务端源码16,848,456字节。Mac锁屏（已读系统会话确认），新运行时已加载，startup=1/canEnter=true/painted=true，但帧暂停、phase仍loading；原生压力夹具因未就绪主动跳过，未改用户成绩。解锁后继续原生核对，不能把此状态写成原生压力已通过。
 
 ## v4内容扩展后的约束
 
@@ -43,7 +41,7 @@
 
 新增友方场地/随从共享预算：12陷阱/8阵/12木牛，36友方延迟弹、24敌方延迟弹；6危险区普通最多3，死亡/卖出/切章清理。160弹体/80敌箭/280粒子/36表现/128金币保持，碰撞不依赖特效池是否满。过多源实例要替换最旧同源，不允许数组无限涨。
 
-test-performance含40类型混编与司马懿、孔明、六新武器1800帧；profile:battle的chronicle-mixed包含80敌+100金币。docs/performance-v4.json仅Node桩CPU/绘图调用；测试时多个Node任务可能并行，不能与v3.4报告直接当A/B百分比。真实iOS完整征程、峰值GPU/纹理内存和闪退回归仍需用户设备复测。
+test-performance含40类型混编与司马懿、孔明、六新武器1800帧；profile:battle的chronicle-mixed包含80敌+100金币。docs/performance-node.json仅Node桩CPU/绘图调用；测试时多个Node任务可能并行，不能与不同机器或负载的旧报告直接当A/B百分比。真实iOS完整征程、峰值GPU/纹理内存和闪退回归仍需用户设备复测。
 
 
 ## v4.3：密集敌兵与特效
@@ -56,9 +54,9 @@ test-performance含40类型混编与司马懿、孔明、六新武器1800帧；p
 - 剑阵切割弧三层单位路径预计算，免除每帧每把剑30个临时坐标数组和重复三角计算；新兵分层尺寸和颜色只在切向/尺寸/受击/阵营变化时更新，脚步和头动保持；延迟敌弹/友弹与友方阵地列表原地压缩。
 - test-performance补充280可见粒子不丢失/零重复上传/真实alpha/裁剪/清理/销毁、共享Sprite弹体切换复用/CCD命中、金币无Graphics和出生环/箭型复用；原3600帧六剑阵/1800帧混编/金币守恒等继续覆盖。Node无Canvas时用原矢量回退；额外提供确定性帧夹具覆盖Sprite实际分支。
 
-微信渲染对照为单独**工程视觉夹具**：fresh menu启动、80兵＋100金币＋280粒子、300帧后240帧计量，没有战斗进度/生命/金币作弊成绩，也没有存档写入。代码scripts/fixtures/wechat-render-pressure.js；非menu/defeat/victory主动跳过，结束恢复界面并验证Run未变，18秒watchdog恢复。before为v4.2，after为v4.3；真实统计和截图见docs/performance-v4.3.json与art/reviews/performance-v4.3。数字只代表微信桌面模拟器的gfx统计，不是iOS峰值内存、手机帧率或那次闪退的根因证明。
+微信渲染对照为单独**工程视觉夹具**：fresh menu启动、80兵＋100金币＋280粒子、300帧后240帧计量，没有战斗进度/生命/金币作弊成绩，也没有存档写入。代码scripts/fixtures/wechat-render-pressure.js；非menu/defeat/victory主动跳过，结束恢复界面并验证Run未变，18秒watchdog恢复。before为v4.2，after为v4.3；真实统计和截图见docs/performance-wechat-baseline.json与art/reviews/performance-v4.3。数字只代表微信桌面模拟器的gfx统计，不是iOS峰值内存、手机帧率或那次闪退的根因证明。
 
-最终有效微信对照：Draw Call中位255→57（−77.65%），三角形29589→5623（−81.0%），gfx缓冲547467704→75639240字节（−86.18%，约522→72MiB）；纹理115715828→118886132字节（约+3MiB）。帧间隔中位仍18ms，P95仍19ms，不宣称桌面FPS提升。原始数据与范围说明在docs/performance-v4.3.json。实际截图检查中修复过Canvas剪裁路径残留，必须保留alpha裁格断言和回归。
+最终有效微信对照：Draw Call中位255→57（−77.65%），三角形29589→5623（−81.0%），gfx缓冲547467704→75639240字节（−86.18%，约522→72MiB）；纹理115715828→118886132字节（约+3MiB）。帧间隔中位仍18ms，P95仍19ms，不宣称桌面FPS提升。原始数据与范围说明在docs/performance-wechat-baseline.json。实际截图检查中修复过Canvas剪裁路径残留，必须保留alpha裁格断言和回归。
 
 
 v5继续保留v4.3共享贴图优化；CommonSkillEffects≤32视觉、CommonSkillRuntime≤36任务，六剑阵＋箭雨3600帧和章17混编六武器＋流星1800帧验证上限。旧v4.3 A/B数字不直接套作v5手机帧率；当前仍需原iOS设备复测。

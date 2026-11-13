@@ -1,4 +1,0 @@
-{
-  "tool": "built-in image_gen",
-  "prompt": "Prepare this EXACT character as a game animation BODY sprite layer. Preserve the head, face, huge ears, topknot, expression and short rounded green torso/red belt exactly. REMOVE both arms INCLUDING sleeves, both hands, both sandals, both tiny feet and the ground shadow entirely to transparency. Reconstruct smooth rounded sides of the small torso under the head. Only head and torso remain; no limbs, no weapons, no ground. Keep identical proportions and style. Center with approximately 5% transparent padding around the remaining head-and-torso silhouette. Genuine transparent background. This is an animation component, not a new character design."
-}

@@ -6,7 +6,7 @@
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "73d9588ca9a16e3c73b537c6292a8c32a2404f77c0cdb9ba95acaf686c031b9d",
+    "fingerprint": "9c69575841b35dea8631f07ddfb9a07e4cd08e450fb219dc2dfaa2bfe4d789be",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -25,13 +25,13 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/taoyuan-adapter.md",
-        "bytes": 5517,
-        "sha256": "21d69c24dedfb54dfbedc13358a066583755db43372d1acc9b64565ffbd4f139"
+        "bytes": 5542,
+        "sha256": "2bd1509a4c2596dbba94faf85d70e40c2588326d94e45e5dace23791a75d5ba4"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/verification.md",
-        "bytes": 4402,
-        "sha256": "e391ed13a0123092bd36bd66c43044bc67430f51ab8baf8a3818fa999756405c"
+        "bytes": 4466,
+        "sha256": "c55ab8c7d5e8a1999c2df6299fa5ebeb1c7c81feca8e559be8c1a0751060cc10"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/scripts/inspect-taoyuan.cjs",
@@ -50,43 +50,43 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 11368,
-        "sha256": "8e34f63b78926b83685e3eb70711a39ef0c4d8a4ae362d08d41062d9f350a355"
+        "bytes": 11377,
+        "sha256": "7acc48ad54fac4587dc95a84194cc3e32db913e7a436c763f6dbeb275f6a7506"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
-        "bytes": 3008,
-        "sha256": "0be5d585f9fe7e9bdb121f3670e35f4019b9901c78915c4b292a1fdf12d5d03a"
+        "bytes": 2984,
+        "sha256": "7c62cd50d326541715c60969323188226474f0d80c13519891184f6e604fe840"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/combat-effects.md",
-        "bytes": 9875,
-        "sha256": "621e017ed8e219feb488a49691ea23982cf0e18e8cdbc111d53fa6e32d8f7815"
+        "bytes": 8547,
+        "sha256": "8e3499c8fcec958839fa84cbbd03a4effe5b658329f78e452c9b11133617f88c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 5045,
-        "sha256": "2114488e989c2754fe20177d411d2cd04da0dc921509aa89afdd8935c1867d17"
+        "bytes": 5144,
+        "sha256": "4566e6743bc5e961fcf73a7530f31d6aa776164206d703273f2ce11b5fda28ad"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 15992,
-        "sha256": "2b0d8ca6227dcdc0fa0599541e9c68b6ce714ffccbd88c3290508a7bab455be0"
+        "bytes": 11469,
+        "sha256": "f7adb219c7a16399f479ea91e134db132c0caba85e437cb9630fd33ccd2d98b8"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
-        "bytes": 4749,
-        "sha256": "55c2a1b32d88626fca96ea03673f2f64fd75ed062a3c5a22674d06ad16ece16b"
+        "bytes": 4742,
+        "sha256": "eeeab98f1652e042cc2495c665b2f1eb6c84bcaeb608a0d96339f1bc925f2ac9"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/gameplay.md",
-        "bytes": 9817,
-        "sha256": "bef4a40822e26490d47572bcab2d915d679ac32d1bc8c17c5de08d61183587c1"
+        "bytes": 9814,
+        "sha256": "637aac0bd1a44dec5c6bd75b9ff3d9f15224ca62249a2cc952f1f0ec0637cc4b"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/hero-arms.md",
-        "bytes": 3050,
-        "sha256": "eb862d57eaaaf65aeaa7a0f2b5481c7bc4f09fbc7287b8bf049b30f8d1ec45bd"
+        "bytes": 2465,
+        "sha256": "7e531d880302810858963a0a76bf7bbddaa002d8c281918e94cb74699e670ebf"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/known-gaps.md",
@@ -95,23 +95,28 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/maintenance.md",
-        "bytes": 4408,
-        "sha256": "1cdda2e1c345ab84800e33aa9b47e72be84f5830815b50147f3848950a4c3a41"
+        "bytes": 4593,
+        "sha256": "568c313831d18285f2109e7a3d7b38c298bae5efb7dd8baede0249e4c8489067"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 9113,
-        "sha256": "93737a3836bfd7b1995bc1ee1396d03564d8ddd1a8c7b3ed343bd586e17317e2"
+        "bytes": 8509,
+        "sha256": "5dd4a6c8ca0baa42a7eb1605da5755387c9b4a4b85011914dd2526c6a466b5cb"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
-        "bytes": 7980,
-        "sha256": "d41eafa778bc39a1871c077a0524e0dddea314b79437d2bb4ada60f7d1ad44a6"
+        "bytes": 7675,
+        "sha256": "e19b5e50114e3a79a6fee9d161af976ea8ddabb752f845659e599d20cf46be1c"
+      },
+      {
+        "path": ".agents/skills/taoyuan-game/references/resources.md",
+        "bytes": 1949,
+        "sha256": "5f3a8ca7408bfd2d4d05c99b322080dcd15df7a3950cc78ec75b5c962248442c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
-        "bytes": 3087,
-        "sha256": "a0e08da5d1e790b49c3982540197a9092c62a9133cf6eacb2ae58676167c0490"
+        "bytes": 2729,
+        "sha256": "f05db0a6aa415f31268b061ea399a61f29bf647bce8e9f6df23b9563c84d261e"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/startup-loading.md",
@@ -120,23 +125,23 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapon-evolution.md",
-        "bytes": 6405,
-        "sha256": "9daf02a1358bc66bd68a09f48e9b6b18e329ede9ec4845e7087373fe90c892f0"
+        "bytes": 5460,
+        "sha256": "e95ede454c60d0513682791a277db753863b8cd34a1558bbfe623239706e04fd"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapons-items.md",
-        "bytes": 10236,
-        "sha256": "b931ebb9494b378839e7899d30d87b44590fdd6bafb8e8659591ab380884bdc5"
+        "bytes": 10175,
+        "sha256": "12518eb897ea6cfe5f012a1b0f427479863086a22f03b197e53329d76e3fa98d"
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 21509,
-        "sha256": "a72525612e1cf391405a436ef1d5595ad5babfca83e1b577936e300afb30da18"
+        "bytes": 20834,
+        "sha256": "8eecf83b983590a3532d2735e5995f7b1b0eeb699d7724a46d681478a3bde983"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 7575,
-        "sha256": "590b4a03d37bfacbe705cb2e8059819f3f8319e14fc3be630456855b627a755f"
+        "bytes": 7676,
+        "sha256": "4314f1ed992f91825d35f4a9e9e52873b42f2c5dd5f69a4cd0a6bb817f132892"
       },
       {
         "path": ".gitignore",
@@ -149,39 +154,34 @@
         "sha256": "1e659d75a02f33fbb498e481f33a926cd1f0989ff31e96974bb4675dba64e70d"
       },
       {
-        "path": "art/concepts/defeat-v2.9/portraits-source.png",
-        "bytes": 1408804,
-        "sha256": "164544daecc7dc65cb65c0cc04903d35738a265d85437548d58307663322d001"
+        "path": "art/audio/taoyuan-kaida-battle.m4a",
+        "bytes": 878240,
+        "sha256": "77201868015c53f800d9a8c1c7981890940c38550250ab12a2dec511c6b43472"
       },
       {
-        "path": "art/concepts/defeat-v2.9/preview-zhangfei.jpg",
-        "bytes": 98186,
-        "sha256": "6e6437795b658aecb8917ab59c6cef29af7be5482ecacfd51f2829b4d3a54e4c"
+        "path": "art/audio/taoyuan-kaida-master.wav",
+        "bytes": 11520044,
+        "sha256": "81052405f96d52e375ed1bb57d9e18f40a7ec7d2dc9aae01827a8a85a63493e6"
       },
       {
-        "path": "art/concepts/defeat-v2.9/prompts.json",
-        "bytes": 2351,
-        "sha256": "a110b9aa0e688ca4d9ca01505652202fe51bbc1df0ed8876687bcdd9d42142bb"
+        "path": "art/audio/taoyuan-kaida-score.json",
+        "bytes": 65008,
+        "sha256": "3927c9e307773c90f9377b46f296b77f4d1eca943c4b7c32a206513894b14293"
       },
       {
-        "path": "art/concepts/hero-select-v2.5/03-select-hero-simple.png",
-        "bytes": 1914182,
-        "sha256": "63e03bee4dd3b969c3cefe6d1bfe621549e608bad705acb617e75c550eb9c55f"
+        "path": "art/audio/weapon-sfx-manifest.json",
+        "bytes": 1659,
+        "sha256": "0c796aadf62b0a880bd2cc00ddc3dd92ec35d8d6d132c409ab374c5b7f0ad445"
       },
       {
-        "path": "art/concepts/hero-select-v2.5/runtime-prompts.json",
-        "bytes": 3710,
-        "sha256": "98e5d965e004ca682b4c9bf23c4d1134c00d6674f38f8f95e7d5b7f3dd908a2c"
+        "path": "art/audio/weapon-sfx-preview.wav",
+        "bytes": 864044,
+        "sha256": "1d26fbbd7e30ccbd8572981a9d9fc4368ea7c1de9a9e4748ae86fd85b9067a54"
       },
       {
         "path": "art/concepts/hero-select-v4.2/manifest.json",
-        "bytes": 2392,
-        "sha256": "212fe1258a2e2da04f0d0b27fd605059559ee4dd1abd3929a5bca66da8b2c931"
-      },
-      {
-        "path": "art/concepts/hero-select-v4.2/previous-poster-background.png",
-        "bytes": 308268,
-        "sha256": "9833ca330181c9aee3edab0b079cefd0d3dbcf1f11a84fb0d9f9d113235eb76f"
+        "bytes": 2303,
+        "sha256": "4cdd125eec781984e1969e590cf4049ca74f48730b9cc267cf5d2bf633e0e612"
       },
       {
         "path": "art/concepts/hero-select-v4.2/training-ground-source.png",
@@ -194,16 +194,6 @@
         "sha256": "3f75e7e41ad867493b74cd4fb6e78263634455218f3f264f82867ad9628a1844"
       },
       {
-        "path": "art/concepts/presentation-v3.0/preview-loadout-advanced.jpg",
-        "bytes": 187243,
-        "sha256": "0b3609beec6ee5edb1509c9e0a95714799ffa700afb38449d96afd3c6d14380e"
-      },
-      {
-        "path": "art/concepts/presentation-v3.0/preview-loadout-basic.jpg",
-        "bytes": 180458,
-        "sha256": "eee957cb12c43343962ffc10b9cf8e6056d540dd3fa91d8d32dc8d408252611f"
-      },
-      {
         "path": "art/concepts/presentation-v3.0/prompts.json",
         "bytes": 5915,
         "sha256": "d2ccdf3fb8d2e0b25fd8698ebfe0d198749a2378bfdf858c8f29c498e85129b2"
@@ -214,9 +204,24 @@
         "sha256": "bc2af98dd6d174ac8257b47ebc7090efdb19f8f355434117f407ac390e99dc09"
       },
       {
-        "path": "art/concepts/weapons-v3.1/menu-background-before.png",
-        "bytes": 1836852,
-        "sha256": "9f12e992d1c456eeffc82b082d53b232c814059b652bc0107c83e621b9129405"
+        "path": "art/concepts/sweep-v5.1/01-golden-cleave.png",
+        "bytes": 2149108,
+        "sha256": "f2083a989483471ae0553e7223691610a9cd29809a74485b7adf338f0d51034d"
+      },
+      {
+        "path": "art/concepts/sweep-v5.1/manifest.json",
+        "bytes": 266,
+        "sha256": "575e92b6d1781e471166a78b8a3918293002b7afd737ca27073cd0b33228a9fc"
+      },
+      {
+        "path": "art/concepts/sweep-v5.1/prompts.json",
+        "bytes": 4444,
+        "sha256": "aaf0961615ea4910706df44e8bd110beae6b98738df54a7e9dd779770cfae96c"
+      },
+      {
+        "path": "art/concepts/sweep-v5.1/README.md",
+        "bytes": 1810,
+        "sha256": "b360206226d48198a957188d36775f8a5743d6307db6e6c6ee17c93074b5a856"
       },
       {
         "path": "art/concepts/weapons-v3.1/pointed-knife-source.png",
@@ -234,279 +239,29 @@
         "sha256": "6ed808e9c7c329de5b3a88256e3c32e5fca4e9071273dc14ae7941e437817783"
       },
       {
-        "path": "art/concepts/weapons-v3.1/poster-before.jpg",
-        "bytes": 320787,
-        "sha256": "a68be7df3d224ffb407c820079ea8db4d70b0214dd2bd9fe21a5b7fce7e56ee1"
-      },
-      {
         "path": "art/concepts/weapons-v3.1/poster-source.png",
         "bytes": 2289817,
         "sha256": "d8c552db930e87c5cdc41e9c1f916b310c471e973e5362ecc5d1ffb76a859ea3"
       },
       {
         "path": "art/concepts/weapons-v3.1/prompts.json",
-        "bytes": 8060,
-        "sha256": "8bde9d4659c784df7d265d6a1cfdf26b376656eb0ac5eb7d6fd0f4c8bd97fe0f"
+        "bytes": 5259,
+        "sha256": "59fb1d3d94e171c459039aa2a896cc591bbb08df76d9d0e3d92219a90eaaf841"
       },
       {
-        "path": "art/concepts/weapons-v3.1/review-defeat.jpg",
-        "bytes": 154046,
-        "sha256": "d726b39ec183e035e44ad687d1765e96530d0b3f6bb69d7eecb289fe6472d50d"
+        "path": "art/reviews/golden-sweep-v5.1/golden-sweep-wechat-preview.gif",
+        "bytes": 4236569,
+        "sha256": "218894517addc41f9ee81cbe9fb0677e2041ea8ca3caac54b1c431b0bd1bc8e7"
       },
       {
-        "path": "art/concepts/weapons-v3.1/review-menu.jpg",
-        "bytes": 241397,
-        "sha256": "c05ef96989b227f904bd89351eb6dd7fec7d323cbd27b61992b3d4267a443aab"
+        "path": "art/reviews/golden-sweep-v5.1/menu-wechat.jpg",
+        "bytes": 109712,
+        "sha256": "876d62049587ef781caf857d027cabb3468dba6732c5f9e164600f770b9cf5b5"
       },
       {
-        "path": "art/concepts/weapons-v3.1/review-peach-i.jpg",
-        "bytes": 168055,
-        "sha256": "1aad5a0bc4cc98c9e8dc29bc2a25672a9061ac131a8d43df75e6ff80f57a4c0b"
-      },
-      {
-        "path": "art/concepts/weapons-v3.1/review-peach-ii.jpg",
-        "bytes": 169121,
-        "sha256": "34aad4defaa357ef4b58f0a1ab264bc249ed2ce7a8a183f259a1464a982237f7"
-      },
-      {
-        "path": "art/concepts/weapons-v3.1/review-pointed-knife.jpg",
-        "bytes": 169201,
-        "sha256": "4f7817531173a46312d7132f5da8d7f9a13c1272d1ccb42923e5cbbb921f4323"
-      },
-      {
-        "path": "art/concepts/weapons-v3.1/review-pole.jpg",
-        "bytes": 169619,
-        "sha256": "6620a4754e2cb3caf03a912e7d7bd17f13b3445b91ca060678b3b5114c847d8f"
-      },
-      {
-        "path": "art/reviews/arms-v3.2/before-user.png",
-        "bytes": 94394,
-        "sha256": "348950365231fc9ac06408de694d14420ebf40499d66d4bde69452a8f6a592a9"
-      },
-      {
-        "path": "art/reviews/arms-v3.2/runtime-multi.jpg",
-        "bytes": 182404,
-        "sha256": "08418e0c87040225ea358a29e72568e21e62fc8662e0f477972134823bfe6bff"
-      },
-      {
-        "path": "art/reviews/chapter-v3.3/boss-supply.jpg",
-        "bytes": 173014,
-        "sha256": "765c3c40eb46483d0654f95abcf1394c5beba7dc32f3876f821d73e53c103c99"
-      },
-      {
-        "path": "art/reviews/chapter-v3.3/peach-branch.jpg",
-        "bytes": 170013,
-        "sha256": "800a7880362c4dbf7ef2f7eb1747d50af7c439d21b079576a547f535e2182730"
-      },
-      {
-        "path": "art/reviews/chapter-v3.3/victory.jpg",
-        "bytes": 151742,
-        "sha256": "303e8909e56f64a70c2cc46cc06438e30202a37c3dd38c8e6579101bbbfa86ba"
-      },
-      {
-        "path": "art/reviews/chapter-v3.3/zhangjiao.jpg",
-        "bytes": 180268,
-        "sha256": "b6cb3a0cb3f4c4d4a8aca34e06f8cbd4204ac84465bd64f24215b6942a65c0c3"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/enemy-codex-web.png",
-        "bytes": 263886,
-        "sha256": "16ec353928f319b1e35d4b735108983becc70968495b058cd9cddaefd61efcad"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/enemy-codex-wechat.png",
-        "bytes": 85985,
-        "sha256": "1d659be8779198b22e5051d094f27c5347c4c1c3d47f39d8cea91a46d4fa4ca4"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/first-shop-wechat.png",
-        "bytes": 79295,
-        "sha256": "86dfc8192737a20bce20e7b3e43df5e400e6cc64a1d037cb2009d5104aa18505"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/kongming-combat-web.png",
-        "bytes": 1169916,
-        "sha256": "ff509bc9b59b39a9c9643270a454304f4519f0441e3481ac3215001bd018381d"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/lvbu-six-weapons-fixture-web.png",
-        "bytes": 1226289,
-        "sha256": "c4d19a64ad1a038b9479ed48eb89d579e9d5b71864b54c0777af829b31e89b78"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/lvbu-six-weapons-fixture-wechat.png",
-        "bytes": 85487,
-        "sha256": "5f75daadfea37103bb5b0889a6c390d4e760abaa49db7db872bd04296d097314"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/manifest.json",
-        "bytes": 5949,
-        "sha256": "0698eacc7c76219f398c39bec23ace3fcb264decadac33dfcf4f9ffc0b0cc4a9"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/menu-restored-wechat.png",
-        "bytes": 136693,
-        "sha256": "ff1b05727bfbd87b86ea54157e4f7dce326d069aaa0467b05e5427b92c15d19a"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/menu-web.png",
-        "bytes": 948400,
-        "sha256": "76cd188ef5897a735e8ae4ec68824878afc107f99d00e4dc0f0d2e90c47e5aaa"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/menu-wechat.png",
-        "bytes": 136693,
-        "sha256": "ff1b05727bfbd87b86ea54157e4f7dce326d069aaa0467b05e5427b92c15d19a"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/simayi-starfall-fixture-wechat.png",
-        "bytes": 89339,
-        "sha256": "fa9ef676c332d3e1a9bfd9c62e56e0fea0a567e9d0c6891dda6a77ff946a4528"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/skill-codex-web.png",
-        "bytes": 276161,
-        "sha256": "3a43ecfbabd82f87ae1d49c6fe58c28f1f5fc30807d1bb4c1080e0b187b1d7c4"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/skill-codex-wechat.png",
-        "bytes": 82038,
-        "sha256": "ddc1addf2eed0c8b1d514084e651a00f3943b6b09f64b7992103ae2e6fd71c6c"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/weapon-codex-web.png",
-        "bytes": 268761,
-        "sha256": "0c6ec1a1d14b9735a0cc2893f4d8fd02a453ed1fc7bd522f7e8ea87751f1d8db"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/weapon-codex-wechat.png",
-        "bytes": 85180,
-        "sha256": "1891f76eb38c38700a35c3326208b6daa9df84ad2d65191a6ba77e235669d854"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/weapon-mechanic-wechat.png",
-        "bytes": 79951,
-        "sha256": "28716a3bce5f702ae7bca1b5778558b0359e22ef3f0e5f159be5720202b4db3d"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/zhaoyun-combat-web.png",
-        "bytes": 1167799,
-        "sha256": "78f267d4cd459eb1a3a66f92ea2ed7c44365b39c90eb2906f37e1106c49e7e30"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/zhaoyun-start-wechat.png",
-        "bytes": 69782,
-        "sha256": "df4096c6ffbc690d4124904a3eb88c2efd3f2b290f4da7eab1cb1e82d76fa967"
-      },
-      {
-        "path": "art/reviews/chronicle-v4/zhouyu-fire-ring-fixture-wechat.png",
-        "bytes": 81183,
-        "sha256": "fb9df4f98e2ededfb7c9c65b728008f8cbede479ab77ef39a3c4cbbcf06494fb"
-      },
-      {
-        "path": "art/reviews/combat-v2.7/particle-contact-sheet.png",
-        "bytes": 410984,
-        "sha256": "4706fe2f2518fb356a4f7c0538066b081125d12bf6327ba4c513ba1664358e75"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/boat-fixture-wechat.jpg",
-        "bytes": 86792,
-        "sha256": "b4bd3c3faf9ac112efd7e2a72a8d78ea9762ea2fe4eeeea4c89c24ef65e8d961"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/fire-fixture-wechat.jpg",
-        "bytes": 86360,
-        "sha256": "2f5c14e469e6e3d8d20dca0f139fc96f5e8229fff2bf44fc66619221072e1d76"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/lightning-fixture-wechat.jpg",
-        "bytes": 88304,
-        "sha256": "1428ccc8f60e06b0937e858d0741b6cf7748059c4f0b61a3660e127f54b6eeed"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/manifest.json",
-        "bytes": 1325,
-        "sha256": "8f2674a26b938132aec3a0f98bfd0a5dc2cf7b10b0c786d4a309b68b9bf444bc"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/menu-compact-v5.0.1-wechat.jpg",
-        "bytes": 109718,
-        "sha256": "28045dadf3e87be8a4d8fe91cbf4405f64791fe0e0ee4343e3268a7b4016f1aa"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/menu-wechat.jpg",
-        "bytes": 111359,
-        "sha256": "1ef1ba75bf3edcc75a4931a9cfb2bc2275efe73edef87c1c289943164eaae870"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/meteor-fixture-wechat.jpg",
-        "bytes": 87937,
-        "sha256": "3988ef702348fecdf846835c9fb698b4101ea30abce5fc1877dd5c2c0fc7d032"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/selection-meteor-wechat.jpg",
-        "bytes": 79692,
-        "sha256": "34b87714ff7272896cffc23ba2b2c2390612e818f6e3fb2a849d750ed5c4e7a9"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/selection-page1-wechat.jpg",
-        "bytes": 77550,
-        "sha256": "9e61b35439b074eb9e693fbd29f81ea2bd468eca75a1839501b007d8b25976c3"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/selection-page2-wechat.jpg",
-        "bytes": 77897,
-        "sha256": "13d2f711c210599c1445fabe79a44720aab8bedeb1923f655a9e282613183e7b"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/shield-fixture-wechat.jpg",
-        "bytes": 87451,
-        "sha256": "a80c354e541cc52964d1f84c308f49017f3b80e97c719cc1456ccd021fd1d3e1"
-      },
-      {
-        "path": "art/reviews/common-skills-v5/water-fixture-wechat.jpg",
-        "bytes": 88515,
-        "sha256": "b5568fe781c652672efd03cd642a25a1e30f704fe21d0ade3c77686b553ff36f"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/guanyu-wechat.png",
-        "bytes": 98019,
-        "sha256": "b4f98997371d26152188fa7b986517193c8e4e7b15977accf51b175a6fdb9dbf"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/kongming-wechat.png",
-        "bytes": 98593,
-        "sha256": "14efa4b3785f321f7bf4766342eba8e2b569be1648ebeed1e8eebd2ba46918f4"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/liubei-wechat.png",
-        "bytes": 98869,
-        "sha256": "55d0f71b99a97f32f04fada3789d60250147fe591bd9ab9d1e89da3957d00820"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/zhangfei-wechat.png",
-        "bytes": 98833,
-        "sha256": "993861dee04416717fc4d74430ec6fb04cf793684582f13786840cdb8efa060e"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/zhaoyun-wechat.png",
-        "bytes": 100102,
-        "sha256": "41ecc2f063c4f03a7676874bffe9fd5574413a71947e10c2ee33147da4b2e7fd"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.2/kongming-wechat.jpg",
-        "bytes": 108797,
-        "sha256": "8c1f2e9b58c63178e301cc801741403b0dec9a5d8101d070b38b1db475729bdc"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.2/liubei-wechat.jpg",
-        "bytes": 109016,
-        "sha256": "0f31bcac8963f71e42de1f6f2db03bb1d471ceb5d63c1f36abf50672d82863d4"
-      },
-      {
-        "path": "art/reviews/hero-select-v4.2/zhangfei-first-review.jpg",
-        "bytes": 107606,
-        "sha256": "e658a50c948eb10a41fc43bfea5bbb4af0763a320d3d3b5fdefb2514a89a49a9"
+        "path": "art/reviews/golden-sweep-v5.1/peak-fixture-wechat.jpg",
+        "bytes": 86700,
+        "sha256": "3881aa0660204fdea8b9e4d7f795bde9bc6914f7b7a68ded4a5a2b5dbc800c9f"
       },
       {
         "path": "art/reviews/performance-v4.3/cached-art-fixture.jpg",
@@ -519,9 +274,199 @@
         "sha256": "a1660cfa021682a61c4c08c2f77abcb6ac57988018eef03e9e725a4db1a1cdad"
       },
       {
+        "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
+        "bytes": 137499,
+        "sha256": "0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195"
+      },
+      {
+        "path": "art/runtime-sources/png/102be57c9416ba83b73446b25741ec35173efa18bd7305a785923a3945375177.png",
+        "bytes": 2267953,
+        "sha256": "102be57c9416ba83b73446b25741ec35173efa18bd7305a785923a3945375177"
+      },
+      {
+        "path": "art/runtime-sources/png/17403b626edf189a03b3f922a9619da6431c9892889db39aab112fcc0527277e.png",
+        "bytes": 930104,
+        "sha256": "17403b626edf189a03b3f922a9619da6431c9892889db39aab112fcc0527277e"
+      },
+      {
+        "path": "art/runtime-sources/png/1c3a35942afa15e2ceee902f644a3a9bf8bfbd2c7cedfb77ac337ad6ee545a32.png",
+        "bytes": 1545039,
+        "sha256": "1c3a35942afa15e2ceee902f644a3a9bf8bfbd2c7cedfb77ac337ad6ee545a32"
+      },
+      {
+        "path": "art/runtime-sources/png/20a9a91759a94ab983036dea61bd687dbc216da2c17aa2cec659450593e9e3d9.png",
+        "bytes": 374978,
+        "sha256": "20a9a91759a94ab983036dea61bd687dbc216da2c17aa2cec659450593e9e3d9"
+      },
+      {
+        "path": "art/runtime-sources/png/2d55154fd06c3cafcda23b4db43d9ee9131db4c53e3fdd8d562831253dda8813.png",
+        "bytes": 244700,
+        "sha256": "2d55154fd06c3cafcda23b4db43d9ee9131db4c53e3fdd8d562831253dda8813"
+      },
+      {
+        "path": "art/runtime-sources/png/3c8cf3cd97901218627111298effc09521e28bf8a68f8a6de98ff480f311e79b.png",
+        "bytes": 1477662,
+        "sha256": "3c8cf3cd97901218627111298effc09521e28bf8a68f8a6de98ff480f311e79b"
+      },
+      {
+        "path": "art/runtime-sources/png/3ebbe0522639293895256b9f7a415f6fbaaeea94f9c9a191643ae67d2702bf38.png",
+        "bytes": 192173,
+        "sha256": "3ebbe0522639293895256b9f7a415f6fbaaeea94f9c9a191643ae67d2702bf38"
+      },
+      {
+        "path": "art/runtime-sources/png/3f284168900c87e5f5f47ae33e0276ff25688b01d459963a1771406fc41aeb29.png",
+        "bytes": 507960,
+        "sha256": "3f284168900c87e5f5f47ae33e0276ff25688b01d459963a1771406fc41aeb29"
+      },
+      {
+        "path": "art/runtime-sources/png/3f75e7e41ad867493b74cd4fb6e78263634455218f3f264f82867ad9628a1844.png",
+        "bytes": 1274896,
+        "sha256": "3f75e7e41ad867493b74cd4fb6e78263634455218f3f264f82867ad9628a1844"
+      },
+      {
+        "path": "art/runtime-sources/png/47656f4810a2d301c533f1a3d5f6e97b8d09cb09649b76545c60d5122de4c7fd.png",
+        "bytes": 927970,
+        "sha256": "47656f4810a2d301c533f1a3d5f6e97b8d09cb09649b76545c60d5122de4c7fd"
+      },
+      {
+        "path": "art/runtime-sources/png/4b7ebc25235b99a76bee3e277951b72b7b037ed7129d84e1f2a610368005d117.png",
+        "bytes": 54694,
+        "sha256": "4b7ebc25235b99a76bee3e277951b72b7b037ed7129d84e1f2a610368005d117"
+      },
+      {
+        "path": "art/runtime-sources/png/51d883141040f3beb3282337e45f1e7249a00fe8c2e31f21b56561ed09f62669.png",
+        "bytes": 512069,
+        "sha256": "51d883141040f3beb3282337e45f1e7249a00fe8c2e31f21b56561ed09f62669"
+      },
+      {
+        "path": "art/runtime-sources/png/52bfaef2f8c20379d60c718dff0bf6841d75502f590f6faebd722d20ae00a064.png",
+        "bytes": 189300,
+        "sha256": "52bfaef2f8c20379d60c718dff0bf6841d75502f590f6faebd722d20ae00a064"
+      },
+      {
+        "path": "art/runtime-sources/png/5552c9903f9ad822e37a1150160cfae304ba3d9f9a55e2deacb1c4c4d295ad50.png",
+        "bytes": 223315,
+        "sha256": "5552c9903f9ad822e37a1150160cfae304ba3d9f9a55e2deacb1c4c4d295ad50"
+      },
+      {
+        "path": "art/runtime-sources/png/568da57c8ac984b61df2725c49f38ebb6fa57a59513cedca763ba250062d7f73.png",
+        "bytes": 519214,
+        "sha256": "568da57c8ac984b61df2725c49f38ebb6fa57a59513cedca763ba250062d7f73"
+      },
+      {
+        "path": "art/runtime-sources/png/5d650e2c5f7290edbdb150cb5f07b88de32b5840900d6d3b19e70ef4278ba529.png",
+        "bytes": 149952,
+        "sha256": "5d650e2c5f7290edbdb150cb5f07b88de32b5840900d6d3b19e70ef4278ba529"
+      },
+      {
+        "path": "art/runtime-sources/png/668ea01f4053f859124be3e2eb70ac5a4589b678ab0e901b413ebcebf06e62cd.png",
+        "bytes": 368036,
+        "sha256": "668ea01f4053f859124be3e2eb70ac5a4589b678ab0e901b413ebcebf06e62cd"
+      },
+      {
+        "path": "art/runtime-sources/png/70faca252d9d5b322308a792117f2e7dfad68a02aca14be018fb4c3bcea905f5.png",
+        "bytes": 161409,
+        "sha256": "70faca252d9d5b322308a792117f2e7dfad68a02aca14be018fb4c3bcea905f5"
+      },
+      {
+        "path": "art/runtime-sources/png/7b62a1597e699cb4d9a4ae4c858580d9324de2abb8820fbbf2adf4b1d7c07b67.png",
+        "bytes": 2207782,
+        "sha256": "7b62a1597e699cb4d9a4ae4c858580d9324de2abb8820fbbf2adf4b1d7c07b67"
+      },
+      {
+        "path": "art/runtime-sources/png/8b73a1020075f299f3fadac0f9671323c971fff345f344953888b7cf9bc523d6.png",
+        "bytes": 70509,
+        "sha256": "8b73a1020075f299f3fadac0f9671323c971fff345f344953888b7cf9bc523d6"
+      },
+      {
+        "path": "art/runtime-sources/png/949e69360f75b0ada705cf3ac717305f0904bc418a6d6a5445608720cc6a139f.png",
+        "bytes": 909528,
+        "sha256": "949e69360f75b0ada705cf3ac717305f0904bc418a6d6a5445608720cc6a139f"
+      },
+      {
+        "path": "art/runtime-sources/png/a6c50bd87ee1cd3df928bd75a0bfc07b09e50a00222aa843b94ace88920aa66a.png",
+        "bytes": 1766104,
+        "sha256": "a6c50bd87ee1cd3df928bd75a0bfc07b09e50a00222aa843b94ace88920aa66a"
+      },
+      {
+        "path": "art/runtime-sources/png/a9bc5e507123bfafa76c1033aa7b5e5712769f533946b355c2556ddb62f9523a.png",
+        "bytes": 967848,
+        "sha256": "a9bc5e507123bfafa76c1033aa7b5e5712769f533946b355c2556ddb62f9523a"
+      },
+      {
+        "path": "art/runtime-sources/png/b616e6e7695ac459c693587f659b21edd19ce89f08054b26af1a8dd38906f7c3.png",
+        "bytes": 930742,
+        "sha256": "b616e6e7695ac459c693587f659b21edd19ce89f08054b26af1a8dd38906f7c3"
+      },
+      {
+        "path": "art/runtime-sources/png/bb20adaf89419a41c399f71b4c4fbc917084e6cb63de4211eb8c6357f727da76.png",
+        "bytes": 625714,
+        "sha256": "bb20adaf89419a41c399f71b4c4fbc917084e6cb63de4211eb8c6357f727da76"
+      },
+      {
+        "path": "art/runtime-sources/png/c0b9041813340cdc68bbffa398435f70d20dd3140110387f64829d0f1cd388cf.png",
+        "bytes": 533514,
+        "sha256": "c0b9041813340cdc68bbffa398435f70d20dd3140110387f64829d0f1cd388cf"
+      },
+      {
+        "path": "art/runtime-sources/png/c4670ae8458a6412a5570cdafbf17e817b6cd9e114d217830a0c0cb2935d5143.png",
+        "bytes": 173184,
+        "sha256": "c4670ae8458a6412a5570cdafbf17e817b6cd9e114d217830a0c0cb2935d5143"
+      },
+      {
+        "path": "art/runtime-sources/png/ced5daa61b1d24bacc50ad8474b28c84e73c357d472d1efd02b6f27c032cadcf.png",
+        "bytes": 542992,
+        "sha256": "ced5daa61b1d24bacc50ad8474b28c84e73c357d472d1efd02b6f27c032cadcf"
+      },
+      {
+        "path": "art/runtime-sources/png/db32ce1a119d0e27825bc5f9231c105fb5bc01adbf278fc9848151e017f4ffbb.png",
+        "bytes": 948417,
+        "sha256": "db32ce1a119d0e27825bc5f9231c105fb5bc01adbf278fc9848151e017f4ffbb"
+      },
+      {
+        "path": "art/runtime-sources/png/de0b847af749c660582f99d6ca496d1a975e35585468e85567daeb40c84b9249.png",
+        "bytes": 135592,
+        "sha256": "de0b847af749c660582f99d6ca496d1a975e35585468e85567daeb40c84b9249"
+      },
+      {
+        "path": "art/runtime-sources/png/e7867054c4d2e94a5ac52c0ad9aca92132ae0dd1abd893d5d04f0e2ba7f65a96.png",
+        "bytes": 1619972,
+        "sha256": "e7867054c4d2e94a5ac52c0ad9aca92132ae0dd1abd893d5d04f0e2ba7f65a96"
+      },
+      {
+        "path": "art/runtime-sources/png/e9031748c089f1a4a1e23c4c185e53611ebcc405d2b74110bcec77674ef1343d.png",
+        "bytes": 1026170,
+        "sha256": "e9031748c089f1a4a1e23c4c185e53611ebcc405d2b74110bcec77674ef1343d"
+      },
+      {
+        "path": "art/runtime-sources/png/efe69e92c2627fc37d2373c706f65eb0044e9ef580c5fdfc29e699f90ee66c4c.png",
+        "bytes": 506638,
+        "sha256": "efe69e92c2627fc37d2373c706f65eb0044e9ef580c5fdfc29e699f90ee66c4c"
+      },
+      {
+        "path": "art/runtime-sources/png/f60a340fff8caa90d5447b68b72aec3747278654cbfd9ccdf8df3b3a3286153d.png",
+        "bytes": 2113866,
+        "sha256": "f60a340fff8caa90d5447b68b72aec3747278654cbfd9ccdf8df3b3a3286153d"
+      },
+      {
+        "path": "art/runtime-sources/png/f6633ef22e5de09133c54b7fd5ae7cea0b68222917b8d2082ef0232404af71fd.png",
+        "bytes": 1068744,
+        "sha256": "f6633ef22e5de09133c54b7fd5ae7cea0b68222917b8d2082ef0232404af71fd"
+      },
+      {
+        "path": "art/runtime-sources/png/f71d4c25e4a93b11dce0b4428e0d2d42790306402af8db51adfe999adfaef2a7.png",
+        "bytes": 520533,
+        "sha256": "f71d4c25e4a93b11dce0b4428e0d2d42790306402af8db51adfe999adfaef2a7"
+      },
+      {
+        "path": "art/runtime-sources/png/f76d1377b4a9c08a8819c109bad23daf71c7b732c66b5c9202e51f9ef93f2232.png",
+        "bytes": 144177,
+        "sha256": "f76d1377b4a9c08a8819c109bad23daf71c7b732c66b5c9202e51f9ef93f2232"
+      },
+      {
         "path": "art/runtime-sources/png/manifest.json",
-        "bytes": 13853,
-        "sha256": "8575553c03ee38ab3369ed7bc921105047873e1b2a39465cbf3785b664446088"
+        "bytes": 13499,
+        "sha256": "681108b77b67175e2c547395163977fca0b61e3bae05d251f395df2c14017e3c"
       },
       {
         "path": "art/runtime-v4/manifest.json",
@@ -530,8 +475,8 @@
       },
       {
         "path": "art/runtime-v4/prompts.json",
-        "bytes": 14828,
-        "sha256": "87477826c3052c4c03bebf822700e390eea2c687168657680da8d9e9d2b85581"
+        "bytes": 15848,
+        "sha256": "2307eb1cd2ad517dc35189723837e6da5f615821755c46e32f164519c62d0521"
       },
       {
         "path": "art/runtime-v4/sources/boss-mounts.png",
@@ -1619,514 +1564,109 @@
         "sha256": "9d333ea1e1aa35188eeca00dd11208deeaed794a566234c3e6b92a3a9260c028"
       },
       {
-        "path": "docs/balance-smoke-before-weapons-v2.json",
-        "bytes": 1508,
-        "sha256": "b9b3f4552a5f38059c79ebb46290d232a1af1e4edcb7791f1f96109ce62c8f85"
-      },
-      {
-        "path": "docs/balance-smoke-v1.1.json",
-        "bytes": 1557,
-        "sha256": "1868a4f70baedb953cade4d596bf9c0c52cbdf7af164be788d7b218b9e4d9e8f"
-      },
-      {
-        "path": "docs/balance-smoke-v1.2.json",
-        "bytes": 1590,
-        "sha256": "c418a245c81720309252735f1f484696185c2fcb3398787942d821c6d96efdf3"
-      },
-      {
-        "path": "docs/balance-smoke.json",
-        "bytes": 1455,
-        "sha256": "bd71cc3795faf08c86e0216e08dc67e68ed07813112573184416a760210b11da"
-      },
-      {
-        "path": "docs/balance-v2.4-model.json",
-        "bytes": 5662,
-        "sha256": "b8ebed250e0899c92d3614c00a618ac4fd9cd4bda0384cb7b27c2525a1296ffd"
-      },
-      {
-        "path": "docs/balance-v3.1-model.json",
-        "bytes": 34408,
-        "sha256": "6352944578a1a25c990f43cb101f17e0a14bed9e731554744123fb95d7a7006a"
-      },
-      {
-        "path": "docs/balance-v3.3-model.json",
-        "bytes": 34385,
-        "sha256": "b521f8dc04e58e84665813e16a27bdba893e82cb8c19b9b5b933f91f261bdc17"
-      },
-      {
         "path": "docs/battle-music.md",
-        "bytes": 2705,
-        "sha256": "6827e11bcad8b86dc480eb688f1f2ec6cfbfcb1b521e9096e4f48ed0e2243b22"
+        "bytes": 2628,
+        "sha256": "1517c3058fb364996c6cb5e87525f9b4f87fe81bc52a2ea343dba11cdd1cd45d"
       },
       {
-        "path": "docs/chronicle-balance-v4.json",
+        "path": "docs/chronicle-balance.json",
         "bytes": 3761,
         "sha256": "c6a2a75947bdc98b94a4bccb6ae7667c5643f825a55c519e89c61a7e0aa6e466"
       },
       {
-        "path": "docs/common-skills-v5-validation.json",
-        "bytes": 16866,
-        "sha256": "d9d6a2d6104ce63efc235050f679988b18572c85f675883a58a46cd6c149e406"
+        "path": "docs/common-skills.md",
+        "bytes": 5112,
+        "sha256": "a494d47f3bcc4ddd456a3ba0845482a4d7555c0046c6903e07c570340d40da0b"
       },
       {
-        "path": "docs/common-skills-v5.md",
-        "bytes": 5069,
-        "sha256": "4e16ce5c3d9246d5302a4cf99eed13eccfa112304cfc9d3425a2ed6a5855a830"
+        "path": "docs/design/01-campaign-and-bosses.md",
+        "bytes": 18869,
+        "sha256": "d689c33a10c70fa951c0ff4ee6bdeade198ea0ac30721f21ecb7a2b1fcb0b3dd"
       },
       {
-        "path": "docs/compact-skill-v5.0.1.json",
-        "bytes": 2996,
-        "sha256": "fd6caa2af300539bfef179daa696d87f705e7f1f0ddd5ebc174407ad9c313ad5"
+        "path": "docs/design/02-enemy-codex.md",
+        "bytes": 13582,
+        "sha256": "ea1b23296aaa514bd941a28fa6dd98b92825c380fa2e7d1945308fa03d0d6ab1"
       },
       {
-        "path": "docs/design-review/feishu-survival-v2-create.json",
-        "bytes": 262,
-        "sha256": "cfa43016a64c8d4d05b0b56e1e96aecb63449de59a891835376cca613dc952ff"
+        "path": "docs/design/03-weapon-codex.md",
+        "bytes": 20313,
+        "sha256": "c0b7f3a4732d3d27c7299b467c793a328ecc26f9c6bc16a59edb899c2b22fc0c"
       },
       {
-        "path": "docs/design-review/feishu-survival-v2-images.json",
-        "bytes": 731,
-        "sha256": "e49d5ecd3ac6f066c10ae5bb6759a6131159097ac9cc65ed25a37642e318e843"
+        "path": "docs/design/04-heroes-and-skills.md",
+        "bytes": 2450,
+        "sha256": "d77de56ffdc21fab6b98a7fa423a513ce4e4c0ba804e16a00bdab0ecc2fa80db"
       },
       {
-        "path": "docs/design-review/feishu-survival-v2-verified.json",
-        "bytes": 44212,
-        "sha256": "70b3a57b5b87a93eb00b9d8792bb749bb11d20d6265c92916b8e24b4bf5d618a"
+        "path": "docs/design/05-ui-production-and-balance.md",
+        "bytes": 14956,
+        "sha256": "7c856ecf0e12d8b154dfa6079c846414b4698b2b8dd0cdcb354daa1899ebdef1"
       },
       {
-        "path": "docs/design-review/feishu-v2-1-images.json",
-        "bytes": 731,
-        "sha256": "7e2b954caf4f887f5c1937b4780f5b97f0fc4cf5618bc94a0dcd5d0b9eb707b2"
+        "path": "docs/design/06-sources-and-decisions.md",
+        "bytes": 6809,
+        "sha256": "c9c6953c13ab8e8ff974922b05e218054dc8d497b7f7ee8e916f4fd7213b2fb1"
       },
       {
-        "path": "docs/design-review/feishu-v2-1-update-results.json",
-        "bytes": 3145,
-        "sha256": "e9c2eca8c8fb6981a142e0933a55d7c99a6a425e4d00ad169487cfba2786dc0c"
+        "path": "docs/design/07-implementation-and-validation.md",
+        "bytes": 2829,
+        "sha256": "191aecf60dccbbaa445140cf28db4fe5af2f8019dd05df220e2bf8aab151fa11"
       },
       {
-        "path": "docs/design-review/feishu-v2-1-verified.json",
-        "bytes": 72302,
-        "sha256": "5720340909b3cd6bf40f5be396888b77a01c802c9a50be24072db46f3973f13c"
-      },
-      {
-        "path": "docs/design-review/survival-v2-1-proposal.md",
-        "bytes": 35629,
-        "sha256": "aa74c0d94ccbfd4dd192a5eef30fba9ee4e35ec4869db3e4ec633b6071fc938c"
-      },
-      {
-        "path": "docs/design-review/survival-v2-proposal.md",
-        "bytes": 24470,
-        "sha256": "649c53aaec4e4caf39a523a7357eddb358ce47e7f7a9ea816f8282c06045b691"
-      },
-      {
-        "path": "docs/design-v1.1-sections.md",
-        "bytes": 17483,
-        "sha256": "2aee94457ef37d1b68e55dc06b9251a35499f3c78a6b1818fac6078c3e04e6b1"
-      },
-      {
-        "path": "docs/design-v4/01-campaign-and-bosses.md",
-        "bytes": 18863,
-        "sha256": "76a8be93d1e968859a46f1b6e93f2aa146fc835a8aaa98a687b5a12f7506cb32"
-      },
-      {
-        "path": "docs/design-v4/02-enemy-codex.md",
-        "bytes": 13653,
-        "sha256": "e6b7bbff1728edaf5231c19bbe2dbe27fa150b6d188fb13a36c810d995eb40d1"
-      },
-      {
-        "path": "docs/design-v4/03-weapon-codex.md",
-        "bytes": 20333,
-        "sha256": "5c28d1a1256ac0faa812496ab674f6b76090954dc8fe0e700ead6c83cd9053cb"
-      },
-      {
-        "path": "docs/design-v4/04-heroes-and-skills.md",
-        "bytes": 11652,
-        "sha256": "6c022c988dc7a7b80c56363b82bf19f54a6d0e699ba2e63167bf065e1bde47e2"
-      },
-      {
-        "path": "docs/design-v4/05-ui-production-and-balance.md",
-        "bytes": 15587,
-        "sha256": "6420d2f4e7e77e418225cce83fbe776fbc8e7e81d0044b5f5824d60d8e697ad5"
-      },
-      {
-        "path": "docs/design-v4/06-sources-and-decisions.md",
-        "bytes": 6959,
-        "sha256": "4480c627310b52eb52ae5696bbaea187fca5eb21e9f554514e41966e3927f073"
-      },
-      {
-        "path": "docs/design-v4/07-implementation-and-validation.md",
-        "bytes": 13320,
-        "sha256": "c1bcfcd65ded1b5f4a67232c77fdeab7dfbb99bfb449ecda1c34688fbb3de91e"
-      },
-      {
-        "path": "docs/design-v4/concept-manifest.json",
-        "bytes": 1347,
-        "sha256": "9d74aeb0c63ddacdea6d67c8a2dc4704655515a21393bf6061ceb2060a8f630b"
-      },
-      {
-        "path": "docs/design-v4/README.md",
-        "bytes": 5239,
-        "sha256": "310779499d42aa1f33b2452f5e22b4c40d6e9df807d22d75e5aa9f4aa0d0060d"
-      },
-      {
-        "path": "docs/feishu-create-result.json",
-        "bytes": 262,
-        "sha256": "b4ce7eb5c76c40a93f7c98eb063bf04db010737293468441f2849aa8db96e7aa"
-      },
-      {
-        "path": "docs/feishu-images-result.json",
-        "bytes": 2801,
-        "sha256": "321a00ec280611c5d8503e207a6673025b08c5e94f9bf5eca9a38fdddbe25cac"
-      },
-      {
-        "path": "docs/feishu-implementation-result.json",
-        "bytes": 250,
-        "sha256": "b920b47e5e8477c53f4538a8ff8612feb8f5d1ba774e2589b56a6c6268f0181d"
-      },
-      {
-        "path": "docs/feishu-preview-result.json",
-        "bytes": 264,
-        "sha256": "402a88699d7b21a04971399d4183b2c2e9f6368d23238bd5565c1bf1effbbdfb"
-      },
-      {
-        "path": "docs/feishu-v1.1-result.json",
-        "bytes": 2196,
-        "sha256": "b0cc579cc672fba1f065b4500cdba710d685e31ef9e76e724a4bb938ab66c781"
-      },
-      {
-        "path": "docs/feishu-v1.1-verified.json",
-        "bytes": 41585,
-        "sha256": "bf7d80591d2127fca7af88f0cde6d608296ecec4508c80f55e862691616383fb"
-      },
-      {
-        "path": "docs/feishu-v1.2-result.json",
-        "bytes": 1724,
-        "sha256": "af585c5301ce20930be7ef5d10ce47b200a80d49c7c3c29567e077dbc8aea183"
-      },
-      {
-        "path": "docs/feishu-v1.2-verified.json",
-        "bytes": 44456,
-        "sha256": "d5a587deb78dec1e3cc395ad9409d776adfc1f2e840454f1dbd4b5d64ed16fdd"
-      },
-      {
-        "path": "docs/feishu-v1.3-verified.json",
-        "bytes": 47509,
-        "sha256": "394917e2c03c0092bbfd59972e314e850ddd255c15d1ef94e80b4a1737234995"
-      },
-      {
-        "path": "docs/feishu-verified.json",
-        "bytes": 44519,
-        "sha256": "3c22bc557a47e7e5f2fc74a06f5ebf8789eb6a8882fdbcef726e7b4f938618c1"
-      },
-      {
-        "path": "docs/feishu-weapons-v2-header-update.json",
-        "bytes": 264,
-        "sha256": "8ae47951d0dbf7ae8e8cf2c702e474a51af72de654d8f6cd5852c32402bfda14"
-      },
-      {
-        "path": "docs/feishu-weapons-v2-update.json",
-        "bytes": 250,
-        "sha256": "163bda7cd90302cc747dba58f24275c5bb7c646c5c74786af0dd2a5156c7fc54"
-      },
-      {
-        "path": "docs/feishu-weapons-v2-verification-update.json",
-        "bytes": 250,
-        "sha256": "ce04d9f3baf4c39b2792ebf65d2478e5831c4afbf03e4045fd8fb8f142d584e0"
-      },
-      {
-        "path": "docs/feishu-weapons-v2-verified.json",
-        "bytes": 10207,
-        "sha256": "14e4d86d80f84c0056aee26380583c0a973a7965bdc34e09e454605d388a34b3"
-      },
-      {
-        "path": "docs/game-design-v1-initial.md",
-        "bytes": 17372,
-        "sha256": "521f0eb5f17dba70c711a677ae27bf992a365db950ff123ebfd01d6b2d1f1bd4"
-      },
-      {
-        "path": "docs/game-design-v1.md",
-        "bytes": 27333,
-        "sha256": "06d245864727d935cce8e3a52ffdcf5ec293f8184cc613cc46eb34e86fbab6b0"
+        "path": "docs/design/README.md",
+        "bytes": 4427,
+        "sha256": "9166f8039c17fbc668f7c8bf2c848cfba871381772d4368a3da137f4a9a3cd19"
       },
       {
         "path": "docs/golden-sweep-v5.1-validation.json",
-        "bytes": 7759,
-        "sha256": "f5fa3b6420d2ea28341fb8b1edf8d14bef001a76644578173d288b01df468715"
+        "bytes": 7319,
+        "sha256": "e87db3d8431d945dead8af984d7185d31b1eacc79c76746e67dd00d5cc30ee38"
       },
       {
         "path": "docs/golden-sweep-v5.1.md",
-        "bytes": 2604,
-        "sha256": "6f20d49357b6d65b20c42308623088f58f02768865d857be4836a5c861ca5950"
+        "bytes": 2534,
+        "sha256": "cc601b8e655d8cf51075d01c69b3e955b55b4f699c4880a33ec3a4a0701b6e68"
       },
       {
-        "path": "docs/hero-select-v4.2-validation.json",
-        "bytes": 3130,
-        "sha256": "3a8d27a9e5b354cf0084b6ddef3fb15b739bda088ce29c9bdb885aafc30d2a7c"
-      },
-      {
-        "path": "docs/hero-select-v4.2.md",
-        "bytes": 1505,
-        "sha256": "4247a9de2b26c494c7aeb12ea01da6413126a8a89a7d38a66fa694e4c8e171db"
-      },
-      {
-        "path": "docs/implementation-orchard-v2.1.md",
-        "bytes": 3500,
-        "sha256": "b6fc7d7cd95ed1b9aeb6bbc4e08ede664372dcc436f6390cdd15e7bc5f0e99a8"
-      },
-      {
-        "path": "docs/implementation-orchard-v2.2.md",
-        "bytes": 1472,
-        "sha256": "602efbc6f31794f96617fd545bdce5c25eb3e54699638386cd8ba97d097295a2"
-      },
-      {
-        "path": "docs/implementation-orchard-v2.3.md",
-        "bytes": 3034,
-        "sha256": "0e2e7f877ffdc97e1fd31f0bc42189083671b77eacb8a4fd630cea57dcfa5d22"
-      },
-      {
-        "path": "docs/implementation-orchard-v2.4.md",
-        "bytes": 5575,
-        "sha256": "e8e9b2106a4da26bf6692bbcf61a885d6913f3e1fc59afe09ae0be68a948ee96"
-      },
-      {
-        "path": "docs/implementation-orchard-v2.5.md",
-        "bytes": 2776,
-        "sha256": "0e543fd7b89676ef86167b0100039ca1a1bb6bf07386dcbc106b25f759c6a067"
-      },
-      {
-        "path": "docs/implementation-orchard-v2.6.md",
-        "bytes": 1573,
-        "sha256": "1d9bd358d1d27d7e0197596a44ab1a9c616282f4ece8a7b92da18cff85c2e093"
-      },
-      {
-        "path": "docs/implementation-report-v1.1.md",
-        "bytes": 1664,
-        "sha256": "f3cb67bbd1dc840f7ca53e4f41068b6b185d546234576ebff0ec71186362f284"
-      },
-      {
-        "path": "docs/implementation-report-v1.md",
-        "bytes": 3724,
-        "sha256": "eaf768e7cbc40459eb6456bfaf5472c92efae563e85465dbf86c5f5d1bd37f66"
-      },
-      {
-        "path": "docs/native-validation-v4.json",
-        "bytes": 3787,
-        "sha256": "3dc5439ab654d13d48c354a7339313d9fd44f6806a4827e7945a1e0a8718f62d"
-      },
-      {
-        "path": "docs/performance-v3.4.json",
-        "bytes": 2852,
-        "sha256": "de913f5375d9a1ccbfaa766aba02b16a0a7ea812abb6c91b03ecde04e66ad270"
-      },
-      {
-        "path": "docs/performance-v4.3.json",
-        "bytes": 14221,
-        "sha256": "a7a70ebd8f6a6d031412e8c2202d7a25c37111d8ab01da9d5fa2ffe7f8d122d5"
-      },
-      {
-        "path": "docs/performance-v4.json",
+        "path": "docs/performance-node.json",
         "bytes": 1337,
-        "sha256": "34eb85c8e57ebb2c5a53e7481fbb56402bd6e90dcf76fb7d24ba4b5ef44d8945"
+        "sha256": "3d7a64fcae04db98d14e18255586fe9c65cf71b9a1c6d0712f5edc30f1df34ea"
       },
       {
-        "path": "docs/preview-v3.3.2.json",
-        "bytes": 662,
-        "sha256": "15d8e92109bb2e4616a9d931394797ff8d0dacb1f26e13a7fe855d3ac2b80f52"
+        "path": "docs/performance-wechat-baseline.json",
+        "bytes": 12697,
+        "sha256": "ff015938f6fd1235d9a804b30d414051d759719e4f60c9c377e8b6dc120af80a"
       },
       {
-        "path": "docs/preview-v4.json",
-        "bytes": 2732,
-        "sha256": "04ce7443cde697a7706af9a866423c20414c63b603643b98fa5d32f873e1f6c3"
+        "path": "docs/resources.md",
+        "bytes": 1817,
+        "sha256": "8bb0a1d491d3c8118bb767334138f7da24c08432cdd5697be8a75f1410cac6c0"
       },
       {
-        "path": "docs/skill-review-v5.0.1/feishu-document.json",
-        "bytes": 255,
-        "sha256": "2dcd0ccd284a33433f640587bfb5309f2f2e5b2a9007a714bd9e43ea32b9eb25"
+        "path": "docs/skill-review/feishu-document.json",
+        "bytes": 430,
+        "sha256": "1bcc3e9acbca68b7dd69d56a6f7f807386c11957515893448077dd71346f6887"
       },
       {
-        "path": "docs/skill-review-v5.0.1/G01.png",
-        "bytes": 234057,
-        "sha256": "5ef5986a4390bcc648011dd88952fdcdf90c1fb0c3084756a266ba7d0e09a8b9"
+        "path": "docs/skill-review/README.md",
+        "bytes": 8983,
+        "sha256": "ef538b6b972d875dd14f3b96a445c093dd595e5b508601033fec259c03cb6ae5"
       },
       {
-        "path": "docs/skill-review-v5.0.1/G02.png",
-        "bytes": 233756,
-        "sha256": "b11fa13f0f6adc6c38a764fa27e3fe6a6091d83aff7ac4454b4cbf626eb56a98"
+        "path": "docs/skill-review/skills.json",
+        "bytes": 20150,
+        "sha256": "464a80eb3877c127792c6a5b597d5404a056d92980e2e35bde496681c111c9d7"
       },
       {
-        "path": "docs/skill-review-v5.0.1/G03.png",
-        "bytes": 241419,
-        "sha256": "51d4781d2c9c61623eaf5ea1dc69e203d176b0de9991913d4ca35f8796287953"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G04.png",
-        "bytes": 241752,
-        "sha256": "289b102bf6ebfb83c2131b4b26049262d0f03045395021f974b70ee5abd8c4ec"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G05.png",
-        "bytes": 234984,
-        "sha256": "c7e4f05ea55f072e688882a6e501cbef0f62bb22e53493ec017d878b276725ac"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G06.png",
-        "bytes": 235129,
-        "sha256": "88edb806e296f9bc9a7f5652528de9200b1c07cdbef90d53d8ba3ca06e8cc70e"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G07.png",
-        "bytes": 236193,
-        "sha256": "32ac947722b799cbfe17a6dbfc553ebdc9d630aefcee62dd4e3deb69dcf25e14"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G08.png",
-        "bytes": 234856,
-        "sha256": "9112bbf0a923835c6ff92204a1c079cd37a4dbd41cdfec10bff49aec9d5a7bbc"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G09.png",
-        "bytes": 241584,
-        "sha256": "ab88ed35ed70e1bf57dbdfb6e797678b833b8c3ca256acc682dc293899a31ea4"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G10.png",
-        "bytes": 241819,
-        "sha256": "b452685d55dc3e473efc64500b5b45c38de1455b4fcb9626e956d9d9f018dc64"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G11.png",
-        "bytes": 239286,
-        "sha256": "0ea6244daf80a5486f2c6dedc2bf0786b3b2475a74a2516e4afae49d420f1359"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G12.png",
-        "bytes": 247606,
-        "sha256": "dd1a650649f25d7f3139abf15e5cca78d1f629fba6907807c820a4d47efd1424"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G13.png",
-        "bytes": 241797,
-        "sha256": "2230063bd12021aa3c3335e07b6490f3b9a21e97b0fff346e8e8c9bcb287774c"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G14.png",
-        "bytes": 237094,
-        "sha256": "be27078a7d5e1313289beb6171f4f063e63acd10d10d5e605ecd80abf416c272"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G15.png",
-        "bytes": 236006,
-        "sha256": "de58299f793aa9684ce391c975a10c97e5cfdfbd817fa2e1166163805ef4ba45"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G16.png",
-        "bytes": 238769,
-        "sha256": "d9dfe95cd7694b2cf687f9b9ff4c4959f047e611232204e5ccfa036c6d5c2c45"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G17.png",
-        "bytes": 234750,
-        "sha256": "aa0ed55180f63131f651964a0091e280d450b664d672b9eddc8e86ade6cf64b8"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G18.png",
-        "bytes": 241515,
-        "sha256": "77fce55727bd76a84ce7fa0ed6afdc549d309eb82805079ec84e89b41bdf715d"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G19.png",
-        "bytes": 252558,
-        "sha256": "023c8eff615951bdfbed3839bfc62580b0dc599eadbca71fbc275744ee071fb5"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G20.png",
-        "bytes": 247103,
-        "sha256": "3aebd6be5890628e9cbbea3fc9276dab24d86520a319249e86d1ed467c1a9357"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G21.png",
-        "bytes": 235502,
-        "sha256": "d8b3344ca0bc5e0141293a15877da16b09b9d041c135872215c9e961c1feb8d8"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G22.png",
-        "bytes": 245889,
-        "sha256": "415b603ca637d86fc311d9656ca5af337ac6934fb5c472c487271ed6f99555c2"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G23.png",
-        "bytes": 238693,
-        "sha256": "7fadf778dd7a9f5d848e2cef4933c66c6d193d4fb1e0de30d6c1052c22eec7dc"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G24.png",
-        "bytes": 241077,
-        "sha256": "f74f39e319f4a01222b21e434455cc93762634baccc836ff3c1dfe114ad89f4e"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/README.md",
-        "bytes": 8919,
-        "sha256": "dc4df05a5991be198746d151a4befe76617f046fca3f3bbe456f60aae66e5a42"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/skills.json",
-        "bytes": 20128,
-        "sha256": "3a487f520044b6fac9991a432abae9c5aee832aac6e20260bab5481680dcc6d0"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-1.png",
-        "bytes": 599381,
-        "sha256": "1e5e4d4001eb212c3b428b23b90aa3377c81dc0524a784d5cb173931b61cbb82"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-2.png",
-        "bytes": 601963,
-        "sha256": "477426a1d91954593bfc51d3d00cb75a074ee4aeb18f0478810dbad0951a6b17"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-3.png",
-        "bytes": 610634,
-        "sha256": "f9b95ec1e78881844c60c3262e945530a660b097b34fde28ff5d1fffd7d92b2a"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-4.png",
-        "bytes": 661204,
-        "sha256": "7980223e29153fd829110c4a1d71b0a2255533c212744749a010f8444a31fee0"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-5.png",
-        "bytes": 613332,
-        "sha256": "f431ef58535fc3b1ab1941a5cdc7620cb5c103cf2e71190e164ef35b28a2f4cd"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-6.png",
-        "bytes": 666579,
-        "sha256": "d47f03387a7efba28c27d3663d1f7f141d989a41f88aa289915a59c627a02af3"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/技能总览.png",
-        "bytes": 2357684,
-        "sha256": "329ace9e4e7b9c728d1fae26156961a3847f58b906e46a319ffe55dbf0154c8e"
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/桃园乱斗当前技能评审册.docx",
-        "bytes": 3648788,
-        "sha256": "7bc15070ae59a0c26dbfa52552db26b39e4ff9c2591047443806eada944cda40"
-      },
-      {
-        "path": "docs/survival-mode.md",
-        "bytes": 4508,
-        "sha256": "33a84fd7be34dc922866de7cf9f369b32e2ef62b005a1a20fc4f7ba6ab87b894"
+        "path": "docs/skill-review/技能总览.png",
+        "bytes": 2374122,
+        "sha256": "18cb2886a2cf0447f7374d05f9abab52e89a124eb6f8821354f648c8480dfbed"
       },
       {
         "path": "docs/weapon-sounds.md",
-        "bytes": 2676,
-        "sha256": "71f63f0a4966b7de68e61ad8e2f69249c1cbbb9953ac0e6701e55cda7e14dd6e"
-      },
-      {
-        "path": "docs/weapon-system-v2.md",
-        "bytes": 9873,
-        "sha256": "62d13100e0d2899ec2293619430c1212e917d9a48d5098f92ab9e4aa601a86e9"
+        "bytes": 2841,
+        "sha256": "99e204246e14143ecf8c34ac7d2b3e7c5a063af1d8b4f500bbdd85e4fa8393f2"
       },
       {
         "path": "package-lock.json",
@@ -2145,8 +1685,8 @@
       },
       {
         "path": "README.md",
-        "bytes": 5903,
-        "sha256": "89ae8cdd1da40f268e2cf91db4d51a4195b2e2dc8aa1facec65ebfd78a84b77e"
+        "bytes": 5965,
+        "sha256": "60139004793c03ca27251d1a82bc083d8d7258b9fba4dd80fefa38f772162c14"
       },
       {
         "path": "scripts/build-wechat.cjs",
@@ -2175,8 +1715,8 @@
       },
       {
         "path": "scripts/compose-weapon-sfx.py",
-        "bytes": 5418,
-        "sha256": "bc94d0db7f97bc1ea989c9c36d45a7eed22fa428a7f3b7705080898df3c0cfa7"
+        "bytes": 5355,
+        "sha256": "c2c59103483cbf497764751a2e029d699356f2156e5120034cdbd71a6abdb875"
       },
       {
         "path": "scripts/fixtures/wechat-cached-art-review.js",
@@ -2199,11 +1739,6 @@
         "sha256": "d3f34f2ba2ace593f2025b9b1ee8f5ab22d6f8807c92ebdfa1c42633483ce50f"
       },
       {
-        "path": "scripts/generate-sfx.py",
-        "bytes": 1124,
-        "sha256": "16a73dba501e542e5f07f2af0b837bc4876826c9bbb08229e33eb6d9ec1eba74"
-      },
-      {
         "path": "scripts/optimize-textures.cjs",
         "bytes": 3761,
         "sha256": "84513a35f413d55a8278412c89ba6c76a162ebe6e65f050756efd12015bc28c9"
@@ -2214,39 +1749,19 @@
         "sha256": "cbf18ec4e645468f8d8982122db4477747bfd9fb11f8756113a300f9a738db11"
       },
       {
-        "path": "scripts/prepare-camp-review.cjs",
-        "bytes": 1273,
-        "sha256": "41a572bf97bde3458a43bb12cc18a51a5e73c916f4c54d80d3cb91fc15721c7f"
-      },
-      {
-        "path": "scripts/prepare-campaign-art.cjs",
-        "bytes": 2396,
-        "sha256": "e501dbb3b9eca5c973b68bc1f7a27649299516bcfcb6ca33f14be3ab62f81112"
-      },
-      {
-        "path": "scripts/prepare-enemy-art.cjs",
-        "bytes": 1779,
-        "sha256": "ae292b1b60dce487b6ff5686effa6f3f516598f077d152e36ac58f6140a37da2"
-      },
-      {
         "path": "scripts/profile-battle.cjs",
         "bytes": 2636,
         "sha256": "5c82d5f6513edad32d2b0f2a6096e9bd401636f0298ced88f780a8ac88ba24d3"
       },
       {
-        "path": "scripts/report-balance.cjs",
-        "bytes": 3018,
-        "sha256": "8f1fd21b85aea3e48c6e4f3cb148137cd2807263fd84d9c4749da1e1f588c6f6"
-      },
-      {
         "path": "scripts/report-chronicle-balance.cjs",
-        "bytes": 4302,
-        "sha256": "9a105d6ddb25e64a5f9cb3deb63c649aeff2ab3cbaf038e695b205bd49e86b01"
+        "bytes": 4299,
+        "sha256": "6195c7aa42c7ad54b2c68beb74fa60fd8093c5bbe2020dbbf1214d8ac8ac0d1e"
       },
       {
         "path": "scripts/review-common-skills.cjs",
-        "bytes": 13375,
-        "sha256": "b0294c17cd366aad03deaca3ca150a3b1af84020fd4b8d17886a4bf49a3f6470"
+        "bytes": 13496,
+        "sha256": "e268cbd79fca09daf909be36dc172b5b3936ac35789e36e1161fcbfe3cdf334e"
       },
       {
         "path": "scripts/test-campaign.cjs",
@@ -2307,11 +1822,6 @@
         "path": "scripts/test-weapons.cjs",
         "bytes": 10572,
         "sha256": "2f8a6ba31c3bbaa6ba00b90f1ba74f8287f1caaa320bec095ba4ce1c3b0415a0"
-      },
-      {
-        "path": "scripts/write-skill-review.py",
-        "bytes": 6726,
-        "sha256": "47200ba527f1dec615ac76af4cd06c4d7df14162e72ad4d64c148a26debab234"
       },
       {
         "path": "settings/v2/packages/builder.json",
@@ -23560,25 +23070,12 @@
     ],
     "media": [
       {
-        "path": "art/concepts/defeat-v2.9/portraits-source.png",
-        "bytes": 1408804,
-        "width": 2172,
-        "height": 724,
-        "colorType": 6
+        "path": "art/audio/taoyuan-kaida-master.wav",
+        "bytes": 11520044
       },
       {
-        "path": "art/concepts/hero-select-v2.5/03-select-hero-simple.png",
-        "bytes": 1914182,
-        "width": 1831,
-        "height": 859,
-        "colorType": 2
-      },
-      {
-        "path": "art/concepts/hero-select-v4.2/previous-poster-background.png",
-        "bytes": 308268,
-        "width": 1024,
-        "height": 575,
-        "colorType": 6
+        "path": "art/audio/weapon-sfx-preview.wav",
+        "bytes": 864044
       },
       {
         "path": "art/concepts/hero-select-v4.2/training-ground-source.png",
@@ -23602,10 +23099,10 @@
         "colorType": 6
       },
       {
-        "path": "art/concepts/weapons-v3.1/menu-background-before.png",
-        "bytes": 1836852,
-        "width": 1831,
-        "height": 859,
+        "path": "art/concepts/sweep-v5.1/01-golden-cleave.png",
+        "bytes": 2149108,
+        "width": 1672,
+        "height": 941,
         "colorType": 2
       },
       {
@@ -23637,131 +23134,270 @@
         "colorType": 2
       },
       {
-        "path": "art/reviews/arms-v3.2/before-user.png",
-        "bytes": 94394,
-        "width": 286,
-        "height": 196,
+        "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
+        "bytes": 137499,
+        "width": 351,
+        "height": 384,
         "colorType": 6
       },
       {
-        "path": "art/reviews/chronicle-v4/enemy-codex-web.png",
-        "bytes": 263886,
-        "width": 1334,
-        "height": 750,
+        "path": "art/runtime-sources/png/102be57c9416ba83b73446b25741ec35173efa18bd7305a785923a3945375177.png",
+        "bytes": 2267953,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/17403b626edf189a03b3f922a9619da6431c9892889db39aab112fcc0527277e.png",
+        "bytes": 930104,
+        "width": 768,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/1c3a35942afa15e2ceee902f644a3a9bf8bfbd2c7cedfb77ac337ad6ee545a32.png",
+        "bytes": 1545039,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/20a9a91759a94ab983036dea61bd687dbc216da2c17aa2cec659450593e9e3d9.png",
+        "bytes": 374978,
+        "width": 576,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/2d55154fd06c3cafcda23b4db43d9ee9131db4c53e3fdd8d562831253dda8813.png",
+        "bytes": 244700,
+        "width": 341,
+        "height": 512,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/3c8cf3cd97901218627111298effc09521e28bf8a68f8a6de98ff480f311e79b.png",
+        "bytes": 1477662,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/3ebbe0522639293895256b9f7a415f6fbaaeea94f9c9a191643ae67d2702bf38.png",
+        "bytes": 192173,
+        "width": 361,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/3f284168900c87e5f5f47ae33e0276ff25688b01d459963a1771406fc41aeb29.png",
+        "bytes": 507960,
+        "width": 640,
+        "height": 512,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/3f75e7e41ad867493b74cd4fb6e78263634455218f3f264f82867ad9628a1844.png",
+        "bytes": 1274896,
+        "width": 1263,
+        "height": 1246,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/47656f4810a2d301c533f1a3d5f6e97b8d09cb09649b76545c60d5122de4c7fd.png",
+        "bytes": 927970,
+        "width": 1344,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/4b7ebc25235b99a76bee3e277951b72b7b037ed7129d84e1f2a610368005d117.png",
+        "bytes": 54694,
+        "width": 384,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/51d883141040f3beb3282337e45f1e7249a00fe8c2e31f21b56561ed09f62669.png",
+        "bytes": 512069,
+        "width": 768,
+        "height": 576,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/52bfaef2f8c20379d60c718dff0bf6841d75502f590f6faebd722d20ae00a064.png",
+        "bytes": 189300,
+        "width": 379,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/5552c9903f9ad822e37a1150160cfae304ba3d9f9a55e2deacb1c4c4d295ad50.png",
+        "bytes": 223315,
+        "width": 1024,
+        "height": 512,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/568da57c8ac984b61df2725c49f38ebb6fa57a59513cedca763ba250062d7f73.png",
+        "bytes": 519214,
+        "width": 512,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/5d650e2c5f7290edbdb150cb5f07b88de32b5840900d6d3b19e70ef4278ba529.png",
+        "bytes": 149952,
+        "width": 351,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/668ea01f4053f859124be3e2eb70ac5a4589b678ab0e901b413ebcebf06e62cd.png",
+        "bytes": 368036,
+        "width": 576,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/70faca252d9d5b322308a792117f2e7dfad68a02aca14be018fb4c3bcea905f5.png",
+        "bytes": 161409,
+        "width": 384,
+        "height": 355,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/7b62a1597e699cb4d9a4ae4c858580d9324de2abb8820fbbf2adf4b1d7c07b67.png",
+        "bytes": 2207782,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/8b73a1020075f299f3fadac0f9671323c971fff345f344953888b7cf9bc523d6.png",
+        "bytes": 70509,
+        "width": 512,
+        "height": 256,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/949e69360f75b0ada705cf3ac717305f0904bc418a6d6a5445608720cc6a139f.png",
+        "bytes": 909528,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/a6c50bd87ee1cd3df928bd75a0bfc07b09e50a00222aa843b94ace88920aa66a.png",
+        "bytes": 1766104,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/a9bc5e507123bfafa76c1033aa7b5e5712769f533946b355c2556ddb62f9523a.png",
+        "bytes": 967848,
+        "width": 1303,
+        "height": 1207,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/b616e6e7695ac459c693587f659b21edd19ce89f08054b26af1a8dd38906f7c3.png",
+        "bytes": 930742,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/bb20adaf89419a41c399f71b4c4fbc917084e6cb63de4211eb8c6357f727da76.png",
+        "bytes": 625714,
+        "width": 640,
+        "height": 640,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/c0b9041813340cdc68bbffa398435f70d20dd3140110387f64829d0f1cd388cf.png",
+        "bytes": 533514,
+        "width": 640,
+        "height": 512,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/c4670ae8458a6412a5570cdafbf17e817b6cd9e114d217830a0c0cb2935d5143.png",
+        "bytes": 173184,
+        "width": 384,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/ced5daa61b1d24bacc50ad8474b28c84e73c357d472d1efd02b6f27c032cadcf.png",
+        "bytes": 542992,
+        "width": 768,
+        "height": 576,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/db32ce1a119d0e27825bc5f9231c105fb5bc01adbf278fc9848151e017f4ffbb.png",
+        "bytes": 948417,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/de0b847af749c660582f99d6ca496d1a975e35585468e85567daeb40c84b9249.png",
+        "bytes": 135592,
+        "width": 351,
+        "height": 384,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-sources/png/e7867054c4d2e94a5ac52c0ad9aca92132ae0dd1abd893d5d04f0e2ba7f65a96.png",
+        "bytes": 1619972,
+        "width": 1254,
+        "height": 1254,
         "colorType": 2
       },
       {
-        "path": "art/reviews/chronicle-v4/enemy-codex-wechat.png",
-        "bytes": 85985
+        "path": "art/runtime-sources/png/e9031748c089f1a4a1e23c4c185e53611ebcc405d2b74110bcec77674ef1343d.png",
+        "bytes": 1026170,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
       },
       {
-        "path": "art/reviews/chronicle-v4/first-shop-wechat.png",
-        "bytes": 79295
+        "path": "art/runtime-sources/png/efe69e92c2627fc37d2373c706f65eb0044e9ef580c5fdfc29e699f90ee66c4c.png",
+        "bytes": 506638,
+        "width": 640,
+        "height": 512,
+        "colorType": 6
       },
       {
-        "path": "art/reviews/chronicle-v4/kongming-combat-web.png",
-        "bytes": 1169916,
-        "width": 1334,
-        "height": 750,
-        "colorType": 2
+        "path": "art/runtime-sources/png/f60a340fff8caa90d5447b68b72aec3747278654cbfd9ccdf8df3b3a3286153d.png",
+        "bytes": 2113866,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
       },
       {
-        "path": "art/reviews/chronicle-v4/lvbu-six-weapons-fixture-web.png",
-        "bytes": 1226289,
-        "width": 1334,
-        "height": 750,
-        "colorType": 2
+        "path": "art/runtime-sources/png/f6633ef22e5de09133c54b7fd5ae7cea0b68222917b8d2082ef0232404af71fd.png",
+        "bytes": 1068744,
+        "width": 1152,
+        "height": 768,
+        "colorType": 6
       },
       {
-        "path": "art/reviews/chronicle-v4/lvbu-six-weapons-fixture-wechat.png",
-        "bytes": 85487
+        "path": "art/runtime-sources/png/f71d4c25e4a93b11dce0b4428e0d2d42790306402af8db51adfe999adfaef2a7.png",
+        "bytes": 520533,
+        "width": 640,
+        "height": 512,
+        "colorType": 6
       },
       {
-        "path": "art/reviews/chronicle-v4/menu-restored-wechat.png",
-        "bytes": 136693
-      },
-      {
-        "path": "art/reviews/chronicle-v4/menu-web.png",
-        "bytes": 948400,
-        "width": 1334,
-        "height": 750,
-        "colorType": 2
-      },
-      {
-        "path": "art/reviews/chronicle-v4/menu-wechat.png",
-        "bytes": 136693
-      },
-      {
-        "path": "art/reviews/chronicle-v4/simayi-starfall-fixture-wechat.png",
-        "bytes": 89339
-      },
-      {
-        "path": "art/reviews/chronicle-v4/skill-codex-web.png",
-        "bytes": 276161,
-        "width": 1334,
-        "height": 750,
-        "colorType": 2
-      },
-      {
-        "path": "art/reviews/chronicle-v4/skill-codex-wechat.png",
-        "bytes": 82038
-      },
-      {
-        "path": "art/reviews/chronicle-v4/weapon-codex-web.png",
-        "bytes": 268761,
-        "width": 1334,
-        "height": 750,
-        "colorType": 2
-      },
-      {
-        "path": "art/reviews/chronicle-v4/weapon-codex-wechat.png",
-        "bytes": 85180
-      },
-      {
-        "path": "art/reviews/chronicle-v4/weapon-mechanic-wechat.png",
-        "bytes": 79951
-      },
-      {
-        "path": "art/reviews/chronicle-v4/zhaoyun-combat-web.png",
-        "bytes": 1167799,
-        "width": 1334,
-        "height": 750,
-        "colorType": 2
-      },
-      {
-        "path": "art/reviews/chronicle-v4/zhaoyun-start-wechat.png",
-        "bytes": 69782
-      },
-      {
-        "path": "art/reviews/chronicle-v4/zhouyu-fire-ring-fixture-wechat.png",
-        "bytes": 81183
-      },
-      {
-        "path": "art/reviews/combat-v2.7/particle-contact-sheet.png",
-        "bytes": 410984,
-        "width": 1888,
-        "height": 2160,
-        "colorType": 2
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/guanyu-wechat.png",
-        "bytes": 98019
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/kongming-wechat.png",
-        "bytes": 98593
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/liubei-wechat.png",
-        "bytes": 98869
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/zhangfei-wechat.png",
-        "bytes": 98833
-      },
-      {
-        "path": "art/reviews/hero-select-v4.1/zhaoyun-wechat.png",
-        "bytes": 100102
+        "path": "art/runtime-sources/png/f76d1377b4a9c08a8819c109bad23daf71c7b732c66b5c9202e51f9ef93f2232.png",
+        "bytes": 144177,
+        "width": 359,
+        "height": 384,
+        "colorType": 6
       },
       {
         "path": "art/runtime-v4/sources/boss-mounts.png",
@@ -24148,218 +23784,8 @@
         "colorType": 6
       },
       {
-        "path": "docs/skill-review-v5.0.1/G01.png",
-        "bytes": 234057,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G02.png",
-        "bytes": 233756,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G03.png",
-        "bytes": 241419,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G04.png",
-        "bytes": 241752,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G05.png",
-        "bytes": 234984,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G06.png",
-        "bytes": 235129,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G07.png",
-        "bytes": 236193,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G08.png",
-        "bytes": 234856,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G09.png",
-        "bytes": 241584,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G10.png",
-        "bytes": 241819,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G11.png",
-        "bytes": 239286,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G12.png",
-        "bytes": 247606,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G13.png",
-        "bytes": 241797,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G14.png",
-        "bytes": 237094,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G15.png",
-        "bytes": 236006,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G16.png",
-        "bytes": 238769,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G17.png",
-        "bytes": 234750,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G18.png",
-        "bytes": 241515,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G19.png",
-        "bytes": 252558,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G20.png",
-        "bytes": 247103,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G21.png",
-        "bytes": 235502,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G22.png",
-        "bytes": 245889,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G23.png",
-        "bytes": 238693,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/G24.png",
-        "bytes": 241077,
-        "width": 720,
-        "height": 450,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-1.png",
-        "bytes": 599381,
-        "width": 1524,
-        "height": 1117,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-2.png",
-        "bytes": 601963,
-        "width": 1524,
-        "height": 1117,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-3.png",
-        "bytes": 610634,
-        "width": 1524,
-        "height": 1117,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-4.png",
-        "bytes": 661204,
-        "width": 1524,
-        "height": 1117,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-5.png",
-        "bytes": 613332,
-        "width": 1524,
-        "height": 1117,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/tier-6.png",
-        "bytes": 666579,
-        "width": 1524,
-        "height": 1117,
-        "colorType": 6
-      },
-      {
-        "path": "docs/skill-review-v5.0.1/技能总览.png",
-        "bytes": 2357684,
+        "path": "docs/skill-review/技能总览.png",
+        "bytes": 2374122,
         "width": 3004,
         "height": 2997,
         "colorType": 6

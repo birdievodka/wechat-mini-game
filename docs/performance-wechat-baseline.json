@@ -1,0 +1,584 @@
+{
+  "version": "chronicles-v4.3-batched-effects",
+  "date": "2026-11-13",
+  "scope": "WeChat desktop simulator gfx statistics from a visual-only engineering fixture, NOT phone FPS or a gameplay score",
+  "fixture": "scripts/fixtures/wechat-render-pressure.js: fresh menu; 80 E01 units, 100 coins, 280 live particle slots; 300 frames, sample frames61-300; original Run/UI restored",
+  "before": {
+    "running": false,
+    "version": "chronicles-v4.2-training-ground",
+    "frames": 300,
+    "frameMs": {
+      "median": 18,
+      "p95": 19,
+      "max": 19,
+      "samples": 240
+    },
+    "draws": {
+      "median": 255,
+      "p95": 255,
+      "max": 255,
+      "samples": 240
+    },
+    "tris": {
+      "median": 29589,
+      "p95": 29887,
+      "max": 29887,
+      "samples": 240
+    },
+    "bufferBytes": {
+      "median": 547467704,
+      "p95": 547467704,
+      "max": 547467704,
+      "samples": 240
+    },
+    "textureBytes": {
+      "median": 115715828,
+      "p95": 115715828,
+      "max": 115715828,
+      "samples": 240
+    },
+    "reason": "complete",
+    "runUnchanged": true
+  },
+  "after": {
+    "running": false,
+    "version": "chronicles-v4.3-batched-effects",
+    "frames": 300,
+    "frameMs": {
+      "median": 18,
+      "p95": 19,
+      "max": 20,
+      "samples": 240
+    },
+    "draws": {
+      "median": 57,
+      "p95": 57,
+      "max": 57,
+      "samples": 240
+    },
+    "tris": {
+      "median": 5623,
+      "p95": 5733,
+      "max": 5733,
+      "samples": 240
+    },
+    "bufferBytes": {
+      "median": 75639240,
+      "p95": 75639240,
+      "max": 75639240,
+      "samples": 240
+    },
+    "textureBytes": {
+      "median": 118886132,
+      "p95": 118886132,
+      "max": 118886132,
+      "samples": 240
+    },
+    "reason": "complete",
+    "runUnchanged": true
+  },
+  "changesPercent": {
+    "draws": 77.65,
+    "tris": 81.0,
+    "bufferBytes": 86.18
+  },
+  "textureTradeoff": "Runtime shared sprite masks add approximately 3MiB texture memory and remove hundreds of independent large Graphics buffers. This gfx counter is not iOS process peak memory.",
+  "cpuFixture": {
+    "scope": "Node/Cocos stub with --cpu-prof, not GPU/phone timing; no Canvas in Node, static graphics use fallback",
+    "before": {
+      "scope": "Node/Cocos stub CPU fixture; drawing calls counted, no GPU or iOS FPS claim",
+      "scenarios": [
+        {
+          "name": "six-swords",
+          "frames": 480,
+          "medianMs": 1.689,
+          "p95Ms": 2.309,
+          "calls": {
+            "clear": 5919,
+            "fill": 95066,
+            "stroke": 145300,
+            "reorder": 15174
+          },
+          "peakProjectiles": 0,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        },
+        {
+          "name": "six-guns",
+          "frames": 480,
+          "medianMs": 1.232,
+          "p95Ms": 1.612,
+          "calls": {
+            "clear": 3064,
+            "fill": 52045,
+            "stroke": 84044,
+            "reorder": 14960
+          },
+          "peakProjectiles": 3,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        },
+        {
+          "name": "mixed",
+          "frames": 480,
+          "medianMs": 1.091,
+          "p95Ms": 1.492,
+          "calls": {
+            "clear": 3610,
+            "fill": 70393,
+            "stroke": 89411,
+            "reorder": 17400
+          },
+          "peakProjectiles": 4,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        },
+        {
+          "name": "chronicle-mixed",
+          "frames": 480,
+          "medianMs": 1.559,
+          "p95Ms": 2.411,
+          "calls": {
+            "clear": 3263,
+            "fill": 45388,
+            "stroke": 102198,
+            "reorder": 13555
+          },
+          "peakProjectiles": 5,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        }
+      ]
+    },
+    "after": {
+      "scope": "Node/Cocos stub CPU fixture; drawing calls counted, no GPU or iOS FPS claim",
+      "scenarios": [
+        {
+          "name": "six-swords",
+          "frames": 480,
+          "medianMs": 1.528,
+          "p95Ms": 2.56,
+          "calls": {
+            "clear": 5919,
+            "fill": 94170,
+            "stroke": 82120,
+            "reorder": 15174
+          },
+          "peakProjectiles": 0,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        },
+        {
+          "name": "six-guns",
+          "frames": 480,
+          "medianMs": 1.017,
+          "p95Ms": 1.895,
+          "calls": {
+            "clear": 3064,
+            "fill": 40011,
+            "stroke": 32559,
+            "reorder": 14960
+          },
+          "peakProjectiles": 3,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        },
+        {
+          "name": "mixed",
+          "frames": 480,
+          "medianMs": 1.042,
+          "p95Ms": 1.392,
+          "calls": {
+            "clear": 3610,
+            "fill": 50387,
+            "stroke": 45703,
+            "reorder": 17400
+          },
+          "peakProjectiles": 4,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        },
+        {
+          "name": "chronicle-mixed",
+          "frames": 480,
+          "medianMs": 1.455,
+          "p95Ms": 2.356,
+          "calls": {
+            "clear": 3263,
+            "fill": 44404,
+            "stroke": 39551,
+            "reorder": 13555
+          },
+          "peakProjectiles": 5,
+          "enemyNodes": 80,
+          "coinNodes": 100
+        }
+      ]
+    },
+    "note": "CPU medians generally improved but p95 is mixed; no claim of a uniform FPS increase."
+  },
+  "runtime": {
+    "version": "chronicles-v4.3-batched-effects",
+    "phase": "menu",
+    "ready": true,
+    "atlas": true,
+    "cells": 46,
+    "coin": [
+      28,
+      28
+    ],
+    "shadow": [
+      24,
+      10
+    ]
+  },
+  "visualReview": {
+    "fixture": "scripts/fixtures/wechat-cached-art-review.js (12 units, 12 coins, 8 projectiles, birth effects, 280 particles; independent visual fixture)",
+    "restored": true,
+    "atlasCells": [
+      {
+        "id": "weapon-sandal",
+        "w": 36,
+        "h": 55,
+        "x": 0,
+        "y": 12.5
+      },
+      {
+        "id": "weapon-pole",
+        "w": 22,
+        "h": 119,
+        "x": 0,
+        "y": 11.5
+      },
+      {
+        "id": "weapon-peach",
+        "w": 33,
+        "h": 44,
+        "x": 1.5,
+        "y": 7
+      },
+      {
+        "id": "weapon-cleaver",
+        "w": 24,
+        "h": 95,
+        "x": 3,
+        "y": 23.5
+      },
+      {
+        "id": "weapon-firecracker",
+        "w": 38,
+        "h": 59,
+        "x": 0,
+        "y": 16.5
+      },
+      {
+        "id": "weapon-smg",
+        "w": 10,
+        "h": 33,
+        "x": 0,
+        "y": 2.5
+      },
+      {
+        "id": "weapon-shotgun",
+        "w": 10,
+        "h": 33,
+        "x": 0,
+        "y": 2.5
+      },
+      {
+        "id": "weapon-rocket",
+        "w": 16,
+        "h": 34,
+        "x": 0,
+        "y": 2
+      },
+      {
+        "id": "weapon-sword",
+        "w": 38,
+        "h": 89,
+        "x": 0,
+        "y": 22.5
+      },
+      {
+        "id": "weapon-thunder",
+        "w": 38,
+        "h": 66,
+        "x": 0,
+        "y": 12
+      },
+      {
+        "id": "weapon-gourd",
+        "w": 44,
+        "h": 79,
+        "x": 0,
+        "y": 6.5
+      },
+      {
+        "id": "weapon-twin-swords",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-guandao",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-serpent-spear",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-halberd",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-silver-spear",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-qinggang",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-yitian",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-seven-saber",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-ancient-saber",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-twin-halberds",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-trident",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-caltrops",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-repeater",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-phoenix-bow",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-heavy-crossbow",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-hand-halberd",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-chain-hook",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-oil-jar",
+        "w": 22,
+        "h": 28,
+        "x": 0,
+        "y": 3
+      },
+      {
+        "id": "weapon-thunder-bomb",
+        "w": 22,
+        "h": 28,
+        "x": 0,
+        "y": 3
+      },
+      {
+        "id": "weapon-feather-fan",
+        "w": 30,
+        "h": 41,
+        "x": 0,
+        "y": 7.5
+      },
+      {
+        "id": "weapon-taiping-book",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-star-lamps",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-bagua",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-wood-ox",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "weapon-wood-kite",
+        "w": 18,
+        "h": 45,
+        "x": 0,
+        "y": 4.5
+      },
+      {
+        "id": "coin",
+        "w": 28,
+        "h": 28,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "coin-shadow",
+        "w": 24,
+        "h": 10,
+        "x": 0,
+        "y": -3
+      },
+      {
+        "id": "birth-ring",
+        "w": 26,
+        "h": 26,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "birth-dot",
+        "w": 24,
+        "h": 24,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "id": "enemy-arrow",
+        "w": 46,
+        "h": 18,
+        "x": 3,
+        "y": 0
+      },
+      {
+        "id": "enemy-bullet",
+        "w": 32,
+        "h": 12,
+        "x": -2,
+        "y": 0
+      },
+      {
+        "id": "enemy-poison",
+        "w": 14,
+        "h": 14,
+        "x": 2,
+        "y": 0
+      },
+      {
+        "id": "enemy-knife",
+        "w": 38,
+        "h": 18,
+        "x": 5,
+        "y": 1
+      },
+      {
+        "id": "enemy-axe",
+        "w": 34,
+        "h": 31,
+        "x": 3,
+        "y": 1.5
+      },
+      {
+        "id": "enemy-coin",
+        "w": 24,
+        "h": 24,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "screenshot": "art/reviews/performance-v4.3/cached-art-fixture.jpg",
+    "screenshotSHA256": "334495f5567bf0f1b06e573cb57b209b235c5c992097c033d27fc15516142cbd",
+    "checked": [
+      "Coin circle/outline/square-hole and shadow alpha bounds",
+      "Eight existing projectile silhouettes preserve their origin",
+      "Six particle types and layered slash/explosion remain visible",
+      "Spawn ring/dots and soldier facing remain visible"
+    ],
+    "regressionFix": "Canvas clipping rectangle must not leak into glyph fill; constructor begins a fresh path, automated regression added."
+  },
+  "checks": [
+    "npm test passed after gameplay/render changes",
+    "test-performance additionally covers the Canvas clipping-path regression and actual sprite-rendering branch with deterministic frames",
+    "typecheck passed",
+    "build/package/import checks passed: 18.49MiB",
+    "no console matches for TypeError/ReferenceError/asset failure/atlas fallback warning"
+  ],
+  "limitations": [
+    "No iOS frame-rate or memory-termination log captured; original device still needs retest.",
+    "The native pressure fixture freezes combat logic and is not a survival or difficulty benchmark."
+  ],
+  "retentionNote": "Latest available native desktop A/B baseline; not a v5.1 phone measurement. Superseded screenshots and transient preview output were removed."
+}

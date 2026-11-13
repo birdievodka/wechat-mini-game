@@ -21,7 +21,7 @@
 | `common-skills.ts`、`CommonSkillRuntime.ts`、`CommonSkillEffects.ts`、`SkillSelectView.ts` | 24通用技能同源定义/排序/击杀门槛、真实机制与有限表现、选人搭配面板 |
 | `HeroShowcase.ts` | 选人专用分层木偶、五种武器亮相、独立菜单时钟；不调用战斗 |
 | `hero-arms.ts` | 新短袍肩腕基准、弯袖/袖口/皮肤和独立握拳绘制；不参与伤害 |
-| `chronicles-data.ts`、`chronicles.ts` | 40兵/17章/24只读技能、固定强度、分段编组、Boss动作 |
+| `chronicles-data.ts`、`chronicles.ts` | 40兵/17章/24技能定义、固定强度、分段编组、Boss动作 |
 | `extra-weapons.ts`、`chronicle-art.ts` | 新25四阶武器/机制、十小图集加载与裁格 |
 | `CodexView.ts`、`chronicle-save.ts` | 只读图鉴、schema4检查点保存/恢复 |
 | `build-templates/wechatgame/first-screen.js` | 游戏引擎启动之前的海报与WebGL进度渲染，替代默认Cocos标识 |
@@ -97,44 +97,17 @@ v3.1全部品级的真实攻击验证位于test-campaign（11×4），不仅检�
 
 v3.3.1组件回归覆盖张角入场保留三类小兵生命/位置/行动及在途箭，商店音乐时钟推进/战斗冻结、商店切后台恢复、购物结束不重新播放、静音后加入当前乐句。
 
-## PNG资源减包（v3.3.2）
+## PNG源图与生成链
 
-`npm run assets:optimize` 使用锁定sharp版本，把PNG的RGB量化到256色后再保存RGBA PNG；不是改成索引PNG。宽高、裁格、所有alpha逐像素保持一致（包括软边），RGB可见像素RMSE必须<8/255，压缩更大时保留原文件。PNG总量22.92→10.70MiB，v3.3.2正式构建总包28.31→16.09MiB（主包2.04MiB），每个分包均低于4MiB。原图按SHA256备份在`art/runtime-sources/png`，清单记录原图/产物hash及误差；原图不进入assets或游戏包。重复运行从原图处理，防止累计量化失真。新增/替换图片后运行该命令，再检查alpha/裁格、实机画面及发布包尺寸，不能为了减包删除玩法或把检查上限调回30MiB。音乐仍为原60秒PCM，没有改曲或删音效。
+`npm run assets:optimize`锁定sharp，把RGB量化后保存RGBA PNG；尺寸、裁格、每个alpha值不变，可见RGB误差有门槛，压缩更大则保留原文件。当前38张运行PNG的未量化源图与哈希保存在art/runtime-sources/png；重复生成从源图处理，不能累计量化失真。源图不进入assets或微信包。
 
-资源变更后完成构建、微信运行时版本与菜单ready检查，并实际调用手机预览验证服务端包体校验；未收到预览成功时不能只凭本地<19MiB就宣称手机可打开。
+art/runtime-v4保留十张生成源图与prompts/manifest，供pack-chronicle-art和素材回归使用。不能因文件名带v4就删除。源图、压缩备份、运行图属于不同工序，保留规则见[资源维护](resources.md)。
 
-v3.3.2原生核对：运行时版本orchard-v3.3.2-preview20m、menu/ready=true，压缩后选人画面正常。create_preview_qrcode成功，微信服务端统计总源码16,842,673字节、主包2,112,349字节，二维码在开发者工具窗口展示；详见docs/preview-v3.3.2.json。auto_preview自动推送先返回code 10，二维码方式成功，不把前者当手机推送成功，也不把二维码生成当手机实际战斗验证。
+## 当前验证记录
 
-## 性能排查 v3.4
+- 当前技能程序评审：docs/skill-review，仅总览、机制JSON、README与飞书快照链接；生成命令node scripts/review-common-skills.cjs。
+- 最新微信横扫A：docs/golden-sweep-v5.1.md与validation.json；GIF为代表帧合成，非连续录像或手机帧率测试。夹具只从菜单执行，有watchdog，结束恢复原存档和菜单。
+- 最新Node压力：docs/performance-node.json；最新保留的真实桌面渲染A/B：docs/performance-wechat-baseline.json。测量范围不能混用，详见performance.md。
+- 最新战役模型：docs/chronicle-balance.json，150条真实交易路径；无受伤/死亡模拟，不是生存胜率。
 
-战斗重绘、缓存、掉落节点预算、本地故障记录和压力指标见[性能与稳定性](performance.md)。npm test加入test-performance，npm run profile:battle输出CPU/绘图调用夹具报告；不能当iOS帧率或闪退根因结论。
-
-## v4扩展验证
-
-新增test-chronicles检查40兵首登/正背面AI、17场Boss动作实际调度、25新武器×四阶真实命中、油火/陷阱共享上限、17章真实状态机流转、恢复原货架/拒绝坏存档；这些是工程夹具，不能充当真人通关。test-performance增加后期40类型混编、六把新武器、孔明/司马懿1800帧池预算；profile:battle增加chronicle-mixed场景。独立图鉴和五英雄原生核对需要刷新最终构建并读取buildVersion，锁屏旧帧不能判成功。
-
-pack脚本只切既有imagegen素材；新增图集全局共享一次加载，复用SpriteFrame分层缓存，颜色常量缓存；没有按章重复全尺寸贴图、远程CDN或每对象贴图。素材生成后先pack→optimize→检查透明→构建。素材与阶段变化同任务同步所有当前参考，不只重新生成catalog。
-
-## Mac锁屏时的补充渲染检查
-
-v4用独立临时用户目录的Chrome headless＋本地web-desktop构建，核对真实Cocos WebGL渲染。选人/图鉴点击和赵云/孔明开局、WASD/技能使用普通CDP输入；后期Boss/六槽布景属于单独工程夹具，不能混作正常进度。截图在art/reviews/chronicle-v4，filename含fixture的都是工程场景。Web SwiftShader不代表微信原生或iOS性能；Mac解锁后的原生界面取证仍单独记录。不要为了锁屏问题跳过启动完成帧或改用户存档。
-
-## v4解锁后原生补验
-
-2026-11-13已完成微信原生五英雄/三图鉴、正常开局→15秒28金币补给→购买扁担→固定摇杆右/上/松手→赵云技能；吕布/周瑜/司马懿为单独工程定帧，不能冒充通卷。周瑜火环内圈/缺口/环面实际伤害调用为0/0/1。原存档及三项成绩恢复一致，最终menu/ready=true；机器记录docs/native-validation-v4.json。模拟器截图在未锁屏时也可能返回旧呈现帧，必须核对Boss名/重复hash和真实窗口；旧帧不得写入取证清单。原生截图在art/reviews/chronicle-v4的*-wechat.png；仍未做iOS手机性能或完整胜率验收。
-
-
-## v4.2选人场景
-
-首页改为独立桃园演武场，training-ground.jpg取代旧合影背景，移除暖纸圆盘；按真实宽高比等比铺满，模型缩放2.2，独立眨眼/武器亮相不推进Run。Loading状态用“英雄集结中… n%”，不要再次写死三兄弟。最终构建18.47MiB，类型检查、组件菜单动画/安全区回归、启动进度回归通过；微信原生menu/ready=true、Loading实际标签确认，刘备/孔明场景核对记录在docs/hero-select-v4.2-validation.json与art/reviews/hero-select-v4.2。zhangfei-first-review.jpg是移除底部条纹前的过程截图，不作为最终验收。没有手机帧率或战斗性能实测。
-
-
-v4.3密集战斗优化必须用真实Canvas/微信渲染核对atlas.ready和46格，而不能只靠Node桩回退路径通过。渲染夹具只在非战斗阶段执行，恢复界面/校验Run不变；测试源和结果见performance参考。
-
-
-v5加入test-common-skills：24种实际施法/特效/伤害、纸兵瞄准、盾次数、吸箭反击、一次回血/章、击杀过滤/防重复/无时间回复、独立选英雄与技能、schema4迁移。启动必须initCommonSkill；仅构造组件的战斗单测也应初始化控制器，不能用未初始化对象模拟真实运行。
-
-
-v5.0.1选人技能入口简化为英雄头像列表右边的纯图标圆钮（84×84触摸区、位置406/−175、图标62）；名称/威力/充能说明只在技能选择面板查看。复用原选择回调，构建18.51MiB，24技能行为回归通过；界面核对见docs/compact-skill-v5.0.1.json。
-
-v5.1横扫六合A实装说明与取帧在[golden-sweep-v5.1](../../../../docs/golden-sweep-v5.1.md)，版本`chronicles-v5.1-golden-sweep`。新增`sweep-effects.ts`仅绘制，不含判定；Runtime保留原一次面积伤害，真实命中后追加暖色接触表现。G03范围/目标上限/空放/只读绘制/0.4秒清理回归在test-common-skills；类型、最终技能与压力回归、18.51MiB构建已通过。微信工程定帧夹具`wechat-golden-sweep-review.js`只从menu运行，带watchdog并恢复菜单及校验原存档；GIF为真实引擎代表帧合成，不能说是连续录像或手机帧率验收。
+运行assets和现有微信构建未在资源清理任务中改动；清理文档不重编、不刷新用户对局。改动游戏后需按最新源码重新构建，不拿旧二维码或旧截图证明新版已加载。

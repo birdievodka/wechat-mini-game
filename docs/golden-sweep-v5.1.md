@@ -1,6 +1,6 @@
 # 横扫六合 A金锋回旋实装
 
-版本 `chronicles-v5.1-golden-sweep`。用户确认A版，现已实现并构建加载到微信开发者工具；B/C不采用。
+版本 `chronicles-v5.1-golden-sweep`。用户确认A版，现已实现并构建加载到微信开发者工具。
 
 ## 本次变化
 
@@ -17,7 +17,7 @@
 
 ## 验证与查看
 
-- TypeScript通过；完整回归在初版通过，最终刃面宽度/暖色命中调整后再次通过24技能和性能回归。
+- TypeScript通过；完整回归及最终24技能和性能检查通过。
 - G03定向回归确认249内受伤、251外不受伤、中立物/出生期不受伤、一次最多10敌；拖尾不重复伤害、空放不生成命中、绘制不推进时间或发射粒子、0.4秒后姿态与刀光收回。
 - 微信运行版本、ready及画面已核对。12个代表帧来自真实微信Cocos渲染，工程布景里使用真实Runtime/Effects/Enemy更新；没有走正常关卡或写进度、成绩，结束恢复菜单并确认原存档未变化。
 - [模拟器定帧合成动画](../art/reviews/golden-sweep-v5.1/golden-sweep-wechat-preview.gif)展示完整刀光阶段，不是连续录像或手机帧率测试。[峰值画面](../art/reviews/golden-sweep-v5.1/peak-fixture-wechat.jpg)，[机器记录](golden-sweep-v5.1-validation.json)。

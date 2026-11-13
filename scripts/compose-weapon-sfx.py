@@ -97,7 +97,6 @@ for i,name in enumerate(['sandal']+names):
         if cast is not None:
             at=round(beat*SR); preview[at:at+len(cast)]+=cast*.36
         at=round((beat+.28)*SR); preview[at:at+len(hit)]+=hit*.70
-    save(ROOT/f'art/audio/weapon-previews/{name}.wav',preview)
     montage[i*SR*3:(i+1)*SR*3]=preview
 save(ROOT/'art/audio/weapon-sfx-preview.wav',montage)
 (ROOT/'art/audio/weapon-sfx-manifest.json').write_text(json.dumps({'format':'PCM16 mono 24000 Hz','generated':report,

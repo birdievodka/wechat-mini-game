@@ -160,22 +160,7 @@ function generate(root) {
       sources.push({ path: relative, bytes: bytes.length, sha256: hash(bytes) });
     }
   }
-  for (const entry of ['assets', 'scripts', 'config', 'settings', 'docs', '.agents/skills', 'AGENTS.md', 'README.md', 'package.json', 'package-lock.json', 'project.config.json', 'tsconfig.json', '.gitignore', 'art/concepts/hero-select-v2.5/03-select-hero-simple.png', 'art/concepts/hero-select-v2.5/runtime-prompts.json']) scan(entry);
-  scan('build-templates');
-  scan('art/concepts/defeat-v2.9');
-  scan('art/concepts/presentation-v3.0');
-  scan('art/concepts/weapons-v3.1');
-  scan('art/reviews/arms-v3.2');
-  scan('art/reviews/chapter-v3.3');
-  scan('art/reviews/chronicle-v4');
-  scan('art/reviews/hero-select-v4.1');
-  scan('art/reviews/hero-select-v4.2');
-  scan('art/reviews/performance-v4.3');
-  scan('art/reviews/common-skills-v5');
-  scan('art/concepts/hero-select-v4.2');
-  scan('art/runtime-sources/png/manifest.json');
-  scan('art/runtime-v4');
-  scan('art/reviews/combat-v2.7/particle-contact-sheet.png');
+  for (const entry of ['assets', 'scripts', 'config', 'settings', 'docs', 'art', '.agents/skills', 'build-templates', 'AGENTS.md', 'README.md', 'package.json', 'package-lock.json', 'project.config.json', 'tsconfig.json', '.gitignore']) scan(entry);
   sources.sort((a, b) => a.path.localeCompare(b.path, 'en'));
   const media = sources.filter(f => /\.(png|wav|mp3)$/.test(f.path)).map(f => {
     const data = fs.readFileSync(path.join(root, f.path));
@@ -231,7 +216,7 @@ function generate(root) {
     '## 17章固定曲线\n', table(['章 / 首领','参考有效DPS','Boss HP','普通兵HP倍率','第1/2/3段威胁/秒','Boss援军威胁/秒'],catalog.chronicles.chapters.map(ch=>[ch.id+' / '+ch.boss,ch.referenceDps,ch.bossHp,round(ch.enemyHpMultiplier),ch.threatPerSecond.slice(1).map(round).join(' / '),round(ch.bossThreat)])),
     '\n第零章15秒：首章仅E01 HP6／移速86，首店收入补足28；后续章有新兵预告。普通兵出生时乘本章HP倍率和战段1/1.04/1.08，Boss阶段新兵乘1.1；存活旧兵不补血。移速只乘1+min(.006×(章−1),.12)，弹速、冲锋与预警不加速。\n',
     '## 40类敌兵标准数值\n',table(['ID / 名称','首登','标准HP','首登第1段HP','基速','攻击周期 / 前摇','射程','成本 / 金币','机制'],catalog.chronicles.enemies.map(e=>[e.id+' / '+e.name,e.first,e.hp,e.firstChapterValues.hp,e.speed,e.cycle+' / '+e.windup,e.range,e.cost+' / '+e.coins,e.mechanic])),
-    '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与24个可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance-v4.json，不等于真人存活率。\n',
+    '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与24个可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance.json，不等于真人存活率。\n',
     '## 商店价格与刷新\n', table(['章节', '基础价', '草鞋 I/II/III/IV', '突突枪 I/II/III/IV'], catalog.economy.prices.map(row => [row.chapter, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.smg.join(' / ')])),
     '\n无折扣样本，按固定章节指数 `min(5,1.07^(章−1))` 调用现行商店价格函数，不使用旧八关商店价格。\n',
     table(['已刷新次数', '无C05', 'C05×1', 'C05×2', 'C05×3', 'C05×10'], catalog.economy.refresh.map(row => [row.rerolls, ...row.costsByC05Copies.map(v => v.cost)])),

@@ -113,7 +113,7 @@
 | E39 / 黄巾道士 | 1 | 90 | 90 | 72 | 3.8 / 0.9 | 600 | 3 / 4 | 单雷圈R80，预告0.85秒；首章第3战段最多1位，先教躲圈 |
 | E40 / 军师 | 16 | 108 | 2499 | 64 | 5.2 / 1 | 600 | 3.8 / 5 | 两圈R70，间距120，预告1秒；使用统一危险圈池 |
 
-无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与24个可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance-v4.json，不等于真人存活率。
+无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与24个可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance.json，不等于真人存活率。
 
 ## 商店价格与刷新
 

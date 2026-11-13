@@ -63,7 +63,7 @@
 
 同时检查单武器、三武器和六武器，以及范围/穿透/控制收益。先检查意外的硬直锁死、平伤按弹数重复放大、攻速乘算、二次触发递归等，再调敌人血量与组合。
 
-`node scripts/report-chronicle-balance.cjs` 输出v4购物路径模型；`node scripts/report-balance.cjs`仅旧单章模型；`docs/balance-v2.4-model.json` 是旧版样本，数值改变后要重算，不能当恒定现行曲线。不能据面板上限DPS直接承诺玩家一定活几分钟。
+`node scripts/report-chronicle-balance.cjs`输出当前购物路径模型，保存在docs/chronicle-balance.json；数值改变后重算。旧单章模型与生成器已清理，不能据面板上限DPS承诺玩家一定活几分钟。
 
 v3.3整体上调基础伤害，近战按完整可见扇区与敌兵躯体相交，窗口内所有合法目标全伤；见[首章通关规则](chapter-zhangjiao.md)。
 

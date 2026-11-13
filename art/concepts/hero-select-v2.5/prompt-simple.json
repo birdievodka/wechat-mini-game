@@ -1,7 +1,0 @@
-{
-  "tool": "built-in image_gen",
-  "mode": "edit",
-  "reference": "02-character-selection-start.png",
-  "status": "design review only; no runtime changes",
-  "prompt": "Use case: precise-object-edit of an existing Chinese mobile game UI design. Input image 1 is the edit target. Preserve the exact wide landscape format, humorous Liu Bei Guan Yu Zhang Fei chibi artwork, all three green hero cards, names and short role chips on the cards, Liu Bei selected gold border/checkmark, peach orchard background, 桃园乱斗 logo, WeChat capsule, visual style, colors, layout, and large bottom-right red 开始 button. Make only TWO changes: (1) Replace the top-center title 选择好汉 with EXACT Chinese text \"选择英雄\", retaining the same brush-lettered style, size and ink brush backdrop. (2) Completely REMOVE the entire bottom-left-to-middle selected-character attribute strip: its rounded green bar, borders, duplicate 刘备 label, all five red heart icons, separators, stat icons, and both attribute texts 拾取范围 +15% and 武器击退 +20%. Restore that whole footer area seamlessly as quiet painted earth background, with NO replacement panel, explanatory text, numeric values, health indicators, buttons or icons. Keep the bottom-right 开始 button in the same position. Keep the three card names 刘备 / 关羽 / 张飞 and their small role chips 均衡 · 控场 / 远程 · 穿透 / 法术 · 爆发 unchanged. No weapon-selection button, no test mode, no extra UI. Finished professional game UI screenshot, no device frame, no annotations."
-}

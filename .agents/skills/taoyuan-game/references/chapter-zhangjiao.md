@@ -26,4 +26,4 @@ Run.wave=1仅兼容表示第零段，2表示正式；wavesCleared为0～3，boss
 
 ## 验证
 
-首章经济/原地衔接/音乐/保留兵箭/首领唯一性持续出兵/同帧防反杀均在test-campaign；完整17章状态流转在test-chronicles。工程夹具强制推进边界和击杀Boss，只证明状态完整性，不是真人通关成绩。art/reviews/chapter-v3.3为历史单章工程截图，不证明v4图鉴或后期战役画面。
+首章经济/原地衔接/音乐/保留兵箭/首领唯一性持续出兵/同帧防反杀均在test-campaign；完整17章状态流转在test-chronicles。工程夹具强制推进边界和击杀Boss，只证明状态完整性，不是真人通关成绩。最新验收范围见docs/design/07-implementation-and-validation.md。

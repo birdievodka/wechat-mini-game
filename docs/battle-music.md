@@ -20,7 +20,6 @@
 - 游戏资源：`assets/music/taoyuan-kaida.wav`，独立 `music` 本地分包，24 kHz / 单声道 / PCM16，2,880,044 bytes。每个分包仍需低于4 MiB。
 - 试听：`art/audio/taoyuan-kaida-battle.m4a`，48 kHz立体声AAC，不参与游戏打包。
 - 母带：`art/audio/taoyuan-kaida-master.wav`；音序和检测数据：`art/audio/taoyuan-kaida-score.json`。
-- 第一版留档：`art/audio/taoyuan-kaida-light-v1.m4a`，仅供比较。
 - 原创编曲脚本：`scripts/compose-battle-music.py`，依赖Python、NumPy和SciPy，固定随机种子。
 
 ```sh

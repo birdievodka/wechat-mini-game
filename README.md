@@ -2,7 +2,7 @@
 
 Cocos Creator **3.8.8** + TypeScript 横屏微信小游戏。当前v5：搞笑三国、小脚豆Q版，移动＋自动攻击＋一个自由搭配通用技能；五英雄、六卷17章、14位Boss的17场战役、40类敌兵、36种武器、60被动及9种天命。
 
-[完整设计与实装索引](docs/design-v4/README.md) · [实装和验证记录](docs/design-v4/07-implementation-and-validation.md) · [项目skill](.agents/skills/taoyuan-game/SKILL.md)
+[完整设计与实装索引](docs/design/README.md) · [实装和验证记录](docs/design/07-implementation-and-validation.md) · [项目skill](.agents/skills/taoyuan-game/SKILL.md)
 
 ## 开始游玩
 
@@ -14,7 +14,7 @@ Cocos Creator **3.8.8** + TypeScript 横屏微信小游戏。当前v5：搞笑�
 6. Boss入场保留小兵和在途弹幕，并继续援军。击败后回1心、章间继承装备/金币/技能充能；第17章司马懿·五丈原才总通关。失败哭脸，可重试本章入口；失败所得不继承，战斗用时/重试次数保留。
 7. 自动保存最近整备点和每笔商店交易，首页有“继续征程/新征程”。中断战斗重建当前战段世界，不逐帧保存敌兵。地图宽高各视野1.5倍，草地小花为主，小桃树/动物掉回血物，满心也可拾取但不会溢出加血。
 
-购物冻结战斗但BGM继续，菜单/结算停止，后台暂停，音乐/音效开关独立。角色待机有独立眨眼、摇头和呼吸。所有规则以当前源码和skill为准，docs中的旧八关/无尽/单张角版本为历史设计。
+购物冻结战斗但BGM继续，菜单/结算停止，后台暂停，音乐/音效开关独立。角色待机有独立眨眼、摇头和呼吸。所有规则以当前源码和skill为准，旧八关/无尽/单张角方案通过Git追溯，文档保留当前规则。
 
 ## 构建与预览
 
@@ -54,6 +54,6 @@ npm run build:wechat
 
 npm test覆盖真实组件状态流转、交易/保存、所有武器品质真实命中、17场Boss动作、40类AI与正背面、共享池预算、连续碰撞、前期经济、启动/暂停/后台/音乐和胜败导航；工程夹具可加速阶段，不是真人通关成绩。
 
-`node scripts/report-chronicle-balance.cjs`输出150条五英雄购物路径模型（65%清兵/命中假设），结果为docs/chronicle-balance-v4.json；不是生存胜率。`npm run profile:battle -- docs/performance-v4.json`为Node/Cocos桩CPU和绘图调用，不是iOS FPS。v4.3进一步将粒子、金币、出生光圈、双方弹体与剑阵本体改为共享Sprite缓存，保留判定/数量；微信渲染工程对照见docs/performance-v4.3.json。手机完整征程、峰值内存及历史iOS闪退回归仍需设备实测。
+`node scripts/report-chronicle-balance.cjs`输出150条五英雄购物路径模型（65%清兵/命中假设），结果为docs/chronicle-balance.json；不是生存胜率。`npm run profile:battle -- docs/performance-node.json`为Node/Cocos桩CPU和绘图调用，不是iOS FPS。v4.3进一步将粒子、金币、出生光圈、双方弹体与剑阵本体改为共享Sprite缓存，保留判定/数量；微信渲染工程对照见docs/performance-wechat-baseline.json。手机完整征程、峰值内存及历史iOS闪退回归仍需设备实测。
 
-历史方案见docs其他版本；原始飞书方案保留[飞书文档](https://www.feishu.cn/docx/Xb21d7jXnoLvUixnxu1cWSAXnIc)，不覆盖当前v5规则。
+资源只保留当前采用版本，见[资源索引](docs/resources.md)；原始飞书方案保留[飞书文档](https://www.feishu.cn/docx/Xb21d7jXnoLvUixnxu1cWSAXnIc)，不覆盖当前v5规则。

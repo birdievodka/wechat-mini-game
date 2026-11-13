@@ -1,5 +1,0 @@
-{
-  "tool": "built-in image_gen",
-  "prompt": "Edit the reference into ONE isolated game sprite of Liu Bei, using the first idle pose as the identity and style reference. Transparent background. Keep the same compact chibi body, big ears, eyebrows, tiny moustache, topknot, cream tunic, green collar and short cape, red belt, brown boots, bold outlines. Front facing slight three-quarter right, upright neutral idle pose, full body centered, ample margin. REMOVE BOTH STRAW SANDALS AND BOTH HANDS/ARMS completely: this is a torso/head/legs sprite for a game where detached weapon-hands are rendered separately. The short tunic silhouette should be clean at both sides, without empty sleeves sticking out. No weapons, no hands, no floating objects, no shadow, no text, no grid, no effects. A single sprite, not a sheet. Simple flat-color 2D game art, preserve existing style.",
-  "output": "assets/resources/characters/liubei-body.png"
-}

@@ -50,6 +50,7 @@ description: "开发和维护《桃园乱斗》Cocos Creator 微信小游戏时�
 | 三波与张角首领、通关、武器增强及前期掉率 | [首章通关规则](references/chapter-zhangjiao.md) |
 | 失败结算、哭泣表情、成绩与重开 | [结算页](references/result-screen.md) |
 | 长线章节、群雄、新兵／名器、赵云／孔明、图鉴、存档与固定曲线（已实现） | [v4长线实现与数值边界](references/expansion-v4.md) |
+| 生成资源清理、当前源图与最新版本保留 | [资源维护](references/resources.md) |
 | 更新本 skill 或生成器 | [维护流程](references/maintenance.md) |
 | 描述与效果不一致 | [已知差异](references/known-gaps.md)和相关调用路径 |
 

@@ -51,7 +51,7 @@ node /path/to/cocos-game-vfx/scripts/inspect-taoyuan.cjs --project /path/to/wech
 
 案例索引：
 
-- 已选图和提示词：`art/concepts/sweep-v5.1/01-golden-cleave.png`、`prompts.json`。B/C仍只是未采用概念。
+- 已选图和提示词：`art/concepts/sweep-v5.1/01-golden-cleave.png`、`prompts.json`。仅保留已采用A稿，其他候选通过Git追溯。
 - 实装说明：`docs/golden-sweep-v5.1.md`。
 - 微信工程关键帧和GIF：`art/reviews/golden-sweep-v5.1/`。
 - 版本、取帧、还原和源码哈希：`docs/golden-sweep-v5.1-validation.json`。
