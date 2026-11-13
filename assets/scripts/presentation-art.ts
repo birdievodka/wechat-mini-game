@@ -11,6 +11,8 @@ export const WEAPON_ICON_PATCH_RECTS={pole:[25,27,218,206]};
 export const BUTCHER_ICON_RECT=[28,34,335,331];
 // [open head, closed head, torso]; paired head rects have identical geometry for stable blinking.
 export const HERO_PART_RECTS: Record<string, number[][]> = {
+  zhaoyun:[[0,0,256,256],[0,256,256,256],[0,512,256,256]],
+  kongming:[[256,0,256,256],[256,256,256,256],[256,512,256,256]],
   liubei:[[40,29,379,363],[40,438,379,363],[66,939,310,232]],
   guanyu:[[443,30,372,395],[443,439,372,395],[477,937,305,232]],
   zhangfei:[[876,29,356,380],[876,438,356,380],[883,937,325,235]],

@@ -13,8 +13,9 @@
     "skill:check": "node .agents/skills/taoyuan-game/scripts/sync-catalog.cjs --check",
     "typecheck": "tsc --noEmit",
     "build:wechat": "node scripts/build-wechat.cjs",
-    "test": "node scripts/test-presentation-art.cjs && node scripts/test-result-art.cjs && node scripts/test-startup.cjs && node scripts/test-music.cjs && node scripts/test-weapon-sound.cjs && node scripts/test-weapons.cjs && node scripts/test-combat-effects.cjs && node scripts/test-combat.cjs && node scripts/test-campaign.cjs",
-    "assets:optimize": "node scripts/optimize-textures.cjs"
+    "test": "node scripts/test-presentation-art.cjs && node scripts/test-result-art.cjs && node scripts/test-startup.cjs && node scripts/test-music.cjs && node scripts/test-weapon-sound.cjs && node scripts/test-weapons.cjs && node scripts/test-combat-effects.cjs && node scripts/test-combat.cjs && node scripts/test-campaign.cjs && node scripts/test-performance.cjs && node scripts/test-chronicles.cjs && node scripts/test-common-skills.cjs",
+    "assets:optimize": "node scripts/optimize-textures.cjs",
+    "profile:battle": "node scripts/profile-battle.cjs"
   },
   "devDependencies": {
     "sharp": "0.35.5",

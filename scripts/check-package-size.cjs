@@ -38,6 +38,10 @@ assert.ok(bundles.some(b=>b.name==='results'),'缺少结算表情分包');
 assert.ok(fs.existsSync(path.join(root,'subpackages/results/game.js')),'缺少结算表情分包入口');
 assert.ok(bundles.some(b=>b.name==='presentation'),'缺少武器图标与角色分层分包');
 assert.ok(fs.existsSync(path.join(root,'subpackages/presentation/game.js')),'缺少表现分包入口');
+for(const name of ['chronicle-ui','chronicle-units']){
+  assert.ok(bundles.some(b=>b.name===name),'缺少v4共享图集分包 '+name);
+  assert.ok(fs.existsSync(path.join(root,'subpackages',name,'game.js')),'缺少v4分包入口 '+name);
+}
 const total = main + Object.values(sizes).reduce((a, b) => a + b, 0);
 console.log(`总包 ${(total / 1024 / 1024).toFixed(2)} MiB`);
 // This project's actual DevTools preview rejects source packages above 20 MiB.

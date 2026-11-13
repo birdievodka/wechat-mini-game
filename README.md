@@ -1,122 +1,59 @@
 # 桃园乱斗
 
-当前 v3.3.3：左下固定摇杆约放大25%，同步扩大触摸范围，底座/摇杆头/移动行程统一调整并保留边距。
+Cocos Creator **3.8.8** + TypeScript 横屏微信小游戏。当前v5：搞笑三国、小脚豆Q版，移动＋自动攻击＋一个自由搭配通用技能；五英雄、六卷17章、14位Boss的17场战役、40类敌兵、36种武器、60被动及9种天命。
 
-当前 v3.3.2：压缩运行PNG图集（保留尺寸和精确透明度），原图在art/runtime-sources/png；`npm run assets:optimize`可重复执行。手机预览实际上限20MB，构建改为19MiB安全预算；本次总包28.31→16.09MiB。
-
-当前 v3.3.1：挑战张角保留存活小兵与在途弹幕；商店持续播放背景音乐，战斗仍冻结，后台暂停与商店返回续播正常。
-
-项目最新规范维护在 [桃园乱斗 skill](.agents/skills/taoyuan-game/SKILL.md)，包括画风、玩法、角色、武器道具、数值、音效与构建。后续项目变更需同任务更新对应参考，再运行 `npm run skill:sync`；`npm run skill:check` 检查过期目录，已接入 `npm run check`。下方旧关卡和营地说明保留为迭代记录，当前玩法以 skill 与实装为准。
-
-## 当前玩法（2026-11-12）
-
-当前v3.3：20秒热身后挑战三波（每波30秒、波后购物），第三波补给后出现首个张角，击败即通关，当前不再续出第四波。通关开心立绘/胜章，失败哭脸；最快通关独立保存。恢复桃花枝持握并发花瓣；所有武器基础伤害提高约60%–80%，近战整段横扫覆盖全部敌兵。热身保证两武器，前期普通商店80%概率第二把武器；30/60秒提前解锁法器。详见[首章规则](.agents/skills/taoyuan-game/references/chapter-zhangjiao.md)。
-
-当前v3.2：战斗手臂按分层短袍重做，低肩弯肘、短袖口与独立圆手掌；修正袖子盖脸和掌心藏在武器后的问题，左右镜像、多武器自然双手与投鞋手势同步修正。见[手臂与握持规范](.agents/skills/taoyuan-game/references/hero-arms.md)。
-
-当前v3.1：关羽绿豆袋改为近战扁担，张飞默认传统杀猪尖刀；桃花仅商店获得，白色单瓣、蓝色起三瓣扇射，移除擀面杖。11种武器全部配置四档攻击机制，商店/详情显示实际效果；选人、哭泣图与主题海报同步新武器。见[完整升阶表](.agents/skills/taoyuan-game/references/weapon-evolution.md)。
-
-当前 v3.0：十二武器在战斗栏、商店、结算统一使用清晰手绘插画；刘关张战斗形象分为独立头部与短袍，加入实际眨眼、呼吸和各自摇头/点头/笑颤。移动、暂停、受击与重开有完整衔接。素材为独立presentation分包。详见[图标与英雄动作规范](.agents/skills/taoyuan-game/references/presentation-animation.md)。
-
-当前 v2.9：失败结算重做为左侧哭泣英雄、右侧战报纸卡；突出存活时间、击败/最佳/剩余铜钱与六武器，朱红“再来一局”和次要“返回选人”。刘关张各有专用哭泣立绘和轻微抽泣，热身失败显示真实热身时长；表情图为独立results分包。详见 [结算页规范](.agents/skills/taoyuan-game/references/result-screen.md)。
-
-当前 v2.8：启动及Loading统一刘关张主题海报与连续进度条，去除默认Cocos启动标识。引擎阶段2–22%、真实资源准备22–98%、关键资源就绪后100%并进入选人；失败保留提示。详见 [启动与加载规范](.agents/skills/taoyuan-game/references/startup-loading.md)。
-
-当前 v2.7：左下固定方向摇杆，右下人物技能；刘备金鞋震波、关羽青豆龙形扇浪、张飞桃花狮吼，12种武器升级出手/飞行/命中表现。使用280槽程序粒子池与分层短特效，购物/暂停冻结，退出清理。详见 [战斗特效规范](.agents/skills/taoyuan-game/references/combat-effects.md)。
-
-当前 v2.6：1.5倍屏幕地图、十二武器、60种被动道具（新增12种远程强化）、角色专属技能、小桃树掉桃回血与多武器周身环绕。补给可连买三项、连续刷新，刷新费5起每次增加3。选人页采用三张英雄卡与“开始”按钮，移除属性条、测试入口与初始武器选择；点击开始使用角色默认武器。20秒热身结束先购物，准备好后原地进入无尽。详见 [本次实装记录](docs/implementation-orchard-v2.6.md)。
-
-正式模式：20秒热身 → 热身补给 → 三波各30秒及波后补给 → 张角首领战 → 击败通关。固定五颗心、六武器位，支持连续购买和本地最快通关纪录。旧无尽/八关说明保留为历史，不覆盖上方v3.3。详见 [无限模式说明](docs/survival-mode.md)。
-
-
-Cocos Creator **3.8.8** + TypeScript 横屏微信小游戏。三位英雄、八个60秒关卡，完整的「自动战斗 → 经验升级 → 营地商店 → 下一关 → 首领与结算」循环。
-
-[飞书游戏设计与美术方案](https://www.feishu.cn/docx/Xb21d7jXnoLvUixnxu1cWSAXnIc) · [本地数值设计](docs/game-design-v1.md) · [六武器系统 v2](docs/weapon-system-v2.md)
+[完整设计与实装索引](docs/design-v4/README.md) · [实装和验证记录](docs/design-v4/07-implementation-and-validation.md) · [项目skill](.agents/skills/taoyuan-game/SKILL.md)
 
 ## 开始游玩
 
-1. 用 Creator 3.8.8 打开此目录，打开 `assets/scenes/Main.scene` 并预览；微信端先运行 `npm run build:wechat`，再用微信开发者工具编译。
-2. 在“选择英雄”页面选择刘备、关羽或张飞，点击“开始”直接进入战斗；默认白色初始武器分别为草鞋、绿豆袋、桃枝。其他武器从局内商店购买。
-3. 手机拖动左下固定方向摇杆，松手归中停止；右下释放英雄技能。电脑支持 ↑↓←→ / WASD，按住持续移动、松开停止，两个方向同时按可斜走，Space/E释放技能；先点击游戏区域让窗口获得焦点。浏览器与微信桌面接口均有键盘兼容监听，切出窗口会清空按键。
-4. 最多装备6件武器，各自按射程和冷却自动攻击。草鞋投掷、绿豆穿透、桃枝爆炸、杀猪刀扫砍；商店额外出售擀面杖和爆竹。小兵死亡掉落铜钱，靠近吸附，每枚仅提示 `+1`；击杀经验自动到账。
-5. 每关60秒，升级次数积累到回营后逐次三选一，再购买道具。每个营地有4件商品，混合出售武器和道具；前两关商店至少2把武器。刷新费3起、每次加2，每种道具最多3份，锁定商品跨刷新和回合保留原价。最近三种道具显示为角色挂件。
-6. 第3关出现弓箭手，第5关出现冲锋骑兵，第8关挑战道士张角。第1–7关坚持到60秒即可过关；第8关必须击败首领并存活到60秒结束。
-7. 右上暂停按钮位于微信胶囊左侧，可查看装备、继续、返回选人、开关音效。切后台自动暂停。失败或胜利后可同角色重开或返回菜单。
+1. 用Creator3.8.8打开此目录及`assets/scenes/Main.scene`预览；微信体验先`npm run build:wechat`，再在微信开发者工具编译根项目（指向build/wechatgame）。
+2. 上方展示选中英雄的分层动态模型，下方头像选择刘备/关羽/张飞/赵云/孔明，点居中的“开始”。默认白武器为草鞋/扁担/杀猪尖刀/龙胆银枪/白羽扇；没有开局武器选择或测试入口。首页图鉴可查敌兵、Boss、四阶武器和技能；24通用技能全部开放，可点击英雄头像列表右侧的技能图标独立选择，按综合威力升序。
+3. 手机左下固定摇杆、右下携带技能，二者水平对齐。电脑支持方向键/WASD，Space/E放技能；先点击游戏区域获取焦点。松手停止、切后台清输入并暂停。
+4. 每章15秒第零段＋三波各30秒/波后购物＋Boss。首章15秒后收入补足28，保证可买一把新武器；不自动赠送。后续章间先补给，15秒整队后直接继续，避免双商店。
+5. 五颗心，每次有效受伤扣一心。六武器位周身环绕，被动可无限叠加且递减；三张商品可全买，刷新5/8/11……，同款同阶可免费合成，至少保留一把。没有经验条、等级或隐藏等级成长。
+6. Boss入场保留小兵和在途弹幕，并继续援军。击败后回1心、章间继承装备/金币/技能充能；第17章司马懿·五丈原才总通关。失败哭脸，可重试本章入口；失败所得不继承，战斗用时/重试次数保留。
+7. 自动保存最近整备点和每笔商店交易，首页有“继续征程/新征程”。中断战斗重建当前战段世界，不逐帧保存敌兵。地图宽高各视野1.5倍，草地小花为主，小桃树/动物掉回血物，满心也可拾取但不会溢出加血。
 
+购物冻结战斗但BGM继续，菜单/结算停止，后台暂停，音乐/音效开关独立。角色待机有独立眨眼、摇头和呼吸。所有规则以当前源码和skill为准，docs中的旧八关/无尽/单张角版本为历史设计。
 
-当前v2：初始生命刘备10、关羽10、张飞12；刘备护甲+1/拾取+20，关羽远程伤害+1/远程距离+30，张飞近战和法术伤害+2/攻速−10%；升级自动+1生命，首三次经验需求16/25/36，回营再选属性。等级显示在左上姓名旁，经验条位于生命条下方；待机有呼吸和轻摇头。
-
-武器分白I、蓝II、紫III、红IV，同款同阶两件免费合成下一阶，最高IV。未满槽购买同款先增加武器，满6槽时购买同款同阶会直接合成，否则禁用购买。点击装备格可查看属性、合成或按25%标价回收；至少保留1件。同类装备2/4/6件提供该类伤害+1/+2/+3。
-
-营地UI已采用已确认的纸卡漫画设计：整卡点击升级、大图标与前后数值、角色属性区、四件商品、六格武器栏、品质/锁定/合成/回收，以及独立购买/刷新/出发按钮。行囊展示前6种持有道具，点击「全部」查看完整12种道具；更多属性可点「查看全部属性」。敌人基础速度现为普通兵78、弓箭手64、骑兵92、张角54，关卡加速曲线保留。
-
-敌兵技能：弓箭手0.18秒拉弓、约1.29秒一箭，无瞄准线；连续受击不会无限取消出手。骑兵先追近到260距离以内，后仰蓄势0.45秒后，以540速度沿锁定方向冲锋0.62秒，无地面路径、范围或箭头提示，保留奔驰和扬尘。张角交替释放定点落雷与三才雷阵：旋转八卦阵、悬浮符纸和聚能光点后出现分叉金色落雷、地面电弧与碎符余光。圈位固定，最短0.85秒预警，外圈对应实际伤害半径；余光0.55秒不追加伤害。地面符阵与空中雷光分层绘制，HUD保持清晰，无新增贴图；所有敌兵首次攻击冷却不再随整局出生序号增长。
-
-本地只保存最佳到达关卡、音乐和音效偏好；局内金币、装备、经验不跨次保存。道具不收费，无广告复活和体力系统。草鞋命中声沿用用户提供的音频，其余五种武器分别使用专属出手/命中声；范围攻击只响一次，六声道限频，保持小碎屑、闪红、受击形变和击退反馈。见[武器音效设计与试听](docs/weapon-sounds.md)。
-
-战斗配乐为原创《桃园开打·战斗版》：128 BPM、60秒，弹拨主题配战鼓、弦乐短奏和低音，最后15秒加强节奏；暂停菜单支持音乐/音效分别开关。暂停和后台同步暂停音乐，商店持续播放并独立推进音乐时钟，返回商店自动续播；菜单与结算停止，新局从头播放。见[编曲与播放设计](docs/battle-music.md)。
-
-## 构建与手机预览
+## 构建与预览
 
 ```sh
 npm ci
 npm run typecheck
 npm test
+npm run skill:sync
 npm run check
 npm run build:wechat
 ```
 
-首次需让 Creator 导入项目，生成 `temp/tsconfig.cocos.json` 及引擎类型声明。标准 macOS 安装位置自动识别；自定义安装路径可设置：
+首次需Creator导入项目生成引擎类型。标准macOS安装路径自动识别；自定义可设置`COCOS_CREATOR`指向编辑器可执行文件。构建输出`build/wechatgame`，AppID`wxbf455170a0f5ea11`，根project.config.json已指向产物；不要手改产物。
 
-```sh
-export COCOS_CREATOR='/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/MacOS/CocosCreator'
-npm run build:wechat
-```
+微信开发者工具点“编译”，再“预览”扫码。本AppID当前服务端源码包限制20MB，本地安全预算19MiB、主包/每分包4MiB；构建脚本验证尺寸及引擎导出依赖。以最新构建和服务端结果为准，生成二维码不等于iOS战斗实测。
 
-构建配置在 `config/build-wechat.json`，**横屏**，AppID `wxbf455170a0f5ea11`。微信开发者工具导入 `build/wechatgame` 后点击「编译」，再点「预览」扫码。现有根目录的 `project.config.json` 也指向该产物，可继续使用。不要手动修改构建产物。
+素材先用imagegen制作透明源图，保存于`art/runtime-v4`；再运行`node scripts/pack-chronicle-art.cjs`切格，`npm run assets:optimize`在保留尺寸/精确alpha下压缩RGB。原图不进入assets。新增运行图集在chronicle-ui/chronicle-units两共享分包，现阶段不依赖CDN。不要只压PNG字节就认为GPU内存也减少。
 
-关闭 Debug/SourceMap，裁剪引擎并使用本地分包：`battle` 放已有战斗资源，`campaign` 放菜单、角色与道具，`enemies` 放三类特殊敌兵多方向动作图集，`music` 放独立60秒战斗配乐，`sfx` 放专属武器音效。无需 CDN。构建脚本自动验证主包小于4MiB、分包入口存在、总包安全预算小于19MiB（当前手机预览上限20MB），以及全部脚本依赖的引擎运行时导出。以最新实际构建报告为准，不沿用历史包体数据。
+## 代码入口
 
-## 代码与资源
+| 文件 | 用途 |
+| --- | --- |
+| `GameBootstrap.ts` | 正式状态机、输入、战斗/敌军/技能/掉落/保存与音频 |
+| `campaign.ts`、`weapons.ts` | Run、五英雄、属性/品质、装备交易；旧八关函数仅兼容 |
+| `chronicles-data.ts`、`chronicles.ts` | 17章/40兵/24技能、固定曲线、逐段编组与Boss动作 |
+| `extra-weapons.ts` | 新25武器、四阶机制、整组输出系数 |
+| `survival.ts` | 现行货架、资格、价格、购买/刷新、版本号 |
+| `CampaignView.ts`、`CodexView.ts`、`ResultView.ts` | 五英雄/补给、只读图鉴、胜败战报 |
+| `chronicle-art.ts`、`presentation-art.ts`、`hero-idle.ts` | 共享素材裁格、统一图标、分层眨眼与待机 |
+| `chronicle-save.ts`、`runtime-health.ts` | 检查点存档、限长本地故障/内存告警记录 |
+| `combat-math.ts`、`combat-effects.ts`、`combat-particles.ts` | 连续碰撞与有预算的程序特效 |
+| `world-rules.ts`、`joystick-input.ts`、`desktop-keyboard.ts` | 1.5倍地图/相机/出生、固定摇杆、电脑输入 |
 
-|位置|用途|
-|---|---|
-|`assets/scripts/campaign.ts`|人物特性、12道具、升级/经济公式、混合商店/锁定/合成/回收、八关规则|
-|`assets/scripts/weapons.ts`|6武器定义、四阶品质、属性公式、价格与品质概率|
-|`assets/scripts/weapon-art.ts`|菜单/商店/实际战斗共用的武器绘制|
-|`assets/scripts/CampaignView.ts`|开始菜单、纸卡升级/营地商店、行囊与属性弹层、胜负结算|
-|`assets/scripts/camp-presenter.ts`|升级前后属性预览与显示，直接复用实际规则|
-|`assets/scripts/GameBootstrap.ts`|场景、输入、战斗状态机、武器、AI、特效、声音|
-|`assets/scripts/enemy-behavior.ts`|敌兵出手时序、出生冷却、朝向与动作帧选择|
-|`assets/scripts/enemy-spell-effects.ts`|张角施法符纸、八卦阵、分叉落雷、电弧与余光，双层轻量绘制|
-|`assets/enemies/`|弓箭手、骑兵、张角的4列×3行透明动作图集|
-|`assets/scripts/combat-math.ts`|归一化移动、连续扫掠碰撞|
-|`assets/battle/`|刘备拆分身体、普通黄巾兵多方向动作图集、用户打击音效|
-|`assets/campaign/`|运行时压缩尺寸的海报、关张拆分身体、新敌人与道具图集|
-|`art/concepts/campaign/`|本轮设计原图、生成提示、来源记录，不参与打包|
-|`art/archive/`|旧版原图和音频，不参与打包|
-|`docs/`|游戏设计、飞书文档记录、验证结果|
-
-独立UI核对可用 `config/build-camp-review.json` 构建Web，运行 `node scripts/prepare-camp-review.cjs` 将预览模板设为1334×750，然后用本地HTTP服务托管 `build/camp-review`，打开 `?camp=upgrade` 或 `?camp=shop`；附加 `hero=guanyu` / `hero=zhangfei` 切换角色，`bag=full` 查看满行囊。`?enemies=review` 是独立敌兵演示场（100血、停止自动攻击），用于核对动作和技能；正常入口仍先选人。`?camp=shop&weapons=full` 查看六槽混合商店，`?weapons=review` 查看六武器同时攻击。所有核对入口仅在DEBUG浏览器构建启用，微信发布包不启用。
-
-修改数值优先编辑 `campaign.ts`。运行时英雄身体与程序手脚/武器分开，动作跟随实际位移。只装备一件武器时仍显示双手，空手随待机与行走摆动；绿豆袋由一手持袋、另一手投豆，弹丸从投掷手发出。普通黄巾兵保留正/侧/背动作帧；弓箭手、骑兵、张角均采用同样的正/侧/背动作帧，左向镜像侧面，按实际位移切换两步行走，并有独立蓄势与出手帧。所有 `.meta` 应随资源提交。
-
-`scripts/prepare-enemy-art.cjs` 导出新版敌兵图集，原稿与内置imagegen生成提示位于 `art/concepts/enemies-v2/`。
-
-`scripts/prepare-campaign-art.cjs` 仅负责把已生成原图导出为适合运行时的尺寸（macOS sips），保留原稿；修改美术后重跑再构建。
+所有源码位于assets/scripts；资源.meta随源文件保存。完整说明按skill索引阅读。**后续变更必须同任务更新对应skill参考，再skill:sync/check，不绕过来源指纹检查。**
 
 ## 验证范围
 
-- `npm test`：12种起手组合、六武器独立攻击/暂停、近战扇区、弹丸快照、960轮商店分布与保底、满槽/合成/回收/锁定事务；移动/碰撞回归、三英雄真实命中差异、平方经验与升级补血、再生间隔/负护甲、关羽持袋/高攻速单手投豆、待机冻结、商品扣款与上限、完整启动与UI状态切换、计时/暂停、死亡重开、敌方技能和三角色八关流程。八关流程测试使用无敌并在最后强制击杀首领，专用于验证状态完整性，不能证明游戏平衡。
-- `node scripts/test-campaign.cjs --balance`：固定种子、普通生命、简单移动机器人试打，输出 `docs/balance-smoke.json`。它不代表真人胜率。
-- `npm run check`：场景 UUID、AppID、构建配置和 TS 转译。
-- `npm run typecheck`：引擎类型检查。
-- 微信开发者工具实际核对菜单、第一关自动战斗、升级、商店购买、属性变化和预览构建。手机触控、音效、低端机帧率和真实难度仍需真机游玩验收。
+npm test覆盖真实组件状态流转、交易/保存、所有武器品质真实命中、17场Boss动作、40类AI与正背面、共享池预算、连续碰撞、前期经济、启动/暂停/后台/音乐和胜败导航；工程夹具可加速阶段，不是真人通关成绩。
 
-首版数值是待调校基线，文档的通关率与性能数字为目标，不是已测结果。
+`node scripts/report-chronicle-balance.cjs`输出150条五英雄购物路径模型（65%清兵/命中假设），结果为docs/chronicle-balance-v4.json；不是生存胜率。`npm run profile:battle -- docs/performance-v4.json`为Node/Cocos桩CPU和绘图调用，不是iOS FPS。v4.3进一步将粒子、金币、出生光圈、双方弹体与剑阵本体改为共享Sprite缓存，保留判定/数量；微信渲染工程对照见docs/performance-v4.3.json。手机完整征程、峰值内存及历史iOS闪退回归仍需设备实测。
 
-## 参考
-
-- [Brotato 官方介绍](https://store.steampowered.com/app/1942280/Brotato/)
-- [微信小游戏引擎适配概述](https://developers.weixin.qq.com/minigame/dev/guide/game-engine/engine-overview.html)
-- [Cocos 发布到微信小游戏](https://docs.cocos.com/creator/3.8/manual/en/editor/publish/publish-wechatgame.html)
+历史方案见docs其他版本；原始飞书方案保留[飞书文档](https://www.feishu.cn/docx/Xb21d7jXnoLvUixnxu1cWSAXnIc)，不覆盖当前v5规则。

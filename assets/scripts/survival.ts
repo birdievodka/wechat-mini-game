@@ -1,18 +1,20 @@
+import {chapterFor,chapterInflation} from './chronicles';
+import {EXTRA_WEAPONS} from './extra-weapons';
 import { PASSIVE_ITEMS, eligiblePassive, passivePreview, passiveBonuses } from './passive-items';
-import { Run, ITEMS, randomSample, weaponStatsFor } from './campaign';
+import { Run, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BUDGET } from './campaign';
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 
-export const SURVIVAL_VERSION = 'orchard-v3.3.5-centered-start';
+export const SURVIVAL_VERSION = 'chronicles-v5.1-golden-sweep';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;
 export const EARLY_SECOND_WEAPON_CHANCE=.8;
 export const bossDue=(wavesCleared:number):boolean=>wavesCleared>0&&wavesCleared%BOSS_EVERY_WAVES===0;
-export function unlockedWeapons(seconds:number){return WEAPONS.filter(w=>!(['sword','thunder'].indexOf(w.id)>=0&&seconds<30)&&!(['rocket','gourd'].indexOf(w.id)>=0&&seconds<60));}
+export function unlockedWeapons(seconds:number,run?:Run){return WEAPONS.filter(w=>(!EXTRA_WEAPONS.some(e=>e.id===w.id)||!!run&&(w.id===run.starter||EXTRA_WEAPONS.find(e=>e.id===w.id)!.unlock<run.chapter))&&!(['sword','thunder'].indexOf(w.id)>=0&&seconds<30)&&!(['rocket','gourd'].indexOf(w.id)>=0&&seconds<60));}
 export const clockText = (seconds: number): string => `${Math.floor(seconds / 60) < 10 ? '0' : ''}${Math.floor(seconds / 60)}:${('0' + Math.floor(seconds % 60)).slice(-2)}`;
 export const spawnBudget = (seconds: number): number => Math.min(7.5, 2.5 * 1.16 ** (seconds / 60));
 export const enemyCost = (kind: string): number => kind === 'chief' ? 20 : kind === 'cavalry' ? 2.5 : kind === 'spearman' ? 1.25 : 1;
-export const basePrice = (run: Run): number => Math.min(80, Math.round(28 * 1.035 ** run.supplyCount));
+export const basePrice = (run: Run): number => Math.round(28 * chapterInflation(run.chapter));
 export interface Augment { id: string; name: string; desc: string; icon: string; needs?: string[]; }
 export const AUGMENTS: Augment[] = [
   { id: 'ricochet', name: '鞋来！', desc: '草鞋命中后弹射两次\n弹射伤害为原伤害60%', icon: 'range', needs: ['sandal'] },
@@ -21,7 +23,7 @@ export const AUGMENTS: Augment[] = [
   { id: 'all-in', name: '俺全都要', desc: '装满六武器时\n伤害+25% · 攻速+15%', icon: 'power' },
   { id: 'specialist', name: '祖传独门绝活', desc: '同名武器达到3把\n该武器伤害+30%、击退+20%', icon: 'power' },
   { id: 'last-heart', name: '最后一口气', desc: '仅剩一颗心时\n伤害+35% · 移速+12%', icon: 'crit' },
-  { id: 'big-bang', name: '桃园放大器', desc: '爆炸半径+30%\n范围武器伤害+20%', icon: 'area', needs: ['peach', 'firecracker', 'rocket'] },
+  { id: 'big-bang', name: '桃园放大器', desc: '爆炸半径+30%\n范围武器伤害+20%', icon: 'area', needs: ['peach', 'firecracker', 'rocket','oil-jar','thunder-bomb','bagua'] },
   { id: 'drummer', name: '战鼓擂起来', desc: '所有武器攻速+40%\n攻击速度加法叠加', icon: 'haste' },
   { id: 'rich', name: '财神上身', desc: '金币收入+30%\n吸钱范围+60', icon: 'coin' },
 ];
@@ -48,7 +50,7 @@ export function eligibleItem(run: Run, id: string): boolean {
 export const refreshPrice = (run: Run): number => run.rerolls === 0 ? passiveBonuses(run.inventory).refresh : 5 + 3 * run.rerolls;
 export function supplyWeaponPrice(run: Run, id: string, tier: Tier): number {
   const d = weaponFor(id as typeof WEAPONS[number]['id']);
-  return Math.max(1,Math.round(basePrice(run) * (d.starter ? 1 : d.price / 28) * [1,1.6,2.5,4][tier-1] * (1-passiveBonuses(run.inventory).discount)));
+  return Math.max(1,Math.round(basePrice(run) * (d.starter||id===run.starter ? 1 : d.price / 28) * [1,1.6,2.5,4][tier-1] * (1-passiveBonuses(run.inventory).discount)));
 }
 export function upgradeOffer(w: {uid:number;tier:Tier}): string { return `u:${w.uid}:${w.tier+1}`; }
 export function repairSupply(run: Run): void {
@@ -65,12 +67,12 @@ export function rollSupply(run: Run, random = Math.random): void {
   const price = basePrice(run), cards: string[] = [], prices: Record<string, number> = {};
   const add = (id: string, cost: number): void => { if (!(cards.indexOf(id) >= 0)) { cards.push(id); prices[id] = cost; } };
   const addWeapon=():void=>{
-    const seconds=run.survivalSeconds,tier:Tier=seconds<30?1:random()<(seconds<60?.25:.5)?2:1;
-    const purchases=unlockedWeapons(seconds).map(def=>({id:weaponOffer(def.id,tier),weapon:def.id,tier}));
+    const seconds=run.survivalSeconds;const distributions=[[.7,.3,0,0],[.35,.55,.1,0],[.15,.55,.28,.02],[.05,.35,.5,.1],[0,.2,.55,.25],[0,.1,.5,.4]];let roll=random(),tier:Tier=1;if(run.chapter===1)tier=seconds<30?1:random()<(seconds<60?.25:.5)?2:1;else{const chance=distributions[chapterFor(run.chapter).volume-1];for(let i=0;i<4;i++){roll-=chance[i];if(roll<=0){tier=(i+1) as Tier;break;}}}
+    const purchases=unlockedWeapons(seconds,run).filter(def=>run.supplyMode!=='departure'||supplyWeaponPrice(run,def.id,1)<=WARMUP_GOLD_BUDGET).map(def=>({id:weaponOffer(def.id,tier),weapon:def.id,tier}));
     const upgrades=run.weapons.filter(w=>w.tier<4).map(w=>({id:upgradeOffer(w),weapon:w.id,tier:(w.tier+1) as Tier}));
     const candidates=(run.weapons.length===WEAPON_LIMIT?[...upgrades,...purchases]:purchases).filter(c=>cards.indexOf(c.id)<0);
     const matching=candidates.filter(c=>c.id.startsWith('u:')||owns(run,[c.weapon]));
-    const pool=random()<.6&&matching.length?matching:candidates,choice=pool[Math.floor(random()*pool.length)];
+    const ownedCategories=run.weapons.map(w=>weaponFor(w.id).category),sameFamily=candidates.filter(c=>ownedCategories.indexOf(weaponFor(c.weapon).category)>=0),newPool=candidates.filter(c=>EXTRA_WEAPONS.some(d=>d.id===c.weapon&&d.unlock===run.chapter-1)),r=random();const pool=r<.4&&matching.length?matching:r<.75&&sameFamily.length?sameFamily:r<.95&&newPool.length?newPool:candidates,choice=pool[Math.floor(random()*pool.length)];
     if(choice)add(choice.id,supplyWeaponPrice(run,choice.weapon,choice.tier));
   };
   if (run.supplyMode === 'departure') {
@@ -82,7 +84,7 @@ export function rollSupply(run: Run, random = Math.random): void {
   }
   if (run.supplyMode === 'normal' || cards.length < 3) {
     if(run.supplyMode==='normal')addWeapon();
-    if(run.supplyMode!=='major'&&cards.length<2&&(run.supplyMode==='departure'||run.survivalSeconds<=90&&random()<EARLY_SECOND_WEAPON_CHANCE))addWeapon();
+    if(run.supplyMode!=='major'&&cards.length<2&&(run.supplyMode==='departure'||random()<(chapterFor(run.chapter).volume===1?EARLY_SECOND_WEAPON_CHANCE:.5)))addWeapon();
     const pool = ITEMS.filter(i => i.id !== 'training' && eligibleItem(run, i.id));
     if (run.hearts <= 2 && eligibleItem(run, 'bun') && cards.length < 3) add('bun', Math.round(price * 1.8));
     for (const item of randomSample(pool, pool.length, random)) {

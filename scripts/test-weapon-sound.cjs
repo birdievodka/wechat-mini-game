@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const out = {};
 vm.runInNewContext(ts.transpileModule(fs.readFileSync('assets/scripts/weapon-sound.ts', 'utf8'), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2017 },
-}).outputText, { exports: out });
+}).outputText, { exports: out,require:()=>require('./test-campaign.cjs').load('weapons') });
 const { SOUND_CUES, GENERATED_SOUNDS, weaponSound, SoundGate, SFX_VOICES } = out;
 assert.equal(weaponSound('sandal', 'attack'), undefined, 'shoe never adds a whoosh');
 assert.equal(weaponSound('sandal', 'hit'), 'sandal-hit-pcm');

@@ -41,6 +41,6 @@ export class LoadingView {
     g.fillColor=new Color('#1c2b1f');g.roundRect(-width/2-2,-8,width+4,16,8);g.fill();
     const fill=width*this.value;if(fill>0){g.fillColor=new Color('#91af56');g.roundRect(-width/2,-6,fill,12,Math.min(6,fill/2));g.fill();
       g.fillColor=new Color('#c8d988');g.roundRect(-width/2,-1,fill,5,Math.min(2,fill/2));g.fill();}
-    this.status.string=this.error||`正在集结三兄弟…  ${Math.floor(this.value*100)}%`;
+    this.status.string=this.error||`英雄集结中…  ${Math.floor(this.value*100)}%`;
   }
 }

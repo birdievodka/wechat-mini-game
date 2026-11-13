@@ -22,9 +22,10 @@ for(const rect of Object.values(WEAPON_ICON_RECTS))checkRect(icons,rect);
 const patch=readAlpha('assets/presentation/weapon-revision.png'),knife=readAlpha('assets/presentation/butcher-knife.png');
 for(const rect of Object.values(WEAPON_ICON_PATCH_RECTS))checkRect(patch,rect,.05);checkRect(knife,BUTCHER_ICON_RECT,.05);
 for(const [id,rects]of Object.entries(HERO_PART_RECTS)){
-  rects.forEach(rect=>checkRect(heroes,rect));assert.equal(rects.length,3);assert.equal(rects[0][2],rects[1][2]);assert.equal(rects[0][3],rects[1][3]);
+  const image=['zhaoyun','kongming'].includes(id)?readAlpha('assets/chronicle-ui/hero-parts.png'):heroes;
+  rects.forEach(rect=>checkRect(image,rect));assert.equal(rects.length,3);assert.equal(rects[0][2],rects[1][2]);assert.equal(rects[0][3],rects[1][3]);
   const [a,b]=rects;let intersection=0,union=0;for(let y=0;y<a[3];y++)for(let x=0;x<a[2];x++){
-    const open=heroes.alpha[(a[1]+y)*heroes.w+a[0]+x]>32,closed=heroes.alpha[(b[1]+y)*heroes.w+b[0]+x]>32;
+    const open=image.alpha[(a[1]+y)*image.w+a[0]+x]>32,closed=image.alpha[(b[1]+y)*image.w+b[0]+x]>32;
     if(open&&closed)intersection++;if(open||closed)union++;
   }assert.ok(intersection/union>.94,id+'眨眼轮廓稳定，不突然换头/缩放');
 }
@@ -36,4 +37,16 @@ for(const hero of Object.keys(HERO_PART_RECTS)){
   for(const pose of samples){assert.ok(Math.abs(pose.headAngle)<5&&Math.abs(pose.headX)<2&&Math.abs(pose.headY)<3);}
   for(let i=0;i<1000;i++){const p=heroIdlePose(hero,i/60,1);assert.ok(Math.abs(p.headAngle)<1e-12);assert.ok(Math.abs(p.headX)<1e-12);assert.ok(Math.abs(p.headY)<1e-12);assert.equal(heroIdlePose(hero,i/60,0,true).eyesClosed,false);}
 }
-console.log('通过：11武器和三英雄分层图真实透明/纹理尺寸/实测裁格留白/眨眼对齐、三套待机节奏/短眨眼/移动收敛/受击抑制');
+const packed=JSON.parse(fs.readFileSync('art/runtime-v4/manifest.json'));let cells=0,decodedBytes=0;
+assert.equal(Object.keys(packed.atlases).length,10);
+for(const [name,atlas]of Object.entries(packed.atlases)){
+ const data=readAlpha(atlas.file);decodedBytes+=data.w*data.h*4;
+ assert.equal(data.w,atlas.columns*atlas.cell);assert.equal(data.h,atlas.rows*atlas.cell);
+ assert.equal(atlas.cells.length,atlas.columns*atlas.rows);
+ for(const entry of atlas.cells){checkRect(data,entry.rect,.01);cells++;const [x,y,w,h]=entry.rect;
+  for(let j=0;j<4;j++)for(let v=0;v<w;v++)assert.ok(data.alpha[(y+j)*data.w+x+v]<8&&data.alpha[(y+h-1-j)*data.w+x+v]<8,name+'四像素透明安全边');
+ }
+ const bundle=atlas.file.split('/')[1];assert.equal(JSON.parse(fs.readFileSync('assets/'+bundle+'.meta')).userData.bundleName,bundle);
+}
+assert.equal(cells,159);assert.ok(decodedBytes<16*1024*1024,'新增图集RGBA解码预算16MiB');
+console.log('通过：36武器/五英雄真实透明与眨眼对齐、十张新图集159格完整轮廓/安全边/独立分包/解码预算');

@@ -1,0 +1,25 @@
+{
+  "status": "concept-only-not-implemented",
+  "generator": "built-in image_gen",
+  "date": "2026-11-13",
+  "variants": [
+    {
+      "variant": "01-golden-cleave",
+      "title": "A 金锋回旋",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-ce0f1927-9a89-4205-baf0-310c05432853.png",
+      "file": "art/concepts/sweep-v5.1/01-golden-cleave.png"
+    },
+    {
+      "variant": "02-sixfold-blades",
+      "title": "B 六合六刃",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-663f924e-6f4f-41b1-b3ca-23fd7a826795.png",
+      "file": "art/concepts/sweep-v5.1/02-sixfold-blades.png"
+    },
+    {
+      "variant": "03-ink-gold-sweep",
+      "title": "C 墨金破阵",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-266409ec-a598-4d6b-8bc6-16a5eb3bf4b4.png",
+      "file": "art/concepts/sweep-v5.1/03-ink-gold-sweep.png"
+    }
+  ]
+}

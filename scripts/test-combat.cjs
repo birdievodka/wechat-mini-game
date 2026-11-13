@@ -39,7 +39,8 @@ function loadModule(name) {
 }
 const campaignExports = loadModule('campaign');
 vm.runInNewContext(main, { exports: componentExports, require: name => name === 'cc' ? cc : name === 'cc/env' ? { DEBUG: false } : loadModule(name.replace('./', '')) });
-const demo = new componentExports.GameBootstrap(); demo.phase = 'battle';
+function unitComponent(){const g=new componentExports.GameBootstrap();g.initCommonSkill();return g;}
+const demo = unitComponent(); demo.phase = 'battle';
 demo.root = { getComponent: () => ({ convertToNodeSpaceAR: world => world }) };
 // 模拟不同像素比下，正交摄像机将屏幕像素映射到居中世界坐标。
 for (const ratio of [1, 2, 3]) {
@@ -50,6 +51,7 @@ for (const ratio of [1, 2, 3]) {
   const j=loadModule('joystick-input');
   const center=j.joystickCenter(667,375),sx=center.x+667,sy=center.y+375;
   const drag=j.JOYSTICK.travel+7;
+  assert.ok(j.joystickVector(18,0).x>.25&&j.joystickVector(18,0).x<.35,'轻推更灵敏，仍保留模拟量');
   demo.origin=center;
   demo.touchStart(touch(sx,sy));
   assert.equal(demo.touchId,1,'左下固定摇杆可激活');
@@ -79,7 +81,7 @@ cc.Color = class {};
 const drawing = () => new Proxy({}, { get: (o, k) => o[k] || (() => {}) });
 demo.hero = { children: [1, 2, 3, 4] }; demo.enemies = [];
 for (const side of [-1, 1]) for (const angle of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) {
-  const grip = { setSiblingIndex() {}, x: 0, y: 0, setPosition(x, y) { this.x = x; this.y = y; }, setScale() {} };
+  const grip = { getSiblingIndex(){return 0;}, setSiblingIndex() {}, x: 0, y: 0, setPosition(x, y) { this.x = x; this.y = y; }, setScale() {} };
   const arm = drawing(); arm.node = { setSiblingIndex() {} };
   const equipped = { id: 'cleaver', tier: 1, uid: 1 }, stats = campaignExports.weaponStatsFor(demo.run, equipped);
   const w = { node: grip, arm, shoe: {}, offhand: {}, trail: drawing(), side, angle, time: 0, duration: .38, equipped, stats, hit: new Set(), lastX: 0, lastY: 0 };
@@ -107,7 +109,7 @@ assert.ok(demo.walkBlend < 0.001 && Math.abs(demo.lean) < 0.001, '停步后应�
 console.log('通过：交替迈步、朝向倾斜、顶墙停步和站姿回正');
 
 // 命中反馈只随有效伤害触发；尸体不会重复计数或重复播放。
-const feedbackDemo = new componentExports.GameBootstrap();
+const feedbackDemo = unitComponent();
 let droppedCoins = 0; feedbackDemo.dropCoin = () => droppedCoins++;
 feedbackDemo.drawEnemy = () => {}; feedbackDemo.health = () => {};
 const played = [];
@@ -137,7 +139,7 @@ assert.ok(enemy.vx > 0 && enemy.vx < 348, '击退速度应逐渐衰减');
 assert.ok(enemy.node.active, '击败形变阶段不能立即消失');
 console.log('通过：小兵击败后击退、阻尼及可见形变时间');
 
-const playerDemo = new componentExports.GameBootstrap();playerDemo.phase="battle";
+const playerDemo = unitComponent();playerDemo.phase="battle";
 playerDemo.menu = {}; playerDemo.body = {}; playerDemo.hero = visualNode(); playerDemo.hurtText = { string: '' };
 playerDemo.refreshStats = () => {}; playerDemo.drawPlayerHealth = () => {}; playerDemo.playSound = () => {}; playerDemo.endRun = () => {};
 playerDemo.hurtPlayer(-20, 0);
@@ -153,7 +155,7 @@ playerDemo.hurtTime = 0; playerDemo.hurtPlayer(0, 0);
 assert.equal(playerDemo.playerHp, 0, '死亡后不继续扣血');
 console.log('通过：玩家扣血、无敌期、击退方向、重叠保护及死亡边界');
 
-const attackDemo = new componentExports.GameBootstrap();attackDemo.phase="battle";
+const attackDemo = unitComponent();attackDemo.phase="battle";
 for (const angle of [0, Math.PI / 2, Math.PI, -Math.PI / 2, Math.PI / 4]) {
   const fighter = { x: 0, y: 0, weaponKind: 0, attackAngle: angle };
   attackDemo.px = Math.cos(angle) * 60; attackDemo.py = Math.sin(angle) * 60;
@@ -173,7 +175,7 @@ for (const direction of [0, 1, 2, 3]) {
 }
 console.log('通过：小兵四向/斜向攻击扇区、距离边界和蓄力出手帧');
 
-const ranged = new componentExports.GameBootstrap();
+const ranged = unitComponent();
 const struck = [];
 ranged.hitEnemy = e => struck.push(e);
 const near = { x: 40, y: 0, hp: 50 }, far = { x: 90, y: 0, hp: 50 };
@@ -193,7 +195,7 @@ console.log('通过：远程飞鞋连续碰撞、首目标命中、射程上限�
 
 // 回归：旧脚底半径28会漏掉头部；新判定覆盖实际身体，且包含鞋面宽度。
 assert.equal(sweptHit(0, 65, 120, 65, 60, 0, 28), false);
-const collision = new componentExports.GameBootstrap();
+const collision = unitComponent();
 let collisionCount = 0;
 collision.hitEnemy = () => collisionCount++;
 const fireAcross = (height, enemy) => {
@@ -212,7 +214,7 @@ assert.equal(sweepEllipseTime(100, 100, 100, 100, 33, 47), null);
 assert.ok(Math.abs(sweepEllipseTime(-100, 0, 100, 0, 33, 47) - 0.335) < 1e-8);
 console.log('通过：旧穿头漏判复现、头部/身体命中、头顶掠过、敌人跨弹道及首次接触时刻');
 
-const loot = new componentExports.GameBootstrap();
+const loot = unitComponent();
 loot.coinLabel = { string: '', node: visualNode() }; loot.pickupText = { string: '', node: visualNode() };
 const coin = { node: visualNode(), art: visualNode(), x: 80, y: 0, age: 0, active: true, attracted: false };
 loot.coins = [coin];

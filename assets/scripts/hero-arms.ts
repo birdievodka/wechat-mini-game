@@ -2,6 +2,7 @@ import { Color, Graphics } from 'cc';
 export interface ArmPoint { x:number; y:number; }
 export const HERO_ARMS={shoulderX:17,shoulderY:4,heldX:35,heldY:-4,relaxedX:32,relaxedY:-7,meleeReach:18,rangedReach:10};
 const INK='#493522';
+const fistCache=new WeakMap<Graphics,string>();
 export const handSkin=(hero:string):string=>hero==='guanyu'?'#dc5945':'#f3c39b';
 export function shoulderFor(side:number,bob=0):ArmPoint {return {x:side*HERO_ARMS.shoulderX,y:HERO_ARMS.shoulderY+bob};}
 export function relaxedWrist(side:number,bob:number,breath:number,phase:number,walk:number):ArmPoint {
@@ -29,6 +30,7 @@ export function drawHeroSleeve(g:Graphics,side:number,wrist:ArmPoint,bob:number,
 }
 /** Render after the held weapon so the thumb and curled fingers visibly wrap the grip. */
 export function drawHeroFist(g:Graphics,hero:string,side:number,gripping:boolean):void {
+  const key=hero+':'+side+':'+gripping;if(fistCache.get(g)===key)return;fistCache.set(g,key);
   g.clear();g.fillColor=new Color(handSkin(hero));g.strokeColor=new Color(INK);g.lineWidth=2;
   g.roundRect(-7,-6,14,13,5);g.fill();g.stroke();
   if(gripping){

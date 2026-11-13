@@ -288,5 +288,105 @@
     "height": 1086,
     "rgbRmse": 5.4558,
     "alpha": "identical"
+  },
+  "assets/chronicle-ui/hero-parts.png": {
+    "sourceSha": "568da57c8ac984b61df2725c49f38ebb6fa57a59513cedca763ba250062d7f73",
+    "outputSha": "45b68d5bb54c377d304158cd3c4ad0c7744d639bcd2a4fea235aefab47c4f03f",
+    "sourceBytes": 519214,
+    "outputBytes": 222329,
+    "width": 512,
+    "height": 768,
+    "rgbRmse": 1.9516,
+    "alpha": "identical"
+  },
+  "assets/chronicle-ui/hero-portraits.png": {
+    "sourceSha": "17403b626edf189a03b3f922a9619da6431c9892889db39aab112fcc0527277e",
+    "outputSha": "aa0c713d72ed9c1507976dc4e89ea2ee5f1636fb5a237bbc5d7f853bea706eab",
+    "sourceBytes": 930104,
+    "outputBytes": 353155,
+    "width": 768,
+    "height": 768,
+    "rgbRmse": 2.742,
+    "alpha": "identical"
+  },
+  "assets/chronicle-ui/skills.png": {
+    "sourceSha": "668ea01f4053f859124be3e2eb70ac5a4589b678ab0e901b413ebcebf06e62cd",
+    "outputSha": "da285e567ddc9151685c8bb6e9576cf2f66facc188597ad9293661d622ef6d7c",
+    "sourceBytes": 368036,
+    "outputBytes": 176672,
+    "width": 576,
+    "height": 384,
+    "rgbRmse": 5.4012,
+    "alpha": "identical"
+  },
+  "assets/chronicle-ui/weapons.png": {
+    "sourceSha": "bb20adaf89419a41c399f71b4c4fbc917084e6cb63de4211eb8c6357f727da76",
+    "outputSha": "e01ac069708acccfc1451b3720d40ff94881d92eaf4d23e82b7a15a390ef9f2a",
+    "sourceBytes": 625714,
+    "outputBytes": 294386,
+    "width": 640,
+    "height": 640,
+    "rgbRmse": 4.5496,
+    "alpha": "identical"
+  },
+  "assets/chronicle-units/bosses.png": {
+    "sourceSha": "47656f4810a2d301c533f1a3d5f6e97b8d09cb09649b76545c60d5122de4c7fd",
+    "outputSha": "16650b98ed0a93c943f64a1cd67a676302d7dea60fe096e53db55ac53e12a335",
+    "sourceBytes": 927970,
+    "outputBytes": 394948,
+    "width": 1344,
+    "height": 384,
+    "rgbRmse": 4.2215,
+    "alpha": "identical"
+  },
+  "assets/chronicle-units/troops-a-back.png": {
+    "sourceSha": "3f284168900c87e5f5f47ae33e0276ff25688b01d459963a1771406fc41aeb29",
+    "outputSha": "23217ec957f6d44cad39cefc040105fe6107395fcb357ce23c07cbeac93d949a",
+    "sourceBytes": 507960,
+    "outputBytes": 220214,
+    "width": 640,
+    "height": 512,
+    "rgbRmse": 2.8552,
+    "alpha": "identical"
+  },
+  "assets/chronicle-units/troops-a-front.png": {
+    "sourceSha": "efe69e92c2627fc37d2373c706f65eb0044e9ef580c5fdfc29e699f90ee66c4c",
+    "outputSha": "0a6c12a9cead3ea0307e549d8bdf146121a47edc987e20c914f8d4c003ce4809",
+    "sourceBytes": 506638,
+    "outputBytes": 228978,
+    "width": 640,
+    "height": 512,
+    "rgbRmse": 3.2788,
+    "alpha": "identical"
+  },
+  "assets/chronicle-units/troops-b-back.png": {
+    "sourceSha": "c0b9041813340cdc68bbffa398435f70d20dd3140110387f64829d0f1cd388cf",
+    "outputSha": "cfab28b9839777738599681d9c8f1230d3eee49a31cbfaa81659960f668b2216",
+    "sourceBytes": 533514,
+    "outputBytes": 230553,
+    "width": 640,
+    "height": 512,
+    "rgbRmse": 3.8829,
+    "alpha": "identical"
+  },
+  "assets/chronicle-units/troops-b-front.png": {
+    "sourceSha": "f71d4c25e4a93b11dce0b4428e0d2d42790306402af8db51adfe999adfaef2a7",
+    "outputSha": "00989faea0160dc7f242546dcb19a2ae8530058b4709c81415fc13f347bdcbb4",
+    "sourceBytes": 520533,
+    "outputBytes": 240661,
+    "width": 640,
+    "height": 512,
+    "rgbRmse": 4.032,
+    "alpha": "identical"
+  },
+  "assets/chronicle-units/boss-mounts.png": {
+    "sourceSha": "20a9a91759a94ab983036dea61bd687dbc216da2c17aa2cec659450593e9e3d9",
+    "outputSha": "e91e1e8c0f3b7cc17ba54d39c4089afef67045669ba9aa06d75be7f429f7367c",
+    "sourceBytes": 374978,
+    "outputBytes": 171955,
+    "width": 576,
+    "height": 384,
+    "rgbRmse": 3.0083,
+    "alpha": "identical"
   }
 }

@@ -326,14 +326,14 @@ const ROWS = [
   {
     "id": "F07",
     "name": "桃园真传",
-    "desc": "人物专属技能伤害+18%",
+    "desc": "携带技能伤害+18%",
     "price": 1.1,
     "stack": "A，不改变技能所属人物"
   },
   {
     "id": "F08",
     "name": "回气丹",
-    "desc": "人物技能冷却恢复速度+12%",
+    "desc": "技能击杀充能效率+12%",
     "price": 1.3,
     "stack": "U：有效冷却最低原始55%，之后转技能伤害"
   }
@@ -354,16 +354,19 @@ ROWS.push(
   { id:'D20',name:'飞鞋助推带',desc:'草鞋弹速+30%、伤害+10%',price:1,stack:'A/U：持有草鞋时出现，弹速最多增加100%，超出转草鞋伤害' },
 );
 export const PASSIVE_ITEMS: PassiveItem[] = ROWS.map(r => ({ ...r, bonus: {}, slot: 'waist' }));
-export const ITEM_CATEGORIES = ['输出', '生存移动', '经济拾取', '远程弹道', '近战范围', '专属技能'];
+export const ITEM_CATEGORIES = ['输出', '生存移动', '经济拾取', '远程弹道', '近战范围', '武器与技能'];
 export const amount = (inv: Record<string, number>, id: string, unit = 1, k = .08): number => { const n = inv[id] || 0; return n > 0 ? unit * n / (1 + k * (n - 1)) : 0; };
 export const count = (inv: Record<string, number>, id: string): number => inv[id] || 0;
 export function eligiblePassive(id: string, weapons: { id: WeaponId }[]): boolean {
   const owned = (ids: string[]): boolean => weapons.some(w => ids.indexOf(w.id) >= 0);
-  const needs: Record<string, string[]> = { D04:['sandal'],D05:['sword'],D06:['sandal','smg','shotgun'],D07:['smg','shotgun'],D08:['sword'],D15:['sandal'],D17:['rocket'],D18:['shotgun'],D19:['smg'],D20:['sandal'],E06:['peach'],E07:['thunder'],E08:['gourd'],F01:['sandal'],F02:['pole'],F03:['peach'],F04:['cleaver'],F05:['smg'],F06:['sword'] };
+  const straight=['sandal','smg','shotgun','repeater','phoenix-bow','heavy-crossbow','hand-halberd','chain-hook','feather-fan','wood-ox','wood-kite'];
+  const projectiles=[...straight,'peach','firecracker','rocket','oil-jar','thunder-bomb'];
+  const needs: Record<string, string[]> = { D04:['sandal'],D05:['sword'],D06:straight,D07:['smg','shotgun'],D08:['sword'],D15:['sandal'],D17:['rocket'],D18:['shotgun'],D19:['smg'],D20:['sandal'],E06:['peach'],E07:['thunder'],E08:['gourd'],F01:['sandal'],F02:['pole'],F03:['peach'],F04:['cleaver'],F05:['smg'],F06:['sword'] };
   if (needs[id]) return owned(needs[id]);
-  if (id==='D03') return owned(['sandal','smg','shotgun']);
+  if (id==='D03') return owned(straight);
   if (['D09','D10','D11','D12','D13','D16'].indexOf(id)>=0) return weapons.some(w=>weaponFor(w.id).category==='ranged');
-  if (id==='D14') return owned(['sandal','smg','shotgun']);
+  if (id==='D14') return owned(straight);
+  if (id==='D01') return owned(projectiles);
   if (id==='D02') return weapons.some(w=>weaponFor(w.id).category!=='melee');
   if (id[0] === 'D') return weapons.some(w => weaponFor(w.id).category !== 'melee' && ['thunder','gourd'].indexOf(w.id) < 0);
   if (id === 'E01' || id === 'E02') return weapons.some(w => weaponFor(w.id).category === 'melee');

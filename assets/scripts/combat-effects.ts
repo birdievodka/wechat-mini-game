@@ -1,6 +1,6 @@
 import { Color, Graphics } from 'cc';
 import { CombatParticles, FX_LIMITS, ParticleShape } from './combat-particles';
-import { WeaponId } from './weapons';
+import { WeaponId, weaponFor } from './weapons';
 import { HeroId } from './campaign';
 
 // Warm paper highlights, jade wood, peach ink, fire and cyan steel. No fullscreen flash.
@@ -8,10 +8,11 @@ const RGB = [[255,247,213],[247,194,83],[179,126,60],[74,187,102],[222,250,159],
   [243,133,187],[255,220,234],[255,126,53],[144,115,93],[105,224,211],[190,143,244],[242,229,255],
   [34,109,70],[103,56,143],[135,88,32],[188,62,112]];
 const COLORS = RGB.map(c => Array.from({ length: 33 }, (_, i) => new Color(c[0],c[1],c[2],Math.round(i/32*255))));
-const ink = (tone: number, alpha = 1): Color => COLORS[tone][Math.max(0,Math.min(32,Math.round(alpha*32)))];
+export const effectInk = (tone: number, alpha = 1): Color => COLORS[tone][Math.max(0,Math.min(32,Math.round(alpha*32)))];
+const ink=effectInk;
 const TAU = Math.PI * 2;
-const PALETTE: Record<WeaponId, number> = { sandal:1, pole:2, peach:5, cleaver:0,
-  firecracker:7, smg:1, shotgun:1, rocket:7, sword:9, thunder:10, gourd:10 };
+const PALETTE: Record<string, number> = { sandal:1, pole:2, peach:5, cleaver:0,
+  firecracker:7, smg:1, shotgun:1, rocket:7, sword:9, thunder:10, gourd:10,'twin-swords':0,guandao:3,'serpent-spear':9,halberd:15,'silver-spear':9,qinggang:9,yitian:1,'seven-saber':10,'ancient-saber':2,'twin-halberds':0,trident:1,caltrops:8,repeater:2,'phoenix-bow':1,'heavy-crossbow':0,'hand-halberd':1,'chain-hook':8,'oil-jar':7,'thunder-bomb':7,'feather-fan':4,'taiping-book':1,'star-lamps':1,bagua:3,'wood-ox':2,'wood-kite':2 };
 type Point = [number, number];
 type Kind = 'burst' | 'slash' | 'muzzle' | 'bolt' | 'suction' | 'vortex' | 'hero' | 'hit';
 interface Stamp { kind: Kind; id: WeaponId | HeroId; x:number; y:number; tx:number; ty:number; angle:number; radius:number; arc:number; age:number; duration:number; priority:number; seed:number; }
@@ -38,16 +39,16 @@ function shoe(g:Graphics,x:number,y:number,a:number,scale:number,alpha:number):v
   line(g,[p(-10,13),p(0,2),p(10,13)],0,alpha,2.5*scale);line(g,[p(0,2),p(0,-13)],2,alpha,2*scale);
 }
 /** Rigid blade follows a short tapered crescent, never a full glowing hoop. Hero-local coordinates. */
+const SWORD_LAYERS=[[11,.13,.5,9],[5,.55,.3,9],[1.8,.95,.19,0]].map(([width,alpha,extent,tone])=>({width,alpha,tone,points:Array.from({length:10},(_,i)=>{const a=-extent+i*extent/9;return [Math.cos(a),Math.sin(a)];})}));
 export function drawSwordTrail(g:Graphics,angle:number,radius:number,tier:number):void {
-  for(const [width,alpha,extent,tone]of [[11,.13,.5,9],[5,.55,.3,9],[1.8,.95,.19,0]]){
-    const points:Point[]=[];for(let k=0;k<=9;k++){const a=angle-extent+k*extent/9;points.push([Math.cos(a)*radius,35+Math.sin(a)*radius]);}
-    line(g,points,tone,alpha,width);
+  const c=Math.cos(angle),s=Math.sin(angle);
+  for(const layer of SWORD_LAYERS){g.lineWidth=layer.width;g.strokeColor=ink(layer.tone,layer.alpha);
+    for(let i=0;i<layer.points.length;i++){const p=layer.points[i],x=(c*p[0]-s*p[1])*radius,y=35+(s*p[0]+c*p[1])*radius;if(!i)g.moveTo(x,y);else g.lineTo(x,y);}g.stroke();
   }
-  const x=Math.cos(angle)*radius,y=35+Math.sin(angle)*radius;
-  star(g,x,y,5+tier,angle,0,.9);
+  star(g,c*radius,35+s*radius,5+tier,angle,0,.9);
   for(let i=0;i<2;i++){const a=angle-.19-i*.13;star(g,Math.cos(a)*(radius-7),35+Math.sin(a)*(radius-7),3-i,angle,9,.55-i*.15);}
 }
-/** One world-space particle pool + two shared Graphics layers, no per-particle nodes. */
+/** Bounded world-space physics; complex stamps use shared Graphics, particles can use retained sprite quads. */
 export class CombatEffects {
   readonly particles = new CombatParticles();
   readonly stamps: Stamp[] = Array.from({length:FX_LIMITS.stamps},()=>({kind:'hit',id:'sandal',x:0,y:0,tx:0,ty:0,angle:0,radius:0,arc:0,age:1,duration:0,priority:0,seed:0}));
@@ -65,7 +66,7 @@ export class CombatEffects {
   update(dt:number):void {this.particles.update(dt);for(const s of this.stamps)s.age=Math.min(s.duration,s.age+dt);}
   clear():void {this.particles.clear();for(const s of this.stamps)s.age=s.duration;}
   hit(id:WeaponId,x:number,y:number,angle:number,kill:boolean):void {
-    const tone=PALETTE[id];
+    const tone=PALETTE[id]??(weaponFor(id).category==='melee'?9:weaponFor(id).category==='magic'?10:1);
     this.stamp('hit',id,x,y,angle,kill?25:17,.17);
     this.spray(x,y,kill?7:id==='smg'||id==='gourd'?2:4,tone,id==='peach'?'petal':id==='pole'?'chip':'spark',angle,2.5,kill?160:115,3.5);
   }
@@ -73,15 +74,15 @@ export class CombatEffects {
     if(id==='gourd'){this.stamp('vortex',id,x,y,angle,38,.6);return;}
     this.stamp('muzzle',id,x,y,angle,id==='shotgun'?48:id==='rocket'?38:24,id==='shotgun'?.13:.1);
     if(id==='smg'||id==='shotgun')this.spray(x,y,id==='shotgun'?3:1,1,'chip',angle-Math.PI/2,.6,85,3);
-    else if(id==='peach'||id==='firecracker')this.spray(x,y,3,PALETTE[id],id==='peach'?'petal':'spark',angle,1.4,80,3);
+    else if(id==='peach'||id==='firecracker')this.spray(x,y,3,(PALETTE[id]??9),id==='peach'?'petal':'spark',angle,1.4,80,3);
   }
   slash(id:WeaponId,x:number,y:number,angle:number,radius:number,arc:number):void {
     this.stamp('slash',id,x,y,angle,radius,.23,1,0,0,arc*Math.PI/180);
-    const tip=angle+.2;this.spray(x+Math.cos(tip)*radius*.8,y+Math.sin(tip)*radius*.8,5,PALETTE[id],id==='pole'?'dust':'spark',tip,1.4,100,4);
+    const tip=angle+.2;this.spray(x+Math.cos(tip)*radius*.8,y+Math.sin(tip)*radius*.8,5,(PALETTE[id]??9),id==='pole'?'dust':'spark',tip,1.4,100,4);
   }
   burst(id:WeaponId,x:number,y:number,radius:number,skill=false):void {
     this.stamp('burst',id,x,y,0,radius,id==='peach'?.5:.42,skill?2:1);
-    this.spray(x,y,id==='peach'?15:id==='rocket'?20:14,PALETTE[id],id==='peach'?'petal':'spark',0,TAU,radius*3,5,skill?2:1);
+    this.spray(x,y,id==='peach'?15:id==='rocket'?20:14,(PALETTE[id]??9),id==='peach'?'petal':'spark',0,TAU,radius*3,5,skill?2:1);
     if(id!=='peach')this.spray(x,y,5,8,'dust',Math.PI/2,TAU,radius*1.1,11,skill?2:1);
   }
   beam(id:'thunder'|'gourd',x:number,y:number,tx:number,ty:number):void {
@@ -97,17 +98,18 @@ export class CombatEffects {
   }
   hero(id:HeroId,x:number,y:number,angle:number,radius:number):void {
     this.stamp('hero',id,x,y,angle,radius,id==='guanyu'?.72:.8,3);
-    const tone=id==='liubei'?1:id==='guanyu'?3:5;
+    const tone=id==='zhaoyun'?9:id==='kongming'?3:id==='liubei'?1:id==='guanyu'?3:5;
     this.spray(x,y+25,id==='guanyu'?55:64,tone,id==='guanyu'?'chip':id==='zhangfei'?'petal':'spark',id==='guanyu'?angle:0,id==='guanyu'?1.25:TAU,radius*2,5,2);
     this.spray(x,y+20,12,0,'star',0,TAU,160,4,2);
   }
-  draw(ground:Graphics,air:Graphics,cx:number,cy:number,hw:number,hh:number):void {
+  draw(ground:Graphics,air:Graphics,cx:number,cy:number,hw:number,hh:number,particlesAsSprites=false):void {
     const visible=(x:number,y:number,r=80):boolean=>Math.abs(x-cx)<hw+r&&Math.abs(y-cy)<hh+r;
     for(const s of this.stamps){
       if(s.age>=s.duration)continue;
       const beam=s.kind==='bolt'||s.kind==='suction';
       if(beam?visible((s.x+s.tx)/2,(s.y+s.ty)/2,Math.hypot(s.tx-s.x,s.ty-s.y)/2+48):visible(s.x,s.y,s.radius+120))this.drawStamp(ground,air,s);
     }
+    if(particlesAsSprites)return;
     for(const p of this.particles.slots){
       if(p.life<=0||!visible(p.x,p.y))continue;
       const fade=Math.min(1,p.life/p.duration*1.6),size=p.size*(.45+.55*p.life/p.duration);
@@ -123,7 +125,7 @@ export class CombatEffects {
     }
   }
   flight(g:Graphics,id:WeaponId,x:number,y:number,angle:number):void {
-    const c=Math.cos(angle),s=Math.sin(angle),tone=PALETTE[id];
+    const c=Math.cos(angle),s=Math.sin(angle),tone=PALETTE[id]??9;
     const length=id==='smg'?38:id==='shotgun'?23:id==='rocket'?38:24;
     line(g,[[x-c*length,y-s*length],[x,y]],tone,.25,id==='rocket'?13:id==='peach'?9:6);
     line(g,[[x-c*length*.7,y-s*length*.7],[x,y]],id==='peach'?6:0,.8,id==='smg'?2:id==='rocket'?5:2.5);
@@ -143,7 +145,7 @@ export class CombatEffects {
     }else if(s.kind==='slash'){
       const width=s.id==='pole'?17:12,start=s.angle-s.arc*.5,end=start+s.arc;
       // A tapered filled crescent instead of a thin soft line.
-      g.fillColor=ink(s.id==='pole'?1:9,fade*.45);
+      g.fillColor=ink(s.id==='pole'?1:tone,fade*.45);
       for(let i=0;i<=20;i++){const a=start+(end-start)*i/20,px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;if(!i)g.moveTo(px,py);else g.lineTo(px,py);}
       for(let i=20;i>=0;i--){const a=start+(end-start)*i/20,inner=r-width*Math.sin(i/20*Math.PI),px=x+Math.cos(a)*inner,py=y+Math.sin(a)*inner;g.lineTo(px,py);}g.close();g.fill();
       const points:Point[]=[];for(let i=0;i<=16;i++){const a=start+s.arc*i/16;points.push([x+Math.cos(a)*r,y+Math.sin(a)*r]);}line(g,points,0,fade,3);
@@ -152,7 +154,8 @@ export class CombatEffects {
       const rr=r*(.3+.7*ease);
       ground.fillColor=ink(tone,fade*.13);ground.circle(x,y,rr);ground.fill();
       ring(ground,x,y,rr,tone,fade*.8,3+fade*3);ring(ground,x,y,rr*.8,0,fade*.5,2);
-      if(s.id==='peach')for(let i=0;i<5;i++){const a=i*TAU/5;petal(ground,x+Math.cos(a)*rr*.48,y+Math.sin(a)*rr*.48,rr*.27,a,5,fade*.34);}
+      if(s.id==='star-lamps'){for(let i=0;i<7;i++){const a=i*TAU/7+s.age;star(ground,x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8,8,s.age,1,fade);}}
+      else if(s.id==='peach')for(let i=0;i<5;i++){const a=i*TAU/5;petal(ground,x+Math.cos(a)*rr*.48,y+Math.sin(a)*rr*.48,rr*.27,a,5,fade*.34);}
       else {
         // A brief jagged fire silhouette breaks into sparks, rather than looking like a target reticle.
         const flame=Math.max(0,1-t*2.3),size=r*(.35+ease*.3);
@@ -181,7 +184,11 @@ export class CombatEffects {
   }
   private drawHero(ground:Graphics,g:Graphics,s:Stamp,t:number,fade:number,ease:number):void {
     const {x,y,radius:r}=s,alpha=Math.min(1,fade*1.5),rr=r*(.25+.75*ease);
-    if(s.id==='guanyu'){
+    if(s.id==='zhaoyun'){
+      const c=Math.cos(s.angle),d=Math.sin(s.angle);for(let j=-1;j<=1;j++){const u=r*ease,v=j*18;line(g,[[x-d*v,y+c*v],[x+c*u-d*v,y+d*u+c*v]],9,alpha*.35,13);line(g,[[x-d*v,y+c*v],[x+c*u-d*v,y+d*u+c*v]],0,alpha,3);const tx=x+c*u-d*v,ty=y+d*u+c*v;star(g,tx,ty,15-j*2,s.angle,9,alpha);line(g,[[tx-c*26-d*12,ty-d*26+c*12],[tx,ty],[tx-c*26+d*12,ty-d*26-c*12]],0,alpha,3);}return;
+    }else if(s.id==='kongming'){
+      const reach=r*(.2+.8*ease);for(let j=-2;j<=2;j++){const a=s.angle+j*.22,points:Point[]=[];for(let i=0;i<=18;i++){const u=i/18,side=Math.sin(u*Math.PI*2+t*5+j)*12*u;points.push([x+Math.cos(a)*reach*u-Math.sin(a)*side,y+Math.sin(a)*reach*u+Math.cos(a)*side]);}line(g,points,3,alpha*.2,16);line(g,points,4,alpha*.8,4);const tip=points[18];petal(g,tip[0],tip[1],17,a,0,alpha*.8);}return;
+    }else if(s.id==='guanyu'){
       // A coiling jade dragon grows along the actual fan, clear ivory cutting edge.
       const c=Math.cos(s.angle),d=Math.sin(s.angle),at=(u:number,v:number):Point=>[x+c*u-d*v,y+32+d*u+c*v];
       const reach=r*(.3+.7*ease),width=reach*.58;

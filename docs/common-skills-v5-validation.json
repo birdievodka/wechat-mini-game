@@ -1,0 +1,715 @@
+{
+  "date": "2026-11-13",
+  "version": "chronicles-v5-common-skills",
+  "scope": "24 generic skills all open; actual WeChat runtime plus engineering fixed-pose checks, not phone playtesting",
+  "finalState": {
+    "version": "chronicles-v5-common-skills",
+    "phase": "menu",
+    "ready": true,
+    "selectedHero": "liubei",
+    "selectedSkill": "G20",
+    "activeReview": false
+  },
+  "nativeSelection": {
+    "version": "chronicles-v5-common-skills",
+    "phase": "menu",
+    "hero": "guanyu",
+    "skill": "G19"
+  },
+  "nativeMechanisms": {
+    "rows": [
+      {
+        "id": "G01",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 16,
+        "damageTargets": 4,
+        "particles": 28,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G02",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 14,
+        "damageTargets": 3,
+        "particles": 24,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G03",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 22,
+        "damageTargets": 10,
+        "particles": 50,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G04",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 28,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G05",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 24,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G06",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 26,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 1
+      },
+      {
+        "id": "G07",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 30,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G08",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 20,
+        "damageTargets": 1,
+        "particles": 12,
+        "visuals": 2,
+        "tasks": 1
+      },
+      {
+        "id": "G09",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 32,
+        "damageTargets": 0,
+        "particles": 24,
+        "visuals": 2,
+        "tasks": 0
+      },
+      {
+        "id": "G10",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 38,
+        "damageTargets": 1,
+        "particles": 16,
+        "visuals": 1,
+        "tasks": 2
+      },
+      {
+        "id": "G11",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 36,
+        "damageTargets": 0,
+        "particles": 44,
+        "visuals": 5,
+        "tasks": 0
+      },
+      {
+        "id": "G12",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 40,
+        "damageTargets": 2,
+        "particles": 20,
+        "visuals": 1,
+        "tasks": 1
+      },
+      {
+        "id": "G13",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 42,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G14",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 34,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 12
+      },
+      {
+        "id": "G15",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 12,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G16",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 18,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G17",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 44,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G18",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 46,
+        "damageTargets": 12,
+        "particles": 59,
+        "visuals": 1,
+        "tasks": 1
+      },
+      {
+        "id": "G19",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 52,
+        "damageTargets": 1,
+        "particles": 16,
+        "visuals": 1,
+        "tasks": 3
+      },
+      {
+        "id": "G20",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 58,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 9
+      },
+      {
+        "id": "G21",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 50,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G22",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 56,
+        "damageTargets": 4,
+        "particles": 32,
+        "visuals": 6,
+        "tasks": 6
+      },
+      {
+        "id": "G23",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 48,
+        "damageTargets": 7,
+        "particles": 38,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G24",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 54,
+        "damageTargets": 18,
+        "particles": 81,
+        "visuals": 1,
+        "tasks": 0
+      }
+    ],
+    "chargeAfterOneDeath": 1,
+    "chargeAfterWaiting": 1,
+    "taskLimit": 0,
+    "particleLimit": 88
+  },
+  "nativeVisualReview": {
+    "version": "chronicles-v5-common-skills",
+    "restored": true,
+    "saveUnchanged": true,
+    "reviews": [
+      {
+        "id": "G20",
+        "poseSeconds": 0.5,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 58,
+        "damageTargets": 1,
+        "particles": 32,
+        "visuals": 2,
+        "tasks": 7
+      },
+      {
+        "id": "G10",
+        "poseSeconds": 0.48,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 38,
+        "damageTargets": 2,
+        "particles": 16,
+        "visuals": 2,
+        "tasks": 1
+      },
+      {
+        "id": "G11",
+        "poseSeconds": 0.45,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 36,
+        "damageTargets": 0,
+        "particles": 0,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G10",
+        "poseSeconds": 0.48,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 38,
+        "damageTargets": 2,
+        "particles": 16,
+        "visuals": 2,
+        "tasks": 1
+      },
+      {
+        "id": "G01",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 16,
+        "damageTargets": 4,
+        "particles": 28,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G02",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 14,
+        "damageTargets": 3,
+        "particles": 24,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G03",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 22,
+        "damageTargets": 10,
+        "particles": 50,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G04",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 28,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G05",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 24,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G06",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 26,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 1
+      },
+      {
+        "id": "G07",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 30,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G08",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 20,
+        "damageTargets": 1,
+        "particles": 12,
+        "visuals": 2,
+        "tasks": 1
+      },
+      {
+        "id": "G09",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 32,
+        "damageTargets": 0,
+        "particles": 24,
+        "visuals": 2,
+        "tasks": 0
+      },
+      {
+        "id": "G10",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 38,
+        "damageTargets": 1,
+        "particles": 16,
+        "visuals": 1,
+        "tasks": 2
+      },
+      {
+        "id": "G11",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 36,
+        "damageTargets": 0,
+        "particles": 44,
+        "visuals": 5,
+        "tasks": 0
+      },
+      {
+        "id": "G12",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 40,
+        "damageTargets": 2,
+        "particles": 20,
+        "visuals": 1,
+        "tasks": 1
+      },
+      {
+        "id": "G13",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 42,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G14",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 34,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 12
+      },
+      {
+        "id": "G15",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 12,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G16",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 18,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G17",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 44,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G18",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 46,
+        "damageTargets": 12,
+        "particles": 59,
+        "visuals": 1,
+        "tasks": 1
+      },
+      {
+        "id": "G19",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 52,
+        "damageTargets": 1,
+        "particles": 16,
+        "visuals": 1,
+        "tasks": 3
+      },
+      {
+        "id": "G20",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 58,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 9
+      },
+      {
+        "id": "G21",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 50,
+        "damageTargets": 0,
+        "particles": 12,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G22",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 56,
+        "damageTargets": 4,
+        "particles": 32,
+        "visuals": 6,
+        "tasks": 6
+      },
+      {
+        "id": "G23",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 48,
+        "damageTargets": 7,
+        "particles": 38,
+        "visuals": 1,
+        "tasks": 0
+      },
+      {
+        "id": "G24",
+        "poseSeconds": 0.2,
+        "hero": "liubei",
+        "charge": 0,
+        "required": 54,
+        "damageTargets": 18,
+        "particles": 81,
+        "visuals": 1,
+        "tasks": 0
+      }
+    ]
+  },
+  "screenshots": {
+    "meteor-fixture-wechat.jpg": "3988ef702348fecdf846835c9fb698b4101ea30abce5fc1877dd5c2c0fc7d032",
+    "selection-meteor-wechat.jpg": "34b87714ff7272896cffc23ba2b2c2390612e818f6e3fb2a849d750ed5c4e7a9",
+    "menu-wechat.jpg": "1ef1ba75bf3edcc75a4931a9cfb2bc2275efe73edef87c1c289943164eaae870",
+    "boat-fixture-wechat.jpg": "b4bd3c3faf9ac112efd7e2a72a8d78ea9762ea2fe4eeeea4c89c24ef65e8d961",
+    "selection-page2-wechat.jpg": "13d2f711c210599c1445fabe79a44720aab8bedeb1923f655a9e282613183e7b",
+    "lightning-fixture-wechat.jpg": "1428ccc8f60e06b0937e858d0741b6cf7748059c4f0b61a3660e127f54b6eeed",
+    "shield-fixture-wechat.jpg": "a80c354e541cc52964d1f84c308f49017f3b80e97c719cc1456ccd021fd1d3e1",
+    "selection-page1-wechat.jpg": "9e61b35439b074eb9e693fbd29f81ea2bd468eca75a1839501b007d8b25976c3",
+    "water-fixture-wechat.jpg": "b5568fe781c652672efd03cd642a25a1e30f704fe21d0ade3c77686b553ff36f",
+    "fire-fixture-wechat.jpg": "2f5c14e469e6e3d8d20dca0f139fc96f5e8229fff2bf44fc66619221072e1d76"
+  },
+  "tests": [
+    "typecheck passed",
+    "npm test passed after common-skill integration",
+    "final test-common-skills passed including meteor fall-before-damage regression",
+    "final test-performance passed: six-swords + arrow volley 3600 frames, mixed chapter17 + meteor 1800 frames; 280 particles/32 skill visuals/36 tasks bounded",
+    "project skill sync/check and diff whitespace checks"
+  ],
+  "build": {
+    "totalMiB": 18.51,
+    "allPackagesBelow4MiB": true
+  },
+  "console": "",
+  "save": "Original local saved campaign unchanged; no real battle started or records written during fixed-pose review",
+  "limitations": [
+    "No iOS playthrough, peak memory or new-skill win-rate validation; original phone needs retest.",
+    "Previous v4.3 performance A/B percentages are historical and are not claimed as new v5 phone FPS."
+  ],
+  "sourceSHA256": {
+    "assets/scripts/CommonSkillRuntime.ts": "5d527d9097b3bf7c6e17d26d6409f62de0c835b0b4296faba3b8818681584b8c",
+    "assets/scripts/CommonSkillEffects.ts": "aac1361ceca9dded8ce8e76fa0b7e214f922b82e1381908d2f53bb270baeea8b",
+    "assets/scripts/common-skills.ts": "946a57ad9d31cb7f65296e5e0a51cb40f1198c7247e462d56c153f1df771378e",
+    "assets/scripts/SkillSelectView.ts": "feaa5d99ed621d884b32b8c0861dc4e0135e2244ac2486d543d75eca7c59c3a9"
+  },
+  "preview": {
+    "info": {
+      "size": {
+        "total": 19377305,
+        "packages": [
+          {
+            "name": "TOTAL",
+            "size": 19377305
+          },
+          {
+            "name": "main",
+            "size": 2247842
+          },
+          {
+            "name": "/subpackages/arsenal/",
+            "size": 688906
+          },
+          {
+            "name": "/subpackages/battle/",
+            "size": 2218967
+          },
+          {
+            "name": "/subpackages/campaign/",
+            "size": 1911318
+          },
+          {
+            "name": "/subpackages/chronicle-ui/",
+            "size": 1048151
+          },
+          {
+            "name": "/subpackages/chronicle-units/",
+            "size": 1489415
+          },
+          {
+            "name": "/subpackages/enemies/",
+            "size": 1423765
+          },
+          {
+            "name": "/subpackages/hero-menu/",
+            "size": 628891
+          },
+          {
+            "name": "/subpackages/meadow/",
+            "size": 1537691
+          },
+          {
+            "name": "/subpackages/music/",
+            "size": 2880823
+          },
+          {
+            "name": "/subpackages/orchard/",
+            "size": 699447
+          },
+          {
+            "name": "/subpackages/presentation/",
+            "size": 1022710
+          },
+          {
+            "name": "/subpackages/results/",
+            "size": 425682
+          },
+          {
+            "name": "/subpackages/sfx/",
+            "size": 79358
+          },
+          {
+            "name": "/subpackages/talismans/",
+            "size": 1074339
+          }
+        ]
+      }
+    },
+    "success": true
+  }
+}

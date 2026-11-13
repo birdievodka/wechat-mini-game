@@ -1,0 +1,128 @@
+{
+  "version": "orchard-v3.4-battle-performance",
+  "scope": "Node/Cocos stub CPU fixture; drawing calls counted, no GPU or iOS FPS claim",
+  "before": [
+    {
+      "name": "six-swords",
+      "frames": 480,
+      "medianMs": 2.278,
+      "p95Ms": 2.628,
+      "calls": {
+        "clear": 48484,
+        "fill": 152478,
+        "stroke": 201001,
+        "reorder": 99985
+      },
+      "peakProjectiles": 0,
+      "enemyNodes": 80,
+      "coinNodes": 100
+    },
+    {
+      "name": "six-guns",
+      "frames": 480,
+      "medianMs": 1.503,
+      "p95Ms": 1.714,
+      "calls": {
+        "clear": 54809,
+        "fill": 69660,
+        "stroke": 105723,
+        "reorder": 99458
+      },
+      "peakProjectiles": 3,
+      "enemyNodes": 80,
+      "coinNodes": 100
+    },
+    {
+      "name": "mixed",
+      "frames": 480,
+      "medianMs": 1.473,
+      "p95Ms": 1.698,
+      "calls": {
+        "clear": 53475,
+        "fill": 94672,
+        "stroke": 115774,
+        "reorder": 100299
+      },
+      "peakProjectiles": 2,
+      "enemyNodes": 80,
+      "coinNodes": 100
+    }
+  ],
+  "after": [
+    {
+      "name": "six-swords",
+      "frames": 480,
+      "medianMs": 1.485,
+      "p95Ms": 1.869,
+      "calls": {
+        "clear": 6010,
+        "fill": 92636,
+        "stroke": 141079,
+        "reorder": 15181
+      },
+      "peakProjectiles": 0,
+      "enemyNodes": 80,
+      "coinNodes": 100
+    },
+    {
+      "name": "six-guns",
+      "frames": 480,
+      "medianMs": 1.157,
+      "p95Ms": 1.401,
+      "calls": {
+        "clear": 3157,
+        "fill": 49623,
+        "stroke": 79800,
+        "reorder": 15003
+      },
+      "peakProjectiles": 3,
+      "enemyNodes": 80,
+      "coinNodes": 100
+    },
+    {
+      "name": "mixed",
+      "frames": 480,
+      "medianMs": 0.995,
+      "p95Ms": 1.288,
+      "calls": {
+        "clear": 3702,
+        "fill": 68331,
+        "stroke": 84551,
+        "reorder": 17535
+      },
+      "peakProjectiles": 2,
+      "enemyNodes": 80,
+      "coinNodes": 100
+    }
+  ],
+  "improvements": [
+    {
+      "name": "six-swords",
+      "medianCpuReductionPct": 34.8,
+      "graphicsClearReductionPct": 87.6,
+      "reorderReductionPct": 84.8
+    },
+    {
+      "name": "six-guns",
+      "medianCpuReductionPct": 23.0,
+      "graphicsClearReductionPct": 94.2,
+      "reorderReductionPct": 84.9
+    },
+    {
+      "name": "mixed",
+      "medianCpuReductionPct": 32.5,
+      "graphicsClearReductionPct": 93.1,
+      "reorderReductionPct": 82.5
+    }
+  ],
+  "iosCrashRootCauseConfirmed": false,
+  "validation": {
+    "typecheck": true,
+    "fullRegressionAndPressure": true,
+    "buildMiB": 16.1,
+    "wechatPreviewSuccess": true,
+    "wechatPreviewSourceBytes": 16848456,
+    "nativeStressStatus": "pending Mac unlock; new runtime loaded, startup complete but render frames suspended",
+    "phoneGameplayTested": false
+  }
+}

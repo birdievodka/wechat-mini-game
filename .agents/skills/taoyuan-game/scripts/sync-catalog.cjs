@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress']);
+  const allowed = new Set(['common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'extra-weapons']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -75,7 +75,7 @@ function generate(root) {
   const c = load('campaign'), w = load('weapons'), p = load('passive-items'), s = load('survival');
   const world = load('world-rules'), behavior = load('enemy-behavior'), sound = load('weapon-sound'), music = load('battle-music');
   const effects = load('combat-particles'), controls = load('joystick-input');
-  const startup=load('startup-progress');
+  const startup=load('startup-progress'),chronicles=load('chronicles'),extra=load('extra-weapons');
   function stringsFromUnion(name) {
     const filename = path.join(root, 'assets/scripts/campaign.ts');
     const source = ts.createSourceFile(filename, fs.readFileSync(filename, 'utf8'), ts.ScriptTarget.Latest, true);
@@ -90,7 +90,7 @@ function generate(root) {
   const weaponRows = w.WEAPONS.map(def => {
     const run = c.createRun(hero, def.id);
     return { ...def,
-      qualityStatsWithoutHeroOrItems: w.TIER_NAMES.map((name, i) => {const stats=w.calculateWeapon({ id:def.id,tier:i+1 },c.emptyBonus(),hero);return {tier:i+1,name,color:w.TIER_COLORS[i],...stats,effectText:w.weaponEffectText(def.id,stats)};}),
+      qualityStatsWithoutHeroOrItems: w.TIER_NAMES.map((name, i) => {const stats=w.calculateWeapon({ id:def.id,tier:i+1 },c.emptyBonus(),hero);return {tier:i+1,name,color:w.TIER_COLORS[i],...stats,effectText:w.weaponEffectText(def.id,stats),mechanics:extra.isExtraWeapon(def.id)?extra.extraMechanics(def.id,i+1):w.weaponEffectText(def.id,stats)};}),
       openingStatsByHero: c.HEROES.map(h => {
         const opening = c.createRun(h.id, def.id);
         return { hero: h.id, ...c.weaponStatsFor(opening, opening.weapons[0]), singleTargetDpsCeiling: c.weaponDps(opening, opening.weapons[0]) };
@@ -134,11 +134,11 @@ function generate(root) {
   });
   const heroes = c.HEROES.map(h => {
     const run = c.createRun(h.id);
-    return { ...h, starter: w.starterFor(h.id), startingHearts: run.hearts, initialGold: run.gold, stats: c.statsFor(run), skill: world.HERO_SKILLS[h.id] };
+    return { ...h, starter: w.starterFor(h.id), startingHearts: run.hearts, initialGold: run.gold, stats: c.statsFor(run), skill: {selection:'通用技能自由搭配',defaultId:run.skillId,recharge:'击杀小兵充能'} };
   });
-  const prices = [0, 1, 2, 3, 6, 10, 20, 40].map(supplyCount => {
-    const run = c.createRun(hero); run.supplyCount = supplyCount;
-    return { supplyCount, basePrice: s.basePrice(run), weaponPrices: Object.fromEntries(w.WEAPONS.map(d => [d.id, w.TIER_NAMES.map((_, i) => s.supplyWeaponPrice(run, d.id, i + 1))])) };
+  const prices = chronicles.CHAPTERS.map(chapter => {
+    const run = c.createRun(hero); run.chapter=chapter.id;
+    return { chapter:chapter.id, basePrice: s.basePrice(run), weaponPrices: Object.fromEntries(w.WEAPONS.map(d => [d.id, w.TIER_NAMES.map((_, i) => s.supplyWeaponPrice(run, d.id, i + 1))])) };
   });
   const refresh = [0, 1, 2, 3, 4, 5].map(rerolls => ({ rerolls,
     costsByC05Copies: [0, 1, 2, 3, 10].map(copies => { const run = c.createRun(hero); run.rerolls = rerolls; run.inventory.C05 = copies; return { copies, cost: s.refreshPrice(run) }; }),
@@ -160,14 +160,21 @@ function generate(root) {
       sources.push({ path: relative, bytes: bytes.length, sha256: hash(bytes) });
     }
   }
-  for (const entry of ['assets', 'scripts', 'config', 'settings', 'docs', SKILL, 'AGENTS.md', 'README.md', 'package.json', 'package-lock.json', 'project.config.json', 'tsconfig.json', '.gitignore', 'art/concepts/hero-select-v2.5/03-select-hero-simple.png', 'art/concepts/hero-select-v2.5/runtime-prompts.json']) scan(entry);
+  for (const entry of ['assets', 'scripts', 'config', 'settings', 'docs', '.agents/skills', 'AGENTS.md', 'README.md', 'package.json', 'package-lock.json', 'project.config.json', 'tsconfig.json', '.gitignore', 'art/concepts/hero-select-v2.5/03-select-hero-simple.png', 'art/concepts/hero-select-v2.5/runtime-prompts.json']) scan(entry);
   scan('build-templates');
   scan('art/concepts/defeat-v2.9');
   scan('art/concepts/presentation-v3.0');
   scan('art/concepts/weapons-v3.1');
   scan('art/reviews/arms-v3.2');
   scan('art/reviews/chapter-v3.3');
+  scan('art/reviews/chronicle-v4');
+  scan('art/reviews/hero-select-v4.1');
+  scan('art/reviews/hero-select-v4.2');
+  scan('art/reviews/performance-v4.3');
+  scan('art/reviews/common-skills-v5');
+  scan('art/concepts/hero-select-v4.2');
   scan('art/runtime-sources/png/manifest.json');
+  scan('art/runtime-v4');
   scan('art/reviews/combat-v2.7/particle-contact-sheet.png');
   sources.sort((a, b) => a.path.localeCompare(b.path, 'en'));
   const media = sources.filter(f => /\.(png|wav|mp3)$/.test(f.path)).map(f => {
@@ -183,17 +190,18 @@ function generate(root) {
     const prefix = f.path.slice(0, -5) + '/';
     return [{ path: prefix, ...meta.userData, sourceBytes: sources.filter(s => s.path.startsWith(prefix)).reduce((n, s) => n + s.bytes, 0) }];
   });
-  const catalog = clean({ schemaVersion: 1, game: { name: '桃园乱斗', version: s.SURVIVAL_VERSION,
+  const catalog = clean({ schemaVersion: 2, game: { name: '桃园乱斗', version: s.SURVIVAL_VERSION,
     creator: JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).creator.version },
     provenance: { fingerprint: hash(JSON.stringify(sources)), files: sources },
-    counts: { heroes: heroes.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length },
-    rules: { warmupSeconds: c.WAVE_SECONDS, supplySeconds: s.SUPPLY_SECONDS, majorSeconds: s.MAJOR_SECONDS, bossEveryWaves:s.BOSS_EVERY_WAVES, chapterFinalBoss:'chief', clearAfterFirstBoss:true, earlySecondWeaponChance:s.EARLY_SECOND_WEAPON_CHANCE, weaponLimit: w.WEAPON_LIMIT, defaultWorld: world.WORLD, waveRules: [c.waveRule(1), c.waveRule(2)] },
+    counts: { heroes: heroes.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length, enemyArchetypes:chronicles.CHRONICLE_ENEMIES.length, bossEncounters:chronicles.CHAPTERS.length, bossPeople:new Set(chronicles.CHAPTERS.map(ch=>ch.bossId)).size, genericSkills:chronicles.GENERIC_SKILLS.length },
+    rules: { warmupSeconds: c.WAVE_SECONDS, warmupGoldBudget:c.WARMUP_GOLD_BUDGET, supplySeconds: s.SUPPLY_SECONDS, majorSeconds: s.MAJOR_SECONDS, bossEveryWaves:s.BOSS_EVERY_WAVES, chapterFinalBoss:'simayi', clearAfterFirstBoss:false, clearAfterChapter:17, chapterHeal:1, chapterEnemyScaling:'(referenceDps/152.05)^.95 × stage(1/1.04/1.08; boss1.1)', earlySecondWeaponChance:s.EARLY_SECOND_WEAPON_CHANCE, weaponLimit: w.WEAPON_LIMIT, defaultWorld: world.WORLD, waveRules: [c.waveRule(1), c.waveRule(2)] },
     effects: { limits: effects.FX_LIMITS }, controls: { joystick: controls.JOYSTICK },
     startup: { tasks: startup.STARTUP_TASKS, poster:'assets/campaign/poster.jpg', template:'build-templates/wechatgame/first-screen.js' },
     heroes, weapons: weaponRows, passives: itemRows, augments: s.AUGMENTS,
     consumables: c.ITEMS.filter(i => !p.PASSIVE_ITEMS.some(p => p.id === i.id)),
     enemy: { kinds: enemyKinds, warmup: Object.fromEntries(enemyKinds.map(k => [k, c.enemyStats(k, 1, 0)])), costs: Object.fromEntries(enemyKinds.map(k => [k, s.enemyCost(k)])), behavior: { archer: behavior.ARCHER, cavalry: behavior.CAVALRY, zhangjiao: behavior.ZHANGJIAO }, curve },
-    growth: { xpThresholds: Array.from({ length: 30 }, (_, i) => ({ level: i + 1, xpNeeded: c.xpNeeded(i + 1) })) },
+    chronicles:{chapters:chronicles.CHAPTERS.map(ch=>({...ch,enemyHpMultiplier:(ch.referenceDps/152.05)**.95,threatPerSecond:[0,1,2,3].map(stage=>chronicles.chapterThreat(ch.id,stage)),bossThreat:chronicles.chapterThreat(ch.id,3,true),actions:chronicles.BOSS_ACTIONS[ch.id-1]})),enemies:chronicles.CHRONICLE_ENEMIES.map(e=>({...e,firstChapterValues:chronicles.scaledEnemy(e.id,e.first,1)})),genericSkills:[...chronicles.GENERIC_SKILLS].sort((a,b)=>a.powerRank-b.powerRank),genericSkillsCombatEnabled:true},
+    growth: { enabled:false, xpThresholds: Array.from({ length: 30 }, (_, i) => ({ level: i + 1, xpNeeded: c.xpNeeded(i + 1) })) },
     economy: { prices, refresh },
     audio: { cues: sound.SOUND_CUES, voices: sound.SFX_VOICES, musicSeconds: music.MUSIC_SECONDS, musicVolume: music.MUSIC_VOLUME },
     assets: { bundles, media },
@@ -203,7 +211,7 @@ function generate(root) {
     table(['ID / 武器', '类别', '伤害', '间隔', '射程', '弹速', '击退', '半径 / 穿透', '暴击 / 倍率', '特点'], weaponRows.map(d => [d.id + ' / ' + d.name, w.CLASS_NAMES[d.category], d.damage, d.interval, d.range, d.speed, d.knockback, d.area + ' / ' + d.pierce, `${round(d.crit * 100)}% / ${d.critMultiplier}`, d.desc])),
     '\n## 品质派生\n', '无英雄或道具的伤害/间隔/射程/爆炸半径；实际暴击、特效、DPS上限及各英雄开局值见 `catalog.json`。\n',
     table(['武器', ...w.TIER_NAMES], weaponRows.map(d => [d.name, ...d.qualityStatsWithoutHeroOrItems.map(v => [v.damage, v.interval, v.range, v.area].map(round).join(' / '))])),
-    '\n## 各品级攻击机制\n', table(['武器', ...w.TIER_NAMES],weaponRows.map(d=>[d.name,...d.qualityStatsWithoutHeroOrItems.map(v=>v.effectText)])),
+    '\n## 各品级攻击机制\n', table(['武器', ...w.TIER_NAMES],weaponRows.map(d=>[d.name,...d.qualityStatsWithoutHeroOrItems.map(v=>v.mechanics)])),
     '\n## 出手与命中声音\n', table(['武器', '出手', '命中'], weaponRows.map(d => [d.name, d.sound.attack, d.sound.hit])),
     '\n## 天命强化\n', '每种本局唯一；货架出现资格与战斗生效条件不同，见装备机制参考。\n',
     table(['ID', '名称', '效果', '定义中的武器需求'], s.AUGMENTS.map(a => [a.id, a.name, a.desc, a.needs?.join(', ') || '另见机制条件'])),
@@ -216,17 +224,16 @@ function generate(root) {
     '## 恢复消耗品\n', table(['ID / 名称', '描述'], catalog.consumables.map(i => [i.id + ' / ' + i.name, i.desc])),
     '\n原始48项按源顺序映射8×6图集；新增远程道具为矢量图标。具体图集格位记录在机器目录，新增条目不要打乱旧格位。',
   ].join('\n') + '\n';
-  const balanceDoc = [heading('角色与数值曲线'), `版本：\`${catalog.game.version}\`。时间从进入无尽后开始计；20秒热身另算，购物与暂停不计时。\n`,
-    '## 角色开局与技能\n', table(['英雄', '心 / 移速', '默认武器', '固有特点', '技能', '冷却 / 距离 / 系数'], heroes.map(h => [h.name, h.startingHearts + ' / ' + h.stats.speed, names[h.starter], h.desc, h.skill.name, [h.skill.cooldown, h.skill.range, h.skill.factor].join(' / ')])),
-    '\n技能系数的实际伤害基数、保护、额外段数见玩法参考；不是技能面板最终伤害。\n',
-    '## 热身与无尽敌人\n', table(['类型', '热身生命', '无尽起始生命', '基础速度', '经验', '钱币', '出兵成本'], enemyKinds.map(k => { const a = catalog.enemy.warmup[k], b = catalog.enemy.curve[0].enemies[k]; return [k, a.hp, b.hp, b.speed, b.xp, b.coins, s.enemyCost(k)]; })),
-    '\n热身实际只出普通兵；首领由事件额外安排，不进入下表普通出兵配比。\n',
-    table(['战斗秒数模型', ...enemyKinds.map(k => k + ' HP'), '预算/秒', '普通兵 / 弓兵 / 骑兵'], catalog.enemy.curve.map(row => [row.seconds, ...enemyKinds.map(k => row.enemies[k].hp), row.spawnBudget, ['soldier','spearman','cavalry'].map(k => round(row.ordinaryMix[k] * 100) + '%').join(' / ')])),
-    '\n配比为对 `enemyKind` 的10000个等距输入取样；血量与预算直接调用代码。理论值不等于实测存活时间，首领/精英额外事件和出生动画见玩法参考。\n',
-    '## 隐藏成长\n', table(['内部等级', '下次经验'], catalog.growth.xpThresholds.filter(v => [1,2,3,5,10,20,30].includes(v.level)).map(v => [v.level, v.xpNeeded])),
-    '\nHUD不显示经验和等级；保留隐藏成长与封顶转换，见玩法参考。\n',
-    '## 商店价格与刷新\n', table(['补给计数', '基础价', '草鞋 I/II/III/IV', '突突枪 I/II/III/IV'], catalog.economy.prices.map(row => [row.supplyCount, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.smg.join(' / ')])),
-    '\n无折扣样本，按当前 `supplyCount` 调用现行商店价格函数，不使用旧八关商店价格。\n',
+  const balanceDoc = [heading('角色与数值曲线'), `版本：\`${catalog.game.version}\`。时间从进入正式战斗后开始计；${c.WAVE_SECONDS}秒第零章另算，购物与暂停不计时。\n`,
+    '## 角色开局与技能\n', table(['英雄', '心 / 移速', '默认武器', '固有特点', '技能', '充能方式'], heroes.map(h => [h.name, h.startingHearts + ' / ' + h.stats.speed, names[h.starter], h.desc, h.skill.selection,h.skill.recharge])),
+    '\n24通用技能全部开放，全英雄选1个；初始可用，释放后每击杀1名真实小兵+1，时间不充能。S为施法瞬间装备DPS之和。详见common-skills-v5规则。\n',
+    '## 24通用技能（综合威力升序）\n',table(['技能','威力阶','基础击杀需求','伤害/收益','范围','持续','真实机制'],catalog.chronicles.genericSkills.map(s=>[s.id+' / '+s.name,s.powerTier,s.killCharge,s.damage,s.range,s.duration,s.effect])),
+    '## 17章固定曲线\n', table(['章 / 首领','参考有效DPS','Boss HP','普通兵HP倍率','第1/2/3段威胁/秒','Boss援军威胁/秒'],catalog.chronicles.chapters.map(ch=>[ch.id+' / '+ch.boss,ch.referenceDps,ch.bossHp,round(ch.enemyHpMultiplier),ch.threatPerSecond.slice(1).map(round).join(' / '),round(ch.bossThreat)])),
+    '\n第零章15秒：首章仅E01 HP6／移速86，首店收入补足28；后续章有新兵预告。普通兵出生时乘本章HP倍率和战段1/1.04/1.08，Boss阶段新兵乘1.1；存活旧兵不补血。移速只乘1+min(.006×(章−1),.12)，弹速、冲锋与预警不加速。\n',
+    '## 40类敌兵标准数值\n',table(['ID / 名称','首登','标准HP','首登第1段HP','基速','攻击周期 / 前摇','射程','成本 / 金币','机制'],catalog.chronicles.enemies.map(e=>[e.id+' / '+e.name,e.first,e.hp,e.firstChapterValues.hp,e.speed,e.cycle+' / '+e.windup,e.range,e.cost+' / '+e.coins,e.mechanic])),
+    '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与24个可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance-v4.json，不等于真人存活率。\n',
+    '## 商店价格与刷新\n', table(['章节', '基础价', '草鞋 I/II/III/IV', '突突枪 I/II/III/IV'], catalog.economy.prices.map(row => [row.chapter, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.smg.join(' / ')])),
+    '\n无折扣样本，按固定章节指数 `min(5,1.07^(章−1))` 调用现行商店价格函数，不使用旧八关商店价格。\n',
     table(['已刷新次数', '无C05', 'C05×1', 'C05×2', 'C05×3', 'C05×10'], catalog.economy.refresh.map(row => [row.rerolls, ...row.costsByC05Copies.map(v => v.cost)])),
     '\nC05只降低每次进店的第一次刷新；收益递减后取整，第二份不一定立即降价。\n',
     '## 音频与资源清单\n', `音效池${sound.SFX_VOICES}声道；配乐${music.MUSIC_SECONDS}秒，基础音量${music.MUSIC_VOLUME}。完整声音映射见武器目录。\n`,

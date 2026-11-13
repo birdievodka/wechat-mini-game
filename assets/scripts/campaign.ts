@@ -1,29 +1,33 @@
+import {DEFAULT_SKILL,availableSkill} from './common-skills';
+import { extraHitFactor, isExtraWeapon } from './extra-weapons';
 import { PASSIVE_ITEMS, passiveBonuses, amount } from './passive-items';
 import { WEAPONS, WEAPON_LIMIT, WeaponId, EquippedWeapon, Tier, WeaponStats, weaponFor, starterFor, calculateWeapon, weaponOffer, parseWeaponOffer, weaponPrice, rollWeaponTier } from './weapons';
 /** Pure campaign rules. All percentages are additive fractions (0.10 = +10%). */
-export type HeroId = 'liubei' | 'guanyu' | 'zhangfei';
+export type HeroId = 'liubei' | 'guanyu' | 'zhangfei' | 'zhaoyun' | 'kongming';
 export type EnemyKind = 'soldier' | 'spearman' | 'cavalry' | 'chief';
 export type Phase = 'loading' | 'menu' | 'battle' | 'upgrade' | 'shop' | 'victory' | 'defeat';
 export interface Bonus { hp: number; power: number; melee: number; ranged: number; magic: number; damage: number; haste: number; speed: number; armor: number; crit: number; range: number; regen: number; pickup: number; xp: number; stipend: number; area: number; }
 export interface Hero { id: HeroId; name: string; title: string; desc: string; hp: number; speed: number; color: string; }
 export const HEROES: Hero[] = [
-  { id: 'liubei', name: '刘备', title: '仁义老大', desc: '拾取范围 +15%\n武器击退 +20%\n所有武器皆可上手', hp: 5, speed: 235, color: '#73904b' },
-  { id: 'guanyu', name: '关羽', title: '扁担武圣', desc: '近战伤害 +10%\n近战距离 +15%\n推荐扁担 / 杀猪尖刀', hp: 5, speed: 230, color: '#3c854d' },
-  { id: 'zhangfei', name: '张飞', title: '莽撞屠夫', desc: '近战伤害 +10%\n爆炸半径 +15%\n推荐杀猪尖刀 / 桃花', hp: 5, speed: 225, color: '#824277' },
+  { id: 'liubei', name: '刘备', title: '仁义老大', desc: '拾取范围 +15%\n武器击退 +20%\n所有武器皆可上手', hp: 5, speed: 300, color: '#73904b' },
+  { id: 'guanyu', name: '关羽', title: '扁担武圣', desc: '近战伤害 +10%\n近战距离 +15%\n推荐扁担 / 杀猪尖刀', hp: 5, speed: 295, color: '#3c854d' },
+  { id: 'zhangfei', name: '张飞', title: '莽撞屠夫', desc: '近战伤害 +10%\n爆炸半径 +15%\n推荐杀猪尖刀 / 桃花', hp: 5, speed: 290, color: '#824277' },
 ];
+HEROES.push({id:'zhaoyun',name:'赵云',title:'常山子龙',desc:'移动近战攻速 +10%\n技能可自由搭配',hp:5,speed:325,color:'#5285b0'}, {id:'kongming',name:'孔明',title:'卧龙军师',desc:'法术范围 +10%\n技能充能效率 +10%',hp:5,speed:285,color:'#65a38e'});
 export interface Item { id: string; name: string; price: number; desc: string; bonus: Partial<Bonus>; slot: 'head' | 'waist' | 'back' | 'feet'; }
 export const ITEMS: Item[] = [...PASSIVE_ITEMS, { id: 'bun', name: '热乎肉包', price: 50, desc: '立即恢复一颗心\n每60秒限购一次', bonus: {}, slot: 'waist' }];
-export interface Run { wavesCleared:number; bossEncounter:boolean; survivalSeconds: number; supplyCount: number; supplyMode: 'departure' | 'normal' | 'major'; purchasedOffers: string[]; lastHealAt: number; hearts: number; augments: string[]; economyRemainder: number; weapons: EquippedWeapon[]; starter: WeaponId; nextWeaponUid: number; locked: string[]; offerPrices: Record<string, number>; heroId: HeroId; wave: number; gold: number; level: number; xp: number; pending: number; bonus: Bonus; inventory: Record<string, number>; acquired: string[]; rerolls: number; offers: string[]; spent: number; }
+export interface Run { skillId:string;skillHealChapter:number; chapter:number; elapsed:number; chapterTime:number; chapterShop:boolean; moving:boolean; retries:number; wavesCleared:number; bossEncounter:boolean; survivalSeconds: number; supplyCount: number; supplyMode: 'departure' | 'normal' | 'major'; purchasedOffers: string[]; lastHealAt: number; hearts: number; augments: string[]; economyRemainder: number; weapons: EquippedWeapon[]; starter: WeaponId; nextWeaponUid: number; locked: string[]; offerPrices: Record<string, number>; heroId: HeroId; wave: number; gold: number; level: number; xp: number; pending: number; bonus: Bonus; inventory: Record<string, number>; acquired: string[]; rerolls: number; offers: string[]; spent: number; }
 export interface Stats { maxHp: number; damage: number; interval: number; speed: number; armor: number; crit: number; range: number; regen: number; pickup: number; xp: number; stipend: number; area: number; }
 export const clamp = (v: number, min: number, max: number): number => Math.max(min, Math.min(max, v));
 export const emptyBonus = (): Bonus => ({ hp: 0, power: 0, melee: 0, ranged: 0, magic: 0, damage: 0, haste: 0, speed: 0, armor: 0, crit: 0, range: 0, regen: 0, pickup: 0, xp: 0, stipend: 0, area: 0 });
-export function createRun(heroId: HeroId, starter: WeaponId = starterFor(heroId)): Run { return { wavesCleared:0,bossEncounter:false,survivalSeconds: 0, supplyCount: 0, supplyMode: 'departure', purchasedOffers: [], lastHealAt: -60, hearts: 5, augments: [], economyRemainder: 0, weapons: [{ uid: 1, id: starter, tier: 1, invested: 15 }], starter, nextWeaponUid: 2, locked: [], offerPrices: {}, heroId, wave: 1, gold: 0, level: 1, xp: 0, pending: 0, bonus: emptyBonus(), inventory: {}, acquired: [], rerolls: 0, offers: [], spent: 0 }; }
+export function createRun(heroId: HeroId, starter: WeaponId = starterFor(heroId),skillId=DEFAULT_SKILL): Run { return { skillId:availableSkill(skillId),skillHealChapter:0,chapter:1,elapsed:0,chapterTime:0,chapterShop:false,moving:false,retries:0,wavesCleared:0,bossEncounter:false,survivalSeconds: 0, supplyCount: 0, supplyMode: 'departure', purchasedOffers: [], lastHealAt: -60, hearts: 5, augments: [], economyRemainder: 0, weapons: [{ uid: 1, id: starter, tier: 1, invested: 15 }], starter, nextWeaponUid: 2, locked: [], offerPrices: {}, heroId, wave: 1, gold: 0, level: 1, xp: 0, pending: 0, bonus: emptyBonus(), inventory: {}, acquired: [], rerolls: 0, offers: [], spent: 0 }; }
 export const heroFor = (run: Run): Hero => HEROES.find(h => h.id === run.heroId)!;
 export function totalBonus(run: Run): Bonus {
   const b = { ...run.bonus };
   const p = passiveBonuses(run.inventory);
   b.damage += p.damage; b.haste += p.haste; b.crit += p.crit; b.power += p.power; b.speed += p.speed; b.pickup += p.pickup; b.stipend += p.stipend; b.area += p.area;
-  b.damage += (run.level - 1) * .03;
+  // Hidden levels never grant long-campaign damage or currency.
+
   b.damage += .06 * Math.log2(1 + (run.inventory.training || 0));
   if ((run.augments.indexOf('all-in') >= 0) && run.weapons.length === 6) { b.damage += .25; b.haste += .15; }
   if ((run.augments.indexOf('last-heart') >= 0) && run.hearts === 1) { b.damage += .35; b.speed += .12; }
@@ -43,7 +47,7 @@ export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'ti
   const p = passiveBonuses(run.inventory);
   if(category==='ranged') {
     const crit=s.crit+p.rangedCrit;
-    s.damage=(s.damage+p.rangedPower*Math.max(.15,Math.min(1.5,weaponFor(weapon.id).interval/.8))/(weapon.id==='shotgun'?5:1))*(1+p.rangedDamage+Math.max(0,crit-.8)*.5);
+    s.damage=(s.damage+p.rangedPower*Math.max(.15,Math.min(1.5,weaponFor(weapon.id).interval/.8))/(weapon.id==='shotgun'?5:isExtraWeapon(weapon.id)?extraHitFactor(weapon.id,weapon.tier):1))*(1+p.rangedDamage+Math.max(0,crit-.8)*.5);
     s.crit=Math.min(.8,crit);s.critMultiplier+=p.rangedCritDamage;s.knockback*=p.rangedKnockback;
   }
   if (weapon.id === 'sandal') { s.damage *= 1 + p.sandal; const extra=run.augments.indexOf('ricochet')>=0?2:0;const bounce=(s.bounce||0)+p.bounce+extra;s.bounce=Math.min(3,bounce);s.damage*=1+Math.max(0,bounce-3)*.1; }
@@ -59,7 +63,7 @@ export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'ti
   else { s.range *= p.rangedRange; s.speed *= p.shotSpeed; s.pierce += s.area > 0 ? 0 : p.pierce; }
   s.critMultiplier += p.critDamage; s.bounceFactor = weapon.id==='sandal'?p.bounceFactor:Math.min(1,.6+Math.max(0,(run.inventory.D04||0)-3)*.05); s.split = weapon.id === 'sword' ? p.split : 0; s.splitFactor = p.splitFactor;
   s.pierceFactor = Math.min(1,(.7+Math.max(0,(run.inventory.D03||0)-3)*.05+p.pierceDamage)+(category==='melee'?0:p.pierceRetention)); s.splashFactor = p.splash; s.spread = ['smg','shotgun'].indexOf(weapon.id)>=0?p.spread:1;
-  const extraHaste=(category==='ranged'?p.rangedHaste:0)+(weapon.id==='pole'?p.poleHaste:weapon.id==='smg'?p.smgHaste:0);
+  const extraHaste=(run.heroId==='zhaoyun'&&run.moving&&category==='melee'?.1:0)+(category==='ranged'?p.rangedHaste:0)+(weapon.id==='pole'?p.poleHaste:weapon.id==='smg'?p.smgHaste:0);
   s.interval=weaponFor(weapon.id).interval*[1,.96,.92,.88][weapon.tier-1]/(1+Math.max(-.4,bonus.haste+extraHaste));
   s.interval=Math.max(weapon.id==='smg'?.06:.08,s.interval);
   if(weapon.id==='thunder')s.chainTargets=Math.min(8,(s.chainTargets||3)+p.thunderTargets);
@@ -67,12 +71,21 @@ export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'ti
   if(weapon.id==='sword'){s.range=Math.min(250,s.range);s.orbitSpeed=Math.min(10.5,4.2*Math.sqrt(.5/s.interval)*s.speed/580*p.homing);s.homing=0;s.split=0;}
   if ((run.augments.indexOf('specialist') >= 0) && run.weapons.filter(w => w.id === weapon.id).length >= 3) { s.damage *= 1.3; s.knockback *= 1.2; }
   if ((run.augments.indexOf('big-bang') >= 0) && s.area > 0) { s.area *= 1.3; s.damage *= 1.2; }
+  if(isExtraWeapon(weapon.id)&&category==='melee')s.range=Math.min(280,s.range);
+  if(run.heroId==='kongming'&&category==='magic'){if(s.area>0)s.area*=1.1;else s.range*=1.1;}
+  if(weapon.id==='star-lamps')s.range=[160,175,190,210][weapon.tier-1]*(1+Math.min(.6,p.area));
+  if(weapon.id==='feather-fan')s.knockback*=weapon.tier===4?1.25:weapon.tier===3?1.15:1;
+  if(weapon.id==='heavy-crossbow')s.pierceFactor=Math.min(1,.85+p.pierceRetention+p.pierceDamage);
+  if(weapon.id==='chain-hook')s.bounceFactor=1;
   return s;
 };
 /** Per-target sustained ceiling; crowd damage and skill bursts are separate budgets. */
 export function weaponDps(run:Run,weapon:Pick<EquippedWeapon,'id'|'tier'>):number {
   const s=weaponStatsFor(run,weapon),hits=weapon.id==='shotgun'?4:weapon.id==='gourd'?(s.pulses||6):1;
-  return s.damage/s.interval*hits*(1+s.crit*(s.critMultiplier-1));
+  const factor=extraHitFactor(weapon.id,weapon.tier);let shared=1;
+  if(weapon.id==='oil-jar')shared=Math.min(1,2/Math.max(1,run.weapons.filter(w=>w.id==='oil-jar').length));
+  if(weapon.id==='wood-ox'){const total=run.weapons.filter(w=>w.id==='wood-ox').reduce((n,w)=>n+[1,2,2,3][w.tier-1],0);shared=Math.min(1,12/Math.max(1,total));}
+  return s.damage/(weapon.id==='caltrops'?1:s.interval)*hits*factor*shared*(1+s.crit*(s.critMultiplier-1));
 }
 export function statsFor(run: Run): Stats {
   const h = heroFor(run), b = totalBonus(run), w = weaponStatsFor(run, run.weapons[0]);
@@ -81,12 +94,7 @@ export function statsFor(run: Run): Stats {
     range: w.range, regen: 0, pickup: clamp((240 + b.pickup) * (run.heroId === 'liubei' ? 1.15 : 1), 240, 360), xp: clamp(b.xp, 0, .75), stipend: b.stipend, area: w.area };
 }
 export const xpNeeded = (level: number): number => 10 + 5 * (level - 1);
-export function gainXp(run: Run, base: number): number {
-  if (run.level >= 30) { run.xp += base; const coins = Math.floor(run.xp / 10); run.gold += coins; run.xp -= coins * 10; return 0; }
-  run.xp += base * (1 + statsFor(run).xp); let gained = 0;
-  while (run.level < 30 && run.xp + 1e-8 >= xpNeeded(run.level)) { run.xp -= xpNeeded(run.level); run.level++; gained++; }
-  run.pending = 0; run.xp = Math.max(0, run.xp); return gained;
-}
+export function gainXp(_run: Run, _base: number): number { return 0; }
 // Same armor curve and regeneration-point units as Brotato; round only at impact.
 export const regenPerSecond = (points: number): number => points > 0 ? (points + 1.25) / 11.25 : 0;
 export const damageTaken = (raw: number, armor: number): number => {
@@ -200,8 +208,9 @@ export function chooseUpgrade(run: Run, key: keyof Bonus): boolean {
   run.bonus[u.key] += u.amount; run.pending--; return true;
 }
 export function upgradeText(u: Upgrade): string { return `${u.desc} +${['damage', 'haste', 'speed', 'crit', 'area'].indexOf(u.key) >= 0 ? Math.round(u.amount * 100) + '%' : Number(u.amount.toFixed(2))}`; }
-export const WAVE_NAMES = ['桃园热身', '黄巾三波'];
-export const WAVE_SECONDS = 20;
+export const WAVE_NAMES = ['第零章', '黄巾三波'];
+export const WAVE_SECONDS = 15;
+export const WARMUP_GOLD_BUDGET=28;
 export const waveRule = (wave: number): { interval: number; cap: number; initial: number } => ({ interval: wave === 1 ? 1.6 : 1 / 1.4, cap: wave === 1 ? 12 : 80, initial: wave === 1 ? 3 : 8 });
 export function enemyKind(wave: number, random = Math.random, seconds = 0): EnemyKind {
   if (wave === 1) return 'soldier';
@@ -213,5 +222,5 @@ export function enemyStats(kind: EnemyKind, wave: number, seconds = 0): { hp: nu
   const b = kind === 'chief' ? [4200, 62, 20, 32] : kind === 'cavalry' ? [110, 118, 4, 4] : kind === 'spearman' ? [22, 94, 2, 2] : [wave === 1 ? 6 : 24, wave === 1 ? 86 : 108, 1, 1];
   return { hp: Math.round(b[0] * scale), speed: Math.min(kind === 'chief' ? 70 : 130, b[1] * (1 + Math.min(m, 10) * .025)), damage: 1, xp: b[2], coins: b[3] };
 }
-export const stipendFor = (run: Run): number => run.wave === 1 ? 30 : 12;
+export const stipendFor = (run: Run): number => run.wave === 1 ? Math.max(0,WARMUP_GOLD_BUDGET-run.gold) : 12;
 export const waveOutcome = (wave: number, seconds: number, hp: number, chiefDead: boolean): 'battle' | 'clear' | 'victory' | 'defeat' => hp <= 0 ? 'defeat' : wave === 1 && seconds <= 0 ? 'clear' : 'battle';

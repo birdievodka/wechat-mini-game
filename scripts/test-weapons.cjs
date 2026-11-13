@@ -96,3 +96,13 @@ for(let i=0;i<100;i++){const run=r.createRun('zhangfei');run.gold=40;survival.ro
 assert.ok(!survival.unlockedWeapons(0).some(w=>w.id==='sword'||w.id==='rocket'));assert.ok(survival.unlockedWeapons(30).some(w=>w.id==='sword'));assert.equal(survival.unlockedWeapons(60).length,11);
 assert.equal(survival.bossDue(2),false);assert.equal(survival.bossDue(3),true);assert.equal(survival.bossDue(6),true);
 console.log('通过：首个商店保证2武器、1000轮前期第二武器概率约80%、30/60秒解锁覆盖全11种、每3波首领节奏');
+
+for(const hero of r.HEROES)for(let i=0;i<200;i++){
+ const run=r.createRun(hero.id);run.gold=i%13;run.gold+=r.stipendFor(run);assert.equal(run.gold,28);
+ survival.rollSupply(run,random);const weapons=run.offers.filter(w.parseWeaponOffer),newWeapon=weapons.find(id=>w.parseWeaponOffer(id).id!==run.starter);
+ assert.ok(newWeapon&&survival.canBuySupply(run,newWeapon),'chapter 0 budget buys a new weapon');
+ assert.ok(weapons.reduce((sum,id)=>sum+run.offerPrices[id],0)>run.gold,'budget cannot buy both weapon offers');
+ assert.ok(survival.buySupply(run,newWeapon));assert.equal(run.weapons.length,2);assert.ok(!weapons.some(id=>survival.canBuySupply(run,id)),'one weapon purchase leaves insufficient funds for the other');
+}
+assert.equal(r.WAVE_SECONDS,15);assert.deepEqual(Array.from(r.HEROES,h=>h.speed),[300,295,290,325,285]);
+console.log('通过：15秒第零章、三英雄600次开局预算28/新武器可购买/不能连买两武器、基础移速300/295/290');

@@ -1,0 +1,78 @@
+{
+  "tool": "built-in image_gen",
+  "status": "runtime-assets-generated-and-inspected",
+  "jobs": [
+    {
+      "key": "hero-portraits",
+      "refs": [
+        "art/concepts/chronicles-v4/01-cast.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Exact TWO columns by TWO rows, FOUR full-body portraits only. Column1 Zhao Yun: silver helmet blue plume, blue-white short armor, silver spear with blue tassel. Column2 Zhuge Liang: black scholar hat, white short robe teal belt, white feather fan. Top row proud happy standing poses, bottom row SAME exact identities/gear but crying defeated, big tears and drooping shoulders, closed sad eyes, no smiles. Head occupies 65% height. Tiny feet, no long legs. Zhao's little peach satchel on BACK not in hand."
+    },
+    {
+      "key": "hero-parts",
+      "refs": [
+        "assets/presentation/heroes.png",
+        "art/concepts/chronicles-v4/01-cast.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Exact TWO columns by THREE rows, SIX isolated animation COMPONENTS, following image1's layout. Left column Zhao Yun, right column Zhuge Liang based on image2. Row1 HEAD ONLY eyes open: Zhao silver helmet blue plume handsome smirk, Zhuge black scholar cap sleepy smug eyes/goatee. Row2 SAME heads, same size center and silhouette, eyes CLOSED for blinking, otherwise identical. Row3 TORSO ONLY without head, arms, hands, weapons or feet: left blue-white short armor, right white short robe teal sash. Heads 65% character size, short squat torso. Absolutely no whole characters in this atlas."
+    },
+    {
+      "key": "bosses",
+      "refs": [
+        "art/concepts/chronicles-v4/01-cast.png",
+        "assets/hero-menu/atlas.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Wide atlas exact SEVEN columns by TWO rows, FOURTEEN DISTINCT full-body chibi bosses. Order left to right TOP: Zhang Jiao yellow Taoist robe crown lightning staff; Lu Bu black red armor long pheasant plumes Fangtian halberd; Dong Zhuo fat purple robe gold belt roast drumstick and mace; Yuan Shu tiny gold imperial hat jade seal purple robe pompous face; Yuan Shao gold helmet red plume purple cape command slips; Xiahou Dun dark blue armor clear black eyepatch one eye red spear; Cao Cao cunning narrow eyes black blue robe sword red command token. BOTTOM: Zhou Yu white armor red sash flame feather fan slight cheek soot; Huang Zhong white beard yellow brown armor huge bow; Ma Chao white silver helmet silver spear red-blue tassel; Lu Xun young scholarly green white robe red fire command fan; Zhu Rong woman orange-red hair fiery confident eyebrows short leaf-trim armor two curved daggers; Meng Huo round strong body green leaf trim tooth necklace bronze club stubborn comic face; Sima Yi elderly narrow-eyed scholar dark purple hood black feather fan tiny star ornament. Every figure same head/body ratio as refs, no realistic long-legged generals. No horses in this sheet, weapons compact."
+    },
+    {
+      "key": "troops-a-front",
+      "refs": [
+        "art/concepts/chronicles-v4/02-troops.png",
+        "assets/hero-menu/atlas.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Exact FIVE columns by FOUR rows, TWENTY different front-facing soldier sprites, uniform scale. Order left-to-right: Row1 yellow-headband farmer hoe; green cloth-cap broadsword infantry; gray helmet long spearman; navy broad rectangular shield infantry; black cap dual saber scout. Row2 red heavy axe soldier; gray heavy hammer soldier; purple-gold halberd guard; yellow banner bearer; green medic with small medicine box. Row3 yellow-headband BOW archer; gray soldier wooden crossbow; purple repeating crossbow magazine; navy heavy crossbow; green javelin thrower. Row4 purple double-javelin thrower; red dual throwing-knife soldier; green throwing-axe soldier; light yellow-headband rider on squat brown pony; black-red heavy armored rider on squat armored pony. Each holds recognizable weapon, short arms gripping not dangling. No labels."
+    },
+    {
+      "key": "troops-b-front",
+      "refs": [
+        "art/concepts/chronicles-v4/02-troops.png",
+        "assets/hero-menu/atlas.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Exact FIVE columns by FOUR rows, TWENTY front-facing enemy sprites, uniform scale, compact carts/animals not oversized. Order left-to-right: Row1 black-red tiger-pattern heavy cavalry on pony; navy mounted archer; burgundy western horse archer; green rider on squat wolf; green cute war elephant and tiny rider. Row2 green wild infantry bronze club; bamboo rattan armor shield infantry; green blowpipe hunter; red headwrap soldier big clay fire-oil pot; red torch soldier. Row3 teal matchlock musketeer; navy three-barrel old musketeer; red satchel grenade thrower; comical red firecracker-cart runner; compact wooden THREE-BOLT ballista cart tiny operator. Row4 compact sling stone catapult; small bronze cannon cart red wheels operator; tiny oil catapult cart clay pot; yellow Taoist soldier spell talisman; navy strategist soldier command flag. Fictional comedic tech, no modern realistic rifles. All mounted/carts at most 1.3x foot soldier height. No labels."
+    },
+    {
+      "key": "weapons",
+      "refs": [
+        "art/concepts/chronicles-v4/03-weapons.png",
+        "assets/presentation/icons.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Exact FIVE columns by FIVE rows, TWENTY FIVE isolated collectible weapon icons, diagonal compact silhouettes fully within cell, generous transparent spacing. No hands or characters. Ordered left-right rows: Row1 paired straight swords; green dragon guandao; wavy serpent spear; silver double crescent Fangtian halberd red tassel; blue tassel slender silver spear. Row2 simple blue hilt Qinggang straight sword; ornate gold hilt Yitian straight sword; short saber SEVEN gem studs; broad ancient bronze-backed saber; pair short iron halberds. Row3 three-pronged blade polearm; cluster iron caltrops; wooden repeating crossbow magazine; ornate phoenix curve bow; heavy stone-piercing crossbow. Row4 small throwing halberd; hooked chain weapon; clay fire oil jug; old round iron bomb red fuse; white feather fan jade hilt. Row5 yellow Taoist spell book; compact seven golden oil lamps; octagonal jade Bagua formation plaque; tiny wooden ox turret crossbow; tiny wooden mechanical kite bird. Strong recognizable shape at48pixels, same art style, not glowing sticks."
+    },
+    {
+      "key": "skills",
+      "refs": [
+        "art/concepts/chronicles-v4/06-skill-codex.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D game sprite atlas for 桃园乱斗. Input references are STYLE/IDENTITY REFERENCES ONLY. Match thick dark chocolate outlines, very large expressive heads, tiny bean feet, extremely short rounded bodies, flat warm cel colors, simple readable shapes, short bent sleeves and closed gripping hands. Genuine TRANSPARENT alpha background. No text, labels, frames, grid lines, paper, floor, cast shadows, checkerboard, glow cloud, watermark or UI. Objects separated with 12% empty margins inside exact equal grid cells, no overlap or cropped weapons. Orthographic front three-quarter top-down game view, all feet baseline consistent. Exact SIX columns by FOUR rows, TWENTY FOUR isolated round-readable skill icons, no plates/text. Ordered row1: charging golden spear, rearward blue spear, wide crescent slash, double gold shields, empty escaping robe, red decoy command flag. Row2 red war banner, three silver arrows, broken cooking pot and shield, three fire camps, tiny straw arrow boat, blue tidal wave. Row3 jade bagua shield, three paper soldiers, blue running boots, clean jade talisman, healing peach, eight golden locks. Row4 forked purple thunder, five falling gold stars, footprints and blade wave, fan of twelve arrows, roaring tiger face, four small bronze drums. Flat cel game art, thick brown outlines, transparent negative space."
+    },
+    {
+      "key": "troops-a-back",
+      "refs": [
+        "art/runtime-v4/sources/troops-a-front.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production 2D game sprite atlas. Transform EACH of the TWENTY front-facing soldiers/vehicles in Image1 into its REAR VIEW, all now facing AWAY from camera. Preserve EXACT FIVE columns by FOUR rows, one matching identity per same cell, same proportions, colors, weapons, helmets and relative sizes. Orthographic tiny bean-foot chibi top-down rear view, see back of heads, hats, capes, pony/elephant rears and backs of carts; no front-facing eyes/mouths. Each matching weapon still visible beside body, all mounted/carts remain compact. Preserve thick dark brown outlines, flat warm cel shading. Entire background genuinely TRANSPARENT alpha, no grid/text/shadows, each sprite padded inside own cell, no overlap. Never invent different units or reorder."
+    },
+    {
+      "key": "troops-b-back",
+      "refs": [
+        "art/runtime-v4/sources/troops-b-front.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production 2D game sprite atlas. Transform EACH of the TWENTY front-facing soldiers/vehicles in Image1 into its REAR VIEW, all now facing AWAY from camera. Preserve EXACT FIVE columns by FOUR rows, one matching identity per same cell, same proportions, colors, weapons, helmets and relative sizes. Orthographic tiny bean-foot chibi top-down rear view, see back of heads, hats, capes, pony/elephant rears and backs of carts; no front-facing eyes/mouths. Each matching weapon still visible beside body, all mounted/carts remain compact. Preserve thick dark brown outlines, flat warm cel shading. Entire background genuinely TRANSPARENT alpha, no grid/text/shadows, each sprite padded inside own cell, no overlap. Never invent different units or reorder."
+    },
+    {
+      "key": "boss-mounts",
+      "prompt": "Use case: stylized-concept. Production 2D transparent game sprite atlas for 桃园乱斗. Input1 is the approved boss identity/style reference, input2 approved enemy cavalry style reference. EXACT THREE columns by TWO rows, six isolated mounted chibi characters. Column1 Lu Bu with long red pheasant plumes black-red tiny armor silver crescent Fangtian halberd on a bright red-brown squat Red Hare pony; column2 Xiahou Dun blue armor black eyepatch red spear on a squat charcoal black pony; column3 Ma Chao silver white helmet silver spear and blue tassel on squat white pony. Top row front three-quarter game view, bottom row matching rear three-quarter view facing away; no front faces in rear row. Same thick chocolate outlines, huge expressive heads, tiny compressed bodies, ponies with VERY short stubby legs, no realistic long horse anatomy. All equally sized and fully isolated with at least12% empty margin, weapons and plumes don't touch boundaries. Genuine transparent alpha background, no text/labels/grid/paper/scenery/shadows/glow. Same humorous warm flat cel colors as references; preserve the three general identities."
+    }
+  ]
+}

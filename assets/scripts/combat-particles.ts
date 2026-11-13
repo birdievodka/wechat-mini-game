@@ -11,6 +11,8 @@ export class CombatParticles {
     x: 0, y: 0, vx: 0, vy: 0, life: 0, duration: 1, size: 1, angle: 0, spin: 0,
     gravity: 0, drag: 0, tone: 0, shape: 'spark', priority: 0,
   }));
+  trailsEnabled=true;
+  trimTrails():void {this.trailsEnabled=false;for(const p of this.slots)if(p.priority===0)p.life=0;}
   private seed = 73129;
   private tokens = FX_LIMITS.burstTokens;
   private cursor = 0;
@@ -18,6 +20,7 @@ export class CombatParticles {
   get active(): number { let n = 0; for (const p of this.slots) if (p.life > 0) n++; return n; }
   emit(x: number, y: number, angle: number, speed: number, duration: number, size: number, tone: number,
     shape: ParticleShape = 'spark', priority = 1, gravity = -70, drag = 2): boolean {
+    if(priority===0&&!this.trailsEnabled)return false;
     if (priority < 2 && this.tokens < 1) return false;
     const limit = priority >= 2 ? FX_LIMITS.particles : FX_LIMITS.normalParticles;
     let target: FxParticle | undefined;

@@ -22,8 +22,3 @@ export function orbitAnchor(index: number, count: number, age: number): { x: num
 export function cameraTarget(px: number, py: number, hw: number, hh: number): { x: number; y: number } {
   return { x: clamp(px, -Math.max(0, WORLD.halfWidth - hw), Math.max(0, WORLD.halfWidth - hw)), y: clamp(py, -Math.max(0, WORLD.halfHeight - hh), Math.max(0, WORLD.halfHeight - hh)) };
 }
-export const HERO_SKILLS = {
-  liubei: { name: '以德服人', cooldown: 30, range: 240, factor: .8, color: '#f5c95b' },
-  guanyu: { name: '横扫千军', cooldown: 26, range: 520, factor: 1.4, color: '#8bdb67' },
-  zhangfei: { name: '桃园狮吼', cooldown: 32, range: 260, factor: 1.1, color: '#d791e9' },
-};

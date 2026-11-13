@@ -23,7 +23,7 @@ class Node {
 class Graphics {}
 for (const method of ['clear', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'circle', 'rect', 'roundRect', 'close', 'bezierCurveTo', 'arc']) Graphics.prototype[method] = () => {};
 class Sprite { static SizeMode = { CUSTOM: 1 }; static Type = { SLICED: 1 }; }
-class Label { static HorizontalAlign = { CENTER: 0 }; static VerticalAlign = { CENTER: 0 }; static Overflow = { SHRINK: 0 }; }
+class Label { static CacheMode={NONE:0,CHAR:2}; static HorizontalAlign = { CENTER: 0 }; static VerticalAlign = { CENTER: 0 }; static Overflow = { SHRINK: 0 }; }
 class Frame { destroy() {} }
 class Camera { static ProjectionType = { ORTHO: 1 }; screenToWorld(p) { return p; } }
 const storage = new Map();
@@ -38,7 +38,7 @@ const cc = {
     stop() { this.playing = false; this.currentTime = 0; }
     pause() { this.playing = false; }
     play() { this.playing = true; this.plays++; }
-  }, Texture2D: class {}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
+  }, Texture2D: class {reset(size){Object.assign(this,size);}uploadData(data){this.data=data;}destroy(){this.destroyed=true;}}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
   assetManager: { loadBundle: (_name, cb) => cb(null, { load: (_url, _type, callback) => callback(null, { width: 768, height: 576 }) }) },
   view: { setDesignResolutionSize() {}, getVisibleSize: () => ({ width: 1334, height: 750 }) },
   input: { on() {}, off() {} }, Input: { EventType: {} }, game: { on() {}, off() {} }, Game: {},
@@ -59,11 +59,12 @@ function click(root, title) {
   const target = find(root); assert.ok(target, 'button exists: ' + title); target.events.end();
 }
 function finishStartup(g){g.update(1/60);g.update(1/60);assert.equal(g.ready,true);}
-async function newGame(id = 'liubei', weapon) { const g = new GameBootstrap(); await g.start();finishStartup(g); assert.equal(g.phase, 'menu'); click(g.screens.root, id); click(g.screens.root, 'StartHero'); assert.equal(g.phase, 'battle'); if(weapon&&weapon!==g.run.starter){g.run=r.createRun(id,weapon);g.restart(false);} return g; }
+async function newGame(id = 'liubei', weapon) { storage.delete('taoyuan-chronicle-v4'); const g = new GameBootstrap(); await g.start();finishStartup(g); assert.equal(g.phase, 'menu'); click(g.screens.root, id); click(g.screens.root, 'StartHero'); assert.equal(g.phase, 'battle'); if(weapon&&weapon!==g.run.starter){g.run=r.createRun(id,weapon);g.restart(false);} return g; }
 
 
 const survival = load("survival");
-(async () => {
+module.exports={newGame,GameBootstrap,finishStartup,click,load,cc,Node,Graphics,Sprite,Label,r,storage};
+if(require.main===module)(async () => {
   // Actual asynchronous boot: a missing critical frame must not be hidden by the menu.
   const bootLoad=cc.assetManager.loadBundle;let releaseBody;
   cc.assetManager.loadBundle=(name,cb)=>bootLoad(name,(error,bundle)=>{
@@ -83,27 +84,28 @@ const survival = load("survival");
   console.log('通过：关键角色图延迟时保留加载海报/真实进度、100%完成帧后进入选人、资源失败保留提示而非黑屏或假就绪');
   // The approved menu has one direct start action and no old loadout/test flow.
   for(const hero of r.HEROES){
-    const menuGame=new GameBootstrap();await menuGame.start();finishStartup(menuGame);
+    storage.delete('taoyuan-chronicle-v4');const menuGame=new GameBootstrap();await menuGame.start();finishStartup(menuGame);
     const nodes=()=>{const all=[];const walk=n=>{all.push(n);n.children.forEach(walk);};walk(menuGame.screens.root);return all;};
     assert.equal(menuGame.phase,'menu');assert.equal(menuGame.world.active,false);
     assert.ok(nodes().some(n=>n.name==='选择英雄'));
     for(const name of ['TestMode','ChooseWeapon','SelectedHero','LoadoutPreview','InitialSlot0'])assert.ok(!nodes().some(n=>n.name===name),name+' removed');
     const labels=nodes().map(n=>n.getComponent(Label)?.string||'').join('|');assert.ok(!/拾取范围|武器击退|五颗心|移速|测试模式|选择武器|lv\./i.test(labels));
-    assert.equal(nodes().filter(n=>n.name==='HeroPortrait').length,3,'heroes each appear once');
+    assert.equal(nodes().filter(n=>n.name==='HeroPortrait').length,5,'five head-only selection portraits');
     click(menuGame.screens.root,hero.id);assert.equal(menuGame.phase,'menu');
+    const preview=menuGame.screens.heroShowcase,runBefore=JSON.stringify(menuGame.run),rootBefore=preview.root;let blink=false;const angles=new Set();for(let f=0;f<450;f++){menuGame.update(1/60);blink ||= preview.head.spriteFrame===menuGame.artFrames['hero-'+hero.id+'-closed'];angles.add(Math.round(preview.props[1].angle*10));}assert.ok(blink,hero.id+' showcase actually blinks');assert.ok(angles.size>8,hero.id+' prop gesture moves');assert.equal(JSON.stringify(menuGame.run),runBefore,'menu animation does not advance combat or consume resources');click(menuGame.screens.root,hero.id);assert.equal(menuGame.screens.heroShowcase.root,rootBefore,'selection reuses the puppet');
     const selected=nodes().filter(n=>n.name==='HeroSelected'&&n.active);assert.equal(selected.length,1);assert.equal(selected[0].parent.name,hero.id);
     for(const [width,height]of [[1334,750],[1622,750],[1875,750]]){
       menuGame.screens.resize(width,height);const p=menuGame.screens.content,scale=p.scale.x,start=p.children.find(n=>n.name==='StartHero');
       assert.ok((start.position.x+165)*scale<width/2-24);assert.ok((start.position.y-44)*scale>-height/2+24,'start stays above bottom safe area');
-      for(const id of ['liubei','guanyu','zhangfei']){const n=p.children.find(n=>n.name===id);assert.ok((Math.abs(n.position.x)+165)*scale<width/2-36);}
+      for(const id of r.HEROES.map(h=>h.id)){const n=p.children.find(n=>n.name===id);assert.ok((Math.abs(n.position.x)+50)*scale<width/2-36);assert.ok(n.position.y>start.position.y+90,'avatar list above start');assert.equal(n.getComponent(Transform).height,100);}
     }
-    click(menuGame.screens.root,'StartHero');assert.equal(menuGame.phase,'battle');assert.equal(menuGame.run.heroId,hero.id);assert.equal(menuGame.run.starter,load('weapons').starterFor(hero.id));assert.equal(menuGame.remaining,20);assert.equal(menuGame.playerHp,5);assert.equal(menuGame.testMode,false);
+    click(menuGame.screens.root,'StartHero');assert.equal(menuGame.phase,'battle');assert.equal(menuGame.run.heroId,hero.id);assert.equal(menuGame.run.starter,load('weapons').starterFor(hero.id));assert.equal(menuGame.remaining,15);assert.equal(menuGame.playerHp,5);assert.equal(menuGame.testMode,false);
     menuGame.showMainMenu();assert.equal(menuGame.phase,'menu');assert.equal(menuGame.screens.selection,hero.id);
   }
-  console.log('通过：三张英雄卡/唯一金边选中态/无属性条/无测试和选武器入口、开始直接携带默认武器/20秒热身/五颗心、三种横屏安全区、返回保留所选英雄');
+  console.log('通过：上方分层动态英雄/五头像/真实眨眼与五种武器亮相/菜单不推进战斗/唯一金边选中态/无属性条/无测试和选武器入口、开始直接携带默认武器/15秒第零章/五颗心、三种横屏安全区、返回保留所选英雄');
   const loadBundle=cc.assetManager.loadBundle;cc.assetManager.loadBundle=(name,cb)=>name==='hero-menu'?cb(new Error('simulated optional art failure')):loadBundle(name,cb);
   const warn=console.warn;console.warn=()=>{};
-  try{const fallback=new GameBootstrap();await fallback.start();finishStartup(fallback);assert.equal(fallback.phase,'menu');click(fallback.screens.root,'guanyu');click(fallback.screens.root,'StartHero');assert.equal(fallback.run.starter,'pole');assert.equal(fallback.phase,'battle');}
+  try{const fallback=new GameBootstrap();await fallback.start();finishStartup(fallback);assert.equal(fallback.phase,'menu');click(fallback.screens.root,'guanyu');storage.delete('taoyuan-chronicle-v4');click(fallback.screens.root,'StartHero');assert.equal(fallback.run.starter,'pole');assert.equal(fallback.phase,'battle');}
   finally{cc.assetManager.loadBundle=loadBundle;console.warn=warn;}
   console.log('通过：选角素材加载失败仍能进入基础菜单和默认武器战斗，不停留启动页');
   const keyboardGame = await newGame(); keyboardGame.clearBattle(); keyboardGame.spawnClock = 999;
@@ -180,9 +182,9 @@ const survival = load("survival");
   sweep.updateWeapon(blade,.38*.4);const after=makeTarget(sweep,80,-18);sweep.updateWeapon(blade,.01);assert.equal(after.hp,100,'recovery frames do not deal hidden damage');
   console.log('通过：近战16敌全额横扫/躯体边缘判定/有效时间内新入范围敌兵命中/同挥不重复/出生与收招无伤害');
   // Exercise actual attacks for all 11×4 patterns, not just their config fields.
-  const weaponRules=load('weapons');assert.equal(weaponRules.WEAPONS.length,11);
+  const weaponRules=load('weapons');assert.equal(weaponRules.WEAPONS.length,36);
   assert.equal(weaponRules.parseWeaponOffer('w:beans:1'),undefined);assert.equal(weaponRules.parseWeaponOffer('w:rollingpin:1'),undefined);
-  for(const def of weaponRules.WEAPONS)for(let tier=1;tier<=4;tier++){
+  for(const def of weaponRules.WEAPONS.slice(0,11))for(let tier=1;tier<=4;tier++){
     const qa=await newGame('liubei',def.id);qa.clearBattle();qa.spawnClock=999;qa.run.weapons[0].tier=tier;qa.refreshStats();qa.syncWeapons();
     const weapon=qa.weapons[0],stats=weapon.stats;weapon.damage=10;weapon.angle=0;
     if(def.category==='melee'){
@@ -372,7 +374,7 @@ const survival = load("survival");
       if (kind === 'spearman' && !x) { mob.x = 0; mob.y = y > 0 ? 310 : -310; }
       animated.updateSpecialEnemy(mob, 1 / 60); assert.equal(mob.direction, facing); assert.ok(mob.moving);
       mob.walk = 0; animated.drawEnemy(mob); const firstFrame = mob.art.spriteFrame;
-      mob.walk = 1; animated.drawEnemy(mob); assert.notEqual(mob.art.spriteFrame, firstFrame, 'walking changes limb pose, not only sprite tilt');
+      if(kind==='chief'){const foot=mob.rigParts[2].node.position.y;mob.walk=.5;animated.drawEnemy(mob);assert.notEqual(mob.rigParts[2].node.position.y,foot,'new boss rig has independent footsteps');}else{mob.walk=1;animated.drawEnemy(mob);assert.notEqual(mob.art.spriteFrame,firstFrame,'walking changes limb pose, not only sprite tilt');}
       assert.equal(mob.art.node.scale.x < 0, facing === 3, 'left uses mirrored right profile');
       animated.clearBattle();
     }
@@ -381,16 +383,17 @@ const survival = load("survival");
 
   const advance = (g, seconds) => { for (let i = 0; i < Math.ceil(seconds * 60); i++) g.update(1 / 60); };
   const g = await newGame(); g.clearBattle(); g.spawnClock = 999;
-  assert.equal(g.remaining, 20); assert.equal(g.playerHp, 5); assert.equal(g.stats.maxHp, 5);
+  assert.equal(g.remaining, 15); assert.equal(g.playerHp, 5); assert.equal(g.stats.maxHp, 5);
   g.playerHp = 3; const levelBefore = g.run.level; r.gainXp(g.run, 100); g.refreshStats();
-  assert.ok(g.run.level > levelBefore); assert.equal(g.playerHp, 3); assert.equal(g.run.pending, 0);
-  g.paused = true; g.update(50); assert.equal(g.remaining, 20); g.paused = false;
-  g.dropCoin(400, 0); g.dropCoin(-400, 0); advance(g, 20);
-  assert.equal(g.phase,'shop');assert.equal(g.run.wave,1);assert.equal(g.run.supplyMode,'departure');assert.equal(g.run.gold,32);assert.equal(g.playerHp,5);assert.equal(g.difficultyLabel.string,'');assert.equal(g.run.survivalSeconds,0);
+  assert.equal(g.run.level,levelBefore); assert.equal(g.playerHp, 3); assert.equal(g.run.pending, 0);
+  g.paused = true; g.update(50); assert.equal(g.remaining, 15); g.paused = false;
+  g.dropCoin(400, 0); g.dropCoin(-400, 0); advance(g, 15);
+  assert.equal(g.phase,'shop');assert.equal(g.run.wave,1);assert.equal(g.run.supplyMode,'departure');assert.equal(g.run.gold,28);assert.equal(g.playerHp,5);assert.equal(g.difficultyLabel.string,'');assert.equal(g.run.survivalSeconds,0);
+  const uiLabels=[];const readLabels=n=>{const l=n.getComponent(Label);if(l)uiLabels.push(l.string);n.children.forEach(readLabels);};readLabels(g.screens.root);assert.ok(uiLabels.includes('继续战斗'));assert.ok(!uiLabels.some(t=>/进入第|热身完成/.test(t)));
   const cash=g.run.gold;g.finishWave();assert.equal(g.run.gold,cash,'seamless transition reward is idempotent');assert.equal(g.run.weapons.length,1,'heat transition must not grant a duplicate weapon');assert.equal(g.run.weapons[0].id,g.run.starter);assert.equal(g.run.weapons[0].uid,1);assert.equal(g.run.nextWeaponUid,2);
-  const preparation=JSON.stringify([g.age,g.spawnClock,g.run.survivalSeconds,g.enemies.map(e=>[e.x,e.y,e.hp])]);advance(g,10);assert.equal(JSON.stringify([g.age,g.spawnClock,g.run.survivalSeconds,g.enemies.map(e=>[e.x,e.y,e.hp])]),preparation,'preparation shop freezes battlefield');click(g.screens.root,'SupplySkip');assert.equal(g.phase,'battle');assert.equal(g.run.wave,2);assert.equal(g.nextSupply,30);assert.equal(g.difficultyLabel.string,'难度升级');assert.equal(g.run.weapons.length,1,'skipping purchases never grants a weapon');
+  const preparation=JSON.stringify([g.age,g.spawnClock,g.run.survivalSeconds,g.enemies.map(e=>[e.x,e.y,e.hp])]);advance(g,10);assert.equal(JSON.stringify([g.age,g.spawnClock,g.run.survivalSeconds,g.enemies.map(e=>[e.x,e.y,e.hp])]),preparation,'preparation shop freezes battlefield');click(g.screens.root,'SupplySkip');assert.equal(g.phase,'battle');assert.equal(g.run.wave,2);assert.equal(g.nextSupply,30);assert.equal(g.difficultyLabel.string,'');assert.equal(g.run.weapons.length,1,'skipping purchases never grants a weapon');
   g.clearBattle(); g.spawnClock = 999; g.resumeCountdown = 0;
-  advance(g, 30); assert.equal(g.phase, 'shop'); assert.equal(g.run.supplyCount, 1); assert.equal(g.run.gold,44);
+  advance(g, 30); assert.equal(g.phase, 'shop'); assert.equal(g.run.supplyCount, 1); assert.equal(g.run.gold,40);
   const frozen = JSON.stringify([g.run.survivalSeconds,g.spawnClock,g.age,g.enemies.map(e=>[e.x,e.y,e.attack])]); advance(g, 15);
   assert.equal(JSON.stringify([g.run.survivalSeconds,g.spawnClock,g.age,g.enemies.map(e=>[e.x,e.y,e.attack])]),frozen,'shopping freezes every clock and actor');
   assert.equal(g.run.offers.length,3); assert.ok(g.run.offers.some(id=>survival.canBuySupply(g.run,id)),'affordable choice guaranteed');
@@ -410,24 +413,29 @@ const survival = load("survival");
   assert.equal(g.run.wavesCleared,3);assert.equal(g.run.bossEncounter,true);assert.equal(g.nextSupply,Infinity);
   assert.equal(g.enemies.filter(e=>e.hp>0&&e.kind==='chief').length,1);assert.equal(g.enemies.filter(e=>e.hp>0&&!e.animal&&e.kind!=='chief').length,3,'boss joins surviving minions');
   const firstBoss=g.enemies.find(e=>e.hp>0&&e.kind==='chief');firstBoss.attackCooldown=999;firstBoss.speed=0;
-  g.resumeCountdown=0;g.spawnClock=0;advance(g,31);assert.equal(g.phase,'battle','boss is not a timed survival wave');assert.equal(g.enemies.filter(e=>e.hp>0&&e.kind==='chief').length,1);
+  g.resumeCountdown=0;g.spawnClock=0;
+  const realSpawn=g.spawnNext,realHurt=g.hurtPlayer,reinforcements=[];g.spawnNext=function(kind){reinforcements.push(kind);return realSpawn.call(this,kind);};g.hurtPlayer=()=>{};
+  advance(g,31);g.spawnNext=realSpawn;g.hurtPlayer=realHurt;
+  assert.equal(g.phase,'battle','boss is not a timed survival wave');assert.equal(g.enemies.filter(e=>e.hp>0&&e.kind==='chief').length,1);
+  assert.ok(reinforcements.length>=10,'boss battle continues the regular timed spawning budget');assert.ok(reinforcements.every(kind=>['soldier','spearman','cavalry'].includes(kind)),'reinforcements do not create another boss');
+  assert.ok(g.enemies.filter(e=>e.hp>0&&!e.animal).length<=80,'boss and reinforcements share the enemy cap');
   g.openSupply();g.resumeSupply('duplicate');assert.equal(g.phase,'battle');assert.equal(g.enemies.filter(e=>e.hp>0&&e.kind==='chief').length,1,'no extra shop/boss while Zhang Jiao is alive');
   g.playerHp=5;g.hurtTime=0;g.protectionTime=0;g.hurtPlayer(-20,0,999);assert.equal(g.playerHp,4);g.hurtPlayer(-20,0,999);assert.equal(g.playerHp,4);
   for(let i=0;i<4;i++){g.hurtTime=0;g.hurtPlayer(-20,0,999);}
-  assert.equal(g.phase,'defeat');assert.equal(storage.has('taoyuan-clear-best'),false,'failure never writes a clear record');
+  assert.equal(g.phase,'defeat');assert.equal(storage.has('taoyuan-chronicle-clear-best-v4'),false,'failure never writes a clear record');
   click(g.screens.root,'ResultRetry');assert.equal(g.run.wave,1);assert.equal(g.run.wavesCleared,0);assert.equal(g.run.bossEncounter,false);assert.equal(g.run.gold,0);assert.equal(g.playerHp,5);
-  console.log('通过：20秒热身/先购物/不送武器、三波各30秒与补给冻结、第三波后唯一张角/保留旧敌与弹幕/不续刷/不超时过关、失败/重开清阶段');
+  console.log('通过：15秒第零章/先购物/不送武器、三波各30秒与补给冻结、第三波后唯一张角/保留旧敌与弹幕/持续援军/不重复首领/不超时过关、失败/重开清阶段');
 
-  const prep=await newGame('guanyu');prep.clearBattle();prep.spawnClock=999;prep.run.gold=90;prep.playerHp=3;prep.px=240;prep.py=-70;prep.hero.setPosition(240,-70);prep.cameraX=120;prep.cameraY=-20;
+  const prep=await newGame('guanyu');prep.clearBattle();prep.spawnClock=999;prep.run.gold=120;prep.playerHp=3;prep.px=240;prep.py=-70;prep.hero.setPosition(240,-70);prep.cameraX=120;prep.cameraY=-20;
   const prepEnemy=makeTarget(prep,-350,180);prepEnemy.hp=200;prep.remaining=.001;prep.update(.01);
   assert.equal(prep.phase,'shop');assert.equal(prep.run.wave,1);assert.equal(prep.run.gold,120);assert.equal(prep.playerHp,5);assert.equal(prep.run.weapons.length,1);assert.equal(prep.run.offers.length,3);assert.equal(prep.run.offers[0],'w:pole:1');assert.equal(prep.run.offers.filter(id=>id.startsWith('w:')).length,2,'preparation guarantees two weapon choices');
   for(let i=0;i<3;i++){const id=prep.run.offers[i],price=prep.run.offerPrices[id],gold=prep.run.gold;click(prep.screens.root,'SupplyBuy-'+i);assert.equal(prep.run.gold,gold-price);assert.equal(prep.phase,'shop');assert.equal(prep.run.wave,1);assert.equal(prep.difficultyLabel.string,'');}
   const refreshCost=survival.refreshPrice(prep.run),beforeRefresh=prep.run.gold;click(prep.screens.root,'SupplyRefresh');assert.equal(prep.run.gold,beforeRefresh-refreshCost);assert.equal(prep.run.rerolls,1);assert.equal(survival.refreshPrice(prep.run),8);
   const next=prep.run.offers.findIndex(id=>survival.canBuySupply(prep.run,id));assert.ok(next>=0);click(prep.screens.root,'SupplyBuy-'+next);assert.equal(prep.phase,'shop');
   const frozenPrep=JSON.stringify([prep.age,prep.px,prep.py,prep.cameraX,prep.cameraY,prepEnemy.hp,prepEnemy.x,prepEnemy.y,prep.run.survivalSeconds]);advance(prep,8);assert.equal(JSON.stringify([prep.age,prep.px,prep.py,prep.cameraX,prep.cameraY,prepEnemy.hp,prepEnemy.x,prepEnemy.y,prep.run.survivalSeconds]),frozenPrep);
-  const equippedPrep=JSON.stringify(prep.run.weapons),prepUid=prep.run.nextWeaponUid;click(prep.screens.root,'SupplySkip');assert.equal(prep.run.wave,2);assert.equal(prep.nextSupply,30);assert.equal(prep.nextEvent,90);assert.equal(prep.run.survivalSeconds,0);assert.equal(prep.difficultyLabel.string,'难度升级');assert.equal(JSON.stringify(prep.run.weapons),equippedPrep);assert.equal(prep.run.nextWeaponUid,prepUid);assert.equal(prep.px,240);assert.equal(prep.py,-70);assert.equal(prep.cameraX,120);assert.equal(prep.cameraY,-20);assert.equal(prepEnemy.hp,200);
+  const equippedPrep=JSON.stringify(prep.run.weapons),prepUid=prep.run.nextWeaponUid;click(prep.screens.root,'SupplySkip');assert.equal(prep.run.wave,2);assert.equal(prep.nextSupply,30);assert.equal(prep.nextEvent,90);assert.equal(prep.run.survivalSeconds,0);assert.equal(prep.difficultyLabel.string,'');assert.equal(JSON.stringify(prep.run.weapons),equippedPrep);assert.equal(prep.run.nextWeaponUid,prepUid);assert.equal(prep.px,240);assert.equal(prep.py,-70);assert.equal(prep.cameraX,120);assert.equal(prep.cameraY,-20);assert.equal(prepEnemy.hp,200);
   const continued=JSON.stringify([prep.run.gold,prep.nextSupply,prep.nextEvent,prep.run.weapons]);prep.resumeSupply('重复点击');assert.equal(JSON.stringify([prep.run.gold,prep.nextSupply,prep.nextEvent,prep.run.weapons]),continued);
-  console.log('通过：难度升级前强制展示一次热身商店/两武器一道具/可全买与刷新后再买、购物期间不升级/完整战场冻结、付款后原地进入第1波/不复制装备/不跳过30秒补给/继续幂等');
+  console.log('通过：正式战斗前展示一次普通补给/两武器一道具/可全买与刷新后再买、购物期间不升级/完整战场冻结、付款后原地继续战斗/不复制装备/不跳过30秒补给/继续幂等');
 
   const feedback=await newGame();feedback.clearBattle();feedback.spawnClock=999;feedback.lastDamage=3;
   assert.equal(feedback.hurtTime,0);assert.equal(feedback.protectionTime,0);feedback.finishWave();
@@ -440,7 +448,7 @@ const survival = load("survival");
   advance(feedback,1.4);feedback.openSupply();click(feedback.screens.root,'SupplySkip');assert.ok(feedback.protectionTime>0);assert.equal(feedback.hurtTime,0);
   const protection=feedback.protectionTime;feedback.paused=true;advance(feedback,2);assert.equal(feedback.protectionTime,protection);feedback.paused=false;advance(feedback,1.4);
   assert.equal(feedback.body.color.value,'#ffffff');assert.equal(feedback.hurtText.string,'');feedback.hurtPlayer(feedback.px,feedback.py);assert.equal(feedback.playerHp,4,'supply protection blocks hits without showing damage');
-  feedback.showMainMenu();assert.equal(feedback.protectionTime,0);assert.equal(feedback.hurtTime,0);click(feedback.screens.root,'StartHero');assert.equal(feedback.hurtText.string,'');assert.equal(feedback.body.color.value,'#ffffff');
+  feedback.showMainMenu();assert.equal(feedback.protectionTime,0);assert.equal(feedback.hurtTime,0);storage.delete('taoyuan-chronicle-v4');click(feedback.screens.root,'StartHero');assert.equal(feedback.hurtText.string,'');assert.equal(feedback.body.color.value,'#ffffff');
   feedback.clearBattle();feedback.spawnClock=999;feedback.hurtPlayer(-20,0);feedback.finishWave();assert.ok(feedback.hurtTime>0,'real hit feedback is preserved during the preparation shop');click(feedback.screens.root,'SupplySkip');advance(feedback,2.5);assert.equal(feedback.body.color.value,'#ffffff');
   console.log('通过：热身/补给保护不闪红/不显示扣血/不触发受击加速、保护仍能免伤/暂停冻结、真实受击正常闪红扣血/防连击、重开清理');
 
@@ -491,7 +499,7 @@ const survival = load("survival");
   const orbit=await newGame();orbit.clearBattle();orbit.run.weapons=load('weapons').WEAPONS.filter(w=>['smg','shotgun','rocket','sword','thunder','gourd'].includes(w.id)).map((w,i)=>({id:w.id,tier:2,uid:i+1,invested:50}));orbit.refreshStats();orbit.syncWeapons();
   const points=orbit.weapons.map(w=>w.node.position);assert.equal(new Set(points.map(p=>Math.round(p.x)+','+Math.round(p.y))).size,6);assert.ok(points.some(p=>p.y>100)&&points.some(p=>p.y<0));
   assert.ok(points.some(p=>p.x>75)&&points.some(p=>p.x<-75));for(const w of orbit.weapons){assert.equal(w.arm.node.active,false);assert.equal(w.node.parent,orbit.hero,'orbit weapon has no inactive arm parent');assert.ok(w.node.active);if(w.equipped.id==='sword'){assert.equal(w.shoe.active,false);assert.equal(w.orbitBlades.length,w.stats.shotCount);}else assert.ok(w.shoe.active);}
-  const birth=orbit.spawnNext('soldier');const beforeBorn=birth.hp;orbit.castHeroSkill();assert.equal(birth.hp,beforeBorn,'materializing soldiers cannot take skill damage');assert.ok(birth.born>=.9);orbit.updateEnemy(birth,.4);assert.ok(birth.born>0);assert.equal(birth.attack,-1);
+  const birth=orbit.spawnNext('soldier');const beforeBorn=birth.hp;orbit.castSkill();assert.equal(birth.hp,beforeBorn,'materializing soldiers cannot take skill damage');assert.ok(birth.born>=.9);orbit.updateEnemy(birth,.4);assert.ok(birth.born>0);assert.equal(birth.attack,-1);
   console.log('通过：1.5屏世界跨屏与镜头跟随、固定HUD/无经验条、240次合法出生采样、六武器周身分布/独立父节点/无额外手臂、出生预告无伤害');
 
   const animals=await newGame();animals.clearBattle();animals.spawnClock=999;const animal=animals.spawnAnimal('chicken');animal.born=0;animal.x=100;animal.y=0;const xpBefore=animals.run.xp,killsBefore=animals.kills;
@@ -501,17 +509,17 @@ const survival = load("survival");
   animals.dropHeart(50,0);const hAge=animals.hearts.find(h=>h.active).age;animals.phase='shop';advance(animals,5);assert.equal(animals.hearts.find(h=>h.active).age,hAge);animals.collectAllCoins();assert.ok(animals.hearts.some(h=>h.active),'coin sweep never collects life hearts');
   console.log('通过：动物击败只掉一颗心、不计敌兵成长、满心可拾取但不超上限、回血上限/单次结算、补给冻结寿命与金币回收隔离');
 
-  for(const hero of r.HEROES){const skill=await newGame(hero.id);skill.clearBattle();skill.spawnClock=999;const target=makeTarget(skill,90,0);target.hp=9999;skill.heading=0;skill.castHeroSkill();const damaged=target.hp;assert.ok(damaged<9999,hero.id+' skill deals real damage');assert.ok(skill.skillCooldown>0);skill.castHeroSkill();assert.equal(target.hp,damaged,'double tap cannot cast twice');
-    const cooldown=skill.skillCooldown;skill.paused=true;advance(skill,3);assert.equal(skill.skillCooldown,cooldown);skill.paused=false;skill.phase='shop';advance(skill,3);assert.equal(skill.skillCooldown,cooldown);skill.phase='battle';advance(skill,.1);assert.ok(skill.skillCooldown<cooldown);
-    if(hero.id==='liubei'){skill.hurtTime=0;const hearts=skill.playerHp;skill.hurtPlayer(0,0);assert.equal(skill.playerHp,hearts,'Liu Bei has a short explicit skill dodge window');}
+  for(const hero of r.HEROES){const skill=await newGame(hero.id);skill.clearBattle();skill.spawnClock=999;const target=makeTarget(skill,90,0);target.hp=9999;skill.heading=0;skill.skillCharge=skill.skillRequirement();skill.castSkill();skill.updateSkill(.28);assert.ok(target.hp<9999,hero.id+' selected generic dash deals real damage');assert.equal(skill.skillCharge,0);skill.castSkill();assert.equal(skill.skillCharge,0,'double tap cannot cast twice');
+    skill.paused=true;advance(skill,3);assert.equal(skill.skillCharge,0);skill.paused=false;skill.phase='shop';advance(skill,3);assert.equal(skill.skillCharge,0);skill.phase='battle';skill.protectionTime=0;skill.commonSkill.reset();skill.weapons.forEach(w=>w.cooldown=999);advance(skill,.1);assert.equal(skill.skillCharge,0,'time never recharges a common skill');
+    const hearts=skill.playerHp;skill.skillCharge=skill.skillRequirement();skill.castSkill();skill.hurtTime=0;skill.hurtPlayer(0,0);assert.equal(skill.playerHp,hearts,'generic dash protection applies to every hero');
   }
-  console.log('通过：三人物技能真实伤害、30/26/32秒冷却、防连点、暂停/补给冻结、刘备短避伤');
+  console.log('通过：五英雄可携带同一通用技能、真实路径伤害、防连点、时间不充能、暂停补给保留计数、突进保护不限英雄');
 
   const controls=await newGame(),jc=load('joystick-input').joystickCenter(controls.halfWidth,controls.halfHeight);
   const finger=(x,y,id=1)=>({getLocation:()=>({x,y}),getID:()=>id});
   assert.equal(controls.joystick.node.active,true,'静止时固定摇杆可见');
   controls.touchStart(finger(jc.x,jc.y));controls.touchMove(finger(jc.x+60,jc.y));
-  assert.equal(controls.stick.x,1);controls.castHeroSkill();controls.touchEnd(finger(0,0,2));assert.equal(controls.touchId,1,'技能手指不打断移动');
+  assert.equal(controls.stick.x,1);controls.castSkill();controls.touchEnd(finger(0,0,2));assert.equal(controls.touchId,1,'技能手指不打断移动');
   const beforeMoving=controls.px;advance(controls,.2);assert.ok(controls.px>beforeMoving,'固定摇杆真实驱动角色');
   controls.touchEnd(finger(jc.x,jc.y));assert.equal(controls.stick.x,0);assert.equal(controls.joystick.node.active,true,'松手归中但底座保留');
   const particlesBefore=JSON.stringify(controls.combatFx.particles.slots),stampsBefore=JSON.stringify(controls.combatFx.stamps);
@@ -556,7 +564,7 @@ const survival = load("survival");
 
   for(const id of ['smg','shotgun','rocket','thunder','gourd']){
     const game=await newGame();game.clearBattle();game.spawnClock=999;game.run.weapons=[{id,tier:1,uid:1}];game.refreshStats();game.syncWeapons();const target=makeTarget(game,100,0);target.hp=1000;target.maxHp=1000;const w=game.weapons[0];w.damage=20;w.angle=0;game.releaseWeapon(0,34,0,w);
-    for(let i=0;i<120;i++){game.updateProjectiles(1/120);game.updateHeroSkill(1/120);}assert.ok(target.hp<1000,id+' attacks cause damage');assert.ok(game.projectiles.length<=160);
+    for(let i=0;i<120;i++){game.updateProjectiles(1/120);game.updateSkill(1/120);}assert.ok(target.hp<1000,id+' attacks cause damage');assert.ok(game.projectiles.length<=160);
   }
   const sword=await newGame();sword.clearBattle();sword.run.weapons=[{id:'sword',tier:1,uid:1}];sword.run.inventory.D05=10;sword.refreshStats();sword.syncWeapons();sword.spawnClock=999;
   const swordTarget=makeTarget(sword,150,0);swordTarget.hp=10000;swordTarget.speed=0;swordTarget.attackCooldown=999;const sw=sword.weapons[0];const farSword=makeTarget(sword,500,0);farSword.hp=10000;farSword.speed=0;
@@ -571,7 +579,7 @@ const survival = load("survival");
 
   const suppression=await newGame();suppression.clearBattle();suppression.run.weapons=[{id:'smg',tier:1,uid:1}];suppression.refreshStats();suppression.syncWeapons();const runner=makeTarget(suppression,350,0);runner.hp=10000;runner.maxHp=10000;runner.speed=100;runner.attackCooldown=999;
   const runnerStart=runner.x;for(let i=0;i<240;i++){if(i%19===0)suppression.hitEnemy(runner,0,3,12,'smg',false);suppression.updateEnemy(runner,1/120);}assert.ok(runnerStart-runner.x>150,'continuous SMG hits cannot lock infantry in place');
-  const armored=makeTarget(suppression,350,0,'cavalry');armored.attack=-1;suppression.hitEnemy(armored,0,1,100,'sandal',false);assert.ok(Math.abs(armored.vx-35)<1e-9,'cavalry resists knockback');const durable=makeTarget(suppression,420,0,'chief');durable.hp=durable.maxHp=r.enemyStats('chief',2,180).hp;suppression.run.weapons=Array.from({length:6},(_,i)=>({id:'smg',tier:2,uid:i+1}));suppression.run.inventory={A01:3,A02:3,D09:3,D10:3,D11:2,F05:2,A05:3};suppression.run.level=7;suppression.skillCooldown=0;suppression.run.heroId='guanyu';suppression.refreshStats();suppression.syncWeapons();suppression.castHeroSkill();assert.ok(durable.hp<durable.maxHp,'skill actually reaches boss');assert.ok(durable.hp>durable.maxHp*.6,'even six upgraded gun skill cannot erase boss');
+  const armored=makeTarget(suppression,350,0,'cavalry');armored.attack=-1;suppression.hitEnemy(armored,0,1,100,'sandal',false);assert.ok(Math.abs(armored.vx-35)<1e-9,'cavalry resists knockback');const durable=makeTarget(suppression,420,0,'chief');durable.hp=durable.maxHp=r.enemyStats('chief',2,180).hp;suppression.run.weapons=Array.from({length:6},(_,i)=>({id:'smg',tier:2,uid:i+1}));suppression.run.inventory={A01:3,A02:3,D09:3,D10:3,D11:2,F05:2,A05:3};suppression.run.level=7;suppression.skillCharge=999;suppression.run.heroId='guanyu';suppression.run.skillId='G19';suppression.refreshStats();suppression.syncWeapons();suppression.castSkill();for(let i=0;i<180;i++)suppression.updateSkill(1/120);assert.ok(durable.hp<durable.maxHp,'skill actually reaches boss');assert.ok(durable.hp>durable.maxHp*.6,'even six upgraded gun skill cannot erase boss');
   const pressure=await newGame();pressure.clearBattle();pressure.run.wave=2;pressure.nextSupply=999;pressure.run.weapons=[{id:'smg',tier:1,uid:1}];pressure.refreshStats();pressure.syncWeapons();pressure.spawnClock=.1;pressure.queuedKind='soldier';advance(pressure,40);assert.ok(pressure.playerHp<5,'one SMG cannot make stationary hero invulnerable');
   console.log('通过：机关枪连续命中仍可追近、骑兵击退抗性、首领抗单次技能爆发、单机关枪站桩产生生存压力');
 
@@ -583,7 +591,7 @@ const survival = load("survival");
   const peach=await newGame();peach.clearBattle();const tree=peach.spawnPeachTree();assert.ok(tree);assert.equal(tree.animal,'tree');assert.ok(tree.animalArt.node.children.some(n=>n.name==='TreeSprite'));const treeAt={x:tree.x,y:tree.y};tree.born=0;peach.updateAnimal(tree,1);assert.equal(tree.x,treeAt.x);assert.equal(tree.y,treeAt.y);
   const oldKills=peach.kills;peach.hitEnemy(tree,0,9999);const fruit=peach.hearts.find(h=>h.active);assert.equal(fruit.kind,'peach');assert.equal(fruit.node.name,'HealingPeach');assert.equal(peach.kills,oldKills);peach.hitEnemy(tree,0,9999);assert.equal(peach.hearts.filter(h=>h.active).length,1);
   peach.playerHp=4;fruit.x=peach.px;fruit.y=peach.py;peach.updateWildlife(.3);assert.equal(peach.playerHp,5);assert.equal(fruit.active,false);
-  console.log('通过：20秒先购物后原地衔接/保留镜头与存活敌人/购物音乐续播、首帧初始武器栏、小桃树静止可攻击/单次桃子掉落/拾取回血');
+  console.log('通过：15秒先补给后原地衔接/保留镜头与存活敌人/购物音乐续播、首帧初始武器栏、小桃树静止可攻击/单次桃子掉落/拾取回血');
   for(const hero of r.HEROES){
     const lively=await newGame(hero.id);lively.clearBattle();lively.spawnClock=999;lively.treeClock=999;lively.animalClock=999;
     assert.equal(lively.head.spriteFrame,lively.artFrames['hero-'+hero.id+'-open']);
@@ -636,7 +644,7 @@ const survival = load("survival");
     defeat.run.weapons=load('weapons').WEAPONS.slice(0,6).map((w,i)=>({id:w.id,tier:i%4+1,uid:i+1}));defeat.endRun(false);
     const find=name=>allNodes(defeat.screens.root).find(n=>n.name===name);
     const portrait=find('CryingHero');assert.ok(portrait);assert.equal(portrait.getComponent(Sprite).spriteFrame,defeat.artFrames['result-'+hero.id]);assert.notEqual(portrait.getComponent(Sprite).spriteFrame,defeat.artFrames[hero.id]);
-    assert.equal(find('ResultTime').getComponent(Label).string,'01:02');assert.equal(find('ResultStat-0').getComponent(Label).string,'64');assert.equal(find('ResultStat-1').getComponent(Label).string,'0/3');assert.equal(find('ResultStat-2').getComponent(Label).string,'23');
+    assert.equal(find('ResultTime').getComponent(Label).string,'00:57');assert.equal(find('ResultStat-0').getComponent(Label).string,'64');assert.equal(find('ResultStat-1').getComponent(Label).string,'1/17');assert.equal(find('ResultStat-2').getComponent(Label).string,'23');
     assert.equal(allNodes(defeat.screens.root).filter(n=>n.name.startsWith('ResultWeapon-')).length,6);
     const time=defeat.run.survivalSeconds,age=defeat.age;defeat.update(.1);assert.equal(defeat.run.survivalSeconds,time);assert.equal(defeat.age,age);assert.ok(defeat.screens.resultView.age>0,'只推进哭泣UI，不推进战斗');
     for(const [width,height]of [[1334,750],[1622,750],[1875,750]]){
@@ -644,18 +652,18 @@ const survival = load("survival");
       for(const name of ['ResultRetry','ResultMenu']){const n=find(name),rect=n.getComponent(Transform);assert.ok((Math.abs(n.position.x)+rect.width/2)*scale<width/2-30);assert.ok((n.position.y-43)*scale>-height/2+30,'按钮不贴底部安全区');}
     }
     const oldMenu=find('ResultMenu'),oldRetry=find('ResultRetry');oldRetry.events.end();assert.equal(defeat.phase,'battle');assert.equal(defeat.run.heroId,hero.id);assert.equal(defeat.run.gold,0);assert.equal(defeat.run.weapons.length,1);assert.equal(defeat.playerHp,5);oldMenu.events.end();assert.equal(defeat.phase,'battle','同一结算只提交一次导航');
-    defeat.clearBattle();defeat.remaining=12;defeat.endRun(false);assert.equal(find('ResultTime').getComponent(Label).string,'00:08','热身失败显示真实热身时长');assert.equal(find('ResultTimeLabel').getComponent(Label).string,'热身坚持');click(defeat.screens.root,'ResultMenu');assert.equal(defeat.phase,'menu');assert.equal(defeat.screens.selection,hero.id);
+    defeat.clearBattle();defeat.remaining=7;defeat.endRun(false);assert.equal(find('ResultTime').getComponent(Label).string,'00:08','热身失败显示真实热身时长');assert.equal(find('ResultTimeLabel').getComponent(Label).string,'本局坚持');click(defeat.screens.root,'ResultMenu');assert.equal(defeat.phase,'menu');assert.equal(defeat.screens.selection,hero.id);
   }
-  storage.delete('taoyuan-clear-best');storage.set('taoyuan-survival-best','1234');
+  storage.delete('taoyuan-chronicle-clear-best-v4');storage.set('taoyuan-survival-best','1234');
   let bestClear=Infinity;
   for(const [index,hero]of r.HEROES.entries()){
-    const clear=await newGame(hero.id);clear.clearBattle();clear.run.wave=2;clear.run.wavesCleared=3;clear.run.bossEncounter=true;clear.run.survivalSeconds=[100,105,95][index];clear.nextSupply=Infinity;clear.spawnClock=999;
+    const clear=await newGame(hero.id);clear.clearBattle();clear.run.chapter=17;clear.run.wave=2;clear.run.wavesCleared=3;clear.run.bossEncounter=true;clear.run.survivalSeconds=[100,105,95,108,110][index];clear.run.elapsed=15+clear.run.survivalSeconds;clear.nextSupply=Infinity;clear.spawnClock=999;
     const boss=makeTarget(clear,180,0,'chief');boss.hp=10;clear.hitEnemy(boss,0,9999);assert.equal(clear.victoryPending,true);clear.hurtPlayer(0,0);assert.equal(clear.playerHp,5,'boss death cannot turn into a later same-frame defeat');clear.update(1/60);
     assert.equal(clear.phase,'victory');const nodes=allNodes(clear.screens.root);assert.equal(nodes.find(n=>n.name==='ResultTitle').getComponent(Label).string,'通关啦！');assert.ok(nodes.some(n=>n.name==='VictoryHero'&&n.getComponent(Sprite)?.spriteFrame===clear.artFrames['hero-select-'+hero.id]));assert.ok(!nodes.some(n=>n.name==='CryingHero'||n.name==='DefeatSeal'));assert.ok(nodes.some(n=>n.name==='VictorySeal'));assert.ok(nodes.some(n=>n.getComponent(Label)?.string==='通关用时'));
-    bestClear=Math.min(bestClear,20+[100,105,95][index]);assert.equal(Number(storage.get('taoyuan-clear-best')),bestClear);assert.equal(storage.get('taoyuan-survival-best'),'1234','legacy endless record is isolated');
+    bestClear=Math.min(bestClear,15+[100,105,95,108,110][index]);assert.equal(Number(storage.get('taoyuan-chronicle-clear-best-v4')),bestClear);assert.equal(storage.get('taoyuan-survival-best'),'1234','legacy endless record is isolated');
     const frozen=JSON.stringify([clear.run.survivalSeconds,clear.kills,clear.run.gold]);advance(clear,5);assert.equal(JSON.stringify([clear.run.survivalSeconds,clear.kills,clear.run.gold]),frozen,'victory freezes all combat');clear.endRun(false);assert.equal(clear.phase,'victory');assert.equal(clear.enemies.filter(e=>e.hp>0&&!e.animal).length,0);
     click(clear.screens.root,'ResultRetry');assert.equal(clear.phase,'battle');assert.equal(clear.run.wave,1);assert.equal(clear.run.wavesCleared,0);assert.equal(clear.run.bossEncounter,false);
   }
-  console.log('通过：三英雄击败张角立即通关/开心立绘与胜印/无后续波次/通关冻结/同帧不被反杀/最快通关独立纪录/再来一局重置');
-  console.log('通过：三英雄失败哭泣专用帧/独立裁切、存活/最佳/击败/剩余金币与六格武器、三宽屏安全区、UI哭泣不推进战斗、重开与返回防重复、热身实际时长与纪录提示');
+  console.log('通过：五英雄末章Boss立即通关/开心立绘与胜印/无后续波次/通关冻结/同帧不被反杀/最快通关独立纪录/再来一局重置');
+  console.log('通过：五英雄失败哭泣专用帧/独立裁切、存活/最佳/击败/剩余金币与六格武器、三宽屏安全区、UI哭泣不推进战斗、重开与返回防重复、热身实际时长与纪录提示');
 })().catch(error=>{console.error(error);process.exit(1);});

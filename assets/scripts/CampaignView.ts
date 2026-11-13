@@ -1,3 +1,8 @@
+import {SkillSelectView} from './SkillSelectView';
+import {DEFAULT_SKILL,availableSkill,commonSkillFor} from './common-skills';
+import {HeroShowcase} from './HeroShowcase';
+import {CodexView} from './CodexView';
+import {chapterFor} from './chronicles';
 import { Color, Graphics, Label, Layers, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { HeroId, HEROES, ITEMS, Run, Stats, Upgrade, WAVE_NAMES, heroFor, priceFor, rerollPrice } from './campaign';
 
@@ -13,6 +18,8 @@ import { ResultView } from './ResultView';
 
 const C = { paper: '#fff0d2', ink: '#432d1d', green: '#355e40', red: '#c94d2e', sand: '#f1d7a4', muted: '#826442' };
 
+interface HeroPortraitSlot {node:Node;selected:Node;}
+
 /** Screens own their input surfaces; combat never runs underneath an open screen. */
 export class CampaignView {
   readonly root: Node;
@@ -21,22 +28,24 @@ export class CampaignView {
   private heroMenu = false;
   private campBackground?: Sprite;
   private selection: HeroId = 'liubei';
+  private selectionSkill=DEFAULT_SKILL;
   private width = 1334;
   private height = 750;
-  private resultView?:ResultView;
+  private resultView?:ResultView;private codexView?:CodexView;private heroShowcase?:HeroShowcase;
   constructor(parent: Node, private frames: Record<string, SpriteFrame>, private icons: SpriteFrame[]) {
     this.root = this.node(parent, 'CampaignScreens'); this.root.active = false;
   }
   resize(width: number, height: number): void {
     this.width = width; this.height = height;
+    if(this.codexView){this.codexView.resize(width,height);return;}
     if(this.resultView){this.resultView.resize(width,height);return;}
-    const scale = this.heroMenu ? Math.min(1.08,(width-112)/1360,(height-90)/660) : this.campMode ? Math.min(1, (width - 64) / 1200, (height - 60) / 660) : Math.min(1, (width - 48) / 1200, (height - 30) / 720);
+    const scale = this.heroMenu ? Math.min(1.05,(width-112)/1280,(height-70)/680) : this.campMode ? Math.min(1, (width - 64) / 1200, (height - 60) / 660) : Math.min(1, (width - 48) / 1200, (height - 30) / 720);
     if (this.content) this.content.setScale(scale, scale, 1);
-    if(this.campBackground){const aspect=this.heroMenu?2.13:16/9;this.campBackground.node.getComponent(UITransform)!.setContentSize(Math.max(width,height*aspect),Math.max(height,width/aspect));}
+    if(this.campBackground){const frame=this.campBackground.spriteFrame;const aspect=this.heroMenu&&frame?frame.rect.width/frame.rect.height:16/9;this.campBackground.node.getComponent(UITransform)!.setContentSize(Math.max(width,height*aspect),Math.max(height,width/aspect));}
   }
   hide(): void { this.root.active = false; }
   private begin(title: string, subtitle: string, poster = false): Node {
-    this.resultView=undefined;
+    this.resultView=undefined;this.heroShowcase=undefined;
     for (const child of [...this.root.children]) { child.removeFromParent(); child.destroy(); }
     this.root.active = true; this.heroMenu=false; this.campMode = false; this.campBackground = undefined;
     if (poster) this.sprite(this.root, this.frames.poster, 0, 0, Math.max(this.width, this.height * 16 / 9), Math.max(this.height, this.width * 9 / 16));
@@ -47,44 +56,66 @@ export class CampaignView {
     if (subtitle) this.text(this.content, subtitle, 0, 265, 20, '#e6d8bc', 1100, 36);
     return this.content;
   }
-  menu(selected: HeroId, start: (hero: HeroId) => void): void {
-    this.resultView=undefined;
-    this.selection=selected;let starting=false;
-    const render=():void=>{
-      for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
-      this.root.active=true;this.campMode=false;this.heroMenu=true;
-      this.campBackground=this.sprite(this.root,this.frames['hero-menu-background']||this.frames.poster,0,0,1,1);
-      if(this.campBackground)this.campBackground.node.name='HeroMenuBackground';
-      const shade=this.node(this.root,'MenuVignette').addComponent(Graphics);shade.fillColor=new Color(44,37,24,this.frames['hero-menu-background']?12:145);shade.rect(-2500,-1500,5000,3000);shade.fill();
-      this.content=this.node(this.root,'ScreenContent');this.resize(this.width,this.height);const p=this.content;
-      const logo=this.sprite(p,this.frames['hero-menu-logo'],-550,292,250,125);
-      if(logo)logo.node.name='GameLogo';else this.bold(p,'桃园乱斗',-550,292,43,'#fff0cb',290,80);
-      const title=this.sprite(p,this.frames['hero-menu-title'],0,292,430,215);
-      if(title)title.node.name='选择英雄';else this.bold(p,'选择英雄',0,292,45,'#fff0cb',510,70);
-      const roles=['均衡 · 控场','近战 · 横扫','近战 · 暴击'];
-      HEROES.forEach((hero,i)=>{
-        const selected=hero.id===this.selection,x=(i-1)*385,y=selected?8:0;
-        const n=this.node(p,hero.id);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(330,410);
-        const g=n.addComponent(Graphics);g.fillColor=new Color(52,36,23,65);g.roundRect(-164,-215,330,410,31);g.fill();
-        g.fillColor=new Color(selected?'#66703d':'#374633');g.strokeColor=new Color(selected?'#ffda83':'#7c8460');g.lineWidth=selected?5:2;g.roundRect(-165,-205,330,410,31);g.fill();g.stroke();
-        g.strokeColor=new Color(255,235,163,selected?65:25);g.lineWidth=1;g.roundRect(-157,-197,314,394,26);g.stroke();
-        g.fillColor=new Color(180,185,100,selected?28:18);g.ellipse(-125,-155,45,13);g.ellipse(-148,-140,30,12);g.ellipse(-103,-144,25,11);g.ellipse(133,-115,38,12);g.fill();
-        const portrait=this.sprite(n,this.frames['hero-select-'+hero.id]||this.frames['hero-menu-'+hero.id]||this.frames[hero.id],0,43,310,310);if(portrait)portrait.node.name='HeroPortrait';
-        const name=this.bold(n,hero.name,0,-112,42,'#fff0cc',290,66);name.fontFamily='serif';
-        g.strokeColor=new Color('#e9d5a2');g.lineWidth=1.5;g.roundRect(-105,-180,210,38,19);g.stroke();this.text(n,roles[i],0,-161,19,'#fff0cc',204,33);
-        const check=this.node(n,'HeroSelected');check.active=selected;const mark=check.addComponent(Graphics);mark.fillColor=new Color('#56613b');mark.strokeColor=new Color('#ffda83');mark.lineWidth=4;mark.circle(132,168,24);mark.fill();mark.stroke();mark.lineWidth=6;mark.moveTo(119,168);mark.lineTo(129,159);mark.lineTo(146,180);mark.stroke();
-        n.on(Node.EventType.TOUCH_START,()=>{if(!starting)n.setScale(.985,.985,1);});
-        n.on(Node.EventType.TOUCH_CANCEL,()=>n.setScale(1,1,1));
-        n.on(Node.EventType.TOUCH_END,()=>{if(!starting){this.selection=hero.id;render();}});
-      });
-      const button=this.node(p,'StartHero');button.setPosition(0,-287);button.addComponent(UITransform).setContentSize(330,88);
-      const plate=this.sprite(button,this.frames['hero-menu-start'],0,0,360,180);
-      if(!plate){const g=button.addComponent(Graphics);g.fillColor=new Color('#683723');g.roundRect(-165,-48,330,88,24);g.fill();g.fillColor=new Color('#cb4e2b');g.strokeColor=new Color('#f69b68');g.lineWidth=3;g.roundRect(-165,-41,330,82,24);g.fill();g.stroke();}
-      const text=this.bold(button,'开始',0,0,44,'#fff0cc',290,65);text.fontFamily='serif';
-      button.on(Node.EventType.TOUCH_START,()=>{if(!starting)button.setScale(.97,.97,1);});button.on(Node.EventType.TOUCH_CANCEL,()=>button.setScale(1,1,1));
-      button.on(Node.EventType.TOUCH_END,()=>{if(starting)return;starting=true;start(this.selection);});
-    };render();
+  menu(selected: HeroId, start: (hero: HeroId,skill:string) => void, codex?:()=>void,skill=DEFAULT_SKILL): void {
+    this.resultView=undefined;this.heroShowcase=undefined;this.codexView=undefined;
+    for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
+    this.root.active=true;this.campMode=false;this.heroMenu=true;this.selection=selected;this.selectionSkill=availableSkill(skill);
+    let starting=false;
+    this.campBackground=this.sprite(this.root,this.frames['hero-menu-background'],0,0,1,1);
+    if(this.campBackground)this.campBackground.node.name='HeroMenuBackground';
+    const shade=this.node(this.root,'MenuVignette').addComponent(Graphics);
+    // The environment provides its own contrast; retain a plain meadow fallback.
+    if(!this.campBackground){shade.fillColor=new Color('#849354');shade.rect(-2500,-1500,5000,3000);shade.fill();}
+    this.content=this.node(this.root,'ScreenContent');this.resize(this.width,this.height);const p=this.content;
+    const logo=this.sprite(p,this.frames['hero-menu-logo'],-516,297,224,112);
+    if(logo)logo.node.name='GameLogo';else this.bold(p,'桃园乱斗',-516,297,38,'#fff0cb',245,70);
+    const title=this.sprite(p,this.frames['hero-menu-title'],0,303,380,190);
+    if(title)title.node.name='选择英雄';else this.bold(p,'选择英雄',0,303,42,'#fff0cb',450,65);
+
+    this.heroShowcase=new HeroShowcase(p,this.frames);this.heroShowcase.root.setPosition(0,15);this.heroShowcase.root.setScale(2.2,2.2,1);
+    const nameplate=this.node(p,'HeroNameplate').addComponent(Graphics);
+    nameplate.fillColor=new Color(43,65,41,225);nameplate.roundRect(-69,-112,138,43,18);nameplate.fill();
+    const heroName=this.bold(p,'',0,-90,30,'#fff0d2',126,43);heroName.node.name='ShowcaseHeroName';heroName.fontFamily='serif';
+    const rail=this.node(p,'HeroPortraitRail').addComponent(Graphics);
+    rail.fillColor=new Color(16,34,25,145);rail.strokeColor=new Color(229,204,143,65);rail.lineWidth=1;rail.roundRect(-346,-229,692,111,24);rail.fill();rail.stroke();
+    const portraits:HeroPortraitSlot[]=[];
+    HEROES.forEach((hero,i)=>{
+      const n=this.node(p,hero.id);n.setPosition((i-2)*130,-175);n.addComponent(UITransform).setContentSize(100,100);
+      const bg=n.addComponent(Graphics);bg.fillColor=new Color('#374c3b');bg.strokeColor=new Color('#9b9e74');bg.lineWidth=1.5;bg.roundRect(-46,-46,92,92,18);bg.fill();bg.stroke();
+      const f=this.frames['hero-'+hero.id+'-open'];
+      const portrait=this.sprite(n,f,0,0,1,1);
+      if(portrait){portrait.node.name='HeroPortrait';const r=f.rect,unit=80/Math.max(r.width,r.height);portrait.node.getComponent(UITransform)!.setContentSize(r.width*unit,r.height*unit);}
+      const selectedNode=this.node(n,'HeroSelected'),mark=selectedNode.addComponent(Graphics);
+      mark.strokeColor=new Color('#ffdc8b');mark.lineWidth=4;mark.roundRect(-48,-48,96,96,19);mark.stroke();
+      mark.fillColor=new Color('#ffdc8b');mark.roundRect(-11,-48,22,4,2);mark.fill();
+      portraits.push({node:n,selected:selectedNode});
+      n.on(Node.EventType.TOUCH_START,()=>{if(!starting)n.setScale(.96,.96,1);});
+      n.on(Node.EventType.TOUCH_CANCEL,()=>n.setScale(1,1,1));
+      n.on(Node.EventType.TOUCH_END,()=>{n.setScale(1,1,1);if(!starting)select(hero.id);});
+    });
+    const select=(id:HeroId):void=>{
+      this.selection=id;heroName.string=HEROES.find(h=>h.id===id)!.name;this.heroShowcase!.setHero(id);
+      portraits.forEach((slot,i)=>{const active=HEROES[i].id===id;slot.selected.active=active;slot.node.setPosition((i-2)*130,active?-171:-175);});
+    };
+    select(selected);
+    const skillCard=this.node(p,'HeroSkillSelect');skillCard.setPosition(406,-175);skillCard.addComponent(UITransform).setContentSize(84,84);
+    const sg=skillCard.addComponent(Graphics);sg.fillColor=new Color(35,61,42,230);sg.strokeColor=new Color('#d4be81');sg.lineWidth=2;sg.circle(0,0,39);sg.fill();sg.stroke();
+    const skillIcon=this.sprite(skillCard,this.frames['skill-'+commonSkillFor(this.selectionSkill).icon],0,0,62,62);
+    const updateSkill=()=>{if(skillIcon)skillIcon.spriteFrame=this.frames['skill-'+commonSkillFor(this.selectionSkill).icon];};
+    skillCard.on(Node.EventType.TOUCH_START,()=>{if(!starting)skillCard.setScale(.94,.94,1);});skillCard.on(Node.EventType.TOUCH_CANCEL,()=>skillCard.setScale(1,1,1));
+    let choosing=false;skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choosing=true;new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choosing=false;updateSkill();},()=>choosing=false);});
+    const button=this.node(p,'StartHero');button.setPosition(0,-289);button.addComponent(UITransform).setContentSize(330,88);
+    const plate=this.sprite(button,this.frames['hero-menu-start'],0,0,360,180);
+    if(!plate){const g=button.addComponent(Graphics);g.fillColor=new Color('#683723');g.roundRect(-165,-48,330,88,24);g.fill();g.fillColor=new Color('#cb4e2b');g.strokeColor=new Color('#f69b68');g.lineWidth=3;g.roundRect(-165,-41,330,82,24);g.fill();g.stroke();}
+    const text=this.bold(button,'开始',0,0,44,'#fff0cc',290,65);text.fontFamily='serif';
+    button.on(Node.EventType.TOUCH_START,()=>{if(!starting)button.setScale(.97,.97,1);});button.on(Node.EventType.TOUCH_CANCEL,()=>button.setScale(1,1,1));
+    button.on(Node.EventType.TOUCH_END,()=>{if(starting)return;starting=true;start(this.selection,this.selectionSkill);});
+    if(codex)this.action(p,'图鉴',-516,-289,164,()=>codex());
   }
+
+  codex(close:()=>void):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close);this.codexView.resize(this.width,this.height);}
+  resumePrompt(chapter:string,resume:()=>void,fresh:()=>void):void{const p=this.begin('继续征程','已保存：'+chapter);this.action(p,'继续征程',0,45,340,resume);this.action(p,'新征程',0,-65,340,fresh);this.text(p,'新征程会替换当前存档',0,-170,22,C.paper,500,48);}
+  private action(parent:Node,label:string,x:number,y:number,width:number,action:()=>void):void{const n=this.node(parent,label);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(width,66);const g=n.addComponent(Graphics);g.fillColor=new Color(C.green);g.strokeColor=new Color('#ffda83');g.lineWidth=2;g.roundRect(-width/2,-33,width,66,17);g.fill();g.stroke();this.bold(n,label,0,0,27,C.paper,width-16,60);n.on(Node.EventType.TOUCH_END,action);}
 
   private previewHands(parent: Node, id: HeroId, weapon: EquippedWeapon, y: number, scale: number): void {
     const hands = this.node(parent, 'PreviewHands'); hands.setPosition(0, y); hands.setScale(scale, scale, 1);
@@ -195,15 +226,15 @@ export class CampaignView {
   }
 
   supply(run: Run, buy: (id: string, replaceUid?: number) => void, refresh: () => void, skip: () => void, normal: () => void, manage: (action: 'combine' | 'recycle', uid: number) => void): void {
-    this.resultView=undefined;
+    this.resultView=undefined;this.heroShowcase=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.heroMenu=false;this.campMode=true;this.campBackground=undefined;
     const scrim=this.node(this.root,'SupplyScrim');scrim.addComponent(UITransform).setContentSize(6000,4000);const shade=scrim.addComponent(Graphics);shade.fillColor=new Color(12,26,19,95);shade.rect(-3000,-2000,6000,4000);shade.fill();
     scrim.on(Node.EventType.TOUCH_END,()=>{});
     this.content=this.node(this.root,'SupplyContent');this.resize(this.width,this.height);const p=this.content;
     const departure=run.supplyMode==='departure',major=run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
-    this.bold(p,departure?'热 身 补 给':bossPrep?'张 角 战 前 补 给':major?'天 命 强 化':'桃 园 补 给',0,281,40,'#ffebac',700,60);
-    this.text(p,departure?'热身完成 · 准备好后进入第1波':bossPrep?'三波已守住 · 补给后挑战张角':'战斗已暂停 · 可购买多项 · 刷新补充新货',0,232,22,'#e6e3bf',840,38);
+    this.bold(p,departure?'桃 园 补 给':bossPrep?chapterFor(run.chapter).boss.split('').join(' ')+' 战 前 补 给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天 命 强 化':'桃 园 补 给',0,281,40,'#ffebac',700,60);
+    this.text(p,departure?'添一把趁手兵器，继续迎敌':bossPrep?'补给完成后迎战'+chapterFor(run.chapter).boss:'战斗已暂停 · 可购买多项 · 刷新补充新货',0,232,22,'#e6e3bf',840,38);
     this.plaque(p,`${run.gold} 铜钱`,490,282,190,48,'#355e40','#ffe19a',25);
     run.offers.forEach((id,i)=>{
       const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-1)*340,4);n.addComponent(UITransform).setContentSize(316,392);
@@ -228,7 +259,7 @@ export class CampaignView {
     this.campButton(p,'OpenInventory',`道具 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)}`, -444,-245,160,()=>this.inventoryDialog(run),'secondary');
     {
       const price=refreshPrice(run);this.campButton(p,'SupplyRefresh',`刷新 ${price}`,-347,-315,240,refresh,'secondary',run.gold>=price,true);
-      this.campButton(p,'SupplySkip',departure?'进入第1波 →':bossPrep?'挑战张角 →':`进入第${run.wavesCleared+1}波 →`,347,-315,250,skip,'primary');
+      this.campButton(p,'SupplySkip','继续战斗',347,-315,250,skip,'primary');
       if(major)this.campButton(p,'SupplyNormal','改选普通补给',0,-315,235,normal,'secondary');
       else this.text(p,'道具自动生效 · 武器最多六件',0,-315,18,'#d5d5ae',430,40);
     }
@@ -270,7 +301,7 @@ export class CampaignView {
     this.resultView=new ResultView(this.root,this.frames,run,kills,best,record,retry,menu,testing,warmupElapsed,won);
     this.resultView.resize(this.width,this.height);
   }
-  update(delta:number):void {if(this.root.active)this.resultView?.update(delta);}
+  update(delta:number):void {if(!this.root.active)return;if(this.heroMenu)this.heroShowcase?.update(delta);this.resultView?.update(delta);}
 
   private weaponDialog(run: Run, w: EquippedWeapon, manage: (action: 'combine' | 'recycle', uid: number) => void): void {
     const d = weaponFor(w.id), current = weaponStatsFor(run, w), pair = matchingWeapon(run, w.id, w.tier, w.uid);
@@ -288,7 +319,7 @@ export class CampaignView {
   }
 
   private campBegin(run: Run, mode: 'upgrade' | 'shop', summary: string): Node {
-    this.resultView=undefined;
+    this.resultView=undefined;this.heroShowcase=undefined;
     for (const child of [...this.root.children]) { child.removeFromParent(); child.destroy(); }
     this.root.active = true; this.heroMenu=false; this.campMode = true;
     const base = this.node(this.root, 'CampBackdrop').addComponent(Graphics); base.fillColor = new Color(C.paper); base.rect(-2500, -1500, 5000, 3000); base.fill();

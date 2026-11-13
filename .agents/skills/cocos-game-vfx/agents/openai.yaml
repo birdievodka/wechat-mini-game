@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cocos 战斗特效设计与实现"
+  short_description: "从技能概念稿到Cocos特效代码、命中反馈、性能预算和真实画面验收"
+  default_prompt: "使用 $cocos-game-vfx，为当前项目完成指定技能或武器的特效设计与代码实现，保持已授权的玩法边界并核对真实运行画面。"

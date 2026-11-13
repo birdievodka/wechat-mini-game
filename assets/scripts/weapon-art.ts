@@ -1,9 +1,15 @@
 import { Color, Graphics } from 'cc';
-import { Tier, TIER_COLORS, WeaponId } from './weapons';
+import { Tier, TIER_COLORS, WeaponId, weaponFor } from './weapons';
 
 /** Shared silhouettes for the loadout, shop and actual held weapons. Origin is the grip. */
 export function drawWeaponArt(g: Graphics, id: WeaponId, tier: Tier = 1, projectile = false): void {
   g.clear(); g.lineWidth = 2.5; g.strokeColor = new Color('#493522');
+  if(['sandal','pole','peach','cleaver','firecracker','smg','shotgun','rocket','sword','thunder','gourd'].indexOf(id)<0){
+    g.fillColor=new Color(weaponFor(id).category==='magic'?'#b8e6ca':'#f7e6b4');g.strokeColor=new Color('#473321');g.lineWidth=2;
+    if(['oil-jar','thunder-bomb'].indexOf(id)>=0){g.circle(0,0,8);g.fill();g.stroke();g.strokeColor=new Color('#e76d34');g.moveTo(0,8);g.lineTo(4,14);g.stroke();}
+    else if(id==='feather-fan'){g.moveTo(0,-10);g.bezierCurveTo(-18,4,-12,25,0,25);g.bezierCurveTo(12,25,18,4,0,-10);g.fill();g.stroke();}
+    else {g.moveTo(0,-16);g.lineTo(0,17);g.stroke();g.moveTo(0,23);g.lineTo(-5,12);g.lineTo(5,12);g.close();g.fill();g.stroke();}return;
+  }
   if (id === 'sandal') {
     g.fillColor = new Color('#eabc60'); g.roundRect(-14, -11, 28, 47, 12); g.fill(); g.stroke();
     g.strokeColor = new Color('#9a682b'); g.lineWidth = 2;

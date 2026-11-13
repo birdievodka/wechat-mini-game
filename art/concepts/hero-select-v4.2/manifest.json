@@ -1,0 +1,14 @@
+{
+  "version": "chronicles-v4.2-training-ground",
+  "generator": "built-in image_gen.imagegen",
+  "prompt": "Use case: stylized-concept. Asset type: production background texture for a landscape Chinese chibi Three Kingdoms game hero selection screen, 16:9 wide composition. Create an EMPTY peach-garden army training ground, NO CHARACTERS and NO UI. Charming hand-painted 2D game art: bold simple dark brown organic outlines, chunky shapes, warm flat cel colors with restrained painterly grass textures, mischievous cartoon Three Kingdoms feeling, matching big-headed short-bodied anime bean heroes. Camera low elevated front view across a small oval patch of packed pale ochre dirt in a green meadow, the patch is part of natural ground NOT a disc/pedestal/card/spotlight and without border; its center at 50% width, 53% image height where the hero's feet will stand. Keep central 50% width open and calm, soft distant olive hills on horizon at upper 30%, warm pale apricot morning sky. Small cropped pink peach blossom branch at upper left corner, one small red cloth army pennant and a simple wooden practice post at far left, another small flag at far right. Objects stay in outer 20% edges, low contrast. Lower 30% of composition is quiet muted deep green meadow with tiny sparse petals, for overlaying portrait buttons. Natural soft morning light, cheerful but refined, harmonious sage green / ochre / muted coral palette, subtle ground shadows. Keep top center calm for existing title overlay. No people, no faces, no weapons in center, no writing, no logo, no borders, no frame, no parchment oval, no glow, no ornate architectural buildings, no army crowd, no mountains of props, no interface elements. The environment must feel like a simple playable cartoon battlefield, not a cinematic poster.",
+  "source": "art/concepts/hero-select-v4.2/training-ground-source.png",
+  "runtime": "assets/hero-menu/training-ground.jpg",
+  "processing": "sharp 1536x864 JPEG quality88 mozjpeg; no alpha in opaque background",
+  "sha256": {
+    "art/concepts/hero-select-v4.2/training-ground-source.png": "a52d83b21d78704e127e3a45da24166686c2c69db70b6f4934b8bc1cfb29fc1d",
+    "assets/hero-menu/training-ground.jpg": "e0db9202f3c9c029651d7f0fae3c1651862d94a2f7e06d58f731b1ead535f7c7"
+  },
+  "bytes": 169831,
+  "previousBackground": "previous-poster-background.png (historical only, not shipped)"
+}

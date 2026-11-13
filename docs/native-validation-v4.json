@@ -1,0 +1,149 @@
+{
+  "date": "2026-11-13",
+  "version": "chronicles-v4.0.1-balanced-campaign",
+  "scope": "WeChat native simulator, not iOS device or full campaign win-rate validation",
+  "finalRuntime": {
+    "version": "chronicles-v4.0.1-balanced-campaign",
+    "phase": "menu",
+    "ready": true,
+    "frames": 299,
+    "hero": "liubei",
+    "selection": "liubei",
+    "saveAndRecordsRestored": {
+      "taoyuan-chronicle-v4": true,
+      "taoyuan-chronicle-clear-best-v4": true,
+      "taoyuan-best": true,
+      "taoyuan-survival-best": true
+    }
+  },
+  "normalInput": {
+    "route": "five-hero selection → Zhao Yun start → 15s departure supply (28 coins) → buy pole for 28 → continue → fixed joystick right/up/release → exclusive skill",
+    "right": {
+      "phase": "battle",
+      "hero": "zhaoyun",
+      "position": [
+        268.7701232456654,
+        -1.6190971279858268
+      ],
+      "input": {
+        "x": 0.9999818556252084,
+        "y": -0.006023987082079161
+      },
+      "gold": 1,
+      "weapons": [
+        "silver-spear",
+        "pole"
+      ],
+      "skill": 0
+    },
+    "upAndSkill": {
+      "phase": "battle",
+      "hero": "zhaoyun",
+      "position": [
+        556.1409741447928,
+        512.5
+      ],
+      "input": {
+        "x": 0,
+        "y": 0
+      },
+      "gold": 1,
+      "weapons": [
+        "silver-spear",
+        "pole"
+      ],
+      "skill": 23.011000000000028
+    },
+    "modifiedCombatStats": false
+  },
+  "engineeringFixtures": {
+    "description": "Explicit accelerated poses; equipped weapons, stage and damage protection set for inspection only. Not normal gameplay records.",
+    "lvbu": {
+      "scope": "engineering pose fixture, not a normal play result",
+      "version": "chronicles-v4.0.1-balanced-campaign",
+      "phase": "battle",
+      "boss": "lvbu",
+      "rig": "mount-lvbu-front",
+      "weapons": [
+        "guandao",
+        "halberd",
+        "repeater",
+        "oil-jar",
+        "star-lamps",
+        "wood-ox"
+      ],
+      "danger": [
+        {
+          "shape": "sector",
+          "radius": 250,
+          "arc": 180,
+          "age": 0.4666666666666673,
+          "delay": 0.75
+        }
+      ],
+      "pools": {
+        "projectiles": 6,
+        "zones": 1
+      }
+    },
+    "zhouyu": {
+      "scope": "engineering fixture, not normal gameplay",
+      "boss": "zhouyu",
+      "ring": {
+        "radius": 248,
+        "innerRadius": 152,
+        "gap": 100,
+        "age": 1.152999999999998,
+        "delay": 1
+      },
+      "actualDamageCalls": {
+        "inner": 0,
+        "gap": 0,
+        "rim": 1
+      },
+      "correct": true
+    },
+    "simayi": {
+      "scope": "engineering pose fixture, not a normal play result",
+      "version": "chronicles-v4.0.1-balanced-campaign",
+      "phase": "battle",
+      "boss": "simayi",
+      "rig": "boss-simayi",
+      "weapons": [
+        "guandao",
+        "silver-spear",
+        "repeater",
+        "thunder-bomb",
+        "wood-kite",
+        "yitian"
+      ],
+      "danger": [
+        {
+          "shape": "circle",
+          "radius": 85,
+          "age": 1.2666666666666646,
+          "delay": 1
+        },
+        {
+          "shape": "circle",
+          "radius": 85,
+          "age": 1.2666666666666646,
+          "delay": 1.3
+        },
+        {
+          "shape": "circle",
+          "radius": 85,
+          "age": 1.2666666666666646,
+          "delay": 1.6
+        }
+      ],
+      "pools": {
+        "projectiles": 16,
+        "zones": 3
+      }
+    }
+  },
+  "consoleGrepMatches": "",
+  "screenshotCaveat": "Simulator screenshot occasionally returned the previous presented frame. Repeated hashes/wrong Boss were rejected; input/window foreground refreshed the evidence. Stale normal-touch image discarded.",
+  "phoneBattleVerified": false
+}
