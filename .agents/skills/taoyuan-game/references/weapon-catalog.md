@@ -2,7 +2,7 @@
 
 由 `npm run skill:sync` 从当前代码生成，请修改源码后重新生成。机制、实际调用和已知差异见人工参考；配置字段不代表已接入效果。
 
-当前版本：`chronicles-v5.4-training`；36种武器，6个槽位。
+当前版本：`chronicles-v7-seven-bosses`；36种武器，6个槽位。
 
 ## 基础定义
 

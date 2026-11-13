@@ -4,7 +4,7 @@ import { PASSIVE_ITEMS, eligiblePassive, passivePreview, passiveBonuses } from '
 import { Run, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BUDGET } from './campaign';
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 
-export const SURVIVAL_VERSION = 'chronicles-v5.4-training';
+export const SURVIVAL_VERSION = 'chronicles-v7-seven-bosses';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;

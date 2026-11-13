@@ -1,0 +1,25 @@
+{
+  "status": "adopted-v6.5",
+  "tool": "image_gen.imagegen",
+  "prompt": "Use case: stylized-concept.\nCreate ONE polished LANDSCAPE skill concept image for the existing 2D chibi mobile game 桃园小英雄. Focus on ONLY Lu Bu's improved color and enlarged halberd sweep.\nReferences: image1 is current light runtime Lu Bu sprite atlas (identity/simplified outlines); image2 is the original approved skill board (solid blade impact/energy, NOT its heavy dark shading); image3 is actual current Cocos battlefield (grass, camera, game character scale, NOT a layout to reproduce). Only make one scene, not a grid, not a sprite sheet.\nSingle live-looking battle composition: mounted Lu Bu near center-left performs 画戟回旋, twisting his torso and holding his Fangtian halberd in both hands while compact Red Hare plants its feet and pivots. Keep the actual chibi model: two red helmet feathers, gold circlet, cheeky bold brows, round bean-like face, short torso, cute orange chestnut horse, simple mane, tiny hooves, small expressive eyes. Lu Bu must be recognizably the same character from image1, not a new realistic general.\nCOLOR CHANGE: current runtime has become too pale and low-saturation. Increase saturation while retaining clear light values: strong clean SCARLET red cape/plumes, vivid warm GOLD armor, rich ORANGE-CHESTNUT horse, cream peach skin, medium brown mane, pale silver halberd. No washed-out salmon/pastel pink look, no grey haze, no muddy dark red, no broad black shadows. Clean moderately thin WARM BROWN outlines and tidy flat cel shading, large readable color blocks, simplified armor without dense engraved patterns. Saturated but not neon, and never restore heavy black coarse outlines.\nSWEEP CHANGE: show an unmistakably LARGER area of attack, proposed radius roughly 1.6 times the current 185-unit attack (about 300 world units). The displayed sweep diameter is about 2.5–3 times the mounted actor's visible width. The complete sweep must fit in the picture with generous margin. A gigantic broad 300-DEGREE CRESCENT of solid orange-gold halberd blade sweeps around Lu Bu, with a clear roughly 60-degree open gap. Strong tapered ends, thick amber body, bright gold bevel and a very narrow ivory edge, dark ochre warm-brown back edge. The leading blade must CONNECT to the physical silver halberd tip rather than float apart. Two SHORT separated fading afterimages follow it, not three full rings. Sweep behind the rider in the rear, in front of horse feet in the front; keep Lu Bu's face readable. The interior stays transparent grass, not an opaque glowing fan or circular disk. Main attack is substantial painted blade, not a thin line, transparent colored geometry, ring outline, magic tornado, fire cyclone, laser or lens flare.\nKeep the game's actual 2D combat camera and world-plane circular reach, not a cinematic tilted camera. Include ONE much smaller green Liu Bei with straw shoes dodging just outside the sweep's outer edge on the right to communicate combat scale and space; he is safe, no fake hit flash on him. Sparse grass and tiny flowers only, a few local grass chips/hoof dust near the physical swing, no clutter, army crowds, scenery rocks or UI.\nComposition: make the main scene occupy nearly all of a 1536x1024 landscape image, not a promotional character close-up. The blade should read as a wide-area battlefield threat at a glance. Minimal Chinese text: top title “吕布 · 画戟回旋”; small bottom caption “高饱和配色 · 扩大横扫范围”; tiny corner “概念设计 · 未实装”. No health bars, buttons, cards or other captions.",
+  "references": [
+    "assets/chronicle-units/lvbu-actions.png",
+    "art/concepts/boss-seven/02-lvbu.png",
+    "art/reviews/lvbu/技能实装总览.png"
+  ],
+  "image": "design.png",
+  "proposal": {
+    "palette": "scarlet-red / vivid-gold / orange-chestnut / clean warm-brown outlines",
+    "currentRuntimeRadius": 185,
+    "proposedRadius": 300,
+    "arcDegrees": 300
+  },
+  "runtimeUnchanged": false,
+  "implementation": {
+    "version": "chronicles-v6.5-lvbu-gold-sweep",
+    "radius": 300,
+    "windupSeconds": 1,
+    "arcDegrees": 300,
+    "description": "20-frame saturated palette; solid blade, warning and collision use the same radius"
+  }
+}

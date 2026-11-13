@@ -1,5 +1,27 @@
 {
-  "assets/scripts/chronicles-data.ts": "edb421ede183c4e0dba2a81d5f12d672788afb8b1f300931b07ab7ffb1cb6336",
-  "assets/scripts/common-skills.ts": "946a57ad9d31cb7f65296e5e0a51cb40f1198c7247e462d56c153f1df771378e",
-  "assets/scripts/sweep-effects.ts": "b2f0005f3d93ef4a064ac5a84b9e2546ad8e6b88186cc32f5e6397b03e8a0546"
+  "sweep": {
+    "id": "G03",
+    "name": "横扫六合",
+    "category": "战技",
+    "damage": "0.80S",
+    "range": "半径250",
+    "duration": "0.4秒",
+    "effect": "一圈金刃横扫，最多10敌，击退300。",
+    "icon": 2,
+    "powerRank": 3,
+    "powerTier": 2,
+    "killCharge": 22,
+    "unlocked": true,
+    "unlockHint": "当前版本免费开放",
+    "kind": "sweep",
+    "factor": 0.8,
+    "radius": 250,
+    "seconds": 0.4,
+    "maxTargets": 10,
+    "maxHits": 1,
+    "color": "#f0c56d"
+  },
+  "renderers": {
+    "assets/scripts/sweep-effects.ts": "b2f0005f3d93ef4a064ac5a84b9e2546ad8e6b88186cc32f5e6397b03e8a0546"
+  }
 }

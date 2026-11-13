@@ -6,7 +6,7 @@ import { HeroId } from './campaign';
 // Warm paper highlights, jade wood, peach ink, fire and cyan steel. No fullscreen flash.
 const RGB = [[255,247,213],[247,194,83],[179,126,60],[74,187,102],[222,250,159],
   [243,133,187],[255,220,234],[255,126,53],[144,115,93],[105,224,211],[190,143,244],[242,229,255],
-  [34,109,70],[103,56,143],[135,88,32],[188,62,112]];
+  [34,109,70],[103,56,143],[135,88,32],[188,62,112],[128,48,31],[235,67,39],[83,48,31]];
 const COLORS = RGB.map(c => Array.from({ length: 33 }, (_, i) => new Color(c[0],c[1],c[2],Math.round(i/32*255))));
 export const effectInk = (tone: number, alpha = 1): Color => COLORS[tone][Math.max(0,Math.min(32,Math.round(alpha*32)))];
 const ink=effectInk;

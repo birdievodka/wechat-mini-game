@@ -1,0 +1,13 @@
+{
+  "tool": "built-in imagegen",
+  "assets": {
+    "beasts": {
+      "prompt": "Use case: background-extraction. EDIT TARGET is this exact sprite sheet. Remove EVERY BIT of coloured gradient/background/backdrop and ALL cast shadows/background glow. Make every inter-sprite region exactly fully transparent alpha=0. Preserve ONLY the actual foreground ink/coloured shapes of all 24 characters/animals in the SAME6column4row positions. Preserve each object's full silhouette, thin warm brown outline and opaque bright painted colours INSIDE the object, all poses and spacing unchanged. NO new drawing, NO layout change, NO trimming of fur/dragon whiskers/tails. Do not put the sprites on a checkerboard, black, white, or a gradient; return genuine PNG alpha transparency. Background colour must not remain connected to edges of any cell.",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-c5e8de71-4440-4d6c-9ea6-7905caddd1c3.png"
+    },
+    "props": {
+      "prompt": "Use case: background-extraction. EDIT TARGET is this exact sprite sheet. Remove EVERY BIT of coloured gradient/background/backdrop and ALL cast shadows/background glow. Make every inter-sprite region exactly fully transparent alpha=0. Preserve ONLY the actual foreground ink/coloured shapes of all 16 props/people/dragons in the SAME4column4row positions. Preserve each object's full silhouette, thin warm brown outline and opaque bright painted colours INSIDE the object, all poses and spacing unchanged. NO new drawing, NO layout change, NO trimming of fur/dragon whiskers/tails. Do not put the sprites on a checkerboard, black, white, or a gradient; return genuine PNG alpha transparency. Background colour must not remain connected to edges of any cell.",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-3f5c161b-a08f-4f10-a472-77a493c4f75d.png"
+    }
+  }
+}

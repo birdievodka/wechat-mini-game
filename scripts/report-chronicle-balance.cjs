@@ -11,7 +11,7 @@ function income(chapter,stage,killRate,seconds=30,boss=false){let budget=seconds
 const results=[];for(let i=0;i<150;i++){
  const hero=r.HEROES[i%5],run=r.createRun(hero.id);run.gold=28;run.supplyMode='departure';shop(run);
  const grant=base=>{const mult=1+p.passiveBonuses(run.inventory).income+(run.augments.includes('rich')?.3:0);run.gold+=Math.floor(base*mult);};
- for(let chapter=1;chapter<=17;chapter++){
+ for(let chapter=1;chapter<=c.CHAPTERS.length;chapter++){
   run.chapter=chapter;
   // Later zero segments spawn about nine regular arrivals; no second departure store.
   if(chapter>1){let gold=0;for(let n=0;n<9;n++){const id=c.pickChapterEnemy(chapter,0,false,{},random);if(random()<.65)gold+=c.archetypeFor(id).coins;}grant(gold);}
@@ -19,9 +19,9 @@ const results=[];for(let i=0;i<150;i++){
   const power=dps(run)*.65,ttk=c.chapterFor(chapter).bossHp/power;
   results.push({seed:i,hero:hero.id,chapter,power,ttk,gold:run.gold,tiers:run.weapons.map(q=>q.tier)});
   grant(Math.round(35*c.chapterInflation(chapter))+income(chapter,3,.65,Math.min(90,ttk),true));run.survivalSeconds+=ttk;
-  if(chapter<17){run.chapter=chapter+1;run.supplyMode='normal';run.rerolls=0;shop(run);}
+  if(chapter<c.CHAPTERS.length){run.chapter=chapter+1;run.supplyMode='normal';run.rerolls=0;shop(run);}
  }
 }
 
 const percentile=(a,p)=>a.slice().sort((x,y)=>x-y)[Math.floor((a.length-1)*p)];const byChapter=c.CHAPTERS.map(ch=>{const a=results.filter(r=>r.chapter===ch.id);return {chapter:ch.id,boss:ch.boss,effectiveDpsMedian:Math.round(percentile(a.map(r=>r.power),.5)),bossSecondsP10:+percentile(a.map(r=>r.ttk),.1).toFixed(1),bossSecondsMedian:+percentile(a.map(r=>r.ttk),.5).toFixed(1),bossSecondsP90:+percentile(a.map(r=>r.ttk),.9).toFixed(1)};});
-const report={kind:'shop-output model, not combat survival or iOS performance',runs:150,killRate:.65,hitEfficiency:.65,policy:'all shops use normal shelf (including pre-Boss toggle), at most two rerolls; real transactions, next-chapter prices/unlocks, income passives, free merges, highest output gain per coin',limitations:'no incoming damage or survival simulation; 65% kill/hit assumptions; independent budget draws approximate alive/charge caps; later warmup models nine arrivals; Boss reinforcement income capped at 90s; no skill burst in DPS',byChapter};fs.writeFileSync(process.argv[2]||'docs/chronicle-balance.json',JSON.stringify(report,null,2)+'\n');console.table(byChapter);
+const report={version:s.SURVIVAL_VERSION,kind:'shop-output model, not combat survival or iOS performance',runs:150,killRate:.65,hitEfficiency:.65,policy:'all shops use normal shelf (including pre-Boss toggle), at most two rerolls; real transactions, next-chapter prices/unlocks, income passives, free merges, highest output gain per coin',limitations:'no incoming damage or survival simulation; 65% kill/hit assumptions; independent budget draws approximate alive/charge caps; later warmup models nine arrivals; Boss reinforcement income capped at 90s; no skill burst in DPS; does not model Boss summon costs or target diversion',byChapter};fs.writeFileSync(process.argv[2]||'docs/chronicle-balance.json',JSON.stringify(report,null,2)+'\n');console.table(byChapter);

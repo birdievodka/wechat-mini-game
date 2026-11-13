@@ -1,0 +1,129 @@
+{
+  "status": "concept-boards",
+  "generator": "image_gen.imagegen",
+  "removedFromProposal": [
+    "周瑜",
+    "黄忠",
+    "马超"
+  ],
+  "boards": [
+    {
+      "id": "zhangjiao",
+      "name": "张角",
+      "title": "张角 · 黄天雷法",
+      "skills": [
+        "黄符定雷",
+        "三才雷阵",
+        "太平雷狱"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-9c03a8ca-8e4e-47d7-89ba-81a4956f249f.png",
+      "file": "01-zhangjiao.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "0b99a1de444e3fb3bcb9492717b7f56218a15e69189704d8983395414fcf0afa",
+      "bytes": 2458554
+    },
+    {
+      "id": "lvbu",
+      "name": "吕布",
+      "title": "吕布 · 赤兔重骑",
+      "skills": [
+        "赤兔破军",
+        "画戟回旋",
+        "无双三连冲"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-e03ca605-0dd3-4d3b-bf5d-9eee10dc13af.png",
+      "file": "02-lvbu.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "dcb9d7b936335531add80234f22bb29ec0458bdf6e23ab8062ad55b88a8c19e9",
+      "bytes": 2514497
+    },
+    {
+      "id": "dongzhuo",
+      "name": "董卓",
+      "title": "董卓 · 重装暴君",
+      "skills": [
+        "金印镇地",
+        "赤铜横财",
+        "酒池焚阵"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-20be71fe-04a3-4d7c-9ce2-27ed903c84d2.png",
+      "file": "03-dongzhuo.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "0d3c6c602ca64fc5c483d8cdac337798916426b4ead9cd3e2acb87cf4762e4f6",
+      "bytes": 2738982
+    },
+    {
+      "id": "yuanshao",
+      "name": "袁绍",
+      "title": "袁绍 · 军阵统帅",
+      "skills": [
+        "四世箭阵",
+        "官渡弩阵",
+        "万军齐射"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-82459845-2ead-487a-a46c-15e619aaeaba.png",
+      "file": "04-yuanshao.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6d1e44bce21105cd4d6a5f6b091d835d35224d670bcb705a355afa0194aa17ab",
+      "bytes": 2689475
+    },
+    {
+      "id": "caocao",
+      "name": "曹操",
+      "title": "曹操 · 倚天疑兵",
+      "skills": [
+        "倚天连刃",
+        "疑兵换影",
+        "虎豹合围"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-1febf1eb-5703-4460-adf6-11a744e3796f.png",
+      "file": "05-caocao.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "44973f715f8c91f6c5bf15a0a8631e871b732669c7847ce50527722cf0c157c0",
+      "bytes": 2603770
+    },
+    {
+      "id": "menghuo",
+      "name": "孟获",
+      "title": "孟获 · 百兽蛮王",
+      "skills": [
+        "猪突猛进",
+        "群狼围猎",
+        "万象开道"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-513efd3f-e590-4f70-85a1-a521105f35f2.png",
+      "file": "06-menghuo.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e9c8dd21fda6996048c75cc7e3f4da74ec59670dcfa145b33803534afd1ac669",
+      "bytes": 2675938
+    },
+    {
+      "id": "simayi",
+      "name": "司马懿",
+      "title": "司马懿 · 棋阵星劫",
+      "skills": [
+        "落子成灾",
+        "阴阳双龙",
+        "五丈星劫"
+      ],
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-8f222188-94a8-4220-8ce6-706847dc6d7d.png",
+      "file": "07-simayi.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "d13defc1fbfdef64b81b79b85ca7a1b67f7165718ac34c74254a87fd1403ea0a",
+      "bytes": 2431573
+    }
+  ],
+  "implementedSample": {
+    "id": "lvbu",
+    "documentation": "docs/lvbu-red-hare.md",
+    "runtimeSheet": "assets/chronicle-units/lvbu-actions.png",
+    "note": "Only Lv Bu implemented after approval; other six concept designs pending."
+  }
+}

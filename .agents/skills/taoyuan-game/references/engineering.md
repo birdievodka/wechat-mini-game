@@ -19,11 +19,11 @@
 | `ResultView.ts` | 通关/失败结算布局、哭泣角色与轻微抽泣动作、统计/六格武器和单次导航提交 |
 | `presentation-art.ts`、`hero-idle.ts` | 36武器UI插画/实测裁格、五英雄分层头袍裁格与纯表现待机节奏 |
 | `ParticleSprites.ts`、`BattleSpriteAtlas.ts` | 280槽共享粒子四边形、启动烘焙金币/出生标记/双方弹体，免除逐对象Graphics大缓冲 |
-| `common-skills.ts`、`CommonSkillRuntime.ts`、`CommonSkillEffects.ts`、`SkillSelectView.ts` | 24通用技能同源定义/排序/击杀门槛、真实机制与有限表现、选人搭配面板 |
+| `common-skills.ts`、`CommonSkillRuntime.ts`、`CommonSkillEffects.ts`、`SkillSelectView.ts` | 12通用技能同源定义/排序/击杀门槛、真实机制与有限表现、选人搭配面板 |
 | `skill-vfx-art.ts`、`sweep-effects.ts` | v5.2通用技能纯绘制与保留的G03 A金锋回旋；无伤害/时钟/节点创建 |
 | `HeroShowcase.ts` | 选人专用分层木偶、五种武器亮相、独立菜单时钟；不调用战斗 |
 | `hero-arms.ts` | 新短袍肩腕基准、弯袖/袖口/皮肤和独立握拳绘制；不参与伤害 |
-| `chronicles-data.ts`、`chronicles.ts` | 40兵/17章/24技能定义、固定强度、分段编组、Boss动作 |
+| `chronicles-data.ts`、`chronicles.ts` | 40兵/7章/12技能定义、固定强度、分段编组、Boss动作 |
 | `extra-weapons.ts`、`chronicle-art.ts` | 新25四阶武器/机制、十小图集加载与裁格 |
 | `CodexView.ts`、`chronicle-save.ts` | 只读图鉴、schema4检查点保存/恢复 |
 | `build-templates/wechatgame/first-screen.js` | 游戏引擎启动之前的海报与WebGL进度渲染，替代默认Cocos标识 |
@@ -62,7 +62,7 @@ npm run build:wechat
 
 `npm run build:wechat` 调用Creator CLI，退出码0或36都视为成功，再检查发布文件、包体和引擎依赖。输出 `build/wechatgame`，根 `project.config.json` 的 `miniprogramRoot` 指向这里；不要导入错误目录或只改源码却忘了重建。
 
-当前项目检查阈值来自 `scripts/check-package-size.cjs`：主包和每个分包<4MiB，总资源安全预算<19MiB。2026-11-12当前AppID在开发者工具2.02.2609250预览实际拒绝超过20MB的源码包；旧30MiB门槛不足以保证这个项目可预览，已移除，预留至少1MiB打包余量。主包/分包4MiB是本项目保守门槛，不据此推断所有平台通用限制。
+当前项目检查阈值来自 `scripts/check-package-size.cjs`：主包和每个分包<4MiB，总资源安全预算<19.5MiB。2026-11-12当前AppID在开发者工具2.02.2609250预览实际拒绝超过20MB的源码包；旧30MiB门槛不足以保证这个项目可预览，已移除，预留至少0.5MiB打包余量。主包/分包4MiB是本项目保守门槛，不据此推断所有平台通用限制。
 
 实际构建还会把引擎相关发布依赖拆入战斗分包，`check-engine-imports.cjs` 验证所有运行时import都存在；不能只删大文件把启动页卡死。
 
@@ -90,6 +90,8 @@ wechatide -c Codex get_simulator_console --project "$PROJECT" --command 'grep -E
 
 截图长时间停在旧帧、运行时却在前进时，核对Mac是否锁屏；不要反复刷新或据旧图声称新画面已验证。需要电脑操作而Mac锁屏时请用户解锁，继续后再核验。CLI编译可完成与GUI画面可见是两件事。
 
+用户已明确选择“无需解锁，改完发预览二维码，由自己在手机测试”。在该交付范围内，回归和构建完成后直接生成最新预览二维码，不把Mac解锁或桌面截图验收作为交付前置；保留未完成的桌面/iOS验证事实。二维码生成走create_preview_qrcode的image输出，不要求先打开项目窗口；实际返回成功才交付，不沿用旧二维码。
+
 ## 试玩和交付
 
 用户要求“玩一局”时使用普通开局、正常摇杆/键盘/技能/付费购买，不通过evaluate改生命、金币、模拟时间、敌兵或阶段。保持连续输入与及时转向；实时游戏会在思考与工具往返时继续运行，避免长时间保持朝墙移动。使用短控制循环、阶段改变即停手，看当前截图/位置确认确实变向。
@@ -111,7 +113,7 @@ art/runtime-v4保留十张生成源图与prompts/manifest，供pack-chronicle-ar
 ## 当前验证记录
 
 - 最新v5.2通用特效：`docs/skill-vfx-v5.2.md`与`scripts/test-skill-vfx.cjs`；23项概念/真实Cocos浏览器画布保存在本次主交付目录。新增夹具`browser-skill-vfx-review.js`仅menu安装，120秒watchdog，保存/恢复Run引用与移动/待机状态，不写进度；上传后至少两次0dt渲染再导出完整GameCanvas。关键帧合成不是连续录屏；这次不证明手机FPS或微信客户端已刷新。
-- 当前技能程序评审：docs/skill-review为v5历史评审，仅总览、机制JSON、README与飞书快照链接；生成命令node scripts/review-common-skills.cjs。未经重采集不称最新v5.2还原证据。
+- 当前技能程序评审：docs/skill-review已按v6当前12项重新生成，仅总览、机制JSON、README与飞书快照链接；生成命令node scripts/review-common-skills.cjs。未经重采集不称最新v5.2还原证据。
 - 最新微信横扫A：docs/golden-sweep-v5.1.md与validation.json；GIF为代表帧合成，非连续录像或手机帧率测试。夹具只从菜单执行，有watchdog，结束恢复原存档和菜单。
 - 最新Node压力：docs/performance-node.json；最新保留的真实桌面渲染A/B：docs/performance-wechat-baseline.json。测量范围不能混用，详见performance.md。
 - 最新战役模型：docs/chronicle-balance.json，150条真实交易路径；无受伤/死亡模拟，不是生存胜率。
@@ -121,3 +123,13 @@ art/runtime-v4保留十张生成源图与prompts/manifest，供pack-chronicle-ar
 ### v5.4演武验收
 
 见art/reviews/training：真实界面配置和独立模式战斗，正式进度不改。优化截图曾重复返回旧帧而引擎实际正常；对不上运行时阶段时，使用simulator_screenshot --optimize false与新路径核对原始画面，不能据旧帧判定代码失败或无依据要求解锁。版本、阶段、模拟时钟和截图一起判断。
+
+v6技能重制：新增test-skill-recast，G03单独锁定既有定义与渲染SHA；其余12项按新机制回归，不能用改快照替代8箭/火线/箭雨/眩晕/格挡行为测试。构建版本chronicles-v6-skill-recast。
+
+v6.3吕布样板已接入C02/C05：lvbu-boss.ts负责独立状态与连续碰撞、lvbu-effects.ts负责共享绘制、chronicle-art加载12帧动作；test-lvbu纳入npm test。scripts/fixtures/lvbu-review.js在菜单守卫下进行工程定帧，120秒恢复/存档校验；scripts/capture-lvbu-review.mjs只连接独立本地WebGL评审环境。真实平台结果见art/reviews/lvbu/validation.json，不混称iOS实测。
+
+v6.4吕布追赶与画风修订：20帧、768×960，独立四步小跑、220/230速度、加减速/追赶滞回。test-lvbu增加步频/停步/面向与上身锚点回归；capture-lvbu-review包含小跑工程GIF。本轮用户选择手机自行测试，直接构建后发新二维码，不等待解锁。
+
+v6.5吕布采纳高饱和/大横扫稿：20帧仅改配色、原注册步态保留；半径300、1秒前摇，test-lvbu验证285/317/320内外边界、60°缺口、四向、绘制外缘与只读性、HSV饱和值/色值而非用灰度把鲜红误判黑块。微信预览直接交用户手机测试。
+
+v7七Boss和七章均已完成；boss-roster为纯契约，boss-battle真实模拟、boss-effects共享渲染，入口与96/24/16动作素材在seven-bosses参考。旧14人静态/坐骑运行图已退出assets，主包/分包4MiB、总包19.5MiB安全线保持。微信与独立WebGL分别构建核对，取证脚本捕获54帧/792张动画帧且恢复存档；iOS由用户手机体验。

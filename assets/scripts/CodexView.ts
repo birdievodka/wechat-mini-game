@@ -20,7 +20,7 @@ export class CodexView {
   if(this.tab===0&&this.sub===1)return CHAPTERS.map((c,i)=>({name:c.boss,key:'boss-'+c.bossId,index:i}));
   if(this.tab===0)return CHRONICLE_ENEMIES.map((e,i)=>({name:e.name,key:'enemy-'+e.id+'-front',index:i})).filter(e=>{const d=CHRONICLE_ENEMIES[e.index];return !this.filter||this.filter===1&&d.kind==='soldier'||this.filter===2&&d.kind==='spearman'&&d.group.indexOf('器械')<0||this.filter===3&&d.kind==='cavalry'||this.filter===4&&d.group.indexOf('器械')>=0;});
   if(this.tab===1)return WEAPONS.map((w,i)=>({name:w.name,key:'icon-'+w.id,index:i})).filter(e=>!this.filter||WEAPONS[e.index].category===['','melee','ranged','magic'][this.filter]);
-  return COMMON_SKILLS.filter(s=>!this.filter||s.category===['','战技','军略','奇术'][this.filter]).map(s=>({name:s.name,key:'skill-'+s.icon,index:s.icon}));
+  return COMMON_SKILLS.filter(s=>!this.filter||s.category===['','战技','军略','奇术'][this.filter]).map(s=>({name:s.name,key:'skill-'+s.icon,index:GENERIC_SKILLS.findIndex(d=>d.id===s.id)}));
  }
  private reset(){this.page=0;this.selected=0;this.render();}
  private render(){for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.surface=this.box(this.root,0,0,1260,690,C.paper);const p=this.surface;
@@ -39,7 +39,7 @@ export class CodexView {
    this.button(right,this.chapterValues?'本章值':'标准值',-145,32,150,this.chapterValues,()=>{this.chapterValues=!this.chapterValues;this.render();});this.button(right,'‹',5,32,55,false,()=>{this.chapter=Math.max(1,this.chapter-1);this.render();});this.text(right,'章 '+this.chapter,77,32,22,84,42);this.button(right,'›',148,32,55,false,()=>{this.chapter=Math.min(CHAPTERS.length,this.chapter+1);this.render();});
    this.details(right,[['生命',String(v.hp)],['移速',v.speed.toFixed(1)],['伤害','1颗心'],['射程',String(d.range)],['攻击周期',d.cycle+'秒'],['前摇',d.windup+'秒'],['金币',String(d.coins)],['首登','章 '+d.first],['出兵成本',String(d.cost)],['兵种',d.group]],-28,30);
    this.text(right,d.mechanic,0,-190,20,500,66);this.text(right,'应对：'+d.counter,0,-245,20,500,57,C.muted);
-  }else if(this.tab===0){const c=CHAPTERS[current.index];this.text(right,'第'+c.id+'章 · '+c.name+' · HP '+c.bossHp,0,26,21,510,45);BOSS_ACTIONS[c.id-1].forEach((a,i)=>this.text(right,a.name+'  /  '+a.cd+'秒\n'+this.actionDesc(a.kind,a.range||a.radius||0,a.count||1,a.windup),0,-43-i*75,22,500,74));}
+  }else if(this.tab===0){const c=CHAPTERS[current.index];this.text(right,'第'+c.id+'章 · '+c.name+' · HP '+c.bossHp,0,26,21,510,45);BOSS_ACTIONS[c.id-1].forEach((a,i)=>this.text(right,a.name+'  /  '+a.cd+'秒\n'+(a.description||this.actionDesc(a.kind,a.range||a.radius||0,a.count||1,a.windup)),0,-43-i*75,22,500,74));}
   else if(this.tab===1){const w=WEAPONS[current.index],q=this.quality;this.button(right,this.mechanism?'查看数值':'攻击机制',164,148,170,this.mechanism,()=>{this.mechanism=!this.mechanism;this.render();});[1,2,3,4].forEach((v,i)=>this.button(right,['I','II','III','IV'][i],-190+i*125,33,105,q===v,()=>{this.quality=v as Tier;this.render();}));
    const s=calculateWeapon({id:w.id,tier:q},{power:0,melee:0,ranged:0,magic:0,damage:0,haste:0,range:0,area:0,crit:0},'');
    if(!this.mechanism)this.details(right,[['伤害基数',s.damage.toFixed(1)],['周期',s.interval.toFixed(2)+'秒'],['射程',String(s.range)],['扫角',Math.round(s.arc)+'°'],['击退',String(s.knockback)],['暴击',Math.round(s.crit*100)+'%'],['弹速',String(s.speed)],['范围半径',String(s.area)],['基准DPS',(s.damage/(w.id==='caltrops'?1:s.interval)*(w.id==='shotgun'?4:w.id==='gourd'?(s.pulses||6):1)*extraHitFactor(w.id,q)).toFixed(1)],['每轮数量',String(s.shotCount||1)]],-27,31);

@@ -1,0 +1,10 @@
+{
+  "version": "chronicles-v6.5-lvbu-gold-sweep",
+  "scope": "User requested direct phone preview; no desktop unlock/visual check required",
+  "buildCompleted": true,
+  "previewUploadSuccess": true,
+  "previewBytes": 19804650,
+  "runtimeStagesChecked": false,
+  "visualVerified": false,
+  "iOSPhysicalDevice": "pending user test"
+}

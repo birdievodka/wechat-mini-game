@@ -4,12 +4,12 @@
     {
       "name": "six-swords",
       "frames": 480,
-      "medianMs": 1.446,
-      "p95Ms": 2.242,
+      "medianMs": 2.112,
+      "p95Ms": 4.634,
       "calls": {
         "clear": 5709,
-        "fill": 81276,
-        "stroke": 69100,
+        "fill": 83847,
+        "stroke": 68821,
         "reorder": 13970
       },
       "peakProjectiles": 0,
@@ -19,13 +19,13 @@
     {
       "name": "six-guns",
       "frames": 480,
-      "medianMs": 0.986,
-      "p95Ms": 1.561,
+      "medianMs": 1.156,
+      "p95Ms": 2.173,
       "calls": {
-        "clear": 2828,
-        "fill": 35155,
-        "stroke": 28091,
-        "reorder": 37345
+        "clear": 2829,
+        "fill": 37901,
+        "stroke": 27755,
+        "reorder": 37129
       },
       "peakProjectiles": 24,
       "enemyNodes": 80,
@@ -34,28 +34,28 @@
     {
       "name": "mixed",
       "frames": 480,
-      "medianMs": 0.959,
-      "p95Ms": 1.4,
+      "medianMs": 1.096,
+      "p95Ms": 2.31,
       "calls": {
-        "clear": 3392,
-        "fill": 45295,
-        "stroke": 36372,
-        "reorder": 20547
+        "clear": 3393,
+        "fill": 47758,
+        "stroke": 36240,
+        "reorder": 20090
       },
-      "peakProjectiles": 12,
+      "peakProjectiles": 13,
       "enemyNodes": 80,
       "coinNodes": 100
     },
     {
       "name": "chronicle-mixed",
       "frames": 480,
-      "medianMs": 1.624,
-      "p95Ms": 2.653,
+      "medianMs": 1.862,
+      "p95Ms": 3.731,
       "calls": {
-        "clear": 3109,
-        "fill": 37876,
-        "stroke": 38094,
-        "reorder": 25077
+        "clear": 3108,
+        "fill": 40236,
+        "stroke": 37810,
+        "reorder": 25178
       },
       "peakProjectiles": 20,
       "enemyNodes": 80,

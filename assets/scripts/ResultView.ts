@@ -1,6 +1,7 @@
 import { Color, Graphics, Label, Layers, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { heroFor, Run, WAVE_SECONDS } from './campaign';
 import { clockText } from './survival';
+import {CHAPTERS} from './chronicles';
 import { TIER_COLORS, WEAPON_LIMIT } from './weapons';
 import { addWeaponIcon } from './presentation-art';
 
@@ -53,7 +54,7 @@ export class ResultView {
     ink.lineWidth=1;ink.roundRect(-28,-28,56,56,3);ink.stroke();this.text(stamp,won?'胜':'败',0,0,43,'#b55d40',62,62,true).fontFamily='serif';
     const rules=this.node(paper,'ResultDividers').addComponent(Graphics);rules.strokeColor=new Color('#dcc9a5');rules.lineWidth=1.5;
     for(const y of [30,-64]){rules.moveTo(-282,y);rules.lineTo(282,y);}rules.stroke();
-    const stats=[['击败敌兵',String(kills)],[won?'最快通关':'到达章节',won?clockText(best||elapsed):`${run.chapter}/17`],['剩余铜钱',String(run.gold)]];
+    const stats=[['击败敌兵',String(kills)],[won?'最快通关':'到达章节',won?clockText(best||elapsed):`${run.chapter}/${CHAPTERS.length}`],['剩余铜钱',String(run.gold)]];
     stats.forEach(([label,value],i)=>{
       const x=(i-1)*202;this.text(paper,value,x,-4,i===1?35:38,P.ink,184,55,true).node.name='ResultStat-'+i;
       this.text(paper,label,x,-43,17,P.muted,184,30);

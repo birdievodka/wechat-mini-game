@@ -6,6 +6,7 @@ export class LoadingView {
   readonly status:Label;
   private poster:Sprite;
   private title:Label;
+  private logo:Sprite;
   private bar:Graphics;
   private background:Graphics;
   private width=1334;
@@ -18,6 +19,7 @@ export class LoadingView {
     this.background=node.addComponent(Graphics);
     this.poster=this.child('LoadingPoster').addComponent(Sprite);this.poster.sizeMode=Sprite.SizeMode.CUSTOM;
     this.title=this.text(GAME_NAME,58,'#ffe3a0');this.title.fontFamily='serif';this.title.isBold=true;
+    this.logo=this.child('LoadingLogo').addComponent(Sprite);this.logo.sizeMode=Sprite.SizeMode.CUSTOM;this.logo.node.active=false;
     this.bar=this.child('LoadingProgress').addComponent(Graphics);
     this.status=this.text('',19,'#fff0cf');this.resize(this.width,this.height);
   }
@@ -27,11 +29,15 @@ export class LoadingView {
     label.string=value;label.fontSize=size;label.lineHeight=size*1.3;label.color=new Color(color);label.horizontalAlign=Label.HorizontalAlign.CENTER;label.verticalAlign=Label.VerticalAlign.CENTER;return label;
   }
   setPoster(frame:SpriteFrame,width:number,height:number):void {this.poster.spriteFrame=frame;this.imageWidth=width;this.imageHeight=height;this.resize(this.width,this.height);}
+  setLogo(frame:SpriteFrame):void {this.logo.spriteFrame=frame;this.logo.node.active=true;this.title.node.active=false;this.resize(this.width,this.height);}
   setProgress(value:number,error=''):void {this.value=Math.max(this.value,Math.max(0,Math.min(1,value)));this.error=error;this.draw();}
   resize(width:number,height:number):void {
     this.width=width;this.height=height;const scale=Math.max(width/this.imageWidth,height/this.imageHeight);
     this.poster.node.getComponent(UITransform)!.setContentSize(this.imageWidth*scale,this.imageHeight*scale);
     this.poster.node.setPosition(0,height/2-this.imageHeight*scale/2);
+    const logoWidth=Math.min(380,width-112),frame=this.logo.spriteFrame;
+    if(frame)this.logo.node.getComponent(UITransform)!.setContentSize(logoWidth,logoWidth*frame.rect.height/frame.rect.width);
+    this.logo.node.setPosition(0,-height/2+155);
     this.title.node.setPosition(0,-height/2+155);this.status.node.setPosition(0,-height/2+43);
     this.bar.node.setPosition(0,-height*.4);
     const g=this.background;g.clear();g.fillColor=new Color('#263024');g.rect(-width/2,-height/2,width,height);g.fill();this.draw();

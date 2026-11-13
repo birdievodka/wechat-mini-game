@@ -1,0 +1,27 @@
+{
+  "tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "revision": "v6.5-approved-scarlet-gold",
+  "approvedConcept": "art/concepts/lvbu-saturated-sweep/design.png",
+  "outputs": [
+    {
+      "source": "art/runtime-lvbu/source.png",
+      "mode": "precise-object-edit",
+      "prompt": "Use case: precise-object-edit. This is a COLOR-ONLY production sprite-sheet edit.\nImage1 is the edit target, image2 is the user-approved saturated Lu Bu concept.\nChange ONLY the character palette of image1 to match image2: vivid clean SCARLET red cape and helmet plumes (not pale coral/pink), rich bright GOLD armor (not cream/yellow pastel), strong ORANGE-CHESTNUT horse (not pale peach), medium warm brown hair/mane, light natural peach skin, silver halberd. Increase saturation distinctly while keeping light readable values. Clean thin warm-brown contour, simplified flat cel shading. Do NOT darken everything, add black shadow blocks, thicken lines, add engraving, glow, dust or any effects.\nCrucial invariants: absolutely preserve every pose, silhouette, cell position, camera, scale, face shape, hand/weapon orientation, four horse limbs, crop bounds, and transparent spacing. No new poses, no removed cells, no added weapons. Original upper-body alignment must stay exact; these are registered animation frames, not illustrations. Preserve REAL transparent alpha background; no black/white fill, no checkerboard, no text, borders or guides.\nKeep exactly 4 columns by 3 rows, all 12 action sprites in their exact existing order. Preserve front/rear views and all charging/braking/sweeping gestures.",
+      "references": [
+        "previous v6.4 source, palette replaced with user approval",
+        "art/concepts/lvbu-saturated-sweep/design.png"
+      ]
+    },
+    {
+      "source": "art/runtime-lvbu/trot-source.png",
+      "mode": "precise-object-edit",
+      "prompt": "Use case: precise-object-edit. This is a COLOR-ONLY production sprite-sheet edit.\nImage1 is the edit target, image2 is the user-approved saturated Lu Bu concept.\nChange ONLY the character palette of image1 to match image2: vivid clean SCARLET red cape and helmet plumes (not pale coral/pink), rich bright GOLD armor (not cream/yellow pastel), strong ORANGE-CHESTNUT horse (not pale peach), medium warm brown hair/mane, light natural peach skin, silver halberd. Increase saturation distinctly while keeping light readable values. Clean thin warm-brown contour, simplified flat cel shading. Do NOT darken everything, add black shadow blocks, thicken lines, add engraving, glow, dust or any effects.\nCrucial invariants: absolutely preserve every pose, silhouette, cell position, camera, scale, face shape, hand/weapon orientation, four horse limbs, crop bounds, and transparent spacing. No new poses, no removed cells, no added weapons. Original upper-body alignment must stay exact; these are registered animation frames, not illustrations. Preserve REAL transparent alpha background; no black/white fill, no checkerboard, no text, borders or guides.\nKeep exactly 4 columns by 2 rows, all 8 trot sprites in their exact existing order. Top row front, bottom row rear. In each row the rider head/saddle and horse torso are in the SAME pixel position/scale across all 4 frames, only the lower legs alternate. No galloping or leaning poses.",
+      "references": [
+        "previous v6.4 source, palette replaced with user approval",
+        "art/concepts/lvbu-saturated-sweep/design.png"
+      ]
+    }
+  ],
+  "runtime": "assets/chronicle-units/lvbu-actions.png"
+}

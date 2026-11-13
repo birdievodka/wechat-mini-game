@@ -1,7 +1,7 @@
 // Deterministic extraction/packing of the approved generated sprites. No new artwork is drawn here.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),sharp=require('sharp');
 const source='art/runtime-v4/sources',manifest={source,atlases:{}};
-const specs=[['hero-portraits',2,2,384,'chronicle-ui'],['hero-parts',2,3,256,'chronicle-ui'],['weapons',5,5,128,'chronicle-ui'],['skills',6,4,96,'chronicle-ui'],['bosses',7,2,192,'chronicle-units'],['boss-mounts',3,2,192,'chronicle-units'],...['a','b'].flatMap(g=>['front','back'].map(v=>['troops-'+g+'-'+v,5,4,128,'chronicle-units']))];
+const specs=[['hero-portraits',2,2,384,'chronicle-ui'],['hero-parts',2,3,256,'chronicle-ui'],['weapons',5,5,128,'chronicle-ui'],['skills',6,4,96,'chronicle-ui'],...['a','b'].flatMap(g=>['front','back'].map(v=>['troops-'+g+'-'+v,5,4,128,'chronicle-units']))];
 const uuid=()=>crypto.randomUUID();
 function imageMeta(dest){if(fs.existsSync(dest+'.meta'))return;const x=JSON.parse(fs.readFileSync('assets/presentation/icons.png.meta'));x.uuid=uuid();x.subMetas['6c48a'].uuid=x.uuid+'@6c48a';x.subMetas['6c48a'].displayName=path.basename(dest,'.png');x.subMetas['6c48a'].userData.imageUuidOrDatabaseUri=x.uuid;x.userData.redirect=x.uuid+'@6c48a';fs.writeFileSync(dest+'.meta',JSON.stringify(x,null,2)+'\n');}
 (async()=>{for(const [name,cols,rows,cell,bundle] of specs){

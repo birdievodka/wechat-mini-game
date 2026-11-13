@@ -1,6 +1,7 @@
 import {Color,Graphics,Node,Rect,Sprite,SpriteFrame,Texture2D,UITransform} from 'cc';
 import {WEAPONS} from './weapons';
 import {drawWeaponArt} from './weapon-art';
+import {drawSkillIcon} from './skill-vfx-art';
 
 const CELL=128,COLUMNS=8;
 interface Cell {frame:SpriteFrame;x:number;y:number;width:number;height:number;}
@@ -33,13 +34,14 @@ export class BattleSpriteAtlas {
   private bake():void {
     // Cocos' browser/WeChat document adapter creates an offscreen 2D canvas here.
     if(typeof document==='undefined')return;
-    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin']);
+    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25']);
     const canvas=document.createElement('canvas');canvas.width=CELL*COLUMNS;canvas.height=CELL*Math.ceil(keys.length/COLUMNS);
     const ctx=canvas.getContext('2d');if(!ctx)return;
     for(let i=0;i<keys.length;i++){
       ctx.save();ctx.beginPath();ctx.rect(i%COLUMNS*CELL,Math.floor(i/COLUMNS)*CELL,CELL,CELL);ctx.clip();ctx.translate(i%COLUMNS*CELL+64,Math.floor(i/COLUMNS)*CELL+80);ctx.scale(1,-1);
       const g=new CanvasDrawing(ctx),key=keys[i];
       if(i<WEAPONS.length)drawWeaponArt(g as unknown as Graphics,WEAPONS[i].id,1,true);
+      else if(key.indexOf('skill-')===0)drawSkillIcon(g as unknown as Graphics,Number(key.slice(6)));
       else if(key.indexOf('enemy-')===0){
         g.lineWidth=2;g.strokeColor=new Color('#6f392b');g.fillColor=new Color('#ffe5af');
         if(key==='enemy-coin'){g.fillColor=new Color('#f7c35b');g.circle(0,0,9);g.fill();g.stroke();g.strokeColor=new Color('#a8752e');g.rect(-3,-3,6,6);g.stroke();}
@@ -65,6 +67,9 @@ export class BattleSpriteAtlas {
       this.cells[keys[i]]={frame,width,height,x:left+width/2-64,y:80-top-height/2};
     }
     canvas.width=canvas.height=0;
+  }
+  copyFrame(key:string):SpriteFrame|undefined{
+    const cell=this.cells[key];if(!cell)return;const f=new SpriteFrame();f.texture=cell.frame.texture;const r=cell.frame.rect;f.rect=new Rect(r.x,r.y,r.width,r.height);return f;
   }
   add(parent:Node,key:string):Sprite|undefined{
     const cell=this.cells[key];if(!cell)return;

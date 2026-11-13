@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "4584143e-ed36-4933-a23b-5f44d6dd41b8",
+  "uuid": "9d74daf0-0141-4484-8d25-499ed8e1c85e",
   "files": [
     ".json",
     ".png"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "4584143e-ed36-4933-a23b-5f44d6dd41b8@6c48a",
-      "displayName": "boss-mounts",
+      "uuid": "9d74daf0-0141-4484-8d25-499ed8e1c85e@6c48a",
+      "displayName": "boss-dongzhuo-actions",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "4584143e-ed36-4933-a23b-5f44d6dd41b8",
+        "imageUuidOrDatabaseUri": "9d74daf0-0141-4484-8d25-499ed8e1c85e",
         "visible": false
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "4584143e-ed36-4933-a23b-5f44d6dd41b8@6c48a"
+    "redirect": "9d74daf0-0141-4484-8d25-499ed8e1c85e@6c48a"
   }
 }

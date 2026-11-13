@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "chronicles-v5.4-training",
+    "version": "chronicles-v7-seven-bosses",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "1248496da4dd384e817838345ed422639f682424f57980bd96e658f51208a5f2",
+    "fingerprint": "8c8fc356d633a8949462553074b352187b08836fbe0f20be8f2188e180833ced",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -20,13 +20,13 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/implementation.md",
-        "bytes": 5908,
-        "sha256": "4934def1a4067fd65dcdbc63ad51b4a2dbdf8989e93ee39b0bec5134f55a2e78"
+        "bytes": 6910,
+        "sha256": "fc8b733ddd9da988440a4514e58e14511ef470b4d290399206255f6a5a499f6b"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/taoyuan-adapter.md",
-        "bytes": 5885,
-        "sha256": "d61ea6980170d6bef5e71c69a4dd440e999c493d4750f9a393b1c235df8ce0eb"
+        "bytes": 7594,
+        "sha256": "29649a253659d1243cb16263a64208ebf702928787e9e8bb93363dad154a7129"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/verification.md",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 14813,
-        "sha256": "76016e56d7f3d886ea1a1cc0521d7f35f7163024c32db38252ce16c8f73f3018"
+        "bytes": 16628,
+        "sha256": "2632612c440b6ed2890139e4442a52283728272cac6372d21318964a40a8d293"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -60,28 +60,28 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/combat-effects.md",
-        "bytes": 10182,
-        "sha256": "e6706744646be1817484783f603e851fda03b4702505481ef0a9c5066be7a556"
+        "bytes": 11664,
+        "sha256": "867779cb13aaed656b11730d666da46ff51d5652841c66f22fbb91a105e339aa"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 5097,
-        "sha256": "ed0b8ac044347306afc0e2ace50193094600b0489e12e6d169893f8235e71b9b"
+        "bytes": 4682,
+        "sha256": "74fe4059e486e6f577112641c60eb59e61a6256b89d58897dbfeff47ef41bbe3"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 13280,
-        "sha256": "4d19c0e54a04135be2f556c2b85e11119ab3b06a4aad9d1f193c9fe04dfc8c3c"
+        "bytes": 15382,
+        "sha256": "2eb4ed682abd75ccd9dca8a340172656390dda49fe6c0bea2fdb71c4ec727c05"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
-        "bytes": 4871,
-        "sha256": "fc910fe9840636f86a91252941beefdb7f84e87931b5dae777bcf592085bdd88"
+        "bytes": 1997,
+        "sha256": "95cdd5ecaf140c493b230cd8829dae8e202d8d4cc963a63191c14e49b4a04b28"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/gameplay.md",
-        "bytes": 10518,
-        "sha256": "4fe373b867e3177bf40a64af2c9bb33f82530551b1e65ec30dfe9cb68cdfbcca"
+        "bytes": 10556,
+        "sha256": "c98a7f3254f91ddceeebe62fe68cbb521aa264160b8bd3fff239b43e19d2ff44"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/hero-arms.md",
@@ -94,14 +94,19 @@
         "sha256": "fc3decc88a8ad0a2879b59dabe9e939b59fcf5f1709e1c4e61719846bd68afc2"
       },
       {
+        "path": ".agents/skills/taoyuan-game/references/lvbu-boss.md",
+        "bytes": 3081,
+        "sha256": "046a01e62dea9554687fa8100a8a5b22e449b670bc2468ff98b5d4f670e7e89d"
+      },
+      {
         "path": ".agents/skills/taoyuan-game/references/maintenance.md",
         "bytes": 4593,
         "sha256": "568c313831d18285f2109e7a3d7b38c298bae5efb7dd8baede0249e4c8489067"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 8726,
-        "sha256": "0841676c7b070c49ea31c8d282b1a14580619306de610b76f2fed92711825dfe"
+        "bytes": 10604,
+        "sha256": "0667fb5cb33c797e6884305035dc02bd1754aa7322231fbcffe31eec6ef609c5"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
@@ -110,23 +115,28 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
-        "bytes": 1949,
-        "sha256": "5f3a8ca7408bfd2d4d05c99b322080dcd15df7a3950cc78ec75b5c962248442c"
+        "bytes": 2721,
+        "sha256": "98b855438e7542d179e974ad8fa502a4380b61b2a55d4087e5a04ad407d2707e"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
-        "bytes": 2729,
-        "sha256": "f05db0a6aa415f31268b061ea399a61f29bf647bce8e9f6df23b9563c84d261e"
+        "bytes": 2717,
+        "sha256": "282699991393d29917a55661b723f02aa368a128202024f09a0ebe7cdc5e3869"
+      },
+      {
+        "path": ".agents/skills/taoyuan-game/references/seven-bosses.md",
+        "bytes": 3910,
+        "sha256": "b1b9959e7950b9099d945e7207c8421be1f9e6daa720af7b240840da1a2c8033"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/startup-loading.md",
-        "bytes": 4816,
-        "sha256": "1d20629d09355efaa9e9047a36c862489a3f3b97925c3678a1bfe549df5ea674"
+        "bytes": 5077,
+        "sha256": "4c6c5d199a63b01f31cd75cbf3964e0c318fad584103938c10f5532b7cec13e6"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/training.md",
-        "bytes": 2750,
-        "sha256": "63a0c4d8094d7cd131a647496d4a0e5f8a128af1a96d82d7f6edbc68daaaeaf0"
+        "bytes": 3194,
+        "sha256": "f3ba6fe8f5b16a77c09435f64cb8cf6c376497e6dedc612d239600dc06ae2f4c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapon-evolution.md",
@@ -136,17 +146,17 @@
       {
         "path": ".agents/skills/taoyuan-game/references/weapons-items.md",
         "bytes": 10175,
-        "sha256": "12518eb897ea6cfe5f012a1b0f427479863086a22f03b197e53329d76e3fa98d"
+        "sha256": "8c4c90a49e5ef72c98f39a4e631cbdba5099dbbf4a1c4370247516a2f1d1348a"
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 20864,
-        "sha256": "b9968a1ef0fef7282fd945734558b7c77e82961ce630e4ef4a556f2e7792f16c"
+        "bytes": 20973,
+        "sha256": "3b4b163de70640671d681fb7a748f8b90c6021400265c26add3d253fddf9d0bd"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 9196,
-        "sha256": "f58a239bd7b39229abebef862b1116488ee32983df780a1d05aa103bf29bfebc"
+        "bytes": 9939,
+        "sha256": "d838decf317de8eb77558c0f18a9aacc940d8d91c47a7117c828cc25cb4832bf"
       },
       {
         "path": ".gitignore",
@@ -155,8 +165,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 2699,
-        "sha256": "86cdb23777ae956c92bb372e43309b87bbfdc621e3473ed972bced449e91e70b"
+        "bytes": 3005,
+        "sha256": "d26f9afe58be86527d3edd050d480c617fb5027e97e82a880c44ad3813a8fadd"
       },
       {
         "path": "art/audio/taoyuan-kaida-battle.m4a",
@@ -209,6 +219,56 @@
         "sha256": "4f0a0a7e53062aa6b8416da46b54d19402b71c1cf1c965bf714cfd344ce4a415"
       },
       {
+        "path": "art/concepts/boss-seven/01-zhangjiao.png",
+        "bytes": 2458554,
+        "sha256": "0b99a1de444e3fb3bcb9492717b7f56218a15e69189704d8983395414fcf0afa"
+      },
+      {
+        "path": "art/concepts/boss-seven/02-lvbu.png",
+        "bytes": 2514497,
+        "sha256": "dcb9d7b936335531add80234f22bb29ec0458bdf6e23ab8062ad55b88a8c19e9"
+      },
+      {
+        "path": "art/concepts/boss-seven/03-dongzhuo.png",
+        "bytes": 2738982,
+        "sha256": "0d3c6c602ca64fc5c483d8cdac337798916426b4ead9cd3e2acb87cf4762e4f6"
+      },
+      {
+        "path": "art/concepts/boss-seven/04-yuanshao.png",
+        "bytes": 2689475,
+        "sha256": "6d1e44bce21105cd4d6a5f6b091d835d35224d670bcb705a355afa0194aa17ab"
+      },
+      {
+        "path": "art/concepts/boss-seven/05-caocao.png",
+        "bytes": 2603770,
+        "sha256": "44973f715f8c91f6c5bf15a0a8631e871b732669c7847ce50527722cf0c157c0"
+      },
+      {
+        "path": "art/concepts/boss-seven/06-menghuo.png",
+        "bytes": 2675938,
+        "sha256": "e9c8dd21fda6996048c75cc7e3f4da74ec59670dcfa145b33803534afd1ac669"
+      },
+      {
+        "path": "art/concepts/boss-seven/07-simayi.png",
+        "bytes": 2431573,
+        "sha256": "d13defc1fbfdef64b81b79b85ca7a1b67f7165718ac34c74254a87fd1403ea0a"
+      },
+      {
+        "path": "art/concepts/boss-seven/manifest.json",
+        "bytes": 4081,
+        "sha256": "c288209c25dd7d344d94c6471c552d41c517e4cd782dce839b0c00d20bb3e367"
+      },
+      {
+        "path": "art/concepts/boss-seven/prompts.json",
+        "bytes": 27723,
+        "sha256": "93ac5c571ac46b17597f4f431292c8b62cfbc55ec49cbb80d88d2a002a9ac056"
+      },
+      {
+        "path": "art/concepts/boss-seven/README.md",
+        "bytes": 4099,
+        "sha256": "5a25b58cda553ddaf50bb6be04546829549a183a4383cae3379595f3b86dea44"
+      },
+      {
         "path": "art/concepts/hero-select-v4.2/manifest.json",
         "bytes": 2303,
         "sha256": "4cdd125eec781984e1969e590cf4049ca74f48730b9cc267cf5d2bf633e0e612"
@@ -217,6 +277,36 @@
         "path": "art/concepts/hero-select-v4.2/training-ground-source.png",
         "bytes": 1921152,
         "sha256": "a52d83b21d78704e127e3a45da24166686c2c69db70b6f4934b8bc1cfb29fc1d"
+      },
+      {
+        "path": "art/concepts/hero-youth/design.png",
+        "bytes": 2996484,
+        "sha256": "3bf38011952e90d0ebd2f516a6105aef010e7043f3be2b6e12047687443ce2d4"
+      },
+      {
+        "path": "art/concepts/hero-youth/prompt.json",
+        "bytes": 6485,
+        "sha256": "0532c086a4325c497246b35477d0e3da7a2bc5a4d3cc17af9884a48645918fd3"
+      },
+      {
+        "path": "art/concepts/hero-youth/README.md",
+        "bytes": 995,
+        "sha256": "6b901b313edf8e84442979a7430ae03ac6e1b978fc7120e4b73114835f877d8a"
+      },
+      {
+        "path": "art/concepts/lvbu-saturated-sweep/design.png",
+        "bytes": 2010460,
+        "sha256": "e727efa9d45a88e1bad3a43162421cc8801f25e3165f5425085129620a2d2c34"
+      },
+      {
+        "path": "art/concepts/lvbu-saturated-sweep/prompt.json",
+        "bytes": 4276,
+        "sha256": "02938604749ce93486bd3654acaf308db0ee0556aa4494374908d2320331452a"
+      },
+      {
+        "path": "art/concepts/lvbu-saturated-sweep/README.md",
+        "bytes": 892,
+        "sha256": "ed5f209204092ce5e8e3cf6f234dd7f00ca0e93764ce0fd46ff19ff10950a95b"
       },
       {
         "path": "art/concepts/presentation-v3.0/heroes-source.png",
@@ -309,6 +399,81 @@
         "sha256": "59fb1d3d94e171c459039aa2a896cc591bbb08df76d9d0e3d92219a90eaaf841"
       },
       {
+        "path": "art/reviews/bosses/caocao.gif",
+        "bytes": 1296248,
+        "sha256": "5db7fa0ef0343c94f48f11d37719983a39dedca31e7a8c4f3b110a68aea7e04f"
+      },
+      {
+        "path": "art/reviews/bosses/caocao.png",
+        "bytes": 733533,
+        "sha256": "271c640603b301725df454e0b1ef74c612e1f0c8597df2656a9251decda44bc4"
+      },
+      {
+        "path": "art/reviews/bosses/dongzhuo.gif",
+        "bytes": 1672876,
+        "sha256": "bbe1fe4f5adbe270a2b9da5780457df805c6535ee1a9be946ac0c112c1db25ea"
+      },
+      {
+        "path": "art/reviews/bosses/dongzhuo.png",
+        "bytes": 838019,
+        "sha256": "1bc6050fd4e16bcf394988f80fb66ab7cebc7e40ca5e5b2602c79f405125d3d0"
+      },
+      {
+        "path": "art/reviews/bosses/menghuo.gif",
+        "bytes": 1626351,
+        "sha256": "32d1be75ac13314383c317c186c072e95bdea43b0f556445a5b17c67e359f6e3"
+      },
+      {
+        "path": "art/reviews/bosses/menghuo.png",
+        "bytes": 830617,
+        "sha256": "e53625147e67c39919abe700da7df16db1365fe19adf80bf401b5ce8c4f6f066"
+      },
+      {
+        "path": "art/reviews/bosses/README.md",
+        "bytes": 1469,
+        "sha256": "a1f0bd4b23c8e4182c18f2006ed523cc8e54547ae6232a9fd6a4371d7564f18d"
+      },
+      {
+        "path": "art/reviews/bosses/simayi.gif",
+        "bytes": 1855188,
+        "sha256": "e83841d18abe23023da29779357f482d2388ee49e71d36124e4275744bf14b95"
+      },
+      {
+        "path": "art/reviews/bosses/simayi.png",
+        "bytes": 877259,
+        "sha256": "b8b6ecff47ef943e665af067aeeef7b74ea1f36be2b588f20574edd56d96c2c3"
+      },
+      {
+        "path": "art/reviews/bosses/validation.json",
+        "bytes": 52193,
+        "sha256": "b115b5204b6b533d7f42093cff13e0684442a93770002c8265c6a71ce48f9d36"
+      },
+      {
+        "path": "art/reviews/bosses/wechat-validation.json",
+        "bytes": 301,
+        "sha256": "dcb18b8e63f53835727ae0a035d4bb8a29f4b540696004aa758ec6c157960d4d"
+      },
+      {
+        "path": "art/reviews/bosses/yuanshao.gif",
+        "bytes": 1459676,
+        "sha256": "69bdc1c080c73b3f7fd5b8a9cce89fb0655f2161ca54c082442dae3ea7fa0fa7"
+      },
+      {
+        "path": "art/reviews/bosses/yuanshao.png",
+        "bytes": 811022,
+        "sha256": "eee86246e2ea6f3f9555e23e00686cde215e363e6f7a783c3c2f5a7d504f128c"
+      },
+      {
+        "path": "art/reviews/bosses/zhangjiao.gif",
+        "bytes": 1641690,
+        "sha256": "95e19b7a498c998fa748d05aa3dc50ba2c60f324172b6df94ce2c1d8c79bc399"
+      },
+      {
+        "path": "art/reviews/bosses/zhangjiao.png",
+        "bytes": 833771,
+        "sha256": "2396640751eed9505b2b67aabd1a338a4ba43988dc1381e5f4c3851fa0247273"
+      },
+      {
         "path": "art/reviews/enemy-birth/manifest.json",
         "bytes": 954,
         "sha256": "6bc123c6dc6a64dd7014f7e430829ac15bfd52674c0154372083ecd3f5890912"
@@ -344,6 +509,46 @@
         "sha256": "3881aa0660204fdea8b9e4d7f795bde9bc6914f7b7a68ded4a5a2b5dbc800c9f"
       },
       {
+        "path": "art/reviews/lvbu/README.md",
+        "bytes": 1405,
+        "sha256": "886f37136c66d735391bc604a6d2facb172ba5bb4684bbba6ae102632fa8bda8"
+      },
+      {
+        "path": "art/reviews/lvbu/validation.json",
+        "bytes": 8520,
+        "sha256": "aad0399a0ad5c477ab76d1c0951e3bc8fdaea4b7905e773fcd2b099ad380a689"
+      },
+      {
+        "path": "art/reviews/lvbu/wechat-validation.json",
+        "bytes": 332,
+        "sha256": "3313ac268ee04ec8c23495c92b3784958175245ce7c1b9792a8ad5864d1b2887"
+      },
+      {
+        "path": "art/reviews/lvbu/技能实装总览.png",
+        "bytes": 1113330,
+        "sha256": "0a0255b451713f9867b8f7cbc8446904f9231736ff88c04d795d2463e3694b1f"
+      },
+      {
+        "path": "art/reviews/lvbu/无双三连冲.gif",
+        "bytes": 1071716,
+        "sha256": "15103649b0acef4e11de116050d0abc86b88c88414ca130609694d2153f06076"
+      },
+      {
+        "path": "art/reviews/lvbu/画戟回旋.gif",
+        "bytes": 613849,
+        "sha256": "4e5f4f047248a0964edfde07a531de16521d9da34936e1270b73ea7b45b6ac0d"
+      },
+      {
+        "path": "art/reviews/lvbu/赤兔破军.gif",
+        "bytes": 565015,
+        "sha256": "81ccb5bd807088a2a6b9c1080cb48f236e494628358d0c30cb938acd89123347"
+      },
+      {
+        "path": "art/reviews/lvbu/骑马小跑.gif",
+        "bytes": 440172,
+        "sha256": "a6ba3cc1ae4a54d4c81d88b6a655f46fcc54c6e57dd251e82c475e767e643c2b"
+      },
+      {
         "path": "art/reviews/performance-v4.3/cached-art-fixture.jpg",
         "bytes": 80549,
         "sha256": "334495f5567bf0f1b06e573cb57b209b235c5c992097c033d27fc15516142cbd"
@@ -352,6 +557,26 @@
         "path": "art/reviews/performance-v4.3/manifest.json",
         "bytes": 286,
         "sha256": "a1660cfa021682a61c4c08c2f77abcb6ac57988018eef03e9e725a4db1a1cdad"
+      },
+      {
+        "path": "art/reviews/skills-v6/README.md",
+        "bytes": 1460,
+        "sha256": "befe7d054b9c66fbfbdb458cbfd087416572f6b69a8ccb1b5f61dbecd7ca9de6"
+      },
+      {
+        "path": "art/reviews/skills-v6/validation.json",
+        "bytes": 4631,
+        "sha256": "79fd065b892848e0274491d99b0eab71478c4fb544431c0fe4d93ab8800034ab"
+      },
+      {
+        "path": "art/reviews/skills-v6/实装总览.png",
+        "bytes": 919235,
+        "sha256": "8b98c7d81b6a49c7e5298ce1c605472f998826e0fb7cf6470524842d42858839"
+      },
+      {
+        "path": "art/reviews/skills-v6/重点技能.gif",
+        "bytes": 2072456,
+        "sha256": "88a0b5982eb580b3c49eac9c1570461cd01c098c1b776127c906f7f269b44c80"
       },
       {
         "path": "art/reviews/training/battle-wechat.jpg",
@@ -432,6 +657,91 @@
         "path": "art/reviews/ui-layout/weapon-manage-wechat.jpg",
         "bytes": 45685,
         "sha256": "38094e993d2c5d44068565c67636a2cb048336334f2811dd42c3976d2856c666"
+      },
+      {
+        "path": "art/runtime-bosses/alpha-edits.json",
+        "bytes": 1933,
+        "sha256": "749fa4155c8a7f8569530c2d467f0915968310d95d9c5db57f3267dde81dcea7"
+      },
+      {
+        "path": "art/runtime-bosses/beasts-source.png",
+        "bytes": 2352287,
+        "sha256": "6b4a5ca73abf1ee43fa06337f7a4aa3f9a76f3ca1591deff2dd3ed42e7e21119"
+      },
+      {
+        "path": "art/runtime-bosses/caocao-source.png",
+        "bytes": 1629810,
+        "sha256": "2cb953e627a6734d967a15a13a64e0f30a44cb468e7f82983fab9d72e3f6bb63"
+      },
+      {
+        "path": "art/runtime-bosses/dongzhuo-source.png",
+        "bytes": 1819060,
+        "sha256": "307db56ae8b10b6ea4d98f0728558e82068770985f8317d22bcd284b73ab0929"
+      },
+      {
+        "path": "art/runtime-bosses/manifest.json",
+        "bytes": 58737,
+        "sha256": "56de89ad2b7d286d18d83a659a7b4f209d7a4aedd2b79ce3da7c840f38bbc9f8"
+      },
+      {
+        "path": "art/runtime-bosses/menghuo-source.png",
+        "bytes": 1735767,
+        "sha256": "f66b417c44ea9bddbb5b416cfad5b6c9fd23a3a6ed3611ea4b86e9ca0cfc5e07"
+      },
+      {
+        "path": "art/runtime-bosses/prompts.json",
+        "bytes": 23962,
+        "sha256": "d03366a21c2c313233e4a837266861a28820bf98e747c69098f150c64e650c88"
+      },
+      {
+        "path": "art/runtime-bosses/props-source.png",
+        "bytes": 2129024,
+        "sha256": "07c5687549f249c7cd6eec35d74278c4807fff07baafea7c64ed991c6669ea71"
+      },
+      {
+        "path": "art/runtime-bosses/rider-prompt.json",
+        "bytes": 1473,
+        "sha256": "97192a5f828603f78753ccafa6cb357f5ced54d6cc093268e4c3df632eb9183a"
+      },
+      {
+        "path": "art/runtime-bosses/rider-source.png",
+        "bytes": 1036774,
+        "sha256": "4cf9dd5f2f501298dfe097455306a45c8ec6b65689d3866b0bd7d609dbd5e28b"
+      },
+      {
+        "path": "art/runtime-bosses/simayi-source.png",
+        "bytes": 1574818,
+        "sha256": "59a2e92474656ae8d07a10f2df596314009b8ebed2b81d8d304c8d1ad26c86c2"
+      },
+      {
+        "path": "art/runtime-bosses/yuanshao-source.png",
+        "bytes": 1738839,
+        "sha256": "e6d93426cd6f1254c7d1aeca392ccd52b4f2f1d8a6b4d85d94650cdadbe97e47"
+      },
+      {
+        "path": "art/runtime-bosses/zhangjiao-source.png",
+        "bytes": 1768223,
+        "sha256": "274ee9ad5a2a28491d70e0352cdcf77b91a8fed8a1cb82ca48999c9b28968738"
+      },
+      {
+        "path": "art/runtime-lvbu/manifest.json",
+        "bytes": 9310,
+        "sha256": "bd72ed5b6ab2c006e0789fdf960a85ff2dcb92f34cbb2471b2d8629592b950a2"
+      },
+      {
+        "path": "art/runtime-lvbu/prompt.json",
+        "bytes": 3551,
+        "sha256": "17559efc3cbca0243eef6278ee044969970f7730899aa5d0d61abbe84d354004"
+      },
+      {
+        "path": "art/runtime-lvbu/source.png",
+        "bytes": 1502980,
+        "sha256": "c64322fd93c86a88dc68c04a2df34e9c2ebb1ae2c3ff1b939e0bb464c77ab29c"
+      },
+      {
+        "path": "art/runtime-lvbu/trot-source.png",
+        "bytes": 1384131,
+        "sha256": "7f8d0b5af3ee8fff95d0498555166b0b54b92692f82801bd8a5f4b0ec220cad7"
       },
       {
         "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
@@ -630,8 +940,8 @@
       },
       {
         "path": "art/runtime-v4/manifest.json",
-        "bytes": 37625,
-        "sha256": "4d85530df72c400aa723453f7f4d2948fa441403ada61cd9066ade9375cc623c"
+        "bytes": 32844,
+        "sha256": "fdc039a4ef029bff5293b61ea7086f9ff46242fc0cdae07b099708cdbf13e504"
       },
       {
         "path": "art/runtime-v4/prompts.json",
@@ -954,24 +1264,94 @@
         "sha256": "2e3a866eb7a10030197deec10c6b820a45e6624e70ef7b671af331939a59118d"
       },
       {
-        "path": "assets/chronicle-units/boss-mounts.png",
-        "bytes": 171955,
-        "sha256": "e91e1e8c0f3b7cc17ba54d39c4089afef67045669ba9aa06d75be7f429f7367c"
+        "path": "assets/chronicle-units/boss-beasts.png",
+        "bytes": 147272,
+        "sha256": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26"
       },
       {
-        "path": "assets/chronicle-units/boss-mounts.png.meta",
+        "path": "assets/chronicle-units/boss-beasts.png.meta",
         "bytes": 995,
-        "sha256": "cadf5c5fadd27582be39f352bcdaa5f6a5a4b0a3fe70149ad23322f4f29aa54e"
+        "sha256": "a0412a270b3b4c1a0863f0b801837de399a0e0a7b7f46e878f7f762d79546100"
       },
       {
-        "path": "assets/chronicle-units/bosses.png",
-        "bytes": 394948,
-        "sha256": "16650b98ed0a93c943f64a1cd67a676302d7dea60fe096e53db55ac53e12a335"
+        "path": "assets/chronicle-units/boss-caocao-actions.png",
+        "bytes": 92433,
+        "sha256": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc"
       },
       {
-        "path": "assets/chronicle-units/bosses.png.meta",
-        "bytes": 990,
-        "sha256": "30d7557bf813464dfde982b34ee185dc6bdd0d88fb3813576124be9f99b1ceff"
+        "path": "assets/chronicle-units/boss-caocao-actions.png.meta",
+        "bytes": 1003,
+        "sha256": "2b1642d23e7ed11f0e7f004739f3326c5acfa4f23b16017f63442f9b3c1f3ba5"
+      },
+      {
+        "path": "assets/chronicle-units/boss-dongzhuo-actions.png",
+        "bytes": 142650,
+        "sha256": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c"
+      },
+      {
+        "path": "assets/chronicle-units/boss-dongzhuo-actions.png.meta",
+        "bytes": 1005,
+        "sha256": "1202fc2ede8b75971d928661364f4dccc6def9a2f0d87024890dc1f3c2707aa6"
+      },
+      {
+        "path": "assets/chronicle-units/boss-menghuo-actions.png",
+        "bytes": 140643,
+        "sha256": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483"
+      },
+      {
+        "path": "assets/chronicle-units/boss-menghuo-actions.png.meta",
+        "bytes": 1004,
+        "sha256": "85c37a8c373e827072a282ff04673f7c1f292997c4fab422b557f2fa4bf47f46"
+      },
+      {
+        "path": "assets/chronicle-units/boss-props.png",
+        "bytes": 101833,
+        "sha256": "9ac52c9e729fc60c2db42056a8bc2f9366e39c94cfe8425f0db986fe8e7732ed"
+      },
+      {
+        "path": "assets/chronicle-units/boss-props.png.meta",
+        "bytes": 994,
+        "sha256": "d63973743d69ff81d0f0b347bc243939717311f510eb15da05f96aeab656b558"
+      },
+      {
+        "path": "assets/chronicle-units/boss-simayi-actions.png",
+        "bytes": 119818,
+        "sha256": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7"
+      },
+      {
+        "path": "assets/chronicle-units/boss-simayi-actions.png.meta",
+        "bytes": 1003,
+        "sha256": "b680ec8e9a789988b964fbbb6eb7359d7c0a358cc6bc54a53f45d650d623cedf"
+      },
+      {
+        "path": "assets/chronicle-units/boss-yuanshao-actions.png",
+        "bytes": 115411,
+        "sha256": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704"
+      },
+      {
+        "path": "assets/chronicle-units/boss-yuanshao-actions.png.meta",
+        "bytes": 1005,
+        "sha256": "b10b04c17d1448b79b184717a3ef534757be8a3b1ec028f4dfe9240fb2a098b4"
+      },
+      {
+        "path": "assets/chronicle-units/boss-zhangjiao-actions.png",
+        "bytes": 137646,
+        "sha256": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12"
+      },
+      {
+        "path": "assets/chronicle-units/boss-zhangjiao-actions.png.meta",
+        "bytes": 1006,
+        "sha256": "97176c3fbe54d84e1f539817e2c3dce6854ab0bb5dd86a11ae18c241b548b0ca"
+      },
+      {
+        "path": "assets/chronicle-units/lvbu-actions.png",
+        "bytes": 210967,
+        "sha256": "114f6d1661c501fc3558193f9db78b86254a79786ed8e0658ebd38b9229f444c"
+      },
+      {
+        "path": "assets/chronicle-units/lvbu-actions.png.meta",
+        "bytes": 996,
+        "sha256": "d1ab23347c0c627a013f60bbae1d7a1aacca005c3ebc0c0fb797c9ab53fefdec"
       },
       {
         "path": "assets/chronicle-units/troops-a-back.png",
@@ -1220,13 +1600,43 @@
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts",
-        "bytes": 6848,
-        "sha256": "6d9e73499ad3eda175992dd1dfe97881ea2337cbf108a403355c1cf44d8ce156"
+        "bytes": 7248,
+        "sha256": "3762183a4236f9ce4122d6ebacc68f95306c528cf06f24a845a250b215a90d2f"
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts.meta",
         "bytes": 171,
         "sha256": "c6de681468aee589b2b8b69dffc4cade75d6e7acdd63a630dae640e1cb46a942"
+      },
+      {
+        "path": "assets/scripts/boss-battle.ts",
+        "bytes": 16877,
+        "sha256": "b2b0b755da39cc48e66b406adde172254a88167e3c0cbd589678b7ca3164a1bf"
+      },
+      {
+        "path": "assets/scripts/boss-battle.ts.meta",
+        "bytes": 171,
+        "sha256": "73599a9ce52e28a15ec0e839fe154bbba644cf820d2f0b8ee52cc5c67cc1c8c2"
+      },
+      {
+        "path": "assets/scripts/boss-effects.ts",
+        "bytes": 11311,
+        "sha256": "27f91024ddc6f6631eca8c5dfcc0e70c4419f1a820b8400d70881c088597d5e8"
+      },
+      {
+        "path": "assets/scripts/boss-effects.ts.meta",
+        "bytes": 171,
+        "sha256": "0d9a3747255e211c21543bf0beea87d3ef1d8635f0ad78a60e14c96055d2ded3"
+      },
+      {
+        "path": "assets/scripts/boss-roster.ts",
+        "bytes": 3361,
+        "sha256": "c955eb63fcddd95461003c27c8b8e14003e147ed949d65645621d7599282f37e"
+      },
+      {
+        "path": "assets/scripts/boss-roster.ts.meta",
+        "bytes": 171,
+        "sha256": "0213a5ecef68169fa950196b169a4125434ad3663bf16acb04a8d645266ad113"
       },
       {
         "path": "assets/scripts/camp-presenter.ts",
@@ -1260,8 +1670,8 @@
       },
       {
         "path": "assets/scripts/chronicle-art.ts",
-        "bytes": 2065,
-        "sha256": "347891dcf877ede42c62700a2be2dad920f4f0406d31425f2b71e59fc1d65158"
+        "bytes": 2404,
+        "sha256": "172b263c9dc51a9fd91d8b54c63156bbb19b28a5343d6c398ffc5291a609d112"
       },
       {
         "path": "assets/scripts/chronicle-art.ts.meta",
@@ -1270,8 +1680,8 @@
       },
       {
         "path": "assets/scripts/chronicle-save.ts",
-        "bytes": 1770,
-        "sha256": "475d8bc9acf702d088a39e12adacc6c2d38a78eae0bdce6429423c072d09a711"
+        "bytes": 1817,
+        "sha256": "ab9a607fbe4c90cef3ed6e807284515fe6aa45c2c7835e2ff7fba3c360240758"
       },
       {
         "path": "assets/scripts/chronicle-save.ts.meta",
@@ -1280,8 +1690,8 @@
       },
       {
         "path": "assets/scripts/chronicles-data.ts",
-        "bytes": 34407,
-        "sha256": "edb421ede183c4e0dba2a81d5f12d672788afb8b1f300931b07ab7ffb1cb6336"
+        "bytes": 25424,
+        "sha256": "a22c99fadeb5a6cad49c5958b4c5d5cd1e20ef41cc7cd895aec9b5648fdabdad"
       },
       {
         "path": "assets/scripts/chronicles-data.ts.meta",
@@ -1290,8 +1700,8 @@
       },
       {
         "path": "assets/scripts/chronicles.ts",
-        "bytes": 5536,
-        "sha256": "52d00943f4466a891a9dee00d25c24c3dad0445d2fc4dd9d08b74ccabf2d4f7d"
+        "bytes": 2599,
+        "sha256": "ec0592880dd79c14fad07ff48cd1749f67ae0635c4c8d8d5d31714b44ded360c"
       },
       {
         "path": "assets/scripts/chronicles.ts.meta",
@@ -1300,8 +1710,8 @@
       },
       {
         "path": "assets/scripts/CodexView.ts",
-        "bytes": 9888,
-        "sha256": "411cd183f99abd0993036df56d4dc74e0a3e901ebe9fed405069f4711a177cf2"
+        "bytes": 9939,
+        "sha256": "3a9a4c3602fec5c69a1a66790a124678caec6586e4171325633ad7b678491215"
       },
       {
         "path": "assets/scripts/CodexView.ts.meta",
@@ -1310,8 +1720,8 @@
       },
       {
         "path": "assets/scripts/combat-effects.ts",
-        "bytes": 19355,
-        "sha256": "efb7880d23b117dc7622af89cf722ab43ea7d7b502d149f7d0de30af6804dacb"
+        "bytes": 19390,
+        "sha256": "9b33425a72d43625e125150f51105c0882bb4c2c39de0fc78c617f8cf6e7ec1e"
       },
       {
         "path": "assets/scripts/combat-effects.ts.meta",
@@ -1350,8 +1760,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillEffects.ts",
-        "bytes": 8539,
-        "sha256": "ca223cee45f67e7c2b8a8d853c3cf471454782b1dc8bdd7a521d5a14cd7594e1"
+        "bytes": 6589,
+        "sha256": "ef496d975476c499278bf2bb6e40884ad7c2d8af6b4c6c98cd74f2e7db36e472"
       },
       {
         "path": "assets/scripts/CommonSkillEffects.ts.meta",
@@ -1360,8 +1770,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 14115,
-        "sha256": "f3369fe618b117f585e36dee5abea87e125f2c5639f112fda5d3c976072fbb06"
+        "bytes": 13459,
+        "sha256": "44bccf0e7ed1d702adfb506417e6f6f30c411bc596eb5bc5c4617bf27f724bde"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -1400,8 +1810,8 @@
       },
       {
         "path": "assets/scripts/extra-weapons.ts",
-        "bytes": 15822,
-        "sha256": "1275f1d9b0b466857a88f9a32c177e08d050647dec289560f149756b0abf60c5"
+        "bytes": 15814,
+        "sha256": "338eea09c298af2e3516587850a3b687ed6d555a0175a544a62afb642fbcacfc"
       },
       {
         "path": "assets/scripts/extra-weapons.ts.meta",
@@ -1420,8 +1830,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 174420,
-        "sha256": "ceae29b57cd6ede85275f7cf3d2c3358289bc6a826b8476ceae8272dba040e97"
+        "bytes": 180651,
+        "sha256": "763dfba71d5b4dd8bb22cf4d8832f36052caf6e1c96ce12fbe79a7e95eb0f64d"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -1470,13 +1880,33 @@
       },
       {
         "path": "assets/scripts/LoadingView.ts",
-        "bytes": 3017,
-        "sha256": "3aed945d8de3ee89a2698537a09854b9bb9d2688038e7b7b13f63dba4e895cf8"
+        "bytes": 3578,
+        "sha256": "b39de111a832a7c8ccb02994a6a413c3d7c59b927b0f89deb6c6d19314a68efe"
       },
       {
         "path": "assets/scripts/LoadingView.ts.meta",
         "bytes": 171,
         "sha256": "811ab4ec7d7d40ac5e630be7fbf8c47fbffae73c8230ab9526115c3b6f2daf13"
+      },
+      {
+        "path": "assets/scripts/lvbu-boss.ts",
+        "bytes": 7060,
+        "sha256": "4a626fa60a09b4a4642a51b039841593434c18cdda9718e9561266b745d6325c"
+      },
+      {
+        "path": "assets/scripts/lvbu-boss.ts.meta",
+        "bytes": 171,
+        "sha256": "55b05f4cb42ee45e6e53109349d268dbc49e6c884868d22b79c60c8b03a834d6"
+      },
+      {
+        "path": "assets/scripts/lvbu-effects.ts",
+        "bytes": 7324,
+        "sha256": "e30da9ce0baa4a9a8b3cc717bb93210103372c241ef60b8d2841ca6e59f13e53"
+      },
+      {
+        "path": "assets/scripts/lvbu-effects.ts.meta",
+        "bytes": 171,
+        "sha256": "b16ebb7642b9a1df2754416c6a62b039ef4d59cb0f6fbabdb3d1d2fa681f4e16"
       },
       {
         "path": "assets/scripts/ParticleSprites.ts",
@@ -1510,8 +1940,8 @@
       },
       {
         "path": "assets/scripts/ResultView.ts",
-        "bytes": 9746,
-        "sha256": "15bf7245532ea692368d467c1dc78813b89c060bfd8bcc8e192a648d0d5ce336"
+        "bytes": 9801,
+        "sha256": "667b9d6e3391e4325c66079f3350ce1ec7d16e9fbc693de303d6f50ba5db1714"
       },
       {
         "path": "assets/scripts/ResultView.ts.meta",
@@ -1530,8 +1960,8 @@
       },
       {
         "path": "assets/scripts/skill-vfx-art.ts",
-        "bytes": 16241,
-        "sha256": "4d6f070827a45f3a20c0338dd21837b232bfade60bfd6102e7df628cc708f3ca"
+        "bytes": 14582,
+        "sha256": "82e8ebb831badc4f7f05dffc6627d8e6ee01a9b88bdeb8c54c1e6a384725a1d5"
       },
       {
         "path": "assets/scripts/skill-vfx-art.ts.meta",
@@ -1540,8 +1970,8 @@
       },
       {
         "path": "assets/scripts/SkillSelectView.ts",
-        "bytes": 4316,
-        "sha256": "feaa5d99ed621d884b32b8c0861dc4e0135e2244ac2486d543d75eca7c59c3a9"
+        "bytes": 4453,
+        "sha256": "1dd0f718f7ff3f707bb8580752c15db1e0dd5496852c30d703029b8e31f1d728"
       },
       {
         "path": "assets/scripts/SkillSelectView.ts.meta",
@@ -1560,8 +1990,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 13079,
-        "sha256": "611ef9c8fbff93f926071578365c1ac7b63ddaa2cdf467501b7778ce891fa02e"
+        "bytes": 13081,
+        "sha256": "07aed3ab491b174daf014960cb9a0daaf9595ccaa3cae50aab67912c4e0d1ff0"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -1580,8 +2010,8 @@
       },
       {
         "path": "assets/scripts/TrainingView.ts",
-        "bytes": 10135,
-        "sha256": "5d827fd9fd1d0517758dc042f125ac9056f45159e562e46d3c8a1c4d1236672b"
+        "bytes": 10114,
+        "sha256": "97c684a1184cfa9172a551ecc35e637066757a515ce0509967ca96a5c56c2b3c"
       },
       {
         "path": "assets/scripts/TrainingView.ts.meta",
@@ -1770,53 +2200,53 @@
       },
       {
         "path": "docs/chronicle-balance.json",
-        "bytes": 3761,
-        "sha256": "c6a2a75947bdc98b94a4bccb6ae7667c5643f825a55c519e89c61a7e0aa6e466"
+        "bytes": 1974,
+        "sha256": "72ced9a3f4f7bcb8dc8b296f77f9fa57ad8312ca16f85681f2fd3b6a5ecdfd93"
       },
       {
         "path": "docs/common-skills.md",
-        "bytes": 5313,
-        "sha256": "b1bbb50be27b6772bf7e8666c45f31822cee2d975be32d5d0b30e8860a7c2aac"
+        "bytes": 6122,
+        "sha256": "b2014507e9c622f4434f45dc2beb5d320eadcd121c7c4e9503b00097585def1e"
       },
       {
         "path": "docs/design/01-campaign-and-bosses.md",
-        "bytes": 18699,
-        "sha256": "bc12010bf5602f28756600fce9cd3221f237f3de851ed444f1c4e0e2b5d9cb98"
+        "bytes": 10188,
+        "sha256": "55a5cefadc1b9f0b9a8a0b71e79e4c3bdc70bd30f1843798688d88d33e49d791"
       },
       {
         "path": "docs/design/02-enemy-codex.md",
-        "bytes": 13582,
-        "sha256": "ea1b23296aaa514bd941a28fa6dd98b92825c380fa2e7d1945308fa03d0d6ab1"
+        "bytes": 12104,
+        "sha256": "424bb2fc8d112978df81b149620417667785ebf5e985e96c4b77143986657b5e"
       },
       {
         "path": "docs/design/03-weapon-codex.md",
-        "bytes": 20313,
-        "sha256": "c0b7f3a4732d3d27c7299b467c793a328ecc26f9c6bc16a59edb899c2b22fc0c"
+        "bytes": 20431,
+        "sha256": "bfa004deec35b6035b7d1188a10454544a873403c215a284a38c55a0f1213207"
       },
       {
         "path": "docs/design/04-heroes-and-skills.md",
         "bytes": 2450,
-        "sha256": "d77de56ffdc21fab6b98a7fa423a513ce4e4c0ba804e16a00bdab0ecc2fa80db"
+        "sha256": "5fd22adf1d574cd3df88ed4827860d106dfd03fffd39b9591940b637f2a1adb8"
       },
       {
         "path": "docs/design/05-ui-production-and-balance.md",
-        "bytes": 15025,
-        "sha256": "e2dddbda88a4c2b313fe69b70378c1e029930106ba6a848b8d6f1202bf570255"
+        "bytes": 15003,
+        "sha256": "f98226231b3a601a24cc5e54252cf616aac4a4ea721a012714ff8d8768b48878"
       },
       {
         "path": "docs/design/06-sources-and-decisions.md",
         "bytes": 6809,
-        "sha256": "c9c6953c13ab8e8ff974922b05e218054dc8d497b7f7ee8e916f4fd7213b2fb1"
+        "sha256": "90fb69f7f3ada19b0e42fbceb9fd2c7355a0e7fce6a6c244b382dfc9ff69b080"
       },
       {
         "path": "docs/design/07-implementation-and-validation.md",
-        "bytes": 2829,
-        "sha256": "191aecf60dccbbaa445140cf28db4fe5af2f8019dd05df220e2bf8aab151fa11"
+        "bytes": 3122,
+        "sha256": "e2f598b88660c01d7eedac5cd115e0975c84a2201a92225807b2a0cd12162168"
       },
       {
         "path": "docs/design/README.md",
-        "bytes": 4430,
-        "sha256": "c5a709edb78acc022228a9802f712fff1a4975111bde41a0321e518aa87db67b"
+        "bytes": 3845,
+        "sha256": "40fdf32cc13cb29df03d4b2cc7a4e92ea0c93fd2a1af63d0167904beb63f02c0"
       },
       {
         "path": "docs/golden-sweep-v5.1-validation.json",
@@ -1829,9 +2259,14 @@
         "sha256": "cc601b8e655d8cf51075d01c69b3e955b55b4f699c4880a33ec3a4a0701b6e68"
       },
       {
+        "path": "docs/lvbu-red-hare.md",
+        "bytes": 6166,
+        "sha256": "77396355a275b20965e7d0c5a92a5a5ef7573ef83f56f80287f7fa3724926c33"
+      },
+      {
         "path": "docs/performance-node.json",
-        "bytes": 1337,
-        "sha256": "3d7a64fcae04db98d14e18255586fe9c65cf71b9a1c6d0712f5edc30f1df34ea"
+        "bytes": 1338,
+        "sha256": "060088b234f79976904090b37f1800899acf325660b69c8912c832237b85ba89"
       },
       {
         "path": "docs/performance-wechat-baseline.json",
@@ -1840,8 +2275,13 @@
       },
       {
         "path": "docs/resources.md",
-        "bytes": 1968,
-        "sha256": "72b026c5720a175829337b877ba4a5e10ec12c1dc0deb2bcd5f9aca2e33b0254"
+        "bytes": 2265,
+        "sha256": "d32094678d626c9a0368d2a65199beafb9d8d5c091ab0e7e926b7cafe2e052db"
+      },
+      {
+        "path": "docs/seven-bosses.md",
+        "bytes": 6852,
+        "sha256": "ee5d98dea92a92f125f04d819cfd2346133dce98a5ae50c9108a78f7fd7d43c0"
       },
       {
         "path": "docs/skill-review/feishu-document.json",
@@ -1850,18 +2290,18 @@
       },
       {
         "path": "docs/skill-review/README.md",
-        "bytes": 9267,
-        "sha256": "b95aded1ec0757aaeff096ebf8a141d205e79df84d8730c07dbb64748dbbbac9"
+        "bytes": 4198,
+        "sha256": "d4b501403df0b3d9af3fb821137569b0eecc3bdb75399d985b222f47e2aa0ea2"
       },
       {
         "path": "docs/skill-review/skills.json",
-        "bytes": 20150,
-        "sha256": "464a80eb3877c127792c6a5b597d5404a056d92980e2e35bde496681c111c9d7"
+        "bytes": 9631,
+        "sha256": "7c6fbfdaa0444188039e4a91080e73a63c07dafd4ed1b720783f6b6ead2d5ab4"
       },
       {
         "path": "docs/skill-review/技能总览.png",
-        "bytes": 2374122,
-        "sha256": "18cb2886a2cf0447f7374d05f9abab52e89a124eb6f8821354f648c8480dfbed"
+        "bytes": 1276811,
+        "sha256": "4eb0fcdcb4396b81dd80179dc36e076e2c9d08a31ae260d07c38a35dc3609216"
       },
       {
         "path": "docs/skill-vfx-v5.2.md",
@@ -1880,8 +2320,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 1395,
-        "sha256": "43ac9b7768f8f79b87c5e18cf1dbf801eb5163c84b6c486199825697ffaf9ddc"
+        "bytes": 1495,
+        "sha256": "6f2527e85cdd58434d047af16c1718b772e8c0f5ea088b7532a95dd25caa551f"
       },
       {
         "path": "project.config.json",
@@ -1890,13 +2330,33 @@
       },
       {
         "path": "README.md",
-        "bytes": 6428,
-        "sha256": "ba0b4b22f94be3ae2efcda9812ac5f6ea1fcd6081b814878abc42d3aa82cdbe9"
+        "bytes": 6714,
+        "sha256": "9d1985bc663ee25ff01038db6975424aaecbb4e2b824b44cb3161811747c0eca"
       },
       {
         "path": "scripts/build-wechat.cjs",
         "bytes": 2071,
         "sha256": "e416ee1f6a2d5565aeb1259bcfc27e8f82d8c51fb4e49c52d9fc70424ea55ce3"
+      },
+      {
+        "path": "scripts/capture-bosses-review.mjs",
+        "bytes": 5804,
+        "sha256": "46c47220509eb9f68639cb7bf5e58129723089f5dac18e3a250661a986e84ec0"
+      },
+      {
+        "path": "scripts/capture-lvbu-review.mjs",
+        "bytes": 5734,
+        "sha256": "315bffa0af573b24a6e38ea5ef9dc476c17743fb8fefeed6b31f1b0149d439f8"
+      },
+      {
+        "path": "scripts/capture-lvbu-wechat.cjs",
+        "bytes": 3145,
+        "sha256": "3e0c5e25d8793c68609f12d393b39509f89a7bd44eb0465d4043a18c066e367a"
+      },
+      {
+        "path": "scripts/capture-skill-review.mjs",
+        "bytes": 6005,
+        "sha256": "a7b315eac3c6199903decd23e60e31787269155feebf48e84883f3cfa0acb157"
       },
       {
         "path": "scripts/check-engine-imports.cjs",
@@ -1905,8 +2365,8 @@
       },
       {
         "path": "scripts/check-package-size.cjs",
-        "bytes": 3250,
-        "sha256": "57cdb635dd4b836ee724f6d746834c5fde79f8e65fbca8ae314ab1c2fb92eaa7"
+        "bytes": 3256,
+        "sha256": "85ff26f4f85aa845673a73bc629914495d542477d84ff624932265eeae7c0ca2"
       },
       {
         "path": "scripts/check.cjs",
@@ -1924,14 +2384,24 @@
         "sha256": "c2c59103483cbf497764751a2e029d699356f2156e5120034cdbd71a6abdb875"
       },
       {
+        "path": "scripts/fixtures/bosses-review.js",
+        "bytes": 3215,
+        "sha256": "65dc5b2970a149d9493f8fb6ac6210ff0f6b5b3814d10ad574c84d64140094fb"
+      },
+      {
         "path": "scripts/fixtures/browser-skill-vfx-review.js",
-        "bytes": 3465,
-        "sha256": "c56fee8b323e43a951f2f5f0830dd497d529b382d251197f3677390d603ae356"
+        "bytes": 3338,
+        "sha256": "930865b5b6f16eecf69eb153d0f03b7719e0d7c0076a36147ba22c75e6b14a1e"
+      },
+      {
+        "path": "scripts/fixtures/lvbu-review.js",
+        "bytes": 3456,
+        "sha256": "c1f35cc2d4f508d4f72fc1cc60a247db651dc8e1d435af30fc122032ae0e2009"
       },
       {
         "path": "scripts/fixtures/skill-vfx-baseline.json",
-        "bytes": 320,
-        "sha256": "c4a339397b19886f84675c66919117de2e9c1299aa20d5291e09d39adf738f29"
+        "bytes": 647,
+        "sha256": "fa2c5f703480eaff54d6c7374cb6fd5db1ccc2898948f9eb912a711ba565c80d"
       },
       {
         "path": "scripts/fixtures/wechat-cached-art-review.js",
@@ -1941,17 +2411,17 @@
       {
         "path": "scripts/fixtures/wechat-common-skills-review.js",
         "bytes": 2698,
-        "sha256": "e9445ed3ebd1faca31bdccd12a161aff72489d7fa752ca5211b34bed5f33a6e0"
+        "sha256": "d758944a1436c529ca96a55c7abc0f2a2dcce4979e8e0c4820c997d3dc1ffd71"
       },
       {
         "path": "scripts/fixtures/wechat-enemy-birth-review.js",
         "bytes": 2767,
-        "sha256": "33d50a208af39b71587ba4f6b46c6193dc3bd9d59533c219420270c69a170476"
+        "sha256": "c4aa5a4e865775d0c1a37a187d1889941779103b92804251d4b88e23800a5719"
       },
       {
         "path": "scripts/fixtures/wechat-golden-sweep-review.js",
         "bytes": 2913,
-        "sha256": "d4cc9e81f9accae49f4aa57b5505580855c078b9018c934108a46859bbf8b4cc"
+        "sha256": "535c6ed01192b6e0711a69cd4d4547d1db7272f6ce5934192475bc64b726ba3e"
       },
       {
         "path": "scripts/fixtures/wechat-render-pressure.js",
@@ -1961,7 +2431,7 @@
       {
         "path": "scripts/fixtures/wechat-ui-layout-review.js",
         "bytes": 2198,
-        "sha256": "4cc1114f2ee5aecc3abfcb9f1aff6dd5d0843799c2d878b8158e047088ad0866"
+        "sha256": "552d2da6c4488841b975cedb4477ec78ea6be9d1638604ff430038664fe93440"
       },
       {
         "path": "scripts/optimize-textures.cjs",
@@ -1969,9 +2439,19 @@
         "sha256": "84513a35f413d55a8278412c89ba6c76a162ebe6e65f050756efd12015bc28c9"
       },
       {
+        "path": "scripts/pack-boss-art.cjs",
+        "bytes": 6184,
+        "sha256": "403eeb0d61f1f173248f23f3f245c5354fd051d86cf5ec45ce9d335e789514fb"
+      },
+      {
         "path": "scripts/pack-chronicle-art.cjs",
-        "bytes": 3820,
-        "sha256": "cbf18ec4e645468f8d8982122db4477747bfd9fb11f8756113a300f9a738db11"
+        "bytes": 3741,
+        "sha256": "6023a72a0137e6b3fa0b399fea3534252e5c022074fbddf90e427b42dd9ff234"
+      },
+      {
+        "path": "scripts/pack-lvbu-art.cjs",
+        "bytes": 4714,
+        "sha256": "0e0e8f5e0d31f854d621302542428c76917f408bf0ce6e7bda2f7c231736050c"
       },
       {
         "path": "scripts/profile-battle.cjs",
@@ -1980,23 +2460,28 @@
       },
       {
         "path": "scripts/report-chronicle-balance.cjs",
-        "bytes": 4299,
-        "sha256": "6195c7aa42c7ad54b2c68beb74fa60fd8093c5bbe2020dbbf1214d8ac8ac0d1e"
+        "bytes": 4410,
+        "sha256": "54f3d6fbeb348af1f1f04641a6b2421382d148fcbcc8f2dbe4f18df92e1ed442"
       },
       {
         "path": "scripts/review-common-skills.cjs",
-        "bytes": 13502,
-        "sha256": "468aea67b484060791b5886414e4d380f31ebefe250eb2d93e836f9aa05ba17c"
+        "bytes": 10900,
+        "sha256": "64d6866df0b8f4091b3e4ad9e71c4053083850362a5223e2f4f366bd5ea9d796"
+      },
+      {
+        "path": "scripts/test-bosses.cjs",
+        "bytes": 12429,
+        "sha256": "b7a8037e0dcfca0b3d62b25500f194c8d4a76fd2426a682882835a2594f21651"
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 87259,
-        "sha256": "bb7e340394e2d20b1affc169989c55fe6999b096b1c20368aea71cc7da802901"
+        "bytes": 87417,
+        "sha256": "7707a26e35c6b552e1820d35bd8e5cb1f9ab08b2ad59c87d5b7b920913354144"
       },
       {
         "path": "scripts/test-chronicles.cjs",
-        "bytes": 12417,
-        "sha256": "7930b16131a6fd818916cf68972b6d0bc3a4c0210521aca819a5f47240a6f48d"
+        "bytes": 11915,
+        "sha256": "9981c4c53867de3740aceffe229e00fdc656ed8d48dc79d909178096ada54fab"
       },
       {
         "path": "scripts/test-combat-effects.cjs",
@@ -2010,13 +2495,18 @@
       },
       {
         "path": "scripts/test-common-skills.cjs",
-        "bytes": 8872,
-        "sha256": "3af68d839d3ff3a5bcb29f16116dcaa1ea59dedfc8bbe19426f765446dd3b610"
+        "bytes": 9901,
+        "sha256": "f92d501ff7c0473a8017c11814048d3e15aa179f9f07f3655fbbf3e5f5822ff7"
       },
       {
         "path": "scripts/test-enemy-birth.cjs",
-        "bytes": 3129,
-        "sha256": "ca050e9d97bfc8687a6e622ea285446c74106951b022ef5e4a270c16d96533ed"
+        "bytes": 3212,
+        "sha256": "c4fed8b1c5b89a231fdce148858a415e74a54d5ecc12d233f2dc0c8ff441493c"
+      },
+      {
+        "path": "scripts/test-lvbu.cjs",
+        "bytes": 12458,
+        "sha256": "6dbb939c639b900f3b0d13021ead901a754df323d70aedabf72aa81dd40fbbb5"
       },
       {
         "path": "scripts/test-music.cjs",
@@ -2025,13 +2515,13 @@
       },
       {
         "path": "scripts/test-performance.cjs",
-        "bytes": 11128,
-        "sha256": "2afe25026c27b3c72752154bcb242bb76c2a5d6fe81e11f36e2269b837d42a57"
+        "bytes": 11127,
+        "sha256": "2a46d07578c83cda48d3737c356bf71042b6485a25f0e016176f1980e99100d1"
       },
       {
         "path": "scripts/test-presentation-art.cjs",
-        "bytes": 5071,
-        "sha256": "6d5f75bfc697b6e984a1c7429c8f05cc44c5d6de96839c380872bd3f98dd462c"
+        "bytes": 5073,
+        "sha256": "887b9e1224963efa94afbede4434cc020ba60b5883f4083249d732c87ad412e9"
       },
       {
         "path": "scripts/test-result-art.cjs",
@@ -2039,9 +2529,14 @@
         "sha256": "0cf1aba48a08a94ab62ab9a73d1f58b0f2c003265700334fa561646c5a0251e0"
       },
       {
+        "path": "scripts/test-skill-recast.cjs",
+        "bytes": 8625,
+        "sha256": "e5955c3088dbe02d949a9c37e3c8be0449cfac0a8535d23d3a91ce513885fa48"
+      },
+      {
         "path": "scripts/test-skill-vfx.cjs",
-        "bytes": 6351,
-        "sha256": "68cb4253181782067a1e4893b8cb35bc0fece76016f12143b23a6a613c3d743a"
+        "bytes": 4226,
+        "sha256": "949f33a6bc4b57d96744bd7c35f12c754e59b5d4adc1ec782805d333397b9673"
       },
       {
         "path": "scripts/test-startup.cjs",
@@ -2050,8 +2545,8 @@
       },
       {
         "path": "scripts/test-training.cjs",
-        "bytes": 6809,
-        "sha256": "a7c5f1072986c08dd2d29cdc4fa7e3c808ea13dd2430d19b9c5b9d58f1c59b25"
+        "bytes": 8196,
+        "sha256": "82388fbd3c117e6a7cc45547bba76aea3ca54dd1ae0a8f4da86797a64815f01d"
       },
       {
         "path": "scripts/test-ui-layout.cjs",
@@ -2111,9 +2606,9 @@
     "passives": 60,
     "augments": 9,
     "enemyArchetypes": 40,
-    "bossEncounters": 17,
-    "bossPeople": 14,
-    "genericSkills": 24
+    "bossEncounters": 7,
+    "bossPeople": 7,
+    "genericSkills": 12
   },
   "rules": {
     "warmupSeconds": 15,
@@ -5825,7 +6320,7 @@
       "speed": 0,
       "area": 0,
       "price": 42,
-      "unlock": 8,
+      "unlock": 4,
       "pierce": 0,
       "critMultiplier": 1.75,
       "desc": "银枪连刺 · 同组共享命中次数",
@@ -6053,7 +6548,7 @@
       "speed": 0,
       "area": 0,
       "price": 40,
-      "unlock": 8,
+      "unlock": 4,
       "pierce": 0,
       "critMultiplier": 1.75,
       "desc": "剑斩破盾 · 忽略部分减伤",
@@ -6281,7 +6776,7 @@
       "speed": 0,
       "area": 0,
       "price": 48,
-      "unlock": 10,
+      "unlock": 5,
       "pierce": 0,
       "critMultiplier": 1.7,
       "desc": "四击一月牙 · 近斩与刃波",
@@ -6737,7 +7232,7 @@
       "speed": 0,
       "area": 0,
       "price": 44,
-      "unlock": 4,
+      "unlock": 3,
       "pierce": 0,
       "critMultiplier": 1.6,
       "desc": "重斩 · 首击额外伤害",
@@ -6965,7 +7460,7 @@
       "speed": 0,
       "area": 0,
       "price": 44,
-      "unlock": 6,
+      "unlock": 3,
       "pierce": 0,
       "critMultiplier": 1.6,
       "desc": "双戟连续横扫 · 范围全部命中",
@@ -7193,7 +7688,7 @@
       "speed": 0,
       "area": 0,
       "price": 42,
-      "unlock": 4,
+      "unlock": 3,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "三尖横扫 · 高阶侧刃",
@@ -7421,7 +7916,7 @@
       "speed": 320,
       "area": 35,
       "price": 30,
-      "unlock": 5,
+      "unlock": 3,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "自动布陷阱 · 同敌1秒一次",
@@ -7649,7 +8144,7 @@
       "speed": 480,
       "area": 0,
       "price": 40,
-      "unlock": 7,
+      "unlock": 4,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "连弩逐发 · 同敌命中有上限",
@@ -7877,7 +8372,7 @@
       "speed": 600,
       "area": 0,
       "price": 38,
-      "unlock": 11,
+      "unlock": 5,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "强弓扇射 · 同敌每轮一箭",
@@ -8105,7 +8600,7 @@
       "speed": 760,
       "area": 0,
       "price": 44,
-      "unlock": 6,
+      "unlock": 3,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "直线贯穿 · 后续目标85%伤害",
@@ -8333,7 +8828,7 @@
       "speed": 480,
       "area": 0,
       "price": 34,
-      "unlock": 9,
+      "unlock": 4,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "飞出与返回 · 每程各一次",
@@ -8561,7 +9056,7 @@
       "speed": 550,
       "area": 0,
       "price": 36,
-      "unlock": 12,
+      "unlock": 5,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "连钩聚敌 · 不拉入身体",
@@ -8789,7 +9284,7 @@
       "speed": 300,
       "area": 85,
       "price": 34,
-      "unlock": 7,
+      "unlock": 4,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "火油地面 · 同敌共享叠火上限",
@@ -9017,7 +9512,7 @@
       "speed": 340,
       "area": 115,
       "price": 44,
-      "unlock": 13,
+      "unlock": 6,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "范围爆破 · 外圈55%伤害",
@@ -9245,7 +9740,7 @@
       "speed": 380,
       "area": 0,
       "price": 34,
-      "unlock": 7,
+      "unlock": 4,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "风羽扇射 · 同敌每轮一次",
@@ -9710,7 +10205,7 @@
       "speed": 0,
       "area": 0,
       "price": 46,
-      "unlock": 16,
+      "unlock": 6,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "七星灯阵 · 同敌不按灯数叠加",
@@ -9938,7 +10433,7 @@
       "speed": 0,
       "area": 100,
       "price": 44,
-      "unlock": 13,
+      "unlock": 6,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "自动布阵 · 入阵伤害并减速",
@@ -10166,7 +10661,7 @@
       "speed": 500,
       "area": 0,
       "price": 42,
-      "unlock": 15,
+      "unlock": 6,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "木牛自动点射 · 全场随从最多12",
@@ -10394,7 +10889,7 @@
       "speed": 430,
       "area": 0,
       "price": 40,
-      "unlock": 15,
+      "unlock": 6,
       "pierce": 0,
       "critMultiplier": 1.5,
       "desc": "木鸢穿行 · 每只同敌一次",
@@ -16706,7 +17201,7 @@
         "boss": "张角",
         "bossId": "zhangjiao",
         "bossHp": 6082,
-        "bossSpeed": 62,
+        "bossSpeed": 90,
         "referenceDps": 152.05,
         "roster": [
           "E01",
@@ -16728,6 +17223,7 @@
             "kind": "zones",
             "cd": 2.6,
             "windup": 0.85,
+            "description": "锁定落点R76 · 黄符聚能后落雷\n落点不追踪，击中一次",
             "radius": 76,
             "count": 1
           },
@@ -16736,15 +17232,19 @@
             "kind": "zones",
             "cd": 6,
             "windup": 0.85,
+            "description": "三处R70 · 间隔0.45秒依次落雷\n沿同一横列展开，前后可避",
             "radius": 70,
             "count": 3,
-            "delay": 0.16
+            "delay": 0.45
           },
           {
-            "name": "雷势增强",
-            "kind": "enrage",
-            "cd": 2,
-            "windup": 0.85
+            "name": "太平雷狱",
+            "kind": "flag",
+            "cd": 13,
+            "windup": 1,
+            "description": "三枚雷符各84生命 · 存留7秒\n雷链逐条预告0.9秒，可拆符切断",
+            "count": 3,
+            "duration": 7
           }
         ]
       },
@@ -16752,867 +17252,358 @@
         "id": 2,
         "name": "虎牢争锋",
         "volume": 1,
-        "boss": "吕布·虎牢",
+        "boss": "吕布",
         "bossId": "lvbu",
         "bossHp": 14400,
-        "bossSpeed": 120,
+        "bossSpeed": 220,
         "referenceDps": 300,
         "roster": [
           "E01",
-          "E11",
           "E19",
           "E03",
           "E04",
-          "E20"
+          "E20",
+          "E02",
+          "E12",
+          "E13"
         ],
         "enemyHpMultiplier": 1.90712,
         "threatPerSecond": [
-          1.265625,
-          2.53125,
-          2.8125,
-          3.09375
+          1.4175,
+          2.835,
+          3.15,
+          3.465
         ],
-        "bossThreat": 2.390625,
+        "bossThreat": 2.6775,
         "actions": [
           {
-            "name": "辕门戟斩",
-            "kind": "sector",
-            "cd": 4.2,
-            "windup": 0.75,
-            "range": 250,
-            "arc": 180
-          },
-          {
-            "name": "赤兔突进",
+            "name": "赤兔破军",
             "kind": "charge",
-            "cd": 8,
-            "windup": 0.8,
-            "range": 420,
-            "duration": 0.65
+            "cd": 7.2,
+            "windup": 0.9,
+            "range": 480,
+            "duration": 0.7,
+            "count": 1,
+            "description": "刨地0.9秒 · 锁向冲480\n侧闪可躲 · 撞边提前勒马"
           },
           {
-            "name": "横扫回马",
+            "name": "画戟回旋",
             "kind": "sector",
-            "cd": 9,
-            "windup": 0.75,
-            "range": 230,
-            "arc": 120,
-            "gap": 3.141593
+            "cd": 5.2,
+            "windup": 1,
+            "range": 300,
+            "arc": 300,
+            "duration": 0.42,
+            "count": 1,
+            "description": "抬戟1秒 · 半径300/300°\n实体刃轨伤害 · 身后留缺口"
+          },
+          {
+            "name": "无双三连冲",
+            "kind": "charge",
+            "cd": 13,
+            "windup": 0.9,
+            "range": 420,
+            "duration": 0.62,
+            "count": 3,
+            "delay": 0.65,
+            "description": "半血开启 · 三次独立冲420\n首次蓄0.9秒 · 折返各蓄0.65秒"
           }
         ]
       },
       {
         "id": 3,
         "name": "洛阳逐董",
-        "volume": 1,
+        "volume": 2,
         "boss": "董卓",
         "bossId": "dongzhuo",
         "bossHp": 23000,
-        "bossSpeed": 66,
+        "bossSpeed": 100,
         "referenceDps": 460,
         "roster": [
-          "E01",
-          "E04",
-          "E11",
           "E02",
+          "E04",
           "E06",
-          "E09"
+          "E09",
+          "E16",
+          "E30",
+          "E33",
+          "E35"
         ],
         "enemyHpMultiplier": 2.862417,
         "threatPerSecond": [
-          1.40625,
-          2.8125,
-          3.125,
-          3.4375
+          1.71,
+          3.42,
+          3.8,
+          4.18
         ],
-        "bossThreat": 2.65625,
+        "bossThreat": 3.23,
         "actions": [
           {
-            "name": "金印砸地",
+            "name": "金印镇地",
             "kind": "zones",
-            "cd": 4,
-            "windup": 0.9,
-            "radius": 140,
-            "count": 1,
-            "range": 0
-          },
-          {
-            "name": "铜钱四散",
-            "kind": "ring",
-            "cd": 6,
-            "windup": 0.8,
-            "count": 8,
-            "speed": 230,
-            "gap": 0
-          },
-          {
-            "name": "亲卫号令",
-            "kind": "summon",
-            "cd": 10,
-            "windup": 1,
-            "units": [
-              "E04",
-              "E04"
-            ]
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "name": "寿春称帝",
-        "volume": 2,
-        "boss": "袁术",
-        "bossId": "yuanshu",
-        "bossHp": 28080,
-        "bossSpeed": 72,
-        "referenceDps": 650,
-        "roster": [
-          "E02",
-          "E03",
-          "E04",
-          "E08",
-          "E35",
-          "E12"
-        ],
-        "enemyHpMultiplier": 3.975398,
-        "threatPerSecond": [
-          1.546875,
-          3.09375,
-          3.4375,
-          3.78125
-        ],
-        "bossThreat": 2.921875,
-        "actions": [
-          {
-            "name": "玉玺震击",
-            "kind": "zones",
-            "cd": 4.5,
-            "windup": 0.85,
-            "radius": 110,
+            "cd": 5.2,
+            "windup": 1.1,
+            "description": "锁定落点R135 · 1.1秒抬印\n印玺落地才伤害，余尘无伤",
+            "radius": 135,
             "count": 1
           },
           {
-            "name": "僭号令旗",
-            "kind": "flag",
-            "cd": 10,
-            "windup": 0.9,
-            "count": 2
-          },
-          {
-            "name": "连弩点名",
+            "name": "赤铜横财",
             "kind": "shots",
-            "cd": 8,
-            "windup": 1,
-            "count": 9,
-            "speed": 360,
-            "arc": 75
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "name": "白门困兽",
-        "volume": 2,
-        "boss": "吕布·下邳",
-        "bossId": "lvbu",
-        "bossHp": 42500,
-        "bossSpeed": 125,
-        "referenceDps": 850,
-        "roster": [
-          "E03",
-          "E04",
-          "E12",
-          "E16",
-          "E05",
-          "E23"
-        ],
-        "enemyHpMultiplier": 5.129333,
-        "threatPerSecond": [
-          1.6875,
-          3.375,
-          3.75,
-          4.125
-        ],
-        "bossThreat": 3.1875,
-        "actions": [
-          {
-            "name": "画戟三连",
-            "kind": "sector",
-            "cd": 7,
-            "windup": 0.75,
-            "range": 250,
-            "arc": 90,
-            "count": 3,
-            "delay": 0.55
-          },
-          {
-            "name": "赤兔折返",
-            "kind": "charge",
-            "cd": 9,
-            "windup": 0.65,
-            "range": 360,
-            "duration": 0.6,
-            "count": 2
-          },
-          {
-            "name": "困兽怒吼",
-            "kind": "zones",
-            "cd": 10,
-            "windup": 1,
-            "radius": 210,
-            "count": 1,
-            "range": 0
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "name": "官渡争雄",
-        "volume": 2,
-        "boss": "袁绍",
-        "bossId": "yuanshao",
-        "bossHp": 52800,
-        "bossSpeed": 72,
-        "referenceDps": 1100,
-        "roster": [
-          "E04",
-          "E08",
-          "E09",
-          "E35",
-          "E13",
-          "E36"
-        ],
-        "enemyHpMultiplier": 6.552936,
-        "threatPerSecond": [
-          1.828125,
-          3.65625,
-          4.0625,
-          4.46875
-        ],
-        "bossThreat": 3.453125,
-        "actions": [
-          {
-            "name": "四世军威",
-            "kind": "zones",
-            "cd": 6,
-            "windup": 1,
-            "radius": 85,
-            "count": 3
-          },
-          {
-            "name": "左右旗阵",
-            "kind": "flag",
-            "cd": 12,
-            "windup": 1,
-            "count": 2
-          },
-          {
-            "name": "箭阵缺口",
-            "kind": "ring",
-            "cd": 7,
-            "windup": 0.85,
-            "count": 8,
-            "speed": 230,
-            "gap": 90
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "name": "博望燃灯",
-        "volume": 3,
-        "boss": "夏侯惇",
-        "bossId": "xiahoudun",
-        "bossHp": 59400,
-        "bossSpeed": 110,
-        "referenceDps": 1350,
-        "roster": [
-          "E02",
-          "E03",
-          "E11",
-          "E19",
-          "E29",
-          "E30"
-        ],
-        "enemyHpMultiplier": 7.96031,
-        "threatPerSecond": [
-          1.96875,
-          3.9375,
-          4.375,
-          4.8125
-        ],
-        "bossThreat": 3.71875,
-        "actions": [
-          {
-            "name": "独目枪挑",
-            "kind": "sector",
-            "cd": 4,
-            "windup": 0.65,
-            "range": 220,
-            "arc": 100
-          },
-          {
-            "name": "踏火突进",
-            "kind": "charge",
-            "cd": 8,
-            "windup": 0.8,
-            "range": 360,
-            "duration": 0.65
-          },
-          {
-            "name": "火门追击",
-            "kind": "zones",
-            "cd": 9,
-            "windup": 1,
-            "radius": 80,
-            "count": 3,
-            "duration": 1.5
-          }
-        ]
-      },
-      {
-        "id": 8,
-        "name": "长坂突围",
-        "volume": 3,
-        "boss": "曹操·长坂",
-        "bossId": "caocao",
-        "bossHp": 75900,
-        "bossSpeed": 85,
-        "referenceDps": 1650,
-        "roster": [
-          "E03",
-          "E04",
-          "E12",
-          "E20",
-          "E21",
-          "E22"
-        ],
-        "enemyHpMultiplier": 9.632137,
-        "threatPerSecond": [
-          2.109375,
-          4.21875,
-          4.6875,
-          5.15625
-        ],
-        "bossThreat": 3.984375,
-        "actions": [
-          {
-            "name": "虎豹合围",
-            "kind": "summon",
-            "cd": 10,
-            "windup": 1,
-            "units": [
-              "E21",
-              "E21"
-            ]
-          },
-          {
-            "name": "倚天令斩",
-            "kind": "lines",
-            "cd": 5.5,
-            "windup": 0.9,
-            "range": 300,
-            "radius": 38,
-            "count": 3
-          },
-          {
-            "name": "号令变阵",
-            "kind": "summon",
-            "cd": 16,
-            "windup": 1,
-            "units": [
-              "E12",
-              "E03"
-            ]
-          }
-        ]
-      },
-      {
-        "id": 9,
-        "name": "赤壁较艺",
-        "volume": 3,
-        "boss": "周瑜",
-        "bossId": "zhouyu",
-        "bossHp": 86400,
-        "bossSpeed": 105,
-        "referenceDps": 2000,
-        "roster": [
-          "E02",
-          "E05",
-          "E12",
-          "E22",
-          "E17",
-          "E38"
-        ],
-        "enemyHpMultiplier": 11.563556,
-        "threatPerSecond": [
-          2.25,
-          4.5,
-          5,
-          5.5
-        ],
-        "bossThreat": 4.25,
-        "actions": [
-          {
-            "name": "东风扇火",
-            "kind": "sector",
-            "cd": 5,
-            "windup": 0.9,
-            "range": 400,
-            "arc": 120
-          },
-          {
-            "name": "借风火环",
-            "kind": "ring",
-            "cd": 8,
-            "windup": 1,
-            "range": 200,
-            "radius": 48,
-            "gap": 100,
-            "count": 8,
-            "speed": 150
-          },
-          {
-            "name": "连营火点",
-            "kind": "zones",
-            "cd": 10,
-            "windup": 1,
-            "radius": 85,
-            "count": 3,
-            "duration": 1.5
-          }
-        ]
-      },
-      {
-        "id": 10,
-        "name": "赤壁追风",
-        "volume": 3,
-        "boss": "曹操·赤壁",
-        "bossId": "caocao",
-        "bossHp": 110400,
-        "bossSpeed": 100,
-        "referenceDps": 2300,
-        "roster": [
-          "E03",
-          "E04",
-          "E20",
-          "E37",
-          "E14",
-          "E31"
-        ],
-        "enemyHpMultiplier": 13.205485,
-        "threatPerSecond": [
-          2.390625,
-          4.78125,
-          5.3125,
-          5.84375
-        ],
-        "bossThreat": 4.515625,
-        "actions": [
-          {
-            "name": "赤壁余焰",
-            "kind": "sector",
-            "cd": 7,
-            "windup": 1,
-            "range": 330,
-            "arc": 90,
+            "cd": 6.8,
+            "windup": 0.95,
+            "description": "四枚大铜钱错时滚过 · 速度230\n两侧各两枚，中间留160通道",
             "count": 4,
-            "delay": 1
+            "speed": 230
           },
           {
-            "name": "疑兵青影",
-            "kind": "clone",
-            "cd": 12,
-            "windup": 1,
-            "count": 2
-          },
-          {
-            "name": "丞相退路",
-            "kind": "shots",
-            "cd": 6,
-            "windup": 0.9,
-            "count": 3,
-            "speed": 210,
-            "arc": 80
-          }
-        ]
-      },
-      {
-        "id": 11,
-        "name": "长沙试箭",
-        "volume": 4,
-        "boss": "黄忠",
-        "bossId": "huangzhong",
-        "bossHp": 111300,
-        "bossSpeed": 98,
-        "referenceDps": 2650,
-        "roster": [
-          "E02",
-          "E03",
-          "E11",
-          "E12",
-          "E10",
-          "E15"
-        ],
-        "enemyHpMultiplier": 15.107635,
-        "threatPerSecond": [
-          2.53125,
-          5.0625,
-          5.625,
-          6.1875
-        ],
-        "bossThreat": 4.78125,
-        "actions": [
-          {
-            "name": "百步穿杨",
-            "kind": "shots",
-            "cd": 4,
-            "windup": 0.9,
-            "count": 1,
-            "speed": 560
-          },
-          {
-            "name": "连珠箭",
-            "kind": "shots",
-            "cd": 7,
-            "windup": 0.75,
-            "count": 3,
-            "speed": 420,
-            "delay": 0.25
-          },
-          {
-            "name": "近身老刀",
-            "kind": "sector",
-            "cd": 5,
-            "windup": 0.65,
-            "range": 200,
-            "arc": 140
-          }
-        ]
-      },
-      {
-        "id": 12,
-        "name": "葭萌银骑",
-        "volume": 4,
-        "boss": "马超",
-        "bossId": "machao",
-        "bossHp": 144000,
-        "bossSpeed": 128,
-        "referenceDps": 3000,
-        "roster": [
-          "E03",
-          "E05",
-          "E20",
-          "E07",
-          "E18",
-          "E24"
-        ],
-        "enemyHpMultiplier": 16.997228,
-        "threatPerSecond": [
-          2.671875,
-          5.34375,
-          5.9375,
-          6.53125
-        ],
-        "bossThreat": 5.046875,
-        "actions": [
-          {
-            "name": "银枪冲刺",
-            "kind": "charge",
-            "cd": 6,
-            "windup": 0.75,
-            "range": 400,
-            "duration": 0.6
-          },
-          {
-            "name": "马踏回旋",
+            "name": "酒池焚阵",
             "kind": "zones",
-            "cd": 5,
-            "windup": 0.8,
-            "radius": 160,
-            "count": 1,
-            "range": 0
-          },
-          {
-            "name": "西凉双回马",
-            "kind": "sector",
-            "cd": 10,
-            "windup": 0.7,
-            "range": 300,
-            "arc": 35,
-            "count": 2,
-            "delay": 0.7
-          }
-        ]
-      },
-      {
-        "id": 13,
-        "name": "夷陵火阵",
-        "volume": 5,
-        "boss": "陆逊",
-        "bossId": "luxun",
-        "bossHp": 150080,
-        "bossSpeed": 94,
-        "referenceDps": 3350,
-        "roster": [
-          "E02",
-          "E05",
-          "E17",
-          "E32",
-          "E34",
-          "E33"
-        ],
-        "enemyHpMultiplier": 18.875804,
-        "threatPerSecond": [
-          2.8125,
-          5.625,
-          6.25,
-          6.875
-        ],
-        "bossThreat": 5.3125,
-        "actions": [
-          {
-            "name": "连营火线",
-            "kind": "lines",
-            "cd": 6,
-            "windup": 1,
-            "range": 360,
-            "radius": 38,
-            "count": 3,
-            "duration": 1.5
-          },
-          {
-            "name": "疑阵木桩",
-            "kind": "flag",
             "cd": 12,
-            "windup": 1,
-            "count": 2
-          },
-          {
-            "name": "借风转火",
-            "kind": "moving",
-            "cd": 9,
-            "windup": 1,
-            "radius": 85,
-            "count": 2,
+            "windup": 1.05,
+            "description": "三坛酒依次落地，0.45秒后燃烧\n火池R78持续2秒，每1.2秒至多一击",
+            "count": 3,
+            "radius": 78,
             "duration": 2
           }
         ]
       },
       {
-        "id": 14,
-        "name": "南中飞刃",
+        "id": 4,
+        "name": "官渡箭阵",
+        "volume": 3,
+        "boss": "袁绍",
+        "bossId": "yuanshao",
+        "bossHp": 31200,
+        "bossSpeed": 115,
+        "referenceDps": 650,
+        "roster": [
+          "E04",
+          "E13",
+          "E08",
+          "E10",
+          "E14",
+          "E15",
+          "E36",
+          "E37"
+        ],
+        "enemyHpMultiplier": 3.975398,
+        "threatPerSecond": [
+          2.0025,
+          4.005,
+          4.45,
+          4.895
+        ],
+        "bossThreat": 3.7825,
+        "actions": [
+          {
+            "name": "四世箭阵",
+            "kind": "summon",
+            "cd": 7.2,
+            "windup": 1,
+            "description": "列阵1秒＋绷弦0.7秒 · 四箭齐射\n平行箭速280，中央180宽通道",
+            "count": 4,
+            "units": [
+              "E11"
+            ],
+            "speed": 280
+          },
+          {
+            "name": "官渡弩阵",
+            "kind": "summon",
+            "cd": 12,
+            "windup": 1.1,
+            "description": "两台可拆弩车，各520生命\n交替上弦1秒，重弩速度300，7秒后撤",
+            "count": 2,
+            "units": [
+              "E35"
+            ],
+            "duration": 7
+          },
+          {
+            "name": "万军齐射",
+            "kind": "summon",
+            "cd": 13,
+            "windup": 1.1,
+            "description": "列阵1.1秒＋绷弦0.7秒 · 三轮箭墙\n令旗变向后再放箭，缺口始终可见",
+            "count": 4,
+            "speed": 280
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "长坂疑兵",
+        "volume": 4,
+        "boss": "曹操",
+        "bossId": "caocao",
+        "bossHp": 45000,
+        "bossSpeed": 130,
+        "referenceDps": 900,
+        "roster": [
+          "E03",
+          "E12",
+          "E05",
+          "E07",
+          "E21",
+          "E22",
+          "E23",
+          "E31"
+        ],
+        "enemyHpMultiplier": 5.415559,
+        "threatPerSecond": [
+          2.295,
+          4.59,
+          5.1,
+          5.61
+        ],
+        "bossThreat": 4.335,
+        "actions": [
+          {
+            "name": "倚天连刃",
+            "kind": "shots",
+            "cd": 5.5,
+            "windup": 0.9,
+            "description": "两道银锋错时飞行，间隔0.65秒\n速度290 · 刃宽68，锁向不追踪",
+            "count": 2,
+            "speed": 290,
+            "delay": 0.65
+          },
+          {
+            "name": "疑兵换影",
+            "kind": "clone",
+            "cd": 10,
+            "windup": 1,
+            "description": "本体横移120 · 留两个纸影5秒\n纸影各90生命、可打散，不隐身不免伤",
+            "count": 2,
+            "duration": 5
+          },
+          {
+            "name": "虎豹合围",
+            "kind": "summon",
+            "cd": 13,
+            "windup": 1.1,
+            "description": "两骑分别蓄势后锁向直冲\n错开1.3秒，本体最后补一道剑气",
+            "count": 2,
+            "units": [
+              "E21"
+            ],
+            "speed": 440
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "南中百兽",
         "volume": 5,
-        "boss": "祝融",
-        "bossId": "zhurong",
-        "bossHp": 161280,
-        "bossSpeed": 122,
-        "referenceDps": 3600,
+        "boss": "孟获",
+        "bossId": "menghuo",
+        "bossHp": 65000,
+        "bossSpeed": 110,
+        "referenceDps": 1250,
         "roster": [
           "E05",
           "E15",
           "E17",
+          "E18",
           "E24",
+          "E25",
           "E26",
-          "E28"
+          "E27"
         ],
-        "enemyHpMultiplier": 20.21158,
+        "enemyHpMultiplier": 7.399075,
         "threatPerSecond": [
-          2.953125,
-          5.90625,
-          6.5625,
-          7.21875
+          2.5875,
+          5.175,
+          5.75,
+          6.325
         ],
-        "bossThreat": 5.578125,
+        "bossThreat": 4.8875,
         "actions": [
           {
-            "name": "回旋飞刀",
-            "kind": "shots",
-            "cd": 3.8,
-            "windup": 0.6,
-            "count": 3,
-            "speed": 310,
-            "arc": 65
+            "name": "猪突猛进",
+            "kind": "summon",
+            "cd": 8,
+            "windup": 1,
+            "description": "四头战猪各438生命 · 速度320\n刨地蓄势后直冲，击倒可打开缺口",
+            "count": 4,
+            "speed": 320
           },
           {
-            "name": "猎手围身",
+            "name": "群狼围猎",
             "kind": "summon",
             "cd": 10,
             "windup": 1,
-            "units": [
-              "E28",
-              "E28"
-            ]
+            "description": "三狼各275生命 · 先绕两侧包抄\n各自再伏身0.9秒，锁旧位置扑击",
+            "count": 3
           },
           {
-            "name": "烈刃跳击",
-            "kind": "zones",
-            "cd": 7,
-            "windup": 1,
-            "radius": 100,
-            "count": 1
-          }
-        ]
-      },
-      {
-        "id": 15,
-        "name": "七擒趣战",
-        "volume": 5,
-        "boss": "孟获",
-        "bossId": "menghuo",
-        "bossHp": 202800,
-        "bossSpeed": 80,
-        "referenceDps": 3900,
-        "roster": [
-          "E15",
-          "E26",
-          "E28",
-          "E39",
-          "E25",
-          "E27"
-        ],
-        "enemyHpMultiplier": 21.808424,
-        "threatPerSecond": [
-          3.09375,
-          6.1875,
-          6.875,
-          7.5625
-        ],
-        "bossThreat": 5.84375,
-        "actions": [
-          {
-            "name": "蛮王拍地",
-            "kind": "zones",
-            "cd": 5,
-            "windup": 0.9,
-            "radius": 180,
-            "count": 1,
-            "range": 0
-          },
-          {
-            "name": "象阵破围",
+            "name": "万象开道",
             "kind": "summon",
             "cd": 14,
-            "windup": 1,
-            "units": [
-              "E25"
-            ]
-          },
-          {
-            "name": "七擒变招",
-            "kind": "waves",
-            "cd": 9,
-            "windup": 0.9,
-            "radius": 100,
-            "count": 3
+            "windup": 1.2,
+            "description": "两象各1125生命 · 速度230\n前后错开1.5秒，直线重踏后离场",
+            "count": 2,
+            "speed": 230
           }
         ]
       },
       {
-        "id": 16,
-        "name": "祁山对弈",
+        "id": 7,
+        "name": "五丈星劫",
         "volume": 6,
-        "boss": "司马懿·祁山",
+        "boss": "司马懿",
         "bossId": "simayi",
-        "bossHp": 185920,
-        "bossSpeed": 82,
-        "referenceDps": 4150,
+        "bossHp": 91800,
+        "bossSpeed": 115,
+        "referenceDps": 1700,
         "roster": [
           "E04",
-          "E08",
-          "E14",
           "E21",
-          "E40",
-          "E37"
-        ],
-        "enemyHpMultiplier": 23.134419,
-        "threatPerSecond": [
-          3.234375,
-          6.46875,
-          7.1875,
-          7.90625
-        ],
-        "bossThreat": 6.109375,
-        "actions": [
-          {
-            "name": "军师点阵",
-            "kind": "zones",
-            "cd": 5.5,
-            "windup": 1,
-            "radius": 90,
-            "count": 2
-          },
-          {
-            "name": "空阵诱敌",
-            "kind": "zones",
-            "cd": 8,
-            "windup": 1,
-            "radius": 90,
-            "count": 2,
-            "gap": 1
-          },
-          {
-            "name": "反间号令",
-            "kind": "summon",
-            "cd": 14,
-            "windup": 1,
-            "units": [
-              "E40",
-              "E40"
-            ]
-          }
-        ]
-      },
-      {
-        "id": 17,
-        "name": "五丈星落",
-        "volume": 6,
-        "boss": "司马懿·五丈原",
-        "bossId": "simayi",
-        "bossHp": 230400,
-        "bossSpeed": 80,
-        "referenceDps": 4500,
-        "roster": [
-          "E03",
-          "E13",
-          "E21",
+          "E28",
+          "E29",
           "E32",
-          "E36",
+          "E34",
+          "E38",
           "E40"
         ],
-        "enemyHpMultiplier": 24.984162,
+        "enemyHpMultiplier": 9.909218,
         "threatPerSecond": [
-          3.375,
-          6.75,
-          7.5,
-          8.25
+          2.88,
+          5.76,
+          6.4,
+          7.04
         ],
-        "bossThreat": 6.375,
+        "bossThreat": 5.44,
         "actions": [
           {
-            "name": "星落棋盘",
+            "name": "落子成灾",
             "kind": "zones",
             "cd": 6,
             "windup": 1,
-            "radius": 85,
+            "description": "三枚棋子R78 · 间隔0.4秒落地\n落点锁定、中央预告、落后0.55秒收光",
             "count": 3,
-            "delay": 0.3
+            "radius": 78,
+            "delay": 0.4
           },
           {
-            "name": "阴阳换位",
-            "kind": "ring",
-            "cd": 8,
-            "windup": 1,
-            "count": 10,
-            "speed": 205,
-            "gap": 100
+            "name": "阴阳双龙",
+            "kind": "shots",
+            "cd": 10,
+            "windup": 1.1,
+            "description": "黑白双龙沿固定曲线穿场\n速度210 · 中间最窄安全通道180",
+            "count": 2,
+            "speed": 210
           },
           {
-            "name": "秋风阵眼",
-            "kind": "flag",
-            "cd": 14,
-            "windup": 1,
-            "count": 1
+            "name": "五丈星劫",
+            "kind": "zones",
+            "cd": 13,
+            "windup": 1.15,
+            "description": "三枚星石R92 · 间隔0.55秒落下\n格点预告、不覆盖整张棋盘",
+            "count": 3,
+            "radius": 92,
+            "delay": 0.55
           }
         ]
       }
@@ -17646,7 +17637,7 @@
         "name": "朴刀兵",
         "group": "步兵",
         "kind": "soldier",
-        "first": 3,
+        "first": 2,
         "hp": 32,
         "speed": 122,
         "range": 65,
@@ -17658,8 +17649,8 @@
         "counter": "小步侧移；短刀配布帽",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 92,
-          "speed": 123.464,
+          "hp": 61,
+          "speed": 122.732,
           "coins": 1,
           "damage": 1
         }
@@ -17727,7 +17718,7 @@
         "counter": "扇形／追踪；双短刃和轻帽",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 144,
+          "hp": 152,
           "speed": 148.48,
           "coins": 2,
           "damage": 1
@@ -17761,7 +17752,7 @@
         "name": "巨锤兵",
         "group": "重装",
         "kind": "soldier",
-        "first": 12,
+        "first": 5,
         "hp": 140,
         "speed": 70,
         "range": 130,
@@ -17773,8 +17764,8 @@
         "counter": "提前离圈；巨圆锤",
         "radius": 30,
         "firstChapterValues": {
-          "hp": 2380,
-          "speed": 74.62,
+          "hp": 758,
+          "speed": 71.68,
           "coins": 4,
           "damage": 1
         }
@@ -17830,7 +17821,7 @@
         "name": "军医",
         "group": "支援",
         "kind": "soldier",
-        "first": 11,
+        "first": 4,
         "hp": 48,
         "speed": 86,
         "range": 0,
@@ -17842,8 +17833,8 @@
         "counter": "先打军医；药箱与葫芦标",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 725,
-          "speed": 91.16,
+          "hp": 191,
+          "speed": 87.548,
           "coins": 3,
           "damage": 1
         }
@@ -17876,7 +17867,7 @@
         "name": "弩手",
         "group": "远程",
         "kind": "spearman",
-        "first": 4,
+        "first": 2,
         "hp": 30,
         "speed": 86,
         "range": 460,
@@ -17888,8 +17879,8 @@
         "counter": "趁装填近身；横臂弩",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 119,
-          "speed": 87.548,
+          "hp": 57,
+          "speed": 86.516,
           "coins": 2,
           "damage": 1
         }
@@ -17899,7 +17890,7 @@
         "name": "连弩手",
         "group": "远程",
         "kind": "spearman",
-        "first": 6,
+        "first": 2,
         "hp": 38,
         "speed": 82,
         "range": 460,
@@ -17911,8 +17902,8 @@
         "counter": "连续侧移，不只躲第一箭",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 249,
-          "speed": 84.46,
+          "hp": 72,
+          "speed": 82.492,
           "coins": 3,
           "damage": 1
         }
@@ -17922,7 +17913,7 @@
         "name": "重弩手",
         "group": "远程",
         "kind": "spearman",
-        "first": 10,
+        "first": 4,
         "hp": 64,
         "speed": 70,
         "range": 650,
@@ -17934,8 +17925,8 @@
         "counter": "大幅横移；大弩与撑脚",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 845,
-          "speed": 73.78,
+          "hp": 254,
+          "speed": 71.26,
           "coins": 3,
           "damage": 1
         }
@@ -17945,7 +17936,7 @@
         "name": "投矛手",
         "group": "远程",
         "kind": "spearman",
-        "first": 11,
+        "first": 4,
         "hp": 38,
         "speed": 105,
         "range": 350,
@@ -17957,8 +17948,8 @@
         "counter": "横移；矛束背筒",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 574,
-          "speed": 111.3,
+          "hp": 151,
+          "speed": 106.89,
           "coins": 2,
           "damage": 1
         }
@@ -17968,7 +17959,7 @@
         "name": "标枪兵",
         "group": "远程",
         "kind": "spearman",
-        "first": 5,
+        "first": 3,
         "hp": 54,
         "speed": 110,
         "range": 380,
@@ -17980,8 +17971,8 @@
         "counter": "从扇口外侧绕，不迎面冲",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 277,
-          "speed": 112.64,
+          "hp": 155,
+          "speed": 111.32,
           "coins": 3,
           "damage": 1
         }
@@ -17991,7 +17982,7 @@
         "name": "飞刀兵",
         "group": "远程",
         "kind": "spearman",
-        "first": 9,
+        "first": 6,
         "hp": 36,
         "speed": 124,
         "range": 310,
@@ -18003,8 +17994,8 @@
         "counter": "走近扇形外缘；腰间飞刀",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 416,
-          "speed": 129.952,
+          "hp": 266,
+          "speed": 127.72,
           "coins": 2,
           "damage": 1
         }
@@ -18014,7 +18005,7 @@
         "name": "飞斧手",
         "group": "远程",
         "kind": "spearman",
-        "first": 12,
+        "first": 6,
         "hp": 64,
         "speed": 90,
         "range": 340,
@@ -18026,8 +18017,8 @@
         "counter": "先横移再近身；双斧大刃",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 1088,
-          "speed": 95.94,
+          "hp": 474,
+          "speed": 92.7,
           "coins": 3,
           "damage": 1
         }
@@ -18083,7 +18074,7 @@
         "name": "虎豹骑",
         "group": "骑兵",
         "kind": "cavalry",
-        "first": 8,
+        "first": 5,
         "hp": 160,
         "speed": 132,
         "range": 300,
@@ -18095,8 +18086,8 @@
         "counter": "预留转向空间；黑甲红缨",
         "radius": 34,
         "firstChapterValues": {
-          "hp": 1541,
-          "speed": 137.544,
+          "hp": 866,
+          "speed": 135.168,
           "coins": 5,
           "damage": 1
         }
@@ -18106,7 +18097,7 @@
         "name": "弓骑",
         "group": "骑兵",
         "kind": "cavalry",
-        "first": 8,
+        "first": 5,
         "hp": 100,
         "speed": 120,
         "range": 420,
@@ -18118,8 +18109,8 @@
         "counter": "压向一侧；小马与弓组合",
         "radius": 34,
         "firstChapterValues": {
-          "hp": 963,
-          "speed": 125.04,
+          "hp": 542,
+          "speed": 122.88,
           "coins": 4,
           "damage": 1
         }
@@ -18141,7 +18132,7 @@
         "counter": "观察落脚点；蓝灰头巾",
         "radius": 34,
         "firstChapterValues": {
-          "hp": 616,
+          "hp": 650,
           "speed": 129.024,
           "coins": 4,
           "damage": 1
@@ -18152,7 +18143,7 @@
         "name": "狼骑",
         "group": "骑兵",
         "kind": "cavalry",
-        "first": 12,
+        "first": 6,
         "hp": 88,
         "speed": 138,
         "range": 240,
@@ -18164,8 +18155,8 @@
         "counter": "离开正面；狼形小坐骑",
         "radius": 34,
         "firstChapterValues": {
-          "hp": 1496,
-          "speed": 147.108,
+          "hp": 651,
+          "speed": 142.14,
           "coins": 4,
           "damage": 1
         }
@@ -18175,7 +18166,7 @@
         "name": "南中象兵",
         "group": "重骑",
         "kind": "cavalry",
-        "first": 15,
+        "first": 6,
         "hp": 320,
         "speed": 62,
         "range": 330,
@@ -18187,8 +18178,8 @@
         "counter": "提前横移；最多1头，不把体积做成道路障碍",
         "radius": 48,
         "firstChapterValues": {
-          "hp": 6979,
-          "speed": 67.208,
+          "hp": 2368,
+          "speed": 63.86,
           "coins": 7,
           "damage": 1
         }
@@ -18198,7 +18189,7 @@
         "name": "南中蛮兵",
         "group": "步兵",
         "kind": "soldier",
-        "first": 14,
+        "first": 6,
         "hp": 60,
         "speed": 104,
         "range": 100,
@@ -18210,8 +18201,8 @@
         "counter": "扫角外走位；绿叶领和木棒",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 1213,
-          "speed": 112.112,
+          "hp": 444,
+          "speed": 107.12,
           "coins": 2,
           "damage": 1
         }
@@ -18221,7 +18212,7 @@
         "name": "藤甲兵",
         "group": "防御",
         "kind": "soldier",
-        "first": 15,
+        "first": 6,
         "hp": 150,
         "speed": 88,
         "range": 75,
@@ -18233,8 +18224,8 @@
         "counter": "火油／爆竹；藤编盔甲",
         "radius": 30,
         "firstChapterValues": {
-          "hp": 3271,
-          "speed": 95.392,
+          "hp": 1110,
+          "speed": 90.64,
           "coins": 4,
           "damage": 1
         }
@@ -18244,7 +18235,7 @@
         "name": "吹箭兵",
         "group": "远程",
         "kind": "spearman",
-        "first": 14,
+        "first": 7,
         "hp": 34,
         "speed": 100,
         "range": 360,
@@ -18256,8 +18247,8 @@
         "counter": "别站在吹管正面；叶面护具",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 687,
-          "speed": 107.8,
+          "hp": 337,
+          "speed": 103.6,
           "coins": 2,
           "damage": 1
         }
@@ -18279,7 +18270,7 @@
         "counter": "提前离罐点；大陶罐",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 462,
+          "hp": 575,
           "speed": 84.952,
           "coins": 3,
           "damage": 1
@@ -18290,7 +18281,7 @@
         "name": "纵火兵",
         "group": "火器",
         "kind": "spearman",
-        "first": 7,
+        "first": 3,
         "hp": 44,
         "speed": 104,
         "range": 200,
@@ -18302,8 +18293,8 @@
         "counter": "拉开距离；火把与短喷口",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 350,
-          "speed": 107.744,
+          "hp": 126,
+          "speed": 105.248,
           "coins": 3,
           "damage": 1
         }
@@ -18313,7 +18304,7 @@
         "name": "火枪手",
         "group": "架空火器",
         "kind": "spearman",
-        "first": 10,
+        "first": 5,
         "hp": 46,
         "speed": 84,
         "range": 520,
@@ -18325,8 +18316,8 @@
         "counter": "横移后压近；旧式火绳枪，不是现代步枪",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 607,
-          "speed": 88.536,
+          "hp": 249,
+          "speed": 86.016,
           "coins": 3,
           "damage": 1
         }
@@ -18336,7 +18327,7 @@
         "name": "三眼铳兵",
         "group": "架空火器",
         "kind": "spearman",
-        "first": 13,
+        "first": 7,
         "hp": 62,
         "speed": 72,
         "range": 410,
@@ -18348,8 +18339,8 @@
         "counter": "远离扇口；清楚可见三枪管",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 1170,
-          "speed": 77.184,
+          "hp": 614,
+          "speed": 74.592,
           "coins": 4,
           "damage": 1
         }
@@ -18359,7 +18350,7 @@
         "name": "爆破兵",
         "group": "火器",
         "kind": "spearman",
-        "first": 13,
+        "first": 3,
         "hp": 68,
         "speed": 80,
         "range": 360,
@@ -18371,8 +18362,8 @@
         "counter": "看地面圈；火药包",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 1284,
-          "speed": 85.76,
+          "hp": 195,
+          "speed": 80.96,
           "coins": 4,
           "damage": 1
         }
@@ -18382,7 +18373,7 @@
         "name": "爆竹运兵",
         "group": "火器",
         "kind": "spearman",
-        "first": 13,
+        "first": 7,
         "hp": 42,
         "speed": 108,
         "range": 90,
@@ -18394,8 +18385,8 @@
         "counter": "优先打断；背一捆超大爆竹",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 793,
-          "speed": 115.776,
+          "hp": 416,
+          "speed": 111.888,
           "coins": 2,
           "damage": 1
         }
@@ -18405,7 +18396,7 @@
         "name": "井阑弩车",
         "group": "器械",
         "kind": "spearman",
-        "first": 4,
+        "first": 3,
         "hp": 156,
         "speed": 62,
         "range": 680,
@@ -18417,8 +18408,8 @@
         "counter": "贴侧后方；小双轮木弩，操作员只露头",
         "radius": 42,
         "firstChapterValues": {
-          "hp": 620,
-          "speed": 63.116,
+          "hp": 447,
+          "speed": 62.744,
           "coins": 5,
           "damage": 1
         }
@@ -18428,7 +18419,7 @@
         "name": "投石车",
         "group": "器械",
         "kind": "spearman",
-        "first": 6,
+        "first": 4,
         "hp": 180,
         "speed": 35,
         "range": 780,
@@ -18440,8 +18431,8 @@
         "counter": "优先清理；轮子和抛臂，不做地图建筑",
         "radius": 42,
         "firstChapterValues": {
-          "hp": 1180,
-          "speed": 36.05,
+          "hp": 716,
+          "speed": 35.63,
           "coins": 6,
           "damage": 1
         }
@@ -18451,7 +18442,7 @@
         "name": "神威炮车",
         "group": "架空器械",
         "kind": "spearman",
-        "first": 10,
+        "first": 4,
         "hp": 200,
         "speed": 40,
         "range": 720,
@@ -18463,8 +18454,8 @@
         "counter": "贴侧面／装填期输出；铜炮红轮",
         "radius": 42,
         "firstChapterValues": {
-          "hp": 2641,
-          "speed": 42.16,
+          "hp": 795,
+          "speed": 40.72,
           "coins": 6,
           "damage": 1
         }
@@ -18474,7 +18465,7 @@
         "name": "抛油车",
         "group": "器械",
         "kind": "spearman",
-        "first": 9,
+        "first": 7,
         "hp": 170,
         "speed": 30,
         "range": 650,
@@ -18486,8 +18477,8 @@
         "counter": "留意第二罐；罐架与火油桶",
         "radius": 42,
         "firstChapterValues": {
-          "hp": 1966,
-          "speed": 31.44,
+          "hp": 1685,
+          "speed": 31.08,
           "coins": 6,
           "damage": 1
         }
@@ -18520,7 +18511,7 @@
         "name": "军师",
         "group": "术士",
         "kind": "spearman",
-        "first": 16,
+        "first": 7,
         "hp": 108,
         "speed": 64,
         "range": 600,
@@ -18532,8 +18523,8 @@
         "counter": "不要在两圈交界停留；小羽扇和令旗",
         "radius": 24,
         "firstChapterValues": {
-          "hp": 2499,
-          "speed": 69.76,
+          "hp": 1070,
+          "speed": 66.304,
           "coins": 5,
           "damage": 1
         }
@@ -18541,47 +18532,25 @@
     ],
     "genericSkills": [
       {
-        "id": "G15",
-        "name": "神行百变",
+        "id": "G08",
+        "name": "百步穿杨",
         "category": "战技",
-        "damage": "移速+30%",
-        "range": "自身",
-        "duration": "4秒",
-        "effect": "4秒内移动速度+30%，不自动寻路，不改变摇杆手感。",
-        "icon": 14,
+        "damage": "每箭0.22S",
+        "range": "直线600",
+        "duration": "8箭／约1.1秒",
+        "effect": "连续射出8支实体箭，每箭最多1敌，同一敌最多4箭；箭抵达时命中。",
+        "icon": 7,
         "powerRank": 1,
         "powerTier": 1,
-        "killCharge": 12,
+        "killCharge": 20,
         "unlocked": true,
         "unlockHint": "当前版本免费开放",
-        "kind": "speed-buff",
-        "factor": 0.3,
-        "radius": 80,
-        "seconds": 4,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#f0c56d"
-      },
-      {
-        "id": "G02",
-        "name": "回马一枪",
-        "category": "战技",
-        "damage": "0.75S",
-        "range": "后方300×70",
-        "duration": "0.18秒",
-        "effect": "向移动反方向直刺，最多8敌；不位移、不免伤。",
-        "icon": 1,
-        "powerRank": 2,
-        "powerTier": 1,
-        "killCharge": 14,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "backstab",
-        "factor": 0.75,
-        "radius": 300,
-        "seconds": 0.18,
+        "kind": "precision",
+        "factor": 0.22,
+        "radius": 600,
+        "seconds": 1.1,
         "maxTargets": 8,
-        "maxHits": 1,
+        "maxHits": 4,
         "color": "#f0c56d"
       },
       {
@@ -18593,7 +18562,7 @@
         "duration": "0.28秒",
         "effect": "沿移动方向突进，0.25秒保护，路径最多命中8敌一次。",
         "icon": 0,
-        "powerRank": 3,
+        "powerRank": 2,
         "powerTier": 1,
         "killCharge": 16,
         "unlocked": true,
@@ -18607,50 +18576,6 @@
         "color": "#f0c56d"
       },
       {
-        "id": "G16",
-        "name": "净心诀",
-        "category": "奇术",
-        "damage": "抵挡1次",
-        "range": "自身",
-        "duration": "2秒",
-        "effect": "清除减速并获得2秒、1次伤害抵挡；不清空地图危险圈。",
-        "icon": 15,
-        "powerRank": 4,
-        "powerTier": 1,
-        "killCharge": 18,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "cleanse",
-        "factor": 0,
-        "radius": 95,
-        "seconds": 2,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#8fcfdb"
-      },
-      {
-        "id": "G08",
-        "name": "百步穿杨",
-        "category": "战技",
-        "damage": "每箭0.40S",
-        "range": "直线600",
-        "duration": "0.36秒",
-        "effect": "自动连射3支精准箭，每箭最多1敌，同一敌最多2箭。",
-        "icon": 7,
-        "powerRank": 5,
-        "powerTier": 2,
-        "killCharge": 20,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "precision",
-        "factor": 0.4,
-        "radius": 600,
-        "seconds": 0.36,
-        "maxTargets": 3,
-        "maxHits": 2,
-        "color": "#f0c56d"
-      },
-      {
         "id": "G03",
         "name": "横扫六合",
         "category": "战技",
@@ -18659,7 +18584,7 @@
         "duration": "0.4秒",
         "effect": "一圈金刃横扫，最多10敌，击退300。",
         "icon": 2,
-        "powerRank": 6,
+        "powerRank": 3,
         "powerTier": 2,
         "killCharge": 22,
         "unlocked": true,
@@ -18673,248 +18598,6 @@
         "color": "#f0c56d"
       },
       {
-        "id": "G05",
-        "name": "金蝉脱壳",
-        "category": "战技",
-        "damage": "无伤害",
-        "range": "前移220",
-        "duration": "2秒",
-        "effect": "闪避并留下2秒替身，吸引附近普通兵；Boss仍瞄准真人。",
-        "icon": 4,
-        "powerRank": 7,
-        "powerTier": 2,
-        "killCharge": 24,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "escape",
-        "factor": 0,
-        "radius": 220,
-        "seconds": 2,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#f0c56d"
-      },
-      {
-        "id": "G06",
-        "name": "声东击西",
-        "category": "军略",
-        "damage": "1.00S",
-        "range": "爆点半径150",
-        "duration": "3秒",
-        "effect": "替身诱敌3秒后爆开一次，最多12敌；诱饵不反复生成。",
-        "icon": 5,
-        "powerRank": 8,
-        "powerTier": 2,
-        "killCharge": 26,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "decoy",
-        "factor": 1,
-        "radius": 150,
-        "seconds": 3,
-        "maxTargets": 12,
-        "maxHits": 1,
-        "color": "#e88c53"
-      },
-      {
-        "id": "G04",
-        "name": "铁壁架势",
-        "category": "战技",
-        "damage": "抵挡2次",
-        "range": "自身",
-        "duration": "1.5秒",
-        "effect": "1.5秒内最多挡2次有效伤害；连续接触有0.18秒保护间隔，不回血。",
-        "icon": 3,
-        "powerRank": 9,
-        "powerTier": 3,
-        "killCharge": 28,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "shield",
-        "factor": 0,
-        "radius": 95,
-        "seconds": 1.5,
-        "maxTargets": 2,
-        "maxHits": 1,
-        "color": "#f0c56d"
-      },
-      {
-        "id": "G07",
-        "name": "背水一战",
-        "category": "战技",
-        "damage": "伤害+25%",
-        "range": "自身",
-        "duration": "5秒",
-        "effect": "5秒内提高全部实际伤害25%，不扣心，同名不叠加。",
-        "icon": 6,
-        "powerRank": 10,
-        "powerTier": 3,
-        "killCharge": 30,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "damage-buff",
-        "factor": 0.25,
-        "radius": 90,
-        "seconds": 5,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#f0c56d"
-      },
-      {
-        "id": "G09",
-        "name": "破釜沉舟",
-        "category": "军略",
-        "damage": "攻速+20%",
-        "range": "自身",
-        "duration": "6秒",
-        "effect": "提高攻速20%持续6秒，额外抵挡1次伤害仅持续3秒。",
-        "icon": 8,
-        "powerRank": 11,
-        "powerTier": 3,
-        "killCharge": 32,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "haste-buff",
-        "factor": 0.2,
-        "radius": 95,
-        "seconds": 6,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#e88c53"
-      },
-      {
-        "id": "G14",
-        "name": "纸甲成兵",
-        "category": "奇术",
-        "damage": "每击0.30S",
-        "range": "索敌300",
-        "duration": "3秒",
-        "effect": "召出3个纸兵，3秒内各攻击4次；同一敌最多3次，不吸引Boss。",
-        "icon": 13,
-        "powerRank": 12,
-        "powerTier": 3,
-        "killCharge": 34,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "summon",
-        "factor": 0.3,
-        "radius": 300,
-        "seconds": 3,
-        "maxTargets": 12,
-        "maxHits": 3,
-        "color": "#8fcfdb"
-      },
-      {
-        "id": "G11",
-        "name": "草船借箭",
-        "category": "军略",
-        "damage": "每箭0.30S",
-        "range": "自身半径130",
-        "duration": "2秒",
-        "effect": "2秒内最多吸收4支普通敌箭，结束反击同数量箭；同敌最多2箭，不挡Boss地面技能。",
-        "icon": 10,
-        "powerRank": 13,
-        "powerTier": 4,
-        "killCharge": 36,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "catch",
-        "factor": 0.3,
-        "radius": 130,
-        "seconds": 2,
-        "maxTargets": 4,
-        "maxHits": 2,
-        "color": "#e88c53"
-      },
-      {
-        "id": "G10",
-        "name": "火烧连营",
-        "category": "军略",
-        "damage": "每圈0.55S",
-        "range": "3圈，各半径80",
-        "duration": "1.4秒",
-        "effect": "三处依次点火；同一敌最多2圈，整次最多18个不同目标。",
-        "icon": 9,
-        "powerRank": 14,
-        "powerTier": 4,
-        "killCharge": 38,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "fire",
-        "factor": 0.55,
-        "radius": 80,
-        "seconds": 1.4,
-        "maxTargets": 18,
-        "maxHits": 2,
-        "color": "#e88c53"
-      },
-      {
-        "id": "G12",
-        "name": "水淹七军",
-        "category": "军略",
-        "damage": "1.10S",
-        "range": "半径300",
-        "duration": "0.55秒",
-        "effect": "水浪扩散命中一次，最多18敌，减速2秒：普通兵30%，Boss10%。",
-        "icon": 11,
-        "powerRank": 15,
-        "powerTier": 4,
-        "killCharge": 40,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "water",
-        "factor": 1.1,
-        "radius": 300,
-        "seconds": 0.55,
-        "maxTargets": 18,
-        "maxHits": 1,
-        "color": "#e88c53"
-      },
-      {
-        "id": "G13",
-        "name": "奇门遁甲",
-        "category": "奇术",
-        "damage": "抵挡1次",
-        "range": "自身半径150",
-        "duration": "2.5秒",
-        "effect": "清除减速，结界2.5秒内挡1次有效伤害，并减速附近普通兵；不是全程无敌。",
-        "icon": 12,
-        "powerRank": 16,
-        "powerTier": 4,
-        "killCharge": 42,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "barrier",
-        "factor": 0,
-        "radius": 150,
-        "seconds": 2.5,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#8fcfdb"
-      },
-      {
-        "id": "G17",
-        "name": "妙手回春",
-        "category": "奇术",
-        "damage": "回复1心",
-        "range": "自身",
-        "duration": "0.8秒",
-        "effect": "每章最多一次；满心不能消耗技能，也不会增加心数上限。",
-        "icon": 16,
-        "powerRank": 17,
-        "powerTier": 5,
-        "killCharge": 44,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "heal",
-        "factor": 1,
-        "radius": 90,
-        "seconds": 0.8,
-        "maxTargets": 1,
-        "maxHits": 1,
-        "color": "#8fcfdb"
-      },
-      {
         "id": "G18",
         "name": "八门金锁",
         "category": "奇术",
@@ -18923,8 +18606,8 @@
         "duration": "2秒",
         "effect": "固定八门阵持续2秒，入阵一次伤害和减速，最多18敌；Boss仅减速10%。",
         "icon": 17,
-        "powerRank": 18,
-        "powerTier": 5,
+        "powerRank": 4,
+        "powerTier": 2,
         "killCharge": 46,
         "unlocked": true,
         "unlockHint": "当前版本免费开放",
@@ -18937,48 +18620,136 @@
         "color": "#8fcfdb"
       },
       {
-        "id": "G23",
-        "name": "虎啸山林",
-        "category": "战技",
-        "damage": "1.30S",
-        "range": "100°／350",
-        "duration": "0.6秒",
-        "effect": "虎形声浪命中最多12敌，普通兵击退220和硬直0.15秒，Boss不硬直。",
-        "icon": 22,
-        "powerRank": 19,
-        "powerTier": 5,
-        "killCharge": 48,
+        "id": "G10",
+        "name": "火烧连营",
+        "category": "军略",
+        "damage": "每次0.35S／最多4次",
+        "range": "水平总长480／宽80",
+        "duration": "3秒",
+        "effect": "在施法位置展开水平火线，长6身位、宽1身位，持续3秒；4次灼烧，同敌最多4次，最多18敌。",
+        "icon": 9,
+        "powerRank": 5,
+        "powerTier": 3,
+        "killCharge": 38,
         "unlocked": true,
         "unlockHint": "当前版本免费开放",
-        "kind": "roar",
-        "factor": 1.3,
-        "radius": 350,
-        "seconds": 0.6,
-        "maxTargets": 12,
+        "kind": "fire-line",
+        "factor": 0.35,
+        "radius": 240,
+        "seconds": 3,
+        "maxTargets": 18,
+        "maxHits": 4,
+        "color": "#e88c53"
+      },
+      {
+        "id": "G12",
+        "name": "水淹七军",
+        "category": "军略",
+        "damage": "1.10S",
+        "range": "半径300",
+        "duration": "0.55秒",
+        "effect": "水浪扩散命中一次，最多18敌，减速2秒：普通兵30%，Boss10%。",
+        "icon": 11,
+        "powerRank": 6,
+        "powerTier": 3,
+        "killCharge": 40,
+        "unlocked": true,
+        "unlockHint": "当前版本免费开放",
+        "kind": "water",
+        "factor": 1.1,
+        "radius": 300,
+        "seconds": 0.55,
+        "maxTargets": 18,
+        "maxHits": 1,
+        "color": "#e88c53"
+      },
+      {
+        "id": "G20",
+        "name": "星落五丈原",
+        "category": "奇术",
+        "damage": "每星0.55S",
+        "range": "5点，各半径90",
+        "duration": "1.6秒",
+        "effect": "五颗流星依次坠落；同一敌最多3次，整次最多20个不同目标。",
+        "icon": 19,
+        "powerRank": 7,
+        "powerTier": 4,
+        "killCharge": 58,
+        "unlocked": true,
+        "unlockHint": "当前版本免费开放",
+        "kind": "meteor",
+        "factor": 0.55,
+        "radius": 90,
+        "seconds": 1.6,
+        "maxTargets": 20,
+        "maxHits": 3,
+        "color": "#8fcfdb"
+      },
+      {
+        "id": "G07",
+        "name": "背水一战",
+        "category": "战技",
+        "damage": "攻速×5（+400%）",
+        "range": "自身",
+        "duration": "5秒",
+        "effect": "5秒内武器攻击频率达到原来的5倍，攻击间隔缩短到20%；不增加单次伤害，不扣心，同名不叠加。",
+        "icon": 6,
+        "powerRank": 8,
+        "powerTier": 4,
+        "killCharge": 30,
+        "unlocked": true,
+        "unlockHint": "当前版本免费开放",
+        "kind": "battle-haste",
+        "factor": 4,
+        "radius": 90,
+        "seconds": 5,
+        "maxTargets": 1,
         "maxHits": 1,
         "color": "#f0c56d"
       },
       {
-        "id": "G21",
-        "name": "暗度陈仓",
-        "category": "军略",
-        "damage": "1.20S",
-        "range": "后退200／刃波380",
-        "duration": "0.25秒",
-        "effect": "沿移动反方向退200，0.2秒保护，并朝前推出窄刃波，最多12敌。",
-        "icon": 20,
-        "powerRank": 20,
+        "id": "G25",
+        "name": "护体剑阵",
+        "category": "奇术",
+        "damage": "每击0.20S／抵挡3次",
+        "range": "周身半径120",
+        "duration": "6秒",
+        "effect": "4柄飞剑环绕6秒，接触攻击敌军；同敌最多4次、最多20敌，并抵挡最多3次攻击或飞行弹体。",
+        "icon": 24,
+        "powerRank": 9,
+        "powerTier": 5,
+        "killCharge": 44,
+        "unlocked": true,
+        "unlockHint": "当前版本免费开放",
+        "kind": "sword-guard",
+        "factor": 0.2,
+        "radius": 120,
+        "seconds": 6,
+        "maxTargets": 20,
+        "maxHits": 4,
+        "color": "#8fcfdb"
+      },
+      {
+        "id": "G26",
+        "name": "震军号令",
+        "category": "奇术",
+        "damage": "眩晕5秒",
+        "range": "半径400（5身位）",
+        "duration": "5秒",
+        "effect": "震慑周围5身位内已出生的敌军（含Boss），眩晕5秒；停止行动和攻击，不清除已发射弹体或地面危险。",
+        "icon": 25,
+        "powerRank": 10,
         "powerTier": 5,
         "killCharge": 50,
         "unlocked": true,
         "unlockHint": "当前版本免费开放",
-        "kind": "retreat",
-        "factor": 1.2,
-        "radius": 380,
-        "seconds": 0.25,
-        "maxTargets": 12,
+        "kind": "stun",
+        "factor": 0,
+        "radius": 400,
+        "seconds": 5,
+        "maxTargets": 80,
         "maxHits": 1,
-        "color": "#e88c53"
+        "color": "#8fcfdb"
       },
       {
         "id": "G19",
@@ -18989,7 +18760,7 @@
         "duration": "1.4秒",
         "effect": "4处依次落雷，间隔0.3秒；同一敌最多2雷，整次最多18个不同目标。",
         "icon": 18,
-        "powerRank": 21,
+        "powerRank": 11,
         "powerTier": 6,
         "killCharge": 52,
         "unlocked": true,
@@ -19003,70 +18774,26 @@
         "color": "#8fcfdb"
       },
       {
-        "id": "G24",
-        "name": "四面楚歌",
-        "category": "军略",
-        "damage": "1.20S",
-        "range": "半径320",
-        "duration": "3秒",
-        "effect": "范围伤害一次，最多18敌；3秒内受影响者下一次攻击间隔+20%，Boss+10%，不取消当前出手。",
-        "icon": 23,
-        "powerRank": 22,
-        "powerTier": 6,
-        "killCharge": 54,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "song",
-        "factor": 1.2,
-        "radius": 320,
-        "seconds": 3,
-        "maxTargets": 18,
-        "maxHits": 1,
-        "color": "#e88c53"
-      },
-      {
         "id": "G22",
         "name": "万箭齐发",
         "category": "军略",
-        "damage": "每箭0.22S",
-        "range": "120°／450",
-        "duration": "0.5秒",
-        "effect": "12支穿透箭，每箭最多3敌，同敌最多4箭，整次最多24个不同目标。",
+        "damage": "每轮0.22S／4轮",
+        "range": "半径400（5身位）",
+        "duration": "1.3秒",
+        "effect": "以施法位置为中心，半径5身位被4轮箭雨覆盖；同敌最多4次，最多24敌。",
         "icon": 21,
-        "powerRank": 23,
+        "powerRank": 12,
         "powerTier": 6,
         "killCharge": 56,
         "unlocked": true,
         "unlockHint": "当前版本免费开放",
-        "kind": "volley",
+        "kind": "rain",
         "factor": 0.22,
-        "radius": 450,
-        "seconds": 0.5,
+        "radius": 400,
+        "seconds": 1.3,
         "maxTargets": 24,
         "maxHits": 4,
         "color": "#e88c53"
-      },
-      {
-        "id": "G20",
-        "name": "星落五丈原",
-        "category": "奇术",
-        "damage": "每星0.55S",
-        "range": "5点，各半径90",
-        "duration": "1.6秒",
-        "effect": "五颗流星依次坠落；同一敌最多3次，整次最多20个不同目标。",
-        "icon": 19,
-        "powerRank": 24,
-        "powerTier": 6,
-        "killCharge": 58,
-        "unlocked": true,
-        "unlockHint": "当前版本免费开放",
-        "kind": "meteor",
-        "factor": 0.55,
-        "radius": 90,
-        "seconds": 1.6,
-        "maxTargets": 20,
-        "maxHits": 3,
-        "color": "#8fcfdb"
       }
     ],
     "genericSkillsCombatEnabled": true
@@ -19422,228 +19149,6 @@
       },
       {
         "chapter": 2,
-        "basePrice": 30,
-        "weaponPrices": {
-          "sandal": [
-            30,
-            48,
-            75,
-            120
-          ],
-          "pole": [
-            30,
-            48,
-            75,
-            120
-          ],
-          "peach": [
-            17,
-            27,
-            43,
-            69
-          ],
-          "cleaver": [
-            30,
-            48,
-            75,
-            120
-          ],
-          "firecracker": [
-            19,
-            31,
-            48,
-            77
-          ],
-          "smg": [
-            42,
-            67,
-            104,
-            167
-          ],
-          "shotgun": [
-            42,
-            67,
-            104,
-            167
-          ],
-          "rocket": [
-            48,
-            77,
-            121,
-            193
-          ],
-          "sword": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "thunder": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "gourd": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "twin-swords": [
-            34,
-            55,
-            86,
-            137
-          ],
-          "guandao": [
-            49,
-            79,
-            123,
-            197
-          ],
-          "serpent-spear": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "halberd": [
-            51,
-            82,
-            129,
-            206
-          ],
-          "silver-spear": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "qinggang": [
-            43,
-            69,
-            107,
-            171
-          ],
-          "yitian": [
-            51,
-            82,
-            129,
-            206
-          ],
-          "seven-saber": [
-            41,
-            65,
-            102,
-            163
-          ],
-          "ancient-saber": [
-            47,
-            75,
-            118,
-            189
-          ],
-          "twin-halberds": [
-            47,
-            75,
-            118,
-            189
-          ],
-          "trident": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "caltrops": [
-            32,
-            51,
-            80,
-            129
-          ],
-          "repeater": [
-            43,
-            69,
-            107,
-            171
-          ],
-          "phoenix-bow": [
-            41,
-            65,
-            102,
-            163
-          ],
-          "heavy-crossbow": [
-            47,
-            75,
-            118,
-            189
-          ],
-          "hand-halberd": [
-            36,
-            58,
-            91,
-            146
-          ],
-          "chain-hook": [
-            39,
-            62,
-            96,
-            154
-          ],
-          "oil-jar": [
-            36,
-            58,
-            91,
-            146
-          ],
-          "thunder-bomb": [
-            47,
-            75,
-            118,
-            189
-          ],
-          "feather-fan": [
-            36,
-            58,
-            91,
-            146
-          ],
-          "taiping-book": [
-            41,
-            65,
-            102,
-            163
-          ],
-          "star-lamps": [
-            49,
-            79,
-            123,
-            197
-          ],
-          "bagua": [
-            47,
-            75,
-            118,
-            189
-          ],
-          "wood-ox": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "wood-kite": [
-            43,
-            69,
-            107,
-            171
-          ]
-        }
-      },
-      {
-        "chapter": 3,
         "basePrice": 32,
         "weaponPrices": {
           "sandal": [
@@ -19865,3110 +19370,1112 @@
         }
       },
       {
-        "chapter": 4,
-        "basePrice": 34,
+        "chapter": 3,
+        "basePrice": 36,
         "weaponPrices": {
           "sandal": [
-            34,
-            54,
-            85,
-            136
-          ],
-          "pole": [
-            34,
-            54,
-            85,
-            136
-          ],
-          "peach": [
-            19,
-            31,
-            49,
-            78
-          ],
-          "cleaver": [
-            34,
-            54,
-            85,
-            136
-          ],
-          "firecracker": [
-            22,
-            35,
-            55,
-            87
-          ],
-          "smg": [
-            47,
-            76,
-            118,
-            189
-          ],
-          "shotgun": [
-            47,
-            76,
-            118,
-            189
-          ],
-          "rocket": [
-            55,
-            87,
-            137,
-            219
-          ],
-          "sword": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "thunder": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "gourd": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "twin-swords": [
-            39,
-            62,
-            97,
-            155
-          ],
-          "guandao": [
-            56,
-            89,
-            140,
-            223
-          ],
-          "serpent-spear": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "halberd": [
-            58,
-            93,
-            146,
-            233
-          ],
-          "silver-spear": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "qinggang": [
-            49,
-            78,
-            121,
-            194
-          ],
-          "yitian": [
-            58,
-            93,
-            146,
-            233
-          ],
-          "seven-saber": [
-            46,
-            74,
-            115,
-            185
-          ],
-          "ancient-saber": [
-            53,
-            85,
-            134,
-            214
-          ],
-          "twin-halberds": [
-            53,
-            85,
-            134,
-            214
-          ],
-          "trident": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "caltrops": [
-            36,
-            58,
-            91,
-            146
-          ],
-          "repeater": [
-            49,
-            78,
-            121,
-            194
-          ],
-          "phoenix-bow": [
-            46,
-            74,
-            115,
-            185
-          ],
-          "heavy-crossbow": [
-            53,
-            85,
-            134,
-            214
-          ],
-          "hand-halberd": [
-            41,
-            66,
-            103,
-            165
-          ],
-          "chain-hook": [
-            44,
-            70,
-            109,
-            175
-          ],
-          "oil-jar": [
-            41,
-            66,
-            103,
-            165
-          ],
-          "thunder-bomb": [
-            53,
-            85,
-            134,
-            214
-          ],
-          "feather-fan": [
-            41,
-            66,
-            103,
-            165
-          ],
-          "taiping-book": [
-            46,
-            74,
-            115,
-            185
-          ],
-          "star-lamps": [
-            56,
-            89,
-            140,
-            223
-          ],
-          "bagua": [
-            53,
-            85,
-            134,
-            214
-          ],
-          "wood-ox": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "wood-kite": [
-            49,
-            78,
-            121,
-            194
-          ]
-        }
-      },
-      {
-        "chapter": 5,
-        "basePrice": 37,
-        "weaponPrices": {
-          "sandal": [
-            37,
-            59,
-            93,
-            148
-          ],
-          "pole": [
-            37,
-            59,
-            93,
-            148
-          ],
-          "peach": [
-            21,
-            34,
-            53,
-            85
-          ],
-          "cleaver": [
-            37,
-            59,
-            93,
-            148
-          ],
-          "firecracker": [
-            24,
-            38,
-            59,
-            95
-          ],
-          "smg": [
-            52,
-            82,
-            129,
-            206
-          ],
-          "shotgun": [
-            52,
-            82,
-            129,
-            206
-          ],
-          "rocket": [
-            59,
-            95,
-            149,
-            238
-          ],
-          "sword": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "thunder": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "gourd": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "twin-swords": [
-            42,
-            68,
-            106,
-            169
-          ],
-          "guandao": [
-            61,
-            97,
-            152,
-            243
-          ],
-          "serpent-spear": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "halberd": [
-            63,
-            101,
-            159,
-            254
-          ],
-          "silver-spear": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "qinggang": [
-            53,
-            85,
-            132,
-            211
-          ],
-          "yitian": [
-            63,
-            101,
-            159,
-            254
-          ],
-          "seven-saber": [
-            50,
-            80,
-            126,
-            201
-          ],
-          "ancient-saber": [
-            58,
-            93,
-            145,
-            233
-          ],
-          "twin-halberds": [
-            58,
-            93,
-            145,
-            233
-          ],
-          "trident": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "caltrops": [
-            40,
-            63,
-            99,
-            159
-          ],
-          "repeater": [
-            53,
-            85,
-            132,
-            211
-          ],
-          "phoenix-bow": [
-            50,
-            80,
-            126,
-            201
-          ],
-          "heavy-crossbow": [
-            58,
-            93,
-            145,
-            233
-          ],
-          "hand-halberd": [
-            45,
-            72,
-            112,
-            180
-          ],
-          "chain-hook": [
-            48,
-            76,
-            119,
-            190
-          ],
-          "oil-jar": [
-            45,
-            72,
-            112,
-            180
-          ],
-          "thunder-bomb": [
-            58,
-            93,
-            145,
-            233
-          ],
-          "feather-fan": [
-            45,
-            72,
-            112,
-            180
-          ],
-          "taiping-book": [
-            50,
-            80,
-            126,
-            201
-          ],
-          "star-lamps": [
-            61,
-            97,
-            152,
-            243
-          ],
-          "bagua": [
-            58,
-            93,
-            145,
-            233
-          ],
-          "wood-ox": [
-            56,
-            89,
-            139,
-            222
-          ],
-          "wood-kite": [
-            53,
-            85,
-            132,
-            211
-          ]
-        }
-      },
-      {
-        "chapter": 6,
-        "basePrice": 39,
-        "weaponPrices": {
-          "sandal": [
-            39,
-            62,
-            98,
-            156
-          ],
-          "pole": [
-            39,
-            62,
-            98,
-            156
-          ],
-          "peach": [
-            22,
-            36,
-            56,
-            89
-          ],
-          "cleaver": [
-            39,
-            62,
-            98,
-            156
-          ],
-          "firecracker": [
-            25,
-            40,
-            63,
-            100
-          ],
-          "smg": [
-            54,
-            87,
-            136,
-            217
-          ],
-          "shotgun": [
-            54,
-            87,
-            136,
-            217
-          ],
-          "rocket": [
-            63,
-            100,
-            157,
-            251
-          ],
-          "sword": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "thunder": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "gourd": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "twin-swords": [
-            45,
-            71,
-            111,
-            178
-          ],
-          "guandao": [
-            64,
-            103,
-            160,
-            256
-          ],
-          "serpent-spear": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "halberd": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "silver-spear": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "qinggang": [
-            56,
-            89,
-            139,
-            223
-          ],
-          "yitian": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "seven-saber": [
-            53,
-            85,
-            132,
-            212
-          ],
-          "ancient-saber": [
-            61,
-            98,
-            153,
-            245
-          ],
-          "twin-halberds": [
-            61,
-            98,
-            153,
-            245
-          ],
-          "trident": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "caltrops": [
-            42,
-            67,
-            104,
-            167
-          ],
-          "repeater": [
-            56,
-            89,
-            139,
-            223
-          ],
-          "phoenix-bow": [
-            53,
-            85,
-            132,
-            212
-          ],
-          "heavy-crossbow": [
-            61,
-            98,
-            153,
-            245
-          ],
-          "hand-halberd": [
-            47,
-            76,
-            118,
-            189
-          ],
-          "chain-hook": [
-            50,
-            80,
-            125,
-            201
-          ],
-          "oil-jar": [
-            47,
-            76,
-            118,
-            189
-          ],
-          "thunder-bomb": [
-            61,
-            98,
-            153,
-            245
-          ],
-          "feather-fan": [
-            47,
-            76,
-            118,
-            189
-          ],
-          "taiping-book": [
-            53,
-            85,
-            132,
-            212
-          ],
-          "star-lamps": [
-            64,
-            103,
-            160,
-            256
-          ],
-          "bagua": [
-            61,
-            98,
-            153,
-            245
-          ],
-          "wood-ox": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "wood-kite": [
-            56,
-            89,
-            139,
-            223
-          ]
-        }
-      },
-      {
-        "chapter": 7,
-        "basePrice": 42,
-        "weaponPrices": {
-          "sandal": [
-            42,
-            67,
-            105,
-            168
-          ],
-          "pole": [
-            42,
-            67,
-            105,
-            168
-          ],
-          "peach": [
-            24,
-            38,
-            60,
-            96
-          ],
-          "cleaver": [
-            42,
-            67,
-            105,
-            168
-          ],
-          "firecracker": [
-            27,
-            43,
-            68,
-            108
-          ],
-          "smg": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "shotgun": [
-            59,
-            94,
-            146,
-            234
-          ],
-          "rocket": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "sword": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "thunder": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "gourd": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "twin-swords": [
-            48,
-            77,
-            120,
-            192
-          ],
-          "guandao": [
-            69,
-            110,
-            173,
-            276
-          ],
-          "serpent-spear": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "halberd": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "silver-spear": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "qinggang": [
-            60,
-            96,
-            150,
-            240
-          ],
-          "yitian": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "seven-saber": [
-            57,
-            91,
-            143,
-            228
-          ],
-          "ancient-saber": [
-            66,
-            106,
-            165,
-            264
-          ],
-          "twin-halberds": [
-            66,
-            106,
-            165,
-            264
-          ],
-          "trident": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "caltrops": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "repeater": [
-            60,
-            96,
-            150,
-            240
-          ],
-          "phoenix-bow": [
-            57,
-            91,
-            143,
-            228
-          ],
-          "heavy-crossbow": [
-            66,
-            106,
-            165,
-            264
-          ],
-          "hand-halberd": [
-            51,
-            82,
-            127,
-            204
-          ],
-          "chain-hook": [
-            54,
-            86,
-            135,
-            216
-          ],
-          "oil-jar": [
-            51,
-            82,
-            127,
-            204
-          ],
-          "thunder-bomb": [
-            66,
-            106,
-            165,
-            264
-          ],
-          "feather-fan": [
-            51,
-            82,
-            127,
-            204
-          ],
-          "taiping-book": [
-            57,
-            91,
-            143,
-            228
-          ],
-          "star-lamps": [
-            69,
-            110,
-            173,
-            276
-          ],
-          "bagua": [
-            66,
-            106,
-            165,
-            264
-          ],
-          "wood-ox": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "wood-kite": [
-            60,
-            96,
-            150,
-            240
-          ]
-        }
-      },
-      {
-        "chapter": 8,
-        "basePrice": 45,
-        "weaponPrices": {
-          "sandal": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "pole": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "peach": [
-            26,
-            41,
-            64,
-            103
-          ],
-          "cleaver": [
-            45,
-            72,
-            113,
-            180
-          ],
-          "firecracker": [
-            29,
-            46,
-            72,
-            116
-          ],
-          "smg": [
-            63,
-            100,
-            157,
-            251
-          ],
-          "shotgun": [
-            63,
-            100,
-            157,
-            251
-          ],
-          "rocket": [
-            72,
-            116,
-            181,
-            289
-          ],
-          "sword": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "thunder": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "gourd": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "twin-swords": [
-            51,
-            82,
-            129,
-            206
-          ],
-          "guandao": [
-            74,
-            118,
-            185,
-            296
-          ],
-          "serpent-spear": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "halberd": [
-            77,
-            123,
-            193,
-            309
-          ],
-          "silver-spear": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "qinggang": [
-            64,
-            103,
-            161,
-            257
-          ],
-          "yitian": [
-            77,
-            123,
-            193,
-            309
-          ],
-          "seven-saber": [
-            61,
-            98,
-            153,
-            244
-          ],
-          "ancient-saber": [
-            71,
-            113,
-            177,
-            283
-          ],
-          "twin-halberds": [
-            71,
-            113,
-            177,
-            283
-          ],
-          "trident": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "caltrops": [
-            48,
-            77,
-            121,
-            193
-          ],
-          "repeater": [
-            64,
-            103,
-            161,
-            257
-          ],
-          "phoenix-bow": [
-            61,
-            98,
-            153,
-            244
-          ],
-          "heavy-crossbow": [
-            71,
-            113,
-            177,
-            283
-          ],
-          "hand-halberd": [
-            55,
-            87,
-            137,
-            219
-          ],
-          "chain-hook": [
-            58,
-            93,
-            145,
-            231
-          ],
-          "oil-jar": [
-            55,
-            87,
-            137,
-            219
-          ],
-          "thunder-bomb": [
-            71,
-            113,
-            177,
-            283
-          ],
-          "feather-fan": [
-            55,
-            87,
-            137,
-            219
-          ],
-          "taiping-book": [
-            61,
-            98,
-            153,
-            244
-          ],
-          "star-lamps": [
-            74,
-            118,
-            185,
-            296
-          ],
-          "bagua": [
-            71,
-            113,
-            177,
-            283
-          ],
-          "wood-ox": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "wood-kite": [
-            64,
-            103,
-            161,
-            257
-          ]
-        }
-      },
-      {
-        "chapter": 9,
-        "basePrice": 48,
-        "weaponPrices": {
-          "sandal": [
-            48,
-            77,
-            120,
-            192
-          ],
-          "pole": [
-            48,
-            77,
-            120,
-            192
-          ],
-          "peach": [
-            27,
-            44,
-            69,
-            110
-          ],
-          "cleaver": [
-            48,
-            77,
-            120,
-            192
-          ],
-          "firecracker": [
-            31,
-            49,
-            77,
-            123
-          ],
-          "smg": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "shotgun": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "rocket": [
-            77,
-            123,
-            193,
-            309
-          ],
-          "sword": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "thunder": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "gourd": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "twin-swords": [
-            55,
-            88,
-            137,
-            219
-          ],
-          "guandao": [
-            79,
-            126,
-            197,
-            315
-          ],
-          "serpent-spear": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "halberd": [
-            82,
-            132,
-            206,
-            329
-          ],
-          "silver-spear": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "qinggang": [
-            69,
-            110,
-            171,
-            274
-          ],
-          "yitian": [
-            82,
-            132,
-            206,
-            329
-          ],
-          "seven-saber": [
-            65,
-            104,
-            163,
-            261
-          ],
-          "ancient-saber": [
-            75,
-            121,
-            189,
-            302
-          ],
-          "twin-halberds": [
-            75,
-            121,
-            189,
-            302
-          ],
-          "trident": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "caltrops": [
-            51,
-            82,
-            129,
-            206
-          ],
-          "repeater": [
-            69,
-            110,
-            171,
-            274
-          ],
-          "phoenix-bow": [
-            65,
-            104,
-            163,
-            261
-          ],
-          "heavy-crossbow": [
-            75,
-            121,
-            189,
-            302
-          ],
-          "hand-halberd": [
-            58,
-            93,
-            146,
-            233
-          ],
-          "chain-hook": [
-            62,
-            99,
-            154,
-            247
-          ],
-          "oil-jar": [
-            58,
-            93,
-            146,
-            233
-          ],
-          "thunder-bomb": [
-            75,
-            121,
-            189,
-            302
-          ],
-          "feather-fan": [
-            58,
-            93,
-            146,
-            233
-          ],
-          "taiping-book": [
-            65,
-            104,
-            163,
-            261
-          ],
-          "star-lamps": [
-            79,
-            126,
-            197,
-            315
-          ],
-          "bagua": [
-            75,
-            121,
-            189,
-            302
-          ],
-          "wood-ox": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "wood-kite": [
-            69,
-            110,
-            171,
-            274
-          ]
-        }
-      },
-      {
-        "chapter": 10,
-        "basePrice": 51,
-        "weaponPrices": {
-          "sandal": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "pole": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "peach": [
-            29,
-            47,
-            73,
-            117
-          ],
-          "cleaver": [
-            51,
-            82,
-            128,
-            204
-          ],
-          "firecracker": [
-            33,
-            52,
-            82,
-            131
-          ],
-          "smg": [
-            71,
-            114,
-            178,
-            284
-          ],
-          "shotgun": [
-            71,
-            114,
-            178,
-            284
-          ],
-          "rocket": [
-            82,
-            131,
-            205,
-            328
-          ],
-          "sword": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "thunder": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "gourd": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "twin-swords": [
-            58,
-            93,
-            146,
-            233
-          ],
-          "guandao": [
-            84,
-            134,
-            209,
-            335
-          ],
-          "serpent-spear": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "halberd": [
-            87,
-            140,
-            219,
-            350
-          ],
-          "silver-spear": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "qinggang": [
-            73,
-            117,
-            182,
-            291
-          ],
-          "yitian": [
-            87,
-            140,
-            219,
-            350
-          ],
-          "seven-saber": [
-            69,
-            111,
-            173,
-            277
-          ],
-          "ancient-saber": [
-            80,
-            128,
-            200,
-            321
-          ],
-          "twin-halberds": [
-            80,
-            128,
-            200,
-            321
-          ],
-          "trident": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "caltrops": [
-            55,
-            87,
-            137,
-            219
-          ],
-          "repeater": [
-            73,
-            117,
-            182,
-            291
-          ],
-          "phoenix-bow": [
-            69,
-            111,
-            173,
-            277
-          ],
-          "heavy-crossbow": [
-            80,
-            128,
-            200,
-            321
-          ],
-          "hand-halberd": [
-            62,
-            99,
-            155,
-            248
-          ],
-          "chain-hook": [
-            66,
-            105,
-            164,
-            262
-          ],
-          "oil-jar": [
-            62,
-            99,
-            155,
-            248
-          ],
-          "thunder-bomb": [
-            80,
-            128,
-            200,
-            321
-          ],
-          "feather-fan": [
-            62,
-            99,
-            155,
-            248
-          ],
-          "taiping-book": [
-            69,
-            111,
-            173,
-            277
-          ],
-          "star-lamps": [
-            84,
-            134,
-            209,
-            335
-          ],
-          "bagua": [
-            80,
-            128,
-            200,
-            321
-          ],
-          "wood-ox": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "wood-kite": [
-            73,
-            117,
-            182,
-            291
-          ]
-        }
-      },
-      {
-        "chapter": 11,
-        "basePrice": 55,
-        "weaponPrices": {
-          "sandal": [
-            55,
-            88,
-            138,
-            220
-          ],
-          "pole": [
-            55,
-            88,
-            138,
-            220
-          ],
-          "peach": [
-            31,
-            50,
-            79,
-            126
-          ],
-          "cleaver": [
-            55,
-            88,
-            138,
-            220
-          ],
-          "firecracker": [
-            35,
-            57,
-            88,
-            141
-          ],
-          "smg": [
-            77,
-            123,
-            192,
-            306
-          ],
-          "shotgun": [
-            77,
-            123,
-            192,
-            306
-          ],
-          "rocket": [
-            88,
-            141,
-            221,
-            354
-          ],
-          "sword": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "thunder": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "gourd": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "twin-swords": [
-            63,
-            101,
-            157,
-            251
-          ],
-          "guandao": [
-            90,
-            145,
-            226,
-            361
-          ],
-          "serpent-spear": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "halberd": [
-            94,
-            151,
-            236,
-            377
-          ],
-          "silver-spear": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "qinggang": [
-            79,
-            126,
-            196,
-            314
-          ],
-          "yitian": [
-            94,
-            151,
-            236,
-            377
-          ],
-          "seven-saber": [
-            75,
-            119,
-            187,
-            299
-          ],
-          "ancient-saber": [
-            86,
-            138,
-            216,
-            346
-          ],
-          "twin-halberds": [
-            86,
-            138,
-            216,
-            346
-          ],
-          "trident": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "caltrops": [
-            59,
-            94,
-            147,
-            236
-          ],
-          "repeater": [
-            79,
-            126,
-            196,
-            314
-          ],
-          "phoenix-bow": [
-            75,
-            119,
-            187,
-            299
-          ],
-          "heavy-crossbow": [
-            86,
-            138,
-            216,
-            346
-          ],
-          "hand-halberd": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "chain-hook": [
-            71,
-            113,
-            177,
-            283
-          ],
-          "oil-jar": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "thunder-bomb": [
-            86,
-            138,
-            216,
-            346
-          ],
-          "feather-fan": [
-            67,
-            107,
-            167,
-            267
-          ],
-          "taiping-book": [
-            75,
-            119,
-            187,
-            299
-          ],
-          "star-lamps": [
-            90,
-            145,
-            226,
-            361
-          ],
-          "bagua": [
-            86,
-            138,
-            216,
-            346
-          ],
-          "wood-ox": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "wood-kite": [
-            79,
-            126,
-            196,
-            314
-          ]
-        }
-      },
-      {
-        "chapter": 12,
-        "basePrice": 59,
-        "weaponPrices": {
-          "sandal": [
-            59,
-            94,
-            148,
-            236
-          ],
-          "pole": [
-            59,
-            94,
-            148,
-            236
-          ],
-          "peach": [
-            34,
-            54,
-            84,
-            135
-          ],
-          "cleaver": [
-            59,
-            94,
-            148,
-            236
-          ],
-          "firecracker": [
-            38,
-            61,
-            95,
-            152
-          ],
-          "smg": [
-            82,
-            131,
-            205,
-            329
-          ],
-          "shotgun": [
-            82,
-            131,
-            205,
-            329
-          ],
-          "rocket": [
-            95,
-            152,
-            237,
-            379
-          ],
-          "sword": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "thunder": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "gourd": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "twin-swords": [
-            67,
-            108,
-            169,
-            270
-          ],
-          "guandao": [
-            97,
-            155,
-            242,
-            388
-          ],
-          "serpent-spear": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "halberd": [
-            101,
-            162,
-            253,
-            405
-          ],
-          "silver-spear": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "qinggang": [
-            84,
-            135,
-            211,
-            337
-          ],
-          "yitian": [
-            101,
-            162,
-            253,
-            405
-          ],
-          "seven-saber": [
-            80,
-            128,
-            200,
-            320
-          ],
-          "ancient-saber": [
-            93,
-            148,
-            232,
-            371
-          ],
-          "twin-halberds": [
-            93,
-            148,
-            232,
-            371
-          ],
-          "trident": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "caltrops": [
-            63,
-            101,
-            158,
-            253
-          ],
-          "repeater": [
-            84,
-            135,
-            211,
-            337
-          ],
-          "phoenix-bow": [
-            80,
-            128,
-            200,
-            320
-          ],
-          "heavy-crossbow": [
-            93,
-            148,
-            232,
-            371
-          ],
-          "hand-halberd": [
-            72,
-            115,
-            179,
-            287
-          ],
-          "chain-hook": [
-            76,
-            121,
-            190,
-            303
-          ],
-          "oil-jar": [
-            72,
-            115,
-            179,
-            287
-          ],
-          "thunder-bomb": [
-            93,
-            148,
-            232,
-            371
-          ],
-          "feather-fan": [
-            72,
-            115,
-            179,
-            287
-          ],
-          "taiping-book": [
-            80,
-            128,
-            200,
-            320
-          ],
-          "star-lamps": [
-            97,
-            155,
-            242,
-            388
-          ],
-          "bagua": [
-            93,
-            148,
-            232,
-            371
-          ],
-          "wood-ox": [
-            89,
-            142,
-            221,
-            354
-          ],
-          "wood-kite": [
-            84,
-            135,
-            211,
-            337
-          ]
-        }
-      },
-      {
-        "chapter": 13,
-        "basePrice": 63,
-        "weaponPrices": {
-          "sandal": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "pole": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "peach": [
             36,
             58,
             90,
             144
           ],
-          "cleaver": [
-            63,
-            101,
-            158,
-            252
-          ],
-          "firecracker": [
-            41,
-            65,
-            101,
-            162
-          ],
-          "smg": [
-            88,
-            140,
-            219,
-            351
-          ],
-          "shotgun": [
-            88,
-            140,
-            219,
-            351
-          ],
-          "rocket": [
-            101,
-            162,
-            253,
-            405
-          ],
-          "sword": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "thunder": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "gourd": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "twin-swords": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "guandao": [
-            104,
-            166,
-            259,
-            414
-          ],
-          "serpent-spear": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "halberd": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "silver-spear": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "qinggang": [
-            90,
-            144,
-            225,
-            360
-          ],
-          "yitian": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "seven-saber": [
-            86,
-            137,
-            214,
-            342
-          ],
-          "ancient-saber": [
-            99,
-            158,
-            248,
-            396
-          ],
-          "twin-halberds": [
-            99,
-            158,
-            248,
-            396
-          ],
-          "trident": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "caltrops": [
-            68,
-            108,
-            169,
-            270
-          ],
-          "repeater": [
-            90,
-            144,
-            225,
-            360
-          ],
-          "phoenix-bow": [
-            86,
-            137,
-            214,
-            342
-          ],
-          "heavy-crossbow": [
-            99,
-            158,
-            248,
-            396
-          ],
-          "hand-halberd": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "chain-hook": [
-            81,
-            130,
-            203,
-            324
-          ],
-          "oil-jar": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "thunder-bomb": [
-            99,
-            158,
-            248,
-            396
-          ],
-          "feather-fan": [
-            77,
-            122,
-            191,
-            306
-          ],
-          "taiping-book": [
-            86,
-            137,
-            214,
-            342
-          ],
-          "star-lamps": [
-            104,
-            166,
-            259,
-            414
-          ],
-          "bagua": [
-            99,
-            158,
-            248,
-            396
-          ],
-          "wood-ox": [
-            95,
-            151,
-            236,
-            378
-          ],
-          "wood-kite": [
-            90,
-            144,
-            225,
-            360
-          ]
-        }
-      },
-      {
-        "chapter": 14,
-        "basePrice": 67,
-        "weaponPrices": {
-          "sandal": [
-            67,
-            107,
-            168,
-            268
-          ],
           "pole": [
-            67,
-            107,
-            168,
-            268
+            36,
+            58,
+            90,
+            144
           ],
           "peach": [
-            38,
-            61,
-            96,
-            153
+            21,
+            33,
+            51,
+            82
           ],
           "cleaver": [
-            67,
-            107,
-            168,
-            268
+            36,
+            58,
+            90,
+            144
           ],
           "firecracker": [
-            43,
-            69,
-            108,
-            172
+            23,
+            37,
+            58,
+            93
           ],
           "smg": [
-            93,
-            149,
-            233,
-            373
+            50,
+            80,
+            125,
+            201
           ],
           "shotgun": [
-            93,
-            149,
-            233,
-            373
+            50,
+            80,
+            125,
+            201
           ],
           "rocket": [
-            108,
-            172,
-            269,
-            431
+            58,
+            93,
+            145,
+            231
           ],
           "sword": [
-            101,
-            161,
-            251,
-            402
+            54,
+            86,
+            135,
+            216
           ],
           "thunder": [
-            101,
-            161,
-            251,
-            402
+            54,
+            86,
+            135,
+            216
           ],
           "gourd": [
-            101,
-            161,
-            251,
-            402
+            54,
+            86,
+            135,
+            216
           ],
           "twin-swords": [
-            77,
-            123,
-            191,
-            306
-          ],
-          "guandao": [
-            110,
-            176,
-            275,
-            440
-          ],
-          "serpent-spear": [
-            101,
-            161,
-            251,
-            402
-          ],
-          "halberd": [
-            115,
-            184,
-            287,
-            459
-          ],
-          "silver-spear": [
-            101,
-            161,
-            251,
-            402
-          ],
-          "qinggang": [
-            96,
-            153,
-            239,
-            383
-          ],
-          "yitian": [
-            115,
-            184,
-            287,
-            459
-          ],
-          "seven-saber": [
-            91,
-            145,
-            227,
-            364
-          ],
-          "ancient-saber": [
-            105,
-            168,
-            263,
-            421
-          ],
-          "twin-halberds": [
-            105,
-            168,
-            263,
-            421
-          ],
-          "trident": [
-            101,
-            161,
-            251,
-            402
-          ],
-          "caltrops": [
-            72,
-            115,
-            179,
-            287
-          ],
-          "repeater": [
-            96,
-            153,
-            239,
-            383
-          ],
-          "phoenix-bow": [
-            91,
-            145,
-            227,
-            364
-          ],
-          "heavy-crossbow": [
-            105,
-            168,
-            263,
-            421
-          ],
-          "hand-halberd": [
-            81,
-            130,
-            203,
-            325
-          ],
-          "chain-hook": [
-            86,
-            138,
-            215,
-            345
-          ],
-          "oil-jar": [
-            81,
-            130,
-            203,
-            325
-          ],
-          "thunder-bomb": [
-            105,
-            168,
-            263,
-            421
-          ],
-          "feather-fan": [
-            81,
-            130,
-            203,
-            325
-          ],
-          "taiping-book": [
-            91,
-            145,
-            227,
-            364
-          ],
-          "star-lamps": [
-            110,
-            176,
-            275,
-            440
-          ],
-          "bagua": [
-            105,
-            168,
-            263,
-            421
-          ],
-          "wood-ox": [
-            101,
-            161,
-            251,
-            402
-          ],
-          "wood-kite": [
-            96,
-            153,
-            239,
-            383
-          ]
-        }
-      },
-      {
-        "chapter": 15,
-        "basePrice": 72,
-        "weaponPrices": {
-          "sandal": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "pole": [
-            72,
-            115,
-            180,
-            288
-          ],
-          "peach": [
             41,
             66,
             103,
             165
           ],
-          "cleaver": [
-            72,
-            115,
-            180,
-            288
+          "guandao": [
+            59,
+            95,
+            148,
+            237
           ],
-          "firecracker": [
+          "serpent-spear": [
+            54,
+            86,
+            135,
+            216
+          ],
+          "halberd": [
+            62,
+            99,
+            154,
+            247
+          ],
+          "silver-spear": [
+            54,
+            86,
+            135,
+            216
+          ],
+          "qinggang": [
+            51,
+            82,
+            129,
+            206
+          ],
+          "yitian": [
+            62,
+            99,
+            154,
+            247
+          ],
+          "seven-saber": [
+            49,
+            78,
+            122,
+            195
+          ],
+          "ancient-saber": [
+            57,
+            91,
+            141,
+            226
+          ],
+          "twin-halberds": [
+            57,
+            91,
+            141,
+            226
+          ],
+          "trident": [
+            54,
+            86,
+            135,
+            216
+          ],
+          "caltrops": [
+            39,
+            62,
+            96,
+            154
+          ],
+          "repeater": [
+            51,
+            82,
+            129,
+            206
+          ],
+          "phoenix-bow": [
+            49,
+            78,
+            122,
+            195
+          ],
+          "heavy-crossbow": [
+            57,
+            91,
+            141,
+            226
+          ],
+          "hand-halberd": [
+            44,
+            70,
+            109,
+            175
+          ],
+          "chain-hook": [
             46,
             74,
             116,
             185
           ],
-          "smg": [
-            100,
-            160,
-            251,
-            401
-          ],
-          "shotgun": [
-            100,
-            160,
-            251,
-            401
-          ],
-          "rocket": [
-            116,
-            185,
-            289,
-            463
-          ],
-          "sword": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "thunder": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "gourd": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "twin-swords": [
-            82,
-            132,
-            206,
-            329
-          ],
-          "guandao": [
-            118,
-            189,
-            296,
-            473
-          ],
-          "serpent-spear": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "halberd": [
-            123,
-            197,
-            309,
-            494
-          ],
-          "silver-spear": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "qinggang": [
-            103,
-            165,
-            257,
-            411
-          ],
-          "yitian": [
-            123,
-            197,
-            309,
-            494
-          ],
-          "seven-saber": [
-            98,
-            156,
-            244,
-            391
-          ],
-          "ancient-saber": [
-            113,
-            181,
-            283,
-            453
-          ],
-          "twin-halberds": [
-            113,
-            181,
-            283,
-            453
-          ],
-          "trident": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "caltrops": [
-            77,
-            123,
-            193,
-            309
-          ],
-          "repeater": [
-            103,
-            165,
-            257,
-            411
-          ],
-          "phoenix-bow": [
-            98,
-            156,
-            244,
-            391
-          ],
-          "heavy-crossbow": [
-            113,
-            181,
-            283,
-            453
-          ],
-          "hand-halberd": [
-            87,
-            140,
-            219,
-            350
-          ],
-          "chain-hook": [
-            93,
-            148,
-            231,
-            370
-          ],
           "oil-jar": [
-            87,
-            140,
-            219,
-            350
-          ],
-          "thunder-bomb": [
-            113,
-            181,
-            283,
-            453
-          ],
-          "feather-fan": [
-            87,
-            140,
-            219,
-            350
-          ],
-          "taiping-book": [
-            98,
-            156,
-            244,
-            391
-          ],
-          "star-lamps": [
-            118,
-            189,
-            296,
-            473
-          ],
-          "bagua": [
-            113,
-            181,
-            283,
-            453
-          ],
-          "wood-ox": [
-            108,
-            173,
-            270,
-            432
-          ],
-          "wood-kite": [
-            103,
-            165,
-            257,
-            411
-          ]
-        }
-      },
-      {
-        "chapter": 16,
-        "basePrice": 77,
-        "weaponPrices": {
-          "sandal": [
-            77,
-            123,
-            193,
-            308
-          ],
-          "pole": [
-            77,
-            123,
-            193,
-            308
-          ],
-          "peach": [
             44,
             70,
-            110,
-            176
-          ],
-          "cleaver": [
-            77,
-            123,
-            193,
-            308
-          ],
-          "firecracker": [
-            50,
-            79,
-            124,
-            198
-          ],
-          "smg": [
-            107,
-            172,
-            268,
-            429
-          ],
-          "shotgun": [
-            107,
-            172,
-            268,
-            429
-          ],
-          "rocket": [
-            124,
-            198,
-            309,
-            495
-          ],
-          "sword": [
-            116,
-            185,
-            289,
-            462
-          ],
-          "thunder": [
-            116,
-            185,
-            289,
-            462
-          ],
-          "gourd": [
-            116,
-            185,
-            289,
-            462
-          ],
-          "twin-swords": [
-            88,
-            141,
-            220,
-            352
-          ],
-          "guandao": [
-            127,
-            202,
-            316,
-            506
-          ],
-          "serpent-spear": [
-            116,
-            185,
-            289,
-            462
-          ],
-          "halberd": [
-            132,
-            211,
-            330,
-            528
-          ],
-          "silver-spear": [
-            116,
-            185,
-            289,
-            462
-          ],
-          "qinggang": [
-            110,
-            176,
-            275,
-            440
-          ],
-          "yitian": [
-            132,
-            211,
-            330,
-            528
-          ],
-          "seven-saber": [
-            105,
-            167,
-            261,
-            418
-          ],
-          "ancient-saber": [
-            121,
-            194,
-            303,
-            484
-          ],
-          "twin-halberds": [
-            121,
-            194,
-            303,
-            484
-          ],
-          "trident": [
-            116,
-            185,
-            289,
-            462
-          ],
-          "caltrops": [
-            83,
-            132,
-            206,
-            330
-          ],
-          "repeater": [
-            110,
-            176,
-            275,
-            440
-          ],
-          "phoenix-bow": [
-            105,
-            167,
-            261,
-            418
-          ],
-          "heavy-crossbow": [
-            121,
-            194,
-            303,
-            484
-          ],
-          "hand-halberd": [
-            93,
-            150,
-            234,
-            374
-          ],
-          "chain-hook": [
-            99,
-            158,
-            248,
-            396
-          ],
-          "oil-jar": [
-            93,
-            150,
-            234,
-            374
+            109,
+            175
           ],
           "thunder-bomb": [
-            121,
-            194,
-            303,
-            484
+            57,
+            91,
+            141,
+            226
           ],
           "feather-fan": [
-            93,
-            150,
-            234,
-            374
+            44,
+            70,
+            109,
+            175
           ],
           "taiping-book": [
-            105,
-            167,
-            261,
-            418
+            49,
+            78,
+            122,
+            195
           ],
           "star-lamps": [
-            127,
-            202,
-            316,
-            506
+            59,
+            95,
+            148,
+            237
           ],
           "bagua": [
-            121,
-            194,
-            303,
-            484
+            57,
+            91,
+            141,
+            226
           ],
           "wood-ox": [
-            116,
-            185,
-            289,
-            462
+            54,
+            86,
+            135,
+            216
           ],
           "wood-kite": [
-            110,
-            176,
-            275,
-            440
+            51,
+            82,
+            129,
+            206
           ]
         }
       },
       {
-        "chapter": 17,
-        "basePrice": 83,
+        "chapter": 4,
+        "basePrice": 40,
         "weaponPrices": {
           "sandal": [
-            83,
-            133,
-            208,
-            332
+            40,
+            64,
+            100,
+            160
           ],
           "pole": [
-            83,
-            133,
-            208,
-            332
+            40,
+            64,
+            100,
+            160
           ],
           "peach": [
-            47,
-            76,
-            119,
-            190
+            23,
+            37,
+            57,
+            91
           ],
           "cleaver": [
-            83,
-            133,
-            208,
-            332
+            40,
+            64,
+            100,
+            160
           ],
           "firecracker": [
-            53,
-            85,
-            133,
-            213
+            26,
+            41,
+            64,
+            103
           ],
           "smg": [
-            116,
-            185,
-            289,
-            462
+            56,
+            89,
+            139,
+            223
           ],
           "shotgun": [
-            116,
-            185,
-            289,
-            462
+            56,
+            89,
+            139,
+            223
           ],
           "rocket": [
-            133,
-            213,
-            333,
-            534
+            64,
+            103,
+            161,
+            257
           ],
           "sword": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "thunder": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "gourd": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "twin-swords": [
-            95,
-            152,
-            237,
-            379
+            46,
+            73,
+            114,
+            183
           ],
           "guandao": [
-            136,
-            218,
-            341,
-            545
+            66,
+            105,
+            164,
+            263
           ],
           "serpent-spear": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "halberd": [
-            142,
-            228,
-            356,
-            569
+            69,
+            110,
+            171,
+            274
           ],
           "silver-spear": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "qinggang": [
-            119,
-            190,
-            296,
-            474
+            57,
+            91,
+            143,
+            229
           ],
           "yitian": [
-            142,
-            228,
-            356,
-            569
+            69,
+            110,
+            171,
+            274
           ],
           "seven-saber": [
-            113,
-            180,
-            282,
-            451
+            54,
+            87,
+            136,
+            217
           ],
           "ancient-saber": [
-            130,
-            209,
-            326,
-            522
+            63,
+            101,
+            157,
+            251
           ],
           "twin-halberds": [
-            130,
-            209,
-            326,
-            522
+            63,
+            101,
+            157,
+            251
           ],
           "trident": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "caltrops": [
-            89,
-            142,
-            222,
-            356
+            43,
+            69,
+            107,
+            171
           ],
           "repeater": [
-            119,
-            190,
-            296,
-            474
+            57,
+            91,
+            143,
+            229
           ],
           "phoenix-bow": [
-            113,
-            180,
-            282,
-            451
+            54,
+            87,
+            136,
+            217
           ],
           "heavy-crossbow": [
-            130,
-            209,
-            326,
-            522
+            63,
+            101,
+            157,
+            251
           ],
           "hand-halberd": [
-            101,
-            161,
-            252,
-            403
+            49,
+            78,
+            121,
+            194
           ],
           "chain-hook": [
-            107,
-            171,
-            267,
-            427
+            51,
+            82,
+            129,
+            206
           ],
           "oil-jar": [
-            101,
-            161,
-            252,
-            403
+            49,
+            78,
+            121,
+            194
           ],
           "thunder-bomb": [
-            130,
-            209,
-            326,
-            522
+            63,
+            101,
+            157,
+            251
           ],
           "feather-fan": [
-            101,
-            161,
-            252,
-            403
+            49,
+            78,
+            121,
+            194
           ],
           "taiping-book": [
-            113,
-            180,
-            282,
-            451
+            54,
+            87,
+            136,
+            217
           ],
           "star-lamps": [
-            136,
-            218,
-            341,
-            545
+            66,
+            105,
+            164,
+            263
           ],
           "bagua": [
-            130,
-            209,
-            326,
-            522
+            63,
+            101,
+            157,
+            251
           ],
           "wood-ox": [
-            125,
-            199,
-            311,
-            498
+            60,
+            96,
+            150,
+            240
           ],
           "wood-kite": [
+            57,
+            91,
+            143,
+            229
+          ]
+        }
+      },
+      {
+        "chapter": 5,
+        "basePrice": 46,
+        "weaponPrices": {
+          "sandal": [
+            46,
+            74,
+            115,
+            184
+          ],
+          "pole": [
+            46,
+            74,
+            115,
+            184
+          ],
+          "peach": [
+            26,
+            42,
+            66,
+            105
+          ],
+          "cleaver": [
+            46,
+            74,
+            115,
+            184
+          ],
+          "firecracker": [
+            30,
+            47,
+            74,
+            118
+          ],
+          "smg": [
+            64,
+            103,
+            160,
+            256
+          ],
+          "shotgun": [
+            64,
+            103,
+            160,
+            256
+          ],
+          "rocket": [
+            74,
+            118,
+            185,
+            296
+          ],
+          "sword": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "thunder": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "gourd": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "twin-swords": [
+            53,
+            84,
+            131,
+            210
+          ],
+          "guandao": [
+            76,
+            121,
+            189,
+            302
+          ],
+          "serpent-spear": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "halberd": [
+            79,
+            126,
+            197,
+            315
+          ],
+          "silver-spear": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "qinggang": [
+            66,
+            105,
+            164,
+            263
+          ],
+          "yitian": [
+            79,
+            126,
+            197,
+            315
+          ],
+          "seven-saber": [
+            62,
+            100,
+            156,
+            250
+          ],
+          "ancient-saber": [
+            72,
+            116,
+            181,
+            289
+          ],
+          "twin-halberds": [
+            72,
+            116,
+            181,
+            289
+          ],
+          "trident": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "caltrops": [
+            49,
+            79,
+            123,
+            197
+          ],
+          "repeater": [
+            66,
+            105,
+            164,
+            263
+          ],
+          "phoenix-bow": [
+            62,
+            100,
+            156,
+            250
+          ],
+          "heavy-crossbow": [
+            72,
+            116,
+            181,
+            289
+          ],
+          "hand-halberd": [
+            56,
+            89,
+            140,
+            223
+          ],
+          "chain-hook": [
+            59,
+            95,
+            148,
+            237
+          ],
+          "oil-jar": [
+            56,
+            89,
+            140,
+            223
+          ],
+          "thunder-bomb": [
+            72,
+            116,
+            181,
+            289
+          ],
+          "feather-fan": [
+            56,
+            89,
+            140,
+            223
+          ],
+          "taiping-book": [
+            62,
+            100,
+            156,
+            250
+          ],
+          "star-lamps": [
+            76,
+            121,
+            189,
+            302
+          ],
+          "bagua": [
+            72,
+            116,
+            181,
+            289
+          ],
+          "wood-ox": [
+            69,
+            110,
+            173,
+            276
+          ],
+          "wood-kite": [
+            66,
+            105,
+            164,
+            263
+          ]
+        }
+      },
+      {
+        "chapter": 6,
+        "basePrice": 52,
+        "weaponPrices": {
+          "sandal": [
+            52,
+            83,
+            130,
+            208
+          ],
+          "pole": [
+            52,
+            83,
+            130,
+            208
+          ],
+          "peach": [
+            30,
+            48,
+            74,
+            119
+          ],
+          "cleaver": [
+            52,
+            83,
+            130,
+            208
+          ],
+          "firecracker": [
+            33,
+            53,
+            84,
+            134
+          ],
+          "smg": [
+            72,
+            116,
+            181,
+            290
+          ],
+          "shotgun": [
+            72,
+            116,
+            181,
+            290
+          ],
+          "rocket": [
+            84,
+            134,
+            209,
+            334
+          ],
+          "sword": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "thunder": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "gourd": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "twin-swords": [
+            59,
+            95,
+            149,
+            238
+          ],
+          "guandao": [
+            85,
+            137,
+            214,
+            342
+          ],
+          "serpent-spear": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "halberd": [
+            89,
+            143,
+            223,
+            357
+          ],
+          "silver-spear": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "qinggang": [
+            74,
             119,
-            190,
-            296,
-            474
+            186,
+            297
+          ],
+          "yitian": [
+            89,
+            143,
+            223,
+            357
+          ],
+          "seven-saber": [
+            71,
+            113,
+            176,
+            282
+          ],
+          "ancient-saber": [
+            82,
+            131,
+            204,
+            327
+          ],
+          "twin-halberds": [
+            82,
+            131,
+            204,
+            327
+          ],
+          "trident": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "caltrops": [
+            56,
+            89,
+            139,
+            223
+          ],
+          "repeater": [
+            74,
+            119,
+            186,
+            297
+          ],
+          "phoenix-bow": [
+            71,
+            113,
+            176,
+            282
+          ],
+          "heavy-crossbow": [
+            82,
+            131,
+            204,
+            327
+          ],
+          "hand-halberd": [
+            63,
+            101,
+            158,
+            253
+          ],
+          "chain-hook": [
+            67,
+            107,
+            167,
+            267
+          ],
+          "oil-jar": [
+            63,
+            101,
+            158,
+            253
+          ],
+          "thunder-bomb": [
+            82,
+            131,
+            204,
+            327
+          ],
+          "feather-fan": [
+            63,
+            101,
+            158,
+            253
+          ],
+          "taiping-book": [
+            71,
+            113,
+            176,
+            282
+          ],
+          "star-lamps": [
+            85,
+            137,
+            214,
+            342
+          ],
+          "bagua": [
+            82,
+            131,
+            204,
+            327
+          ],
+          "wood-ox": [
+            78,
+            125,
+            195,
+            312
+          ],
+          "wood-kite": [
+            74,
+            119,
+            186,
+            297
+          ]
+        }
+      },
+      {
+        "chapter": 7,
+        "basePrice": 58,
+        "weaponPrices": {
+          "sandal": [
+            58,
+            93,
+            145,
+            232
+          ],
+          "pole": [
+            58,
+            93,
+            145,
+            232
+          ],
+          "peach": [
+            33,
+            53,
+            83,
+            133
+          ],
+          "cleaver": [
+            58,
+            93,
+            145,
+            232
+          ],
+          "firecracker": [
+            37,
+            60,
+            93,
+            149
+          ],
+          "smg": [
+            81,
+            129,
+            202,
+            323
+          ],
+          "shotgun": [
+            81,
+            129,
+            202,
+            323
+          ],
+          "rocket": [
+            93,
+            149,
+            233,
+            373
+          ],
+          "sword": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "thunder": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "gourd": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "twin-swords": [
+            66,
+            106,
+            166,
+            265
+          ],
+          "guandao": [
+            95,
+            152,
+            238,
+            381
+          ],
+          "serpent-spear": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "halberd": [
+            99,
+            159,
+            249,
+            398
+          ],
+          "silver-spear": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "qinggang": [
+            83,
+            133,
+            207,
+            331
+          ],
+          "yitian": [
+            99,
+            159,
+            249,
+            398
+          ],
+          "seven-saber": [
+            79,
+            126,
+            197,
+            315
+          ],
+          "ancient-saber": [
+            91,
+            146,
+            228,
+            365
+          ],
+          "twin-halberds": [
+            91,
+            146,
+            228,
+            365
+          ],
+          "trident": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "caltrops": [
+            62,
+            99,
+            155,
+            249
+          ],
+          "repeater": [
+            83,
+            133,
+            207,
+            331
+          ],
+          "phoenix-bow": [
+            79,
+            126,
+            197,
+            315
+          ],
+          "heavy-crossbow": [
+            91,
+            146,
+            228,
+            365
+          ],
+          "hand-halberd": [
+            70,
+            113,
+            176,
+            282
+          ],
+          "chain-hook": [
+            75,
+            119,
+            186,
+            298
+          ],
+          "oil-jar": [
+            70,
+            113,
+            176,
+            282
+          ],
+          "thunder-bomb": [
+            91,
+            146,
+            228,
+            365
+          ],
+          "feather-fan": [
+            70,
+            113,
+            176,
+            282
+          ],
+          "taiping-book": [
+            79,
+            126,
+            197,
+            315
+          ],
+          "star-lamps": [
+            95,
+            152,
+            238,
+            381
+          ],
+          "bagua": [
+            91,
+            146,
+            228,
+            365
+          ],
+          "wood-ox": [
+            87,
+            139,
+            218,
+            348
+          ],
+          "wood-kite": [
+            83,
+            133,
+            207,
+            331
           ]
         }
       }
@@ -23239,7 +20746,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "chronicle-units",
         "priority": 8,
-        "sourceBytes": 1493284
+        "sourceBytes": 2142080
       },
       {
         "path": "assets/enemies/",
@@ -23345,10 +20852,73 @@
         "colorType": 6
       },
       {
+        "path": "art/concepts/boss-seven/01-zhangjiao.png",
+        "bytes": 2458554,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/boss-seven/02-lvbu.png",
+        "bytes": 2514497,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/boss-seven/03-dongzhuo.png",
+        "bytes": 2738982,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/boss-seven/04-yuanshao.png",
+        "bytes": 2689475,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/boss-seven/05-caocao.png",
+        "bytes": 2603770,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/boss-seven/06-menghuo.png",
+        "bytes": 2675938,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/boss-seven/07-simayi.png",
+        "bytes": 2431573,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
         "path": "art/concepts/hero-select-v4.2/training-ground-source.png",
         "bytes": 1921152,
         "width": 1672,
         "height": 941,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/hero-youth/design.png",
+        "bytes": 2996484,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/lvbu-saturated-sweep/design.png",
+        "bytes": 2010460,
+        "width": 1536,
+        "height": 1024,
         "colorType": 2
       },
       {
@@ -23429,11 +20999,144 @@
         "colorType": 2
       },
       {
+        "path": "art/reviews/bosses/caocao.png",
+        "bytes": 733533,
+        "width": 1800,
+        "height": 1002,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/bosses/dongzhuo.png",
+        "bytes": 838019,
+        "width": 1800,
+        "height": 1002,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/bosses/menghuo.png",
+        "bytes": 830617,
+        "width": 1800,
+        "height": 1002,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/bosses/simayi.png",
+        "bytes": 877259,
+        "width": 1800,
+        "height": 1002,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/bosses/yuanshao.png",
+        "bytes": 811022,
+        "width": 1800,
+        "height": 1002,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/bosses/zhangjiao.png",
+        "bytes": 833771,
+        "width": 1800,
+        "height": 1002,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/lvbu/技能实装总览.png",
+        "bytes": 1113330,
+        "width": 1800,
+        "height": 1336,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/skills-v6/实装总览.png",
+        "bytes": 919235,
+        "width": 1500,
+        "height": 1140,
+        "colorType": 6
+      },
+      {
         "path": "art/reviews/training/skills-wechat.png",
         "bytes": 643094,
         "width": 1722,
         "height": 796,
         "colorType": 2
+      },
+      {
+        "path": "art/runtime-bosses/beasts-source.png",
+        "bytes": 2352287,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/caocao-source.png",
+        "bytes": 1629810,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/dongzhuo-source.png",
+        "bytes": 1819060,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/menghuo-source.png",
+        "bytes": 1735767,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/props-source.png",
+        "bytes": 2129024,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/rider-source.png",
+        "bytes": 1036774,
+        "width": 2172,
+        "height": 724,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/simayi-source.png",
+        "bytes": 1574818,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/yuanshao-source.png",
+        "bytes": 1738839,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/zhangjiao-source.png",
+        "bytes": 1768223,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-lvbu/source.png",
+        "bytes": 1502980,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-lvbu/trot-source.png",
+        "bytes": 1384131,
+        "width": 1774,
+        "height": 887,
+        "colorType": 6
       },
       {
         "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
@@ -23916,18 +21619,67 @@
         "colorType": 6
       },
       {
-        "path": "assets/chronicle-units/boss-mounts.png",
-        "bytes": 171955,
-        "width": 576,
-        "height": 384,
-        "colorType": 6
+        "path": "assets/chronicle-units/boss-beasts.png",
+        "bytes": 147272,
+        "width": 960,
+        "height": 640,
+        "colorType": 3
       },
       {
-        "path": "assets/chronicle-units/bosses.png",
-        "bytes": 394948,
-        "width": 1344,
-        "height": 384,
-        "colorType": 6
+        "path": "assets/chronicle-units/boss-caocao-actions.png",
+        "bytes": 92433,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/boss-dongzhuo-actions.png",
+        "bytes": 142650,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/boss-menghuo-actions.png",
+        "bytes": 140643,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/boss-props.png",
+        "bytes": 101833,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/boss-simayi-actions.png",
+        "bytes": 119818,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/boss-yuanshao-actions.png",
+        "bytes": 115411,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/boss-zhangjiao-actions.png",
+        "bytes": 137646,
+        "width": 640,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-units/lvbu-actions.png",
+        "bytes": 210967,
+        "width": 768,
+        "height": 960,
+        "colorType": 3
       },
       {
         "path": "assets/chronicle-units/troops-a-back.png",
@@ -24094,9 +21846,9 @@
       },
       {
         "path": "docs/skill-review/技能总览.png",
-        "bytes": 2374122,
+        "bytes": 1276811,
         "width": 3004,
-        "height": 2997,
+        "height": 1587,
         "colorType": 6
       }
     ]

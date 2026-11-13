@@ -8,30 +8,18 @@ const sharp = require('sharp');
 const assert = require('node:assert/strict');
 const OUT = path.resolve('docs/skill-review');
 const notes = {
- G15:['绿色加速箭头与脚下细环','与伤害和攻速增益共用上箭头造型，缺少疾跑轨迹。','加速按基础移速的30%增加，最终不超过基础的2.2倍。',.3],
- G02:['后方金白细枪线与箭头','直刺主要是线条，缺少长枪实体和收招。','没有位移和免伤。',.1],
- G01:['青白双轨与突进箭头','更像指向线，角色起步和终点冲击缺少层次。','按移动方向冲刺，保护0.25秒。',.16],
- G16:['绿白六边形与金色刻线','与其他防护技能轮廓相似，净化瞬间不突出。','仅清除减速；一挡或2秒先到即结束。',.3],
- G08:['三段金白箭线','当前为窄线命中与短箭迹，缺少明确的飞行过程。','单敌最多0.80S；无目标时不消耗施法。',.18],
- G03:['金白厚刃月牙与双层错位拖尾','已实现A金锋回旋；手绘笔触的细腻度仍可继续打磨。','单次最多10敌一次；真实命中才有楔形火花。',.08],
- G05:['紫色纸替身与闪避残迹','替身外形过于几何化，闪避与诱敌关联不强。','前移220并保护0.2秒；仅吸引420内普通步兵。',.35],
- G06:['橙色纸替身与延时火焰爆点','替身与金蝉相似，等待爆炸的节奏提示较弱。','3秒后爆炸；仅吸引普通步兵，不误导骑兵弓兵或Boss。',.5],
- G04:['青色双盾板与六边护环','双盾具备剪影，但抵挡剩余次数缺少明确反馈。','两挡或1.5秒先到即结束；抵挡后保护0.18秒。',.3],
- G07:['橙色战旗与三个上箭头','与加速增益相似，伤害增强没有持续冲击反馈。','全部实际伤害乘1.25；同名不叠加。',.3],
- G09:['金旗箭头与额外双盾外观','与背水一战容易混淆，攻速提升难以直接辨认。','攻速持续6秒，附加一挡只持续3秒。',.3],
- G14:['三名绕身纸兵与小箭','三角纸兵偏简化，攻击姿态和命中反馈不足。','每个纸兵各4次攻击；单敌最多0.90S。',.45],
- G11:['木船白帆与四支装饰箭','船体有辨识度，但箭数不反映实际吸收数量。','最多收4箭；每箭一敌，单敌最多0.60S；不挡Boss地面伤害。',.4],
- G10:['三处橙黄火焰依次展开','火苗较细碎，主爆点与燃烧层次不清晰。','三处位置施法时锁定，间隔0.4秒；单敌最多1.10S。',.48],
- G12:['青色扩散水环与白色浪沫','范围清楚，但水浪体积和推进力度较弱。','0.55秒扩散，普通兵减速30%两秒，Boss10%。',.35],
- G13:['绿金八边结界与白色内环','与净心诀和护盾区分不足，结界缺少独特符纹。','附近减速普通兵25%、Boss10%；抵挡耗尽后结界提前结束。',.3],
- G17:['粉绿花瓣与白色回复十字','回复语义清楚，但缺少桃园主题的记忆点。','每章一次；满心不释放、不消耗充能。',.3],
- G18:['固定双八角阵与八座小门','阵型清楚但线条薄，门与锁阵缺少开合过程。','入阵一次0.90S；减速普通兵25%、Boss10%，命中后维持2秒。',.3],
- G23:['金白扇形声浪与虎面','虎面已有特色，但轮廓与声浪的衔接较平。','100度扇区，普通兵硬直0.15秒，Boss不硬直。',.22],
- G21:['后撤双轨与紫白前向刃波','后退与刃波是两段简单线条，缺少鲜明终结动作。','先后退200再推出380长、80宽刃波；保护0.2秒。',.34],
- G19:['紫白多层雷柱与分叉电弧','单点雷柱较醒目，四次落雷的层次与余波不足。','四处位置施法时锁定，间隔0.3秒；单敌最多1.40S。',.38],
- G24:['四面紫旗与向内移动的圆形音符','军旗与其他增益旗帜相似，压制含义不直观。','一次伤害；3秒内延长下一次攻击间隔，普通兵20%、Boss10%。',.3],
- G22:['十二道扇面穿透箭迹','覆盖面大，但箭体偏细，缺少齐射爆发感。','120度扇面，每箭最多穿3敌；单敌最多0.88S。',.24],
- G20:['紫色坠星金焰与五角落地冲击','坠落有阶段，但落地冲击偏符号化，重量感不足。','五点间隔0.28秒，每点下落0.35秒后伤害；单敌最多1.65S。',.48],
+ G01:['厚实体青白枪锋与双侧断笔尾迹','','方向突进，路径伤害。',.16],
+ G08:['金色战弓与八支实体红羽箭','','每箭.22S；同敌最多4箭，命中有飞行过程。',.25],
+ G03:['A金锋回旋实体厚刃与双拖尾','','原机制和渲染基线保持。',.08],
+ G07:['赤色战旗、红金战气与出手拖尾','','5秒攻击频率达到5倍，单次伤害不变。',.18],
+ G10:['水平连续火线、四层卷焰与焦痕','','480×80，3秒四次灼烧。',.5],
+ G12:['深浅厚浪墙与断续白沫','','扩散经过才命中与减速。',.35],
+ G25:['四柄实体青剑与三枚格挡星印','','6秒、三次格挡；耗尽防御后仍可攻击。',.3],
+ G18:['八方实体门印与接触锁链','','固定阵地，入阵一次伤害。',.3],
+ G26:['金色断续冲击波与敌军头顶旋转星星','','半径400眩晕5秒，包含Boss。',.14],
+ G19:['雷印预表现、粗雷柱与分叉冲击','','四雷每处先亮印再结算。',.18],
+ G22:['覆盖圆形区域的四批实体箭雨','','半径400，四轮.22S。',.18],
+ G20:['实体岩核流星、金紫焰尾与碎石冲击','','先下落.35秒，再结算伤害。',.43],
 };
 class Color { constructor(r=0,g=0,b=0,a=255){Object.assign(this,{r,g,b,a});} }
 const cache={};
@@ -64,7 +52,7 @@ const text=(str,x,y,size=24,color='#f9edd0',weight=400)=>`<text x="${x}" y="${y}
 async function main(){
  fs.mkdirSync(OUT,{recursive:true});
  const VERSION=load('survival').SURVIVAL_VERSION;
- const skills=Array.from(load('common-skills').COMMON_SKILLS);assert.equal(skills.length,24);
+ const skills=Array.from(load('common-skills').COMMON_SKILLS);assert.equal(skills.length,12);
  const {CommonSkillRuntime}=load('CommonSkillRuntime'),{CommonSkillEffects}=load('CommonSkillEffects'),{CombatEffects}=load('combat-effects');
  const head=await png('assets/presentation/heroes.png',{left:40,top:29,width:379,height:363});
  const body=await png('assets/presentation/heroes.png',{left:66,top:939,width:310,height:232});
@@ -80,7 +68,9 @@ async function main(){
   for(let i=0;i<Math.round(time*120);i++){host.age+=1/120;runtime.update(1/120);fx.update(1/120);}
   const g=new GraphicsSVG(),a=new GraphicsSVG();effects.draw(g,a,0,0,1500,1500,host.x,host.y);fx.draw(g,a,0,0,1500,1500,false);
   assert.ok(g.parts.length+a.parts.length>0,`${s.id} has visible effects`);
-  const icon=await png('assets/chronicle-ui/skills.png',{left:s.icon%6*96,top:Math.floor(s.icon/6)*96,width:96,height:96});
+  let icon;
+  if(s.icon<24)icon=await png('assets/chronicle-ui/skills.png',{left:s.icon%6*96,top:Math.floor(s.icon/6)*96,width:96,height:96});
+  else{const ig=new GraphicsSVG();load('skill-vfx-art').drawSkillIcon(ig,s.icon);icon='data:image/png;base64,'+(await sharp(Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96"><g transform="translate(48 80) scale(.9 -.9)">${ig.parts.join('')}</g></svg>`)).png().toBuffer()).toString('base64');}
   // Consistent scale and viewport across all skills; target troops stand still for comparison.
   const sprite=(url,x,y,w,h)=>image(url,x-w/2,-y-h,w,h);
   const hero=`<ellipse cx="${host.x}" cy="${-host.y+10}" rx="34" ry="10" fill="#35442a" opacity=".28"/>`+sprite(body,host.x,host.y-22,63,47)+`<circle cx="${host.x-31}" cy="${-host.y-20}" r="10" fill="#eec48b" stroke="#553526" stroke-width="3"/><circle cx="${host.x+31}" cy="${-host.y-20}" r="10" fill="#eec48b" stroke="#553526" stroke-width="3"/>`+sprite(head,host.x,host.y+16,100,96);
@@ -92,7 +82,7 @@ async function main(){
  }
  const compose=async(files,cols,width,height,header,target)=>{
   const rows=Math.ceil(files.length/cols),w=cols*720+(cols-1)*20+64,h=rows*450+(rows-1)*20+header+32;
-  let base=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#152b25"/>${text(width||'桃园小英雄 当前技能总览',32,58,40,'#ffe3a2',600)}${text(height||'24项通用技能 · 综合威力升序 · 基础击杀充能',32,101,25,'#c4d1b8')}${text('当前代码定帧预览  ·  统一缩放  ·  静态参照兵  ·  非微信实机截图',32,135,20,'#9eaf99')}</svg>`;
+  let base=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#152b25"/>${text(width||'桃园小英雄 当前技能总览',32,58,40,'#ffe3a2',600)}${text(height||`${skills.length}项通用技能 · 综合威力升序 · 基础击杀充能`,32,101,25,'#c4d1b8')}${text('当前代码定帧预览  ·  统一缩放  ·  静态参照兵  ·  非微信实机截图',32,135,20,'#9eaf99')}</svg>`;
   await sharp(Buffer.from(base)).composite(files.map((input,i)=>({input,left:32+i%cols*740,top:header+Math.floor(i/cols)*470}))).png().toFile(target);
  };
  await compose(cards,4,'','',165,path.join(OUT,'技能总览.png'));
@@ -100,7 +90,7 @@ async function main(){
  fs.writeFileSync(path.join(OUT,'skills.json'),JSON.stringify(data,null,2)+'\n');
  const cloudPath=path.join(OUT,'feishu-document.json'),cloud=fs.existsSync(cloudPath)?JSON.parse(fs.readFileSync(cloudPath,'utf8')):undefined;
  const cloudLine=cloud?`飞书评审文档：${cloud.doc_url}（云端为先前评审快照，本次本地清理未修改云文档）。\n\n`:'';
- fs.writeFileSync(path.join(OUT,'README.md'),`# 桃园小英雄当前技能评审\n\n版本 ${VERSION}，${data.date}。\n\n${cloudLine}共24项全部开放。本目录只保留当前代码生成的汇总；横扫六合已采用A金锋回旋。\n\n[整体预览](技能总览.png) · [结构化数据](skills.json)\n\n预览执行当前 CommonSkillRuntime / CommonSkillEffects / CombatEffects，在固定场景取代表帧，Graphics路径经SVG栅格化。兵与英雄为静态参照，背景使用当前草地。与Cocos的抗锯齿和动态表现有差异，不能当作微信实机截图；一帧不能展示完整的多段攻击或受击反馈。\n\nS为施法时已装备武器的理论单目标DPS合计乘技能伤害加成，不是单武器攻击力。威力阶是综合效用顺序，不是严格DPS或实测胜率。\n\n|顺序|技能|阶|基础击杀|数值|范围|描述|\n|---|---|---|---|---|---|---|\n`+records.map(s=>`|${s.powerRank}|${s.name}|${s.powerTier}|${s.killCharge}|${s.damage}|${s.range}|${s.effect} ${s.detail}|`).join('\n')+'\n\n## 当前表现评审\n\n'+records.map(s=>`### ${s.name}\n\n现有效果：${s.visual}。\n\n重做重点：${s.issue}\n`).join('\n'));
+ fs.writeFileSync(path.join(OUT,'README.md'),`# 桃园小英雄当前技能评审\n\n版本 ${VERSION}，${data.date}。\n\n${cloudLine}共${records.length}项全部开放。本目录只保留当前代码生成的汇总；横扫六合已采用A金锋回旋。\n\n[整体预览](技能总览.png) · [结构化数据](skills.json)\n\n预览执行当前 CommonSkillRuntime / CommonSkillEffects / CombatEffects，在固定场景取代表帧，Graphics路径经SVG栅格化。兵与英雄为静态参照，背景使用当前草地。与Cocos的抗锯齿和动态表现有差异，不能当作微信实机截图；一帧不能展示完整的多段攻击或受击反馈。\n\nS为施法时已装备武器的理论单目标DPS合计乘技能伤害加成，不是单武器攻击力。威力阶是综合效用顺序，不是严格DPS或实测胜率。\n\n|顺序|技能|阶|基础击杀|数值|范围|描述|\n|---|---|---|---|---|---|---|\n`+records.map(s=>`|${s.powerRank}|${s.name}|${s.powerTier}|${s.killCharge}|${s.damage}|${s.range}|${s.effect} ${s.detail}|`).join('\n')+'\n\n## 当前表现\n\n'+records.map(s=>`### ${s.name}\n\n现有效果：${s.visual}。\n`).join('\n'));
  console.log(JSON.stringify({output:OUT,skills:records.length,skillsRendered:cards.length,intermediateFiles:0}));
 }
 module.exports={load,GraphicsSVG};

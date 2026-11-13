@@ -59,7 +59,7 @@ function click(root, title) {
   const target = find(root); assert.ok(target, 'button exists: ' + title); target.events.end();
 }
 function finishStartup(g){g.update(1/60);g.update(1/60);assert.equal(g.ready,true);}
-async function newGame(id = 'liubei', weapon) { storage.delete('taoyuan-chronicle-v4'); const g = new GameBootstrap(); await g.start();finishStartup(g); assert.equal(g.phase, 'menu'); click(g.screens.root, id); click(g.screens.root, 'StartHero'); assert.equal(g.phase, 'battle'); if(weapon&&weapon!==g.run.starter){g.run=r.createRun(id,weapon);g.restart(false);} return g; }
+async function newGame(id = 'liubei', weapon) { storage.delete('taoyuan-chronicle-v7'); const g = new GameBootstrap(); await g.start();finishStartup(g); assert.equal(g.phase, 'menu'); click(g.screens.root, id); click(g.screens.root, 'StartHero'); assert.equal(g.phase, 'battle'); if(weapon&&weapon!==g.run.starter){g.run=r.createRun(id,weapon);g.restart(false);} return g; }
 
 
 const survival = load("survival");
@@ -84,7 +84,7 @@ if(require.main===module)(async () => {
   console.log('通过：关键角色图延迟时保留加载海报/真实进度、100%完成帧后进入选人、资源失败保留提示而非黑屏或假就绪');
   // The approved menu has one direct start action and no old loadout/test flow.
   for(const hero of r.HEROES){
-    storage.delete('taoyuan-chronicle-v4');const menuGame=new GameBootstrap();await menuGame.start();finishStartup(menuGame);
+    storage.delete('taoyuan-chronicle-v7');const menuGame=new GameBootstrap();await menuGame.start();finishStartup(menuGame);
     const nodes=()=>{const all=[];const walk=n=>{all.push(n);n.children.forEach(walk);};walk(menuGame.screens.root);return all;};
     assert.equal(menuGame.phase,'menu');assert.equal(menuGame.world.active,false);
     assert.ok(!nodes().some(n=>n.name==='选择英雄'),'首页不再显示选择英雄标题');assert.ok(nodes().some(n=>n.name==='GameLogo'));
@@ -105,7 +105,7 @@ if(require.main===module)(async () => {
   console.log('通过：上方分层动态英雄/五头像/真实眨眼与五种武器亮相/菜单不推进战斗/唯一金边选中态/无属性条/无测试和选武器入口、开始直接携带默认武器/15秒第零章/五颗心、三种横屏安全区、返回保留所选英雄');
   const loadBundle=cc.assetManager.loadBundle;cc.assetManager.loadBundle=(name,cb)=>name==='hero-menu'?cb(new Error('simulated optional art failure')):loadBundle(name,cb);
   const warn=console.warn;console.warn=()=>{};
-  try{const fallback=new GameBootstrap();await fallback.start();finishStartup(fallback);assert.equal(fallback.phase,'menu');click(fallback.screens.root,'guanyu');storage.delete('taoyuan-chronicle-v4');click(fallback.screens.root,'StartHero');assert.equal(fallback.run.starter,'pole');assert.equal(fallback.phase,'battle');}
+  try{const fallback=new GameBootstrap();await fallback.start();finishStartup(fallback);assert.equal(fallback.phase,'menu');click(fallback.screens.root,'guanyu');storage.delete('taoyuan-chronicle-v7');click(fallback.screens.root,'StartHero');assert.equal(fallback.run.starter,'pole');assert.equal(fallback.phase,'battle');}
   finally{cc.assetManager.loadBundle=loadBundle;console.warn=warn;}
   console.log('通过：选角素材加载失败仍能进入基础菜单和默认武器战斗，不停留启动页');
   const keyboardGame = await newGame(); keyboardGame.clearBattle(); keyboardGame.spawnClock = 999;
@@ -372,9 +372,9 @@ if(require.main===module)(async () => {
     for (const [x, y, facing] of [[-600, 0, 1], [600, 0, 3], [0, -280, 2], [0, 280, 0]]) {
       const mob = makeTarget(animated, x, y, kind); mob.attackCooldown = 99;
       if (kind === 'spearman' && !x) { mob.x = 0; mob.y = y > 0 ? 310 : -310; }
-      animated.updateSpecialEnemy(mob, 1 / 60); assert.equal(mob.direction, facing); assert.ok(mob.moving);
+      if(kind==='chief'){mob.bossTimers=[999,999,999];animated.updateChronicleEnemy(mob,1/60);}else animated.updateSpecialEnemy(mob, 1 / 60); assert.equal(mob.direction, facing); assert.ok(mob.moving);
       mob.walk = 0; animated.drawEnemy(mob); const firstFrame = mob.art.spriteFrame;
-      if(kind==='chief'){const foot=mob.rigParts[2].node.position.y;mob.walk=.5;animated.drawEnemy(mob);assert.notEqual(mob.rigParts[2].node.position.y,foot,'new boss rig has independent footsteps');}else{mob.walk=1;animated.drawEnemy(mob);assert.notEqual(mob.art.spriteFrame,firstFrame,'walking changes limb pose, not only sprite tilt');}
+      if(kind==='chief'){mob.bossState.blend=1;mob.bossState.gait=0;animated.drawEnemy(mob);const pose=mob.art.spriteFrame;mob.bossState.gait=.4;animated.drawEnemy(mob);assert.notEqual(mob.art.spriteFrame,pose,'new boss has registered independent footstep frames');}else{mob.walk=1;animated.drawEnemy(mob);assert.notEqual(mob.art.spriteFrame,firstFrame,'walking changes limb pose, not only sprite tilt');}
       assert.equal(mob.art.node.scale.x < 0, facing === 3, 'left uses mirrored right profile');
       animated.clearBattle();
     }
@@ -422,7 +422,7 @@ if(require.main===module)(async () => {
   g.openSupply();g.resumeSupply('duplicate');assert.equal(g.phase,'battle');assert.equal(g.enemies.filter(e=>e.hp>0&&e.kind==='chief').length,1,'no extra shop/boss while Zhang Jiao is alive');
   g.playerHp=5;g.hurtTime=0;g.protectionTime=0;g.hurtPlayer(-20,0,999);assert.equal(g.playerHp,4);g.hurtPlayer(-20,0,999);assert.equal(g.playerHp,4);
   for(let i=0;i<4;i++){g.hurtTime=0;g.hurtPlayer(-20,0,999);}
-  assert.equal(g.phase,'defeat');assert.equal(storage.has('taoyuan-chronicle-clear-best-v4'),false,'failure never writes a clear record');
+  assert.equal(g.phase,'defeat');assert.equal(storage.has('taoyuan-chronicle-clear-best-v7'),false,'failure never writes a clear record');
   click(g.screens.root,'ResultRetry');assert.equal(g.run.wave,1);assert.equal(g.run.wavesCleared,0);assert.equal(g.run.bossEncounter,false);assert.equal(g.run.gold,0);assert.equal(g.playerHp,5);
   console.log('通过：15秒第零章/先购物/不送武器、三波各30秒与补给冻结、第三波后唯一张角/保留旧敌与弹幕/持续援军/不重复首领/不超时过关、失败/重开清阶段');
 
@@ -448,7 +448,7 @@ if(require.main===module)(async () => {
   advance(feedback,1.4);feedback.openSupply();click(feedback.screens.root,'SupplySkip');assert.ok(feedback.protectionTime>0);assert.equal(feedback.hurtTime,0);
   const protection=feedback.protectionTime;feedback.paused=true;advance(feedback,2);assert.equal(feedback.protectionTime,protection);feedback.paused=false;advance(feedback,1.4);
   assert.equal(feedback.body.color.value,'#ffffff');assert.equal(feedback.hurtText.string,'');feedback.hurtPlayer(feedback.px,feedback.py);assert.equal(feedback.playerHp,4,'supply protection blocks hits without showing damage');
-  feedback.showMainMenu();assert.equal(feedback.protectionTime,0);assert.equal(feedback.hurtTime,0);storage.delete('taoyuan-chronicle-v4');click(feedback.screens.root,'StartHero');assert.equal(feedback.hurtText.string,'');assert.equal(feedback.body.color.value,'#ffffff');
+  feedback.showMainMenu();assert.equal(feedback.protectionTime,0);assert.equal(feedback.hurtTime,0);storage.delete('taoyuan-chronicle-v7');click(feedback.screens.root,'StartHero');assert.equal(feedback.hurtText.string,'');assert.equal(feedback.body.color.value,'#ffffff');
   feedback.clearBattle();feedback.spawnClock=999;feedback.hurtPlayer(-20,0);feedback.finishWave();assert.ok(feedback.hurtTime>0,'real hit feedback is preserved during the preparation shop');click(feedback.screens.root,'SupplySkip');advance(feedback,2.5);assert.equal(feedback.body.color.value,'#ffffff');
   console.log('通过：热身/补给保护不闪红/不显示扣血/不触发受击加速、保护仍能免伤/暂停冻结、真实受击正常闪红扣血/防连击、重开清理');
 
@@ -644,7 +644,7 @@ if(require.main===module)(async () => {
     defeat.run.weapons=load('weapons').WEAPONS.slice(0,6).map((w,i)=>({id:w.id,tier:i%4+1,uid:i+1}));defeat.endRun(false);
     const find=name=>allNodes(defeat.screens.root).find(n=>n.name===name);
     const portrait=find('CryingHero');assert.ok(portrait);assert.equal(portrait.getComponent(Sprite).spriteFrame,defeat.artFrames['result-'+hero.id]);assert.notEqual(portrait.getComponent(Sprite).spriteFrame,defeat.artFrames[hero.id]);
-    assert.equal(find('ResultTime').getComponent(Label).string,'00:57');assert.equal(find('ResultStat-0').getComponent(Label).string,'64');assert.equal(find('ResultStat-1').getComponent(Label).string,'1/17');assert.equal(find('ResultStat-2').getComponent(Label).string,'23');
+    assert.equal(find('ResultTime').getComponent(Label).string,'00:57');assert.equal(find('ResultStat-0').getComponent(Label).string,'64');assert.equal(find('ResultStat-1').getComponent(Label).string,'1/7');assert.equal(find('ResultStat-2').getComponent(Label).string,'23');
     assert.equal(allNodes(defeat.screens.root).filter(n=>n.name.startsWith('ResultWeapon-')).length,6);
     const time=defeat.run.survivalSeconds,age=defeat.age;defeat.update(.1);assert.equal(defeat.run.survivalSeconds,time);assert.equal(defeat.age,age);assert.ok(defeat.screens.resultView.age>0,'只推进哭泣UI，不推进战斗');
     for(const [width,height]of [[1334,750],[1622,750],[1875,750]]){
@@ -654,13 +654,13 @@ if(require.main===module)(async () => {
     const oldMenu=find('ResultMenu'),oldRetry=find('ResultRetry');oldRetry.events.end();assert.equal(defeat.phase,'battle');assert.equal(defeat.run.heroId,hero.id);assert.equal(defeat.run.gold,0);assert.equal(defeat.run.weapons.length,1);assert.equal(defeat.playerHp,5);oldMenu.events.end();assert.equal(defeat.phase,'battle','同一结算只提交一次导航');
     defeat.clearBattle();defeat.remaining=7;defeat.endRun(false);assert.equal(find('ResultTime').getComponent(Label).string,'00:08','热身失败显示真实热身时长');assert.equal(find('ResultTimeLabel').getComponent(Label).string,'本局坚持');click(defeat.screens.root,'ResultMenu');assert.equal(defeat.phase,'menu');assert.equal(defeat.screens.selection,hero.id);
   }
-  storage.delete('taoyuan-chronicle-clear-best-v4');storage.set('taoyuan-survival-best','1234');
+  storage.delete('taoyuan-chronicle-clear-best-v7');storage.set('taoyuan-survival-best','1234');
   let bestClear=Infinity;
   for(const [index,hero]of r.HEROES.entries()){
-    const clear=await newGame(hero.id);clear.clearBattle();clear.run.chapter=17;clear.run.wave=2;clear.run.wavesCleared=3;clear.run.bossEncounter=true;clear.run.survivalSeconds=[100,105,95,108,110][index];clear.run.elapsed=15+clear.run.survivalSeconds;clear.nextSupply=Infinity;clear.spawnClock=999;
+    const clear=await newGame(hero.id);clear.clearBattle();clear.run.chapter=7;clear.run.wave=2;clear.run.wavesCleared=3;clear.run.bossEncounter=true;clear.run.survivalSeconds=[100,105,95,108,110][index];clear.run.elapsed=15+clear.run.survivalSeconds;clear.nextSupply=Infinity;clear.spawnClock=999;
     const boss=makeTarget(clear,180,0,'chief');boss.hp=10;clear.hitEnemy(boss,0,9999);assert.equal(clear.victoryPending,true);clear.hurtPlayer(0,0);assert.equal(clear.playerHp,5,'boss death cannot turn into a later same-frame defeat');clear.update(1/60);
     assert.equal(clear.phase,'victory');const nodes=allNodes(clear.screens.root);assert.equal(nodes.find(n=>n.name==='ResultTitle').getComponent(Label).string,'通关啦！');assert.ok(nodes.some(n=>n.name==='VictoryHero'&&n.getComponent(Sprite)?.spriteFrame===clear.artFrames['hero-select-'+hero.id]));assert.ok(!nodes.some(n=>n.name==='CryingHero'||n.name==='DefeatSeal'));assert.ok(nodes.some(n=>n.name==='VictorySeal'));assert.ok(nodes.some(n=>n.getComponent(Label)?.string==='通关用时'));
-    bestClear=Math.min(bestClear,15+[100,105,95,108,110][index]);assert.equal(Number(storage.get('taoyuan-chronicle-clear-best-v4')),bestClear);assert.equal(storage.get('taoyuan-survival-best'),'1234','legacy endless record is isolated');
+    bestClear=Math.min(bestClear,15+[100,105,95,108,110][index]);assert.equal(Number(storage.get('taoyuan-chronicle-clear-best-v7')),bestClear);assert.equal(storage.get('taoyuan-survival-best'),'1234','legacy endless record is isolated');
     const frozen=JSON.stringify([clear.run.survivalSeconds,clear.kills,clear.run.gold]);advance(clear,5);assert.equal(JSON.stringify([clear.run.survivalSeconds,clear.kills,clear.run.gold]),frozen,'victory freezes all combat');clear.endRun(false);assert.equal(clear.phase,'victory');assert.equal(clear.enemies.filter(e=>e.hp>0&&!e.animal).length,0);
     click(clear.screens.root,'ResultRetry');assert.equal(clear.phase,'battle');assert.equal(clear.run.wave,1);assert.equal(clear.run.wavesCleared,0);assert.equal(clear.run.bossEncounter,false);
   }

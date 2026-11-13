@@ -4,8 +4,11 @@
 
 | 目录 | 保留内容 |
 | --- | --- |
-| assets | 全部当前游戏运行素材与meta，本次未改动 |
+| assets | 全部当前游戏运行素材与meta |
 | art/branding | 当前小游戏头像、标题Logo源图、游戏名与简介及完整提示词；头像不进入运行包，Logo导出至hero-menu |
+| art/runtime-lvbu | 当前吕布20帧动作的两张源图、生成提示及裁格manifest，运行图由pack-lvbu-art重建 |
+| art/reviews/lvbu | 当前吕布三招真实Cocos工程帧、合成GIF和平台验证记录 |
+| art/concepts/boss-seven | 七Boss三招概念，吕布已采用，其余六位待实现 |
 | art/runtime-v4 | 当前战役十张源图、prompt与裁格manifest |
 | art/runtime-sources/png | 38张当前PNG的压缩前原图及哈希清单，避免重复量化失真 |
 | art/concepts/presentation-v3.0 | 当前三英雄分层与武器图标的生成源图 |
@@ -16,7 +19,7 @@
 | art/reviews/performance-v4.3 | 最新可用桌面渲染A/B基线截图与清单，非v5.1手机FPS |
 | art/audio | 当前音乐母带/配方/试听及武器声音总览 |
 | docs/design | 一套当前战役、兵种、武器、英雄、经济与验证说明 |
-| docs/skill-review | 当前24技能机制与一张总览，原飞书快照链接 |
+| docs/skill-review | 当前12技能机制与一张总览，原飞书快照链接 |
 
 当前报告：[战役交易模型](chronicle-balance.json)、[Node压力采样](performance-node.json)、[桌面微信渲染基线](performance-wechat-baseline.json)、[横扫A取帧记录](golden-sweep-v5.1-validation.json)。每种测量独立保留最新可用一份，不能把旧基线当作当前手机实测。
 

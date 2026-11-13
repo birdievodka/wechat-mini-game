@@ -18,8 +18,9 @@ node /path/to/cocos-game-vfx/scripts/inspect-taoyuan.cjs --project /path/to/wech
 | 统一排序、查找、击杀需求 | `assets/scripts/common-skills.ts` |
 | 真实施法、排程、一次/多次命中、姿态时钟 | `assets/scripts/CommonSkillRuntime.ts` |
 | Visual槽位、粒子事件、寿命与共享绘制 | `assets/scripts/CommonSkillEffects.ts` |
-| 23项通用技能纯绘制 | `assets/scripts/skill-vfx-art.ts`；当前还原与范围说明见`docs/skill-vfx-v5.2.md` |
+| 横扫以外11项通用技能纯绘制 | `assets/scripts/skill-vfx-art.ts`；当前机制与表现说明见`docs/common-skills.md` |
 | 横扫实体刃、拖尾、接触楔形 | `assets/scripts/sweep-effects.ts` |
+| 吕布Boss三招、骑马动作与共享特效 | `lvbu-boss.ts`纯状态/CCD、`lvbu-effects.ts`纯绘制、`GameBootstrap.updateLvbuBoss/drawLvbuEnemy`绑定；详见`docs/lvbu-red-hare.md` |
 | 施法入口、Host绑定、伤害/反馈与动作合成 | `assets/scripts/GameBootstrap.ts` 的 `castSkill/initCommonSkill/hitEnemy/animateWalk/updateEffects` |
 | 原命中样式和缓存颜色 | `assets/scripts/combat-effects.ts` |
 | 粒子物理、容量、私有RNG | `assets/scripts/combat-particles.ts` |
@@ -28,7 +29,7 @@ node /path/to/cocos-game-vfx/scripts/inspect-taoyuan.cjs --project /path/to/wech
 | 行为与压力 | `scripts/test-common-skills.cjs`、`scripts/test-skill-vfx.cjs`、`scripts/test-performance.cjs` |
 | 浏览器工程真实帧 | `scripts/fixtures/browser-skill-vfx-review.js`：menu/watchdog/restore；变更Graphics需上传后再取完整画布，普通视口可能裁切或陈旧 |
 
-不要把旧英雄专属技能或`combat-effects.ts`内未调用的历史原型当成当前入口。现有24通用技能全英雄选1个，开局就绪，击杀真实小兵充能；优化特效不恢复专属技能或秒数CD。
+不要把旧英雄专属技能或`combat-effects.ts`内未调用的历史原型当成当前入口。现有12通用技能全英雄选1个，开局就绪，击杀真实小兵充能；优化特效不恢复专属技能或秒数CD。
 
 ## 画风与预算
 
@@ -79,3 +80,13 @@ npm run build:wechat
 正常体验使用真实输入。工程布景仅在menu等允许阶段运行，带恢复/watchdog并确认存档未变化；不要把布景成绩当真实存活或通关。只改本skill或文档不重建/刷新用户当前游戏。
 
 后续实现同步本skill受影响条目和`taoyuan-game`的`common-skills/combat-effects/engineering`，再运行目录同步与检查；不只刷新哈希而保留失效规则。
+
+## 吕布样板补充
+
+`art/concepts/boss-seven/02-lvbu.png`为批准概念，`art/runtime-lvbu`保留内置imagegen的浅暖色12攻击/驻马姿态与8独立小跑帧源图/提示/裁格manifest。仅运行768×960图集进入chronicle-units。三招已接入C02/C05，不把其他六Boss提案说成实装，也不擅自删17章。
+
+实际渲染曾抓到同类型对象复用时的尺寸回退：spawn把主Sprite尺寸重置，旧rigSize缓存却仍命中，造成首帧大、后续小。修复是在每次spawn使尺寸缓存失效，再在首次显形前按最终身份初始化；定帧夹具读回每个阶段300×300，测试连续复用5次。新动作不能只测第一次生成。
+
+`scripts/fixtures/lvbu-review.js`支持独立Cocos与微信上下文，菜单守卫、120秒恢复、存档核对。微信裁剪后的全局cc未必导出UITransform；工程检查可只读已有Node的_uiProps.uiTransformComp，不因调试需求把引擎模块重新整包导出。不同阶段截图哈希完全相同必须判为旧帧、丢弃，不以运行时阶段变化推断图像已更新。当前平台限制与预览见art/reviews/lvbu/validation.json。
+
+v6.4小跑修复案例：移动速度提高后不能沿用按travel/12再floor(walk*1.5)切整身冲锋帧。独立步态按140世界单位一循环，腿部四帧，上身在打包时统一注册；alpha边界包含腿部运动，逐帧bbox居中会使头身抽搐。加减速、近身追赶区间和朝向滞回与帧选择分开验证。

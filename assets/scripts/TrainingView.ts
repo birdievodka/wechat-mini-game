@@ -96,13 +96,13 @@ export class TrainingView {
     }else{
       const skill=commonSkillFor(selected.id);
       this.text(detail,skillPowerText(skill.id)+' · '+skill.category,0,28,20,320,32,'#e1d7b1');
-      this.text(detail,`基础 ${skill.killCharge} 击杀充能 · ${skill.duration}`,0,-10,18,320,34);
+      this.text(detail,`演武场无冷却 · ${skill.duration}`,0,-10,18,320,34);
       this.text(detail,skill.effect,0,-88,19,310,115);
       this.button(detail,'TrainingEquipSkill',state.skillId===skill.id?'已携带 · 重新装配':'携带此技能',0,-189,310,()=>this.act(()=>this.host.skill(skill.id)),true,true,48);
     }
     this.text(p,this.message,40,254,16,600,22,'#f0d899');
     this.button(p,'TrainingClear','清空战场',-397,-285,230,()=>this.act(()=>this.host.clear()));
-    this.button(p,'TrainingRefill','技能就绪',-128,-285,230,()=>this.act(()=>this.host.refill()));
+    this.button(p,'TrainingRefill','重置技能',-128,-285,230,()=>this.act(()=>this.host.refill()));
     this.button(p,'TrainingResume','进入战场  →',350,-285,330,()=>this.host.close(),true,true,54);
   }
 }

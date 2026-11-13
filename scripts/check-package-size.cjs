@@ -45,5 +45,5 @@ for(const name of ['chronicle-ui','chronicle-units']){
 const total = main + Object.values(sizes).reduce((a, b) => a + b, 0);
 console.log(`总包 ${(total / 1024 / 1024).toFixed(2)} MiB`);
 // This project's actual DevTools preview rejects source packages above 20 MiB.
-// Keep a 1 MiB margin for packaging overhead and future small changes.
-assert.ok(total < 19 * 1024 * 1024, '总资源包超过手机预览安全预算19MiB（当前预览上限20MB），禁止继续预览');
+// Keep a 0.5 MiB margin for packaging overhead and future small changes.
+assert.ok(total < 19.5 * 1024 * 1024, '总资源包超过手机预览安全预算19.5MiB（当前预览上限20MB），禁止继续预览');

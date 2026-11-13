@@ -2,9 +2,9 @@
 function commonSkillReview(){
  const w=globalThis.__gameContextWindow,c=w.cc,g=c?.director.getScene()?.getChildByName('Game')?.components.find(x=>'buildVersion'in x);
  if(!g||!g.ready||g.phase!=='menu')return {skipped:true,phase:g?.phase};
- const old={run:g.run,update:g.update,phase:g.phase,x:g.px,y:g.py,hp:g.playerHp,age:g.age,charge:g.skillCharge,kills:g.kills,hits:g.hits},save=c.sys.localStorage.getItem('taoyuan-chronicle-v4');let timer,closed=false;
+ const old={run:g.run,update:g.update,phase:g.phase,x:g.px,y:g.py,hp:g.playerHp,age:g.age,charge:g.skillCharge,kills:g.kills,hits:g.hits},save=c.sys.localStorage.getItem('taoyuan-chronicle-v7');let timer,closed=false;
  const reviews=[];
- function restore(){if(closed)return;closed=true;clearTimeout(timer);g.update=old.update;g.clearBattle();g.run=old.run;g.phase=old.phase;g.px=old.x;g.py=old.y;g.playerHp=old.hp;g.age=old.age;g.skillCharge=old.charge;g.kills=old.kills;g.hits=old.hits;g.applyHeroPresentation();g.setBattleVisible(false);g.screens.root.active=true;const result={version:g.buildVersion,restored:true,saveUnchanged:c.sys.localStorage.getItem('taoyuan-chronicle-v4')===save,reviews};w.__commonSkillReview=result;return result;}
+ function restore(){if(closed)return;closed=true;clearTimeout(timer);g.update=old.update;g.clearBattle();g.run=old.run;g.phase=old.phase;g.px=old.x;g.py=old.y;g.playerHp=old.hp;g.age=old.age;g.skillCharge=old.charge;g.kills=old.kills;g.hits=old.hits;g.applyHeroPresentation();g.setBattleVisible(false);g.screens.root.active=true;const result={version:g.buildVersion,restored:true,saveUnchanged:c.sys.localStorage.getItem('taoyuan-chronicle-v7')===save,reviews};w.__commonSkillReview=result;return result;}
  function show(id,time=.3){
   if(closed)return {error:'review closed'};clearTimeout(timer);timer=setTimeout(restore,120000);
   g.clearBattle();g.run=JSON.parse(JSON.stringify(old.run));g.run.skillId=id;g.run.heroId='liubei';g.run.skillHealChapter=0;g.phase='battle';g.playerHp=id==='G17'?4:5;g.px=g.py=g.cameraX=g.cameraY=0;g.heading=0;g.resumeCountdown=0;g.paused=false;g.protectionTime=999;g.age=0;g.setBattleVisible(true);g.screens.root.active=false;g.applyHeroPresentation();g.syncWeapons();g.avatar.spriteFrame=g.artFrames['hero-select-liubei'];

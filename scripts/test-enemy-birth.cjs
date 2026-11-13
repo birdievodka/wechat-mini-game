@@ -14,12 +14,12 @@ const {CHRONICLE_ENEMIES,chapterFor}=load('chronicles');
   if(e.birthRig)assert.equal(e.birthRig.active,false,'复用时清除上一轮出生效果');
   assert.equal(e.art.node.active,false,'出生前段不能先露出旧模型 '+(id||kind));
   const expected=appearance(e);assert.ok(expected.length>0&&expected.every(Boolean),'首次显示前准备本兵种贴图 '+(id||kind));
-  if(id||kind==='chief')assert.equal(e.rigKey,id?'enemy-'+id+'-front':'boss-'+chapterFor(g.run.chapter).bossId);
+  if(id)assert.equal(e.rigKey,'enemy-'+id+'-front');if(kind==='chief')assert.equal(e.art.spriteFrame,g.artFrames['boss-'+chapterFor(g.run.chapter).bossId+'-action-0']);
   const duration=e.bornTotal;g.updateEnemy(e,duration*.2);assert.equal(e.art.node.active,false);
   g.presentSubstep=true;g.updateEnemy(e,duration*.3);assert.equal(e.art.node.active,true);
   assert.deepEqual(appearance(e),expected,'出生显形阶段不能露出上个兵种 '+(id||kind));
   g.updateEnemy(e,duration*.5+.000001);assert.equal(e.born,0);assert.deepEqual(appearance(e),expected);
-  e.x=0;e.y=240;e.speed=0;e.attackCooldown=999;e.node.setPosition(0,240);g.updateEnemy(e,1/120);
+  e.x=0;e.y=240;e.speed=0;e.attackCooldown=999;e.bossTimers=[999,999,999];e.node.setPosition(0,240);g.updateEnemy(e,1/120);
   assert.deepEqual(appearance(e),expected,'出生结束不能再换一次兵种 '+(id||kind));
   // Force the next reuse to encounter a lingering birth marker as well as cached rigs.
   if(e.birthRig)e.birthRig.active=true;e.hp=0;e.dead=0;

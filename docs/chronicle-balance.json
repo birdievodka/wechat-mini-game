@@ -4,143 +4,64 @@
   "killRate": 0.65,
   "hitEfficiency": 0.65,
   "policy": "all shops use normal shelf (including pre-Boss toggle), at most two rerolls; real transactions, next-chapter prices/unlocks, income passives, free merges, highest output gain per coin",
-  "limitations": "no incoming damage or survival simulation; 65% kill/hit assumptions; independent budget draws approximate alive/charge caps; later warmup models nine arrivals; Boss reinforcement income capped at 90s; no skill burst in DPS",
+  "limitations": "no incoming damage or survival simulation; 65% kill/hit assumptions; independent budget draws approximate alive/charge caps; later warmup models nine arrivals; Boss reinforcement income capped at 90s; no skill burst in DPS; does not model Boss summon costs or target diversion",
   "byChapter": [
     {
       "chapter": 1,
       "boss": "张角",
-      "effectiveDpsMedian": 183,
-      "bossSecondsP10": 26.3,
-      "bossSecondsMedian": 33.1,
-      "bossSecondsP90": 44.6
+      "effectiveDpsMedian": 181,
+      "bossSecondsP10": 24.6,
+      "bossSecondsMedian": 33.3,
+      "bossSecondsP90": 44.9
     },
     {
       "chapter": 2,
-      "boss": "吕布·虎牢",
-      "effectiveDpsMedian": 343,
-      "bossSecondsP10": 30.3,
-      "bossSecondsMedian": 42,
-      "bossSecondsP90": 55.7
+      "boss": "吕布",
+      "effectiveDpsMedian": 345,
+      "bossSecondsP10": 31.7,
+      "bossSecondsMedian": 41.6,
+      "bossSecondsP90": 53.9
     },
     {
       "chapter": 3,
       "boss": "董卓",
-      "effectiveDpsMedian": 503,
-      "bossSecondsP10": 34,
-      "bossSecondsMedian": 45,
-      "bossSecondsP90": 60.1
+      "effectiveDpsMedian": 530,
+      "bossSecondsP10": 32.3,
+      "bossSecondsMedian": 43.4,
+      "bossSecondsP90": 55.8
     },
     {
       "chapter": 4,
-      "boss": "袁术",
-      "effectiveDpsMedian": 728,
-      "bossSecondsP10": 28.7,
-      "bossSecondsMedian": 38.5,
-      "bossSecondsP90": 51.3
+      "boss": "袁绍",
+      "effectiveDpsMedian": 781,
+      "bossSecondsP10": 31.2,
+      "bossSecondsMedian": 39.7,
+      "bossSecondsP90": 53.2
     },
     {
       "chapter": 5,
-      "boss": "吕布·下邳",
-      "effectiveDpsMedian": 964,
-      "bossSecondsP10": 34.3,
-      "bossSecondsMedian": 44.1,
-      "bossSecondsP90": 59.6
+      "boss": "曹操",
+      "effectiveDpsMedian": 1117,
+      "bossSecondsP10": 32.8,
+      "bossSecondsMedian": 40.2,
+      "bossSecondsP90": 52.4
     },
     {
       "chapter": 6,
-      "boss": "袁绍",
-      "effectiveDpsMedian": 1252,
-      "bossSecondsP10": 33.4,
-      "bossSecondsMedian": 41.9,
-      "bossSecondsP90": 57.6
+      "boss": "孟获",
+      "effectiveDpsMedian": 1493,
+      "bossSecondsP10": 35.6,
+      "bossSecondsMedian": 43.5,
+      "bossSecondsP90": 55.4
     },
     {
       "chapter": 7,
-      "boss": "夏侯惇",
-      "effectiveDpsMedian": 1583,
-      "bossSecondsP10": 29.7,
-      "bossSecondsMedian": 37.5,
-      "bossSecondsP90": 48.6
-    },
-    {
-      "chapter": 8,
-      "boss": "曹操·长坂",
-      "effectiveDpsMedian": 1898,
-      "bossSecondsP10": 31.1,
-      "bossSecondsMedian": 40,
-      "bossSecondsP90": 51.1
-    },
-    {
-      "chapter": 9,
-      "boss": "周瑜",
-      "effectiveDpsMedian": 2226,
-      "bossSecondsP10": 29.4,
-      "bossSecondsMedian": 38.5,
-      "bossSecondsP90": 47.6
-    },
-    {
-      "chapter": 10,
-      "boss": "曹操·赤壁",
-      "effectiveDpsMedian": 2515,
-      "bossSecondsP10": 28.4,
-      "bossSecondsMedian": 43.7,
-      "bossSecondsP90": 56.4
-    },
-    {
-      "chapter": 11,
-      "boss": "黄忠",
-      "effectiveDpsMedian": 2815,
-      "bossSecondsP10": 21.7,
-      "bossSecondsMedian": 39.5,
-      "bossSecondsP90": 50.1
-    },
-    {
-      "chapter": 12,
-      "boss": "马超",
-      "effectiveDpsMedian": 3020,
-      "bossSecondsP10": 21.8,
-      "bossSecondsMedian": 47.4,
-      "bossSecondsP90": 61
-    },
-    {
-      "chapter": 13,
-      "boss": "陆逊",
-      "effectiveDpsMedian": 3382,
-      "bossSecondsP10": 17.9,
-      "bossSecondsMedian": 44.3,
-      "bossSecondsP90": 56.9
-    },
-    {
-      "chapter": 14,
-      "boss": "祝融",
-      "effectiveDpsMedian": 3632,
-      "bossSecondsP10": 15.3,
-      "bossSecondsMedian": 44.4,
-      "bossSecondsP90": 56.6
-    },
-    {
-      "chapter": 15,
-      "boss": "孟获",
-      "effectiveDpsMedian": 3849,
-      "bossSecondsP10": 16.5,
-      "bossSecondsMedian": 52.6,
-      "bossSecondsP90": 65.4
-    },
-    {
-      "chapter": 16,
-      "boss": "司马懿·祁山",
-      "effectiveDpsMedian": 4064,
-      "bossSecondsP10": 12.6,
-      "bossSecondsMedian": 45.7,
-      "bossSecondsP90": 56.4
-    },
-    {
-      "chapter": 17,
-      "boss": "司马懿·五丈原",
-      "effectiveDpsMedian": 4291,
-      "bossSecondsP10": 12.7,
-      "bossSecondsMedian": 53.4,
-      "bossSecondsP90": 65.4
+      "boss": "司马懿",
+      "effectiveDpsMedian": 1861,
+      "bossSecondsP10": 41.7,
+      "bossSecondsMedian": 49.3,
+      "bossSecondsP90": 61.5
     }
-  ]
+  ],
+  "version": "chronicles-v7-seven-bosses"
 }

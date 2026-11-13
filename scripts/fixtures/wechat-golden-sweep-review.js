@@ -3,11 +3,11 @@ function goldenSweepReview(){
  const w=globalThis.__gameContextWindow,c=w.cc,g=c?.director.getScene()?.getChildByName('Game')?.components.find(x=>'buildVersion'in x);
  if(!g||!g.ready||g.phase!=='menu')return {skipped:true,phase:g?.phase};
  const old={run:g.run,update:g.update,phase:g.phase,x:g.px,y:g.py,hp:g.playerHp,age:g.age,charge:g.skillCharge,kills:g.kills,hits:g.hits,remaining:g.remaining,paused:g.paused};
- const save=c.sys.localStorage.getItem('taoyuan-chronicle-v4');let timer,closed=false;const frames=[];
+ const save=c.sys.localStorage.getItem('taoyuan-chronicle-v7');let timer,closed=false;const frames=[];
  function restore(){
   if(closed)return;closed=true;clearTimeout(timer);g.update=old.update;g.clearBattle();g.run=old.run;g.phase=old.phase;g.px=old.x;g.py=old.y;g.playerHp=old.hp;g.age=old.age;g.skillCharge=old.charge;g.kills=old.kills;g.hits=old.hits;g.remaining=old.remaining;g.paused=old.paused;
   g.applyHeroPresentation();g.setBattleVisible(false);g.screens.root.active=true;
-  const result={version:g.buildVersion,restored:true,saveUnchanged:c.sys.localStorage.getItem('taoyuan-chronicle-v4')===save,frames};w.__goldenSweepReview=result;return result;
+  const result={version:g.buildVersion,restored:true,saveUnchanged:c.sys.localStorage.getItem('taoyuan-chronicle-v7')===save,frames};w.__goldenSweepReview=result;return result;
  }
  function show(time=.1){
   if(closed)return {error:'review closed'};clearTimeout(timer);timer=setTimeout(restore,120000);

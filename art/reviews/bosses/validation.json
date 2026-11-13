@@ -1,0 +1,2280 @@
+{
+  "version": "chronicles-v7-seven-bosses",
+  "scope": "actual Cocos WebGL in isolated headless Chrome; engineering stages, not WeChat/iOS gameplay",
+  "boards": [
+    {
+      "id": "zhangjiao",
+      "file": "zhangjiao.png"
+    },
+    {
+      "id": "dongzhuo",
+      "file": "dongzhuo.png"
+    },
+    {
+      "id": "yuanshao",
+      "file": "yuanshao.png"
+    },
+    {
+      "id": "caocao",
+      "file": "caocao.png"
+    },
+    {
+      "id": "menghuo",
+      "file": "menghuo.png"
+    },
+    {
+      "id": "simayi",
+      "file": "simayi.png"
+    }
+  ],
+  "records": [
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "黄符定雷",
+      "index": 0,
+      "time": 0.5,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 0.5,
+          "delay": 0.85,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "黄符定雷",
+      "index": 0,
+      "time": 0.9,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 9999,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 0.8999999999999992,
+          "delay": 0.85,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "黄符定雷",
+      "index": 0,
+      "time": 1.2,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 1.1999999999999982,
+          "delay": 0.85,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "三才雷阵",
+      "index": 1,
+      "time": 0.5,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 0.5,
+          "delay": 0.85,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "lightning",
+          "age": 0.5,
+          "delay": 1.3,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "lightning",
+          "age": 0.5,
+          "delay": 1.75,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "三才雷阵",
+      "index": 1,
+      "time": 1.35,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 1.3499999999999976,
+          "delay": 0.85,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "lightning",
+          "age": 1.3499999999999976,
+          "delay": 1.3,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "lightning",
+          "age": 1.3499999999999976,
+          "delay": 1.75,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "三才雷阵",
+      "index": 1,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 1.799999999999996,
+          "delay": 1.3,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "lightning",
+          "age": 1.799999999999996,
+          "delay": 1.75,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "太平雷狱",
+      "index": 2,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "chain",
+          "age": 0.6,
+          "delay": 1.9,
+          "x": 190.52558883257652,
+          "y": 109.99999999999999
+        },
+        {
+          "kind": "chain",
+          "age": 0.6,
+          "delay": 3.4,
+          "x": -190.52558883257646,
+          "y": 110.00000000000007
+        },
+        {
+          "kind": "chain",
+          "age": 0.6,
+          "delay": 4.9,
+          "x": -4.0413344371862656e-14,
+          "y": -205
+        }
+      ],
+      "units": [
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": 190.52558883257652,
+          "y": 109.99999999999999,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -190.52558883257646,
+          "y": 110.00000000000007,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -4.0413344371862656e-14,
+          "y": -205,
+          "hp": 84
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "太平雷狱",
+      "index": 2,
+      "time": 2.05,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "chain",
+          "age": 2.0499999999999954,
+          "delay": 1.9,
+          "x": 190.52558883257652,
+          "y": 109.99999999999999
+        },
+        {
+          "kind": "chain",
+          "age": 2.0499999999999954,
+          "delay": 3.4,
+          "x": -190.52558883257646,
+          "y": 110.00000000000007
+        },
+        {
+          "kind": "chain",
+          "age": 2.0499999999999954,
+          "delay": 4.9,
+          "x": -4.0413344371862656e-14,
+          "y": -205
+        }
+      ],
+      "units": [
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": 190.52558883257652,
+          "y": 109.99999999999999,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -190.52558883257646,
+          "y": 110.00000000000007,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -4.0413344371862656e-14,
+          "y": -205,
+          "hp": 84
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "太平雷狱",
+      "index": 2,
+      "time": 4.95,
+      "phase": "idle",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "chain",
+          "age": 4.95,
+          "delay": 4.9,
+          "x": -4.0413344371862656e-14,
+          "y": -205
+        }
+      ],
+      "units": [
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": 190.52558883257652,
+          "y": 109.99999999999999,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -190.52558883257646,
+          "y": 110.00000000000007,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -4.0413344371862656e-14,
+          "y": -205,
+          "hp": 84
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "金印镇地",
+      "index": 0,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "seal",
+          "age": 0.6,
+          "delay": 1.1,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "金印镇地",
+      "index": 0,
+      "time": 1.12,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "seal",
+          "age": 1.12,
+          "delay": 1.1,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "金印镇地",
+      "index": 0,
+      "time": 1.45,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "seal",
+          "age": 1.4499999999999973,
+          "delay": 1.1,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "赤铜横财",
+      "index": 1,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "coin",
+          "age": 0.6,
+          "delay": 0.95,
+          "x": -260,
+          "y": -180
+        },
+        {
+          "kind": "coin",
+          "age": 0.6,
+          "delay": 1.15,
+          "x": -260,
+          "y": -90
+        },
+        {
+          "kind": "coin",
+          "age": 0.6,
+          "delay": 1.35,
+          "x": -260,
+          "y": 150
+        },
+        {
+          "kind": "coin",
+          "age": 0.6,
+          "delay": 1.55,
+          "x": -260,
+          "y": 240
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "赤铜横财",
+      "index": 1,
+      "time": 1.65,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "coin",
+          "age": 1.6499999999999966,
+          "delay": 0.95,
+          "x": -99.00000000000094,
+          "y": -180
+        },
+        {
+          "kind": "coin",
+          "age": 1.6499999999999966,
+          "delay": 1.15,
+          "x": -145.00000000000085,
+          "y": -90
+        },
+        {
+          "kind": "coin",
+          "age": 1.6499999999999966,
+          "delay": 1.35,
+          "x": -191.00000000000085,
+          "y": 150
+        },
+        {
+          "kind": "coin",
+          "age": 1.6499999999999966,
+          "delay": 1.55,
+          "x": -237.0000000000008,
+          "y": 240
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "赤铜横财",
+      "index": 1,
+      "time": 2.45,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "coin",
+          "age": 2.449999999999994,
+          "delay": 0.95,
+          "x": 84.99999999999955,
+          "y": -180
+        },
+        {
+          "kind": "coin",
+          "age": 2.449999999999994,
+          "delay": 1.15,
+          "x": 38.99999999999892,
+          "y": -90
+        },
+        {
+          "kind": "coin",
+          "age": 2.449999999999994,
+          "delay": 1.35,
+          "x": -7.000000000001705,
+          "y": 150
+        },
+        {
+          "kind": "coin",
+          "age": 2.449999999999994,
+          "delay": 1.55,
+          "x": -53.00000000000162,
+          "y": 240
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "酒池焚阵",
+      "index": 2,
+      "time": 0.65,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "wine",
+          "age": 0.65,
+          "delay": 1.5,
+          "x": -45,
+          "y": -210
+        },
+        {
+          "kind": "wine",
+          "age": 0.65,
+          "delay": 1.95,
+          "x": 90,
+          "y": 0
+        },
+        {
+          "kind": "wine",
+          "age": 0.65,
+          "delay": 2.4000000000000004,
+          "x": -45,
+          "y": 210
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "酒池焚阵",
+      "index": 2,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "wine",
+          "age": 1.799999999999996,
+          "delay": 1.5,
+          "x": -45,
+          "y": -210
+        },
+        {
+          "kind": "wine",
+          "age": 1.799999999999996,
+          "delay": 1.95,
+          "x": 90,
+          "y": 0
+        },
+        {
+          "kind": "wine",
+          "age": 1.799999999999996,
+          "delay": 2.4000000000000004,
+          "x": -45,
+          "y": 210
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "酒池焚阵",
+      "index": 2,
+      "time": 2.5,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "wine",
+          "age": 2.499999999999994,
+          "delay": 1.5,
+          "x": -45,
+          "y": -210
+        },
+        {
+          "kind": "wine",
+          "age": 2.499999999999994,
+          "delay": 1.95,
+          "x": 90,
+          "y": 0
+        },
+        {
+          "kind": "wine",
+          "age": 2.499999999999994,
+          "delay": 2.4000000000000004,
+          "x": -45,
+          "y": 210
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "四世箭阵",
+      "index": 0,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -212.22010168758712,
+          "y": -164.36873582666348,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -243.37356907227914,
+          "y": -90.68385630643266,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -313.4688706878363,
+          "y": 75.10712261408665,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -344.6223380725283,
+          "y": 148.79200213431747,
+          "hp": 117
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "四世箭阵",
+      "index": 0,
+      "time": 1.75,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -176.2987229214746,
+          "y": -119.1814204766261
+        },
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -207.4521903061666,
+          "y": -45.496540956395286
+        },
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -277.54749192172375,
+          "y": 120.29443796412403
+        },
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -308.70095930641577,
+          "y": 193.97931748435485
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -212.22010168758712,
+          "y": -164.36873582666348,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -243.37356907227914,
+          "y": -90.68385630643266,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -313.4688706878363,
+          "y": 75.10712261408665,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -344.6223380725283,
+          "y": 148.79200213431747,
+          "hp": 117
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "四世箭阵",
+      "index": 0,
+      "time": 2.5,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "arrow",
+          "age": 0.7999999999999996,
+          "delay": 0,
+          "x": 17.12408581913087,
+          "y": -37.40356859180966
+        },
+        {
+          "kind": "arrow",
+          "age": 0.7999999999999996,
+          "delay": 0,
+          "x": -14.029381565561152,
+          "y": 36.281310928421156
+        },
+        {
+          "kind": "arrow",
+          "age": 0.7999999999999996,
+          "delay": 0,
+          "x": -84.12468318111829,
+          "y": 202.07228984894047
+        },
+        {
+          "kind": "arrow",
+          "age": 0.7999999999999996,
+          "delay": 0,
+          "x": -115.27815056581031,
+          "y": 275.75716936917127
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -212.22010168758712,
+          "y": -164.36873582666348,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -243.37356907227914,
+          "y": -90.68385630643266,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -313.4688706878363,
+          "y": 75.10712261408665,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -344.6223380725283,
+          "y": 148.79200213431747,
+          "hp": 117
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "官渡弩阵",
+      "index": 1,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "cart",
+          "phase": "ready",
+          "x": -260,
+          "y": -160,
+          "hp": 520
+        },
+        {
+          "kind": "cart",
+          "phase": "ready",
+          "x": -260,
+          "y": 160,
+          "hp": 520
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "官渡弩阵",
+      "index": 1,
+      "time": 2.15,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "bolt",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -213.15879258125008,
+          "y": -101.17464158846158
+        }
+      ],
+      "units": [
+        {
+          "kind": "cart",
+          "phase": "attack",
+          "x": -260,
+          "y": -160,
+          "hp": 520
+        },
+        {
+          "kind": "cart",
+          "phase": "windup",
+          "x": -260,
+          "y": 160,
+          "hp": 520
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "官渡弩阵",
+      "index": 1,
+      "time": 3.8,
+      "phase": "idle",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "cart",
+          "phase": "windup",
+          "x": -260,
+          "y": -160,
+          "hp": 520
+        },
+        {
+          "kind": "cart",
+          "phase": "windup",
+          "x": -260,
+          "y": 160,
+          "hp": 520
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "万军齐射",
+      "index": 2,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -212.22010168758712,
+          "y": -164.36873582666348,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -243.37356907227914,
+          "y": -90.68385630643266,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -313.4688706878363,
+          "y": 75.10712261408665,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "ready",
+          "x": -344.6223380725283,
+          "y": 148.79200213431747,
+          "hp": 117
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "万军齐射",
+      "index": 2,
+      "time": 1.85,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -176.2987229214746,
+          "y": -119.1814204766261
+        },
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -207.4521903061666,
+          "y": -45.496540956395286
+        },
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -277.54749192172375,
+          "y": 120.29443796412403
+        },
+        {
+          "kind": "arrow",
+          "age": 0.049999999999999996,
+          "delay": 0,
+          "x": -308.70095930641577,
+          "y": 193.97931748435485
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -212.22010168758712,
+          "y": -164.36873582666348,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -243.37356907227914,
+          "y": -90.68385630643266,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -313.4688706878363,
+          "y": 75.10712261408665,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -344.6223380725283,
+          "y": 148.79200213431747,
+          "hp": 117
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "万军齐射",
+      "index": 2,
+      "time": 5.1,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 3,
+      "hazards": [
+        {
+          "kind": "arrow",
+          "age": 0.7083333333332902,
+          "delay": 0,
+          "x": 8.605439051450162,
+          "y": -100.99421957422815
+        },
+        {
+          "kind": "arrow",
+          "age": 1.9999999999999523,
+          "delay": 0,
+          "x": 222.33545307890734,
+          "y": 293.3501910491419
+        },
+        {
+          "kind": "arrow",
+          "age": 1.9999999999999523,
+          "delay": 0,
+          "x": 152.24015146335017,
+          "y": 459.14116996966123
+        },
+        {
+          "kind": "arrow",
+          "age": 1.9999999999999523,
+          "delay": 0,
+          "x": 121.08668407865815,
+          "y": 532.8260494898921
+        },
+        {
+          "kind": "arrow",
+          "age": 0.7083333333332902,
+          "delay": 0,
+          "x": -22.54802833324186,
+          "y": -27.30934005399733
+        },
+        {
+          "kind": "arrow",
+          "age": 0.7083333333332902,
+          "delay": 0,
+          "x": -92.64332994879899,
+          "y": 138.48163886652196
+        },
+        {
+          "kind": "arrow",
+          "age": 0.7083333333332902,
+          "delay": 0,
+          "x": -123.79679733349101,
+          "y": 212.16651838675278
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -212.22010168758712,
+          "y": -164.36873582666348,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -243.37356907227914,
+          "y": -90.68385630643266,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -313.4688706878363,
+          "y": 75.10712261408665,
+          "hp": 117
+        },
+        {
+          "kind": "bowman",
+          "phase": "windup",
+          "x": -344.6223380725283,
+          "y": 148.79200213431747,
+          "hp": 117
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "倚天连刃",
+      "index": 0,
+      "time": 0.5,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 0.5,
+          "delay": 0.9,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 0.5,
+          "delay": 1.55,
+          "x": -210,
+          "y": 30
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "倚天连刃",
+      "index": 0,
+      "time": 1.25,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 1.249999999999998,
+          "delay": 0.9,
+          "x": -108.50000000000061,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.249999999999998,
+          "delay": 1.55,
+          "x": -210,
+          "y": 30
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "倚天连刃",
+      "index": 0,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 1.55,
+          "x": -137.5000000000012,
+          "y": 30
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "疑兵换影",
+      "index": 1,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "decoy",
+          "phase": "ready",
+          "x": -260,
+          "y": -90,
+          "hp": 90
+        },
+        {
+          "kind": "decoy",
+          "phase": "ready",
+          "x": -260,
+          "y": 90,
+          "hp": 90
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "疑兵换影",
+      "index": 1,
+      "time": 1.3,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "decoy",
+          "phase": "ready",
+          "x": -260,
+          "y": -90,
+          "hp": 90
+        },
+        {
+          "kind": "decoy",
+          "phase": "ready",
+          "x": -260,
+          "y": 90,
+          "hp": 90
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "疑兵换影",
+      "index": 1,
+      "time": 2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "decoy",
+          "phase": "ready",
+          "x": -260,
+          "y": -90,
+          "hp": 90
+        },
+        {
+          "kind": "decoy",
+          "phase": "ready",
+          "x": -260,
+          "y": 90,
+          "hp": 90
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "虎豹合围",
+      "index": 2,
+      "time": 0.7,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 0.7,
+          "delay": 3.8000000000000003,
+          "x": -210,
+          "y": 30
+        }
+      ],
+      "units": [
+        {
+          "kind": "rider",
+          "phase": "ready",
+          "x": -457.70191602789185,
+          "y": -45.923371657540955,
+          "hp": 405
+        },
+        {
+          "kind": "rider",
+          "phase": "ready",
+          "x": 460,
+          "y": -5.633375276077825e-14,
+          "hp": 405
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "虎豹合围",
+      "index": 2,
+      "time": 1.7,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 1.6999999999999964,
+          "delay": 3.8000000000000003,
+          "x": -210,
+          "y": 30
+        }
+      ],
+      "units": [
+        {
+          "kind": "rider",
+          "phase": "attack",
+          "x": -195.02081639449167,
+          "y": -19.567349662778398,
+          "hp": 405
+        },
+        {
+          "kind": "rider",
+          "phase": "ready",
+          "x": 460,
+          "y": -5.633375276077825e-14,
+          "hp": 405
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "虎豹合围",
+      "index": 2,
+      "time": 4.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 3,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "rider",
+          "phase": "recover",
+          "x": 300.71651971597606,
+          "y": 30.17229339637995,
+          "hp": 405
+        },
+        {
+          "kind": "rider",
+          "phase": "recover",
+          "x": -302.22639383231285,
+          "y": 3.701205858245855e-14,
+          "hp": 405
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "猪突猛进",
+      "index": 0,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "boar",
+          "phase": "ready",
+          "x": -430,
+          "y": -157.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "ready",
+          "x": -430,
+          "y": -52.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "ready",
+          "x": -430,
+          "y": 52.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "ready",
+          "x": -430,
+          "y": 157.5,
+          "hp": 438
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "猪突猛进",
+      "index": 0,
+      "time": 1.6,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -237.99999999999883,
+          "y": -157.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -237.99999999999883,
+          "y": -52.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -237.99999999999883,
+          "y": 52.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -237.99999999999883,
+          "y": 157.5,
+          "hp": 438
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "猪突猛进",
+      "index": 0,
+      "time": 2.25,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -29.999999999999137,
+          "y": -157.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -29.999999999999137,
+          "y": -52.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -29.999999999999137,
+          "y": 52.5,
+          "hp": 438
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -29.999999999999137,
+          "y": 157.5,
+          "hp": 438
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "群狼围猎",
+      "index": 1,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "wolf",
+          "phase": "ready",
+          "x": -430,
+          "y": -150,
+          "hp": 275
+        },
+        {
+          "kind": "wolf",
+          "phase": "ready",
+          "x": -430,
+          "y": 0,
+          "hp": 275
+        },
+        {
+          "kind": "wolf",
+          "phase": "ready",
+          "x": -430,
+          "y": 150,
+          "hp": 275
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "群狼围猎",
+      "index": 1,
+      "time": 2.4,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "wolf",
+          "phase": "windup",
+          "x": -320.00000000000057,
+          "y": -150.00000000000094,
+          "hp": 275
+        },
+        {
+          "kind": "wolf",
+          "phase": "windup",
+          "x": -320.00000000000057,
+          "y": 9.399352214800155e-13,
+          "hp": 275
+        },
+        {
+          "kind": "wolf",
+          "phase": "windup",
+          "x": -320.00000000000057,
+          "y": 150.00000000000094,
+          "hp": 275
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "群狼围猎",
+      "index": 1,
+      "time": 3,
+      "phase": "idle",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "wolf",
+          "phase": "attack",
+          "x": -181.46478279829432,
+          "y": -85.06161693670052,
+          "hp": 275
+        },
+        {
+          "kind": "wolf",
+          "phase": "attack",
+          "x": -167.00000000000057,
+          "y": 4.90528693709885e-13,
+          "hp": 275
+        },
+        {
+          "kind": "wolf",
+          "phase": "attack",
+          "x": -181.46478279829432,
+          "y": 85.06161693670052,
+          "hp": 275
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "万象开道",
+      "index": 2,
+      "time": 0.7,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "elephant",
+          "phase": "ready",
+          "x": -280.5658139895032,
+          "y": -205,
+          "hp": 1125
+        },
+        {
+          "kind": "elephant",
+          "phase": "ready",
+          "x": -280.5658139895032,
+          "y": 185,
+          "hp": 1125
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "万象开道",
+      "index": 2,
+      "time": 1.8,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "elephant",
+          "phase": "attack",
+          "x": -169.1403785802355,
+          "y": -123.58518351150809,
+          "hp": 1125
+        },
+        {
+          "kind": "elephant",
+          "phase": "ready",
+          "x": -280.5658139895032,
+          "y": 185,
+          "hp": 1125
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "万象开道",
+      "index": 2,
+      "time": 4.25,
+      "phase": "idle",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 3,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "elephant",
+          "phase": "recover",
+          "x": 53.172696185510326,
+          "y": 38.85149998508806,
+          "hp": 1125
+        },
+        {
+          "kind": "elephant",
+          "phase": "attack",
+          "x": -7.296258384486231,
+          "y": 4.8110202092567,
+          "hp": 1125
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "落子成灾",
+      "index": 0,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "stone",
+          "age": 0.6,
+          "delay": 1,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "stone",
+          "age": 0.6,
+          "delay": 1.4,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "stone",
+          "age": 0.6,
+          "delay": 1.8,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "落子成灾",
+      "index": 0,
+      "time": 1.4,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "stone",
+          "age": 1.3999999999999975,
+          "delay": 1,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "stone",
+          "age": 1.3999999999999975,
+          "delay": 1.4,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "stone",
+          "age": 1.3999999999999975,
+          "delay": 1.8,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "落子成灾",
+      "index": 0,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "stone",
+          "age": 1.799999999999996,
+          "delay": 1.4,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "stone",
+          "age": 1.799999999999996,
+          "delay": 1.8,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "阴阳双龙",
+      "index": 1,
+      "time": 0.6,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "dragon",
+          "age": 0.6,
+          "delay": 1.1,
+          "x": -450,
+          "y": -145
+        },
+        {
+          "kind": "dragon",
+          "age": 0.6,
+          "delay": 1.1,
+          "x": -450,
+          "y": 205
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "阴阳双龙",
+      "index": 1,
+      "time": 2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "dragon",
+          "age": 1.9999999999999953,
+          "delay": 1.1,
+          "x": -261.00000000000057,
+          "y": -165.35179181125477
+        },
+        {
+          "kind": "dragon",
+          "age": 1.9999999999999953,
+          "delay": 1.1,
+          "x": -261.00000000000057,
+          "y": 225.35179181125477
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "阴阳双龙",
+      "index": 1,
+      "time": 3.1,
+      "phase": "idle",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "dragon",
+          "age": 3.0999999999999917,
+          "delay": 1.1,
+          "x": -30.00000000000057,
+          "y": -155.86624656942203
+        },
+        {
+          "kind": "dragon",
+          "age": 3.0999999999999917,
+          "delay": 1.1,
+          "x": -30.00000000000057,
+          "y": 215.86624656942203
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "五丈星劫",
+      "index": 2,
+      "time": 0.7,
+      "phase": "windup",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "meteor",
+          "age": 0.7,
+          "delay": 1.15,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "meteor",
+          "age": 0.7,
+          "delay": 1.7,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "meteor",
+          "age": 0.7,
+          "delay": 2.25,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "五丈星劫",
+      "index": 2,
+      "time": 1.75,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "meteor",
+          "age": 1.7499999999999962,
+          "delay": 1.15,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "meteor",
+          "age": 1.7499999999999962,
+          "delay": 1.7,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "meteor",
+          "age": 1.7499999999999962,
+          "delay": 2.25,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "version": "chronicles-v7-seven-bosses",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "五丈星劫",
+      "index": 2,
+      "time": 2.3,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "meteor",
+          "age": 2.2999999999999945,
+          "delay": 1.7,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "meteor",
+          "age": 2.2999999999999945,
+          "delay": 2.25,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    }
+  ],
+  "motion": [
+    {
+      "file": "zhangjiao.gif",
+      "frames": 132,
+      "fps": 10,
+      "scope": "Cocos engineering keyframes concatenated; not continuous gameplay recording"
+    },
+    {
+      "file": "dongzhuo.gif",
+      "frames": 132,
+      "fps": 10,
+      "scope": "Cocos engineering keyframes concatenated; not continuous gameplay recording"
+    },
+    {
+      "file": "yuanshao.gif",
+      "frames": 132,
+      "fps": 10,
+      "scope": "Cocos engineering keyframes concatenated; not continuous gameplay recording"
+    },
+    {
+      "file": "caocao.gif",
+      "frames": 132,
+      "fps": 10,
+      "scope": "Cocos engineering keyframes concatenated; not continuous gameplay recording"
+    },
+    {
+      "file": "menghuo.gif",
+      "frames": 132,
+      "fps": 10,
+      "scope": "Cocos engineering keyframes concatenated; not continuous gameplay recording"
+    },
+    {
+      "file": "simayi.gif",
+      "frames": 132,
+      "fps": 10,
+      "scope": "Cocos engineering keyframes concatenated; not continuous gameplay recording"
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "restored": true,
+    "saveUnchanged": true,
+    "version": "chronicles-v7-seven-bosses"
+  },
+  "checks": {
+    "fullSuite": "passed on final runtime",
+    "newBossRegression": "passed; includes late entry into live lightning chain and correct wine/coin pose",
+    "typecheck": "passed",
+    "wechatBuild": "passed",
+    "webBuild": "passed",
+    "localPackageMiB": 19.35,
+    "previewUpload": "success",
+    "previewBytes": 20259880,
+    "iOSPhysicalDevice": "pending user test"
+  },
+  "motionScope": "each of three skills contributes first4.4s at10fps;132frames per Boss; late long-skill phases additionally sampled in the54 stills",
+  "wechat": {
+    "visualVerified": false,
+    "reason": "user requested direct phone preview without desktop unlock"
+  },
+  "sourceHashes": {
+    "assets/scripts/boss-roster.ts": "c955eb63fcddd95461003c27c8b8e14003e147ed949d65645621d7599282f37e",
+    "assets/scripts/boss-battle.ts": "b2b0b755da39cc48e66b406adde172254a88167e3c0cbd589678b7ca3164a1bf",
+    "assets/scripts/boss-effects.ts": "27f91024ddc6f6631eca8c5dfcc0e70c4419f1a820b8400d70881c088597d5e8",
+    "assets/scripts/lvbu-boss.ts": "4a626fa60a09b4a4642a51b039841593434c18cdda9718e9561266b745d6325c",
+    "assets/scripts/lvbu-effects.ts": "e30da9ce0baa4a9a8b3cc717bb93210103372c241ef60b8d2841ca6e59f13e53",
+    "assets/scripts/GameBootstrap.ts": "18ccf5c49febc091786c2030726b0e11ced657adb3e86bbe6f90d25726dcde87",
+    "assets/scripts/chronicles.ts": "ec0592880dd79c14fad07ff48cd1749f67ae0635c4c8d8d5d31714b44ded360c",
+    "assets/scripts/chronicles-data.ts": "a22c99fadeb5a6cad49c5958b4c5d5cd1e20ef41cc7cd895aec9b5648fdabdad",
+    "assets/scripts/chronicle-art.ts": "172b263c9dc51a9fd91d8b54c63156bbb19b28a5343d6c398ffc5291a609d112",
+    "assets/scripts/extra-weapons.ts": "338eea09c298af2e3516587850a3b687ed6d555a0175a544a62afb642fbcacfc",
+    "assets/scripts/survival.ts": "07aed3ab491b174daf014960cb9a0daaf9595ccaa3cae50aab67912c4e0d1ff0",
+    "assets/scripts/chronicle-save.ts": "ab9a607fbe4c90cef3ed6e807284515fe6aa45c2c7835e2ff7fba3c360240758",
+    "assets/scripts/ResultView.ts": "667b9d6e3391e4325c66079f3350ce1ec7d16e9fbc693de303d6f50ba5db1714",
+    "assets/chronicle-units/boss-zhangjiao-actions.png": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12",
+    "assets/chronicle-units/boss-dongzhuo-actions.png": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c",
+    "assets/chronicle-units/boss-yuanshao-actions.png": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704",
+    "assets/chronicle-units/boss-caocao-actions.png": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc",
+    "assets/chronicle-units/boss-menghuo-actions.png": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483",
+    "assets/chronicle-units/boss-simayi-actions.png": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7",
+    "assets/chronicle-units/boss-beasts.png": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26",
+    "assets/chronicle-units/boss-props.png": "9ac52c9e729fc60c2db42056a8bc2f9366e39c94cfe8425f0db986fe8e7732ed"
+  }
+}

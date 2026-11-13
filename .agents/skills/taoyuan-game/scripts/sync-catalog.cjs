@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'extra-weapons']);
+  const allowed = new Set(['game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -211,12 +211,12 @@ function generate(root) {
   ].join('\n') + '\n';
   const balanceDoc = [heading('角色与数值曲线'), `版本：\`${catalog.game.version}\`。时间从进入正式战斗后开始计；${c.WAVE_SECONDS}秒第零章另算，购物与暂停不计时。\n`,
     '## 角色开局与技能\n', table(['英雄', '心 / 移速', '默认武器', '固有特点', '技能', '充能方式'], heroes.map(h => [h.name, h.startingHearts + ' / ' + h.stats.speed, names[h.starter], h.desc, h.skill.selection,h.skill.recharge])),
-    '\n24通用技能全部开放，全英雄选1个；初始可用，释放后每击杀1名真实小兵+1，时间不充能。S为施法瞬间装备DPS之和。详见common-skills-v5规则。\n',
-    '## 24通用技能（综合威力升序）\n',table(['技能','威力阶','基础击杀需求','伤害/收益','范围','持续','真实机制'],catalog.chronicles.genericSkills.map(s=>[s.id+' / '+s.name,s.powerTier,s.killCharge,s.damage,s.range,s.duration,s.effect])),
+    `\n${catalog.chronicles.genericSkills.length}通用技能全部开放，全英雄选1个；初始可用，释放后每击杀1名真实小兵+1，时间不充能。S为施法瞬间装备DPS之和。详见common-skills-v5规则。\n`,
+    `## ${catalog.chronicles.genericSkills.length}通用技能（综合威力升序）\n`,table(['技能','威力阶','基础击杀需求','伤害/收益','范围','持续','真实机制'],catalog.chronicles.genericSkills.map(s=>[s.id+' / '+s.name,s.powerTier,s.killCharge,s.damage,s.range,s.duration,s.effect])),
     '## 17章固定曲线\n', table(['章 / 首领','参考有效DPS','Boss HP','普通兵HP倍率','第1/2/3段威胁/秒','Boss援军威胁/秒'],catalog.chronicles.chapters.map(ch=>[ch.id+' / '+ch.boss,ch.referenceDps,ch.bossHp,round(ch.enemyHpMultiplier),ch.threatPerSecond.slice(1).map(round).join(' / '),round(ch.bossThreat)])),
     '\n第零章15秒：首章仅E01 HP6／移速86，首店收入补足28；后续章有新兵预告。普通兵出生时乘本章HP倍率和战段1/1.04/1.08，Boss阶段新兵乘1.1；存活旧兵不补血。移速只乘1+min(.006×(章−1),.12)，弹速、冲锋与预警不加速。\n',
     '## 40类敌兵标准数值\n',table(['ID / 名称','首登','标准HP','首登第1段HP','基速','攻击周期 / 前摇','射程','成本 / 金币','机制'],catalog.chronicles.enemies.map(e=>[e.id+' / '+e.name,e.first,e.hp,e.firstChapterValues.hp,e.speed,e.cycle+' / '+e.windup,e.range,e.cost+' / '+e.coins,e.mechanic])),
-    '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与24个可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance.json，不等于真人存活率。\n',
+    '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与当前可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance.json，不等于真人存活率。\n',
     '## 商店价格与刷新\n', table(['章节', '基础价', '草鞋 I/II/III/IV', '突突枪 I/II/III/IV'], catalog.economy.prices.map(row => [row.chapter, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.smg.join(' / ')])),
     '\n无折扣样本，按固定章节指数 `min(5,1.07^(章−1))` 调用现行商店价格函数，不使用旧八关商店价格。\n',
     table(['已刷新次数', '无C05', 'C05×1', 'C05×2', 'C05×3', 'C05×10'], catalog.economy.refresh.map(row => [row.rerolls, ...row.costsByC05Copies.map(v => v.cost)])),

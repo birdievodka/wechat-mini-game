@@ -90,7 +90,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 42.0,
-    "unlock": 8,
+    "unlock": 4,
     "pierce": 0,
     "critMultiplier": 1.75,
     "desc": "银枪连刺 · 同组共享命中次数"
@@ -109,7 +109,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 40.0,
-    "unlock": 8,
+    "unlock": 4,
     "pierce": 0,
     "critMultiplier": 1.75,
     "desc": "剑斩破盾 · 忽略部分减伤"
@@ -128,7 +128,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 48.0,
-    "unlock": 10,
+    "unlock": 5,
     "pierce": 0,
     "critMultiplier": 1.7,
     "desc": "四击一月牙 · 近斩与刃波"
@@ -166,7 +166,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 44.0,
-    "unlock": 4,
+    "unlock": 3,
     "pierce": 0,
     "critMultiplier": 1.6,
     "desc": "重斩 · 首击额外伤害"
@@ -185,7 +185,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 44.0,
-    "unlock": 6,
+    "unlock": 3,
     "pierce": 0,
     "critMultiplier": 1.6,
     "desc": "双戟连续横扫 · 范围全部命中"
@@ -204,7 +204,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 42.0,
-    "unlock": 4,
+    "unlock": 3,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "三尖横扫 · 高阶侧刃"
@@ -223,7 +223,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 320.0,
     "area": 35.0,
     "price": 30.0,
-    "unlock": 5,
+    "unlock": 3,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "自动布陷阱 · 同敌1秒一次"
@@ -242,7 +242,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 480.0,
     "area": 0.0,
     "price": 40.0,
-    "unlock": 7,
+    "unlock": 4,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "连弩逐发 · 同敌命中有上限"
@@ -261,7 +261,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 600.0,
     "area": 0.0,
     "price": 38.0,
-    "unlock": 11,
+    "unlock": 5,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "强弓扇射 · 同敌每轮一箭"
@@ -280,7 +280,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 760.0,
     "area": 0.0,
     "price": 44.0,
-    "unlock": 6,
+    "unlock": 3,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "直线贯穿 · 后续目标85%伤害"
@@ -299,7 +299,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 480.0,
     "area": 0.0,
     "price": 34.0,
-    "unlock": 9,
+    "unlock": 4,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "飞出与返回 · 每程各一次"
@@ -318,7 +318,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 550.0,
     "area": 0.0,
     "price": 36.0,
-    "unlock": 12,
+    "unlock": 5,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "连钩聚敌 · 不拉入身体"
@@ -337,7 +337,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 300.0,
     "area": 85.0,
     "price": 34.0,
-    "unlock": 7,
+    "unlock": 4,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "火油地面 · 同敌共享叠火上限"
@@ -356,7 +356,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 340.0,
     "area": 115.0,
     "price": 44.0,
-    "unlock": 13,
+    "unlock": 6,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "范围爆破 · 外圈55%伤害"
@@ -375,7 +375,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 380.0,
     "area": 0.0,
     "price": 34.0,
-    "unlock": 7,
+    "unlock": 4,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "风羽扇射 · 同敌每轮一次"
@@ -413,7 +413,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 0.0,
     "price": 46.0,
-    "unlock": 16,
+    "unlock": 6,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "七星灯阵 · 同敌不按灯数叠加"
@@ -432,7 +432,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 0.0,
     "area": 100.0,
     "price": 44.0,
-    "unlock": 13,
+    "unlock": 6,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "自动布阵 · 入阵伤害并减速"
@@ -451,7 +451,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 500.0,
     "area": 0.0,
     "price": 42.0,
-    "unlock": 15,
+    "unlock": 6,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "木牛自动点射 · 全场随从最多12"
@@ -470,7 +470,7 @@ export const EXTRA_WEAPONS:(WeaponDefinition & {unlock:number})[] = [
     "speed": 430.0,
     "area": 0.0,
     "price": 40.0,
-    "unlock": 15,
+    "unlock": 6,
     "pierce": 0,
     "critMultiplier": 1.5,
     "desc": "木鸢穿行 · 每只同敌一次"

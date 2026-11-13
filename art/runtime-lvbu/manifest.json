@@ -1,0 +1,560 @@
+{
+  "sources": [
+    {
+      "path": "art/runtime-lvbu/source.png",
+      "sha256": "c64322fd93c86a88dc68c04a2df34e9c2ebb1ae2c3ff1b939e0bb464c77ab29c"
+    },
+    {
+      "path": "art/runtime-lvbu/trot-source.png",
+      "sha256": "7f8d0b5af3ee8fff95d0498555166b0b54b92692f82801bd8a5f4b0ec220cad7"
+    }
+  ],
+  "dest": "assets/chronicle-units/lvbu-actions.png",
+  "sha256": "114f6d1661c501fc3558193f9db78b86254a79786ed8e0658ebd38b9229f444c",
+  "width": 768,
+  "height": 960,
+  "cell": 192,
+  "cells": [
+    {
+      "index": 0,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        27,
+        20,
+        310,
+        306
+      ],
+      "rect": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "content": [
+        17,
+        24,
+        158,
+        156
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        85.40289597814146,
+        77.86940427222316
+      ]
+    },
+    {
+      "index": 1,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        381,
+        9,
+        291,
+        317
+      ],
+      "rect": [
+        192,
+        0,
+        192,
+        192
+      ],
+      "content": [
+        22,
+        19,
+        148,
+        161
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        81.81208032267922,
+        70.32280421882203
+      ]
+    },
+    {
+      "index": 2,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        733,
+        47,
+        339,
+        276
+      ],
+      "rect": [
+        384,
+        0,
+        192,
+        192
+      ],
+      "content": [
+        10,
+        40,
+        172,
+        140
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        81.67565528507946,
+        89.67823261923627
+      ]
+    },
+    {
+      "index": 3,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        1099,
+        32,
+        334,
+        270
+      ],
+      "rect": [
+        576,
+        0,
+        192,
+        192
+      ],
+      "content": [
+        11,
+        43,
+        170,
+        137
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        81.49155381765715,
+        90.89571758874266
+      ]
+    },
+    {
+      "index": 4,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        22,
+        379,
+        283,
+        290
+      ],
+      "rect": [
+        0,
+        192,
+        192,
+        192
+      ],
+      "content": [
+        24,
+        32,
+        144,
+        148
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        82.14291674764753,
+        81.09728202019554
+      ]
+    },
+    {
+      "index": 5,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        374,
+        391,
+        337,
+        277
+      ],
+      "rect": [
+        192,
+        192,
+        192,
+        192
+      ],
+      "content": [
+        10,
+        39,
+        171,
+        141
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        82.0982499098976,
+        88.38718365189058
+      ]
+    },
+    {
+      "index": 6,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        763,
+        377,
+        257,
+        294
+      ],
+      "rect": [
+        384,
+        192,
+        192,
+        192
+      ],
+      "content": [
+        31,
+        30,
+        131,
+        150
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        94.26728712047336,
+        76.6990788352467
+      ]
+    },
+    {
+      "index": 7,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        1106,
+        374,
+        262,
+        297
+      ],
+      "rect": [
+        576,
+        192,
+        192,
+        192
+      ],
+      "content": [
+        29,
+        29,
+        133,
+        151
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        95.48561797736706,
+        78.63145098852272
+      ]
+    },
+    {
+      "index": 8,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        10,
+        779,
+        346,
+        253
+      ],
+      "rect": [
+        0,
+        384,
+        192,
+        192
+      ],
+      "content": [
+        8,
+        51,
+        176,
+        129
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        87.04625927835367,
+        97.02748634650709
+      ]
+    },
+    {
+      "index": 9,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        382,
+        761,
+        327,
+        262
+      ],
+      "rect": [
+        192,
+        384,
+        192,
+        192
+      ],
+      "content": [
+        13,
+        47,
+        166,
+        133
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        86.46405056095298,
+        93.75159183142162
+      ]
+    },
+    {
+      "index": 10,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        738,
+        751,
+        281,
+        283
+      ],
+      "rect": [
+        384,
+        384,
+        192,
+        192
+      ],
+      "content": [
+        25,
+        36,
+        143,
+        144
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        87.61455450798144,
+        82.27093530052994
+      ]
+    },
+    {
+      "index": 11,
+      "source": "art/runtime-lvbu/source.png",
+      "sourceRect": [
+        1096,
+        755,
+        344,
+        281
+      ],
+      "rect": [
+        576,
+        384,
+        192,
+        192
+      ],
+      "content": [
+        9,
+        37,
+        175,
+        143
+      ],
+      "registration": "action foot baseline",
+      "anchor": [
+        77.7474718677367,
+        86.28488587685644
+      ]
+    },
+    {
+      "index": 12,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        58,
+        25,
+        335,
+        368
+      ],
+      "rect": [
+        0,
+        576,
+        192,
+        192
+      ],
+      "content": [
+        25,
+        24,
+        142,
+        156
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        91.98759479315953,
+        76.19203942580705
+      ]
+    },
+    {
+      "index": 13,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        502,
+        25,
+        335,
+        365
+      ],
+      "rect": [
+        192,
+        576,
+        192,
+        192
+      ],
+      "content": [
+        25,
+        25,
+        142,
+        154
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        91.69364445856013,
+        76.71721008396904
+      ]
+    },
+    {
+      "index": 14,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        945,
+        25,
+        335,
+        368
+      ],
+      "rect": [
+        384,
+        576,
+        192,
+        192
+      ],
+      "content": [
+        25,
+        24,
+        142,
+        156
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        92.01678961490279,
+        76.22729801002048
+      ]
+    },
+    {
+      "index": 15,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        1390,
+        26,
+        335,
+        367
+      ],
+      "rect": [
+        576,
+        576,
+        192,
+        192
+      ],
+      "content": [
+        26,
+        25,
+        142,
+        155
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        92.45999126457065,
+        76.88941417558488
+      ]
+    },
+    {
+      "index": 16,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        59,
+        469,
+        331,
+        368
+      ],
+      "rect": [
+        0,
+        768,
+        192,
+        192
+      ],
+      "content": [
+        29,
+        30,
+        135,
+        150
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        92.21848663490877,
+        79.33839927580104
+      ]
+    },
+    {
+      "index": 17,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        503,
+        469,
+        330,
+        364
+      ],
+      "rect": [
+        192,
+        768,
+        192,
+        192
+      ],
+      "content": [
+        29,
+        31,
+        134,
+        148
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        91.95611343440652,
+        79.9060890602444
+      ]
+    },
+    {
+      "index": 18,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        946,
+        469,
+        331,
+        368
+      ],
+      "rect": [
+        384,
+        768,
+        192,
+        192
+      ],
+      "content": [
+        29,
+        30,
+        135,
+        150
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        92.20584579406278,
+        79.38980393684876
+      ]
+    },
+    {
+      "index": 19,
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceRect": [
+        1390,
+        469,
+        331,
+        369
+      ],
+      "rect": [
+        576,
+        768,
+        192,
+        192
+      ],
+      "content": [
+        29,
+        30,
+        135,
+        150
+      ],
+      "registration": "registered upper body",
+      "anchor": [
+        92.1419610321033,
+        79.65217971318202
+      ]
+    }
+  ],
+  "bytes": 210967
+}

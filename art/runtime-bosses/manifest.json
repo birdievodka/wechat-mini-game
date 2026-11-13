@@ -1,0 +1,2845 @@
+{
+  "cell": 160,
+  "sources": [
+    {
+      "path": "art/runtime-bosses/zhangjiao-source.png",
+      "sha256": "274ee9ad5a2a28491d70e0352cdcf77b91a8fed8a1cb82ca48999c9b28968738"
+    },
+    {
+      "path": "art/runtime-bosses/dongzhuo-source.png",
+      "sha256": "307db56ae8b10b6ea4d98f0728558e82068770985f8317d22bcd284b73ab0929"
+    },
+    {
+      "path": "art/runtime-bosses/yuanshao-source.png",
+      "sha256": "e6d93426cd6f1254c7d1aeca392ccd52b4f2f1d8a6b4d85d94650cdadbe97e47"
+    },
+    {
+      "path": "art/runtime-bosses/caocao-source.png",
+      "sha256": "2cb953e627a6734d967a15a13a64e0f30a44cb468e7f82983fab9d72e3f6bb63"
+    },
+    {
+      "path": "art/runtime-bosses/menghuo-source.png",
+      "sha256": "f66b417c44ea9bddbb5b416cfad5b6c9fd23a3a6ed3611ea4b86e9ca0cfc5e07"
+    },
+    {
+      "path": "art/runtime-bosses/simayi-source.png",
+      "sha256": "59a2e92474656ae8d07a10f2df596314009b8ebed2b81d8d304c8d1ad26c86c2"
+    },
+    {
+      "path": "art/runtime-bosses/beasts-source.png",
+      "sha256": "6b4a5ca73abf1ee43fa06337f7a4aa3f9a76f3ca1591deff2dd3ed42e7e21119"
+    },
+    {
+      "path": "art/runtime-bosses/rider-source.png",
+      "sha256": "4cf9dd5f2f501298dfe097455306a45c8ec6b65689d3866b0bd7d609dbd5e28b"
+    },
+    {
+      "path": "art/runtime-bosses/props-source.png",
+      "sha256": "07c5687549f249c7cd6eec35d74278c4807fff07baafea7c64ed991c6669ea71"
+    }
+  ],
+  "atlases": [
+    {
+      "dest": "assets/chronicle-units/boss-zhangjiao-actions.png",
+      "sha256": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12",
+      "width": 640,
+      "height": 640,
+      "bytes": 137646,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            31,
+            23,
+            249,
+            256
+          ],
+          "content": [
+            21,
+            30,
+            119,
+            122
+          ],
+          "anchor": [
+            83.48452424359209,
+            72.85003070661801
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            345,
+            23,
+            240,
+            257
+          ],
+          "content": [
+            22,
+            30,
+            115,
+            123
+          ],
+          "anchor": [
+            83.14413685746581,
+            72.86592365238869
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            659,
+            26,
+            233,
+            256
+          ],
+          "content": [
+            24,
+            31,
+            111,
+            122
+          ],
+          "anchor": [
+            83.27488283788045,
+            73.07161299185427
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            971,
+            28,
+            237,
+            254
+          ],
+          "content": [
+            23,
+            31,
+            113,
+            121
+          ],
+          "anchor": [
+            83.28124385232549,
+            72.48830024730901
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            30,
+            340,
+            238,
+            255
+          ],
+          "content": [
+            22,
+            31,
+            114,
+            122
+          ],
+          "anchor": [
+            83.28921727194964,
+            72.84325647623373
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            348,
+            325,
+            257,
+            267
+          ],
+          "content": [
+            19,
+            24,
+            123,
+            128
+          ],
+          "anchor": [
+            83.65083119094753,
+            71.05594304567603
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            637,
+            359,
+            301,
+            229
+          ],
+          "content": [
+            8,
+            43,
+            144,
+            109
+          ],
+          "anchor": [
+            69.53075268206183,
+            79.83362463489306
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            953,
+            326,
+            285,
+            266
+          ],
+          "content": [
+            12,
+            25,
+            136,
+            127
+          ],
+          "anchor": [
+            82.6667391231395,
+            70.74086007217707
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            41,
+            651,
+            230,
+            253
+          ],
+          "content": [
+            24,
+            30,
+            111,
+            122
+          ],
+          "anchor": [
+            82.97016346917968,
+            71.80646008516919
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            350,
+            650,
+            232,
+            252
+          ],
+          "content": [
+            24,
+            30,
+            112,
+            122
+          ],
+          "anchor": [
+            83.40577286799495,
+            71.83765458821404
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            658,
+            657,
+            228,
+            247
+          ],
+          "content": [
+            24,
+            31,
+            110,
+            119
+          ],
+          "anchor": [
+            83.48697193588754,
+            71.14061721357398
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            969,
+            655,
+            233,
+            252
+          ],
+          "content": [
+            23,
+            31,
+            113,
+            122
+          ],
+          "anchor": [
+            83.75190090424607,
+            71.63264419295666
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            36,
+            969,
+            226,
+            255
+          ],
+          "content": [
+            25,
+            31,
+            109,
+            123
+          ],
+          "anchor": [
+            83.54749273022938,
+            71.82670161927417
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            356,
+            948,
+            240,
+            275
+          ],
+          "content": [
+            22,
+            19,
+            116,
+            133
+          ],
+          "anchor": [
+            85.09701757175144,
+            67.57330179817313
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            639,
+            982,
+            298,
+            239
+          ],
+          "content": [
+            8,
+            37,
+            144,
+            115
+          ],
+          "anchor": [
+            68.88550097811198,
+            75.86299826006112
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/zhangjiao-source.png",
+          "sourceRect": [
+            949,
+            947,
+            279,
+            274
+          ],
+          "content": [
+            13,
+            20,
+            135,
+            132
+          ],
+          "anchor": [
+            84.61277177275089,
+            67.37795747590003
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-dongzhuo-actions.png",
+      "sha256": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c",
+      "width": 640,
+      "height": 640,
+      "bytes": 142650,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            33,
+            34,
+            238,
+            239
+          ],
+          "content": [
+            19,
+            30,
+            122,
+            122
+          ],
+          "anchor": [
+            80.97953414129066,
+            69.65543903909173
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            344,
+            34,
+            242,
+            242
+          ],
+          "content": [
+            17,
+            29,
+            124,
+            124
+          ],
+          "anchor": [
+            81.4505778705096,
+            69.03857332881715
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            660,
+            35,
+            239,
+            244
+          ],
+          "content": [
+            19,
+            28,
+            122,
+            125
+          ],
+          "anchor": [
+            80.96057351573351,
+            68.83046970150656
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            976,
+            38,
+            236,
+            241
+          ],
+          "content": [
+            19,
+            29,
+            121,
+            124
+          ],
+          "anchor": [
+            80.81652337921605,
+            69.14365921825151
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            35,
+            349,
+            239,
+            239
+          ],
+          "content": [
+            18,
+            29,
+            122,
+            122
+          ],
+          "anchor": [
+            81.02336222467912,
+            69.15754211566122
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            349,
+            350,
+            236,
+            239
+          ],
+          "content": [
+            20,
+            30,
+            121,
+            122
+          ],
+          "anchor": [
+            75.00033436837049,
+            71.5119802004129
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            639,
+            347,
+            280,
+            240
+          ],
+          "content": [
+            8,
+            29,
+            143,
+            123
+          ],
+          "anchor": [
+            77.28311404481019,
+            70.44777583059508
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            952,
+            346,
+            281,
+            243
+          ],
+          "content": [
+            8,
+            27,
+            144,
+            125
+          ],
+          "anchor": [
+            69.18004592402205,
+            70.97039437296984
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            39,
+            658,
+            234,
+            243
+          ],
+          "content": [
+            21,
+            30,
+            118,
+            122
+          ],
+          "anchor": [
+            79.97341521000293,
+            69.85534699332072
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            348,
+            658,
+            238,
+            249
+          ],
+          "content": [
+            20,
+            29,
+            120,
+            126
+          ],
+          "anchor": [
+            80.36969593689093,
+            69.78141422620115
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            663,
+            658,
+            237,
+            251
+          ],
+          "content": [
+            21,
+            28,
+            119,
+            127
+          ],
+          "anchor": [
+            80.38760396707369,
+            69.54295746019196
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            974,
+            659,
+            241,
+            250
+          ],
+          "content": [
+            19,
+            28,
+            121,
+            126
+          ],
+          "anchor": [
+            79.74206866991076,
+            69.39992703346427
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            35,
+            973,
+            240,
+            248
+          ],
+          "content": [
+            19,
+            28,
+            121,
+            125
+          ],
+          "anchor": [
+            80.49156969878923,
+            69.34846572022383
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            343,
+            975,
+            236,
+            241
+          ],
+          "content": [
+            21,
+            31,
+            119,
+            121
+          ],
+          "anchor": [
+            79.63245452556211,
+            72.09808244154485
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            632,
+            971,
+            278,
+            248
+          ],
+          "content": [
+            10,
+            27,
+            140,
+            125
+          ],
+          "anchor": [
+            78.25748160485735,
+            68.32077863646033
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/dongzhuo-source.png",
+          "sourceRect": [
+            951,
+            969,
+            275,
+            251
+          ],
+          "content": [
+            11,
+            25,
+            139,
+            127
+          ],
+          "anchor": [
+            70.3728414184533,
+            68.88844410774678
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-yuanshao-actions.png",
+      "sha256": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704",
+      "width": 640,
+      "height": 640,
+      "bytes": 115411,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            35,
+            18,
+            255,
+            263
+          ],
+          "content": [
+            22,
+            32,
+            117,
+            120
+          ],
+          "anchor": [
+            79.03913077918423,
+            70.95717478179537
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            347,
+            19,
+            252,
+            264
+          ],
+          "content": [
+            23,
+            32,
+            115,
+            121
+          ],
+          "anchor": [
+            78.47222881263923,
+            70.87695173128067
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            664,
+            21,
+            244,
+            261
+          ],
+          "content": [
+            26,
+            32,
+            112,
+            119
+          ],
+          "anchor": [
+            78.45991709202556,
+            70.30875184258971
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            979,
+            25,
+            243,
+            257
+          ],
+          "content": [
+            27,
+            35,
+            111,
+            117
+          ],
+          "anchor": [
+            79.15041650525446,
+            70.8638677691752
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            35,
+            339,
+            246,
+            253
+          ],
+          "content": [
+            25,
+            36,
+            112,
+            116
+          ],
+          "anchor": [
+            78.91232461232255,
+            71.1532115768581
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            310,
+            319,
+            255,
+            264
+          ],
+          "content": [
+            22,
+            31,
+            117,
+            121
+          ],
+          "anchor": [
+            82.15785529055944,
+            70.49880293068759
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            623,
+            360,
+            312,
+            223
+          ],
+          "content": [
+            9,
+            50,
+            143,
+            102
+          ],
+          "anchor": [
+            69.16521063916318,
+            85.31252413129702
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            954,
+            357,
+            276,
+            252
+          ],
+          "content": [
+            17,
+            37,
+            126,
+            115
+          ],
+          "anchor": [
+            73.93551671278388,
+            75.82293546392766
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            44,
+            648,
+            233,
+            258
+          ],
+          "content": [
+            26,
+            32,
+            109,
+            120
+          ],
+          "anchor": [
+            78.39786218995725,
+            71.12647548954676
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            351,
+            650,
+            231,
+            258
+          ],
+          "content": [
+            26,
+            33,
+            108,
+            120
+          ],
+          "anchor": [
+            77.7573285633548,
+            71.21585165613998
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            667,
+            649,
+            227,
+            259
+          ],
+          "content": [
+            28,
+            32,
+            106,
+            121
+          ],
+          "anchor": [
+            78.26754594606714,
+            70.48325947149246
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            979,
+            652,
+            228,
+            255
+          ],
+          "content": [
+            28,
+            34,
+            106,
+            119
+          ],
+          "anchor": [
+            77.79501888810586,
+            71.11425678061617
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            40,
+            970,
+            227,
+            248
+          ],
+          "content": [
+            27,
+            35,
+            106,
+            116
+          ],
+          "anchor": [
+            77.66413736727438,
+            70.70783423018698
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            317,
+            949,
+            228,
+            258
+          ],
+          "content": [
+            27,
+            32,
+            106,
+            120
+          ],
+          "anchor": [
+            80.20562646675455,
+            71.06807157152207
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            620,
+            985,
+            309,
+            222
+          ],
+          "content": [
+            8,
+            49,
+            144,
+            103
+          ],
+          "anchor": [
+            66.55341252833239,
+            85.06863416149636
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/yuanshao-source.png",
+          "sourceRect": [
+            953,
+            987,
+            272,
+            226
+          ],
+          "content": [
+            17,
+            47,
+            127,
+            105
+          ],
+          "anchor": [
+            72.7114793676867,
+            82.6054426275649
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-caocao-actions.png",
+      "sha256": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc",
+      "width": 640,
+      "height": 640,
+      "bytes": 92433,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            52,
+            27,
+            221,
+            253
+          ],
+          "content": [
+            36,
+            52,
+            88,
+            100
+          ],
+          "anchor": [
+            74.85863190374148,
+            86.45248288082567
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            358,
+            27,
+            228,
+            253
+          ],
+          "content": [
+            33,
+            52,
+            90,
+            100
+          ],
+          "anchor": [
+            75.1754881240476,
+            86.25760715881881
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            670,
+            27,
+            229,
+            253
+          ],
+          "content": [
+            32,
+            52,
+            91,
+            100
+          ],
+          "anchor": [
+            74.73076058116254,
+            86.10229057088709
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            981,
+            27,
+            233,
+            253
+          ],
+          "content": [
+            31,
+            52,
+            92,
+            100
+          ],
+          "anchor": [
+            75.29578849824338,
+            86.02948327658103
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            49,
+            340,
+            224,
+            255
+          ],
+          "content": [
+            34,
+            52,
+            89,
+            101
+          ],
+          "anchor": [
+            75.04612496597943,
+            86.26515711976364
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            339,
+            342,
+            261,
+            252
+          ],
+          "content": [
+            28,
+            52,
+            103,
+            100
+          ],
+          "anchor": [
+            74.1234277657168,
+            85.65597656917996
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            634,
+            343,
+            297,
+            253
+          ],
+          "content": [
+            21,
+            52,
+            118,
+            100
+          ],
+          "anchor": [
+            74.2613040666073,
+            86.02275236889429
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            950,
+            343,
+            276,
+            253
+          ],
+          "content": [
+            25,
+            52,
+            109,
+            100
+          ],
+          "anchor": [
+            77.67923541885503,
+            84.9964296085964
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            49,
+            655,
+            230,
+            247
+          ],
+          "content": [
+            33,
+            52,
+            93,
+            100
+          ],
+          "anchor": [
+            78.60703422872098,
+            85.79724055576114
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            351,
+            655,
+            239,
+            251
+          ],
+          "content": [
+            29,
+            51,
+            97,
+            102
+          ],
+          "anchor": [
+            78.75283386296331,
+            85.14610093822498
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            670,
+            655,
+            229,
+            253
+          ],
+          "content": [
+            33,
+            51,
+            93,
+            103
+          ],
+          "anchor": [
+            79.2866703614664,
+            85.14516301018072
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            982,
+            655,
+            228,
+            253
+          ],
+          "content": [
+            33,
+            52,
+            93,
+            103
+          ],
+          "anchor": [
+            79.26103633043272,
+            85.89618150625898
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            42,
+            968,
+            229,
+            255
+          ],
+          "content": [
+            33,
+            51,
+            93,
+            103
+          ],
+          "anchor": [
+            78.83248703272034,
+            85.07807108804413
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            334,
+            967,
+            253,
+            255
+          ],
+          "content": [
+            18,
+            28,
+            123,
+            124
+          ],
+          "anchor": [
+            75.69759848003122,
+            69.15255468337969
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            633,
+            971,
+            296,
+            252
+          ],
+          "content": [
+            8,
+            29,
+            144,
+            123
+          ],
+          "anchor": [
+            72.84139998525681,
+            70.79854738737845
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/caocao-source.png",
+          "sourceRect": [
+            958,
+            971,
+            258,
+            253
+          ],
+          "content": [
+            17,
+            29,
+            126,
+            123
+          ],
+          "anchor": [
+            77.97424236887625,
+            71.12368899287239
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-menghuo-actions.png",
+      "sha256": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483",
+      "width": 640,
+      "height": 640,
+      "bytes": 140643,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            58,
+            38,
+            238,
+            246
+          ],
+          "content": [
+            19,
+            26,
+            122,
+            126
+          ],
+          "anchor": [
+            76.04632778141752,
+            67.85254937420214
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            369,
+            38,
+            232,
+            246
+          ],
+          "content": [
+            20,
+            26,
+            119,
+            126
+          ],
+          "anchor": [
+            76.52248352428586,
+            67.53571261593626
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            684,
+            41,
+            229,
+            242
+          ],
+          "content": [
+            20,
+            27,
+            117,
+            124
+          ],
+          "anchor": [
+            76.26463889921078,
+            67.44230805141946
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            997,
+            39,
+            232,
+            243
+          ],
+          "content": [
+            19,
+            27,
+            119,
+            125
+          ],
+          "anchor": [
+            75.95750607909375,
+            67.8887093890392
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            58,
+            353,
+            228,
+            244
+          ],
+          "content": [
+            20,
+            27,
+            117,
+            125
+          ],
+          "anchor": [
+            76.26907452025812,
+            67.74380606838095
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            359,
+            350,
+            246,
+            246
+          ],
+          "content": [
+            17,
+            26,
+            126,
+            126
+          ],
+          "anchor": [
+            77.44574814424031,
+            67.06882303552715
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            687,
+            356,
+            228,
+            241
+          ],
+          "content": [
+            22,
+            28,
+            117,
+            124
+          ],
+          "anchor": [
+            78.04928940926291,
+            68.47288923393569
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            958,
+            353,
+            279,
+            243
+          ],
+          "content": [
+            8,
+            27,
+            143,
+            125
+          ],
+          "anchor": [
+            77.03798577550008,
+            67.05249285058787
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            59,
+            663,
+            229,
+            247
+          ],
+          "content": [
+            22,
+            26,
+            117,
+            126
+          ],
+          "anchor": [
+            77.18173445892269,
+            67.60115457746002
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            369,
+            664,
+            227,
+            248
+          ],
+          "content": [
+            21,
+            26,
+            116,
+            127
+          ],
+          "anchor": [
+            76.21931642013895,
+            67.27710075825973
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            683,
+            667,
+            229,
+            243
+          ],
+          "content": [
+            21,
+            27,
+            117,
+            124
+          ],
+          "anchor": [
+            77.125867389398,
+            67.40126539114077
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            995,
+            667,
+            232,
+            243
+          ],
+          "content": [
+            19,
+            27,
+            118,
+            124
+          ],
+          "anchor": [
+            76.28425643043923,
+            67.27642705387657
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            57,
+            981,
+            226,
+            242
+          ],
+          "content": [
+            21,
+            27,
+            115,
+            124
+          ],
+          "anchor": [
+            76.72709340772067,
+            67.07978628786529
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            362,
+            975,
+            240,
+            248
+          ],
+          "content": [
+            19,
+            25,
+            123,
+            127
+          ],
+          "anchor": [
+            77.02635237654371,
+            66.52915009762017
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            688,
+            984,
+            224,
+            239
+          ],
+          "content": [
+            23,
+            30,
+            114,
+            122
+          ],
+          "anchor": [
+            77.65809352404554,
+            69.58521042382992
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/menghuo-source.png",
+          "sourceRect": [
+            953,
+            979,
+            282,
+            243
+          ],
+          "content": [
+            8,
+            28,
+            144,
+            124
+          ],
+          "anchor": [
+            80.87506758492792,
+            67.86988245696026
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-simayi-actions.png",
+      "sha256": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7",
+      "width": 640,
+      "height": 640,
+      "bytes": 119818,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            71,
+            53,
+            214,
+            239
+          ],
+          "content": [
+            28,
+            35,
+            105,
+            117
+          ],
+          "anchor": [
+            74.50801286222774,
+            73.73095969417838
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            377,
+            53,
+            219,
+            240
+          ],
+          "content": [
+            26,
+            35,
+            107,
+            117
+          ],
+          "anchor": [
+            74.5234687134755,
+            74.04442070480522
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            690,
+            55,
+            217,
+            239
+          ],
+          "content": [
+            27,
+            35,
+            106,
+            117
+          ],
+          "anchor": [
+            73.92118070229742,
+            73.61187602989789
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            997,
+            57,
+            224,
+            236
+          ],
+          "content": [
+            26,
+            35,
+            110,
+            115
+          ],
+          "anchor": [
+            74.36903655846982,
+            73.74577525668533
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            62,
+            369,
+            223,
+            240
+          ],
+          "content": [
+            26,
+            35,
+            109,
+            117
+          ],
+          "anchor": [
+            74.6118443238044,
+            74.27204366035859
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            345,
+            366,
+            236,
+            242
+          ],
+          "content": [
+            22,
+            34,
+            115,
+            118
+          ],
+          "anchor": [
+            77.05821147232483,
+            72.89285787872261
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            641,
+            366,
+            239,
+            242
+          ],
+          "content": [
+            22,
+            34,
+            117,
+            118
+          ],
+          "anchor": [
+            70.25576680618111,
+            72.94992964285242
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            941,
+            361,
+            294,
+            247
+          ],
+          "content": [
+            8,
+            31,
+            144,
+            121
+          ],
+          "anchor": [
+            79.72356537321588,
+            71.43955899941346
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            68,
+            676,
+            216,
+            241
+          ],
+          "content": [
+            28,
+            35,
+            105,
+            117
+          ],
+          "anchor": [
+            76.84096336092233,
+            73.08328499735086
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            367,
+            676,
+            227,
+            241
+          ],
+          "content": [
+            23,
+            35,
+            110,
+            117
+          ],
+          "anchor": [
+            76.0986416149538,
+            73.24366410976731
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            684,
+            675,
+            223,
+            244
+          ],
+          "content": [
+            27,
+            35,
+            108,
+            118
+          ],
+          "anchor": [
+            76.80211614612735,
+            73.734629232669
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            992,
+            679,
+            228,
+            236
+          ],
+          "content": [
+            25,
+            35,
+            111,
+            114
+          ],
+          "anchor": [
+            76.82207440708501,
+            72.9965445588191
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            66,
+            992,
+            220,
+            239
+          ],
+          "content": [
+            28,
+            35,
+            107,
+            116
+          ],
+          "anchor": [
+            76.65098605724236,
+            73.12394825780925
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            340,
+            988,
+            234,
+            239
+          ],
+          "content": [
+            23,
+            36,
+            113,
+            116
+          ],
+          "anchor": [
+            80.50388028580734,
+            73.69812503336698
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            630,
+            988,
+            251,
+            238
+          ],
+          "content": [
+            19,
+            37,
+            122,
+            115
+          ],
+          "anchor": [
+            75.82425841050637,
+            75.19904977419947
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/simayi-source.png",
+          "sourceRect": [
+            938,
+            984,
+            297,
+            242
+          ],
+          "content": [
+            8,
+            35,
+            144,
+            117
+          ],
+          "anchor": [
+            81.50839999573479,
+            73.7362783269727
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-beasts.png",
+      "sha256": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26",
+      "width": 960,
+      "height": 640,
+      "bytes": 147272,
+      "rgbaMiB": 2.34375,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            30,
+            60,
+            219,
+            160
+          ],
+          "content": [
+            14,
+            56,
+            131,
+            96
+          ],
+          "anchor": [
+            76.96251264244086,
+            90.10401388161304
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            290,
+            55,
+            216,
+            171
+          ],
+          "content": [
+            15,
+            49,
+            130,
+            103
+          ],
+          "anchor": [
+            78.11449361386774,
+            85.27122959683525
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            536,
+            52,
+            217,
+            174
+          ],
+          "content": [
+            15,
+            49,
+            130,
+            104
+          ],
+          "anchor": [
+            78.46951816686723,
+            86.10718533706495
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            781,
+            48,
+            216,
+            174
+          ],
+          "content": [
+            15,
+            49,
+            130,
+            104
+          ],
+          "anchor": [
+            78.19105481997465,
+            86.01180357662383
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            1027,
+            46,
+            220,
+            180
+          ],
+          "content": [
+            12,
+            47,
+            132,
+            108
+          ],
+          "anchor": [
+            78.21989127321072,
+            85.90442327290233
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            1287,
+            37,
+            240,
+            167
+          ],
+          "content": [
+            8,
+            52,
+            144,
+            100
+          ],
+          "anchor": [
+            81.93314198705255,
+            88.15005627906272
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            31,
+            314,
+            222,
+            138
+          ],
+          "content": [
+            16,
+            72,
+            129,
+            80
+          ],
+          "anchor": [
+            80.31436973611753,
+            100.717023398555
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            287,
+            305,
+            217,
+            151
+          ],
+          "content": [
+            17,
+            64,
+            126,
+            88
+          ],
+          "anchor": [
+            80.31917179692923,
+            94.53119231527762
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            526,
+            304,
+            222,
+            149
+          ],
+          "content": [
+            15,
+            65,
+            129,
+            87
+          ],
+          "anchor": [
+            80.74970942919121,
+            95.21054933033054
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            770,
+            304,
+            224,
+            144
+          ],
+          "content": [
+            15,
+            67,
+            130,
+            84
+          ],
+          "anchor": [
+            80.80892516315893,
+            94.75487027017437
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            1014,
+            303,
+            230,
+            147
+          ],
+          "content": [
+            12,
+            64,
+            134,
+            85
+          ],
+          "anchor": [
+            80.58502855281498,
+            94.63514449508776
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            1274,
+            294,
+            248,
+            129
+          ],
+          "content": [
+            8,
+            77,
+            144,
+            75
+          ],
+          "anchor": [
+            83.21773623229943,
+            104.03903364792643
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            15,
+            541,
+            240,
+            155
+          ],
+          "content": [
+            8,
+            59,
+            144,
+            93
+          ],
+          "anchor": [
+            86.12553255230462,
+            88.74744456337572
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            277,
+            534,
+            230,
+            160
+          ],
+          "content": [
+            11,
+            56,
+            138,
+            96
+          ],
+          "anchor": [
+            83.93373914055832,
+            86.54559352330145
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            532,
+            535,
+            215,
+            156
+          ],
+          "content": [
+            17,
+            57,
+            129,
+            94
+          ],
+          "anchor": [
+            84.21896114855113,
+            86.98602438825691
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            771,
+            533,
+            225,
+            156
+          ],
+          "content": [
+            12,
+            56,
+            135,
+            94
+          ],
+          "anchor": [
+            83.5402899714091,
+            86.3207992228555
+          ]
+        },
+        {
+          "index": 16,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            1022,
+            533,
+            226,
+            157
+          ],
+          "content": [
+            10,
+            56,
+            136,
+            94
+          ],
+          "anchor": [
+            84.19793634592675,
+            86.0691591477812
+          ]
+        },
+        {
+          "index": 17,
+          "source": "art/runtime-bosses/beasts-source.png",
+          "sourceRect": [
+            1275,
+            505,
+            227,
+            186
+          ],
+          "content": [
+            12,
+            40,
+            136,
+            112
+          ],
+          "anchor": [
+            91.18143063529438,
+            79.03842779276808
+          ]
+        },
+        {
+          "index": 18,
+          "source": "art/runtime-bosses/rider-source.png",
+          "sourceRect": [
+            31,
+            175,
+            318,
+            355
+          ],
+          "content": [
+            23,
+            25,
+            114,
+            127
+          ],
+          "anchor": [
+            83.47803500544387,
+            73.13911157050764
+          ]
+        },
+        {
+          "index": 19,
+          "source": "art/runtime-bosses/rider-source.png",
+          "sourceRect": [
+            376,
+            211,
+            315,
+            314
+          ],
+          "content": [
+            24,
+            40,
+            113,
+            112
+          ],
+          "anchor": [
+            85.51647526197095,
+            78.93209885217104
+          ]
+        },
+        {
+          "index": 20,
+          "source": "art/runtime-bosses/rider-source.png",
+          "sourceRect": [
+            719,
+            211,
+            310,
+            316
+          ],
+          "content": [
+            26,
+            39,
+            111,
+            113
+          ],
+          "anchor": [
+            85.49535577212453,
+            78.23937586840793
+          ]
+        },
+        {
+          "index": 21,
+          "source": "art/runtime-bosses/rider-source.png",
+          "sourceRect": [
+            1053,
+            211,
+            318,
+            313
+          ],
+          "content": [
+            24,
+            40,
+            114,
+            112
+          ],
+          "anchor": [
+            85.4003054833623,
+            78.8923361137447
+          ]
+        },
+        {
+          "index": 22,
+          "source": "art/runtime-bosses/rider-source.png",
+          "sourceRect": [
+            1399,
+            211,
+            313,
+            314
+          ],
+          "content": [
+            26,
+            39,
+            112,
+            112
+          ],
+          "anchor": [
+            85.14157640868532,
+            78.31351251495136
+          ]
+        },
+        {
+          "index": 23,
+          "source": "art/runtime-bosses/rider-source.png",
+          "sourceRect": [
+            1734,
+            238,
+            403,
+            289
+          ],
+          "content": [
+            8,
+            49,
+            144,
+            103
+          ],
+          "anchor": [
+            75.98157783002665,
+            84.49841660284682
+          ]
+        }
+      ]
+    },
+    {
+      "dest": "assets/chronicle-units/boss-props.png",
+      "sha256": "9ac52c9e729fc60c2db42056a8bc2f9366e39c94cfe8425f0db986fe8e7732ed",
+      "width": 640,
+      "height": 640,
+      "bytes": 101833,
+      "rgbaMiB": 1.5625,
+      "cells": [
+        {
+          "index": 0,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            85,
+            27,
+            236,
+            233
+          ],
+          "content": [
+            8,
+            9,
+            144,
+            142
+          ],
+          "anchor": [
+            79.33560042441012,
+            55.5192585702138
+          ]
+        },
+        {
+          "index": 1,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            476,
+            31,
+            189,
+            227
+          ],
+          "content": [
+            20,
+            8,
+            120,
+            144
+          ],
+          "anchor": [
+            81.22040229385232,
+            53.30269896594877
+          ]
+        },
+        {
+          "index": 2,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            831,
+            30,
+            221,
+            230
+          ],
+          "content": [
+            11,
+            8,
+            138,
+            144
+          ],
+          "anchor": [
+            81.40939982309393,
+            53.81255336539361
+          ]
+        },
+        {
+          "index": 3,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            1231,
+            18,
+            179,
+            241
+          ],
+          "content": [
+            27,
+            8,
+            107,
+            144
+          ],
+          "anchor": [
+            84.29535867619666,
+            52.402879769512275
+          ]
+        },
+        {
+          "index": 4,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            94,
+            324,
+            210,
+            153
+          ],
+          "content": [
+            8,
+            28,
+            144,
+            105
+          ],
+          "anchor": [
+            81.83701478104085,
+            61.56010967031664
+          ]
+        },
+        {
+          "index": 5,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            465,
+            325,
+            210,
+            153
+          ],
+          "content": [
+            8,
+            28,
+            144,
+            105
+          ],
+          "anchor": [
+            81.73607980047869,
+            61.42813591360543
+          ]
+        },
+        {
+          "index": 6,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            828,
+            292,
+            237,
+            202
+          ],
+          "content": [
+            8,
+            19,
+            144,
+            123
+          ],
+          "anchor": [
+            83.32251606759601,
+            60.31389709889093
+          ]
+        },
+        {
+          "index": 7,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            1196,
+            275,
+            263,
+            233
+          ],
+          "content": [
+            8,
+            16,
+            144,
+            128
+          ],
+          "anchor": [
+            84.05859386935875,
+            55.78244171540634
+          ]
+        },
+        {
+          "index": 8,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            67,
+            524,
+            264,
+            226
+          ],
+          "content": [
+            8,
+            18,
+            144,
+            123
+          ],
+          "anchor": [
+            68.0701861072757,
+            60.19941491007133
+          ]
+        },
+        {
+          "index": 9,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            437,
+            528,
+            227,
+            222
+          ],
+          "content": [
+            8,
+            10,
+            144,
+            141
+          ],
+          "anchor": [
+            75.4443177268556,
+            57.019681585656066
+          ]
+        },
+        {
+          "index": 10,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            810,
+            528,
+            279,
+            221
+          ],
+          "content": [
+            8,
+            23,
+            144,
+            114
+          ],
+          "anchor": [
+            68.3859177088791,
+            63.43534223637168
+          ]
+        },
+        {
+          "index": 11,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            1198,
+            532,
+            269,
+            218
+          ],
+          "content": [
+            8,
+            22,
+            144,
+            117
+          ],
+          "anchor": [
+            73.51405032970851,
+            63.421054028655334
+          ]
+        },
+        {
+          "index": 12,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            13,
+            806,
+            361,
+            191
+          ],
+          "content": [
+            8,
+            42,
+            144,
+            76
+          ],
+          "anchor": [
+            89.64834273683424,
+            69.44176099539209
+          ]
+        },
+        {
+          "index": 13,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            397,
+            807,
+            359,
+            165
+          ],
+          "content": [
+            8,
+            47,
+            144,
+            66
+          ],
+          "anchor": [
+            90.92110881007393,
+            71.08443500839998
+          ]
+        },
+        {
+          "index": 14,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            779,
+            807,
+            359,
+            190
+          ],
+          "content": [
+            8,
+            42,
+            144,
+            76
+          ],
+          "anchor": [
+            89.86192894183762,
+            69.72615769841181
+          ]
+        },
+        {
+          "index": 15,
+          "source": "art/runtime-bosses/props-source.png",
+          "sourceRect": [
+            1158,
+            807,
+            365,
+            164
+          ],
+          "content": [
+            8,
+            48,
+            144,
+            65
+          ],
+          "anchor": [
+            91.12004892178213,
+            71.3159644610249
+          ]
+        }
+      ]
+    }
+  ],
+  "bytes": 997706,
+  "rgbaMiB": 13.28125
+}
