@@ -1,10 +1,12 @@
 // Deterministic extraction/packing of the approved generated sprites. No new artwork is drawn here.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),sharp=require('sharp');
-const source='art/runtime-v4/sources',manifest={source,atlases:{}};
-const specs=[['hero-portraits',2,2,384,'chronicle-ui'],['hero-parts',2,3,256,'chronicle-ui'],['weapons',5,5,128,'chronicle-ui'],['skills',6,4,96,'chronicle-ui'],...['a','b'].flatMap(g=>['front','back'].map(v=>['troops-'+g+'-'+v,5,4,128,'chronicle-units']))];
+const source='art/runtime-v4/sources',manifest=JSON.parse(fs.readFileSync('art/runtime-v4/manifest.json','utf8'));
+// Hero art has its own registered youth source. Never restore old adult heads.
+const specs=[['weapons',5,5,128,'chronicle-ui'],['skills',6,4,96,'chronicle-ui'],...['a','b'].flatMap(g=>['front','back'].map(v=>['troops-'+g+'-'+v,5,4,128,'chronicle-units']))];
 const uuid=()=>crypto.randomUUID();
 function imageMeta(dest){if(fs.existsSync(dest+'.meta'))return;const x=JSON.parse(fs.readFileSync('assets/presentation/icons.png.meta'));x.uuid=uuid();x.subMetas['6c48a'].uuid=x.uuid+'@6c48a';x.subMetas['6c48a'].displayName=path.basename(dest,'.png');x.subMetas['6c48a'].userData.imageUuidOrDatabaseUri=x.uuid;x.userData.redirect=x.uuid+'@6c48a';fs.writeFileSync(dest+'.meta',JSON.stringify(x,null,2)+'\n');}
 (async()=>{for(const [name,cols,rows,cell,bundle] of specs){
+ if(name.startsWith('troops-')&&fs.existsSync('art/runtime-enemy-actions/manifest.json')){console.log(name+' uses v8.6 modular atlas; regenerate with scripts/bake-enemy-atlases.mjs');continue;}
  const dest='assets/'+bundle;fs.mkdirSync(dest,{recursive:true});if(!fs.existsSync(dest+'.meta')){const m=JSON.parse(fs.readFileSync('assets/presentation.meta'));m.uuid=uuid();m.userData.bundleName=bundle;fs.writeFileSync(dest+'.meta',JSON.stringify(m,null,2)+'\n');}
  const {data,info}=await sharp(source+'/'+name+'.png').ensureAlpha().raw().toBuffer({resolveWithObject:true});const {width:w,height:h}=info,N=w*h,seen=new Uint8Array(N),queue=new Uint32Array(N),bounds=Array.from({length:cols*rows},()=>({x:w,y:h,r:0,b:0,pixels:0}));
  // Whole connected silhouettes may cross an approximate generated grid line. Assign each silhouette to its nearest slot.
@@ -19,4 +21,4 @@ function imageMeta(dest){if(fs.existsSync(dest+'.meta'))return;const x=JSON.pars
   const sprite=await sharp(buf,{raw:{width:bw,height:bh,channels:4}}).resize(cell-12,cell-12,{fit:'inside'}).png().toBuffer();const m=await sharp(sprite).metadata(),left=i%cols*cell+Math.round((cell-m.width)/2),top=Math.floor(i/cols)*cell+Math.round((cell-m.height)/2);layers.push({input:sprite,left,top});cells.push({source:[a.x,a.y,bw,bh],rect:[i%cols*cell,Math.floor(i/cols)*cell,cell,cell]});
  }
  const file=dest+'/'+name+'.png';await sharp({create:{width:cols*cell,height:rows*cell,channels:4,background:{r:0,g:0,b:0,alpha:0}}}).composite(layers).png({compressionLevel:9}).toFile(file);imageMeta(file);manifest.atlases[name]={file,columns:cols,rows,cell,cells,sourceSha256:crypto.createHash('sha256').update(fs.readFileSync(source+'/'+name+'.png')).digest('hex')};console.log(name,cols*cell,rows*cell,fs.statSync(file).size);
-}fs.writeFileSync('art/runtime-v4/manifest.json',JSON.stringify(manifest,null,2)+'\n');})().catch(e=>{console.error(e);process.exitCode=1;});
+}fs.writeFileSync('art/runtime-v4/manifest.json',JSON.stringify(manifest,null,2)+'\n');require('node:child_process').execFileSync(process.execPath,['scripts/pack-youth-heroes.cjs'],{stdio:'inherit'});})().catch(e=>{console.error(e);process.exitCode=1;});

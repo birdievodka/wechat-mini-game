@@ -1,0 +1,32 @@
+{
+  "version": "stage-v9.2-kiting-results",
+  "scope": "isolated real Cocos engineering scenes and AI movement replay; not phone FPS or real cleared records",
+  "records": [
+    {
+      "name": "clear-first",
+      "phase": "victory"
+    },
+    {
+      "name": "clear-shared",
+      "phase": "victory"
+    },
+    {
+      "name": "clear-repeat",
+      "phase": "victory"
+    },
+    {
+      "name": "clear-final",
+      "phase": "victory"
+    },
+    {
+      "name": "halberd-bait-retreat",
+      "hp": 5
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profile": true,
+    "storage": true
+  },
+  "errors": []
+}

@@ -1,0 +1,227 @@
+{
+  "version": "stage-v9-hero-growth",
+  "scope": "isolated real Cocos engineering screenshots and AI attack replays; not phone gameplay or FPS",
+  "records": [
+    {
+      "hero": "liubei",
+      "growth": 0,
+      "hearts": 5,
+      "speed": 300,
+      "weapon": "sandal",
+      "mounted": false,
+      "dash": false
+    },
+    {
+      "hero": "liubei",
+      "growth": 1,
+      "hearts": 6,
+      "speed": 300,
+      "weapon": "twin-swords",
+      "mounted": false,
+      "dash": false
+    },
+    {
+      "hero": "liubei",
+      "growth": 2,
+      "hearts": 7,
+      "speed": 390,
+      "weapon": "twin-swords",
+      "mounted": true,
+      "dash": false
+    },
+    {
+      "hero": "liubei",
+      "growth": 3,
+      "hearts": 8,
+      "speed": 390,
+      "weapon": "twin-swords",
+      "mounted": true,
+      "dash": false
+    },
+    {
+      "hero": "liubei",
+      "growth": 4,
+      "hearts": 9,
+      "speed": 390,
+      "weapon": "twin-swords",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "liubei",
+      "growth": 5,
+      "hearts": 10,
+      "speed": 390,
+      "weapon": "twin-swords",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "liubei",
+      "growth": 6,
+      "hearts": 11,
+      "speed": 390,
+      "weapon": "twin-swords",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "guanyu",
+      "growth": 0,
+      "hearts": 5,
+      "speed": 345,
+      "weapon": "pole",
+      "mounted": false,
+      "dash": false
+    },
+    {
+      "hero": "guanyu",
+      "growth": 1,
+      "hearts": 6,
+      "speed": 345,
+      "weapon": "guandao",
+      "mounted": false,
+      "dash": false
+    },
+    {
+      "hero": "guanyu",
+      "growth": 2,
+      "hearts": 7,
+      "speed": 448.5,
+      "weapon": "guandao",
+      "mounted": true,
+      "dash": false
+    },
+    {
+      "hero": "guanyu",
+      "growth": 3,
+      "hearts": 8,
+      "speed": 448.5,
+      "weapon": "guandao",
+      "mounted": true,
+      "dash": false
+    },
+    {
+      "hero": "guanyu",
+      "growth": 4,
+      "hearts": 9,
+      "speed": 448.5,
+      "weapon": "guandao",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "guanyu",
+      "growth": 5,
+      "hearts": 10,
+      "speed": 448.5,
+      "weapon": "guandao",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "guanyu",
+      "growth": 6,
+      "hearts": 11,
+      "speed": 448.5,
+      "weapon": "guandao",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 0,
+      "hearts": 6,
+      "speed": 270,
+      "weapon": "cleaver",
+      "mounted": false,
+      "dash": false
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 1,
+      "hearts": 7,
+      "speed": 270,
+      "weapon": "serpent-spear",
+      "mounted": false,
+      "dash": false
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 2,
+      "hearts": 8,
+      "speed": 351,
+      "weapon": "serpent-spear",
+      "mounted": true,
+      "dash": false
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 3,
+      "hearts": 9,
+      "speed": 351,
+      "weapon": "serpent-spear",
+      "mounted": true,
+      "dash": false
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 4,
+      "hearts": 10,
+      "speed": 351,
+      "weapon": "serpent-spear",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 5,
+      "hearts": 11,
+      "speed": 351,
+      "weapon": "serpent-spear",
+      "mounted": true,
+      "dash": true
+    },
+    {
+      "hero": "zhangfei",
+      "growth": 6,
+      "hearts": 12,
+      "speed": 351,
+      "weapon": "serpent-spear",
+      "mounted": true,
+      "dash": true
+    }
+  ],
+  "combos": [
+    {
+      "hero": "liubei",
+      "phases": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "hero": "guanyu",
+      "phases": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "hero": "zhangfei",
+      "phases": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profile": true,
+    "storage": true
+  },
+  "errors": []
+}

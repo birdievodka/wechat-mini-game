@@ -1,0 +1,114 @@
+{
+  "version": "stage-v8.3-battle-memory",
+  "scope": "isolated Cocos WebGL engineering frames, not iOS gameplay; fixture clear is synthetic",
+  "records": [
+    {
+      "name": "menu",
+      "result": {
+        "phase": "menu",
+        "version": "stage-v8.3-battle-memory"
+      }
+    },
+    {
+      "name": "stage-picker",
+      "result": {
+        "screen": "locked stage grid"
+      }
+    },
+    {
+      "name": "starter",
+      "result": {
+        "screen": "three basic starters"
+      }
+    },
+    {
+      "name": "battle",
+      "result": {
+        "phase": "battle",
+        "stage": 1,
+        "wave": 1,
+        "enemies": 2
+      }
+    },
+    {
+      "name": "shop",
+      "result": {
+        "phase": "shop",
+        "offers": [
+          "w:sandal:2",
+          "w:cleaver:2",
+          "D02",
+          "C07"
+        ],
+        "gold": 53
+      }
+    },
+    {
+      "name": "yellow-trio",
+      "result": {
+        "count": 3,
+        "totalHp": 7200,
+        "phase": "windup"
+      }
+    },
+    {
+      "name": "yellow-charge",
+      "result": {
+        "phases": [
+          "dash",
+          "hunt",
+          "hunt"
+        ]
+      }
+    },
+    {
+      "name": "mini-clear",
+      "result": {
+        "phase": "shop",
+        "seconds": 8.008333333333333,
+        "fixedReward": 25,
+        "remaining": 51.99166666666667
+      }
+    },
+    {
+      "name": "boss-reinforcements",
+      "result": {
+        "phase": "battle",
+        "seconds": 6.000000000000088,
+        "ordinary": 14,
+        "bossAlive": true
+      }
+    },
+    {
+      "name": "clear",
+      "result": {
+        "phase": "victory",
+        "heroes": {
+          "liubei": {
+            "S01": {
+              "seconds": 252,
+              "kills": 3,
+              "hearts": 3,
+              "clears": 1
+            }
+          },
+          "guanyu": {},
+          "zhangfei": {},
+          "zhaoyun": {},
+          "kongming": {}
+        }
+      }
+    },
+    {
+      "name": "codex",
+      "result": {
+        "screen": "unknown weapon placeholder"
+      }
+    }
+  ],
+  "errors": [],
+  "motion": {
+    "frames": 22,
+    "scope": "actual Cocos engineering frames joined as GIF; not iOS recording"
+  }
+}

@@ -16,13 +16,13 @@ export interface WeChatKeyboard {
 }
 const CODES: Record<string, number> = {
   ArrowLeft: 37, ArrowUp: 38, ArrowRight: 39, ArrowDown: 40,
-  Space:32, KeyE:69, e:69, E:69,
+  Space:32, KeyE:69, e:69, E:69, KeyQ:81,q:81,Q:81,ShiftLeft:16,ShiftRight:16,Shift:16,
   KeyW: 87, KeyA: 65, KeyS: 83, KeyD: 68,
   w: 87, a: 65, s: 83, d: 68, W: 87, A: 65, S: 83, D: 68,
 };
 export function movementKeyCode(event: DesktopKeyEvent): number | undefined {
   const code = CODES[event.code || ''] || CODES[event.key || ''] || event.keyCode;
-  return code !== undefined && [32,69,37, 38, 39, 40, 87, 65, 83, 68].indexOf(code) >= 0 ? code : undefined;
+  return code !== undefined && [16,81,32,69,37, 38, 39, 40, 87, 65, 83, 68].indexOf(code) >= 0 ? code : undefined;
 }
 export function attachDesktopKeyboard(
   surface: KeyboardSurface | undefined, wx: WeChatKeyboard | undefined,

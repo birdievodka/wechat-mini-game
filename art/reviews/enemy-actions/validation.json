@@ -1,0 +1,219 @@
+{
+  "version": "stage-v8.6-enemy-actions",
+  "scope": "isolated real Cocos WebGL engineering poses and real AI replays; not phone FPS or live gameplay scores",
+  "records": [
+    {
+      "direction": 0,
+      "phase": "idle",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 0,
+      "phase": "windup",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 0,
+      "phase": "release",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 1,
+      "phase": "idle",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 1,
+      "phase": "windup",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 1,
+      "phase": "release",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 2,
+      "phase": "idle",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 2,
+      "phase": "windup",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 2,
+      "phase": "release",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 3,
+      "phase": "idle",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 3,
+      "phase": "windup",
+      "count": 40,
+      "rigs": 39
+    },
+    {
+      "direction": 3,
+      "phase": "release",
+      "count": 40,
+      "rigs": 39
+    }
+  ],
+  "ai": [
+    {
+      "id": "E02",
+      "attackObserved": true,
+      "damageOrShots": true
+    },
+    {
+      "id": "E03",
+      "attackObserved": true,
+      "damageOrShots": true
+    },
+    {
+      "id": "E11",
+      "attackObserved": true,
+      "damageOrShots": true
+    },
+    {
+      "id": "E19",
+      "attackObserved": true,
+      "damageOrShots": true
+    },
+    {
+      "id": "E37",
+      "attackObserved": true,
+      "damageOrShots": true
+    },
+    {
+      "id": "E39",
+      "attackObserved": true,
+      "damageOrShots": true
+    }
+  ],
+  "bossRecords": [
+    {
+      "id": "zhangjiao",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "zhangjiao",
+      "phase": "cast",
+      "attack": 0.8666666666666666
+    },
+    {
+      "id": "zhangjiao",
+      "phase": "recover",
+      "attack": 1.5333333333333332
+    },
+    {
+      "id": "lvbu",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "lvbu",
+      "phase": "dash",
+      "attack": 0.8999999999999999
+    },
+    {
+      "id": "lvbu",
+      "phase": "recover",
+      "attack": 1.6
+    },
+    {
+      "id": "dongzhuo",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "dongzhuo",
+      "phase": "cast",
+      "attack": 1.1
+    },
+    {
+      "id": "dongzhuo",
+      "phase": "recover",
+      "attack": 1.7666666666666666
+    },
+    {
+      "id": "yuanshao",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "yuanshao",
+      "phase": "cast",
+      "attack": 1.0333333333333332
+    },
+    {
+      "id": "yuanshao",
+      "phase": "recover",
+      "attack": 1.6666666666666665
+    },
+    {
+      "id": "caocao",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "caocao",
+      "phase": "cast",
+      "attack": 0.9333333333333332
+    },
+    {
+      "id": "caocao",
+      "phase": "recover",
+      "attack": 1.5666666666666664
+    },
+    {
+      "id": "menghuo",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "menghuo",
+      "phase": "cast",
+      "attack": 1.0333333333333332
+    },
+    {
+      "id": "menghuo",
+      "phase": "recover",
+      "attack": 1.6666666666666665
+    },
+    {
+      "id": "simayi",
+      "phase": "windup",
+      "attack": 0
+    },
+    {
+      "id": "simayi",
+      "phase": "cast",
+      "attack": 1.0333333333333332
+    },
+    {
+      "id": "simayi",
+      "phase": "recover",
+      "attack": 1.6666666666666665
+    }
+  ],
+  "errors": [],
+  "restored": true
+}

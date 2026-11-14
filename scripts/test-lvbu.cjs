@@ -60,7 +60,7 @@ const run=(e,s,seconds,tx=0,ty=0)=>{let hits=0,releases=0;for(let t=0;t<seconds-
  assert.ok(boss.art.spriteFrame===g.artFrames['lvbu-action-'+lvbuFrame(boss.lvbu,boss.walk,boss.moving)]);
  for(const facing of [1,-1])for(const back of [false,true]){boss.lvbu.facing=facing;boss.lvbu.back=back;g.drawEnemy(boss);assert.equal(Math.sign(boss.art.node.scale.x),facing);assert.ok(boss.art.spriteFrame===g.artFrames['lvbu-action-'+lvbuFrame(boss.lvbu,boss.walk,boss.moving)]);}
  g.hitEnemy(boss,0,1e9,0,'sandal',false,true);assert.equal(boss.lvbu,undefined);assert.ok(boss.lvbuGhosts.every(sp=>!sp.node.active));boss.dead=0;
- const reused=g.spawnNext('soldier','E01');assert.equal(reused,boss);assert.equal(reused.lvbu,undefined);assert.ok(reused.lvbuGhosts.every(sp=>!sp.node.active));assert.equal(reused.art.enabled,false,'复用回普通兵分层');
+ const reused=g.spawnNext('soldier','E01');assert.equal(reused,boss);assert.equal(reused.lvbu,undefined);assert.ok(reused.lvbuGhosts.every(sp=>!sp.node.active));assert.equal(reused.art.enabled,true,'复用回E01完整农具动作');assert.equal(reused.art.spriteFrame,g.soldierFrames[reused.weaponKind][0]);assert.equal(reused.art.node.getComponent(cc.UITransform).width,78,'清掉吕布300px展示尺寸');
  for(let i=0;i<5;i++){g.clearBattle();const same=g.spawnNext('chief',undefined,2);assert.equal(same.art.node.getComponent(cc.UITransform).width,300,'连续复用吕布出生时不能退回145尺寸');assert.equal(same.lvbuGhosts.length,2);}
  g.clearBattle();const big=g.spawnNext('chief',undefined,2);Object.assign(big,{x:0,y:0,born:0,previousHitX:0,previousHitY:88});big.art.node.setPosition(0,0);
  const before=big.hp;g.launchProjectile(-150,168,0,g.run.weapons[0],{...g.weapons[0].stats,speed:1000,range:400},50);g.updateProjectiles(.3);assert.ok(big.hp<before,'放大骑将头身区域仍能被飞鞋命中');

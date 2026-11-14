@@ -1,0 +1,443 @@
+{
+  "version": "youth-heroes-v1",
+  "baseCommit": "a848884",
+  "ids": [
+    "liubei",
+    "guanyu",
+    "zhangfei",
+    "zhaoyun",
+    "kongming"
+  ],
+  "source": "built-in image_gen",
+  "sources": [
+    {
+      "file": "art/runtime-youth/sources/parts.png",
+      "sha256": "8fabfb84a80e86ce3ac4c0a2c78a6e0523d5abac3f2653c30f8ef3e4f7aba34d"
+    },
+    {
+      "file": "art/runtime-youth/sources/portraits.png",
+      "sha256": "ea9920007faa63e577203d4612296ce49fde05122453402ce17a36d9697b7905"
+    },
+    {
+      "file": "art/runtime-youth/sources/poster.png",
+      "sha256": "d9a3735bc1edbc674b8ad61434a5ea1b651f25b42f8a17004687ec9dfbd328eb"
+    },
+    {
+      "file": "art/branding/avatar-source.png",
+      "sha256": "834a5eeb70bc9a36c5e0128ea298221b8c36ea9a88ff3db12ed48f11829221be"
+    }
+  ],
+  "atlases": {
+    "three-hero-parts": {
+      "file": "assets/presentation/heroes.png",
+      "width": 768,
+      "height": 768,
+      "bytes": 325134,
+      "sha256": "df4e12e49ca22e68fc8c6a8f9cd99463836881da161d999987bab2c2f8a6d508",
+      "columns": 3,
+      "rows": 3,
+      "cell": 256,
+      "cells": [
+        {
+          "source": [
+            6,
+            33,
+            301,
+            290
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            310,
+            38,
+            310,
+            279
+          ],
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            621,
+            47,
+            311,
+            279
+          ],
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            6,
+            355,
+            301,
+            290
+          ],
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            310,
+            360,
+            310,
+            278
+          ],
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            621,
+            369,
+            311,
+            279
+          ],
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            18,
+            729,
+            301,
+            243
+          ],
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            325,
+            725,
+            296,
+            248
+          ],
+          "rect": [
+            256,
+            512,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            627,
+            730,
+            288,
+            241
+          ],
+          "rect": [
+            512,
+            512,
+            256,
+            256
+          ]
+        }
+      ]
+    },
+    "hero-parts": {
+      "file": "assets/chronicle-ui/hero-parts.png",
+      "width": 512,
+      "height": 768,
+      "bytes": 226270,
+      "sha256": "3ea529a842b633e6298604c2138f1e66377bc1fe06e86756235b74928469eb04",
+      "columns": 2,
+      "rows": 3,
+      "cell": 256,
+      "cells": [
+        {
+          "source": [
+            930,
+            32,
+            294,
+            294
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            1230,
+            42,
+            282,
+            295
+          ],
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            930,
+            354,
+            294,
+            293
+          ],
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            1230,
+            364,
+            282,
+            295
+          ],
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            922,
+            728,
+            293,
+            238
+          ],
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            1221,
+            727,
+            302,
+            247
+          ],
+          "rect": [
+            256,
+            512,
+            256,
+            256
+          ]
+        }
+      ]
+    },
+    "three-hero-portraits": {
+      "file": "assets/results/portraits.png",
+      "width": 1152,
+      "height": 768,
+      "bytes": 470883,
+      "sha256": "0bd7004a5b13426b80bef62d74fb4c8b7011da5a5c8078242cb5e36f5da4db7e",
+      "columns": 3,
+      "rows": 2,
+      "cell": 384,
+      "cells": [
+        {
+          "source": [
+            53,
+            9,
+            299,
+            375
+          ],
+          "rect": [
+            0,
+            0,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            439,
+            9,
+            323,
+            375
+          ],
+          "rect": [
+            384,
+            0,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            815,
+            13,
+            319,
+            370
+          ],
+          "rect": [
+            768,
+            0,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            62,
+            397,
+            289,
+            383
+          ],
+          "rect": [
+            0,
+            384,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            439,
+            401,
+            326,
+            379
+          ],
+          "rect": [
+            384,
+            384,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            818,
+            403,
+            312,
+            377
+          ],
+          "rect": [
+            768,
+            384,
+            384,
+            384
+          ]
+        }
+      ]
+    },
+    "hero-portraits": {
+      "file": "assets/chronicle-ui/hero-portraits.png",
+      "width": 768,
+      "height": 768,
+      "bytes": 344466,
+      "sha256": "be1a76c5fd0d7a4b6500d3681b0e88eeffaeb2f9529fb0592f91aa503bdd854f",
+      "columns": 2,
+      "rows": 2,
+      "cell": 384,
+      "cells": [
+        {
+          "source": [
+            1192,
+            4,
+            352,
+            379
+          ],
+          "rect": [
+            0,
+            0,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            1616,
+            9,
+            321,
+            374
+          ],
+          "rect": [
+            384,
+            0,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            1188,
+            402,
+            349,
+            378
+          ],
+          "rect": [
+            0,
+            384,
+            384,
+            384
+          ]
+        },
+        {
+          "source": [
+            1616,
+            401,
+            303,
+            379
+          ],
+          "rect": [
+            384,
+            384,
+            384,
+            384
+          ]
+        }
+      ]
+    }
+  },
+  "poster": {
+    "file": "assets/campaign/poster.jpg",
+    "sha256": "c717097f244ef18b82b40898ddc2444aa5ff5fdafeb040f652016557f5261c8b",
+    "width": 1334,
+    "height": 750,
+    "quality": 85
+  },
+  "avatar": {
+    "file": "art/branding/avatar.png",
+    "sha256": "f82778404b609653d5572486a422195456e51073d3954d0c4276249b67df7a90",
+    "width": 512,
+    "height": 512
+  }
+}

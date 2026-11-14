@@ -1,0 +1,2853 @@
+{
+  "scope": "isolated real Cocos WebGL pressure fixture; not phone FPS, process memory, or crash root cause",
+  "samples": [
+    {
+      "bufferBytes": 52045228,
+      "textureBytes": 149488096,
+      "draws": 190,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 100,
+      "particles": 146,
+      "atlas": true,
+      "heap": 44904132,
+      "frame": 120
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 195,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 100,
+      "particles": 131,
+      "atlas": true,
+      "heap": 95097040,
+      "frame": 240
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 182,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 101,
+      "particles": 98,
+      "atlas": true,
+      "heap": 39331528,
+      "frame": 360
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 108,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 102,
+      "particles": 117,
+      "atlas": true,
+      "heap": 73240096,
+      "frame": 480
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 115,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 61,
+      "atlas": true,
+      "heap": 40999352,
+      "frame": 600
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 164,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 158,
+      "atlas": true,
+      "heap": 56611900,
+      "frame": 720
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 178,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 108,
+      "atlas": true,
+      "heap": 88415888,
+      "frame": 840
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 129,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 101,
+      "atlas": true,
+      "heap": 88183948,
+      "frame": 960
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 185,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 151,
+      "atlas": true,
+      "heap": 57154944,
+      "frame": 1080
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 188,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 103,
+      "atlas": true,
+      "heap": 78779868,
+      "frame": 1200
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 134,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 104,
+      "atlas": true,
+      "heap": 76707824,
+      "frame": 1320
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 116,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 53,
+      "atlas": true,
+      "heap": 57329276,
+      "frame": 1440
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 154,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 145,
+      "atlas": true,
+      "heap": 58064172,
+      "frame": 1560
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 173,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 153,
+      "atlas": true,
+      "heap": 56505216,
+      "frame": 1680
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 138,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 93,
+      "atlas": true,
+      "heap": 90768600,
+      "frame": 1800
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 113,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 77,
+      "atlas": true,
+      "heap": 111493176,
+      "frame": 1920
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 185,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 117,
+      "atlas": true,
+      "heap": 100007512,
+      "frame": 2040
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 189,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 111,
+      "atlas": true,
+      "heap": 115184244,
+      "frame": 2160
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 113,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 116,
+      "atlas": true,
+      "heap": 76571908,
+      "frame": 2280
+    },
+    {
+      "bufferBytes": 52056784,
+      "textureBytes": 149488096,
+      "draws": 111,
+      "graphics": 143,
+      "meshes": [
+        {
+          "name": "Ground",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LiuBei",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LeftFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RightFoot",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "NaturalArms",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "SwingTrail",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedLeftHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "RelaxedRightHand",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeldWeapon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "ImpactEffects",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpells",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "EnemySpellBursts",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PlayerStatus",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "Health",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "CoinIcon",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "BossHealth",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "FixedJoystick",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "HeroSkill",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "PauseButton",
+          "models": 1,
+          "visible": true
+        },
+        {
+          "name": "LoadingScreen",
+          "models": 1,
+          "visible": false
+        },
+        {
+          "name": "LoadingProgress",
+          "models": 1,
+          "visible": false
+        }
+      ],
+      "enemyNodes": 80,
+      "worldNodes": 103,
+      "particles": 52,
+      "atlas": true,
+      "heap": 99336232,
+      "frame": 2400
+    }
+  ],
+  "errors": [],
+  "version": "stage-v8.3-battle-memory",
+  "menu": {
+    "bufferBytes": 56645388,
+    "textureBytes": 150037236,
+    "draws": 48,
+    "graphics": 97,
+    "meshes": [
+      {
+        "name": "LoadingScreen",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "LoadingProgress",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "ShowcaseShadow",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseLeftFoot",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseRightFoot",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseSleeves",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseLeftProp",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseRightProp",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseLeftHand",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseRightHand",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroNameplate",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroPortraitRail",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "liubei",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroSelected",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "guanyu",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "zhangfei",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroSkillSelect",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroWeaponSelect",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "图鉴",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "演武场",
+        "models": 1,
+        "visible": true
+      }
+    ],
+    "enemyNodes": 8,
+    "worldNodes": 9,
+    "particles": 0,
+    "atlas": true,
+    "heap": 25331509
+  },
+  "restored": {
+    "bufferBytes": 103966136,
+    "textureBytes": 150222324,
+    "draws": 48,
+    "graphics": 169,
+    "meshes": [
+      {
+        "name": "Ground",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "FriendlyGroundEffects",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "LiuBei",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "LeftFoot",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "RightFoot",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "NaturalArms",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "SwingTrail",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "RelaxedLeftHand",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "RelaxedRightHand",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "HeldWeapon",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "ImpactEffects",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "EnemySpells",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "EnemySpellBursts",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "PlayerStatus",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "Health",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "CoinIcon",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "BossHealth",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "FixedJoystick",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "HeroSkill",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "PauseButton",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "LoadingScreen",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "LoadingProgress",
+        "models": 1,
+        "visible": false
+      },
+      {
+        "name": "ShowcaseShadow",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseLeftFoot",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseRightFoot",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseSleeves",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseLeftProp",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseRightProp",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseLeftHand",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "ShowcaseRightHand",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroNameplate",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroPortraitRail",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "liubei",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroSelected",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "guanyu",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "zhangfei",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroSkillSelect",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "GoldCurl",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "HeroWeaponSelect",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "图鉴",
+        "models": 1,
+        "visible": true
+      },
+      {
+        "name": "演武场",
+        "models": 1,
+        "visible": true
+      }
+    ],
+    "enemyNodes": 80,
+    "worldNodes": 103,
+    "particles": 0,
+    "atlas": true,
+    "heap": 104505003
+  }
+}

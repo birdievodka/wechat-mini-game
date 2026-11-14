@@ -83,3 +83,16 @@ chronicles-data / common-skills
 ## 七Boss实体案例（v7）
 
 桃园boss-battle与boss-effects沿纯状态→真实伤害→只读绘制分层：可拆雷符/弩车/兽群用真实敌军池，不是装饰贴图；移动月牙与龙身分段CCD，落地道具先飞行/落点再命中。角色16帧、战兽每物种独立比例与头部注册；不能用含长枪的同一缩放挤小整张动物表。首次复用纸影要清visualHit，否则颜色缓存可能误跳过。主体Sprite按世界深度排序，不为每道具建Graphics；规划新落点时限制镜头/HUD安全区，释放后的路径仍按世界模拟。项目精确预算在seven-bosses参考，不作为其他项目固定常数。
+
+
+## v9.1内存案例：特效之外也要检查
+
+本项目实际在已有图集上又产生2048²动态合图，加载UI隐藏后保留2份Graphics模型；商店13个重复底板也各持固定缓冲。采用加载前禁用dynamicAtlasManager＋macro.CLEANUP_IMAGE_CACHE、销毁一次性加载树、同BattleSpriteAtlas九宫格复用后保留战斗表现而降低峰值。清源图只在后续不依赖这些像素重合图时使用；不能加载中途开启后再假设旧ImageAsset会自动全部释放。数字与原机限制见taoyuan-game/references/performance.md及docs/performance-v91.json。
+
+
+## v9.2范围一致性案例
+
+戟卫原真实range175、140°，表现用min(range×.8,95)与约92°短刃痕，导致可见攻击远小于真实判伤。按本轮授权把真实范围改110/100°、延长.8秒起手/.5收招，并把刃痕直接读同一range/arc；锁向、表现窗口与判伤时钟同步，玩家身体半径18另计。不能只缩视觉而留下旧隐形命中，也不能为“更好看”放大伤害；普通长枪等同步真实距离。真实AI诱导后撤GIF与工程截图在art/reviews/kiting-results-v92，纯绘制不推进伤害。
+
+
+演武v9.2.1命中案例：不能用HP下降充当所有命中事件。无限生命场景仍要闪烁/击退/状态和Boss接触光效；hurtPlayer显式返回是否接受命中，训练只跳过扣血。格挡/保护等返回false，普通接受true；FX/毒箭减速消费此结果。

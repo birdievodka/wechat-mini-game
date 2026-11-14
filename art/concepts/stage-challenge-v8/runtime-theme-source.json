@@ -1,0 +1,10 @@
+{
+  "source": "art/concepts/stage-challenge-v8/themes.png",
+  "sourceSha256": "4c3402b7b1090a65d7f758f8418247bb2cce0fa156993151ffb9328d2996dd40",
+  "output": "assets/chronicle-ui/stage-themes.jpg",
+  "width": 960,
+  "height": 640,
+  "decodedBytes": 2457600,
+  "description": "approved source crops, 3x2 cells 320 square: thumbnail top128, ground lower192",
+  "thumbnailSource": "art/concepts/stage-challenge-v8/stage-picker.png"
+}

@@ -38,3 +38,13 @@ async function testFirstScreen(imageFails,uploadFails=false){
   assert.ok(uniforms.some(([name])=>name==='u_progress'));assert.ok(uniforms.every(([,value])=>Number.isFinite(value)));
 }
 (async()=>{await testFirstScreen(false);await testFirstScreen(true);await testFirstScreen(false,true);console.log('通过：启动海报/进度同一WebGL上下文、跨阶段衔接、图片/纹理上传失败不挂起、绘制后兑现Promise、RAF与GPU资源释放');})().catch(error=>{console.error(error);process.exit(1);});
+
+// A delayed/failed logo must never swap an already-visible title mid-load.
+const {load,cc}=require('./test-campaign.cjs'),{LoadingView}=load('LoadingView');
+const v=new LoadingView(new cc.Node('LoadingFixture'));assert.equal(v.title.node.active,false);assert.equal(v.logo.node.active,false);
+v.setProgress(.52);const barY=v.bar.node.position.y,logoX=v.logo.node.position.x,logoY=v.logo.node.position.y;
+const logo=new cc.SpriteFrame();logo.rect={width:720,height:220};v.setLogo(logo);
+assert.equal(v.title.node.active,false);assert.equal(v.logo.node.active,true);assert.deepEqual([v.bar.node.position.y,v.logo.node.position.x,v.logo.node.position.y],[barY,logoX,logoY],'Logo到达不移动标题锚点或进度条');
+v.showTitleFallback();assert.equal(v.title.node.active,false,'其他菜单素材失败不替换已显示的Logo');assert.equal(v.logo.node.active,true);
+const fallback=new LoadingView(new cc.Node('FallbackFixture'));fallback.showTitleFallback();assert.equal(fallback.title.node.active,true);fallback.setLogo(logo);assert.equal(fallback.title.node.active,true);assert.equal(fallback.logo.node.active,false,'晚到图片不能替换已显示的备用标题');
+console.log('通过：Logo延迟不先显示替代字体/进度条位置稳定/失败备用标题一次决定/晚到Logo不再切换');

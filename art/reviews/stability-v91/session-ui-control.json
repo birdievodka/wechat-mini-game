@@ -1,0 +1,2724 @@
+{
+  "scope": "isolated real Cocos menu/shop/retry lifecycle; not phone process memory or FPS",
+  "samples": [
+    {
+      "case": "initial-menu",
+      "phase": "menu",
+      "buffers": 111075128,
+      "textures": 126555932,
+      "draws": 48,
+      "nodes": 1534,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseShadow",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseSleeves",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseAccent",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroNameplate",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroPortraitRail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "liubei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSelected",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "guanyu",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "zhangfei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkillSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroWeaponSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "图鉴",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "演武场",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "battle-0",
+      "phase": "battle",
+      "buffers": 56806260,
+      "textures": 125821704,
+      "draws": 29,
+      "nodes": 1470,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "shop-0",
+      "phase": "shop",
+      "buffers": 108715612,
+      "textures": 127481504,
+      "draws": 74,
+      "nodes": 1546,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SupplyScrim",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-4",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-5",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "return-menu-0",
+      "phase": "menu",
+      "buffers": 108715612,
+      "textures": 126555932,
+      "draws": 48,
+      "nodes": 1534,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseShadow",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseSleeves",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroNameplate",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroPortraitRail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "liubei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSelected",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "guanyu",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "zhangfei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkillSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroWeaponSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "图鉴",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "演武场",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "battle-1",
+      "phase": "battle",
+      "buffers": 56806260,
+      "textures": 125821704,
+      "draws": 29,
+      "nodes": 1470,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "shop-1",
+      "phase": "shop",
+      "buffers": 108715612,
+      "textures": 127481504,
+      "draws": 74,
+      "nodes": 1546,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SupplyScrim",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-4",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-5",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "return-menu-1",
+      "phase": "menu",
+      "buffers": 108715612,
+      "textures": 126555932,
+      "draws": 48,
+      "nodes": 1534,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseShadow",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseSleeves",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroNameplate",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroPortraitRail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "liubei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSelected",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "guanyu",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "zhangfei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkillSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroWeaponSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "图鉴",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "演武场",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "battle-2",
+      "phase": "battle",
+      "buffers": 56806260,
+      "textures": 125821704,
+      "draws": 29,
+      "nodes": 1470,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "shop-2",
+      "phase": "shop",
+      "buffers": 108715612,
+      "textures": 127481504,
+      "draws": 74,
+      "nodes": 1546,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SupplyScrim",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-4",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-5",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "return-menu-2",
+      "phase": "menu",
+      "buffers": 108715612,
+      "textures": 126555932,
+      "draws": 48,
+      "nodes": 1534,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseShadow",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseSleeves",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroNameplate",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroPortraitRail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "liubei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSelected",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "guanyu",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "zhangfei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkillSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroWeaponSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "图鉴",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "演武场",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "battle-3",
+      "phase": "battle",
+      "buffers": 56806260,
+      "textures": 125821704,
+      "draws": 29,
+      "nodes": 1470,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "shop-3",
+      "phase": "shop",
+      "buffers": 108715612,
+      "textures": 127481504,
+      "draws": 74,
+      "nodes": 1546,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SupplyScrim",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "TierBand-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Supply-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "JadePanel",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-0",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-1",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-2",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-3",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-4",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "SupplyWeapon-5",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "Pill",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    },
+    {
+      "case": "return-menu-3",
+      "phase": "menu",
+      "buffers": 108715612,
+      "textures": 126555932,
+      "draws": 48,
+      "nodes": 1534,
+      "models": [
+        {
+          "name": "Ground",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FriendlyGroundEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LiuBei",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "LeftFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "RightFoot",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ThrowingHand",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "WeaponArm",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "SwingTrail",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeldWeapon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "GripFist",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ImpactEffects",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpells",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "EnemySpellBursts",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PlayerStatus",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "Health",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "CoinIcon",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "FixedJoystick",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "HeroSkill",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "MountDash",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "PauseButton",
+          "visible": false,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseShadow",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightFoot",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseSleeves",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightProp",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseLeftHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "ShowcaseRightHand",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroNameplate",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroPortraitRail",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "liubei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSelected",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "guanyu",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "zhangfei",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroSkillSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "GoldCurl",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "HeroWeaponSelect",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "图鉴",
+          "visible": true,
+          "models": 1
+        },
+        {
+          "name": "演武场",
+          "visible": true,
+          "models": 1
+        }
+      ],
+      "dynamicAtlas": 0,
+      "cleanupImage": true
+    }
+  ],
+  "errors": [],
+  "version": "stage-v9.1-memory",
+  "uiCache": false,
+  "restored": {
+    "phase": "menu",
+    "profile": true,
+    "storage": true
+  }
+}

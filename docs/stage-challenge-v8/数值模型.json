@@ -1,0 +1,71 @@
+{
+  "scope": "1080 historical fixed-income shopping routes; wave3 actual income now depends on miniBoss kill time; not an estimate of v8.2 actual income or win rate; 60% weapon DPS utilization, excludes skill bursts",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "黄巾起义",
+      "routes": 180,
+      "bossSeconds": {
+        "p10": 14.2,
+        "median": 21.1,
+        "p90": 29.6
+      },
+      "meanWeapons": 5.4
+    },
+    {
+      "stage": 2,
+      "name": "虎牢讨董",
+      "routes": 180,
+      "bossSeconds": {
+        "p10": 20.2,
+        "median": 29.7,
+        "p90": 48.4
+      },
+      "meanWeapons": 5.43
+    },
+    {
+      "stage": 3,
+      "name": "官渡争锋",
+      "routes": 180,
+      "bossSeconds": {
+        "p10": 30.3,
+        "median": 43.1,
+        "p90": 71.5
+      },
+      "meanWeapons": 5.32
+    },
+    {
+      "stage": 4,
+      "name": "赤壁鏖兵",
+      "routes": 180,
+      "bossSeconds": {
+        "p10": 34.1,
+        "median": 51.1,
+        "p90": 84.9
+      },
+      "meanWeapons": 5.13
+    },
+    {
+      "stage": 5,
+      "name": "南中平蛮",
+      "routes": 180,
+      "bossSeconds": {
+        "p10": 43.2,
+        "median": 68.1,
+        "p90": 107.4
+      },
+      "meanWeapons": 5.25
+    },
+    {
+      "stage": 6,
+      "name": "五丈原决战",
+      "routes": 180,
+      "bossSeconds": {
+        "p10": 52.8,
+        "median": 83.1,
+        "p90": 130.6
+      },
+      "meanWeapons": 5.3
+    }
+  ]
+}

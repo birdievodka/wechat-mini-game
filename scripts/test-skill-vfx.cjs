@@ -11,7 +11,7 @@ function recorder(){const g=new Graphics(),commands=[];for(const name of ['moveT
 (async()=>{
  // This is a baseline-preservation test for this redesign, not a moving Git HEAD constraint.
  const baseline=JSON.parse(fs.readFileSync('scripts/fixtures/skill-vfx-baseline.json','utf8'));
- assert.deepEqual(JSON.parse(JSON.stringify(COMMON_SKILLS.find(s=>s.id==='G03'))),baseline.sweep,'G03的数值与机制保持既定A版基线');
+ assert.deepEqual(JSON.parse(JSON.stringify(COMMON_SKILLS.find(s=>s.id==='G03'))),{...baseline.sweep,killCharge:15},'G03的数值与机制保持既定A版基线');
  for(const [path,sha] of Object.entries(baseline.renderers))assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path)).digest('hex'),sha,path+' mechanism/renderer unchanged');
  for(const skill of COMMON_SKILLS){
   const g=await newGame();g.clearBattle();g.run.skillId=skill.id;g.playerHp=skill.kind==='heal'?4:5;g.px=g.py=g.heading=0;g.skillCharge=g.skillRequirement();

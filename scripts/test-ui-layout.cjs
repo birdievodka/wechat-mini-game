@@ -2,9 +2,9 @@ const assert=require('node:assert/strict');
 const {newGame,click,cc,Label}=require('./test-campaign.cjs');
 const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolean);
 (async()=>{
- const g=await newGame();
+ const g=await newGame();assert.equal(g.screens.root.children.length,0,'战斗中不保留隐藏选人节点与Graphics');assert.equal(g.screens.heroShowcase,undefined);
  const pause=find(g.ui,'PauseButton');assert.equal(pause.getComponent(cc.UITransform).width,64);
- assert.equal(pause.position.x-24-(g.statusPanel.position.x+305),16,'暂停键位于状态栏右侧并留间距');
+ assert.equal(pause.position.x-24-(g.statusPanel.position.x+g.statusWidth),16,'暂停键位于状态栏右侧并留间距');
  assert.equal(g.skillButton.position.y,g.origin.y,'技能与摇杆同一基线');
  g.run.weapons=Array.from({length:6},(_,i)=>({uid:i+1,id:i===1?'cleaver':'sandal',tier:i===1?3:1,invested:i===1?400:15}));g.run.nextWeaponUid=7;
  g.run.gold=0;g.run.offers=['w:peach:2'];g.run.offerPrices={'w:peach:2':90};g.run.purchasedOffers=[];
@@ -25,6 +25,6 @@ const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolea
  assert.equal(find(g.screens.root,'SupplyBalance').getComponent(Label).string,String(g.run.gold));
  click(g.screens.root,'SupplyWeapon-0');assert.ok(find(g.screens.root,'RecycleWeapon'));click(g.screens.root,'CloseDialog');
  click(g.screens.root,'OpenInventory');assert.ok(find(g.screens.root,'BagNext'));click(g.screens.root,'CloseDialog');
- click(g.screens.root,'SupplySkip');assert.equal(g.phase,'battle');for(const n of [g.statusPanel,g.skillButton,g.weaponHud,pause])assert.equal(n.active,true);
+ const oldScreen=[...g.screens.root.children];click(g.screens.root,'SupplySkip');assert.equal(g.phase,'battle');assert.equal(g.screens.root.children.length,0,'离店释放全部UI节点');assert.ok(oldScreen.every(n=>n.destroyed),'调用destroy释放其绘图模型');g.screens.resize(1400,750);g.showShop();assert.ok(find(g.screens.root,'SupplySkip'),'商店可重建');click(g.screens.root,'SupplySkip');for(const n of [g.statusPanel,g.skillButton,g.weaponHud,pause])assert.equal(n.active,true);
  console.log('通过：补给布局、HUD隐藏恢复、音乐持续、满槽替换的未选/不足/取消/成交、武器和道具弹窗');
 })().catch(e=>{console.error(e);process.exitCode=1;});

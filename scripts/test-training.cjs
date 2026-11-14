@@ -5,9 +5,9 @@ const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolea
 const advance=(g,t)=>{for(let i=0;i<Math.ceil(t*60);i++)g.update(1/60);};
 const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtime-health').sort());
 (async()=>{
- const g=await newGame();g.run.gold=123;g.saveCheckpoint('battle');g.showMainMenu();const saved=progress();
- click(g.screens.root,'zhaoyun');click(g.screens.root,'HeroSkillSelect');click(g.screens.root,'SkillChoice-G03');click(g.screens.root,'ConfirmSkill');click(g.screens.root,'演武场');
- assert.equal(g.trainingMode,true);assert.equal(g.testMode,true);assert.equal(g.phase,'battle');assert.equal(g.trainingPanel.root.active,true);assert.equal(g.run.heroId,'zhaoyun');assert.equal(g.run.skillId,'G03');assert.equal(g.playerHp,5);assert.match(g.healthText.string,/∞/);assert.equal(g.trainingAlive(),0);assert.equal(progress(),saved,'进入演武场不覆盖正式存档');
+ const g=await newGame();g.run.gold=123;g.saveCheckpoint('battle');g.showMainMenu();let saved=progress();
+ click(g.screens.root,'liubei');click(g.screens.root,'HeroSkillSelect');click(g.screens.root,'SkillChoice-G03');click(g.screens.root,'ConfirmSkill');saved=progress();click(g.screens.root,'演武场');
+ assert.equal(g.trainingMode,true);assert.equal(g.testMode,true);assert.equal(g.phase,'battle');assert.equal(g.trainingPanel.root.active,true);assert.equal(g.run.heroId,'liubei');assert.equal(g.run.skillId,'G03');assert.equal(g.playerHp,5);assert.match(g.healthText.string,/∞/);assert.equal(g.trainingAlive(),0);assert.equal(progress(),saved,'进入演武场不覆盖正式存档');
  const panel=g.trainingPanel,at=[g.px,g.py,g.age];g.keys.add(cc.KeyCode.ARROW_RIGHT);advance(g,2);g.castSkill();assert.deepEqual([g.px,g.py,g.age],at,'配置面板冻结移动和模拟');assert.equal(g.skillCharge,g.skillRequirement());
  g.onBackground();g.onForeground();assert.equal(g.paused,false);assert.equal(g.menu.active,false);assert.equal(panel.root.active,true);
  click(panel.root,'TrainingCount-5');click(panel.root,'TrainingSpawn');assert.equal(g.trainingAlive(),5);assert.ok(g.enemies.filter(e=>e.hp>0).every(e=>e.archetype==='E01'&&e.born>0));
@@ -21,19 +21,29 @@ const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtim
  const weapons=JSON.stringify(g.run.weapons);for(const args of [['none',1,0],['sword',5,0],['sword',1,6],['sword',1,NaN]])g.equipTrainingWeapon(...args);assert.equal(JSON.stringify(g.run.weapons),weapons,'非法武器/品级/槽位无副作用');
  const host=panel.host;for(const skill of COMMON_SKILLS){host.skill(skill.id);assert.equal(g.run.skillId,skill.id);assert.equal(g.skillCharge,g.skillRequirement());}
  // Every real skill accepts consecutive casts with no kills, time or manual recharge.
- click(panel.root,'TrainingResume');const target=g.spawnNext('soldier','E01');target.born=0;target.hp=target.maxHp=1e9;
+ click(panel.root,'TrainingResume');assert.equal(panel.root.children.length,0,'演武配置收起后释放节点');g.openTrainingPanel();assert.ok(panel.root.children.length>0,'保留配置值并按需重建');click(panel.root,'TrainingResume');const target=g.spawnNext('soldier','E01');target.born=0;target.hp=target.maxHp=1e9;
  const cast=g.commonSkill.cast;let accepted=0;g.commonSkill.cast=function(...args){const ok=cast.apply(this,args);if(ok)accepted++;return ok;};
  for(const skill of COMMON_SKILLS){host.skill(skill.id);target.x=g.px+80;target.y=g.py;target.node.setPosition(target.x,target.y);const before=accepted;g.skillCharge=0;g.castSkill();g.castSkill();assert.equal(accepted-before,2,skill.name+'无需充能可连放');assert.equal(g.skillCharge,g.skillRequirement());assert.match(g.skillLabel.string,/无冷却/);assert.ok(g.commonSkill.tasks.length<=36);assert.ok(g.commonEffects.visuals.length<=32);}
  g.openTrainingPanel();const blocked=accepted;g.castSkill();assert.equal(accepted,blocked,'面板仍禁止施法');
  host.skill('G03');click(panel.root,'TrainingResume');g.castSkill();assert.equal(g.skillCharge,g.skillRequirement(),'演武技能释放后仍就绪');assert.equal(g.playerHp,5);g.paused=true;g.menu.active=true;g.openTrainingPanel();assert.equal(g.paused,false,'从暂停进入配置后可正常继续');assert.equal(g.menu.active,false);click(panel.root,'TrainingRefill');assert.equal(g.skillCharge,g.skillRequirement());assert.equal(g.commonSkill.tasks.length,0,'重置按钮清除旧任务与效果');
  click(panel.root,'TrainingClear');assert.equal(g.trainingAlive(),0);assert.equal(g.enemyShots.filter(s=>s.remaining>0).length,0);assert.equal(g.enemyZones.length,0);assert.equal(g.run.weapons.length,6);click(panel.root,'TrainingResume');
- for(let i=0;i<100;i++){g.hurtTime=0;g.protectionTime=0;g.hurtPlayer(0,0,999);}assert.equal(g.playerHp,5,'任何来袭伤害不减生命');assert.equal(g.hurtTime,0,'无永久受击闪烁');
+ for(let i=0;i<100;i++){g.hurtTime=0;g.protectionTime=0;g.hurtPlayer(0,0,999);}assert.equal(g.playerHp,5,'任何来袭伤害不减生命');assert.ok(g.hurtTime>0,'不死仍有受击保护与反馈');assert.equal(g.hurtText.string,'-1');assert.equal(g.heroTint,'#ff8479');assert.ok(Math.hypot(g.playerVx,g.playerVy)>0,'保留击退');assert.ok(g.shake>0);
+ const sound=g.playSound;let hitSounds=0;g.playSound=function(...args){hitSounds++;return sound.apply(this,args);};
+ assert.equal(g.hurtPlayer(0,0),false,'保护期内不重复受击');assert.equal(hitSounds,0);
+ advance(g,1.3);assert.equal(g.hurtTime,0);assert.equal(g.hurtText.string,'');assert.equal(g.heroTint,'#ffffff','按正式时序退闪');
+ g.protectionTime=.2;assert.equal(g.hurtPlayer(40,0),false,'冲刺无敌仍生效');g.protectionTime=0;
+ host.skill('G25');g.castSkill();assert.equal(g.hurtPlayer(40,0),false,'格挡仍生效');assert.equal(g.hurtTime,0);assert.equal(g.playerHp,5);g.commonSkill.reset();g.protectionTime=0;
+ g.paused=true;assert.equal(g.hurtPlayer(40,0),false);g.paused=false;g.openTrainingPanel();assert.equal(g.hurtPlayer(40,0),false,'配置期间不受击');click(panel.root,'TrainingResume');
+ // A real incoming melee strike and poison projectile drive feedback despite unchanged HP.
+ g.clearBattle();g.px=g.py=0;g.weapons.forEach(w=>w.cooldown=999);const melee=g.spawnNext('soldier','E01');Object.assign(melee,{born:0,x:45,y:0,attack:0,attackAngle:Math.PI,vx:0,vy:0,speed:0,fired:false,hp:1e6});g.updateEnemy(melee,.49);assert.equal(g.playerHp,5);assert.ok(g.hurtTime>0);assert.ok(g.playerVx<0);assert.ok(hitSounds>0);
+ g.clearBattle();g.px=g.py=0;const archer=g.spawnNext('spearman','E28');Object.assign(archer,{born:0,x:-100,y:0,attackAngle:0});g.fireEnemyShot(archer,0,300);g.updateEnemyShots(.5);assert.equal(g.playerHp,5);assert.ok(g.hurtTime>0);assert.ok(g.playerSlowUntil>g.age,'命中后的减速不再依赖HP差值');
+ g.playSound=sound;g.clearBattle();
  advance(g,65);assert.equal(g.phase,'battle');assert.equal(g.trainingAlive(),0,'不随机出兵或中立物');assert.equal(g.run.elapsed,0);assert.equal(g.run.survivalSeconds,0);assert.equal(g.enemies.filter(e=>e.hp>0).length,0);assert.equal(progress(),saved,'长期演武不写正式记录');
  g.openTrainingPanel();for(const d of CHRONICLE_ENEMIES){g.addTrainingEnemies(d.id,1,false);assert.ok(g.enemies.some(e=>e.hp>0&&e.archetype===d.id));}assert.equal(g.trainingAlive(),40);g.addTrainingEnemies('1',80,true);assert.equal(g.trainingAlive(),80);g.addTrainingEnemies('E01',1,false);assert.equal(g.trainingAlive(),80,'混合敌军总上限80');
  for(const chapter of CHAPTERS){host.clear();g.addTrainingEnemies(String(chapter.id),1,true);const e=g.enemies.find(e=>e.hp>0);assert.equal(e.bossSkin,chapter.bossId);assert.equal(e.maxHp,chapter.bossHp);e.born=0;e.x=g.px-100;e.y=g.py;e.bossTimers=[0,0,0];g.updateChronicleBoss(e,1/60,100,0);assert.equal(e.bossMove,BOSS_ACTIONS[chapter.id-1][0]);}
  host.clear();g.addTrainingEnemies('7',1,true);const boss=g.enemies.find(e=>e.hp>0);boss.born=0;g.hitEnemy(boss,0,1e9,0,'sandal',false,true);assert.equal(g.run.chapter,1);assert.equal(g.victoryPending,false);assert.equal(g.phase,'battle','击败Boss不推进正式关卡');
  assert.equal(progress(),saved);click(panel.root,'TrainingExit');assert.equal(g.trainingMode,false);assert.equal(g.testMode,false);assert.equal(g.phase,'menu');assert.equal(progress(),saved,'退出保留原正式快照和最好成绩');
- click(g.screens.root,'StartHero');assert.equal(g.trainingMode,false);assert.equal(g.testMode,false);assert.equal(g.run.chapter,1);assert.equal(g.run.weapons.length,1);assert.equal(g.stats.maxHp,5);assert.equal(g.healthText.string,'');assert.equal(g.trainingButton.node.parent.active,false);g.hurtTime=0;g.protectionTime=0;g.hurtPlayer(50,0);assert.equal(g.playerHp,4,'正式闯关恢复正常受伤');
+ click(g.screens.root,'StartHero');g.resumeCountdown=0;assert.equal(g.trainingMode,false);assert.equal(g.testMode,false);assert.equal(g.run.chapter,1);assert.equal(g.run.weapons.length,1);assert.equal(g.stats.maxHp,5);assert.equal(g.healthText.string,'');assert.equal(g.trainingButton.node.parent.active,false);g.hurtTime=0;g.protectionTime=0;g.hurtPlayer(50,0);assert.equal(g.playerHp,4,'正式闯关恢复正常受伤');
  g.run.skillId='G03';g.skillCharge=g.skillRequirement();g.castSkill();assert.equal(g.skillCharge,0,'正式技能仍消耗充能');const tasks=g.commonSkill.tasks.length;g.castSkill();assert.equal(g.commonSkill.tasks.length,tasks,'正式未充能不能连放');assert.ok(!g.skillLabel.string.includes('无冷却'),'切回正式HUD恢复充能提示');
- console.log('通过：演武入口/配置冻结、40兵和7场Boss配置/混合独立技能、36武器四阶六槽/12技能、无限生命/12技能无冷却连放/效果重置/清场、80上限、正式存档隔离与退出恢复');
+ console.log('通过：演武入口/配置冻结、40兵和7场Boss配置/混合独立技能、36武器四阶六槽/12技能、无限生命仍有闪烁击退音效/实际近战与毒箭/格挡无敌和退闪/12技能无冷却连放/效果重置/清场、80上限、正式存档隔离与退出恢复');
 })().catch(e=>{console.error(e);process.exitCode=1;});

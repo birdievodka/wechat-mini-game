@@ -1,0 +1,18 @@
+{
+  "version": "stage-v8.4-stable-loading-title",
+  "checks": {
+    "startupRegression": "passed",
+    "campaignRegression": "passed",
+    "typecheck": "passed",
+    "projectCheck": "passed",
+    "diffCheck": "passed",
+    "wechatBuild": "passed",
+    "packageMiB": 19.16
+  },
+  "preview": {
+    "accepted": true,
+    "sourceBytes": 20062599
+  },
+  "webgl": "art/reviews/loading-v84/validation.json",
+  "phone": "not tested"
+}

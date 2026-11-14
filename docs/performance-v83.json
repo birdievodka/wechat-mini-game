@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-14",
+  "scope": "isolated real Cocos WebGL pressure fixture; not phone FPS, process memory, or crash root cause",
+  "fixture": "80 enemies, six tier-IV weapons (rocket/shotgun/sword/peach/thunder/gourd), repeated meteor skill (星落五丈原); 2400 simulated 60Hz steps with actual Cocos render ticks; isolated headless Chrome SwiftShader; not player gameplay",
+  "before": {
+    "version": "stage-v8.2-reinforcements",
+    "frames": 2400,
+    "errors": 0,
+    "bufferBytes": {
+      "min": 120470256,
+      "max": 120481812,
+      "last": 120481812
+    },
+    "textureBytes": 149698036,
+    "graphicsModels": 51,
+    "hiddenModels": [
+      "LoadingScreen",
+      "LoadingProgress",
+      "ShowcaseShadow",
+      "ShowcaseLeftFoot",
+      "ShowcaseRightFoot",
+      "ShowcaseSleeves",
+      "ShowcaseLeftProp",
+      "ShowcaseRightProp",
+      "ShowcaseLeftHand",
+      "ShowcaseRightHand",
+      "ShowcaseAccent",
+      "HeroNameplate",
+      "HeroPortraitRail",
+      "liubei",
+      "HeroSelected",
+      "guanyu",
+      "zhangfei",
+      "HeroSkillSelect",
+      "GoldCurl",
+      "GoldCurl",
+      "GoldCurl",
+      "GoldCurl",
+      "HeroWeaponSelect",
+      "图鉴",
+      "演武场"
+    ],
+    "enemyNodes": 80,
+    "atlas": true
+  },
+  "after": {
+    "version": "stage-v8.3-battle-memory",
+    "frames": 2400,
+    "errors": 0,
+    "bufferBytes": {
+      "min": 52045228,
+      "max": 52056784,
+      "last": 52056784
+    },
+    "textureBytes": 149488096,
+    "graphicsModels": 22,
+    "hiddenModels": [
+      "LoadingScreen",
+      "LoadingProgress"
+    ],
+    "enemyNodes": 80,
+    "atlas": true
+  },
+  "bufferSavingsBytes": 68425028,
+  "bufferReductionPercent": 56.79,
+  "checks": [
+    "typecheck passed",
+    "npm test passed",
+    "web and WeChat builds passed; 19.16MiB package",
+    "formal miniboss early settlement and faster reinforcements retained"
+  ],
+  "limitations": [
+    "No original iOS termination log or physical phone reproduction; exact crash cause unconfirmed.",
+    "Graphics memory counter excludes OS process memory, framebuffer and driver overhead; not total iPhone memory.",
+    "No claim of better FPS; JS heap varies with GC."
+  ],
+  "source": {
+    "before": "art/reviews/stability-v83/before.json",
+    "after": "art/reviews/stability-v83/after.json",
+    "script": "scripts/diagnose-stability.mjs",
+    "shot": "art/reviews/stability-v83/after.png",
+    "shotScope": "representative 120-frame pressure fixture, separate from the 2400-frame A/B samples"
+  }
+}

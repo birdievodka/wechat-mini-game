@@ -1,6 +1,6 @@
 # 启动与加载
 
-当前 v2.8：启动画面和游戏Loading统一为刘关张战斗海报＋加载进度条；不显示默认Cocos Creator标识。加载后进入“选择英雄”，不自动进入战斗。
+当前 v7.1：启动画面和游戏Loading统一为少年刘关张战斗海报＋加载进度条；不显示默认Cocos Creator标识。加载后进入“选择英雄”，不自动进入战斗。
 
 展示名称由game-brand.ts的GAME_NAME统一提供。选人页加载独立hero-menu/logo透明图，menu:logo计入就绪与可选素材失败回退，避免使用旧atlas烘入的名称。
 
@@ -17,9 +17,9 @@
 
 ## 视觉与布局
 
-- 海报来源：`assets/campaign/poster.jpg`，已有刘关张合影，约342KiB；复用既定美术，不新增一套角色画风。
+- 海报来源：`assets/campaign/poster.jpg`，批准少年版刘关张合影，约198KiB；源图/提示在art/runtime-youth，与五英雄采用同一少年身份和画风。
 - 等比cover铺满、顶部对齐，宽屏优先保留人物头部，裁底部空白；不要拉扁人物。
-- 引擎前置画面仅海报与进度条；Cocos Loading复用选人界面的 `hero-menu/logo.png` 透明Logo（等比宽380，窄屏不超过视野宽减112），位于进度条上方；状态文字为“英雄集结中… n%”。hero-menu分包在加载界面建立后即并行请求，Logo就绪立即替换文字，加载前或失败保留同名文字降级；与选人共用SpriteFrame，不新增重复纹理。
+- 引擎前置画面仅海报与进度条；Cocos Loading复用选人界面的 `hero-menu/logo.png` 透明Logo（等比宽380，窄屏不超过视野宽减112），位于进度条上方；状态文字为“英雄集结中… n%”。hero-menu分包在加载界面建立后即并行请求，Logo未就绪时不显示替代字形，首次就绪后显示固定Logo；仅图片失败且尚未展示Logo时显示同名文字备用。标题模式一经确定，不因其他菜单素材失败或晚到图片再次切换；与选人共用SpriteFrame，不新增重复纹理。
 - 横屏逻辑高度750；进度宽 `min(520,视野宽−112)`、中心距底为视野高10%，轨道20高，绿芯12高。前后画面位置衔接，避免重排跳动。
 - Loading盖住战场与HUD，不显示测试、选武器或其他跳转按钮。完毕再展示选人。
 
@@ -36,10 +36,19 @@
 - 校验引擎 `splashScreen.totalTime=0`，避免第二层插屏；相关设置参见 [Cocos构建选项](https://docs.cocos.com/creator/3.8/manual/zh/editor/publish/build-options.html)。
 - 复制完再检查包大小，新增约342KiB要算主包，不允许先检查后塞大海报。
 
-启动GL驱动在交接前结束RAF、删除自身纹理/缓冲/程序，保留原图供Cocos上传；菜单就绪后清理共享原图引用。Cocos专有纹理/图像对象随组件销毁回收，不释放资源管理器拥有的普通素材。
+启动GL驱动在交接前结束RAF、删除自身纹理/缓冲/程序，保留原图供Cocos上传；菜单就绪后清理共享原图引用。v9.1在完成两帧交接后销毁一次性加载树，专有海报纹理/图像立刻进入释放；浏览器专用加载海报也从资源管理器释放，其他共享普通素材保留。
 
 验证需区分：启动模板渲染、真实资源回调/失败测试、微信加载到新版本菜单，以及定帧UI构图。用62%测试夹具拍预览可以验证布局，不能声称那就是实机某次真实下载进度。
 
 ## v4资源就绪
 
 startup-progress新增chronicles关键任务，chronicle-ui与chronicle-units十图集加载并建立帧后才允许进入五英雄菜单；加载失败保留原有错误/重试路径，不让新英雄无头像或无身体进战斗。新增英雄帧由chronicle-art建立，旧presentation加载必须只覆盖刘关张，不能按全部HERO_PART_RECTS覆盖赵云/孔明帧。
+
+## v8.4 加载标题稳定
+
+LoadingView在Logo请求期间保持标题区待定，不能先显示系统字体再换透明图片。setLogo/showTitleFallback只允许从pending选择一次；成功Logo后其他菜单失败不切换文字，失败文字后迟到Logo不替换。绝对锚点与进度条位置保持，首页Logo不受影响；不新增贴图或人为等待。test-startup覆盖延迟/成功/部分失败/晚到图片和锚点不变。
+
+
+## v9.1加载后退场与当前角色依赖
+
+加载成功后GameBootstrap.retireLoadingSurface销毁LoadingScreen（含2个Graphics模型），清loadingView引用与artFrames.poster，释放仅此界面使用的海报texture/ImageAsset，delete bridge.image。resize与markStartup可面对已退场画面；失败画面保持。liubei-body仍是逻辑就绪任务，现由presentation/heroes少年torso＋results肖像完成，不再请求旧6MiB成人身体。CAMPAIGN_ART删除5张被少年图覆盖的旧图请求；旧键作别名。test-campaign的延迟角色测试应拦presentation/heroes，而非已不用的旧身体文件。标题/进度/错误和两帧门槛保持。

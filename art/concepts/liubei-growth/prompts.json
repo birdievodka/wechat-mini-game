@@ -1,0 +1,39 @@
+{
+  "revision": 2,
+  "status": "proposal-not-approved-for-runtime",
+  "scope": "user-corrected white horse and paired swords concepts; runtime unchanged",
+  "tool": "built-in imagegen",
+  "hero": "liubei",
+  "mountBaseSpeedBonus": 0.3,
+  "userCorrection": "白色马；武器双手剑，按双股剑/左右手各一把呈现",
+  "referenceSources": [
+    {
+      "file": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-bdf20f8a-fa48-4101-b615-36db2d2b0e0e.png",
+      "role": "superseded board layout and boy identity only; rejected donkey/flying-shoe progression not retained"
+    },
+    {
+      "file": "art/concepts/hero-youth/design.png",
+      "role": "adopted youthful Liu Bei identity, first boy only"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "hero-growth.png",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-5bd4ba80-b487-448e-ac14-01eb44acdff9.png"
+    },
+    {
+      "file": "combat-growth.png",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-7ba56963-942a-4ae7-9551-adebacff0884.png"
+    }
+  ],
+  "prompts": [
+    {
+      "key": "hero-growth",
+      "prompt": "EDIT AND REPLACE the supplied 小刘 growth design board to apply the user's correction. FIRST image is the previous board layout and SAME BOY identity, but its WHITE DONKEY and FLYING SHOES AFTER STAGE1 MUST BE REPLACED. Second image is the adopted youthful character sheet: use ONLY its first boy for face/style identity. Preserve the five-column parchment/jade-gold design-board composition, cream paper, small peach corners, warm dark-brown outlines, bright simple cel colors. Young Liu Bei: fluffy brown fringe, small topknot with GREEN ribbon, very big round ears, clever lively large eyes, rosy warm peach cheeks, NO beard/moustache, bean-short green/ivory robe/red sash/tiny feet. Same face/head size across all columns. Landscape3:2 high resolution.\nExact main title 小刘 · 双剑白马成长. Exactly FIVE primary figures, arrows, full uncropped weapons and feet/hooves. Exact labels/subtitles:\n01 草鞋少年 / 初始形态\n02 双剑少年 / 通关黄巾\n03 白马骑将 / 通关讨董\n04 双剑三连 / 通关官渡\n05 仁德小英雄 / 通关南中\nSTAGE1 ONLY: original on-foot boy grips TWO woven tan straw sandals with his two fists; this is ONLY the starting stage. STAGE2: SAME simple green/ivory outfit, still ON FOOT, now grips TWO SHORT CHINESE JIAN SWORDS, ONE IN EACH HAND, traditional paired double swords 双股剑, straight double-edged silver blades with pointed tips, simple GOLD CROSSGUARDS, emerald grip wraps, small red cord pommels. Both distinct swords visible fully and firmly held, not one giant two-handed longsword, not a curved guandao or flying sandals. STAGE3: SAME boy with SAME pair of jian swords, riding a cute compact WHITE HORSE: NORMAL SHORT POINTED HORSE EARS, flowing SILVER-WHITE mane/tail, round but unmistakable horse head, friendly confident eyes, short sturdy legs, grey hooves, green saddle cloth. Horse must NOT be a donkey or rabbit: NO long ears, NO donkey muzzle/black mane, no exaggerated rabbit silhouette. Hero head remains dominant; mounted silhouette only35-45% taller than foot boy. Both swords remain visible, horse stands steadily, reins can drape naturally rather than forcing a third hand. STAGE4: SAME white HORSE, SAME boy, SAME robe and SAME two swords as3. Show clearly unlocked attack behavior with boy crossing his TWO HELD SWORDS into an X, TWO compact separated gold/ivory diagonal sword streaks near blades. NO thrown shoes, shoe marks, green dragon or extra armor tier. STAGE5: same boy, same WHITE HORSE and BOTH swords; final clean IVORY/EMERALD/GOLD short light hero robe with peach-shaped green clasp and short green/red-lined cape. Horse gains modest jade forehead charm/gold-edged green saddle cloth but short horse ears remain fully visible. Boy looks clever/heroic/young, no adult royal crown. Do not invent extra weapon transformations.\nBelow labels three short badges exact 坐骑基础移速 +30% ; 每关首通 +1心 ; 赤壁解锁踏云闪. Bottom narrow grassy strip titled 战斗尺寸示意 with exactly five corresponding tiny matching silhouettes, same sword/horse corrections. Footer 角色成长提案 · 未实装. This is conceptual art, not real game screenshots or sprite frames. No donkey anywhere, no flying shoes in stages2-5, no beards, no dark low-saturation armor, no giant long-legged realistic horses, no extra limbs or floating unheld swords, no English or watermarks."
+    },
+    {
+      "key": "combat-growth",
+      "prompt": "Create a CORRECTED matching COMBAT CONCEPT BOARD for young Liu Bei 小刘 in 桃园小英雄. Image1 is the previous design-board style/identity reference ONLY: disregard its donkey and flying-shoe attacks, which the user has explicitly rejected. Image2 ONLY FIRST boy is identity reference. Young boy with fluffy brown fringe/topknot GREEN ribbon, HUGE round ears, clever large eyes and playful grin, warm peach cheeks, NO facial hair, bean-short GREEN/IVORY robe/red sash/mitten fists. WEAPONS ARE PAIRED SHORT STRAIGHT CHINESE JIAN SWORDS 双股剑, ONE IN EACH HAND, matching silver double-edged pointed blades, gold crossguards, green grips, small red pommel cords. Not a single two-handed greatsword, not sandals or guandao. MOUNT IS A CUTE COMPACT WHITE HORSE with normal SHORT POINTED HORSE EARS, silver-white mane and tail, grey hooves and green saddle blanket, no long donkey ears/black mane/rabbit shape. Same boy, same horse and same sword pair in EVERY panel. Clean warm-brown outlines, vivid flat chibi phone-game style. Landscape3:2 high-resolution cream parchment/jade/gold board, room to read everything. Exact main title 小刘 · 双剑合璧与踏云闪.\nTOP60%: three equal simple GRASSY BATTLEFIELD concept peak-frame panels, same oblique 2D game camera/actor scale, mounted hero at left and a few small yellow-bandit soldiers at right, no blood. Section header 双剑三连. First panel 第一式 · 左剑快斩: boy's LEFT sword makes a compact diagonal ivory/gold cutting wedge downwards toward one nearest bandit, right sword visibly held back in guard, tiny actual contact star. Second panel 第二式 · 右剑回斩: right sword makes a clear opposite diagonal upward cut, left sword held back at guard; TWO hands and TWO swords remain readable and distinct, no third sword. Third panel 第三式 · 双剑合璧: BOTH held swords cross and release TWO THICK SOLID IVORY/GOLD SWORD STREAKS into a crisp X, pointed tapered tips, narrow emerald edge accent and a few peach-petal flecks, short trail separated by clear gaps; a compact crossing sword-wave travels at most2-3 body lengths toward a SHORT line of enemies. A couple of clear small contact sparks, hero face unobscured. Distinguish it from Guan Yu's single broad dragon crescent and Zhang Fei's ground-impact crown. No long dragon, full-screen explosion, light ring, red fire, shoes or footwear projectiles. Paired crossing blade shapes, not a diagram fan.\nBOTTOM40% split left/right. LEFT 两种坐骑阶段: show the same NORMAL SHORT-EAR WHITE HORSE with boy holding BOTH swords labeled 移速型白马, badge 基础移速 +30%; next the same horse with small jade forehead charm labeled 冲刺型白马, leaning forwards in a brief agile dash with two small spaced pale-gold HORSE afterimages and tiny hoof dust/peach petals, no long-ear ghosts. Boy still has both swords. Caption 踏云闪 · 灵巧脱围. No offensive collision damage or enemies being trampled. RIGHT 右下双技能: small grass UI crop with two jade/gold round buttons on exactly the SAME HORIZONTAL CENTERLINE. Left smaller button has SHORT-EAR WHITE HORSE HEAD with forward arrow, 6s and label 踏云闪; right larger button has TWO CROSSED SWORD icon,8/15,label 通用技能 (generic selectable slot placeholder). Small line 普通技能击杀充能 · 冲刺独立冷却. Same aligned icon centers, comfortable gap, no giant ability info card, no third skill button. Footer 战斗表现概念 · 未实装. No donkey or sandal anywhere in this board, no adult bearded emperor, no long-legged human, no realistic horse, no cloned extra swords/hands, no English paragraphs or watermark."
+    }
+  ]
+}

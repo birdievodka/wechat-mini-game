@@ -1,0 +1,110 @@
+{
+  "scope": "design content audit only; no gameplay simulation or measured win rates",
+  "result": "passed",
+  "weapons": {
+    "total": 36,
+    "initial": 3,
+    "rewardCounts": [
+      6,
+      7,
+      7,
+      6,
+      4,
+      3
+    ]
+  },
+  "passives": {
+    "total": 60,
+    "initial": 24,
+    "rewardCounts": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ]
+  },
+  "skills": {
+    "total": 12,
+    "initial": 3,
+    "rewardCounts": [
+      2,
+      2,
+      2,
+      1,
+      1,
+      1
+    ]
+  },
+  "enemies": 40,
+  "stages": 6,
+  "bossIdentities": 7,
+  "duplicateOrMissingUnlocks": 0,
+  "bossHpFormula": "matched effective DPS × target seconds",
+  "runtimeChanges": "none; design-only revision",
+  "revision": "v8.2: 45/45/miniBoss defeat/60 + final Boss; all miniBosses dead ends wave 3 immediately",
+  "economy": {
+    "dropValueMultiplier": 1.25,
+    "fixedRewardsMultiplier": 1.25,
+    "offerCount": 4,
+    "targetPreBossBudgets": [
+      403,
+      493,
+      603,
+      713,
+      813,
+      918
+    ],
+    "fractionalRemainder": true
+  },
+  "stageProgressScope": "per-hero",
+  "contentUnlockScope": "account-shared; weapons/passives shop-only, skills selectable; hidden heroes inherit if restored",
+  "contentRewardDeduplication": "account + stageId + rewardVersion",
+  "activeSkillRecharge": {
+    "allSkills": 12,
+    "allHeroes": 3,
+    "killsRequired": 15,
+    "timeBasedCooldown": false,
+    "efficiencyDiscount": false,
+    "status": "design constraint; runtime not modified"
+  },
+  "discovery": "account-shared, unknown entries stay anonymous placeholders",
+  "initialWeaponSelection": "fixed 3 basic I-tier weapons; advanced unlocks shop-only",
+  "nextStage": "full combat loadout/buff reset; preserve permanent data only",
+  "resultFirstClearCounts": {
+    "weapons": 6,
+    "passives": 6,
+    "skills": 2,
+    "total": 14
+  },
+  "heroAvailability": {
+    "visible": 3,
+    "hidden": 2,
+    "dataPreserved": true
+  },
+  "heroBaseAttributes": {
+    "liubei": {
+      "name": "小刘",
+      "maxHearts": 5,
+      "moveSpeed": 300,
+      "weaponAttackFrequencyMultiplier": 1.0,
+      "role": "均衡"
+    },
+    "guanyu": {
+      "name": "小关",
+      "maxHearts": 5,
+      "moveSpeed": 345,
+      "weaponAttackFrequencyMultiplier": 0.85,
+      "role": "快速游走、慢攻"
+    },
+    "zhangfei": {
+      "name": "小张",
+      "maxHearts": 6,
+      "moveSpeed": 270,
+      "weaponAttackFrequencyMultiplier": 1.15,
+      "role": "高血量、快速攻击、慢移速"
+    }
+  },
+  "heroAttributeAudit": "numeric ordering and reset/healing maxima checked; not runtime or win-rate testing"
+}

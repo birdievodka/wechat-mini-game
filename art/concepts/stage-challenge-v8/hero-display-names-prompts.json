@@ -1,0 +1,31 @@
+{
+  "mode": "built-in image_gen",
+  "status": "concept-only-not-implemented",
+  "renames": {
+    "liubei": "小刘",
+    "guanyu": "小关",
+    "zhangfei": "小张"
+  },
+  "specs": [
+    {
+      "key": "menuSmallNames",
+      "file": "menu.png",
+      "prompt": "Use case: text-localization. Rename ONLY the PLAYER HERO displayname in this exact game menu image: replace nameplate '刘备' with exact '小刘', replace stagecardheading '刘备的征程 · 1/6' with exact '小刘的征程 · 1/6'. Preserve same fontsizes/fontstyle, boxes, allpositions, tinyhero portraits, heroart, scene, ALL otherwords andnumbers/buttons unchanged. No changes to game title '桃园小英雄', bosses '吕布'/'董卓', weapon/skillicons or layout. Samecanvassize. Two text replacements only."
+    },
+    {
+      "key": "pickerSmallNames",
+      "file": "stage-picker.png",
+      "prompt": "Use case: text-localization. In this exact stagepicker image rename ONLY playerhero displaytext: header '刘备的征程' -> exact '小刘的征程'; any visible background hero nameplate '刘备' -> '小刘'. Preserve calligraphy/fontsize, all6stagecards/names/statuses/locks, everycount (including 武器+7/道具+6/技能+2), portrait/scene, buttons andcanvas unchanged. Do not change boss orstage names. No otherredesign."
+    },
+    {
+      "key": "firstClearSmallNames",
+      "file": "result-first-clear.png",
+      "prompt": "Use case: text-localization. In this exact victory screen change ONLY playerhero displayname: leftnameplate '刘备' -> exact '小刘'; lowerprogressstrip '刘备新关卡：02 虎牢讨董' -> exact '小刘新关卡：02 虎牢讨董'. Preserve everyother word, ALL14rewardicon/name/counts, title, stats, 5hearts/3full, 15kill skillhint, heroillustration, all scene/panels/buttons/fontstyle/size/positions andcanvasunchanged. Do not replace itemname '老刘的鞋油', bossname '张角', or game title. Two text replacements only."
+    },
+    {
+      "key": "sharedClearSmallNames",
+      "file": "result-shared-unlocked.png",
+      "prompt": "Use case: text-localization. In this exact victory screen rename ONLY playerhero displayname: leftnameplate '关羽' -> exact '小关'; bottomprogressstrip '关羽新关卡：02 虎牢讨董' -> exact '小关新关卡：02 虎牢讨董'. Preserve tinyherohead and largeGuanYu teenageart, all words/numbers including6weapons/6items/2skills, headings, stats, hearts, scene, icons, buttons, fontstyle/size, positions andcanvassize. Do not change '张角' or otherbossnames. Two text replacements only."
+    }
+  ]
+}

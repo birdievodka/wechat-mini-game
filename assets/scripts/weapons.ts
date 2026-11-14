@@ -2,7 +2,7 @@ import { EXTRA_WEAPONS, EXTRA_EVOLUTION, isExtraWeapon, extraEffectText, extraHi
 export type WeaponId = 'sandal' | 'pole' | 'peach' | 'cleaver' | 'firecracker' | 'smg' | 'shotgun' | 'rocket' | 'sword' | 'thunder' | 'gourd' | 'twin-swords' | 'guandao' | 'serpent-spear' | 'halberd' | 'silver-spear' | 'qinggang' | 'yitian' | 'seven-saber' | 'ancient-saber' | 'twin-halberds' | 'trident' | 'caltrops' | 'repeater' | 'phoenix-bow' | 'heavy-crossbow' | 'hand-halberd' | 'chain-hook' | 'oil-jar' | 'thunder-bomb' | 'feather-fan' | 'taiping-book' | 'star-lamps' | 'bagua' | 'wood-ox' | 'wood-kite';
 export type WeaponClass = 'melee' | 'ranged' | 'magic';
 export type Tier = 1 | 2 | 3 | 4;
-export interface EquippedWeapon { uid: number; id: WeaponId; tier: Tier; invested?: number; }
+export interface EquippedWeapon { signature?:boolean; uid: number; id: WeaponId; tier: Tier; invested?: number; }
 export interface WeaponDefinition { id: WeaponId; name: string; category: WeaponClass; starter: boolean; damage: number; interval: number; range: number; speed: number; knockback: number; area: number; pierce: number; crit: number; critMultiplier: number; arc: number; price: number; desc: string; }
 export const WEAPON_LIMIT = 6;
 export const TIER_NAMES = ['普通 I', '精良 II', '稀有 III', '传说 IV'];

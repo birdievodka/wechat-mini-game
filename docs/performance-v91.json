@@ -1,0 +1,72 @@
+{
+  "version": "stage-v9.1-memory",
+  "scope": "Isolated real Cocos desktop WebGL. GPU counters, not iOS process RSS, phone FPS, or proof of crash root cause.",
+  "combat": {
+    "before": {
+      "bufferBytes": 49728600,
+      "textureBytes": 155185632,
+      "graphicsModels": 21,
+      "draws": 162
+    },
+    "after": {
+      "bufferBytes": 45008680,
+      "textureBytes": 125848220,
+      "graphicsModels": 19,
+      "draws": 162
+    },
+    "enemies": 80,
+    "frames": 600,
+    "renderEvery": 1,
+    "combinedMiB": {
+      "before": 195.42,
+      "after": 162.94,
+      "saved": 32.48,
+      "reductionPercent": 16.62
+    }
+  },
+  "shop": {
+    "before": {
+      "bufferBytes": 113435532,
+      "textureBytes": 156818916,
+      "graphicsModels": 48,
+      "draws": 74
+    },
+    "after": {
+      "bufferBytes": 78041904,
+      "textureBytes": 127481504,
+      "graphicsModels": 33,
+      "draws": 74
+    },
+    "cycles": 4,
+    "restoredBefore": {
+      "phase": "menu",
+      "profile": true,
+      "storage": true
+    },
+    "restoredAfter": {
+      "phase": "menu",
+      "profile": true,
+      "storage": true
+    },
+    "combinedMiB": {
+      "before": 257.73,
+      "after": 196.0,
+      "saved": 61.73,
+      "reductionPercent": 23.95
+    }
+  },
+  "long": {
+    "simulatedSeconds": 300,
+    "frames": 18000,
+    "renderEvery": 20,
+    "bosses": 3,
+    "roster": "all40 plus LvBu/MengHuo/SiMaYi; total80",
+    "bufferMin": 47360564,
+    "bufferMax": 47361056,
+    "textureMin": 125893800,
+    "textureMax": 125893800,
+    "errors": 0,
+    "storageRestored": true
+  },
+  "evidence": "art/reviews/stability-v91"
+}

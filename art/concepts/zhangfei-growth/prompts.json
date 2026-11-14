@@ -1,0 +1,39 @@
+{
+  "status": "proposal-not-approved-for-runtime",
+  "scope": "five-milestone character, mount and combat concepts only; runtime unchanged",
+  "tool": "built-in imagegen",
+  "hero": "zhangfei",
+  "mountBaseSpeedBonus": 0.3,
+  "references": [
+    {
+      "file": "art/concepts/hero-youth/design.png",
+      "role": "adopted youthful identity; first hero for liubei, third for zhangfei"
+    },
+    {
+      "file": "art/concepts/guanyu-growth/hero-growth.png",
+      "role": "matching layout and art style only, not Guan Yu identity"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "hero-growth.png",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-0fca4bae-83d5-49f0-aa0e-931ee3b2b9d1.png"
+    },
+    {
+      "file": "combat-growth.png",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-1c81bdee-4b60-4573-a0cb-8542e01db7e0.png"
+    }
+  ],
+  "prompts": [
+    {
+      "hero": "zhangfei",
+      "key": "hero-growth",
+      "prompt": "Create a matching FIVE-MILESTONE EVOLUTION CONCEPT BOARD for 小张 (young Zhang Fei) in mobile game 桃园小英雄. IMAGE1 is character identity/style reference: ONLY THIRD hero from left, fluffy spiky dark-brown hair/topknot, RED headband with two tails, thick lively eyebrows, huge open laughing mouth and tiny fang, warm peach rosy cheeks, NO beard, NO moustache; PURPLE short robe and red sash, bean-short body, mitten fists, tiny feet. IMAGE2 is ONLY the FIVE-COLUMN BOARD LAYOUT reference, NOT Guan Yu's face/hat/horse. Same joyful brave youthful boy and same head size in every column. Clean warm dark-brown outlines, saturated purple/red/gold mobile chibi cel art, minimal small-detail noise. Landscape3:2 high resolution, cream parchment, jade/gold header, tiny peach blossoms, EXACTLY FIVE main specimen columns with generous spacing/arrows, all feet/hooves/blade tips visible. Exact title 小张 · 蛇矛成长. Labels left to right 01 杀猪少年 ; 02 蛇矛少年 ; 03 黑猪骑将 ; 04 震地三连 ; 05 燕人小霸王. Sublabels 初始形态 ; 通关黄巾 ; 通关讨董 ; 通关官渡 ; 通关南中.\n1 ON FOOT, plain PURPLE short cloth robe/red sash, right hand grips a small traditional POINTED BUTCHER KNIFE: narrow silver pointed blade, short brown handle with brass rivets, NOT a square kitchen cleaver; other fist raised, big mischievous laugh. 2 STILL ON FOOT SAME boy/robe, now holds a recognizably ZHANGBA SERPENT SPEAR with a slender dark shaft, SINGLE sinuous wavy pointed silver spearhead, red neck tassel, no three-pronged trident, no guandao blade. Exaggerated proud grin, two natural mitten grips. 3 SAME boy, SAME purple robe and SAME serpent spear riding a compact CUTE ROUND DARK-BROWN/CHARCOAL BOAR: short stout legs, little pale ivory tusks, BIG round pink snout, little spiky mane echoing boy's hair, lively white eyes, comical brave expression, plum-purple saddle blanket/red strap. It is a tame funny round BOAR, not a horse, buffalo, tiger, hostile huge wild boar or black silhouette. Warm highlights so face is readable. Mounted body only about40% taller than foot boy, hero head remains huge. 4 SAME outfit/boar/spear as3, NOT a new armor tier. Show rapid short spear thrust plus compact RED-ORANGE/IVORY ground crack impact accents and three little strike marks indicating unlocked three-hit chain, no dragon, no long green sword wave, no giant explosion. 5 final distinct appearance: same boy and same round boar, clean PURPLE/SCARLET/GOLD short light brawler armor, small tiger-face BELT BUCKLE (not a real tiger head), short red cape, no helmet hiding hair/headband. Boar gets a modest brass forehead guard and purple/red chest harness leaving snout/tusks visible. Holds SAME serpent spear family, not a new weapon each stage. Laughing fearless expression, stocky cheerful silhouette.\nBelow labels short badges 坐骑基础移速 +30% ; 每关首通 +1心 ; 赤壁解锁猪突猛进. Bottom narrow grassy strip 战斗尺寸示意 with EXACTLY five tiny matching chibi silhouettes, conceptual scale check, not a real screenshot. Footer 角色成长提案 · 未实装. No beard, adult muscular torso, long human legs, red horse, green Guan Yu cap, giant hammer, square cleaver, extra limbs, elaborate medieval armor, watermarks."
+    },
+    {
+      "hero": "zhangfei",
+      "key": "combat-growth",
+      "prompt": "Design a matching chibi GAME COMBAT CONCEPT BOARD for 小张, young Zhang Fei in 桃园小英雄, landscape3:2. IMAGE1 identity reference ONLY the THIRD hero: brown spiky hair, red headband, huge laughing mouth/tiny fang, warm peach skin, NO facial hair, purple bean-short robe/red sash/mitten fists. IMAGE2 only parchment/jade layout/art style; NEVER use Guan Yu or his horse. Mount is SAME compact ROUND DARK-CHARCOAL/BROWN BOAR, stubby legs, lively eyes, broad pink round snout, two small ivory tusks, short spiky mane, purple saddle cloth, humorous confident tame expression. Weapon SAME dark-shaft SERPENT SPEAR with a SINGLE wavy pointed silver spearhead, red tassel; NOT a trident, guandao or hammer. Clean warm brown outlines, bright purple/scarlet/gold and ivory effects, friendly phone-game cartoon rendering, no realistic material shading. Exact title 小张 · 震地三连与猪突猛进.\nTop60% is THREE equal gameplay-like panels on same simple grassy field, identical hero/boar/enemy scale and camera, boy mounted at left, a few yellow-bandit troops at right. Section header 震地三连. These are concept keyframes, not implementation screenshots. First panel 第一式 · 快刺: short forceful forward serpent-spear thrust, 2 narrow sharp ivory/red-orange speed wedges aligned to spear, small impact star on nearest enemy, boar braces. Second panel 第二式 · 回扫: short reverse close-range spear sweep with red-orange/ivory broad but COMPACT crescent and a second few shorter speed ticks, boy's grin and boar snout unobscured, one enemy knocked back slightly. Third panel 第三式 · 震地: boy drives serpent-spear point into a small spot on ground in front, boar crouches firmly; a stout jagged RED-ORANGE/IVORY impact crown at contact point, 3 SHORT RADIAL CRACKS and a segmented low dust shockwave, area about2 body lengths. Not a full-screen explosion, circular fan diagram or fire spell, NO dragon, NO giant hammer, no blood. Important readability: heavier body posture, ground contact, bold compact impact shapes rather than glamorous long-range magic.\nBottom40% two separate sections. LEFT 两种坐骑阶段: normal round boar labeled 移速型黑猪 and badge 基础移速 +30%; beside it the same boar with a small brass forehead guard labeled 冲刺型黑猪, head down, short rushing charge with 3 red-orange speed wedges and tiny kicked-up clods; in front TWO little bandits visibly pushed APART to open a SHORT escape gap, not killed/exploded/thrown across screen. Caption 猪突猛进 · 撞开包围. This is the distinguishing defensive charge: strong push, no attack damage, no Boss stun. RIGHT 右下双技能: small grassy UI crop, two jade/gold circular buttons on precisely the same horizontal CENTERLINE, left smaller icon of funny pink BOAR SNOUT/dark boar head with short forward arrow and6s label 猪突猛进, right larger generic golden skill icon and8/15 label 通用技能. Brief note 普通技能击杀充能 · 冲刺独立冷却. Clear gap between tap circles, no giant description box, no third button. Footer 战斗表现概念 · 未实装. Consistent readable style, no beard, no adult red warrior, no horses, no green dragon arcs, no endless smoke, no watermarks or English paragraphs."
+    }
+  ]
+}

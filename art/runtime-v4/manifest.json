@@ -3,16 +3,20 @@
   "atlases": {
     "hero-portraits": {
       "file": "assets/chronicle-ui/hero-portraits.png",
+      "width": 768,
+      "height": 768,
+      "bytes": 344466,
+      "sha256": "be1a76c5fd0d7a4b6500d3681b0e88eeffaeb2f9529fb0592f91aa503bdd854f",
       "columns": 2,
       "rows": 2,
       "cell": 384,
       "cells": [
         {
           "source": [
-            40,
-            24,
-            568,
-            562
+            1192,
+            4,
+            352,
+            379
           ],
           "rect": [
             0,
@@ -23,10 +27,10 @@
         },
         {
           "source": [
-            666,
-            33,
-            567,
-            555
+            1616,
+            9,
+            321,
+            374
           ],
           "rect": [
             384,
@@ -37,10 +41,10 @@
         },
         {
           "source": [
-            63,
-            649,
-            539,
-            569
+            1188,
+            402,
+            349,
+            378
           ],
           "rect": [
             0,
@@ -51,10 +55,10 @@
         },
         {
           "source": [
-            664,
-            647,
-            548,
-            571
+            1616,
+            401,
+            303,
+            379
           ],
           "rect": [
             384,
@@ -64,76 +68,81 @@
           ]
         }
       ],
-      "sourceSha256": "7e3d307df35d6e777b1e7af1399cfc6f7cc1fa0f6b2858f4e88b2ebb0e293cb3"
+      "source": "art/runtime-youth/sources/portraits.png",
+      "supersededBy": "art/runtime-youth/manifest.json"
     },
     "hero-parts": {
       "file": "assets/chronicle-ui/hero-parts.png",
+      "width": 512,
+      "height": 768,
+      "bytes": 226270,
+      "sha256": "3ea529a842b633e6298604c2138f1e66377bc1fe06e86756235b74928469eb04",
       "columns": 2,
       "rows": 3,
       "cell": 256,
       "cells": [
         {
           "source": [
-            107,
-            22,
-            489,
-            401
-          ],
-          "rect": [
-            0,
-            0,
-            256,
-            256
-          ]
-        },
-        {
-          "source": [
-            720,
-            25,
-            391,
-            412
-          ],
-          "rect": [
-            256,
-            0,
-            256,
-            256
-          ]
-        },
-        {
-          "source": [
-            107,
-            448,
-            489,
-            402
-          ],
-          "rect": [
-            0,
-            256,
-            256,
-            256
-          ]
-        },
-        {
-          "source": [
-            720,
-            452,
-            391,
-            412
-          ],
-          "rect": [
-            256,
-            256,
-            256,
-            256
-          ]
-        },
-        {
-          "source": [
-            190,
             930,
-            361,
-            273
+            32,
+            294,
+            294
+          ],
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            1230,
+            42,
+            282,
+            295
+          ],
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            930,
+            354,
+            294,
+            293
+          ],
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            1230,
+            364,
+            282,
+            295
+          ],
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ]
+        },
+        {
+          "source": [
+            922,
+            728,
+            293,
+            238
           ],
           "rect": [
             0,
@@ -144,10 +153,10 @@
         },
         {
           "source": [
-            716,
-            931,
-            372,
-            270
+            1221,
+            727,
+            302,
+            247
           ],
           "rect": [
             256,
@@ -157,7 +166,8 @@
           ]
         }
       ],
-      "sourceSha256": "497fb2e1b9f754c9bb8826bf84028968950533bf444ef71d9f22c217abb24f83"
+      "source": "art/runtime-youth/sources/parts.png",
+      "supersededBy": "art/runtime-youth/manifest.json"
     },
     "weapons": {
       "file": "assets/chronicle-ui/weapons.png",

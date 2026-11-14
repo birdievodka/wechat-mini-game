@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
+  const allowed = new Set(['hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -86,9 +86,10 @@ function generate(root) {
     return alias.type.types.map(n => n.literal.text);
   }
   const enemyKinds = stringsFromUnion('EnemyKind');
+  const stages=load('stage-data');
   const hero = c.HEROES[0].id;
   const weaponRows = w.WEAPONS.map(def => {
-    const run = c.createRun(hero, def.id);
+    const run = c.createRun(hero, def.id);run.challenge=true;
     return { ...def,
       qualityStatsWithoutHeroOrItems: w.TIER_NAMES.map((name, i) => {const stats=w.calculateWeapon({ id:def.id,tier:i+1 },c.emptyBonus(),hero);return {tier:i+1,name,color:w.TIER_COLORS[i],...stats,effectText:w.weaponEffectText(def.id,stats),mechanics:extra.isExtraWeapon(def.id)?extra.extraMechanics(def.id,i+1):w.weaponEffectText(def.id,stats)};}),
       openingStatsByHero: c.HEROES.map(h => {
@@ -132,16 +133,17 @@ function generate(root) {
       enemies: Object.fromEntries(enemyKinds.map(k => [k, c.enemyStats(k, 2, seconds)])),
     };
   });
-  const heroes = c.HEROES.map(h => {
-    const run = c.createRun(h.id);
-    return { ...h, starter: w.starterFor(h.id), startingHearts: run.hearts, initialGold: run.gold, stats: c.statsFor(run), skill: {selection:'通用技能自由搭配',defaultId:run.skillId,recharge:'击杀小兵充能'} };
+  const heroes = c.HEROES.filter(h=>stages.VISIBLE_HERO_IDS.includes(h.id)).map(h => {
+    const run = c.createRun(h.id);run.gold=28;run.challenge=true;
+    return { ...h, starter: w.starterFor(h.id), startingHearts: run.hearts, initialGold: run.gold, stats: c.statsFor(run), skill: {selection:'通用技能自由搭配',defaultId:run.skillId,recharge:'固定15名真实小兵重置'} };
   });
-  const prices = chronicles.CHAPTERS.map(chapter => {
-    const run = c.createRun(hero); run.chapter=chapter.id;
+  const prices = stages.STAGES.map((stage,index) => {
+    const chapter={id:index+1};
+    const run = c.createRun(hero); run.chapter=chapter.id;run.challenge=true;
     return { chapter:chapter.id, basePrice: s.basePrice(run), weaponPrices: Object.fromEntries(w.WEAPONS.map(d => [d.id, w.TIER_NAMES.map((_, i) => s.supplyWeaponPrice(run, d.id, i + 1))])) };
   });
   const refresh = [0, 1, 2, 3, 4, 5].map(rerolls => ({ rerolls,
-    costsByC05Copies: [0, 1, 2, 3, 10].map(copies => { const run = c.createRun(hero); run.rerolls = rerolls; run.inventory.C05 = copies; return { copies, cost: s.refreshPrice(run) }; }),
+    costsByC05Copies: [0, 1, 2, 3, 10].map(copies => { const run = c.createRun(hero); run.challenge=true;run.rerolls = rerolls; run.inventory.C05 = copies; return { copies, cost: s.refreshPrice(run) }; }),
   }));
   const sources = [];
   function scan(relative) {
@@ -175,17 +177,21 @@ function generate(root) {
     const prefix = f.path.slice(0, -5) + '/';
     return [{ path: prefix, ...meta.userData, sourceBytes: sources.filter(s => s.path.startsWith(prefix)).reduce((n, s) => n + s.bytes, 0) }];
   });
+  const heroGrowth=load('hero-growth'),progress=load('stage-progress');
+  const growthRows=heroGrowth.GROWTH_HEROES.flatMap(id=>Array.from({length:7},(_,clears)=>{const profile=progress.newProfile();for(let i=1;i<=clears;i++)progress.recordClear(profile,id,i,240,100,5);const run=c.createStageRun(profile,id,Math.min(6,clears+1),w.starterFor(id),'G03'),weapon=run.weapons[0],stats=c.statsFor(run);return {hero:id,clears,title:heroGrowth.growthTitle(id,clears),maxHearts:stats.maxHp,speed:stats.speed,signature:weapon.id,tier:weapon.tier,weaponStats:c.weaponStatsFor(run,weapon),singleTargetDpsCeiling:c.weaponDps(run,weapon),combo:clears>=3,mounted:clears>=2,dash:clears>=4,finalOutfit:clears>=5};}));
   const catalog = clean({ schemaVersion: 2, game: { name: load('game-brand').GAME_NAME, version: s.SURVIVAL_VERSION,
     creator: JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).creator.version },
     provenance: { fingerprint: hash(JSON.stringify(sources)), files: sources },
-    counts: { heroes: heroes.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length, enemyArchetypes:chronicles.CHRONICLE_ENEMIES.length, bossEncounters:chronicles.CHAPTERS.length, bossPeople:new Set(chronicles.CHAPTERS.map(ch=>ch.bossId)).size, genericSkills:chronicles.GENERIC_SKILLS.length },
-    rules: { warmupSeconds: c.WAVE_SECONDS, warmupGoldBudget:c.WARMUP_GOLD_BUDGET, supplySeconds: s.SUPPLY_SECONDS, majorSeconds: s.MAJOR_SECONDS, bossEveryWaves:s.BOSS_EVERY_WAVES, chapterFinalBoss:'simayi', clearAfterFirstBoss:false, clearAfterChapter:17, chapterHeal:1, chapterEnemyScaling:'(referenceDps/152.05)^.95 × stage(1/1.04/1.08; boss1.1)', earlySecondWeaponChance:s.EARLY_SECOND_WEAPON_CHANCE, weaponLimit: w.WEAPON_LIMIT, defaultWorld: world.WORLD, waveRules: [c.waveRule(1), c.waveRule(2)] },
+    counts: { heroes: heroes.length, stages: stages.STAGES.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length, enemyArchetypes:chronicles.CHRONICLE_ENEMIES.length, bossEncounters:chronicles.CHAPTERS.length, bossPeople:new Set(chronicles.CHAPTERS.map(ch=>ch.bossId)).size, genericSkills:chronicles.GENERIC_SKILLS.length },
+    rules: {initialShop:false,warmupSeconds:0,waveSeconds:[45,45,60,60,null],wave3End:'all miniBosses defeated; immediate',wave3CountdownVisible:false,wave5End:'boss defeated',initialGold:28,shopOffers:4,refreshCap:20,skillKillRequirement:15,stageProgress:'per hero',contentUnlocks:'account shared; advanced weapons shop only',carryEquipment:false,weaponLimit:w.WEAPON_LIMIT,defaultWorld:world.WORLD},
+    heroGrowth:{enabled:true,progress:'per hero consecutive first clears',heartPerClear:1,mountBaseSpeedBonus:.3,dash:heroGrowth.DASH,states:growthRows},
+    stageChallenge:{waveRosters:stages.STAGE_WAVE_ROSTERS,rangedCostShares:stages.STAGE_RANGED_COST_SHARE,shooterWeight:1.5,yellowChargers:load('yellow-chargers').YELLOW_CHARGERS,spawnCostPerSecond:stages.STAGES.map((s,i)=>({stage:i+1,waves:[1,2,3,4,5].map(w=>stages.stageThreat(i+1,w)),stipends:[1,2,3,4,5].map(w=>stages.stageStipend(i+1,w))})),stages:stages.STAGES,initial:stages.INITIAL_CONTENT,starterWeapons:stages.STARTER_WEAPONS,visibleHeroes:stages.VISIBLE_HERO_IDS,themes:stages.STAGE_THEMES},
     effects: { limits: effects.FX_LIMITS }, controls: { joystick: controls.JOYSTICK },
     startup: { tasks: startup.STARTUP_TASKS, poster:'assets/campaign/poster.jpg', template:'build-templates/wechatgame/first-screen.js' },
     heroes, weapons: weaponRows, passives: itemRows, augments: s.AUGMENTS,
     consumables: c.ITEMS.filter(i => !p.PASSIVE_ITEMS.some(p => p.id === i.id)),
     enemy: { kinds: enemyKinds, warmup: Object.fromEntries(enemyKinds.map(k => [k, c.enemyStats(k, 1, 0)])), costs: Object.fromEntries(enemyKinds.map(k => [k, s.enemyCost(k)])), behavior: { archer: behavior.ARCHER, cavalry: behavior.CAVALRY, zhangjiao: behavior.ZHANGJIAO }, curve },
-    chronicles:{chapters:chronicles.CHAPTERS.map(ch=>({...ch,enemyHpMultiplier:(ch.referenceDps/152.05)**.95,threatPerSecond:[0,1,2,3].map(stage=>chronicles.chapterThreat(ch.id,stage)),bossThreat:chronicles.chapterThreat(ch.id,3,true),actions:chronicles.BOSS_ACTIONS[ch.id-1]})),enemies:chronicles.CHRONICLE_ENEMIES.map(e=>({...e,firstChapterValues:chronicles.scaledEnemy(e.id,e.first,1)})),genericSkills:[...chronicles.GENERIC_SKILLS].sort((a,b)=>a.powerRank-b.powerRank),genericSkillsCombatEnabled:true},
+    chronicles:{chapters:chronicles.CHAPTERS.map(ch=>({...ch,enemyHpMultiplier:(ch.referenceDps/152.05)**.95,threatPerSecond:[0,1,2,3].map(stage=>chronicles.chapterThreat(ch.id,stage)),bossThreat:chronicles.chapterThreat(ch.id,3,true),actions:chronicles.BOSS_ACTIONS[ch.id-1]})),enemies:chronicles.CHRONICLE_ENEMIES.map(e=>{const firstStage=stages.STAGES.findIndex((s,i)=>s.roster.includes(e.id)||stages.miniArchetype(i+1)===e.id)+1;return {...e,firstStage,firstChapterValues:{hp:stages.stageEnemyHp(e.hp,firstStage,1),speed:e.speed*(1+.006*(firstStage-1)),coins:e.coins,damage:1}};}),genericSkills:[...chronicles.GENERIC_SKILLS].sort((a,b)=>a.powerRank-b.powerRank),genericSkillsCombatEnabled:true},
     growth: { enabled:false, xpThresholds: Array.from({ length: 30 }, (_, i) => ({ level: i + 1, xpNeeded: c.xpNeeded(i + 1) })) },
     economy: { prices, refresh },
     audio: { cues: sound.SOUND_CUES, voices: sound.SFX_VOICES, musicSeconds: music.MUSIC_SECONDS, musicVolume: music.MUSIC_VOLUME },
@@ -209,13 +215,16 @@ function generate(root) {
     '## 恢复消耗品\n', table(['ID / 名称', '描述'], catalog.consumables.map(i => [i.id + ' / ' + i.name, i.desc])),
     '\n原始48项按源顺序映射8×6图集；新增远程道具为矢量图标。具体图集格位记录在机器目录，新增条目不要打乱旧格位。',
   ].join('\n') + '\n';
-  const balanceDoc = [heading('角色与数值曲线'), `版本：\`${catalog.game.version}\`。时间从进入正式战斗后开始计；${c.WAVE_SECONDS}秒第零章另算，购物与暂停不计时。\n`,
+  const balanceDoc = [heading('角色与数值曲线'), `版本：\`${catalog.game.version}\`。六关独立构筑、无热身，购物与暂停不计时。\n`,
     '## 角色开局与技能\n', table(['英雄', '心 / 移速', '默认武器', '固有特点', '技能', '充能方式'], heroes.map(h => [h.name, h.startingHearts + ' / ' + h.stats.speed, names[h.starter], h.desc, h.skill.selection,h.skill.recharge])),
-    `\n${catalog.chronicles.genericSkills.length}通用技能全部开放，全英雄选1个；初始可用，释放后每击杀1名真实小兵+1，时间不充能。S为施法瞬间装备DPS之和。详见common-skills-v5规则。\n`,
+    `\n${catalog.chronicles.genericSkills.length}通用技能，初始3个，其他随共享首通解锁；全英雄统一15击杀重置、初始就绪，释放后每击杀1名真实小兵+1，时间不充能。S为施法瞬间装备DPS之和。详见common-skills-v5规则。\n`,
+    '## 个人首通成长（白I本命、无道具）\n',table(['英雄','首通数','形态','最大心','移速','本命','单体理论DPS','三连 / 冲刺'],growthRows.map(r=>[r.hero,r.clears,r.title,r.maxHearts,r.speed,r.signature,round(r.singleTargetDpsCeiling),(r.combo?'三连':'单击')+' / '+(r.dash?'6秒':'无')])),
+    '本命只占六槽之一，三连替代原品质附加连段；范围收益另计。成长规则见hero-growth.md。\n',
     `## ${catalog.chronicles.genericSkills.length}通用技能（综合威力升序）\n`,table(['技能','威力阶','基础击杀需求','伤害/收益','范围','持续','真实机制'],catalog.chronicles.genericSkills.map(s=>[s.id+' / '+s.name,s.powerTier,s.killCharge,s.damage,s.range,s.duration,s.effect])),
-    '## 17章固定曲线\n', table(['章 / 首领','参考有效DPS','Boss HP','普通兵HP倍率','第1/2/3段威胁/秒','Boss援军威胁/秒'],catalog.chronicles.chapters.map(ch=>[ch.id+' / '+ch.boss,ch.referenceDps,ch.bossHp,round(ch.enemyHpMultiplier),ch.threatPerSecond.slice(1).map(round).join(' / '),round(ch.bossThreat)])),
-    '\n第零章15秒：首章仅E01 HP6／移速86，首店收入补足28；后续章有新兵预告。普通兵出生时乘本章HP倍率和战段1/1.04/1.08，Boss阶段新兵乘1.1；存活旧兵不补血。移速只乘1+min(.006×(章−1),.12)，弹速、冲锋与预警不加速。\n',
-    '## 40类敌兵标准数值\n',table(['ID / 名称','首登','标准HP','首登第1段HP','基速','攻击周期 / 前摇','射程','成本 / 金币','机制'],catalog.chronicles.enemies.map(e=>[e.id+' / '+e.name,e.first,e.hp,e.firstChapterValues.hp,e.speed,e.cycle+' / '+e.windup,e.range,e.cost+' / '+e.coins,e.mechanic])),
+    '## 六关固定曲线\n',table(['关 / 大首领','小首领 / HP','大首领 HP','普通兵HP倍率','五波投入成本/秒','目标Boss前金币'],stages.STAGES.map((d,i)=>[d.name+' / '+d.boss,d.miniBoss+' / '+d.miniBossHp,d.bossHp,d.ordinaryHpFactor,[1,2,3,4,5].map(w=>stages.stageThreat(i+1,w)).join(' / '),d.targetPreBossBudget])),
+    '\n每波普通兵HP倍率0.8/0.95/1/1.1/1.1；移速只随关卡微增，预警与弹速不加快。Boss不读取装备动态抬血。经济与完成率仍需手机实测。\n',
+
+    '## 40类敌兵标准数值\n',table(['ID / 名称','首登','标准HP','首登关第1波HP','基速','攻击周期 / 前摇','射程','成本 / 金币','机制'],catalog.chronicles.enemies.map(e=>[e.id+' / '+e.name,e.firstStage,e.hp,e.firstChapterValues.hp,e.speed,e.cycle+' / '+e.windup,e.range,e.cost+' / '+e.coins,e.mechanic])),
     '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与当前可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance.json，不等于真人存活率。\n',
     '## 商店价格与刷新\n', table(['章节', '基础价', '草鞋 I/II/III/IV', '突突枪 I/II/III/IV'], catalog.economy.prices.map(row => [row.chapter, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.smg.join(' / ')])),
     '\n无折扣样本，按固定章节指数 `min(5,1.07^(章−1))` 调用现行商店价格函数，不使用旧八关商店价格。\n',

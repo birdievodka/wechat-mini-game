@@ -1,0 +1,311 @@
+{
+  "cell": 96,
+  "columns": 5,
+  "rows": 13,
+  "mode": "built-in image_gen body edits + deterministic canvas equipment",
+  "atlases": {
+    "a-front": {
+      "file": "assets/chronicle-units/troops-a-front.png",
+      "bytes": 193175,
+      "sha256": "ab0d73148be504692e158af89c29b0140ebcf1e0ca25d3b74efc001ecf859d09",
+      "sourceSha256": "aa48e32ee807d1807474d9cc328cdd07c247f55ac7eb494cc78a812bf758052a"
+    },
+    "a-back": {
+      "file": "assets/chronicle-units/troops-a-back.png",
+      "bytes": 173547,
+      "sha256": "cdbe15a03e683090b731f197a017a0378e88071835b9bd1885811472b8759265",
+      "sourceSha256": "609b8a71bff496a71da31e395eda085d5a35da733514068239d712c206015c61"
+    },
+    "b-front": {
+      "file": "assets/chronicle-units/troops-b-front.png",
+      "bytes": 202942,
+      "sha256": "74fd59af1ecb0bde01d5a46293dbb18e55d0972e6bac4cde0d4f9ecc09488221",
+      "sourceSha256": "cef15ac7a285c719abdb7dcde8e9b6312b6ac3e253fdaf111f2cd89e029a1476"
+    },
+    "b-back": {
+      "file": "assets/chronicle-units/troops-b-back.png",
+      "bytes": 190023,
+      "sha256": "ca5ece5d743594fdee1162c2f5c9ea7de376edd24f4f6b6371f8159668ccd2a9",
+      "sourceSha256": "f22bf93a27fe58c40523acb75f9b70b68c72eaa739bf68461596bf1508ffb6a8"
+    }
+  },
+  "gearBounds": [
+    [
+      43,
+      7,
+      27,
+      74
+    ],
+    [
+      37,
+      13,
+      24,
+      68
+    ],
+    [
+      38,
+      0,
+      20,
+      81
+    ],
+    [
+      37,
+      13,
+      24,
+      68
+    ],
+    [
+      37,
+      25,
+      24,
+      56
+    ],
+    [
+      43,
+      22,
+      27,
+      59
+    ],
+    [
+      28,
+      17,
+      40,
+      64
+    ],
+    [
+      38,
+      0,
+      27,
+      81
+    ],
+    [
+      43,
+      5,
+      39,
+      77
+    ],
+    [
+      29,
+      44,
+      38,
+      32
+    ],
+    [
+      39,
+      36,
+      51,
+      56
+    ],
+    [
+      31,
+      43,
+      50,
+      42
+    ],
+    [
+      31,
+      43,
+      50,
+      42
+    ],
+    [
+      31,
+      43,
+      50,
+      42
+    ],
+    [
+      38,
+      0,
+      20,
+      81
+    ],
+    [
+      38,
+      9,
+      20,
+      72
+    ],
+    [
+      37,
+      25,
+      24,
+      56
+    ],
+    [
+      43,
+      22,
+      27,
+      59
+    ],
+    [
+      38,
+      0,
+      20,
+      81
+    ],
+    [
+      38,
+      0,
+      20,
+      81
+    ],
+    [
+      37,
+      13,
+      24,
+      68
+    ],
+    [
+      39,
+      36,
+      51,
+      56
+    ],
+    [
+      31,
+      43,
+      50,
+      42
+    ],
+    [
+      37,
+      13,
+      24,
+      68
+    ],
+    [
+      38,
+      10,
+      20,
+      71
+    ],
+    [
+      35,
+      17,
+      26,
+      64
+    ],
+    [
+      37,
+      13,
+      24,
+      68
+    ],
+    [
+      33,
+      58,
+      54,
+      12
+    ],
+    [
+      30,
+      24,
+      36,
+      55
+    ],
+    [
+      32,
+      4,
+      35,
+      77
+    ],
+    [
+      28,
+      55,
+      60,
+      27
+    ],
+    [
+      28,
+      54,
+      60,
+      28
+    ],
+    [
+      30,
+      24,
+      36,
+      55
+    ],
+    [
+      31,
+      30,
+      34,
+      45
+    ],
+    [
+      31,
+      43,
+      50,
+      42
+    ],
+    [
+      30,
+      24,
+      36,
+      55
+    ],
+    [
+      30,
+      24,
+      36,
+      55
+    ],
+    [
+      30,
+      24,
+      36,
+      55
+    ],
+    [
+      34,
+      27,
+      28,
+      45
+    ],
+    [
+      29,
+      23,
+      38,
+      56
+    ],
+    [
+      40,
+      49,
+      16,
+      30
+    ],
+    [
+      37,
+      54,
+      22,
+      20
+    ],
+    [
+      28,
+      37,
+      40,
+      46
+    ]
+  ],
+  "inputs": [
+    {
+      "file": "assets/scripts/npc-equipment.ts",
+      "sha256": "eb5c0cc62916e93b55309ba212345812f32c5060bb94681cc5e0c5949688cc23"
+    },
+    {
+      "file": "assets/scripts/enemy-actions.ts",
+      "sha256": "d9d0a0b8b41dd15064b7d00b2f15a48f86a25ce9fb2c239c8725d2a4715dfd2a"
+    },
+    {
+      "file": "assets/scripts/BattleSpriteAtlas.ts",
+      "sha256": "43b83b1b6c28d7914672ea620105124e20bfb2c175cb92d59a6a4dd242998f1c"
+    },
+    {
+      "file": "scripts/bake-enemy-atlases.mjs",
+      "sha256": "f91508bfd5bdb52c40ab9350fc2f4b9ddead6f95a2b7c45c36c18bec57d3443c"
+    }
+  ],
+  "gearSha256": "5330748642ca6562834da2e86026d31829a1ec8a909a4277154ae6bebf1c660a"
+}

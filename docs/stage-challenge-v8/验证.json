@@ -1,0 +1,82 @@
+{
+  "version": "stage-v8.3-battle-memory",
+  "checks": {
+    "typecheck": "passed",
+    "npmTest": "passed",
+    "projectCheck": "passed",
+    "diffCheck": "passed"
+  },
+  "formalCoverage": {
+    "heroes": 3,
+    "stages": 6,
+    "flows": 18,
+    "supplyShelves": 1800,
+    "miniBossAICases": 5,
+    "yellowChargers": {
+      "count": 3,
+      "hpEach": 2400,
+      "totalHp": 7200,
+      "cases": [
+        "locked dash / swept contact / staggered release",
+        "all three dead and 60 seconds before supply",
+        "single heal and bounty",
+        "charger / Lvbu separate pooled ghosts"
+      ]
+    },
+    "reinforcementSchedules": 30,
+    "miniBossEnd": "all miniBosses defeated; immediate at 8 seconds verified through actual update",
+    "fixedMiniReward": [
+      25,
+      30,
+      35,
+      40,
+      45,
+      50
+    ]
+  },
+  "balanceModel": {
+    "routes": 1080,
+    "scope": "historical fixed target income only; wave3 actual income now depends on kill time; no v8.2 income/survival prediction"
+  },
+  "webgl": {
+    "frames": 11,
+    "motionFrames": 22,
+    "errors": 0,
+    "scope": "isolated Cocos WebGL engineering frames, not iOS gameplay; fixture clear is synthetic",
+    "behaviorChecks": {
+      "miniClearSeconds": 8,
+      "miniReward": 25,
+      "bossReinforcementSeconds": 6,
+      "scope": "isolated Cocos fixture; not phone playtest"
+    }
+  },
+  "wechat": {
+    "build": "passed",
+    "resourceMiB": 19.16,
+    "previewAccepted": true,
+    "previewSourceBytes": 20062367,
+    "runtimeVersionVerified": false,
+    "desktopMenuFirstFrame": "not verified in WeChat; v8.3 actual isolated WebGL menu and stage frames verified"
+  },
+  "ios": {
+    "gameplay": "not tested on physical phone",
+    "balance": "needs playtest",
+    "fps": "not measured"
+  },
+  "changesVerified": [
+    "all stage-3 miniBosses dead ends wave immediately regardless of remaining time",
+    "stage-3 HUD shows objective instead of countdown",
+    "fixed miniboss bounty and collected ground coins settle once",
+    "all 30 stage-wave spawn schedules faster while existing population/cost caps remain",
+    "formal boss summons no longer delay ordinary reinforcement clock",
+    "stage 6 melee halberd filler prevents all-specialist roster saturation"
+  ],
+  "stability": {
+    "report": "docs/performance-v83.json",
+    "beforeBufferBytes": 120481812,
+    "afterBufferBytes": 52056784,
+    "framesEach": 2400,
+    "runtimeErrors": 0,
+    "phoneCrashCause": "unconfirmed; no original phone termination log"
+  }
+}

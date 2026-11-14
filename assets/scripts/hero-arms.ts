@@ -3,7 +3,8 @@ export interface ArmPoint { x:number; y:number; }
 export const HERO_ARMS={shoulderX:17,shoulderY:4,heldX:35,heldY:-4,relaxedX:32,relaxedY:-7,meleeReach:18,rangedReach:10};
 const INK='#493522';
 const fistCache=new WeakMap<Graphics,string>();
-export const handSkin=(hero:string):string=>hero==='guanyu'?'#dc5945':'#f3c39b';
+// All five approved teenage faces use warm peach skin, including Guan Yu.
+export const handSkin=(_hero:string):string=>'#f3c39b';
 export function shoulderFor(side:number,bob=0):ArmPoint {return {x:side*HERO_ARMS.shoulderX,y:HERO_ARMS.shoulderY+bob};}
 export function relaxedWrist(side:number,bob:number,breath:number,phase:number,walk:number):ArmPoint {
   return {x:side*(HERO_ARMS.relaxedX+Math.sin(phase)*walk),y:HERO_ARMS.relaxedY+bob+breath+Math.sin(phase+side)*walk*3};

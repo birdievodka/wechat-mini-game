@@ -1,0 +1,25 @@
+{
+  "version": "stage-v8.4-stable-loading-title",
+  "scope": "isolated real Cocos cold-load UI; logo PNG request delayed by CDP; no phone test",
+  "records": [
+    {
+      "name": "logo-pending",
+      "title": false,
+      "logo": false,
+      "mode": "pending",
+      "barY": -300,
+      "logoX": 0,
+      "logoY": -220
+    },
+    {
+      "name": "logo-ready",
+      "title": false,
+      "logo": true,
+      "mode": "logo",
+      "barY": -300,
+      "logoX": 0,
+      "logoY": -220
+    }
+  ],
+  "restored": true
+}

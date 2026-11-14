@@ -6,7 +6,7 @@ const {CHRONICLE_ENEMIES,chapterFor}=load('chronicles');
  // Reproduce pooled legacy sprite -> chronicle rig while intermediate physics skips drawing.
  const atlas=g.battleSprites;atlas.texture=new cc.Texture2D();for(const id of ['birth-ring','birth-dot'])atlas.cells[id]={frame:new cc.SpriteFrame(),width:32,height:32,x:0,y:0};
  const pooled=g.spawnNext('soldier');pooled.hp=0;pooled.dead=0;
- const appearance=e=>e.art.enabled?[e.art.spriteFrame]:e.rigParts.filter(sp=>sp.node.active).map(sp=>sp.spriteFrame);
+ const appearance=e=>e.art.enabled?[e.art.spriteFrame]:(e.npcRig?e.npcRig.parts:e.rigParts).filter(sp=>sp.node.active).map(sp=>sp.spriteFrame);
  const cases=[...CHRONICLE_ENEMIES.map(d=>({kind:d.kind,id:d.id})),{kind:'soldier'},{kind:'spearman'},{kind:'cavalry'},{kind:'chief'}];
  for(const {kind,id} of cases){
   g.presentSubstep=false;

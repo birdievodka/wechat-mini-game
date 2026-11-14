@@ -1,0 +1,45 @@
+{
+  "status": "concept-only-not-implemented",
+  "generator": "built-in image_gen",
+  "document": "docs/stage-challenge-v8/方案.md",
+  "artifacts": [
+    {
+      "file": "art/concepts/stage-challenge-v8/menu.png",
+      "sha256": "27fe0307c2843b37f33620b1cf38769e00342f26070fef037b19c5dc35bda88a"
+    },
+    {
+      "file": "art/concepts/stage-challenge-v8/stage-picker.png",
+      "sha256": "86afb68365b0258cbf33051e584ac1b5f551697872554c342461d46d2170c02e"
+    },
+    {
+      "file": "art/concepts/stage-challenge-v8/themes.png",
+      "sha256": "4c3402b7b1090a65d7f758f8418247bb2cce0fa156993151ffb9328d2996dd40"
+    },
+    {
+      "file": "art/concepts/stage-challenge-v8/result-first-clear.png",
+      "sha256": "472d08b8e06d2cbbf3519c707b00bdd2f5159ece7d1cde5e25e101f48cac3ac7"
+    },
+    {
+      "file": "art/concepts/stage-challenge-v8/result-shared-unlocked.png",
+      "sha256": "7437747cf304fbab543a3fcaa9fc862569204d67c23bd5569baa38c49cc669f4"
+    },
+    {
+      "file": "art/concepts/stage-challenge-v8/codex-discovery.png",
+      "sha256": "b154005c1ff55b9e8ce5147467d9bc582ec6419bd234479fef8b313322694fb4"
+    }
+  ],
+  "sources": {
+    "menu": "exec-4c3dee58-785d-40b3-b8f3-edaa39b33d17.png",
+    "stagePickerInitial": "exec-f8ccd153-e90a-44b6-a42c-ff791a72ee82.png",
+    "stagePickerFinal": "exec-42e089ff-f440-4195-84bc-dcf108947e8f.png",
+    "themes": "exec-bec97203-70bb-45f5-ada5-51e0ec870c6f.png",
+    "resultFirstClearInitial": "exec-510004e3-93ae-45e7-82b9-3db77a56a4b3.png",
+    "resultFirstClearFinal": "exec-52f16747-2029-4e4b-8cec-9ec9abab0260.png",
+    "resultSharedUnlocked": "exec-9d983f85-a2b8-4250-ae89-a8efcc93154d.png",
+    "codexDiscovery": "exec-c18117eb-9f16-49e1-86f8-b1c9ad54cc4e.png"
+  },
+  "promptSet": "art/concepts/stage-challenge-v8/prompts.json",
+  "notes": "Current display names 小刘/小关/小张; preserve liubei/guanyu/zhangfei IDs and saves; three basic starters; advanced weapons SHOP ONLY. Concept only, runtime unchanged.",
+  "resultPromptSet": "art/concepts/stage-challenge-v8/result-prompts.json",
+  "currentRevisionPromptSet": "art/concepts/stage-challenge-v8/hero-display-names-prompts.json"
+}

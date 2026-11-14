@@ -1,3 +1,5 @@
+import {growthClears,signatureId} from './hero-growth';
+import {StageProfile,canChallenge,unlocked} from './stage-progress';
 import {DEFAULT_SKILL,availableSkill} from './common-skills';
 import { extraHitFactor, isExtraWeapon } from './extra-weapons';
 import { PASSIVE_ITEMS, passiveBonuses, amount } from './passive-items';
@@ -9,18 +11,24 @@ export type Phase = 'loading' | 'menu' | 'battle' | 'upgrade' | 'shop' | 'victor
 export interface Bonus { hp: number; power: number; melee: number; ranged: number; magic: number; damage: number; haste: number; speed: number; armor: number; crit: number; range: number; regen: number; pickup: number; xp: number; stipend: number; area: number; }
 export interface Hero { id: HeroId; name: string; title: string; desc: string; hp: number; speed: number; color: string; }
 export const HEROES: Hero[] = [
-  { id: 'liubei', name: '刘备', title: '仁义老大', desc: '拾取范围 +15%\n武器击退 +20%\n所有武器皆可上手', hp: 5, speed: 300, color: '#73904b' },
-  { id: 'guanyu', name: '关羽', title: '扁担武圣', desc: '近战伤害 +10%\n近战距离 +15%\n推荐扁担 / 杀猪尖刀', hp: 5, speed: 295, color: '#3c854d' },
-  { id: 'zhangfei', name: '张飞', title: '莽撞屠夫', desc: '近战伤害 +10%\n爆炸半径 +15%\n推荐杀猪尖刀 / 桃花', hp: 5, speed: 290, color: '#824277' },
+  { id: 'liubei', name: '小刘', title: '仁义老大', desc: '拾取范围 +15%\n武器击退 +20%\n所有武器皆可上手', hp: 5, speed: 300, color: '#73904b' },
+  { id: 'guanyu', name: '小关', title: '扁担武圣', desc: '近战伤害 +10%\n近战距离 +15%\n推荐扁担 / 杀猪尖刀', hp: 5, speed: 345, color: '#3c854d' },
+  { id: 'zhangfei', name: '小张', title: '莽撞屠夫', desc: '近战伤害 +10%\n爆炸半径 +15%\n推荐杀猪尖刀 / 桃花', hp: 6, speed: 270, color: '#824277' },
 ];
-HEROES.push({id:'zhaoyun',name:'赵云',title:'常山子龙',desc:'移动近战攻速 +10%\n技能可自由搭配',hp:5,speed:325,color:'#5285b0'}, {id:'kongming',name:'孔明',title:'卧龙军师',desc:'法术范围 +10%\n技能充能效率 +10%',hp:5,speed:285,color:'#65a38e'});
+HEROES.push({id:'zhaoyun',name:'赵云',title:'常山子龙',desc:'移动近战攻速 +10%\n技能可自由搭配',hp:5,speed:325,color:'#5285b0'}, {id:'kongming',name:'孔明',title:'卧龙军师',desc:'法术范围 +10%\n技能击杀15名小兵重置',hp:5,speed:285,color:'#65a38e'});
 export interface Item { id: string; name: string; price: number; desc: string; bonus: Partial<Bonus>; slot: 'head' | 'waist' | 'back' | 'feet'; }
 export const ITEMS: Item[] = [...PASSIVE_ITEMS, { id: 'bun', name: '热乎肉包', price: 50, desc: '立即恢复一颗心\n每60秒限购一次', bonus: {}, slot: 'waist' }];
-export interface Run { skillId:string;skillHealChapter:number; chapter:number; elapsed:number; chapterTime:number; chapterShop:boolean; moving:boolean; retries:number; wavesCleared:number; bossEncounter:boolean; survivalSeconds: number; supplyCount: number; supplyMode: 'departure' | 'normal' | 'major'; purchasedOffers: string[]; lastHealAt: number; hearts: number; augments: string[]; economyRemainder: number; weapons: EquippedWeapon[]; starter: WeaponId; nextWeaponUid: number; locked: string[]; offerPrices: Record<string, number>; heroId: HeroId; wave: number; gold: number; level: number; xp: number; pending: number; bonus: Bonus; inventory: Record<string, number>; acquired: string[]; rerolls: number; offers: string[]; spent: number; }
+export interface Run { growth?:number; challenge?:boolean; stageWave?:number; waveTime?:number; miniSpawned?:boolean; miniDefeated?:boolean; unlockedWeaponIds?:string[]; unlockedPassiveIds?:string[]; healMisses?:number;newWeaponIds?:string[]; skillId:string;skillHealChapter:number; chapter:number; elapsed:number; chapterTime:number; chapterShop:boolean; moving:boolean; retries:number; wavesCleared:number; bossEncounter:boolean; survivalSeconds: number; supplyCount: number; supplyMode: 'departure' | 'normal' | 'major'; purchasedOffers: string[]; lastHealAt: number; hearts: number; augments: string[]; economyRemainder: number; weapons: EquippedWeapon[]; starter: WeaponId; nextWeaponUid: number; locked: string[]; offerPrices: Record<string, number>; heroId: HeroId; wave: number; gold: number; level: number; xp: number; pending: number; bonus: Bonus; inventory: Record<string, number>; acquired: string[]; rerolls: number; offers: string[]; spent: number; }
 export interface Stats { maxHp: number; damage: number; interval: number; speed: number; armor: number; crit: number; range: number; regen: number; pickup: number; xp: number; stipend: number; area: number; }
 export const clamp = (v: number, min: number, max: number): number => Math.max(min, Math.min(max, v));
 export const emptyBonus = (): Bonus => ({ hp: 0, power: 0, melee: 0, ranged: 0, magic: 0, damage: 0, haste: 0, speed: 0, armor: 0, crit: 0, range: 0, regen: 0, pickup: 0, xp: 0, stipend: 0, area: 0 });
-export function createRun(heroId: HeroId, starter: WeaponId = starterFor(heroId),skillId=DEFAULT_SKILL): Run { return { skillId:availableSkill(skillId),skillHealChapter:0,chapter:1,elapsed:0,chapterTime:0,chapterShop:false,moving:false,retries:0,wavesCleared:0,bossEncounter:false,survivalSeconds: 0, supplyCount: 0, supplyMode: 'departure', purchasedOffers: [], lastHealAt: -60, hearts: 5, augments: [], economyRemainder: 0, weapons: [{ uid: 1, id: starter, tier: 1, invested: 15 }], starter, nextWeaponUid: 2, locked: [], offerPrices: {}, heroId, wave: 1, gold: 0, level: 1, xp: 0, pending: 0, bonus: emptyBonus(), inventory: {}, acquired: [], rerolls: 0, offers: [], spent: 0 }; }
+export function createRun(heroId: HeroId, starter: WeaponId = starterFor(heroId),skillId=DEFAULT_SKILL): Run { return { skillId:availableSkill(skillId),skillHealChapter:0,chapter:1,elapsed:0,chapterTime:0,chapterShop:false,moving:false,retries:0,wavesCleared:0,bossEncounter:false,survivalSeconds: 0, supplyCount: 0, supplyMode: 'departure', purchasedOffers: [], lastHealAt: -60, hearts: HEROES.find(h=>h.id===heroId)!.hp, augments: [], economyRemainder: 0, weapons: [{ uid: 1, id: starter, tier: 1, invested: 15 }], starter, nextWeaponUid: 2, locked: [], offerPrices: {}, heroId, wave: 1, gold: 0, level: 1, xp: 0, pending: 0, bonus: emptyBonus(), inventory: {}, acquired: [], rerolls: 0, offers: [], spent: 0 }; }
+export function createStageRun(profile:StageProfile,heroId:HeroId,chapter:number,starter:WeaponId,skillId:string):Run|undefined {
+ if(!canChallenge(profile,heroId,chapter,starter,skillId))return;
+ const run=createRun(heroId,starter,skillId),growth=growthClears(profile,heroId);run.growth=growth;run.hearts=heroMaxHearts(run);run.weapons[0]={uid:1,id:(growth>0?signatureId(heroId,growth):starter) as WeaponId,tier:1,signature:true,invested:0};Object.assign(run,{challenge:true,chapter,stageWave:1,waveTime:0,miniSpawned:false,miniDefeated:false,wave:2,supplyMode:'normal',gold:28,unlockedWeaponIds:unlocked(profile,'weapons'),unlockedPassiveIds:unlocked(profile,'passives'),healMisses:0,newWeaponIds:[...profile.pendingWeapons]});return run;
+}
+export const heroMaxHearts=(hero:HeroId|Run):number=>HEROES.find(h=>h.id===(typeof hero==='string'?hero:hero.heroId))!.hp+(typeof hero==='string'?0:Math.max(0,Math.min(6,Math.floor(hero.growth||0))));
+export const heroAttackFrequency=(id:HeroId):number=>id==='guanyu'?.85:id==='zhangfei'?1.15:1;
 export const heroFor = (run: Run): Hero => HEROES.find(h => h.id === run.heroId)!;
 export function totalBonus(run: Run): Bonus {
   const b = { ...run.bonus };
@@ -39,7 +47,7 @@ export function totalBonus(run: Run): Bonus {
   for (const category of ['melee', 'ranged', 'magic'] as const) b[category] += Math.floor(run.weapons.filter(w => weaponFor(w.id).category === category).length / 2);
   return b;
 }
-export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'tier'>): WeaponStats => {
+export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'tier'> & {signature?:boolean}): WeaponStats => {
   const bonus=totalBonus(run),s = calculateWeapon(weapon, bonus, run.heroId), category = weaponFor(weapon.id).category;
   if (run.heroId === 'liubei') s.knockback *= 1.2;
   if (run.heroId === 'guanyu' && category === 'melee') { s.damage *= 1.1; s.range *= 1.15; }
@@ -65,7 +73,7 @@ export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'ti
   s.pierceFactor = Math.min(1,(.7+Math.max(0,(run.inventory.D03||0)-3)*.05+p.pierceDamage)+(category==='melee'?0:p.pierceRetention)); s.splashFactor = p.splash; s.spread = ['smg','shotgun'].indexOf(weapon.id)>=0?p.spread:1;
   const extraHaste=(run.heroId==='zhaoyun'&&run.moving&&category==='melee'?.1:0)+(category==='ranged'?p.rangedHaste:0)+(weapon.id==='pole'?p.poleHaste:weapon.id==='smg'?p.smgHaste:0);
   s.interval=weaponFor(weapon.id).interval*[1,.96,.92,.88][weapon.tier-1]/(1+Math.max(-.4,bonus.haste+extraHaste));
-  s.interval=Math.max(weapon.id==='smg'?.06:.08,s.interval);
+  s.interval=Math.max(weapon.id==='smg'?.06:.08,s.interval/heroAttackFrequency(run.heroId));
   if(weapon.id==='thunder')s.chainTargets=Math.min(8,(s.chainTargets||3)+p.thunderTargets);
   if(weapon.id==='pole'&&run.augments.indexOf('pole-mastery')>=0){s.arc=Math.min(220,s.arc+25);s.knockback*=1.3;}
   if(weapon.id==='sword'){s.range=Math.min(250,s.range);s.orbitSpeed=Math.min(10.5,4.2*Math.sqrt(.5/s.interval)*s.speed/580*p.homing);s.homing=0;s.split=0;}
@@ -77,20 +85,22 @@ export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'ti
   if(weapon.id==='feather-fan')s.knockback*=weapon.tier===4?1.25:weapon.tier===3?1.15:1;
   if(weapon.id==='heavy-crossbow')s.pierceFactor=Math.min(1,.85+p.pierceRetention+p.pierceDamage);
   if(weapon.id==='chain-hook')s.bounceFactor=1;
+  if(weapon.signature&&(run.growth||0)>0){const base=run.heroId==='liubei'?1.12:run.heroId==='guanyu'?1.1:1.2;s.damage*=base;s.interval*=run.heroId==='zhangfei'?.82:1;s.range=run.heroId==='liubei'?Math.min(220,s.range):run.heroId==='zhangfei'?Math.min(190,s.range):s.range;s.arc=run.heroId==='zhangfei'?65:s.arc;s.damage*=1+Math.max(0,(run.growth||0)-1)*.06;}
   return s;
 };
 /** Per-target sustained ceiling; crowd damage and skill bursts are separate budgets. */
-export function weaponDps(run:Run,weapon:Pick<EquippedWeapon,'id'|'tier'>):number {
+export function weaponDps(run:Run,weapon:Pick<EquippedWeapon,'id'|'tier'|'signature'>):number {
   const s=weaponStatsFor(run,weapon),hits=weapon.id==='shotgun'?4:weapon.id==='gourd'?(s.pulses||6):1;
-  const factor=extraHitFactor(weapon.id,weapon.tier);let shared=1;
+  const evolved=weapon.signature&&(run.growth||0)>0;
+  const factor=evolved?((run.growth||0)>=3?7/6:1):extraHitFactor(weapon.id,weapon.tier);let shared=1;
   if(weapon.id==='oil-jar')shared=Math.min(1,2/Math.max(1,run.weapons.filter(w=>w.id==='oil-jar').length));
   if(weapon.id==='wood-ox'){const total=run.weapons.filter(w=>w.id==='wood-ox').reduce((n,w)=>n+[1,2,2,3][w.tier-1],0);shared=Math.min(1,12/Math.max(1,total));}
   return s.damage/(weapon.id==='caltrops'?1:s.interval)*hits*factor*shared*(1+s.crit*(s.critMultiplier-1));
 }
 export function statsFor(run: Run): Stats {
   const h = heroFor(run), b = totalBonus(run), w = weaponStatsFor(run, run.weapons[0]);
-  return { maxHp: 5, damage: w.damage,
-    interval: w.interval, speed: h.speed * (1 + clamp(b.speed, -.25, .5)), armor: 0, crit: clamp(.05 + b.crit, 0, .8),
+  return { maxHp: heroMaxHearts(run), damage: w.damage,
+    interval: w.interval, speed: h.speed * (1 + ((run.growth||0)>=2?.3:0) + clamp(b.speed, -.25, .5)), armor: 0, crit: clamp(.05 + b.crit, 0, .8),
     range: w.range, regen: 0, pickup: clamp((240 + b.pickup) * (run.heroId === 'liubei' ? 1.15 : 1), 240, 360), xp: clamp(b.xp, 0, .75), stipend: b.stipend, area: w.area };
 }
 export const xpNeeded = (level: number): number => 10 + 5 * (level - 1);
@@ -159,10 +169,10 @@ export function buyItem(run: Run, id: string): boolean {
 export function combineWeapon(run: Run, uid: number): boolean {
   const w = run.weapons.find(v => v.uid === uid); if (!w) return false;
   const match = matchingWeapon(run, w.id, w.tier, uid); if (!match) return false;
-  w.invested = (w.invested || 0) + (match.invested || 0); w.tier = (w.tier + 1) as Tier; run.weapons = run.weapons.filter(v => v.uid !== match.uid); return true;
+  w.signature=!!(w.signature||match.signature);w.invested = (w.invested || 0) + (match.invested || 0); w.tier = (w.tier + 1) as Tier; run.weapons = run.weapons.filter(v => v.uid !== match.uid); return true;
 }
 export function recycleValue(run: Run, uid: number): number {
-  const w = run.weapons.find(v => v.uid === uid); return w ? Math.floor((w.invested || 15) * passiveBonuses(run.inventory).refund) : 0;
+  const w = run.weapons.find(v => v.uid === uid); return w ? Math.floor((w.invested ?? 15) * passiveBonuses(run.inventory).refund) : 0;
 }
 export function recycleWeapon(run: Run, uid: number): boolean {
   if (run.weapons.length <= 1 || !run.weapons.some(w => w.uid === uid)) return false;

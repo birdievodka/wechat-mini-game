@@ -1,3 +1,8 @@
+import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
+import {growthClears,signatureId} from './hero-growth';
+import {StagePickerView,StageBriefView,StarterSelectView,StageClearView,GrowthDetailView} from './StageViews';
+import {StageProfile,StageReward,highestStage,unlocked,visibleHero} from './stage-progress';
+import {STAGES,stageFor,bossDisplayName,STARTER_WEAPONS} from './stage-data';
 import {GAME_NAME} from './game-brand';
 import {SkillSelectView} from './SkillSelectView';
 import {DEFAULT_SKILL,availableSkill,commonSkillFor} from './common-skills';
@@ -24,7 +29,7 @@ interface HeroPortraitSlot {node:Node;selected:Node;}
 /** Screens own their input surfaces; combat never runs underneath an open screen. */
 export class CampaignView {
   readonly root: Node;
-  private content!: Node;
+  private content?: Node;
   private campMode = false;
   private heroMenu = false;
   private campBackground?: Sprite;
@@ -32,8 +37,8 @@ export class CampaignView {
   private selectionSkill=DEFAULT_SKILL;
   private width = 1334;
   private height = 750;
-  private resultView?:ResultView;private codexView?:CodexView;private heroShowcase?:HeroShowcase;
-  constructor(parent: Node, private frames: Record<string, SpriteFrame>, private icons: SpriteFrame[]) {
+  private resultView?:ResultView|StageClearView;private codexView?:CodexView;private heroShowcase?:HeroShowcase;
+  constructor(parent: Node, private frames: Record<string, SpriteFrame>, private icons: SpriteFrame[],private battleAtlas?:BattleSpriteAtlas) {
     this.root = this.node(parent, 'CampaignScreens'); this.root.active = false;
   }
   resize(width: number, height: number): void {
@@ -44,7 +49,14 @@ export class CampaignView {
     if (this.content) this.content.setScale(scale, scale, 1);
     if(this.campBackground){const frame=this.campBackground.spriteFrame;const aspect=this.heroMenu&&frame?frame.rect.width/frame.rect.height:16/9;this.campBackground.node.getComponent(UITransform)!.setContentSize(Math.max(width,height*aspect),Math.max(height,width/aspect));}
   }
-  hide(): void { this.root.active = false; }
+  hide(): void {
+    this.root.active = false;
+    // Hidden Graphics still own their GPU buffers. Screens are rebuilt on entry;
+    // retain selections in the Run/profile, never a whole inactive screen tree.
+    for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
+    this.content=undefined;this.resultView=undefined;this.codexView=undefined;this.heroShowcase=undefined;
+    this.campBackground=undefined;this.heroMenu=false;this.campMode=false;
+  }
   private begin(title: string, subtitle: string, poster = false): Node {
     this.resultView=undefined;this.heroShowcase=undefined;
     for (const child of [...this.root.children]) { child.removeFromParent(); child.destroy(); }
@@ -57,11 +69,13 @@ export class CampaignView {
     if (subtitle) this.text(this.content, subtitle, 0, 265, 20, '#e6d8bc', 1100, 36);
     return this.content;
   }
-  menu(selected: HeroId, start: (hero: HeroId,skill:string) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void): void {
+  menu(selected: HeroId, start: (hero: HeroId,skill:string,weapon?:WeaponId,stage?:number) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void,options?:{profile:StageProfile;stage:number;weapon:WeaponId;changed:()=>void}): void {
     this.resultView=undefined;this.heroShowcase=undefined;this.codexView=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.campMode=false;this.heroMenu=true;this.selection=selected;this.selectionSkill=availableSkill(skill);
-    let starting=false;
+    let starting=false;const heroes=options?HEROES.filter(h=>visibleHero(h.id)):HEROES;
+    let stage=options?.stage||1,weapon=options?.weapon||starterFor(selected);if(options&&!STARTER_WEAPONS.some(id=>id===weapon))weapon='sandal';
+    if(options&&!unlocked(options.profile,'skills').includes(this.selectionSkill))this.selectionSkill=DEFAULT_SKILL;
     this.campBackground=this.sprite(this.root,this.frames['hero-menu-background'],0,0,1,1);
     if(this.campBackground)this.campBackground.node.name='HeroMenuBackground';
     const shade=this.node(this.root,'MenuVignette').addComponent(Graphics);
@@ -72,49 +86,68 @@ export class CampaignView {
     const logo=this.sprite(p,logoFrame,-516,297,244,logoFrame?244*logoFrame.rect.height/logoFrame.rect.width:80);
     if(logo)logo.node.name='GameLogo';else this.bold(p,GAME_NAME,-516,297,34,'#fff0cb',245,70);
 
-    this.heroShowcase=new HeroShowcase(p,this.frames);this.heroShowcase.root.setPosition(0,15);this.heroShowcase.root.setScale(2.2,2.2,1);
+    this.heroShowcase=new HeroShowcase(p,this.frames);this.heroShowcase.root.setPosition(options?-265:0,15);this.heroShowcase.root.setScale(options?2.65:2.2,options?2.65:2.2,1);
     const nameplate=this.node(p,'HeroNameplate').addComponent(Graphics);
-    nameplate.fillColor=new Color(43,65,41,225);nameplate.roundRect(-69,-112,138,43,18);nameplate.fill();
-    const heroName=this.bold(p,'',0,-90,30,'#fff0d2',126,43);heroName.node.name='ShowcaseHeroName';heroName.fontFamily='serif';
+    nameplate.fillColor=new Color(43,65,41,225);nameplate.roundRect((options?-265:0)-69,-112,138,43,18);nameplate.fill();
+    const heroName=this.bold(p,'',options?-265:0,-90,30,'#fff0d2',126,43);heroName.node.name='ShowcaseHeroName';heroName.fontFamily='serif';
     const rail=this.node(p,'HeroPortraitRail').addComponent(Graphics);
     rail.fillColor=new Color(16,34,25,145);rail.strokeColor=new Color(229,204,143,65);rail.lineWidth=1;rail.roundRect(-346,-229,692,111,24);rail.fill();rail.stroke();
     const portraits:HeroPortraitSlot[]=[];
-    HEROES.forEach((hero,i)=>{
-      const n=this.node(p,hero.id);n.setPosition((i-2)*130,-175);n.addComponent(UITransform).setContentSize(100,100);
+    heroes.forEach((hero,i)=>{
+      const n=this.node(p,hero.id);n.setPosition((i-(heroes.length-1)/2)*130+(options?-130:0),-175);n.addComponent(UITransform).setContentSize(100,100);
       const bg=n.addComponent(Graphics);bg.fillColor=new Color('#374c3b');bg.strokeColor=new Color('#9b9e74');bg.lineWidth=1.5;bg.roundRect(-46,-46,92,92,18);bg.fill();bg.stroke();
       const f=this.frames['hero-'+hero.id+'-open'];
       const portrait=this.sprite(n,f,0,0,1,1);
       if(portrait){portrait.node.name='HeroPortrait';const r=f.rect,unit=80/Math.max(r.width,r.height);portrait.node.getComponent(UITransform)!.setContentSize(r.width*unit,r.height*unit);}
       const selectedNode=this.node(n,'HeroSelected'),mark=selectedNode.addComponent(Graphics);
-      mark.strokeColor=new Color('#ffdc8b');mark.lineWidth=4;mark.roundRect(-48,-48,96,96,19);mark.stroke();
+      mark.strokeColor=new Color(255,202,83,45);mark.lineWidth=12;mark.roundRect(-48,-48,96,96,19);mark.stroke();mark.strokeColor=new Color('#ffdc8b');mark.lineWidth=4;mark.roundRect(-48,-48,96,96,19);mark.stroke();
       mark.fillColor=new Color('#ffdc8b');mark.roundRect(-11,-48,22,4,2);mark.fill();
       portraits.push({node:n,selected:selectedNode});
       n.on(Node.EventType.TOUCH_START,()=>{if(!starting)n.setScale(.96,.96,1);});
       n.on(Node.EventType.TOUCH_CANCEL,()=>n.setScale(1,1,1));
       n.on(Node.EventType.TOUCH_END,()=>{n.setScale(1,1,1);if(!starting)select(hero.id);});
     });
+    let stageCard:Node|undefined,stageBrief:StageBriefView|undefined,weaponCard:Node|undefined;
+    const persist=()=>{if(options){options.profile.preferences[this.selection]={stage,weapon,skill:this.selectionSkill};options.changed();}};
+    const updateLoadout=()=>{
+      if(options)stageBrief?.setSelection(options.profile,this.selection,stage);
+      const growth=options?growthClears(options.profile,this.selection):0,shownWeapon=(growth?signatureId(this.selection,growth):weapon) as WeaponId;
+      if(weaponCard){for(const child of [...weaponCard.children]){child.removeFromParent();child.destroy();}const art=addWeaponIcon(weaponCard,this.frames,shownWeapon,1,66);art.setPosition(0,0);}
+      this.heroShowcase?.setHero(this.selection,options?shownWeapon:undefined,growth);
+    };
+    let onHeroChanged=()=>{};
     const select=(id:HeroId):void=>{
       this.selection=id;heroName.string=HEROES.find(h=>h.id===id)!.name;this.heroShowcase!.setHero(id);
-      portraits.forEach((slot,i)=>{const active=HEROES[i].id===id;slot.selected.active=active;slot.node.setPosition((i-2)*130,active?-171:-175);});
+      if(options){const pref=options.profile.preferences[id];stage=pref?.stage||highestStage(options.profile,id);stage=Math.min(stage,highestStage(options.profile,id));if(pref){weapon=STARTER_WEAPONS.some(w=>w===pref.weapon)?pref.weapon as WeaponId:starterFor(id);this.selectionSkill=unlocked(options.profile,'skills').includes(pref.skill)?pref.skill:DEFAULT_SKILL;}else weapon=starterFor(id);}
+      updateLoadout();onHeroChanged();
+      portraits.forEach((slot,i)=>{const active=heroes[i].id===id;slot.selected.active=active;slot.node.setPosition((i-(heroes.length-1)/2)*130+(options?-130:0),active?-171:-175);});
     };
     select(selected);
-    const skillCard=this.node(p,'HeroSkillSelect');skillCard.setPosition(406,-175);skillCard.addComponent(UITransform).setContentSize(84,84);
+    const skillCard=this.node(p,'HeroSkillSelect');skillCard.setPosition(options?290:406,-175);skillCard.addComponent(UITransform).setContentSize(84,84);
     const sg=skillCard.addComponent(Graphics);sg.fillColor=new Color(35,61,42,230);sg.strokeColor=new Color('#d4be81');sg.lineWidth=2;sg.circle(0,0,39);sg.fill();sg.stroke();
     const skillIcon=this.sprite(skillCard,this.frames['skill-'+commonSkillFor(this.selectionSkill).icon],0,0,62,62);
-    const updateSkill=()=>{if(skillIcon)skillIcon.spriteFrame=this.frames['skill-'+commonSkillFor(this.selectionSkill).icon];};
+    const updateSkill=()=>{persist();if(skillIcon)skillIcon.spriteFrame=this.frames['skill-'+commonSkillFor(this.selectionSkill).icon];};
+    onHeroChanged=updateSkill;
     skillCard.on(Node.EventType.TOUCH_START,()=>{if(!starting)skillCard.setScale(.94,.94,1);});skillCard.on(Node.EventType.TOUCH_CANCEL,()=>skillCard.setScale(1,1,1));
-    let choosing=false;skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choosing=true;new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choosing=false;updateSkill();},()=>choosing=false);});
+    let choosing=false;skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choosing=true;new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choosing=false;updateSkill();},()=>choosing=false,options?.profile);});
     const button=this.node(p,'StartHero');button.setPosition(0,-289);button.addComponent(UITransform).setContentSize(330,88);
     const plate=this.sprite(button,this.frames['hero-menu-start'],0,0,360,180);
     if(!plate){const g=button.addComponent(Graphics);g.fillColor=new Color('#683723');g.roundRect(-165,-48,330,88,24);g.fill();g.fillColor=new Color('#cb4e2b');g.strokeColor=new Color('#f69b68');g.lineWidth=3;g.roundRect(-165,-41,330,82,24);g.fill();g.stroke();}
-    const text=this.bold(button,'开始',0,0,44,'#fff0cc',290,65);text.fontFamily='serif';
+    const text=this.bold(button,options?'开始挑战':'开始',0,0,44,'#fff0cc',290,65);text.fontFamily='serif';
     button.on(Node.EventType.TOUCH_START,()=>{if(!starting)button.setScale(.97,.97,1);});button.on(Node.EventType.TOUCH_CANCEL,()=>button.setScale(1,1,1));
-    button.on(Node.EventType.TOUCH_END,()=>{if(starting)return;starting=true;start(this.selection,this.selectionSkill);});
+    button.on(Node.EventType.TOUCH_END,()=>{if(starting)return;starting=true;persist();start(this.selection,this.selectionSkill,weapon,stage);});
+    if(options){
+      stageBrief=new StageBriefView(p,this.frames);stageCard=stageBrief.root;stageCard.setPosition(290,85);
+      stageCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;new StagePickerView(p,this.frames,options.profile,this.selection,stage,n=>{stage=n;choosing=false;persist();updateLoadout();},()=>choosing=false);});
+      weaponCard=this.node(p,'HeroWeaponSelect');weaponCard.setPosition(180,-175);weaponCard.addComponent(UITransform).setContentSize(84,84);const g=weaponCard.addComponent(Graphics);g.fillColor=new Color('#294632');g.strokeColor=new Color('#d4be81');g.lineWidth=2;g.roundRect(-39,-39,78,78,16);g.fill();g.stroke();
+      weaponCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;if(growthClears(options.profile,this.selection)>0){new GrowthDetailView(p,this.frames,this.selection,growthClears(options.profile,this.selection),()=>choosing=false);return;}new StarterSelectView(p,this.frames,weapon,id=>{weapon=id;choosing=false;persist();updateLoadout();},()=>choosing=false);});
+      updateLoadout();updateSkill();
+    }
     if(codex)this.action(p,'图鉴',-516,-289,164,()=>codex());
     if(training)this.action(p,'演武场',516,-289,164,()=>{if(starting||choosing)return;starting=true;training(this.selection,this.selectionSkill);});
   }
 
-  codex(close:()=>void):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close);this.codexView.resize(this.width,this.height);}
+  codex(close:()=>void,profile?:StageProfile):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close,profile);this.codexView.resize(this.width,this.height);}
   private action(parent:Node,label:string,x:number,y:number,width:number,action:()=>void):void{const n=this.node(parent,label);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(width,66);const g=n.addComponent(Graphics);g.fillColor=new Color(C.green);g.strokeColor=new Color('#ffda83');g.lineWidth=2;g.roundRect(-width/2,-33,width,66,17);g.fill();g.stroke();this.bold(n,label,0,0,27,C.paper,width-16,60);n.on(Node.EventType.TOUCH_END,action);}
 
   private previewHands(parent: Node, id: HeroId, weapon: EquippedWeapon, y: number, scale: number): void {
@@ -232,33 +265,33 @@ export class CampaignView {
     const scrim=this.node(this.root,'SupplyScrim');scrim.addComponent(UITransform).setContentSize(6000,4000);const shade=scrim.addComponent(Graphics);shade.fillColor=new Color(12,26,19,95);shade.rect(-3000,-2000,6000,4000);shade.fill();
     scrim.on(Node.EventType.TOUCH_END,()=>{});
     this.content=this.node(this.root,'SupplyContent');this.resize(this.width,this.height);const p=this.content;
-    const major=run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
+    const major=!run.challenge&&run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
     this.jadePanel(p,1140,650);
-    const title=bossPrep?chapterFor(run.chapter).boss+' · 战前补给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天命强化':'桃园补给';
+    const title=run.challenge?'桃园补给':bossPrep?chapterFor(run.chapter).boss+' · 战前补给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天命强化':'桃园补给';
     this.bold(p,title,-315,278,34,'#ffedba',460,50);
     this.text(p,'可购买多件',-437,238,18,'#c5d1b5',210,30);
     this.sprite(p,this.frames['ui-coin'],414,274,34,34);
     const balance=this.bold(p,String(run.gold),482,274,32,'#ffe1a0',90,46);balance.node.name='SupplyBalance';
     if(major)this.campButton(p,'SupplyNormal','普通补给 ›',40,271,180,normal,'secondary');
     run.offers.forEach((id,i)=>{
-      const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-1)*360,27);n.addComponent(UITransform).setContentSize(336,360);
+      const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-(run.offers.length-1)/2)*(run.challenge?270:360),27);n.addComponent(UITransform).setContentSize(run.challenge?254:336,360);
       const g=n.addComponent(Graphics),color=card.major?'#e8bb65':card.weapon?TIER_COLORS[card.weapon.tier-1]:'#b8afdc';
-      g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=card.weapon?2+card.weapon.tier*.65:2;g.roundRect(-168,-180,336,360,19);g.fill();g.stroke();
-      if(card.weapon){const wash=new Color(color);wash.a=card.weapon.tier===1?10:22;g.fillColor=wash;g.roundRect(-162,-174,324,348,15);g.fill();this.tierBand(n,card.weapon.tier,0,149,310,card.from);}
-      else this.text(n,card.tag,0,149,17,'#e8dca4',300,32);
+      g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=card.weapon?2+card.weapon.tier*.65:2;g.roundRect(run.challenge?-127:-168,-180,run.challenge?254:336,360,19);g.fill();g.stroke();
+      if(card.weapon){const wash=new Color(color);wash.a=card.weapon.tier===1?10:22;g.fillColor=wash;g.roundRect(run.challenge?-121:-162,-174,run.challenge?242:324,348,15);g.fill();this.tierBand(n,card.weapon.tier,0,149,run.challenge?232:310,card.from);}
+      else this.text(n,card.tag,0,149,17,'#e8dca4',run.challenge?232:300,32);
       if(card.weapon)this.weaponIcon(n,card.weapon.id,card.weapon.tier,0,67,1.25);
       else this.itemIcon(n,id,0,67,.95);
-      this.bold(n,card.title,0,3,26,'#fff0c8',302,40);
-      this.text(n,card.desc,0,-59,18,'#e4eacb',300,80);
+      this.bold(n,card.title,0,3,run.challenge?23:26,'#fff0c8',run.challenge?236:302,40);
+      const desc=this.text(n,card.desc.split('\n').slice(0,3).join('\n'),0,-59,18,'#e4eacb',run.challenge?234:300,80);if(run.challenge)desc.node.on(Node.EventType.TOUCH_END,()=>{const details=this.dialog(card.title,850,420);this.text(details,card.desc,0,35,24,'#fff0d2',770,220);this.campButton(details,'SupplyDetailsClose','返回',0,-152,260,()=>{const overlay=details.parent!;overlay.removeFromParent();overlay.destroy();},'secondary');});
       const enabled=canBuySupply(run,id),sold=run.purchasedOffers.indexOf(id)>=0,full=card.weapon&&parseWeaponOffer(id)&&run.weapons.length===6;
       const title=sold?'已购入':!enabled?(run.gold<card.price?'铜钱不足':'暂不可购'):`${card.price} ${full?'替换':'购买'}`;
-      this.campButton(n,'SupplyBuy-'+i,title,0,-137,296,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
+      this.campButton(n,'SupplyBuy-'+i,title,0,-137,run.challenge?230:296,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
     });
     const rail=this.node(p,'SupplyEquipment');rail.setPosition(0,-207);this.jadePanel(rail,1080,78,false);
     this.bold(rail,`武器 ${run.weapons.length}/6`,-445,0,21,'#e9d9a4',160,40);
     for(let i=0;i<6;i++){
       const w=run.weapons[i],n=this.node(rail,'SupplyWeapon-'+i);n.setPosition(-282+i*90,0);n.addComponent(UITransform).setContentSize(76,60);
-      const g=n.addComponent(Graphics);g.fillColor=new Color(26,47,35,230);g.strokeColor=new Color(w?TIER_COLORS[w.tier-1]:'#6b8065');g.lineWidth=1.5;g.roundRect(-38,-30,76,60,10);g.fill();g.stroke();
+      if(!this.battleAtlas?.addSliced(n,'ui-slot-'+(w?.tier||0),76,60,6)){const g=n.addComponent(Graphics);g.fillColor=new Color(26,47,35,230);g.strokeColor=new Color(w?TIER_COLORS[w.tier-1]:'#6b8065');g.lineWidth=1.5;g.roundRect(-38,-30,76,60,10);g.fill();g.stroke();}
       if(w){this.weaponIcon(n,w.id,w.tier,0,-7,.66);this.bold(n,['I','II','III','IV'][w.tier-1],27,-18,14,'#f0dfb3',25,20);n.on(Node.EventType.TOUCH_END,()=>this.weaponDialog(run,w,manage));}
       else this.text(n,'+',0,0,25,'#839879',60,40);
     }
@@ -328,6 +361,10 @@ export class CampaignView {
     this.campButton(p,'CancelReplacement','取消',-323,-253,350,close,'secondary');updateConfirm();
   }
 
+  stageResult(run:Run,kills:number,reward:StageReward,next:()=>void,menu:()=>void,saved:boolean):void {
+    for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}this.root.active=true;this.heroMenu=false;this.campMode=false;this.campBackground=undefined;this.codexView=undefined;
+    this.resultView=new StageClearView(this.root,this.frames,run,kills,reward,next,menu,saved,this.battleAtlas);this.resultView.resize(this.width,this.height);
+  }
   survivalResult(run: Run, kills: number, best: number, record: boolean, retry: () => void, menu: () => void, testing: boolean, warmupElapsed=0,won=false): void {
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.heroMenu=false;this.campMode=false;this.campBackground=undefined;
@@ -418,15 +455,16 @@ export class CampaignView {
   }
 
   private dialog(title: string, width: number, height: number): Node {
-    const old = this.content.children.find(n => n.name === 'CampDialog'); if (old) { old.removeFromParent(); old.destroy(); }
-    const overlay = this.node(this.content, 'CampDialog'); overlay.addComponent(UITransform).setContentSize(3000, 2000);
+    const content=this.content!; // Dialog actions belong to the currently visible screen.
+    const old = content.children.find(n => n.name === 'CampDialog'); if (old) { old.removeFromParent(); old.destroy(); }
+    const overlay = this.node(content, 'CampDialog'); overlay.addComponent(UITransform).setContentSize(3000, 2000);
     const shade = overlay.addComponent(Graphics); shade.fillColor = new Color(35, 45, 34, 170); shade.rect(-1500, -1000, 3000, 2000); shade.fill();
     const close = (): void => { overlay.removeFromParent(); overlay.destroy(); };
     overlay.on(Node.EventType.TOUCH_END, (event?: { target: Node }) => { if (!event || event.target === overlay) close(); });
-    const box = this.node(overlay, 'DialogPaper'); box.addComponent(UITransform).setContentSize(width, height); if(this.content.name==='SupplyContent')this.jadePanel(box,width,height);else this.paper(box, width, height);
+    const box = this.node(overlay, 'DialogPaper'); box.addComponent(UITransform).setContentSize(width, height); if(content.name==='SupplyContent')this.jadePanel(box,width,height);else this.paper(box, width, height);
     box.on(Node.EventType.TOUCH_END, (event?: { propagationStopped: boolean }) => { if (event) event.propagationStopped = true; });
-    this.bold(box, title, 0, height / 2 - 50, 32, this.content.name==='SupplyContent'?'#ffedba':C.green, width - 150, 50);
-    if(this.content.name==='SupplyContent'){
+    this.bold(box, title, 0, height / 2 - 50, 32, content.name==='SupplyContent'?'#ffedba':C.green, width - 150, 50);
+    if(content.name==='SupplyContent'){
       const button=this.node(box,'CloseDialog');button.setPosition(width/2-44,height/2-44);button.addComponent(UITransform).setContentSize(64,64);
       const g=button.addComponent(Graphics);g.fillColor=new Color('#355e40');g.strokeColor=new Color('#c7ba82');g.lineWidth=1.5;g.circle(0,0,21);g.fill();g.stroke();
       this.bold(button,'×',0,1,27,'#f4e7c0',42,42);button.on(Node.EventType.TOUCH_END,(event?:{propagationStopped:boolean})=>{if(event)event.propagationStopped=true;close();});
@@ -447,6 +485,7 @@ export class CampaignView {
     if (sprite) sprite.type = Sprite.Type.SLICED;
   }
   private pill(parent: Node, width: number, height: number, color: string): void {
+    if(height>=48&&this.battleAtlas?.addSliced(parent,'ui-pill-'+color,width,height,12))return;
     const g = this.node(parent, 'Pill').addComponent(Graphics);
     g.fillColor = new Color('#392a20'); g.roundRect(-width / 2, -height / 2 - 3, width, height, Math.min(18, height / 2)); g.fill();
     g.fillColor = new Color(color); g.strokeColor = new Color(C.ink); g.lineWidth = 2;

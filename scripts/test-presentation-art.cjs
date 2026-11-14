@@ -40,6 +40,7 @@ for(const hero of Object.keys(HERO_PART_RECTS)){
 const packed=JSON.parse(fs.readFileSync('art/runtime-v4/manifest.json'));let cells=0,decodedBytes=0;
 assert.equal(Object.keys(packed.atlases).length,8);
 for(const [name,atlas]of Object.entries(packed.atlases)){
+ if(name.startsWith('troops-'))continue;
  const data=readAlpha(atlas.file);decodedBytes+=data.w*data.h*4;
  assert.equal(data.w,atlas.columns*atlas.cell);assert.equal(data.h,atlas.rows*atlas.cell);
  assert.equal(atlas.cells.length,atlas.columns*atlas.rows);
@@ -48,5 +49,5 @@ for(const [name,atlas]of Object.entries(packed.atlases)){
  }
  const bundle=atlas.file.split('/')[1];assert.equal(JSON.parse(fs.readFileSync('assets/'+bundle+'.meta')).userData.bundleName,bundle);
 }
-assert.equal(cells,139);assert.ok(decodedBytes<16*1024*1024,'新增图集RGBA解码预算16MiB');
-console.log('通过：36武器/五英雄真实透明与眨眼对齐、八张共享图集139格完整轮廓/安全边/独立分包/解码预算');
+assert.equal(cells,59);assert.ok(decodedBytes<16*1024*1024,'新增图集RGBA解码预算16MiB');
+console.log('通过：36武器/五英雄真实透明与眨眼对齐、旧非兵种图集59格完整轮廓/安全边/独立分包/解码预算（模块兵种另有专项）');

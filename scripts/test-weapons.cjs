@@ -104,5 +104,5 @@ for(const hero of r.HEROES)for(let i=0;i<200;i++){
  assert.ok(weapons.reduce((sum,id)=>sum+run.offerPrices[id],0)>run.gold,'budget cannot buy both weapon offers');
  assert.ok(survival.buySupply(run,newWeapon));assert.equal(run.weapons.length,2);assert.ok(!weapons.some(id=>survival.canBuySupply(run,id)),'one weapon purchase leaves insufficient funds for the other');
 }
-assert.equal(r.WAVE_SECONDS,15);assert.deepEqual(Array.from(r.HEROES,h=>h.speed),[300,295,290,325,285]);
-console.log('通过：15秒第零章、三英雄600次开局预算28/新武器可购买/不能连买两武器、基础移速300/295/290');
+assert.equal(r.WAVE_SECONDS,15);assert.deepEqual(Array.from(r.HEROES,h=>h.speed),[300,345,270,325,285]);
+console.log('通过：15秒第零章、三英雄600次开局预算28/新武器可购买/不能连买两武器、基础移速300/345/270');

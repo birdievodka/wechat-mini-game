@@ -1,4 +1,4 @@
-export const CAMPAIGN_ART = ['poster','liubei','guanyu','zhangfei','guanyu_body','zhangfei_body','items','camp-background','camp-paper','camp-stats','camp-titles'];
+export const CAMPAIGN_ART = ['poster','items','camp-background','camp-paper','camp-stats','camp-titles'];
 export const ENEMY_ART = [['spearman','archer-actions'],['cavalry','cavalry-actions'],['chief','zhangjiao-actions']] as const;
 export const STARTUP_TASKS=['chronicles','battle','soldier:sickle','soldier:hoe','liubei-body','campaign',...CAMPAIGN_ART.map(id=>'campaign:'+id),'enemies',...ENEMY_ART.map(([id])=>'enemy:'+id),'results','results:portraits','presentation','presentation:icons','presentation:weapon-revision','presentation:butcher-knife','presentation:heroes','hero-menu','menu:background','menu:atlas','menu:logo'];
 export interface StartupBridge { progress:number; image?:HTMLImageElement; ended?:boolean; }

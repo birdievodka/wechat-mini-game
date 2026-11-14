@@ -1,0 +1,23 @@
+{
+  "version": "stage-v8.5-grunt-attack",
+  "checks": {
+    "typecheck": "passed",
+    "npmTest": "passed",
+    "projectCheck": "passed",
+    "diffCheck": "passed",
+    "webBuild": "passed",
+    "wechatBuild": "passed"
+  },
+  "wechat": {
+    "resourceMiB": 19.17,
+    "previewAccepted": true,
+    "previewSourceBytes": 20066100
+  },
+  "webgl": {
+    "keyframes": 12,
+    "motionFrames": 72,
+    "errors": 0,
+    "scope": "isolated real Cocos engineering frames; GIF is 2x crop assembled at 24 fps, not phone recording or gameplay score"
+  },
+  "phone": "not tested on physical device"
+}

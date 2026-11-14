@@ -20,7 +20,7 @@ const area=(kind:HazardKind)=>['lightning','chain','seal','wine','stone','meteor
 const beast=(kind:BossUnitKind)=>['boar','wolf','elephant'].indexOf(kind)>=0;
 const clamp=(n:number,a:number,b:number)=>Math.max(a,Math.min(b,n));
 export const createBossState=():ReforgedState=>({phase:'idle',time:0,index:0,gait:0,blend:0,moveSpeed:0,facing:1,back:false,originX:0,originY:0,sideX:0,sideY:0,serial:0});
-export function bossFrame(s:ReforgedState,id?:string):number {const base=s.back?8:0,wide=id==='dongzhuo'?s.index===2:s.index===1;return base+(s.phase==='idle'?(s.blend>.05?1+Math.floor(s.gait*4)%4:0):s.phase==='windup'?5:wide?7:6);}
+export function bossFrame(s:ReforgedState,id?:string):number {const base=s.back?8:0,wide=id==='dongzhuo'?s.index===2:s.index===1;return base+(s.phase==='idle'?(s.blend>.05?1+Math.floor(s.gait*4)%4:0):s.phase==='windup'?5:s.phase==='recover'?(s.time<.18?(wide?7:6):s.time<.45?5:0):wide?7:6);}
 
 /** Simulation and real collisions only. All rendering is a read-only consumer. */
 export class BossBattle {

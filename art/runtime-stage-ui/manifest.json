@@ -1,0 +1,27 @@
+{
+  "generator": "built-in image_gen",
+  "promptSet": "art/runtime-stage-ui/prompts.json",
+  "reference": "art/concepts/stage-challenge-v8/stage-picker.png",
+  "runtimeSize": [
+    480,
+    300
+  ],
+  "nineSliceInsets": [
+    64,
+    64,
+    48,
+    48
+  ],
+  "artifacts": [
+    {
+      "file": "art/runtime-stage-ui/jade-panel-source.png",
+      "bytes": 1593490,
+      "sha256": "585cb0c5dffa3f31535e3b582b59bde43eb29e4cf2a940b7924b247740bb4c91"
+    },
+    {
+      "file": "assets/chronicle-ui/stage-jade.png",
+      "bytes": 89114,
+      "sha256": "2c9c3a14ead92f167b6e74cd7c3f00d0486197ad6007757e5413819503235caa"
+    }
+  ]
+}

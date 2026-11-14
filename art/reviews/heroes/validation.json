@@ -1,0 +1,307 @@
+{
+  "version": "chronicles-v7.1-youth-heroes",
+  "scope": "isolated Cocos WebGL engineering frames, not iOS gameplay or continuous recording",
+  "records": [
+    {
+      "id": "liubei",
+      "screen": "menu",
+      "selected": "liubei",
+      "head": "open"
+    },
+    {
+      "id": "liubei",
+      "screen": "battle",
+      "multi": false,
+      "back": false,
+      "blink": false,
+      "closed": false,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "sandal"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "liubei",
+      "screen": "battle",
+      "multi": true,
+      "back": true,
+      "blink": true,
+      "closed": true,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "sandal",
+        "sword",
+        "thunder",
+        "peach",
+        "smg",
+        "gourd"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "liubei",
+      "screen": "defeat",
+      "frame": "result-liubei"
+    },
+    {
+      "id": "liubei",
+      "screen": "victory",
+      "frame": "hero-select-liubei"
+    },
+    {
+      "id": "guanyu",
+      "screen": "menu",
+      "selected": "guanyu",
+      "head": "open"
+    },
+    {
+      "id": "guanyu",
+      "screen": "battle",
+      "multi": false,
+      "back": false,
+      "blink": false,
+      "closed": false,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "pole"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "guanyu",
+      "screen": "battle",
+      "multi": true,
+      "back": true,
+      "blink": true,
+      "closed": true,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "pole",
+        "sword",
+        "thunder",
+        "peach",
+        "smg",
+        "gourd"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "guanyu",
+      "screen": "defeat",
+      "frame": "result-guanyu"
+    },
+    {
+      "id": "guanyu",
+      "screen": "victory",
+      "frame": "hero-select-guanyu"
+    },
+    {
+      "id": "zhangfei",
+      "screen": "menu",
+      "selected": "zhangfei",
+      "head": "open"
+    },
+    {
+      "id": "zhangfei",
+      "screen": "battle",
+      "multi": false,
+      "back": false,
+      "blink": false,
+      "closed": false,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "cleaver"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "zhangfei",
+      "screen": "battle",
+      "multi": true,
+      "back": true,
+      "blink": true,
+      "closed": true,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "cleaver",
+        "sword",
+        "thunder",
+        "peach",
+        "smg",
+        "gourd"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "zhangfei",
+      "screen": "defeat",
+      "frame": "result-zhangfei"
+    },
+    {
+      "id": "zhangfei",
+      "screen": "victory",
+      "frame": "hero-select-zhangfei"
+    },
+    {
+      "id": "zhaoyun",
+      "screen": "menu",
+      "selected": "zhaoyun",
+      "head": "open"
+    },
+    {
+      "id": "zhaoyun",
+      "screen": "battle",
+      "multi": false,
+      "back": false,
+      "blink": false,
+      "closed": false,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "silver-spear"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "zhaoyun",
+      "screen": "battle",
+      "multi": true,
+      "back": true,
+      "blink": true,
+      "closed": true,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "silver-spear",
+        "sword",
+        "thunder",
+        "peach",
+        "smg",
+        "gourd"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "zhaoyun",
+      "screen": "defeat",
+      "frame": "result-zhaoyun"
+    },
+    {
+      "id": "zhaoyun",
+      "screen": "victory",
+      "frame": "hero-select-zhaoyun"
+    },
+    {
+      "id": "kongming",
+      "screen": "menu",
+      "selected": "kongming",
+      "head": "open"
+    },
+    {
+      "id": "kongming",
+      "screen": "battle",
+      "multi": false,
+      "back": false,
+      "blink": false,
+      "closed": false,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "feather-fan"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "kongming",
+      "screen": "battle",
+      "multi": true,
+      "back": true,
+      "blink": true,
+      "closed": true,
+      "heroPosition": [
+        0,
+        0
+      ],
+      "weapons": [
+        "feather-fan",
+        "sword",
+        "thunder",
+        "peach",
+        "smg",
+        "gourd"
+      ],
+      "headSize": [
+        100,
+        100
+      ]
+    },
+    {
+      "id": "kongming",
+      "screen": "defeat",
+      "frame": "result-kongming"
+    },
+    {
+      "id": "kongming",
+      "screen": "victory",
+      "frame": "hero-select-kongming"
+    }
+  ],
+  "errors": [],
+  "restored": {
+    "restored": true,
+    "phase": "menu",
+    "saveUnchanged": true
+  }
+}

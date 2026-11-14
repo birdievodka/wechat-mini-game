@@ -24,16 +24,16 @@ export class RuntimeHealth {
   frame(seconds:number):void {
     if(!Number.isFinite(seconds)||seconds<0)return;
     this.frames++;if(seconds>1/30)this.slowFrames++;this.maxFrameMs=Math.max(this.maxFrameMs,seconds*1000);
-    this.seconds+=seconds;if(this.seconds>=15){this.seconds%=15;this.save();}
+    this.seconds+=seconds;if(this.seconds>=5){this.seconds%=5;this.save();}
   }
   record(type:string,event?:unknown):void {
     let detail='';
     try{
-      const value=event as {message?:unknown;errMsg?:unknown;reason?:unknown;level?:unknown}|undefined;
-      const reason=value?.reason as {message?:unknown}|undefined;
-      const message=typeof event==='string'?event:value?.message??value?.errMsg??reason?.message??value?.reason;
+      const value=event as {message?:unknown;stack?:unknown;errMsg?:unknown;reason?:unknown;level?:unknown}|undefined;
+      const reason=value?.reason as {message?:unknown;stack?:unknown}|undefined;
+      const message=typeof event==='string'?event:value?.stack??value?.message??value?.errMsg??reason?.stack??reason?.message??value?.reason;
       // Never serialize a whole Promise/native error graph under memory pressure.
-      detail=(typeof message==='string'?message:typeof value?.level==='number'?'level='+value.level:'').slice(0,320);
+      detail=(typeof message==='string'?message:typeof value?.level==='number'?'level='+value.level:'').slice(0,1000);
     }catch(_){detail='unreadable';}
     this.events.push({type,at:Date.now(),detail});if(this.events.length>8)this.events.shift();this.save();
   }

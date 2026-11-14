@@ -1,0 +1,1094 @@
+{
+  "version": "stage-v9.2.1-training-hit",
+  "scope": "isolated real Cocos actual training AI attack/recovery; not phone footage or FPS",
+  "hit": true,
+  "recovered": true,
+  "trace": [
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": 0
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.1833333333333333,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -188.3080732079358
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.1500000000000001,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -126.22667630162601
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.116666666666667,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -84.61227146943166
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0833333333333337,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -56.71730170656943
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0500000000000005,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -38.01874429096486
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0166666666666673,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -25.484726423336763
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9833333333333341,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -17.082922989296765
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9500000000000008,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -11.451025724608686
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9166666666666676,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -7.675852090874983
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.8833333333333344,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -5.1452775269180755
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.8500000000000012,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -3.4489826687098635
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.816666666666668,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -2.3119222212657173
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7833333333333348,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -1.5497278097896527
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7500000000000016,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -1.0388136168009103
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7166666666666683,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.696337591436435
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6833333333333351,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.46676904634801714
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6500000000000019,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.3128846486360143
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6166666666666687,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.20973285207753786
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.5833333333333355,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.14058813505980106
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.5500000000000023,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.09423904516535049
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.516666666666669,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.06317032109359241
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.4833333333333357,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.04234433254354298
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.4500000000000023,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.02838425493993614
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.41666666666666885,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.019026535078025313
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.3833333333333354,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.012753867869400628
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.350000000000002,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.008549173297349088
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.31666666666666854,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0057306822382456974
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.2833333333333351,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.003841391181756475
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.25000000000000167,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.002574961513795899
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.21666666666666834,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0017260483204676659
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.183333333333335,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0011570047896356233
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.1500000000000017,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.000775563503852006
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.11666666666666836,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.0005198757636056383
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.08333333333333504,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0003484831457929446
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.05000000000000171,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.00023359523833057095
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.016666666666668384,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.0001565835709114544
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.00010496110646179088
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.00007035753371541929
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.000047162065239073895
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.1833333333333333,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -188.3080732079358
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.1500000000000001,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -126.22667630162601
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.116666666666667,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -84.61227146943166
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0833333333333337,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -56.71730170656943
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0500000000000005,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -38.01874429096486
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0166666666666673,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -25.484726423336763
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9833333333333341,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -17.082922989296765
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9500000000000008,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -11.451025724608686
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9166666666666676,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -7.675852090874983
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.8833333333333344,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -5.1452775269180755
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.8500000000000012,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -3.4489826687098635
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.816666666666668,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -2.3119222212657173
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7833333333333348,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -1.5497278097896527
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7500000000000016,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -1.0388136168009103
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7166666666666683,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.696337591436435
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6833333333333351,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.46676904634801714
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6500000000000019,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.3128846486360143
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6166666666666687,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.20973285207753786
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.5833333333333355,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.14058813505980106
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.5500000000000023,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.09423904516535049
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.516666666666669,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.06317032109359241
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.4833333333333357,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.04234433254354298
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.4500000000000023,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.02838425493993614
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.41666666666666885,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.019026535078025313
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.3833333333333354,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.012753867869400628
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.350000000000002,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.008549173297349088
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.31666666666666854,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0057306822382456974
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.2833333333333351,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.003841391181756475
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.25000000000000167,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.002574961513795899
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.21666666666666834,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0017260483204676659
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.183333333333335,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0011570047896356233
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.1500000000000017,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.000775563503852006
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.11666666666666836,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.0005198757636056383
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.08333333333333504,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0003484831457929446
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.05000000000000171,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.00023359523833057095
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.016666666666668384,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.0001565835709114544
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.00010496110646179088
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.00007035753371541929
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.000047162065239073895
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.1833333333333333,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -188.3080732079358
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.1500000000000001,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -126.22667630162601
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.116666666666667,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -84.61227146943166
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0833333333333337,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -56.71730170656943
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0500000000000005,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -38.01874429096486
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 1.0166666666666673,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -25.484726423336763
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9833333333333341,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -17.082922989296765
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9500000000000008,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -11.451025724608686
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.9166666666666676,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -7.675852090874983
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.8833333333333344,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -5.1452775269180755
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.8500000000000012,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -3.4489826687098635
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.816666666666668,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -2.3119222212657173
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7833333333333348,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -1.5497278097896527
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7500000000000016,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -1.0388136168009103
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.7166666666666683,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.696337591436435
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6833333333333351,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.46676904634801714
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6500000000000019,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.3128846486360143
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.6166666666666687,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.20973285207753786
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.5833333333333355,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.14058813505980106
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.5500000000000023,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.09423904516535049
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.516666666666669,
+      "tint": "#ffffff",
+      "text": "-1",
+      "vx": -0.06317032109359241
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.4833333333333357,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.04234433254354298
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.4500000000000023,
+      "tint": "#ff8479",
+      "text": "-1",
+      "vx": -0.02838425493993614
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.41666666666666885,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.019026535078025313
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.3833333333333354,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.012753867869400628
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.350000000000002,
+      "tint": "#ff8479",
+      "text": "",
+      "vx": -0.008549173297349088
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.31666666666666854,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.0057306822382456974
+    },
+    {
+      "phase": "battle",
+      "training": true,
+      "hp": 5,
+      "hurt": 0.2833333333333351,
+      "tint": "#ffffff",
+      "text": "",
+      "vx": -0.003841391181756475
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profile": true,
+    "storage": true
+  },
+  "errors": []
+}

@@ -5,7 +5,8 @@ import {EquippedWeapon,Tier,WEAPONS,TIER_COLORS,TIER_NAMES,weaponFor,calculateWe
 import {addWeaponIcon} from './presentation-art';
 
 export interface TrainingHost {
-  snapshot():{weapons:EquippedWeapon[];skillId:string;alive:number};
+  snapshot():{weapons:EquippedWeapon[];skillId:string;alive:number;growth?:number};
+  growth?():string;
   spawn(id:string,count:number,boss:boolean):string;
   equip(id:string,tier:Tier,slot:number):string;
   remove(slot:number):string;
@@ -25,7 +26,7 @@ export class TrainingView {
   }
   resize(w:number,h:number):void {const s=Math.min(1,(w-80)/1140,(h-70)/650);this.root.setScale(s,s,1);}
   show():void {this.root.active=true;this.render();}
-  hide():void {this.root.active=false;}
+  hide():void {this.root.active=false;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}}
   private node(p:Node,name:string):Node {const n=new Node(name);n.layer=Layers.Enum.UI_2D;p.addChild(n);return n;}
   private text(p:Node,t:string,x:number,y:number,size=20,w=300,h=36,color='#fff0d2'):Label {
     const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;
@@ -54,6 +55,7 @@ export class TrainingView {
     const p=this.box(this.root,'TrainingSurface',0,0,1140,650),state=this.host.snapshot();
     p.on(Node.EventType.TOUCH_END,(e?:{propagationStopped:boolean})=>{if(e)e.propagationStopped=true;});
     this.text(p,'演武场',-418,278,36,240,52);this.text(p,`生命 ∞  ·  在场 ${state.alive}/80`,-25,286,21,440,32,'#dcd3a8');
+    if(this.host.growth)this.button(p,'TrainingGrowth','成长 '+(state.growth||0)+'/6',288,278,150,()=>this.act(()=>this.host.growth!()));
     this.button(p,'TrainingExit','返回首页',465,278,150,()=>this.host.exit());
     ['小兵','Boss','武器','主动技能'].forEach((t,i)=>this.button(p,'TrainingTab-'+i,t,-438+i*153,214,140,()=>{this.tab=i;this.message='';this.render();},true,this.tab===i,44));
     const entries=this.entries(),pages=Math.ceil(entries.length/12),page=this.pages[this.tab];

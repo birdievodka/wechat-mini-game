@@ -332,10 +332,10 @@ const ROWS = [
   },
   {
     "id": "F08",
-    "name": "回气丹",
-    "desc": "技能击杀充能效率+12%",
+    "name": "凝神丹",
+    "desc": "主动技能伤害+12%",
     "price": 1.3,
-    "stack": "U：有效冷却最低原始55%，之后转技能伤害"
+    "stack": "A：技能伤害重复收益递减，充能恒定15击杀"
   }
 ];
 // Keep the original atlas's 48 entries in order; new icons are drawn by the view.
@@ -378,7 +378,7 @@ export function passivePreview(inv: Record<string, number>, id: string): string 
   const item = PASSIVE_ITEMS.find(i => i.id === id); if (!item) return '';
   const n=count(inv,id),clean=item.desc.replace(/；/g,'\n').replace(/，/g,' · ');
   if(!n)return clean+'\n自动生效 · 不占武器位';
-  const primary=[['damage','haste','crit','critDamage','power','elite','execute','close'],['speed','invincible','resist','hitbox','hurtSpeed','hurtDuration','heartPickup','animalDamage'],['income','pickup','stipend','discount','refresh','refund','heartLife','healDiscount'],['shotSpeed','rangedRange','pierce','bounce','split','pierceFactor','spread','homing','rangedDamage','rangedHaste','rangedCrit','rangedCritDamage','rangedPower','pierceRetention','ricochetRetention','rangedKnockback','rocketDamage','shotgunDamage','smgPierce','sandalBoost'],['meleeRange','arc','knockback','area','splash','peachFactor','thunderTargets','pull'],['sandal','poleHaste','peach','cleaverThird','smgHaste','sword','skillDamage','skillHaste']];
+  const primary=[['damage','haste','crit','critDamage','power','elite','execute','close'],['speed','invincible','resist','hitbox','hurtSpeed','hurtDuration','heartPickup','animalDamage'],['income','pickup','stipend','discount','refresh','refund','heartLife','healDiscount'],['shotSpeed','rangedRange','pierce','bounce','split','pierceFactor','spread','homing','rangedDamage','rangedHaste','rangedCrit','rangedCritDamage','rangedPower','pierceRetention','ricochetRetention','rangedKnockback','rocketDamage','shotgunDamage','smgPierce','sandalBoost'],['meleeRange','arc','knockback','area','splash','peachFactor','thunderTargets','pull'],['sandal','poleHaste','peach','cleaverThird','smgHaste','sword','skillDamage','skillDamage']];
   const key=primary[id.charCodeAt(0)-65][Number(id.slice(1))-1],before=passiveBonuses(inv),after=passiveBonuses({...inv,[id]:n+1});
   const read=(v:ReturnType<typeof passiveBonuses>,k:string):number=>(v as unknown as Record<string,number>)[k];
   const percent=['damage','haste','crit','critDamage','elite','execute','close','speed','resist','hitbox','hurtSpeed','animalDamage','income','discount','refund','healDiscount','pierceFactor','area','splash','peachFactor','sandal','poleHaste','peach','cleaverThird','smgHaste','sword','skillDamage','skillHaste','spread','rangedDamage','rangedHaste','rangedCrit','rangedCritDamage','pierceRetention','ricochetRetention','rangedKnockback','rocketDamage','shotgunDamage','sandalBoost'];
@@ -403,7 +403,7 @@ export function passiveBonuses(inv: Record<string, number>) {
     bounce:Math.min(3,count(inv,'D04')),bounceFactor:Math.min(1,.6+Math.max(0,count(inv,'D04')-3)*.05+v('D15',.15)),split:Math.min(3,count(inv,'D05')),splitFactor:Math.min(1,.45+Math.max(0,count(inv,'D05')-3)*.05),
     spread:Math.max(.5,1-v('D07',.1)),homing:1+Math.min(1,v('D08',.2)),meleeRange:1+Math.min(.6,v('E01',.12)),arc:v('E02',15),knockback:1+Math.min(1,v('E03',.2)+overflow('B01',.06,.5)),
     area:Math.min(.8,v('E04',.15)),splash:Math.min(1,.55+v('E05',.1)),peachChain:count(inv,'E06'),peachFactor:.6+Math.max(0,v('E06',.12)-.12),thunderTargets:Math.min(2,count(inv,'E07')),pull:1+Math.min(1,v('E08',.2)),
-    sandal:v('F01',.2),poleHaste:v('F02',.18,.12),peach:v('F03',.18),cleaverThird:v('F04',.4),smgHaste:v('F05',.15,.12),sword:v('F06',.18),skillDamage:v('F07',.18)+overflow('F08',.12,1/.55-1)*.5,skillHaste:Math.min(1/.55-1,v('F08',.12,.12)),
+    sandal:v('F01',.2),poleHaste:v('F02',.18,.12),peach:v('F03',.18),cleaverThird:v('F04',.4),smgHaste:v('F05',.15,.12),sword:v('F06',.18),skillDamage:v('F07',.18)+v('F08',.12),skillHaste:0,
     rangedDamage:v('D09',.18)+overflow('D11',.06,.75)+overflow('D14',.1,.3)+overflow('D16',.25,1)*.2,
     rangedHaste:v('D10',.15,.12),rangedCrit:Math.min(.75,v('D11',.06)),rangedCritDamage:v('D12',.25),rangedPower:v('D13',2),
     pierceRetention:Math.min(.3,v('D14',.1)),ricochetRetention:Math.min(.4,v('D15',.15)),rangedKnockback:1+Math.min(1,v('D16',.25)),
