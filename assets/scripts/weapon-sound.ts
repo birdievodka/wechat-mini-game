@@ -1,35 +1,23 @@
-import { WeaponId, weaponFor } from './weapons';
+import type { WeaponId } from './weapons';
+import { AUDIO_CUES, WEAPON_AUDIO_FAMILIES } from './audio-catalog';
 
-export const SOUND_CUES = {
-  'sandal-hit-pcm': { volume: .48, duration: .5, gap: .055, priority: 1 },
-  'beans-attack': { volume: .18, duration: .10, gap: .10, priority: 0 },
-  'beans-hit': { volume: .38, duration: .085, gap: .055, priority: 1 },
-  'peach-attack': { volume: .20, duration: .18, gap: .12, priority: 0 },
-  'peach-hit': { volume: .35, duration: .26, gap: .09, priority: 1 },
-  'cleaver-attack': { volume: .18, duration: .07, gap: .10, priority: 0 },
-  'cleaver-hit': { volume: .46, duration: .15, gap: .07, priority: 1 },
-  'rollingpin-attack': { volume: .16, duration: .08, gap: .12, priority: 0 },
-  'rollingpin-hit': { volume: .48, duration: .20, gap: .09, priority: 1 },
-  'firecracker-attack': { volume: .16, duration: .14, gap: .16, priority: 0 },
-  'firecracker-hit': { volume: .46, duration: .33, gap: .12, priority: 1 },
-} as const;
+export const SOUND_CUES = AUDIO_CUES;
 export type SoundId = keyof typeof SOUND_CUES;
 export type SoundEvent = 'attack' | 'hit';
 export const GENERATED_SOUNDS = (Object.keys(SOUND_CUES) as SoundId[]).filter(id => id !== 'sandal-hit-pcm');
-const WEAPON_SOUNDS: Partial<Record<WeaponId, { attack?: SoundId; hit: SoundId }>> = {
-  sandal: { hit: 'sandal-hit-pcm' }, // Deliberately no shoe whoosh, per the approved sound direction.
-  pole: { attack: 'rollingpin-attack', hit: 'rollingpin-hit' },
-  peach: { attack: 'peach-attack', hit: 'peach-hit' },
-  cleaver: { attack: 'cleaver-attack', hit: 'cleaver-hit' },
-  firecracker: { attack: 'firecracker-attack', hit: 'firecracker-hit' },
-  smg: { attack: 'beans-attack', hit: 'beans-hit' },
-  shotgun: { attack: 'cleaver-hit', hit: 'rollingpin-hit' },
-  rocket: { attack: 'firecracker-attack', hit: 'firecracker-hit' },
-  sword: { attack: 'peach-attack', hit: 'cleaver-attack' },
-  thunder: { attack: 'peach-attack', hit: 'firecracker-hit' },
-  gourd: { attack: 'rollingpin-attack', hit: 'peach-hit' },
+export function weaponSound(weapon: WeaponId, event: SoundEvent): SoundId | undefined {
+  if (weapon === 'sandal') return event === 'hit' ? 'sandal-hit-pcm' : undefined;
+  const family = WEAPON_AUDIO_FAMILIES[weapon], id = `${family}-${event}` as SoundId;
+  return SOUND_CUES[id] ? id : undefined;
+}
+export const bossSound = (boss:string,index:number):SoundId|undefined => {
+  const id = `boss-${boss}-${index+1}` as SoundId;
+  return SOUND_CUES[id] ? id : undefined;
 };
-export const weaponSound = (weapon: WeaponId, event: SoundEvent): SoundId | undefined => (WEAPON_SOUNDS[weapon] || (weaponFor(weapon).category==='melee'?WEAPON_SOUNDS.cleaver:weaponFor(weapon).category==='magic'?WEAPON_SOUNDS.peach:WEAPON_SOUNDS.smg))?.[event];
+export function enemySound(id?:string):SoundId {
+  const n=Number(id?.slice(1)||0);
+  return n>=35&&n<=38?'siege':n>=39?'thunder-attack':n>=28&&n<=34?'gun-attack':n>=11&&n<=18||n===22||n===23?'enemy-bow':'melee-commit';
+}
 export const SFX_VOICES = 6;
 
 /** Per-cue rate limits preserve distinct weapons; release sounds cannot cut off impacts. */

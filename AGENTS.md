@@ -42,3 +42,6 @@ v9.2：StageClearView改场景背景/大动态英雄/纸卡实物奖励，账号
 
 
 v9.2.1演武受击：仅跳过扣血，不跳过闪红/退闪/击退/飘字/音效/命中状态。hurtPlayer返回是否接受命中boolean，BossBattle.hit、吕布接触效果与E28减速消费bool，不依赖HP差。正式扣血死亡不变；格挡/冲刺及受击短保护、暂停/后台/配置仍阻止命中。
+
+
+v9.3音频：三场景menu/battle/boss，音乐单源懒加载/世代号/切场释放旧解码；购物续播、后台暂停、首触解锁。86段新音效＋原草鞋，六声道、按类限频、受伤危险优先；8箭/4雷/5星/4轮箭雨由真实释放发声。audio-catalog由pack-game-audio.py生成，不能把整段试听连击当cast音效。来源/预算/验证见docs/audio-integration-v93.md与skill声音参考。

@@ -2,7 +2,7 @@
 
 由 `npm run skill:sync` 从当前代码生成，请修改源码后重新生成。机制、实际调用和已知差异见人工参考；配置字段不代表已接入效果。
 
-当前版本：`stage-v9.2.1-training-hit`；36种武器，6个槽位。
+当前版本：`stage-v9.3-audio`；36种武器，6个槽位。
 
 ## 基础定义
 
@@ -136,41 +136,41 @@
 | 武器 | 出手 | 命中 |
 | --- | --- | --- |
 | 草鞋 | — | sandal-hit-pcm |
-| 扁担 | rollingpin-attack | rollingpin-hit |
-| 桃花枝 | peach-attack | peach-hit |
-| 杀猪尖刀 | cleaver-attack | cleaver-hit |
-| 爆竹 | firecracker-attack | firecracker-hit |
-| 桃园突突枪 | beans-attack | beans-hit |
-| 村口霰弹枪 | cleaver-hit | rollingpin-hit |
-| 二踢脚火箭筒 | firecracker-attack | firecracker-hit |
-| 青莲飞剑 | peach-attack | cleaver-attack |
-| 五雷符 | peach-attack | firecracker-hit |
-| 吞天葫芦 | rollingpin-attack | peach-hit |
-| 双股剑 | cleaver-attack | cleaver-hit |
-| 青龙偃月刀 | cleaver-attack | cleaver-hit |
-| 丈八蛇矛 | cleaver-attack | cleaver-hit |
-| 方天画戟 | cleaver-attack | cleaver-hit |
-| 龙胆银枪 | cleaver-attack | cleaver-hit |
-| 青釭剑 | cleaver-attack | cleaver-hit |
-| 倚天剑 | cleaver-attack | cleaver-hit |
-| 七星宝刀 | cleaver-attack | cleaver-hit |
-| 古锭刀 | cleaver-attack | cleaver-hit |
-| 双铁戟 | cleaver-attack | cleaver-hit |
-| 三尖刀 | cleaver-attack | cleaver-hit |
-| 铁蒺藜 | beans-attack | beans-hit |
-| 诸葛连弩 | beans-attack | beans-hit |
-| 麒麟弓 | beans-attack | beans-hit |
-| 贯石弩 | beans-attack | beans-hit |
-| 手戟 | beans-attack | beans-hit |
-| 锁链钩 | beans-attack | beans-hit |
-| 火油壶 | peach-attack | peach-hit |
-| 震天雷 | peach-attack | peach-hit |
-| 白羽扇 | peach-attack | peach-hit |
-| 太平要术 | peach-attack | peach-hit |
-| 七星灯 | peach-attack | peach-hit |
-| 八阵图 | peach-attack | peach-hit |
-| 木牛机关 | beans-attack | beans-hit |
-| 木鸢飞翼 | beans-attack | beans-hit |
+| 扁担 | wood-attack | wood-hit |
+| 桃花枝 | petal-attack | petal-hit |
+| 杀猪尖刀 | blade-attack | blade-hit |
+| 爆竹 | blast-attack | blast-hit |
+| 桃园突突枪 | gun-attack | gun-hit |
+| 村口霰弹枪 | gun-attack | gun-hit |
+| 二踢脚火箭筒 | blast-attack | blast-hit |
+| 青莲飞剑 | spirit-attack | spirit-hit |
+| 五雷符 | thunder-attack | thunder-hit |
+| 吞天葫芦 | ritual-attack | ritual-hit |
+| 双股剑 | blade-attack | blade-hit |
+| 青龙偃月刀 | heavy-attack | heavy-hit |
+| 丈八蛇矛 | heavy-attack | heavy-hit |
+| 方天画戟 | heavy-attack | heavy-hit |
+| 龙胆银枪 | heavy-attack | heavy-hit |
+| 青釭剑 | blade-attack | blade-hit |
+| 倚天剑 | blade-attack | blade-hit |
+| 七星宝刀 | blade-attack | blade-hit |
+| 古锭刀 | blade-attack | blade-hit |
+| 双铁戟 | heavy-attack | heavy-hit |
+| 三尖刀 | heavy-attack | heavy-hit |
+| 铁蒺藜 | bow-attack | bow-hit |
+| 诸葛连弩 | bow-attack | bow-hit |
+| 麒麟弓 | bow-attack | bow-hit |
+| 贯石弩 | bow-attack | bow-hit |
+| 手戟 | blade-attack | blade-hit |
+| 锁链钩 | blade-attack | blade-hit |
+| 火油壶 | blast-attack | blast-hit |
+| 震天雷 | blast-attack | blast-hit |
+| 白羽扇 | ritual-attack | ritual-hit |
+| 太平要术 | thunder-attack | thunder-hit |
+| 七星灯 | ritual-attack | ritual-hit |
+| 八阵图 | ritual-attack | ritual-hit |
+| 木牛机关 | wood-attack | wood-hit |
+| 木鸢飞翼 | gun-attack | gun-hit |
 
 ## 天命强化
 

@@ -36,3 +36,6 @@ v9成长素材新增art/runtime-growth/source.png、prompt.json、manifest.json�
 ## v9.1内存修订
 
 v9.1减少常驻解码：旧成人身体/五张campaign图停止请求，源码资源保留；别名复用现行少年帧。macro.CLEANUP_IMAGE_CACHE与禁用动态合图在首次加载前设置。BattleSpriteAtlas现在62格1024²/4MiB，新增9种原生Canvas按钮/武器格9宫格，无新增下载PNG。加载页poster专用资源在交接后释放。
+
+
+v9.3音频保留art/audio/review-v1试听源/音序/manifest与art/audio/runtime-manifest.json采纳记录，母带可由固定seed脚本重建，ignored local不复制进包；旧taoyuan-kaida.wav与10个兼容音效从assets删除。三首运行AAC约1MiB，86段PCM加草鞋共87声源；微信实际分包以构建报告为准。无持续背景环绕声，不按敌数新增播放器。

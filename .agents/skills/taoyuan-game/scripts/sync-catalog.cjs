@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
+  const allowed = new Set(['audio-catalog','hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -194,7 +194,7 @@ function generate(root) {
     chronicles:{chapters:chronicles.CHAPTERS.map(ch=>({...ch,enemyHpMultiplier:(ch.referenceDps/152.05)**.95,threatPerSecond:[0,1,2,3].map(stage=>chronicles.chapterThreat(ch.id,stage)),bossThreat:chronicles.chapterThreat(ch.id,3,true),actions:chronicles.BOSS_ACTIONS[ch.id-1]})),enemies:chronicles.CHRONICLE_ENEMIES.map(e=>{const firstStage=stages.STAGES.findIndex((s,i)=>s.roster.includes(e.id)||stages.miniArchetype(i+1)===e.id)+1;return {...e,firstStage,firstChapterValues:{hp:stages.stageEnemyHp(e.hp,firstStage,1),speed:e.speed*(1+.006*(firstStage-1)),coins:e.coins,damage:1}};}),genericSkills:[...chronicles.GENERIC_SKILLS].sort((a,b)=>a.powerRank-b.powerRank),genericSkillsCombatEnabled:true},
     growth: { enabled:false, xpThresholds: Array.from({ length: 30 }, (_, i) => ({ level: i + 1, xpNeeded: c.xpNeeded(i + 1) })) },
     economy: { prices, refresh },
-    audio: { cues: sound.SOUND_CUES, voices: sound.SFX_VOICES, musicSeconds: music.MUSIC_SECONDS, musicVolume: music.MUSIC_VOLUME },
+    audio: { cues: sound.SOUND_CUES, voices: sound.SFX_VOICES, musicSeconds: music.MUSIC_SECONDS, musicVolume: music.MUSIC_VOLUME, musicScenes:music.MUSIC_SCENES },
     assets: { bundles, media },
   });
   const weaponDoc = [heading('武器与天命目录'), `当前版本：\`${catalog.game.version}\`；${weaponRows.length}种武器，${w.WEAPON_LIMIT}个槽位。\n`,
@@ -230,7 +230,7 @@ function generate(root) {
     '\n无折扣样本，按固定章节指数 `min(5,1.07^(章−1))` 调用现行商店价格函数，不使用旧八关商店价格。\n',
     table(['已刷新次数', '无C05', 'C05×1', 'C05×2', 'C05×3', 'C05×10'], catalog.economy.refresh.map(row => [row.rerolls, ...row.costsByC05Copies.map(v => v.cost)])),
     '\nC05只降低每次进店的第一次刷新；收益递减后取整，第二份不一定立即降价。\n',
-    '## 音频与资源清单\n', `音效池${sound.SFX_VOICES}声道；配乐${music.MUSIC_SECONDS}秒，基础音量${music.MUSIC_VOLUME}。完整声音映射见武器目录。\n`,
+    '## 音频与资源清单\n', `音效池${sound.SFX_VOICES}声道；配乐场景备战40/战斗60/首领30秒；各场景音量见audio.musicScenes。完整声音映射见武器目录。\n`,
     table(['Bundle', '优先级', '源码素材 MiB'], bundles.map(b => [b.bundleName, b.priority, round(b.sourceBytes / 1024 / 1024)])),
     '\n以上为源码目录字节，包含meta，并非发布包大小。PNG尺寸、资源路径、源码指纹见机器目录；微信包限制与验证见工程参考。',
   ].join('\n') + '\n';

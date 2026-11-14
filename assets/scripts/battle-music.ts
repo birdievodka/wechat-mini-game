@@ -6,6 +6,7 @@ export interface MusicSource {
 
 export const MUSIC_SECONDS = 60;
 export const MUSIC_VOLUME = .26;
+export const MUSIC_SCENES={menu:{seconds:40,volume:.65},battle:{seconds:60,volume:.72},boss:{seconds:30,volume:.72}};
 
 export class BattleMusic {
   private source?: MusicSource;
@@ -16,6 +17,14 @@ export class BattleMusic {
   private playing = false;
   private elapsed = 0;
   private fade = 0;
+  private seconds = MUSIC_SECONDS;
+  private volume = MUSIC_VOLUME;
+  private duckTime = 0;
+  private duckAmount = 0;
+
+  configure(seconds = MUSIC_SECONDS, volume = MUSIC_VOLUME): void { this.seconds = seconds; this.volume = volume; }
+  detach(): void { this.source?.stop(); this.source = undefined; this.playing = false; }
+  duck(amount = .5, seconds = .35): void { this.duckAmount = Math.max(this.duckAmount, amount); this.duckTime = Math.max(this.duckTime, seconds); }
 
   attach(source: MusicSource): void {
     this.source?.stop(); this.source = source; source.loop = true; source.volume = 0;
@@ -35,15 +44,17 @@ export class BattleMusic {
   resume(): void { this.paused = false; this.sync(); }
   stop(): void {
     this.source?.stop(); this.running = false; this.playing = false;
-    this.elapsed = 0; this.fade = 0;
+    this.elapsed = 0; this.fade = 0; this.duckTime = this.duckAmount = 0;
     if (this.source) this.source.volume = 0;
   }
   update(delta: number): void {
     if (!this.running || this.paused) return;
-    this.elapsed = (this.elapsed + Math.max(0, delta)) % MUSIC_SECONDS;
+    this.elapsed = (this.elapsed + Math.max(0, delta)) % this.seconds;
     if (this.playing && this.source) {
       this.fade = Math.min(1, this.fade + Math.max(0, delta) / .45);
-      this.source.volume = MUSIC_VOLUME * this.fade;
+      this.duckTime = Math.max(0, this.duckTime - Math.max(0, delta));
+      if (!this.duckTime) this.duckAmount = 0;
+      this.source.volume = this.volume * this.fade * (1 - this.duckAmount * Math.min(1, this.duckTime / .22));
     }
   }
   private sync(): void {

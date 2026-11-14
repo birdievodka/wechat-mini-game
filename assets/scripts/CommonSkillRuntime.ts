@@ -7,7 +7,7 @@ interface Host {
  readonly x:number;readonly y:number;readonly angle:number;readonly age:number;
  enemies():Enemy[];move(dx:number,dy:number):void;protect(seconds:number):void;clearSlow():void;
  hit(e:Enemy,angle:number,damage:number,knockback:number,style:WeaponId):void;
- canHeal():boolean;heal():void;sound(style:WeaponId):void;impact?():void;
+ canHeal():boolean;heal():void;sound(style:WeaponId):void;impact?():void;audio?(id:string,event:'cast'|'release'|'pre'|'hit'|'block'):void;
 }
 interface Group {hits:Map<Enemy,number>;maxTargets:number;maxHits:number;}
 interface Task {id:string;kind:string;x:number;y:number;angle:number;delay:number;life:number;age:number;power:number;group:Group;index:number;token:number;}
@@ -45,7 +45,7 @@ export class CommonSkillRuntime {
   const before=e.hp;this.h.hit(e,angle,Math.max(1,Math.round(power*d.factor)),knockback,style);
   if(e.hp<before){
    if(d.kind==='sweep'){this.effects.play(id,'sweep-hit',e.x,e.y+34,angle,30,.19);if(group.hits.size===1)this.h.impact?.();}
-   else{this.effects.play(id,d.kind==='gates'?'lock-hit':'contact',e.x,e.y+34,angle,24,.2);this.h.sound(style);}
+   else{this.effects.play(id,d.kind==='gates'?'lock-hit':'contact',e.x,e.y+34,angle,24,.2);if(this.h.audio)this.h.audio(id,'hit');else this.h.sound(style);}
   }
   return true;
  }
@@ -104,12 +104,12 @@ export class CommonSkillRuntime {
     this.queue(id,'pre',tx,ty,0,delay,.01,power,group,i);this.queue(id,'area',tx,ty,0,delay+pre,.01,power,group,i);
    }
   }
-  h.sound(kind==='fire-line'?'firecracker':kind==='lightning'||kind==='meteor'?'thunder':kind==='stun'?'pole':'silver-spear');return true;
+  if(h.audio)h.audio(id,'cast');else h.sound(kind==='fire-line'?'firecracker':kind==='lightning'||kind==='meteor'?'thunder':kind==='stun'?'pole':'silver-spear');return true;
  }
  block(x=this.h.x+45,y=this.h.y+24):boolean{
   if(!this.shield||this.shieldTime<=0||this.blockGrace>0)return false;
   this.shield--;this.blockGrace=.18;this.effects.setCount('sword-guard',this.shield);this.h.protect(.18);
-  this.effects.play('G25','guard-hit',x,y,Math.atan2(y-this.h.y,x-this.h.x),30,.22);this.h.sound('cleaver');return true;
+  this.effects.play('G25','guard-hit',x,y,Math.atan2(y-this.h.y,x-this.h.x),30,.22);if(this.h.audio)this.h.audio('G25','block');else this.h.sound('cleaver');return true;
  }
  interceptShot(x:number,y:number,tx:number,ty:number,_style?:string):boolean{
   if(!this.shield||this.blockGrace>0)return false;
@@ -169,18 +169,19 @@ export class CommonSkillRuntime {
    const previousDelay=task.delay;task.delay-=dt;if(task.delay>0)continue;
    const activeDt=previousDelay>0?Math.min(dt,-task.delay):dt;task.age+=activeDt;const d=commonSkillFor(task.id);
    if(task.kind==='precision-shot'){
+    this.h.audio?.(task.id,'release');
     const target=this.nearest(task.group,d.radius);task.x=this.h.x;task.y=this.h.y;task.angle=target?Math.atan2(target.y-task.y,target.x-task.x):this.h.angle;
     this.effects.aimBow(task.angle);task.kind='flight';task.life=d.radius;this.flight(task,activeDt);continue;
    }
    if(task.kind==='flight'){this.flight(task,activeDt);continue;}
-   if(task.kind==='pre'){this.effects.play(task.id,d.kind==='meteor'?'meteor-fall':'lightning-pre',task.x,task.y,0,d.radius,d.kind==='meteor'?.35:.12);task.life=-1;continue;}
+   if(task.kind==='pre'){this.h.audio?.(task.id,'pre');this.effects.play(task.id,d.kind==='meteor'?'meteor-fall':'lightning-pre',task.x,task.y,0,d.radius,d.kind==='meteor'?.35:.12);task.life=-1;continue;}
    if(task.kind==='fire-line'){
     while(task.index<4&&task.age>=.15+task.index*.75){for(const e of this.h.enemies())if(this.eligible(e)&&Math.abs(e.x-task.x)<=d.radius&&Math.abs(e.y-task.y)<=40)this.hit(e,task.id,task.power,task.group,e.y>=task.y?Math.PI/2:-Math.PI/2,30);task.index++;}
     if(task.age<task.life)continue;
    }else if(task.kind==='water'||task.kind==='gates'){
     this.area(task,task.kind==='water'?d.radius*Math.min(1,task.age/d.seconds):d.radius);if(task.age<task.life)continue;
    }else{
-    this.area(task,d.radius);
+    this.h.audio?.(task.id,'release');this.area(task,d.radius);
     if(d.kind!=='rain')this.effects.play(task.id,d.kind,task.x,task.y,task.angle,d.radius,d.kind==='sweep'?.4:.6);
    }
    task.life=-1;

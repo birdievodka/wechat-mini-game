@@ -1,0 +1,846 @@
+{
+  "scope": "candidate file QA only; no subjective listening or phone validation",
+  "clips": 92,
+  "checks": [
+    "all WAV/AAC decode",
+    "current 36 weapons and 12 skills covered",
+    "21 boss releases",
+    "manifest hashes",
+    "no clipping in new generated audio; supplied shoe preserved separately",
+    "no silence or excessive DC offset",
+    "durations",
+    "generated waveform endpoints",
+    "approved slap exact hash",
+    "no stale WAVs"
+  ],
+  "audio": [
+    {
+      "id": "sandal-hit",
+      "seconds": 0.444,
+      "peakDbFS": 0.0,
+      "rmsDbFS": -8.4,
+      "fullScaleSamples": 98,
+      "rate": 44100,
+      "channels": 1
+    },
+    {
+      "id": "wood-attack",
+      "seconds": 0.12,
+      "peakDbFS": -2.89,
+      "rmsDbFS": -21.41,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "wood-hit",
+      "seconds": 0.16,
+      "peakDbFS": -3.51,
+      "rmsDbFS": -18.43,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "blade-attack",
+      "seconds": 0.12,
+      "peakDbFS": -2.82,
+      "rmsDbFS": -20.9,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "blade-hit",
+      "seconds": 0.16,
+      "peakDbFS": -3.67,
+      "rmsDbFS": -21.87,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "heavy-attack",
+      "seconds": 0.12,
+      "peakDbFS": -3.49,
+      "rmsDbFS": -20.69,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "heavy-hit",
+      "seconds": 0.3,
+      "peakDbFS": -2.39,
+      "rmsDbFS": -22.16,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "bow-attack",
+      "seconds": 0.15,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -9.85,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "bow-hit",
+      "seconds": 0.11,
+      "peakDbFS": -2.81,
+      "rmsDbFS": -16.2,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "gun-attack",
+      "seconds": 0.1,
+      "peakDbFS": -3.03,
+      "rmsDbFS": -20.43,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "gun-hit",
+      "seconds": 0.16,
+      "peakDbFS": -3.08,
+      "rmsDbFS": -18.96,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "blast-attack",
+      "seconds": 0.18,
+      "peakDbFS": -3.29,
+      "rmsDbFS": -17.16,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "blast-hit",
+      "seconds": 0.3,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -20.06,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "petal-attack",
+      "seconds": 0.28,
+      "peakDbFS": -2.98,
+      "rmsDbFS": -14.12,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "petal-hit",
+      "seconds": 0.36,
+      "peakDbFS": -3.01,
+      "rmsDbFS": -14.32,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "spirit-attack",
+      "seconds": 0.22,
+      "peakDbFS": -3.06,
+      "rmsDbFS": -13.66,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "spirit-hit",
+      "seconds": 0.25,
+      "peakDbFS": -2.55,
+      "rmsDbFS": -19.39,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "thunder-attack",
+      "seconds": 0.23,
+      "peakDbFS": -2.85,
+      "rmsDbFS": -13.45,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "thunder-hit",
+      "seconds": 0.62,
+      "peakDbFS": -3.03,
+      "rmsDbFS": -25.09,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ritual-attack",
+      "seconds": 0.28,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -13.7,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ritual-hit",
+      "seconds": 0.45,
+      "peakDbFS": -3.26,
+      "rmsDbFS": -16.68,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "player-hurt",
+      "seconds": 0.3,
+      "peakDbFS": -3.05,
+      "rmsDbFS": -17.56,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "enemy-hit",
+      "seconds": 0.085,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -15.63,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "enemy-fall",
+      "seconds": 0.2,
+      "peakDbFS": -2.86,
+      "rmsDbFS": -18.88,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "crit",
+      "seconds": 0.2,
+      "peakDbFS": -2.87,
+      "rmsDbFS": -19.18,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "coin",
+      "seconds": 0.13,
+      "peakDbFS": -3.35,
+      "rmsDbFS": -10.79,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "heal",
+      "seconds": 0.48,
+      "peakDbFS": -2.91,
+      "rmsDbFS": -16.89,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "block",
+      "seconds": 0.3,
+      "peakDbFS": -2.94,
+      "rmsDbFS": -15.08,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-ready",
+      "seconds": 0.33,
+      "peakDbFS": -2.75,
+      "rmsDbFS": -14.58,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "dash",
+      "seconds": 0.35,
+      "peakDbFS": -4.52,
+      "rmsDbFS": -19.29,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "hoof",
+      "seconds": 0.21,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -17.83,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "footstep",
+      "seconds": 0.08,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -16.93,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "spawn",
+      "seconds": 0.24,
+      "peakDbFS": -2.84,
+      "rmsDbFS": -21.46,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "melee-commit",
+      "seconds": 0.12,
+      "peakDbFS": -2.99,
+      "rmsDbFS": -18.73,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "enemy-bow",
+      "seconds": 0.18,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -11.94,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "charge-warn",
+      "seconds": 0.6,
+      "peakDbFS": -2.86,
+      "rmsDbFS": -17.75,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "danger",
+      "seconds": 0.54,
+      "peakDbFS": -2.85,
+      "rmsDbFS": -18.14,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "siege",
+      "seconds": 0.55,
+      "peakDbFS": -2.92,
+      "rmsDbFS": -20.3,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G08",
+      "seconds": 1.2,
+      "peakDbFS": -2.82,
+      "rmsDbFS": -10.93,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G01",
+      "seconds": 0.7,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -18.39,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G03",
+      "seconds": 0.85,
+      "peakDbFS": -2.99,
+      "rmsDbFS": -27.07,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G18",
+      "seconds": 0.9,
+      "peakDbFS": -2.9,
+      "rmsDbFS": -18.44,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G10",
+      "seconds": 1.1,
+      "peakDbFS": -2.62,
+      "rmsDbFS": -20.62,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G12",
+      "seconds": 0.65,
+      "peakDbFS": -2.76,
+      "rmsDbFS": -21.5,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G20",
+      "seconds": 1.9,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -21.06,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G07",
+      "seconds": 0.65,
+      "peakDbFS": -4.14,
+      "rmsDbFS": -18.8,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G25",
+      "seconds": 0.8,
+      "peakDbFS": -3.02,
+      "rmsDbFS": -16.84,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G26",
+      "seconds": 0.95,
+      "peakDbFS": -3.28,
+      "rmsDbFS": -18.99,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G19",
+      "seconds": 1.7,
+      "peakDbFS": -2.79,
+      "rmsDbFS": -23.53,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "skill-G22",
+      "seconds": 1.6,
+      "peakDbFS": -2.8,
+      "rmsDbFS": -20.33,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-zhangjiao-1",
+      "seconds": 0.62,
+      "peakDbFS": -3.68,
+      "rmsDbFS": -23.26,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-zhangjiao-2",
+      "seconds": 1.6,
+      "peakDbFS": -3.0,
+      "rmsDbFS": -23.09,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-zhangjiao-3",
+      "seconds": 1.2,
+      "peakDbFS": -2.89,
+      "rmsDbFS": -20.73,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-lvbu-1",
+      "seconds": 0.95,
+      "peakDbFS": -2.87,
+      "rmsDbFS": -17.74,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-lvbu-2",
+      "seconds": 0.85,
+      "peakDbFS": -2.99,
+      "rmsDbFS": -27.07,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-lvbu-3",
+      "seconds": 3.1,
+      "peakDbFS": -2.87,
+      "rmsDbFS": -24.67,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-dongzhuo-1",
+      "seconds": 0.75,
+      "peakDbFS": -2.89,
+      "rmsDbFS": -23.53,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-dongzhuo-2",
+      "seconds": 0.9,
+      "peakDbFS": -2.85,
+      "rmsDbFS": -17.05,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-dongzhuo-3",
+      "seconds": 1.4,
+      "peakDbFS": -2.63,
+      "rmsDbFS": -19.55,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-yuanshao-1",
+      "seconds": 0.5,
+      "peakDbFS": -2.85,
+      "rmsDbFS": -21.2,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-yuanshao-2",
+      "seconds": 1.05,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -20.58,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-yuanshao-3",
+      "seconds": 1.6,
+      "peakDbFS": -2.8,
+      "rmsDbFS": -20.33,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-caocao-1",
+      "seconds": 1.15,
+      "peakDbFS": -3.27,
+      "rmsDbFS": -25.51,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-caocao-2",
+      "seconds": 0.55,
+      "peakDbFS": -2.84,
+      "rmsDbFS": -19.07,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-caocao-3",
+      "seconds": 2.2,
+      "peakDbFS": -3.3,
+      "rmsDbFS": -22.62,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-menghuo-1",
+      "seconds": 0.9,
+      "peakDbFS": -2.86,
+      "rmsDbFS": -16.65,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-menghuo-2",
+      "seconds": 0.8,
+      "peakDbFS": -2.8,
+      "rmsDbFS": -22.78,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-menghuo-3",
+      "seconds": 2.0,
+      "peakDbFS": -3.16,
+      "rmsDbFS": -23.57,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-simayi-1",
+      "seconds": 1.3,
+      "peakDbFS": -2.9,
+      "rmsDbFS": -22.68,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-simayi-2",
+      "seconds": 0.9,
+      "peakDbFS": -2.96,
+      "rmsDbFS": -16.87,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-simayi-3",
+      "seconds": 1.9,
+      "peakDbFS": -2.78,
+      "rmsDbFS": -22.32,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-click",
+      "seconds": 0.1,
+      "peakDbFS": -2.89,
+      "rmsDbFS": -9.41,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-hero",
+      "seconds": 0.23,
+      "peakDbFS": -2.9,
+      "rmsDbFS": -13.74,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-equip",
+      "seconds": 0.3,
+      "peakDbFS": -2.97,
+      "rmsDbFS": -13.34,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-buy",
+      "seconds": 0.36,
+      "peakDbFS": -2.91,
+      "rmsDbFS": -15.85,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-refresh",
+      "seconds": 0.33,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -22.06,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-sell",
+      "seconds": 0.28,
+      "peakDbFS": -2.9,
+      "rmsDbFS": -14.09,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-upgrade",
+      "seconds": 0.65,
+      "peakDbFS": -3.01,
+      "rmsDbFS": -16.45,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-open",
+      "seconds": 0.22,
+      "peakDbFS": -2.77,
+      "rmsDbFS": -16.71,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-close",
+      "seconds": 0.12,
+      "peakDbFS": -2.84,
+      "rmsDbFS": -20.3,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-denied",
+      "seconds": 0.24,
+      "peakDbFS": -2.85,
+      "rmsDbFS": -13.44,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "ui-start",
+      "seconds": 0.75,
+      "peakDbFS": -4.37,
+      "rmsDbFS": -20.97,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "boss-arrive",
+      "seconds": 1.3,
+      "peakDbFS": -4.42,
+      "rmsDbFS": -21.99,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "wave-clear",
+      "seconds": 0.65,
+      "peakDbFS": -2.91,
+      "rmsDbFS": -18.23,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "victory",
+      "seconds": 2.6,
+      "peakDbFS": -4.1,
+      "rmsDbFS": -24.31,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "defeat",
+      "seconds": 1.8,
+      "peakDbFS": -2.83,
+      "rmsDbFS": -17.22,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "unlock",
+      "seconds": 0.85,
+      "peakDbFS": -3.19,
+      "rmsDbFS": -18.72,
+      "fullScaleSamples": 0,
+      "rate": 24000,
+      "channels": 1
+    },
+    {
+      "id": "menu",
+      "seconds": 40.0,
+      "peakDbFS": -4.43,
+      "rmsDbFS": -22.0,
+      "fullScaleSamples": 0,
+      "rate": 32000,
+      "channels": 2
+    },
+    {
+      "id": "battle",
+      "seconds": 60.0,
+      "peakDbFS": -2.83,
+      "rmsDbFS": -20.01,
+      "fullScaleSamples": 0,
+      "rate": 32000,
+      "channels": 2
+    },
+    {
+      "id": "boss",
+      "seconds": 30.0,
+      "peakDbFS": -4.43,
+      "rmsDbFS": -20.01,
+      "fullScaleSamples": 0,
+      "rate": 32000,
+      "channels": 2
+    },
+    {
+      "id": "battle-mix",
+      "seconds": 28.0,
+      "peakDbFS": -5.3,
+      "rmsDbFS": -21.33,
+      "fullScaleSamples": 0,
+      "rate": 32000,
+      "channels": 2
+    },
+    {
+      "id": "menu-mix",
+      "seconds": 22.0,
+      "peakDbFS": -6.59,
+      "rmsDbFS": -24.68,
+      "fullScaleSamples": 0,
+      "rate": 32000,
+      "channels": 2
+    }
+  ]
+}

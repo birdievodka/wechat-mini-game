@@ -216,7 +216,7 @@ if(require.main===module)(async () => {
   for (const def of load('weapons').WEAPONS.slice(0,5)) {
     const audioGame = await newGame(); audioGame.clearBattle(); audioGame.spawnClock = 999;
     audioGame.run.weapons = [{ id: def.id, tier: 1, uid: 1 }]; audioGame.refreshStats(); audioGame.syncWeapons();
-    const sounds = [], play = audioGame.playSound.bind(audioGame);
+    const sounds = [], priorPlays=audioGame.soundSources.reduce((n,s)=>n+s.plays,0), play = audioGame.playSound.bind(audioGame);
     audioGame.playSound = (...args) => { sounds.push(args[0]); play(...args); };
     const one = makeTarget(audioGame,80,0), two = makeTarget(audioGame,90,0);
     const equipped = audioGame.run.weapons[0], w = audioGame.weapons[0]; w.angle=0; w.damage=5;
@@ -228,7 +228,7 @@ if(require.main===module)(async () => {
     if (def.area || def.category === 'melee') assert.equal(sounds.filter(s => s===expected).length,1,'one sweep / explosion only sounds once for several targets');
     const beforeDead=sounds.length; one.hp=0; audioGame.hitEnemy(one,0,5); assert.equal(sounds.length,beforeDead);
     const nativePlays=audioGame.soundSources.reduce((n,s)=>n+s.plays,0);
-    assert.equal(nativePlays,def.id==='sandal'?1:2,'one release + one audible impact even for same-frame bean piercing');
+    assert.equal(nativePlays-priorPlays,def.id==='sandal'?1:2,'one release + one audible impact even for same-frame bean piercing');
     audioGame.stopSounds(); audioGame.muted=true; audioGame.playWeaponSound(def.id,'hit');
     assert.equal(audioGame.soundSources.reduce((n,s)=>n+s.plays,0),nativePlays,'mute covers all weapon sounds');
     audioGame.muted=false; audioGame.clearBattle(); sounds.length=0;
@@ -242,7 +242,7 @@ if(require.main===module)(async () => {
   const beanWeapon=ownedSound.run.weapons[0], beanStats=ownedSound.weapons[0].stats, routed=[];
   ownedSound.playSound=id=>routed.push(id); ownedSound.launchProjectile(0,34,0,beanWeapon,beanStats,4);
   ownedSound.run.weapons[0]={uid:2,id:'sandal',tier:1}; ownedSound.updateProjectiles(.4);
-  assert.ok(routed.includes('beans-hit') && !routed.includes('sandal-hit-pcm'),'in-flight shot retains its sound identity after equipment changes');
+  assert.ok(routed.includes('gun-hit') && !routed.includes('sandal-hit-pcm'),'in-flight shot retains its sound identity after equipment changes');
   console.log('通过：五种基础武器真实攻击/命中路由、空挥无命中声、扇形与范围攻击只响一次、弹丸同帧穿透限频、爆竹空爆、弹丸声音快照、全部音效静音');
   for (const hero of r.HEROES) for (const def of load('weapons').WEAPONS.filter(w => w.starter)) {
     const combo = await newGame(hero.id, def.id); combo.clearBattle(); combo.spawnClock = 999;

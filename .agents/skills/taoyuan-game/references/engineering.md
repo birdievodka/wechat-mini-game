@@ -175,3 +175,8 @@ v9运行时版本stage-v9-hero-growth。主要调用：stage-progress.recordClea
 
 
 v9.2.1运行版本stage-v9.2.1-training-hit；hurtPlayer受击bool与HP损失解耦，BossBattle/Lvbu/E28消费命中bool。test-training扩展真实受击/恢复/格挡/暂停/免死，capture-training-hit为实际AI抬手命中/红闪/击退/恢复的独立WebGL回放，带原档恢复；没有新美术资源。
+
+
+## v9.3音频
+
+版本stage-v9.3-audio。render-audio-review生成源试听，pack-game-audio采纳为小体积音乐与分事件音效，audio-catalog为生成源；weapon-sound定义36武器11类与六声道，BattleMusic支持场景长度/音量/短压低，GameBootstrap连接菜单/商店/真实释放和生命周期。test-audio-scenes加入npm test，新增纯数据模块audio-catalog加入目录生成器允许导入表，不关闭同步检查。不要把整段8箭/4雷/5星/箭雨试听放在cast时直接播放。详见docs/audio-integration-v93.md。

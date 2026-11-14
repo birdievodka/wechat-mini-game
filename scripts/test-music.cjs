@@ -25,13 +25,12 @@ music.stop(); const stopped = s.plays; music.update(100); music.unlock(); music.
 const delayed = new BattleMusic(), late = source(); delayed.begin(); delayed.unlock(); delayed.update(8); delayed.attach(late);
 assert.equal(late.plays, 1); assert.equal(late.currentTime, 8, 'late download catches up with the battle clock');
 delayed.stop(); const menuSource = source(); delayed.attach(menuSource); assert.equal(menuSource.plays, 0, 'late completion after round end remains silent');
-const wav = fs.readFileSync('assets/music/taoyuan-kaida.wav');
-assert.equal(wav.toString('ascii', 0, 4), 'RIFF'); assert.equal(wav.readUInt16LE(20), 1);
-assert.equal(wav.readUInt16LE(22), 1); assert.equal(wav.readUInt32LE(24), 24000); assert.equal(wav.readUInt16LE(34), 16);
-assert.equal(wav.readUInt32LE(40) / 48000, 60); assert.ok(wav.length < 3 * 1024 * 1024);
-const samples = new Int16Array(wav.buffer, wav.byteOffset + 44, (wav.length - 44) / 2);
-let peak = 0, power = 0; for (const v of samples) { peak = Math.max(peak, Math.abs(v)); power += v * v; }
-assert.ok(peak < 32760 && peak > 10000, 'not clipped or silent');
-assert.ok(Math.sqrt(power / samples.length) > 1000, 'audible average level');
-assert.ok(Math.abs(samples[0] - samples[samples.length - 1]) < 4, 'no boundary amplitude jump');
-console.log('通过：音乐手势解锁、淡入、暂停冻结、独立开关、60秒循环、换关重置、延迟加载与退出竞态、PCM时长/大小/非静音/无削波/循环接点');
+// Scene-length changes and important feedback ducking retain pause safety.
+const scenes=new BattleMusic(), sceneSource=source();scenes.configure(40,.65);scenes.attach(sceneSource);scenes.unlock();scenes.begin();scenes.update(41);scenes.pause();scenes.resume();assert.equal(sceneSource.currentTime,1);
+scenes.update(.5);assert.equal(sceneSource.volume,.65);scenes.duck(.5,.4);scenes.update(.02);assert.ok(sceneSource.volume<.4);scenes.update(.5);assert.equal(sceneSource.volume,.65);
+scenes.detach();const oldPlays=sceneSource.plays;scenes.update(1);assert.equal(sceneSource.plays,oldPlays);scenes.configure(30,.72);const boss=source();scenes.attach(boss);assert.equal(boss.loop,true);
+for(const id of ['menu','battle','boss']){
+ const file=fs.readFileSync('assets/music/'+id+'.m4a');assert.equal(file.toString('ascii',4,8),'ftyp');assert.ok(file.length>100000&&file.length<650000,'compact AAC scene loop');
+}
+assert.ok(!fs.existsSync('assets/music/taoyuan-kaida.wav'),'old multi-megabyte runtime WAV replaced');
+console.log('通过：音乐手势解锁、淡入、暂停冻结、开关、延迟/退出竞态、40/60/30秒场景循环、重要反馈压低与恢复、单源解码与AAC预算');

@@ -123,7 +123,7 @@ feedbackDemo.hitEnemy(enemy, 0);
 assert.equal(enemy.hp, 0); assert.equal(played[1], 'sandal-hit-pcm');
 feedbackDemo.hitEnemy(enemy, 0);
 assert.equal(droppedCoins, 1, '每只小兵仅死亡时掉落一次');
-assert.equal(feedbackDemo.hits, 2); assert.equal(played.length, 2);
+assert.equal(feedbackDemo.hits, 2); assert.equal(played.filter(x=>x==='sandal-hit-pcm').length, 2);assert.equal(played.filter(x=>x==='enemy-fall').length,1,'death has one separate low-priority cue');assert.equal(played.length,3);
 assert.equal(feedbackDemo.combatFx.particles.slots.length,280,'粒子池有固定上限');
 console.log('通过：草鞋命中/击败啪声、尸体不重复触发和粒子反馈固定上限');
 

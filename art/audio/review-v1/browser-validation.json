@@ -1,0 +1,33 @@
+{
+  "scope": "isolated Chrome; actual AAC/WAV playback and audition-page UI, not iOS/game validation",
+  "desktop": {
+    "entries": 92,
+    "cards": 3,
+    "tabs": 8,
+    "scroll": 1440,
+    "viewport": 1440
+  },
+  "playback": {
+    "first": {
+      "ready": 4,
+      "time": 0.488091,
+      "duration": 28.096,
+      "paused": false
+    },
+    "second": {
+      "ready": 4,
+      "time": 0.107815,
+      "source": "file:///Users/bytedance/workspace/z-private/wechat-mini-game/art/audio/review-v1/sfx/player-hurt.wav",
+      "single": 1
+    }
+  },
+  "search": {
+    "cards": 2,
+    "title": "长兵重刃 · 出手"
+  },
+  "mobile": {
+    "width": 390,
+    "viewport": 390,
+    "cards": 3
+  }
+}

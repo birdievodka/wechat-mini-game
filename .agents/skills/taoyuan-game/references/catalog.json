@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v9.2.1-training-hit",
+    "version": "stage-v9.3-audio",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "cc183ae6736b28e9fabe392d92df38f0663a407c42b8ed09b598b22caa0034c1",
+    "fingerprint": "96d6cdb7e7284295a576eaca627f149d3847e8cd3859683dfa6da51a2431ab10",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 20374,
-        "sha256": "9d5132e60e77f5eb12649032625ccb5c94739714046188036eb30ada0a68bc73"
+        "bytes": 22610,
+        "sha256": "1c07881da696c84a6878116a2979e3a011a99a832e66570e20ecd736f6895683"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 20652,
-        "sha256": "766d716b009919fb6be103fb81d6f33448e01cbc904d54312ba0b27ef763f2a4"
+        "bytes": 21217,
+        "sha256": "de7fde931a7d4c2543036ffdd72d0f0a17e6e817f94ed8d86e167423cfc272ec"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -125,8 +125,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
-        "bytes": 5045,
-        "sha256": "2856ba5631eb409d21475ccaa0ad1fbc8f1b7e03633bcc059712d318a69b0d1e"
+        "bytes": 5438,
+        "sha256": "c937667f90d67b3a7085e1337c959e59e77cbdbbc7d08bb62457239ef3619b1e"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
@@ -170,13 +170,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 23117,
-        "sha256": "e8761db09e5ebf3880fafd0ae50c3a961f2dc9e50aadfd280766d4e28b1b8db3"
+        "bytes": 23177,
+        "sha256": "9d3572d15089c5c0cf86c1072d168d09e5173d4bdd62da281bdb3e93f1caed93"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 12208,
-        "sha256": "3d03259e256074dcb2d206a45a59fbad2f83ce09c38f1f44be80890592e7e69a"
+        "bytes": 12505,
+        "sha256": "8a3e88fed98c506c4ccb0949f333a0a09bdbb821d80a7e47790bc22dd689571c"
       },
       {
         "path": ".gitignore",
@@ -185,8 +185,508 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 6622,
-        "sha256": "9f753ac4d7bd8c2c19c4d9cd491ad499eff9e03a7e4f9fcfc764e143582dfe2f"
+        "bytes": 7054,
+        "sha256": "53eed4a69fcf3a95b04598ef50f0b079868ae1ce4f4eb63485345220e6f757c9"
+      },
+      {
+        "path": "art/audio/review-v1/browser-validation.json",
+        "bytes": 696,
+        "sha256": "d90d67dc94647d91f8c564b599a8a423acfdbb7ea987754c9ca23272da5ef940"
+      },
+      {
+        "path": "art/audio/review-v1/index.html",
+        "bytes": 53543,
+        "sha256": "7bfac328a7c2b8cc26544de5ea2330bf8a38d00d9f234f9c6aa1154c4a7f196d"
+      },
+      {
+        "path": "art/audio/review-v1/manifest.json",
+        "bytes": 60697,
+        "sha256": "9014128b47534c46abf7ae793c609cce6e27700c1b7128b8cbdbec0b9b02aa42"
+      },
+      {
+        "path": "art/audio/review-v1/mix/battle-mix.m4a",
+        "bytes": 395237,
+        "sha256": "2794c08bbd1f11f0cc3853eeb082b79c926f7f3fe05fd042102c32fc48685fe9"
+      },
+      {
+        "path": "art/audio/review-v1/mix/menu-mix.m4a",
+        "bytes": 285949,
+        "sha256": "ccf4b41bc8a33d9e38610eef39d40e77b951174ba5f8945207fb2115ef827a7d"
+      },
+      {
+        "path": "art/audio/review-v1/music/battle-score.json",
+        "bytes": 32034,
+        "sha256": "19cd54ca63aa85822ebf10e868cbfdc73dd5c657f1a90fa83840c937d4fb72b5"
+      },
+      {
+        "path": "art/audio/review-v1/music/battle.m4a",
+        "bytes": 811021,
+        "sha256": "27bef765d3652d575fb1a0998f3bbe8552215747a733098f9daa6787e4d0a373"
+      },
+      {
+        "path": "art/audio/review-v1/music/boss-score.json",
+        "bytes": 15971,
+        "sha256": "09113304aecf8844112ee8d86514dd95d3b04150937e6166ee6ba0060ebc73d3"
+      },
+      {
+        "path": "art/audio/review-v1/music/boss.m4a",
+        "bytes": 402523,
+        "sha256": "04773f929e58dd57346c90c2697fb0b2d04c93f913c5f627171db82710ac29ce"
+      },
+      {
+        "path": "art/audio/review-v1/music/menu-score.json",
+        "bytes": 8102,
+        "sha256": "77b9434664719b3e1da78dfed1b2378e5f8f78c74341abb6067b800b49293582"
+      },
+      {
+        "path": "art/audio/review-v1/music/menu.m4a",
+        "bytes": 533342,
+        "sha256": "b548c146a549cb054a237259658e33c8f0cc9c1130eab6110e9bec2f2956218a"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blade-attack.wav",
+        "bytes": 5804,
+        "sha256": "73e40ce4560d83b36f2530a1890567e6682d86e44d35579076c123f5682eba48"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blade-hit.wav",
+        "bytes": 7724,
+        "sha256": "2067f2b4dfa666f962174da6023635f2f25eb2ca47a2a9671bc4bb474e4c22c1"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blast-attack.wav",
+        "bytes": 8684,
+        "sha256": "202d0dadd361873ab6de047d6e57489343a7644b4b3cd0a0dfe0f2e1b0689077"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blast-hit.wav",
+        "bytes": 14444,
+        "sha256": "2b4452fa23a613c87978abfad3765f042cf1efd6d810a21f74f2b0862bee8887"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/block.wav",
+        "bytes": 14444,
+        "sha256": "ddad9254c1b3beea07836974fb8cd3a0a138bc7b0efb4b01aac49a6464ffda89"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-arrive.wav",
+        "bytes": 62444,
+        "sha256": "a02b146861f1a52abac27d9d26f125109e6a7a359fb466feae026c77993ac91a"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-caocao-1.wav",
+        "bytes": 55244,
+        "sha256": "df056635610118884fcc916079fd709245c3b1ce8b4b8265a91a80e50c5b0a9f"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-caocao-2.wav",
+        "bytes": 26444,
+        "sha256": "5cdbdc0d7c5e5b07a598b70adbcd6226e9ca56dfaafa387f960a6bcc7f1b6719"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-caocao-3.wav",
+        "bytes": 105644,
+        "sha256": "22ca3efe9bc23272cfdc68d570c5f0948d5a30a956b685a9dc84d2d2503a978d"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-dongzhuo-1.wav",
+        "bytes": 36044,
+        "sha256": "ba374da960ce1beac4dad23cdd0032ccfd1c02c8e043cfa96ef4cdf98ac9ab3e"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-dongzhuo-2.wav",
+        "bytes": 43244,
+        "sha256": "8ebee13f1f9a3a4f46d8a8af126ce59b6b5603e025e7f27b33954aa4e1205f3c"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-dongzhuo-3.wav",
+        "bytes": 67244,
+        "sha256": "6dea8b37692c7f304fc10abbbe9e008c6689ca7a1a68e81f40a86d79f944450e"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-lvbu-1.wav",
+        "bytes": 45644,
+        "sha256": "e0c8c4ed4768b967985f18c5deb4879dcc7ea50c37010cdb758acdf39087d58d"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-lvbu-2.wav",
+        "bytes": 40844,
+        "sha256": "2ade2e9ba169692c9de1924686f8b9127b1c5405fe5180dd3bdad0599f388f58"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-lvbu-3.wav",
+        "bytes": 148844,
+        "sha256": "209b15640f7e9559e84f418dc44b4c04b2b1140c60082daef4ad7dbf7968f1fe"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-menghuo-1.wav",
+        "bytes": 43244,
+        "sha256": "647cc653799f5571b1b4db52de60365a6673f10f635a60085f48ff5546f2f38f"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-menghuo-2.wav",
+        "bytes": 38444,
+        "sha256": "04a2a3ca156584915fa1a6f52d18b4144a6ccba1025c6adbf54e7ce341abec47"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-menghuo-3.wav",
+        "bytes": 96044,
+        "sha256": "6cdbc6e0a749d27be16c53bc3fd5dd1312be86aba47f078763af338addf5de40"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-simayi-1.wav",
+        "bytes": 62444,
+        "sha256": "543618826a965caf6a41b900fc013fcfa0f70e5a118c2847cd2466f4c30210a8"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-simayi-2.wav",
+        "bytes": 43244,
+        "sha256": "d8b35e5e380c9e69099a4ff32c8a5169b078676520c05974c76e867b62d97ef5"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-simayi-3.wav",
+        "bytes": 91244,
+        "sha256": "fe14a7c582ed1204a0bf1052e2f507dc3418eea098eea91cc7254c0f409f49b8"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-yuanshao-1.wav",
+        "bytes": 24044,
+        "sha256": "2061fa1fbda5113f089cfe592b0efafc4631021d4d2a6cafb8b7978f7a0b9c4c"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-yuanshao-2.wav",
+        "bytes": 50444,
+        "sha256": "0e9b1e4752473cf7558befe0cf4dd2afb27a3affb19335451a85ddd2cc30abfc"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-yuanshao-3.wav",
+        "bytes": 76844,
+        "sha256": "2ad17bcc49c8b379308cf5043e0674f838b20395d9b9cb7439008ceeb38e834f"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-zhangjiao-1.wav",
+        "bytes": 29804,
+        "sha256": "e2ada80c3b005d249b8db53535998f5994d47b1e1fe9d783b9285d5e45f6d274"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-zhangjiao-2.wav",
+        "bytes": 76844,
+        "sha256": "acee60623cf6faf16e78a406e3231ffb1abb58815092365018ac147673a6f0a6"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-zhangjiao-3.wav",
+        "bytes": 57644,
+        "sha256": "6418f3e0100b78c19319fe664ba2f7d17d0bb08f00d280329a4f2fa89770c6a7"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/bow-attack.wav",
+        "bytes": 7244,
+        "sha256": "2100b02d82e71866b5ab706d5c2a986800e465f11efc4f5837031293e7e816ea"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/bow-hit.wav",
+        "bytes": 5324,
+        "sha256": "23a557b17c768ded452b93989a707fdd24756649b039828533596e9c37952d3f"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/charge-warn.wav",
+        "bytes": 28844,
+        "sha256": "4a7f53c4b5b17ff45e96e5c91396400d41eed7ae5a175b3d25ed162f1c3dee4c"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/coin.wav",
+        "bytes": 6284,
+        "sha256": "fe7bc3050a8968a3790191db55b9825fd80a1af6d3ba445eb6e669687d804f9d"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/crit.wav",
+        "bytes": 9644,
+        "sha256": "f28dd7cab36b0320f7f9febfe8cc39faa4452be3427742aea9bf3f6f3ba54ca8"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/danger.wav",
+        "bytes": 25964,
+        "sha256": "691d0882a5127888b1820a63d03fb6c5012bc6dba7a6885d207a195142e1e4e0"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/dash.wav",
+        "bytes": 16844,
+        "sha256": "58f5e6b2f6edb263ebd50618a28e82b49858180f42f56fa087890a0daa4ba554"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/defeat.wav",
+        "bytes": 86444,
+        "sha256": "ed5a3416fd4372652cf2dffcf8f4446e63a590df5eadd260a30e993d56eae0cd"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/enemy-bow.wav",
+        "bytes": 8684,
+        "sha256": "b15c9281602a1cd7fbe16a7713497ab8c0245f854ed98010d1efbff915a9edd4"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/enemy-fall.wav",
+        "bytes": 9644,
+        "sha256": "17a765ff55e38a0b4e00b5ec3aea25c670e7299be40bbda0317324e26027a2d5"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/enemy-hit.wav",
+        "bytes": 4124,
+        "sha256": "f2011f957b75ecb13b57a62ec78f953219ea9b691ec3ffd8aeaa373158c9983d"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/footstep.wav",
+        "bytes": 3884,
+        "sha256": "5e376591a4acb3dcf0c8583b5ffa899f9d73ebb513f5eb03f7b1e23776a090a6"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/gun-attack.wav",
+        "bytes": 4844,
+        "sha256": "6f3f6d53a15e8dd314e999313fa0d7b2147f1c73ca8c24486294b4ba3875db77"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/gun-hit.wav",
+        "bytes": 7724,
+        "sha256": "17ce68a70dadedd0850b7453b76d55a6b4d2271dc2aff90cb5d2fbb12579f378"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/heal.wav",
+        "bytes": 23084,
+        "sha256": "6b6ba92883f7f823aeae920892d3621bff7a3961708998d596a494494adb7534"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/heavy-attack.wav",
+        "bytes": 5804,
+        "sha256": "cb6bb703a1253c84d0c5a3eafd3c092aaed036976791a7720257c3c9862e4c2a"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/heavy-hit.wav",
+        "bytes": 14444,
+        "sha256": "b4cd712b6df00e13975b4f5a769a79c30668f4d7a89f33f1e109e0409b66a7ec"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/hoof.wav",
+        "bytes": 10124,
+        "sha256": "20d6d1cb022eecbbd370d28c79c76e4ab9536ace8363429f3c330c61e6af1b77"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/melee-commit.wav",
+        "bytes": 5804,
+        "sha256": "366b4209f49939a822f5e3ce932c5c6488011c94ec1bd2a3d7c6854634bb05b0"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/petal-attack.wav",
+        "bytes": 13484,
+        "sha256": "664fe4e6598e527362e38895dd258edc7c21c0bcd4ac174998ae4f822c9011b0"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/petal-hit.wav",
+        "bytes": 17324,
+        "sha256": "9a47875d3b96db1c6fac71360491a4ecc3824d28a39973eea4368edf016222a9"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/player-hurt.wav",
+        "bytes": 14444,
+        "sha256": "8d199adcca0ed0e4ddf7429385c8e12367fd1665dee0feccf92951f04d5eacc9"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ritual-attack.wav",
+        "bytes": 13484,
+        "sha256": "1dcc3c9781e48c2cf0b6e8e472b6354bbea3752c1dffcc9283e31cf55b9495b3"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ritual-hit.wav",
+        "bytes": 21644,
+        "sha256": "212bc37215551ed910ef9441aed906ce06e143337c634dc80de903074f69a021"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/sandal-hit.wav",
+        "bytes": 43264,
+        "sha256": "67d8c8dd0efb963c66a8fa27cef4e1bdc35aa2ee1e92a53050a4a8b854866543"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/siege.wav",
+        "bytes": 26444,
+        "sha256": "800f990504bdd5e7a7f35dcc20227e63eeb3df3d44e1027c5309c2ada2715ad5"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G01.wav",
+        "bytes": 33644,
+        "sha256": "8a3cf570d5cb152704556cbfe9a2b5a92ab49e746b4651affff71f438c00d8a5"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G03.wav",
+        "bytes": 40844,
+        "sha256": "2ade2e9ba169692c9de1924686f8b9127b1c5405fe5180dd3bdad0599f388f58"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G07.wav",
+        "bytes": 31244,
+        "sha256": "5f1a83a0f473f0abf93a885dd8880ce6545f3c51743eca002cdd37c0822ba24d"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G08.wav",
+        "bytes": 57644,
+        "sha256": "18280c4fd1d7011174d87e57e62f1f31713da4e06fd4c6aae70f74953af94146"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G10.wav",
+        "bytes": 52844,
+        "sha256": "de76d1a3e4bd0c6032ce0c2d6614c65225dcd377428d9ee74ab80f27f1cf7849"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G12.wav",
+        "bytes": 31244,
+        "sha256": "a15154a9997e4e56ad94776ff4f6ed31255f9fa3246e0b955378748b16957380"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G18.wav",
+        "bytes": 43244,
+        "sha256": "b3f013e155bd6581c3f6642fbbdf901fe5faeb130afcdf6b1e996ff7c9c6c7b7"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G19.wav",
+        "bytes": 81644,
+        "sha256": "162974e529ffaf11cda27d6f2f68b602a1c7d1a8f6e1a454ccabc057c9f6bd8c"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G20.wav",
+        "bytes": 91244,
+        "sha256": "26a98315cf1ace8653b4eec28c288daa7e8ec70cf51414bcf1e2c4eb20972fdd"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G22.wav",
+        "bytes": 76844,
+        "sha256": "2ad17bcc49c8b379308cf5043e0674f838b20395d9b9cb7439008ceeb38e834f"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G25.wav",
+        "bytes": 38444,
+        "sha256": "dfcbbdb36e9b5edcb6812a9209e2cb95293a55ac5f0833e937d54e77ed030fa5"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G26.wav",
+        "bytes": 45644,
+        "sha256": "d721b12f28a52be9dc50679d529844a88292b4021ec2391848b07ab417e2f42c"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-ready.wav",
+        "bytes": 15884,
+        "sha256": "7e2db802179478044bdf1accb82170dc23f3faef4d4ef4d5e719cf60ccdc9279"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/spawn.wav",
+        "bytes": 11564,
+        "sha256": "0272e6c35b576b46a10d446559b4297eed80c098dfb377afb1d7a93958b26728"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/spirit-attack.wav",
+        "bytes": 10604,
+        "sha256": "a25036120c99940abd67c84f4432f30472bffdaf5eccc8de79af29a0da33d28f"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/spirit-hit.wav",
+        "bytes": 12044,
+        "sha256": "4f79ed08fbd6a52201bab5d49ef0f66698ea734f578542a77739f5899017769a"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/thunder-attack.wav",
+        "bytes": 11084,
+        "sha256": "28233fc330bb28ec6f1cc6fe437ceeeb58a1fa5b005b9da46e6e4cf7f5bb0c26"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/thunder-hit.wav",
+        "bytes": 29804,
+        "sha256": "9698b6ca264b180b870345159488177ecebe4d2ff2826e8e3cffde26878ffbd7"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-buy.wav",
+        "bytes": 17324,
+        "sha256": "8d5d99a64a0e8fb547dc66754983a6de413a9e7c23a71d7762ca8958fccdaac0"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-click.wav",
+        "bytes": 4844,
+        "sha256": "c5baa8c9e49c0cdc94f7b0ed92d73d53a3e1dee91db323a9ce90b780a239ef47"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-close.wav",
+        "bytes": 5804,
+        "sha256": "f2388ae4f59df0c3d28971a3b14e488c17649684bf030baa32dda9c219cf899d"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-denied.wav",
+        "bytes": 11564,
+        "sha256": "10f823f1741dd0396c8395bdee7d9330115ef349663c7beb3ce6e2b9aaff9247"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-equip.wav",
+        "bytes": 14444,
+        "sha256": "41e971f8ae8bd973910af7a4effdba932f7f868d5744dc4fe28cb57438812acf"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-hero.wav",
+        "bytes": 11084,
+        "sha256": "5db82639a9179acb08ff1e3065a5a763cd9b828e4d5e08e6c324b80221208fcd"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-open.wav",
+        "bytes": 10604,
+        "sha256": "8cd1088093f096d713ba1e97c0dd9fcc5d10b548cef9d7cffb645250f5794a85"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-refresh.wav",
+        "bytes": 15884,
+        "sha256": "4cc27fc0db74146abd7bc849a39ece4108b8d50d639b355bd477d2f15fa9f7dd"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-sell.wav",
+        "bytes": 13484,
+        "sha256": "f227c7473f2a0991da8de4d09354c388cde40086794d25cf352a71a6b062a760"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-start.wav",
+        "bytes": 36044,
+        "sha256": "778c48c73fb4468681eed29730e5dc82c51439cd1260f0a25ec1332221789cae"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-upgrade.wav",
+        "bytes": 31244,
+        "sha256": "d5013b72be43d4be6744cf3418301df859e2037d17e8422b179ff980530f744b"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/unlock.wav",
+        "bytes": 40844,
+        "sha256": "2ca1af9c80735a6c384d801b1a50ac9e1f8e14477756575213b1ebbd2f0160b4"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/victory.wav",
+        "bytes": 124844,
+        "sha256": "6f08fa2d062ce8ec817553b86ebfc003a9150876b34b8edfa815b490c915a2cc"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/wave-clear.wav",
+        "bytes": 31244,
+        "sha256": "caca6048723e826b0e6e4bddec7aa269bbd8b0972b3e07ffd425184157584b55"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/wood-attack.wav",
+        "bytes": 5804,
+        "sha256": "2cb1b073d45adbcd32ada8eab7dbe0faf961879685940e2df59996cb52f7cce3"
+      },
+      {
+        "path": "art/audio/review-v1/sfx/wood-hit.wav",
+        "bytes": 7724,
+        "sha256": "c9711e346f42a9b72848d47e91c48ac9bf6dd50ab805a91508b9790b9993f38a"
+      },
+      {
+        "path": "art/audio/review-v1/validation.json",
+        "bytes": 17144,
+        "sha256": "4d32d0ac92ddffa2d2c32244e88d67a276d0bed8ee05ba18405e349726a0a49f"
+      },
+      {
+        "path": "art/audio/runtime-manifest.json",
+        "bytes": 1869,
+        "sha256": "97e3ecbdf50327dd2b6f4e567d065d5c3d0087ac4f5d0ebebc9eb41146fbb021"
       },
       {
         "path": "art/audio/taoyuan-kaida-battle.m4a",
@@ -547,6 +1047,11 @@
         "path": "art/concepts/zhangfei-growth/README.md",
         "bytes": 880,
         "sha256": "9537e4f3ca0b4ca6f5a49668b26ba0265a2f8d94d9da414f35aedda84c7c37b3"
+      },
+      {
+        "path": "art/reviews/audio-v93/validation.json",
+        "bytes": 3609,
+        "sha256": "f07b91c69b4237f8b609915b0b71ba49224353b03a9c5a994142f53d9f1fd184"
       },
       {
         "path": "art/reviews/bosses/caocao.gif",
@@ -2604,14 +3109,34 @@
         "sha256": "e2ab4f500a490f760f5f346b19f3d467ab14a6712d2f8d494cb9e117126ddf80"
       },
       {
-        "path": "assets/music/taoyuan-kaida.wav",
-        "bytes": 2880044,
-        "sha256": "180de906af89ff9019303ca25ebd6ee13d7ca3116f9b5b69451e9c55cb0d6b7d"
+        "path": "assets/music/battle.m4a",
+        "bytes": 481087,
+        "sha256": "226b904ba3f2550201e5fea1a176c88c0cd76c8c031df851d3c3d1f68a9ca1be"
       },
       {
-        "path": "assets/music/taoyuan-kaida.wav.meta",
+        "path": "assets/music/battle.m4a.meta",
         "bytes": 222,
-        "sha256": "074062b0e9f1dd2597d7af5198b7a9677bdfe3bbd7a4a0d1484358cf2dd8ccaa"
+        "sha256": "95064c44f543d9ff9e431afd84edd281463ad100c32367f25f866b4baffbdc5f"
+      },
+      {
+        "path": "assets/music/boss.m4a",
+        "bytes": 246554,
+        "sha256": "e95bca5f2a75ef2ff51256cd4906185540245702e758d09470aa4d1c54e3701f"
+      },
+      {
+        "path": "assets/music/boss.m4a.meta",
+        "bytes": 222,
+        "sha256": "aa19a2938c5fbbb39b3b406566840b1f9eb7b85e4343cda0db1331e034b183b3"
+      },
+      {
+        "path": "assets/music/menu.m4a",
+        "bytes": 325987,
+        "sha256": "c3a1b59fc5e2c988b7bf3360be5e32e72b09ad660242f4dd09b8f434893fc1c8"
+      },
+      {
+        "path": "assets/music/menu.m4a.meta",
+        "bytes": 222,
+        "sha256": "8a2bebe123f3e4842da1a61c3310d55ae9f6779fa0068ddd36f353c33087408c"
       },
       {
         "path": "assets/orchard.meta",
@@ -2719,9 +3244,19 @@
         "sha256": "de9c720c3a9514b85acd9c1f7a38c22017e54d117e013979af3942f2b13c6466"
       },
       {
+        "path": "assets/scripts/audio-catalog.ts",
+        "bytes": 10294,
+        "sha256": "4c97893d296e6ce104b0febe2d877f49ade7714a36b4f462a8ea0fe770eaa985"
+      },
+      {
+        "path": "assets/scripts/audio-catalog.ts.meta",
+        "bytes": 171,
+        "sha256": "27cedfa46abea4b0ed2dff427519da2a73a6631f894cc173c02d547f178a83fa"
+      },
+      {
         "path": "assets/scripts/battle-music.ts",
-        "bytes": 2191,
-        "sha256": "2c5dafc5521651cbf3c94156b903fc658928e6cdddd9369fb596f51cfdb75ae4"
+        "bytes": 2993,
+        "sha256": "2010f070388826b2cc35f17c5bb9374cd802f51201d901b3f713a5fe6330cbe3"
       },
       {
         "path": "assets/scripts/battle-music.ts.meta",
@@ -2900,8 +3435,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 13459,
-        "sha256": "44bccf0e7ed1d702adfb506417e6f6f30c411bc596eb5bc5c4617bf27f724bde"
+        "bytes": 13756,
+        "sha256": "79a8268a383df6928cf02359bd315b64780bb1fbf50074cbb1fc0a1a10996bf5"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -2980,8 +3515,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 211692,
-        "sha256": "69861bd33a9d942c5c2aa04bef10fcf2a2c6db30d385c206e1ad9d642bc83669"
+        "bytes": 216451,
+        "sha256": "3c8c705767ccad063274a3abaecb9f5c338272f81c804743b5f65a9d3af396fd"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -3260,8 +3795,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 17003,
-        "sha256": "1566251b214bbbed0d9e1bb39fbae6faa8ba7260a4e9750c464d2ae7f22a7074"
+        "bytes": 16994,
+        "sha256": "f9c75120c36ccbfb7f45ecfc37f9daaea70fe4d3c6510dee16432cba148ed0ad"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -3300,8 +3835,8 @@
       },
       {
         "path": "assets/scripts/weapon-sound.ts",
-        "bytes": 3441,
-        "sha256": "efb50cd89dfacfcc36e6dd8f9be287c72e643a8bf31ec9c90a349a15ae682cf2"
+        "bytes": 2304,
+        "sha256": "38e188cafbef549cc97c5345065be756b71ba6eb715c1911c00629dfad149bee"
       },
       {
         "path": "assets/scripts/weapon-sound.ts.meta",
@@ -3354,104 +3889,864 @@
         "sha256": "1913354e5b9e79a4983f97d309f1f580eb426fcd8818a0ffd83dd3a42d93b18e"
       },
       {
-        "path": "assets/sfx/beans-attack.wav",
-        "bytes": 4844,
-        "sha256": "5c6fcc9d2cde8c0f454c454c5dfc86978215826ab998a4de7cc580c8f2f18cc9"
+        "path": "assets/sfx/blade-attack.wav",
+        "bytes": 5804,
+        "sha256": "3e6048d418094c175b9225e1945a5cfdb7be06b7b2b13bf904688b73e80b0f13"
       },
       {
-        "path": "assets/sfx/beans-attack.wav.meta",
+        "path": "assets/sfx/blade-attack.wav.meta",
         "bytes": 222,
-        "sha256": "d0f51f79176cd512ad7c8b8f64f453330cf85943c2b0a665ffa1cca7c7f10abd"
+        "sha256": "5a06eefe2d395d20ffe89bcd9f4cfd52330bf406f89999430d423954444fe3c2"
       },
       {
-        "path": "assets/sfx/beans-hit.wav",
-        "bytes": 4124,
-        "sha256": "f90bdd428873d41f9f5c8d5c41a0b6be17327a5ea10a141a703287b77e7695f3"
+        "path": "assets/sfx/blade-hit.wav",
+        "bytes": 7724,
+        "sha256": "35a109cca6956bc019dc5ea01dfc97b3e918752b7a41a85fcbc521954734b423"
       },
       {
-        "path": "assets/sfx/beans-hit.wav.meta",
+        "path": "assets/sfx/blade-hit.wav.meta",
         "bytes": 222,
-        "sha256": "a2ad8ab7ee3f3581cba3685be35b1da0f4ee8a05726d5dd9a6f316ac002b9d44"
+        "sha256": "eb5af7ce96190e63aa4bd7016a88e0178e0c0c21102b27c3378364f7d6f81041"
       },
       {
-        "path": "assets/sfx/cleaver-attack.wav",
-        "bytes": 3404,
-        "sha256": "5e7cd4241bf0c89a91c49b20f495ca4c35b6bb15e1a272577dcb53833dba2b27"
-      },
-      {
-        "path": "assets/sfx/cleaver-attack.wav.meta",
-        "bytes": 222,
-        "sha256": "fa464d7c864ce3936790736a4f78989b20345d9197840170d8a5b0a262e624e1"
-      },
-      {
-        "path": "assets/sfx/cleaver-hit.wav",
-        "bytes": 7244,
-        "sha256": "73832b661c4253a90d464fcb670e9b394f725d290be4799bcf902e3ee1c286e0"
-      },
-      {
-        "path": "assets/sfx/cleaver-hit.wav.meta",
-        "bytes": 222,
-        "sha256": "57adcc87c22a17d82913246b3c9a43e03500c7b128b2daecb4ea058ae945d60f"
-      },
-      {
-        "path": "assets/sfx/firecracker-attack.wav",
-        "bytes": 6764,
-        "sha256": "15329bf72a11177816ebee71011cf6f45e5864b3931e956bed2a5867a40743ee"
-      },
-      {
-        "path": "assets/sfx/firecracker-attack.wav.meta",
-        "bytes": 222,
-        "sha256": "2ff69fdef3598d81a7cc57f2fedbc99804a3e67c92efeef6d00e59b1e982d771"
-      },
-      {
-        "path": "assets/sfx/firecracker-hit.wav",
-        "bytes": 15884,
-        "sha256": "6a4d46d538b98c43864b8fa9df7825e5523f028c54be260eb692bda71fd65156"
-      },
-      {
-        "path": "assets/sfx/firecracker-hit.wav.meta",
-        "bytes": 222,
-        "sha256": "f5f8d0838b59cc1005ef8cdefa5e3f12a4e028a850d786416c29a10a70e54ae2"
-      },
-      {
-        "path": "assets/sfx/peach-attack.wav",
+        "path": "assets/sfx/blast-attack.wav",
         "bytes": 8684,
-        "sha256": "ce15f31ef23cf1e152c789197299f6abb0553415646d7cfedd68c7309be1fe92"
+        "sha256": "360a36e33c717993aa42f2b5911d824195527049657f1673019186d32e8f0334"
       },
       {
-        "path": "assets/sfx/peach-attack.wav.meta",
+        "path": "assets/sfx/blast-attack.wav.meta",
         "bytes": 222,
-        "sha256": "833bf74ced11efc88ff2ff3f3391ca4d4c25a6caa09c7598b120a53e30e139cb"
+        "sha256": "8a4f28c1eafa73bfbe195911fc67008ff0bdf7fd74abb089f603ea26ea1112a2"
       },
       {
-        "path": "assets/sfx/peach-hit.wav",
-        "bytes": 12524,
-        "sha256": "8f70015938c3307d0b7908a9588525167e038c36cbde2c11abf31c3341e0837c"
+        "path": "assets/sfx/blast-hit.wav",
+        "bytes": 14444,
+        "sha256": "5845b2615279d26841a1b602934a16e7733266fc68744fa111070176e41a6023"
       },
       {
-        "path": "assets/sfx/peach-hit.wav.meta",
+        "path": "assets/sfx/blast-hit.wav.meta",
         "bytes": 222,
-        "sha256": "6c6a9a2313e1cb2adafcc32c68c1560ef6ca8a1b62f9dfccded296f0112b6f04"
+        "sha256": "0f35da49eedc74e439133c5768e62a2f8713c0caad126f7ad52b97870f03cd6e"
       },
       {
-        "path": "assets/sfx/rollingpin-attack.wav",
-        "bytes": 3884,
-        "sha256": "ce15e812fc5dcb053a3e3243cd2103300491f8a6fdd80301aba793faf2f94339"
+        "path": "assets/sfx/block.wav",
+        "bytes": 14444,
+        "sha256": "cb72e9752662704327eeb5c681d7a1f90a5f62e250b29d0fd1afa8e868c00595"
       },
       {
-        "path": "assets/sfx/rollingpin-attack.wav.meta",
+        "path": "assets/sfx/block.wav.meta",
         "bytes": 222,
-        "sha256": "6ce021e81f9f105c04b10848988fc03eae8acb57a89075f22c1ca2000b947c08"
+        "sha256": "2dbab0c72a5ca14c5499a05e020a5a4c78c19cf2592e87b38f35cbef5fb487e0"
       },
       {
-        "path": "assets/sfx/rollingpin-hit.wav",
+        "path": "assets/sfx/boss-arrive.wav",
+        "bytes": 62444,
+        "sha256": "7378de842fec8cd9c7428e6f53e910e5c84e66135d8f262f2e3666eb20112807"
+      },
+      {
+        "path": "assets/sfx/boss-arrive.wav.meta",
+        "bytes": 222,
+        "sha256": "33f9949b23e5508b2bb70857fd9847fd46d2b4ca79956b5ed67c47bb4e17ad60"
+      },
+      {
+        "path": "assets/sfx/boss-caocao-1.wav",
+        "bytes": 5804,
+        "sha256": "3e6048d418094c175b9225e1945a5cfdb7be06b7b2b13bf904688b73e80b0f13"
+      },
+      {
+        "path": "assets/sfx/boss-caocao-1.wav.meta",
+        "bytes": 222,
+        "sha256": "f96de1f4b46098bbec4d02cdec0a6ebb5c03805a0714bb9b8002a0684f6fe126"
+      },
+      {
+        "path": "assets/sfx/boss-caocao-2.wav",
+        "bytes": 10604,
+        "sha256": "9022fe09e7d9848165060b3b7858a0689c9f491986ee39e8066ea47a9d2311fc"
+      },
+      {
+        "path": "assets/sfx/boss-caocao-2.wav.meta",
+        "bytes": 222,
+        "sha256": "3f1713c4d7c5789c6a6548f8155366e9472e547070731a3543074d0397b9c7ac"
+      },
+      {
+        "path": "assets/sfx/boss-caocao-3.wav",
+        "bytes": 28844,
+        "sha256": "a9ce90d46ef3d98104d7b70b121443bf39a0cfdfc5871fbd15127fa6788780a9"
+      },
+      {
+        "path": "assets/sfx/boss-caocao-3.wav.meta",
+        "bytes": 222,
+        "sha256": "667e3547669079a5d44ccd62be38856adfbe45e352b756a1e2253b4debec9d26"
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-1.wav",
+        "bytes": 14444,
+        "sha256": "3daa1154889cc222b7e6e0f33043a3272d92b1d3fcc7f021bf17a654d6d09f3c"
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-1.wav.meta",
+        "bytes": 222,
+        "sha256": "04f8424cd1b9572ac2ea87e6cf4464437ae0ee276b8f970973841ea1144ce98d"
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-2.wav",
+        "bytes": 6284,
+        "sha256": "2fd22dda62fd3b1a1ac5a06b11a1078822efc6ffc510aac0e7896c0b1335d135"
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-2.wav.meta",
+        "bytes": 222,
+        "sha256": "61c3b510f8ca3357a233eca3d3460452202484a65a6c858f95ae3eef0fc8ed15"
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-3.wav",
+        "bytes": 14444,
+        "sha256": "5845b2615279d26841a1b602934a16e7733266fc68744fa111070176e41a6023"
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-3.wav.meta",
+        "bytes": 222,
+        "sha256": "d6a4d650407c70811061d03e6b0e1fe00a211dbccfdfcadcf8bd4ccd789f97b1"
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-1.wav",
+        "bytes": 28844,
+        "sha256": "a9ce90d46ef3d98104d7b70b121443bf39a0cfdfc5871fbd15127fa6788780a9"
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-1.wav.meta",
+        "bytes": 222,
+        "sha256": "b4d838849580b4d87f8fbf868597ab92a28c057877109438b9c097bdf16ea536"
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-2.wav",
+        "bytes": 28844,
+        "sha256": "ca77fe033911367b7c0e09d75072520aa96ac9f3d0688a96465b73a3f26f279b"
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-2.wav.meta",
+        "bytes": 222,
+        "sha256": "3e91aee00e8d33413785b40acf3f3e65a63bdab58a39d7643f46f1f9dfe9e23f"
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-3.wav",
+        "bytes": 14444,
+        "sha256": "3daa1154889cc222b7e6e0f33043a3272d92b1d3fcc7f021bf17a654d6d09f3c"
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-3.wav.meta",
+        "bytes": 222,
+        "sha256": "22a9ca187aef21364ff97a5195fa78c9ca3457b8a549d01a011c136ea95ae121"
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-1.wav",
+        "bytes": 28844,
+        "sha256": "a9ce90d46ef3d98104d7b70b121443bf39a0cfdfc5871fbd15127fa6788780a9"
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-1.wav.meta",
+        "bytes": 222,
+        "sha256": "f47101880c33155cdac284e61fed68afcb476df0abc63788ac29a67159808107"
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-2.wav",
+        "bytes": 5804,
+        "sha256": "e32b8bac880148c8f6eea1cc4566f0856dff18394976687fe824b7b1456c8f86"
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-2.wav.meta",
+        "bytes": 222,
+        "sha256": "d136fac6f77feaf56654e3f897bfd3e9528ae10c1b09f92d495aae8e4a65a19c"
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-3.wav",
+        "bytes": 7724,
+        "sha256": "bea7e9a0217bfc3ba22b888fe89535826ad10677ea93f7d245f777ca6afafab3"
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-3.wav.meta",
+        "bytes": 222,
+        "sha256": "09e4866fd64e83f00879738f3063e87538073b739676777060f4119a7a7d036e"
+      },
+      {
+        "path": "assets/sfx/boss-simayi-1.wav",
+        "bytes": 7724,
+        "sha256": "bea7e9a0217bfc3ba22b888fe89535826ad10677ea93f7d245f777ca6afafab3"
+      },
+      {
+        "path": "assets/sfx/boss-simayi-1.wav.meta",
+        "bytes": 222,
+        "sha256": "ecca9b4a4a97142ab23c5807889edb148bdab6d2b8ab15cdbb4ed18177e75a0c"
+      },
+      {
+        "path": "assets/sfx/boss-simayi-2.wav",
+        "bytes": 21644,
+        "sha256": "1fd76fbb3a284c728f154201e2d25f21a9c7ef3dbaf5efaca2abcd432cce17ff"
+      },
+      {
+        "path": "assets/sfx/boss-simayi-2.wav.meta",
+        "bytes": 222,
+        "sha256": "8761230d52dea2cc6c0054e1d479df634732a768bea00780afefe744e14e3a62"
+      },
+      {
+        "path": "assets/sfx/boss-simayi-3.wav",
+        "bytes": 14444,
+        "sha256": "5845b2615279d26841a1b602934a16e7733266fc68744fa111070176e41a6023"
+      },
+      {
+        "path": "assets/sfx/boss-simayi-3.wav.meta",
+        "bytes": 222,
+        "sha256": "a3b32e99a8834edf9a74b4f5dcec26fd3c8202851afa7e58722d019ba72d4d51"
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-1.wav",
+        "bytes": 8684,
+        "sha256": "3df4117e517b8572613f1051bc99f98a35560c2370a8f745091adf3d0bc5ae16"
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-1.wav.meta",
+        "bytes": 222,
+        "sha256": "40f70963a3231011e1721ba118785bacea09a550ea71cb016abe37f67fbe5fb0"
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-2.wav",
+        "bytes": 7244,
+        "sha256": "29cef709a2e90dc0883f5d6fede612a380d1eea1c07eadb969e478b0e63fa26d"
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-2.wav.meta",
+        "bytes": 222,
+        "sha256": "2a4568a78dd509b9642cd42bafa89a6402ea8f45599acb305714f7fab8399d80"
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-3.wav",
+        "bytes": 5324,
+        "sha256": "338e4159ceae7a5295e1d862f50caa81e8929ee2d6b38262506214659fc2bc4c"
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-3.wav.meta",
+        "bytes": 222,
+        "sha256": "27108211fc9377fd3ceac60f17f7f0ea9bb78dd3d1809921834a62929e177d94"
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-1.wav",
+        "bytes": 28844,
+        "sha256": "62242675cbff36e3c129cd7437e2e39113ef85e6b85f86f4bf8274943660d966"
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-1.wav.meta",
+        "bytes": 222,
+        "sha256": "93f7b09749fb988cea429d89aa35e606980815da950a01f4ca96e97bf7c2b9b9"
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-2.wav",
+        "bytes": 28844,
+        "sha256": "62242675cbff36e3c129cd7437e2e39113ef85e6b85f86f4bf8274943660d966"
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-2.wav.meta",
+        "bytes": 222,
+        "sha256": "5ef0a78b2e48f71a8e09717fd0d205e94a4bb393a4b15ec427f4497ef0acb675"
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-3.wav",
+        "bytes": 13484,
+        "sha256": "8598071410566cf38b79bab8fc3195cd18de56057f4c04560cf4580ba886c4a9"
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-3.wav.meta",
+        "bytes": 222,
+        "sha256": "c32e2aa4c5a8d37d515a9442c0c945b10407bdeee7903fff95292317c4950b1e"
+      },
+      {
+        "path": "assets/sfx/bow-attack.wav",
+        "bytes": 7244,
+        "sha256": "29cef709a2e90dc0883f5d6fede612a380d1eea1c07eadb969e478b0e63fa26d"
+      },
+      {
+        "path": "assets/sfx/bow-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "a3bcb4fdb1ea5c5ad6cc514a6e42bddac2b6179d0ccc97923baa9e1b072afd42"
+      },
+      {
+        "path": "assets/sfx/bow-hit.wav",
+        "bytes": 5324,
+        "sha256": "338e4159ceae7a5295e1d862f50caa81e8929ee2d6b38262506214659fc2bc4c"
+      },
+      {
+        "path": "assets/sfx/bow-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "6592d56ed374a6f474785863dbe82f517f9e1ebbadbeecef349bcaf280dc348d"
+      },
+      {
+        "path": "assets/sfx/charge-warn.wav",
+        "bytes": 28844,
+        "sha256": "a9ce90d46ef3d98104d7b70b121443bf39a0cfdfc5871fbd15127fa6788780a9"
+      },
+      {
+        "path": "assets/sfx/charge-warn.wav.meta",
+        "bytes": 222,
+        "sha256": "475adafcc1664e10550d5058f98134c7c66b4ff86d69e7b47dc3ac3872f3950a"
+      },
+      {
+        "path": "assets/sfx/coin.wav",
+        "bytes": 6284,
+        "sha256": "2fd22dda62fd3b1a1ac5a06b11a1078822efc6ffc510aac0e7896c0b1335d135"
+      },
+      {
+        "path": "assets/sfx/coin.wav.meta",
+        "bytes": 222,
+        "sha256": "f1e9455b3a538e547b610e20dcbedae1aaa53a85c958072bb96457e2520a7aaa"
+      },
+      {
+        "path": "assets/sfx/crit.wav",
         "bytes": 9644,
-        "sha256": "d4c01d518f43faef5b968cf7ecaec8a26b0d7dbf114597e9d6ec7546dda973e7"
+        "sha256": "17df781bef5b6179c0f504aa7fd75df2556e1fbb8b23da44748faaeddfef4b9a"
       },
       {
-        "path": "assets/sfx/rollingpin-hit.wav.meta",
+        "path": "assets/sfx/crit.wav.meta",
         "bytes": 222,
-        "sha256": "b960445300efa74674000ba2c2e485a76820274a13efe8c3acf8ba9adf018969"
+        "sha256": "9890776f98224c250c79749fd022a355dcd0ccbba7eb12954d8c03875aa11c3d"
+      },
+      {
+        "path": "assets/sfx/danger.wav",
+        "bytes": 25964,
+        "sha256": "97507f4a25f5b41de05da90146610c791adce74c688971e1b422d2fad6028c97"
+      },
+      {
+        "path": "assets/sfx/danger.wav.meta",
+        "bytes": 222,
+        "sha256": "0e3ad6c41bedd9021faa44f7ca9c48cf50753d19253377359b7a0688e18ac826"
+      },
+      {
+        "path": "assets/sfx/dash.wav",
+        "bytes": 16844,
+        "sha256": "11ef22f3d89207078085727929a42ebba330f83cd171dc16f3fb6abce8deefd3"
+      },
+      {
+        "path": "assets/sfx/dash.wav.meta",
+        "bytes": 222,
+        "sha256": "701bb7e158268a7346f24a8fa6a664d774f441e2b7cbc5206f549c879dfd8504"
+      },
+      {
+        "path": "assets/sfx/defeat.wav",
+        "bytes": 86444,
+        "sha256": "de18e838da3402847f562e57345e653803dd2dcd091ece5735e2facf00284d5b"
+      },
+      {
+        "path": "assets/sfx/defeat.wav.meta",
+        "bytes": 222,
+        "sha256": "d11bdab706ba1a04ad0d4608da209a86a9a8d1a1409bb4a35eba028f4a18c350"
+      },
+      {
+        "path": "assets/sfx/enemy-bow.wav",
+        "bytes": 8684,
+        "sha256": "3df4117e517b8572613f1051bc99f98a35560c2370a8f745091adf3d0bc5ae16"
+      },
+      {
+        "path": "assets/sfx/enemy-bow.wav.meta",
+        "bytes": 222,
+        "sha256": "062607a7d95e957cf67048b07659a313456db14b60cd5f08b09b984185ede920"
+      },
+      {
+        "path": "assets/sfx/enemy-fall.wav",
+        "bytes": 9644,
+        "sha256": "6c7b98c70ea8fc11f6fb17702939e99f16d816cc4369feb9e0db41bb3bfd8c9a"
+      },
+      {
+        "path": "assets/sfx/enemy-fall.wav.meta",
+        "bytes": 222,
+        "sha256": "8c7975ffc83e852ff113ae3a4df1387324ce2b3224f4a2ad7503d6f7e839b205"
+      },
+      {
+        "path": "assets/sfx/enemy-hit.wav",
+        "bytes": 4124,
+        "sha256": "aae20e8cecd2b4418842efed4943d951188bd5ea6a8938774e05356a9fb818b7"
+      },
+      {
+        "path": "assets/sfx/enemy-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "f646edf522cd29b750503d02864f4a00b0eb388517ae85638257c66b8859087f"
+      },
+      {
+        "path": "assets/sfx/footstep.wav",
+        "bytes": 3884,
+        "sha256": "7cc09a0b7bc987058d5580ab6676da5184a0994c555c5e5743974319b38ca111"
+      },
+      {
+        "path": "assets/sfx/footstep.wav.meta",
+        "bytes": 222,
+        "sha256": "2e6f865a7cae38845072bb35718686f1f1ae882cd1a5f0eae0de7d23ae31b820"
+      },
+      {
+        "path": "assets/sfx/gun-attack.wav",
+        "bytes": 4844,
+        "sha256": "12077d9c7f414c8893c5e2e016b6bbd7a3ae88bab0133926e93e3232320f84cc"
+      },
+      {
+        "path": "assets/sfx/gun-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "530d1b09796e0f76c9498b845dcf9eba1abc73df3d7564cc7f425603b5c5a4fb"
+      },
+      {
+        "path": "assets/sfx/gun-hit.wav",
+        "bytes": 7724,
+        "sha256": "eda034f5472e57ab1309f0671b9e669d70b5a05f7cab5521567bf37ca90a5fd7"
+      },
+      {
+        "path": "assets/sfx/gun-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "5f9db68e50c3274e1d162cea15bc82528123226d0e7eeb11eccea4d8d7cbfbbe"
+      },
+      {
+        "path": "assets/sfx/heal.wav",
+        "bytes": 23084,
+        "sha256": "f5032e215ae0900e4e695ad6e54f9163b4dddbcba56a91ba5ae74c40fdbea159"
+      },
+      {
+        "path": "assets/sfx/heal.wav.meta",
+        "bytes": 222,
+        "sha256": "7db42fc8b82bb7865a287863b67aa9bf9c9ced702f8bc03293a7c653fe906870"
+      },
+      {
+        "path": "assets/sfx/heavy-attack.wav",
+        "bytes": 5804,
+        "sha256": "4b874bc631af27d5beff78b3251f9eb72a356d249ec4ba76c50af8377c661d85"
+      },
+      {
+        "path": "assets/sfx/heavy-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "70725905529466125449dbeff2930d47fc0cda09249dc2c1af5fb99ad28683b3"
+      },
+      {
+        "path": "assets/sfx/heavy-hit.wav",
+        "bytes": 14444,
+        "sha256": "3daa1154889cc222b7e6e0f33043a3272d92b1d3fcc7f021bf17a654d6d09f3c"
+      },
+      {
+        "path": "assets/sfx/heavy-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "5ac704371efbbd44a52ff0ada1ba329260ce7757f1778bad8ab04be0211eb88e"
+      },
+      {
+        "path": "assets/sfx/hoof.wav",
+        "bytes": 10124,
+        "sha256": "37c66a15379b8c70e767cdb917b37bcc6a177d87554564f939546af825dde91e"
+      },
+      {
+        "path": "assets/sfx/hoof.wav.meta",
+        "bytes": 222,
+        "sha256": "99c34035ca412adefbcfdf2ad9823d1e92a15ac5b13c42a3a2d5b92240afde21"
+      },
+      {
+        "path": "assets/sfx/melee-commit.wav",
+        "bytes": 5804,
+        "sha256": "e32b8bac880148c8f6eea1cc4566f0856dff18394976687fe824b7b1456c8f86"
+      },
+      {
+        "path": "assets/sfx/melee-commit.wav.meta",
+        "bytes": 222,
+        "sha256": "a9055a5d71846fc501ad91ee8302b2940b99b7384345b154b5164e7214dec47c"
+      },
+      {
+        "path": "assets/sfx/petal-attack.wav",
+        "bytes": 13484,
+        "sha256": "28d63cc149a64e6953f9ae53e47697729222570c08873766229e708fcc268972"
+      },
+      {
+        "path": "assets/sfx/petal-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "3f0402d5e0142e57ca9dd229a073d3185f6c84578701f97ecb1d7c2cadb72b7e"
+      },
+      {
+        "path": "assets/sfx/petal-hit.wav",
+        "bytes": 17324,
+        "sha256": "f5aaad69db0e86a885fb0316581d0c53041d04318ef3dfa92928a853728fe9f3"
+      },
+      {
+        "path": "assets/sfx/petal-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "8b9a9c41f93b7b21726fc9557d5e0b14242116a222668ffb63d57df1ce1e9017"
+      },
+      {
+        "path": "assets/sfx/player-hurt.wav",
+        "bytes": 14444,
+        "sha256": "ffb9fb5604f4574357cc2863b851dd54c92c3d5924188e28fa7d9f4ca1bd814f"
+      },
+      {
+        "path": "assets/sfx/player-hurt.wav.meta",
+        "bytes": 222,
+        "sha256": "42a98510b823c138d00cb70a1e2fcac1d77f880f9a18e6cb1487b182add35156"
+      },
+      {
+        "path": "assets/sfx/ritual-attack.wav",
+        "bytes": 13484,
+        "sha256": "8598071410566cf38b79bab8fc3195cd18de56057f4c04560cf4580ba886c4a9"
+      },
+      {
+        "path": "assets/sfx/ritual-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "bed6a7e37deb370b8dff30de7a6b7ebc32286957c0c064e2c82d3a7f2b49e33f"
+      },
+      {
+        "path": "assets/sfx/ritual-hit.wav",
+        "bytes": 21644,
+        "sha256": "1fd76fbb3a284c728f154201e2d25f21a9c7ef3dbaf5efaca2abcd432cce17ff"
+      },
+      {
+        "path": "assets/sfx/ritual-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "e78d23f27f2d20ab74d869523611e5824dd876106e9679e7186a210581e4ff4c"
+      },
+      {
+        "path": "assets/sfx/siege.wav",
+        "bytes": 26444,
+        "sha256": "c4ca9b24a7d1dea8e95ca0092c6c192f5bde17c7da86780df9ad56cbb058670a"
+      },
+      {
+        "path": "assets/sfx/siege.wav.meta",
+        "bytes": 222,
+        "sha256": "574adc0d4a2d056f453e8eb2af07b76b8a58542b6c6d026e9003c655ef857e42"
+      },
+      {
+        "path": "assets/sfx/skill-G01.wav",
+        "bytes": 33644,
+        "sha256": "5a0818544c6306d0857763677e400e263b25f762eac68f841e6ac0eeb133f0c5"
+      },
+      {
+        "path": "assets/sfx/skill-G01.wav.meta",
+        "bytes": 222,
+        "sha256": "918cdb63fe9321949ac7d3cc3d81fb9c78b9c463b47647d38f028812d6821a12"
+      },
+      {
+        "path": "assets/sfx/skill-G03.wav",
+        "bytes": 40844,
+        "sha256": "38ca3d19509b57c89d7e36c5076d1815a9d22caf97844192182f35a3414abec8"
+      },
+      {
+        "path": "assets/sfx/skill-G03.wav.meta",
+        "bytes": 222,
+        "sha256": "ba6d2da23865605ba9a6906e70166408eb8847e7f6f0722e5840d2eb29e23227"
+      },
+      {
+        "path": "assets/sfx/skill-G07.wav",
+        "bytes": 31244,
+        "sha256": "d9a7952057599277fa1ec2c9b983a967852d0a231730d20d6a6ba654632e6467"
+      },
+      {
+        "path": "assets/sfx/skill-G07.wav.meta",
+        "bytes": 222,
+        "sha256": "3217cb2eae3d6c2423495350d96a728a7279c1a47f1d4cf1873cc9586fe1708f"
+      },
+      {
+        "path": "assets/sfx/skill-G08.wav",
+        "bytes": 4604,
+        "sha256": "fccb7d95564b1a25501474c69e8d6479dd9ccf8fb1c5fc41e7e61b8e21cc19be"
+      },
+      {
+        "path": "assets/sfx/skill-G08.wav.meta",
+        "bytes": 222,
+        "sha256": "15b8bc6a511b940866c9d92c5877dd8179dee35a9e941b343c8e694eddbc7f0c"
+      },
+      {
+        "path": "assets/sfx/skill-G10.wav",
+        "bytes": 52844,
+        "sha256": "dd8ba156a9f3021b0932c8fa08808d3fef4418f789bb78cb81ba9da54da22c52"
+      },
+      {
+        "path": "assets/sfx/skill-G10.wav.meta",
+        "bytes": 222,
+        "sha256": "2e7124654f736c5c3c1dca17bc63109da777a9539f51d9d393a1524b190a6380"
+      },
+      {
+        "path": "assets/sfx/skill-G12.wav",
+        "bytes": 31244,
+        "sha256": "7928e7eee5e35c023550c1786d9f5192590a50cb5157989f4efcb969ee2fb81d"
+      },
+      {
+        "path": "assets/sfx/skill-G12.wav.meta",
+        "bytes": 222,
+        "sha256": "2cf32df736e1a0c046f1f3a6ffc398090682df5677a897fac678650f048e8107"
+      },
+      {
+        "path": "assets/sfx/skill-G18.wav",
+        "bytes": 43244,
+        "sha256": "56c0bff174745eefb23fc51854a2f4f3900b091feb99ed16e0516dfadb3b800e"
+      },
+      {
+        "path": "assets/sfx/skill-G18.wav.meta",
+        "bytes": 222,
+        "sha256": "cc41e1192abfc57a89ab6cd7e9feae10c53597f1debee43a80cb3ed3092dd989"
+      },
+      {
+        "path": "assets/sfx/skill-G19.wav",
+        "bytes": 29804,
+        "sha256": "e9b99e9c6d8d5c6be7d2bb326b9c1dea58c9f21012f8f28d59488c4e25d1b78c"
+      },
+      {
+        "path": "assets/sfx/skill-G19.wav.meta",
+        "bytes": 222,
+        "sha256": "80ce631b7a132570c2f3bd234f7e6cfdfab9ebe60d74daab1634bf3c10f63b6d"
+      },
+      {
+        "path": "assets/sfx/skill-G20.wav",
+        "bytes": 21644,
+        "sha256": "ecdb7e6bbbe94b3f03d5b73bc781a584eef0706ee48cc1b5b643956da747fc45"
+      },
+      {
+        "path": "assets/sfx/skill-G20.wav.meta",
+        "bytes": 222,
+        "sha256": "f1b26139a9115ea1e070953f025a211d2d7dc075134f07e91587046781336918"
+      },
+      {
+        "path": "assets/sfx/skill-G22.wav",
+        "bytes": 13964,
+        "sha256": "6deb1e5af6cec60ca119fe095eb5c85965a78ce25338f29f8c27b882b9250340"
+      },
+      {
+        "path": "assets/sfx/skill-G22.wav.meta",
+        "bytes": 222,
+        "sha256": "50a959552ff0c03d8a781fdd2e2a12aa25344e56b9fb4bb62a2df31e9bef381d"
+      },
+      {
+        "path": "assets/sfx/skill-G25.wav",
+        "bytes": 38444,
+        "sha256": "1d3daf88896766042435baec6a20721e26b655e65d8a37f2f1823869152f7223"
+      },
+      {
+        "path": "assets/sfx/skill-G25.wav.meta",
+        "bytes": 222,
+        "sha256": "2bf091101bf1b8dff8288bdf538156fc3e9b7a61825cad2a57efccf167d7a9f2"
+      },
+      {
+        "path": "assets/sfx/skill-G26.wav",
+        "bytes": 45644,
+        "sha256": "a2b9b5f159bcd07576a2e54788fc0a717c0d172276617d2b369446b077df8bad"
+      },
+      {
+        "path": "assets/sfx/skill-G26.wav.meta",
+        "bytes": 222,
+        "sha256": "39f0c72185ab1c29da5c3062b79517cdd6fe2cdea944248c2d2618d3ffa286de"
+      },
+      {
+        "path": "assets/sfx/skill-ready.wav",
+        "bytes": 15884,
+        "sha256": "89a9ccacbf2a89ba1f7b6d2f62fa7aae1a1b761973afc86d7e908f6cb4e4a84f"
+      },
+      {
+        "path": "assets/sfx/skill-ready.wav.meta",
+        "bytes": 222,
+        "sha256": "84e1fc52584ac1381203f333ab9b84a8656ba70b1bf26c5c6fedfd9043c6e093"
+      },
+      {
+        "path": "assets/sfx/spawn.wav",
+        "bytes": 11564,
+        "sha256": "5975670cdca74c9798a408902be5a6b33a7b7c88fa13361b3086aa35e1f076eb"
+      },
+      {
+        "path": "assets/sfx/spawn.wav.meta",
+        "bytes": 222,
+        "sha256": "02fea2c2122b1a3defc9f136e2836bbcdc8eb487a4ebac096b84b380299ba86f"
+      },
+      {
+        "path": "assets/sfx/spirit-attack.wav",
+        "bytes": 10604,
+        "sha256": "202fbfe59406b38c003650b966271b49190f44322da0023123659b749b383ccf"
+      },
+      {
+        "path": "assets/sfx/spirit-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "053a38834b40aa0118670554034a2b84dcba3825c7f556d6e32dc169970a1a7f"
+      },
+      {
+        "path": "assets/sfx/spirit-hit.wav",
+        "bytes": 12044,
+        "sha256": "4969d07266457f9835514a533e37aa861cd83fb6d5aafdc9e040bffc8d32c88d"
+      },
+      {
+        "path": "assets/sfx/spirit-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "acf34bd01bcfa342c7fa56a08480f237580dcaff120c956ee9ecca443d8954d8"
+      },
+      {
+        "path": "assets/sfx/thunder-attack.wav",
+        "bytes": 11084,
+        "sha256": "c292721c2829f296cfc400097e09836261ea11cef4f5205342cb36f82ecbec9e"
+      },
+      {
+        "path": "assets/sfx/thunder-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "d08f3c548a788766f720cbaa53db21b685a7438a734d7bcbb1b28f1f9831b51e"
+      },
+      {
+        "path": "assets/sfx/thunder-hit.wav",
+        "bytes": 29804,
+        "sha256": "e9b99e9c6d8d5c6be7d2bb326b9c1dea58c9f21012f8f28d59488c4e25d1b78c"
+      },
+      {
+        "path": "assets/sfx/thunder-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "b16de70ac1b8a0c8d3db3c4537569ad1ced479fc2f4143c23b6c2077075ec58d"
+      },
+      {
+        "path": "assets/sfx/ui-buy.wav",
+        "bytes": 17324,
+        "sha256": "1ded9c0185b4991ee0d3c6483b211804c8d7ecae83ac80e8d221bd31df2b8275"
+      },
+      {
+        "path": "assets/sfx/ui-buy.wav.meta",
+        "bytes": 222,
+        "sha256": "4be40f68497f9c706dc01ee078fb9a38464eaa44724ce399f914f78b1dce93f4"
+      },
+      {
+        "path": "assets/sfx/ui-click.wav",
+        "bytes": 4844,
+        "sha256": "7952575cb98bf8ae33df1cf34274a2251fe245a4cececc6f983dbfd32599403e"
+      },
+      {
+        "path": "assets/sfx/ui-click.wav.meta",
+        "bytes": 222,
+        "sha256": "9013e7ad71328d5c26068296f4993a01f2e7df370d96931bc88f2ccd7a46ef37"
+      },
+      {
+        "path": "assets/sfx/ui-close.wav",
+        "bytes": 5804,
+        "sha256": "8bac12418ac6a6d0ca38af44610e358508e37afd7e4c2a3f03327932e5ddf5d1"
+      },
+      {
+        "path": "assets/sfx/ui-close.wav.meta",
+        "bytes": 222,
+        "sha256": "aada58fa95d34bfad010455c9ab6a59c2b880b2f1ceec267b5130e490fc3cf80"
+      },
+      {
+        "path": "assets/sfx/ui-denied.wav",
+        "bytes": 11564,
+        "sha256": "ca4f7624d85758c360770d82cf57b0ffb67d5fffb0780f760b3ac5bd82773dd9"
+      },
+      {
+        "path": "assets/sfx/ui-denied.wav.meta",
+        "bytes": 222,
+        "sha256": "256c6c2b678c6c225853d18a5615de5a960c484275e7dea06558a672cdd138b7"
+      },
+      {
+        "path": "assets/sfx/ui-equip.wav",
+        "bytes": 14444,
+        "sha256": "bd830ce299efa94890152efa0269c2f0591d28bbdddd1b9c6f9f150554fc38f5"
+      },
+      {
+        "path": "assets/sfx/ui-equip.wav.meta",
+        "bytes": 222,
+        "sha256": "2a5a1bbca4599d918b36201dc8e3c20b591215dec192be4430a41052e1d859df"
+      },
+      {
+        "path": "assets/sfx/ui-hero.wav",
+        "bytes": 11084,
+        "sha256": "f8f646529079dca81f4894c0f10044963a98428e85783fc7608a5cb94e92fe48"
+      },
+      {
+        "path": "assets/sfx/ui-hero.wav.meta",
+        "bytes": 222,
+        "sha256": "363cac5957b52827d9569e739a7131a62e457d649273a586bb71d67614b047b0"
+      },
+      {
+        "path": "assets/sfx/ui-open.wav",
+        "bytes": 10604,
+        "sha256": "9022fe09e7d9848165060b3b7858a0689c9f491986ee39e8066ea47a9d2311fc"
+      },
+      {
+        "path": "assets/sfx/ui-open.wav.meta",
+        "bytes": 222,
+        "sha256": "44f173e0f465be57c85bc74893a32ac9126010512136388694b8b46b1db4e60c"
+      },
+      {
+        "path": "assets/sfx/ui-refresh.wav",
+        "bytes": 15884,
+        "sha256": "dc3724e7d23ee13ba4748f84f261a83ec353ea9e4252322b9aeef2799943db4b"
+      },
+      {
+        "path": "assets/sfx/ui-refresh.wav.meta",
+        "bytes": 222,
+        "sha256": "ac907eb5af620337038a6caa108013bd5f2721e3ce7dcd4b44ac03cc2cc404ca"
+      },
+      {
+        "path": "assets/sfx/ui-sell.wav",
+        "bytes": 13484,
+        "sha256": "e43bb5e29fec814d12bd5a54f5e076d50b103f1b5b43797d907f7af82fbcafbd"
+      },
+      {
+        "path": "assets/sfx/ui-sell.wav.meta",
+        "bytes": 222,
+        "sha256": "c53c9042ab9b8e2f88f2466957e4332d44ede02d0a12fbc7ca8fc909631474e8"
+      },
+      {
+        "path": "assets/sfx/ui-start.wav",
+        "bytes": 36044,
+        "sha256": "e6ef5397a5fc02d42e9bd5a0d2bae9d248e4ef01f45d70bec5aa3af920d67947"
+      },
+      {
+        "path": "assets/sfx/ui-start.wav.meta",
+        "bytes": 222,
+        "sha256": "aa0e8e9f1a1b4840a3eaf0f251082a899a5a00618ce919947571ae7f7b7b5c39"
+      },
+      {
+        "path": "assets/sfx/ui-upgrade.wav",
+        "bytes": 31244,
+        "sha256": "7e65840bea9de8b5760ee0f621fd541a88eef7d35cf020d9342e75ae7cf6aafb"
+      },
+      {
+        "path": "assets/sfx/ui-upgrade.wav.meta",
+        "bytes": 222,
+        "sha256": "50a11e0d675ce982553c77a8a408fce47e5584e639133ee2a8760adbf63b38a9"
+      },
+      {
+        "path": "assets/sfx/unlock.wav",
+        "bytes": 40844,
+        "sha256": "5b55031e6e6150d6f10a3b978e24bae957e9a30ea6e8dff2f474d81772ec63af"
+      },
+      {
+        "path": "assets/sfx/unlock.wav.meta",
+        "bytes": 222,
+        "sha256": "e35eda0dd95a66d4011d7264233cf6ba35122ac97f68fddbec5611ca7bbb5e31"
+      },
+      {
+        "path": "assets/sfx/victory.wav",
+        "bytes": 124844,
+        "sha256": "87b15c1ab21753b6bd3d250a2f13c6edbe31ef3e883d3b2834b238287ad74273"
+      },
+      {
+        "path": "assets/sfx/victory.wav.meta",
+        "bytes": 222,
+        "sha256": "f18cf4f258dd39a74b75b02f3e0acf45f3bfd9abce96f1327132fd85be8827c4"
+      },
+      {
+        "path": "assets/sfx/wave-clear.wav",
+        "bytes": 31244,
+        "sha256": "745d3d83f3958a6283b0cebd117ecbdc1bcd4e53f4cc49406a28f001efc0fdb7"
+      },
+      {
+        "path": "assets/sfx/wave-clear.wav.meta",
+        "bytes": 222,
+        "sha256": "bcb0099cb5c16feba394b422ad6610933c3a0f87284ba66e592aff3c457358ef"
+      },
+      {
+        "path": "assets/sfx/wood-attack.wav",
+        "bytes": 5804,
+        "sha256": "2cd899326d1a84e5c79eb1c37e71148cacaab0215cff03decc4109de92b4b3ca"
+      },
+      {
+        "path": "assets/sfx/wood-attack.wav.meta",
+        "bytes": 222,
+        "sha256": "2d98d19d9ba378afb89faf49eab7fb6ce9aae1697aa06a358b4c88c676e46cbe"
+      },
+      {
+        "path": "assets/sfx/wood-hit.wav",
+        "bytes": 7724,
+        "sha256": "bea7e9a0217bfc3ba22b888fe89535826ad10677ea93f7d245f777ca6afafab3"
+      },
+      {
+        "path": "assets/sfx/wood-hit.wav.meta",
+        "bytes": 222,
+        "sha256": "49c058fed1d4b05fe199efadc520196f68f6b5190991817eaccca81c1828525d"
       },
       {
         "path": "assets/talismans.meta",
@@ -3484,9 +4779,19 @@
         "sha256": "e65a5ecc7f514f57b119b73833401c4de875ac4f5665c16aa0cab40217a3ef13"
       },
       {
+        "path": "docs/audio-integration-v93.md",
+        "bytes": 5522,
+        "sha256": "370ce8e621d69f981537799d29a4c0c2e8ea87d9e37eef18fa77672bb85fa555"
+      },
+      {
+        "path": "docs/audio-review-v1.md",
+        "bytes": 8407,
+        "sha256": "fb912e5b6c78da950dde50b79bfca37404885f5a8254cd19fbadd295eee29970"
+      },
+      {
         "path": "docs/battle-music.md",
-        "bytes": 2628,
-        "sha256": "1517c3058fb364996c6cb5e87525f9b4f87fe81bc52a2ea343dba11cdd1cd45d"
+        "bytes": 2819,
+        "sha256": "d0f520a66dcd295ab1469deb92f05e5cb4199018a3bad8039fc44acbae078766"
       },
       {
         "path": "docs/chronicle-balance.json",
@@ -3660,8 +4965,8 @@
       },
       {
         "path": "docs/weapon-sounds.md",
-        "bytes": 2841,
-        "sha256": "99e204246e14143ecf8c34ac7d2b3e7c5a063af1d8b4f500bbdd85e4fa8393f2"
+        "bytes": 3032,
+        "sha256": "f08cc1b6e5574f579b06fe9b1e1783705bb94c31e8f2249940f30fdb28fb88eb"
       },
       {
         "path": "package-lock.json",
@@ -3670,8 +4975,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 1768,
-        "sha256": "178cc7bd2903792b5663a38f29773af3de4f9be459c7789b5b04abbd7d516400"
+        "bytes": 1806,
+        "sha256": "295426e40e942ee9cfb790644483ad5f7cb376e8f06e4c154bea05bf97f10a3c"
       },
       {
         "path": "project.config.json",
@@ -3692,6 +4997,11 @@
         "path": "scripts/build-wechat.cjs",
         "bytes": 2071,
         "sha256": "e416ee1f6a2d5565aeb1259bcfc27e8f82d8c51fb4e49c52d9fc70424ea55ce3"
+      },
+      {
+        "path": "scripts/capture-audio-review.mjs",
+        "bytes": 5465,
+        "sha256": "0f7f3208806fd2bc709b88de4024cfeafb67f0341ea6093646a80c19617143ad"
       },
       {
         "path": "scripts/capture-bosses-review.mjs",
@@ -3854,6 +5164,11 @@
         "sha256": "148bd2c59dbee720c44ecc046363c443fb46e376ea6995e9bc584053ba2b216f"
       },
       {
+        "path": "scripts/pack-game-audio.py",
+        "bytes": 4832,
+        "sha256": "91d3d7adcf65d533a7026629910538cd24c6037938a76bd66265432b20fb3ecc"
+      },
+      {
         "path": "scripts/pack-growth-art.cjs",
         "bytes": 4279,
         "sha256": "1e7e2b8d1f6d020836e75d278b4316a1aaf7dc08150f392150769208c7432d09"
@@ -3879,6 +5194,11 @@
         "sha256": "5c82d5f6513edad32d2b0f2a6096e9bd401636f0298ced88f780a8ac88ba24d3"
       },
       {
+        "path": "scripts/render-audio-review.py",
+        "bytes": 33952,
+        "sha256": "00bca9d693aadcc18d9842e6bf31bd9a6df99b54e762e7b95bccdfcf8950730d"
+      },
+      {
         "path": "scripts/report-chronicle-balance.cjs",
         "bytes": 4410,
         "sha256": "54f3d6fbeb348af1f1f04641a6b2421382d148fcbcc8f2dbe4f18df92e1ed442"
@@ -3894,14 +5214,19 @@
         "sha256": "64d6866df0b8f4091b3e4ad9e71c4053083850362a5223e2f4f366bd5ea9d796"
       },
       {
+        "path": "scripts/test-audio-scenes.cjs",
+        "bytes": 3112,
+        "sha256": "b7fb8dcb2c5ed9051a1012b836fd97ed7b55a89d09408866cea987ea84a76675"
+      },
+      {
         "path": "scripts/test-bosses.cjs",
         "bytes": 12429,
         "sha256": "b7a8037e0dcfca0b3d62b25500f194c8d4a76fd2426a682882835a2594f21651"
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 86135,
-        "sha256": "eb1733c055c3124d029644b5455d84f9c1b6952d3838a1ddbb081fb67082e0c4"
+        "bytes": 86206,
+        "sha256": "ba0e8f45cafb8a8b2b6004fd5ff4fc077f819a9c8084a76a1946d0eeb2627d98"
       },
       {
         "path": "scripts/test-chronicles.cjs",
@@ -3915,8 +5240,8 @@
       },
       {
         "path": "scripts/test-combat.cjs",
-        "bytes": 15471,
-        "sha256": "f421c4d20b9c0b3d4067aec3fca6ee454e59c805ef6b7f5bd474c5efa39257b8"
+        "bytes": 15633,
+        "sha256": "fcdb6574e97520debd83765ca88ccedcecad52616f9bc5608acfc459180453b9"
       },
       {
         "path": "scripts/test-common-skills.cjs",
@@ -3955,8 +5280,8 @@
       },
       {
         "path": "scripts/test-music.cjs",
-        "bytes": 3278,
-        "sha256": "3aa9997e325bdc5d6402098fc5aa23c0fe6ca0af79201f1d4f84924423c98ecf"
+        "bytes": 3480,
+        "sha256": "b226dc244347729cfc37779e6abdbc720bf9bafa6e58734e0cc50c88cd1314b5"
       },
       {
         "path": "scripts/test-performance.cjs",
@@ -4005,8 +5330,8 @@
       },
       {
         "path": "scripts/test-weapon-sound.cjs",
-        "bytes": 2709,
-        "sha256": "d43af995d84da69a0c3dd436bd9cfd0b0997ecfb4f230a0456883194f8ab12d1"
+        "bytes": 2524,
+        "sha256": "f114c97c98ce22e1556253b457900c52fc5cb23f52548bcb4c41047cbc7b791c"
       },
       {
         "path": "scripts/test-weapons.cjs",
@@ -6139,8 +7464,8 @@
         80
       ],
       "sound": {
-        "attack": "rollingpin-attack",
-        "hit": "rollingpin-hit"
+        "attack": "wood-attack",
+        "hit": "wood-hit"
       }
     },
     {
@@ -6366,8 +7691,8 @@
         80
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "petal-attack",
+        "hit": "petal-hit"
       }
     },
     {
@@ -6593,8 +7918,8 @@
         80
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -6820,8 +8145,8 @@
         80
       ],
       "sound": {
-        "attack": "firecracker-attack",
-        "hit": "firecracker-hit"
+        "attack": "blast-attack",
+        "hit": "blast-hit"
       }
     },
     {
@@ -7047,8 +8372,8 @@
         156
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "gun-attack",
+        "hit": "gun-hit"
       }
     },
     {
@@ -7274,8 +8599,8 @@
         156
       ],
       "sound": {
-        "attack": "cleaver-hit",
-        "hit": "rollingpin-hit"
+        "attack": "gun-attack",
+        "hit": "gun-hit"
       }
     },
     {
@@ -7501,8 +8826,8 @@
         180
       ],
       "sound": {
-        "attack": "firecracker-attack",
-        "hit": "firecracker-hit"
+        "attack": "blast-attack",
+        "hit": "blast-hit"
       }
     },
     {
@@ -7738,8 +9063,8 @@
         168
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "cleaver-attack"
+        "attack": "spirit-attack",
+        "hit": "spirit-hit"
       }
     },
     {
@@ -7974,8 +9299,8 @@
         168
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "firecracker-hit"
+        "attack": "thunder-attack",
+        "hit": "thunder-hit"
       }
     },
     {
@@ -8219,8 +9544,8 @@
         168
       ],
       "sound": {
-        "attack": "rollingpin-attack",
-        "hit": "peach-hit"
+        "attack": "ritual-attack",
+        "hit": "ritual-hit"
       }
     },
     {
@@ -8447,8 +9772,8 @@
         128
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -8675,8 +10000,8 @@
         184
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "heavy-attack",
+        "hit": "heavy-hit"
       }
     },
     {
@@ -8903,8 +10228,8 @@
         168
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "heavy-attack",
+        "hit": "heavy-hit"
       }
     },
     {
@@ -9131,8 +10456,8 @@
         192
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "heavy-attack",
+        "hit": "heavy-hit"
       }
     },
     {
@@ -9359,8 +10684,8 @@
         168
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "heavy-attack",
+        "hit": "heavy-hit"
       }
     },
     {
@@ -9587,8 +10912,8 @@
         160
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -9815,8 +11140,8 @@
         192
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -10043,8 +11368,8 @@
         152
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -10271,8 +11596,8 @@
         176
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -10499,8 +11824,8 @@
         176
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "heavy-attack",
+        "hit": "heavy-hit"
       }
     },
     {
@@ -10727,8 +12052,8 @@
         168
       ],
       "sound": {
-        "attack": "cleaver-attack",
-        "hit": "cleaver-hit"
+        "attack": "heavy-attack",
+        "hit": "heavy-hit"
       }
     },
     {
@@ -10955,8 +12280,8 @@
         120
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "bow-attack",
+        "hit": "bow-hit"
       }
     },
     {
@@ -11183,8 +12508,8 @@
         160
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "bow-attack",
+        "hit": "bow-hit"
       }
     },
     {
@@ -11411,8 +12736,8 @@
         152
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "bow-attack",
+        "hit": "bow-hit"
       }
     },
     {
@@ -11639,8 +12964,8 @@
         176
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "bow-attack",
+        "hit": "bow-hit"
       }
     },
     {
@@ -11867,8 +13192,8 @@
         136
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -12095,8 +13420,8 @@
         144
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "blade-attack",
+        "hit": "blade-hit"
       }
     },
     {
@@ -12323,8 +13648,8 @@
         136
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "blast-attack",
+        "hit": "blast-hit"
       }
     },
     {
@@ -12551,8 +13876,8 @@
         176
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "blast-attack",
+        "hit": "blast-hit"
       }
     },
     {
@@ -12779,8 +14104,8 @@
         136
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "ritual-attack",
+        "hit": "ritual-hit"
       }
     },
     {
@@ -13016,8 +14341,8 @@
         152
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "thunder-attack",
+        "hit": "thunder-hit"
       }
     },
     {
@@ -13244,8 +14569,8 @@
         184
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "ritual-attack",
+        "hit": "ritual-hit"
       }
     },
     {
@@ -13472,8 +14797,8 @@
         176
       ],
       "sound": {
-        "attack": "peach-attack",
-        "hit": "peach-hit"
+        "attack": "ritual-attack",
+        "hit": "ritual-hit"
       }
     },
     {
@@ -13700,8 +15025,8 @@
         168
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "wood-attack",
+        "hit": "wood-hit"
       }
     },
     {
@@ -13928,8 +15253,8 @@
         160
       ],
       "sound": {
-        "attack": "beans-attack",
-        "hit": "beans-hit"
+        "attack": "gun-attack",
+        "hit": "gun-hit"
       }
     }
   ],
@@ -23281,76 +24606,546 @@
   },
   "audio": {
     "cues": {
-      "sandal-hit-pcm": {
-        "volume": 0.48,
-        "duration": 0.5,
-        "gap": 0.055,
-        "priority": 1
-      },
-      "beans-attack": {
-        "volume": 0.18,
-        "duration": 0.1,
-        "gap": 0.1,
+      "wood-attack": {
+        "volume": 0.198,
+        "duration": 0.12,
+        "gap": 0.14,
         "priority": 0
       },
-      "beans-hit": {
-        "volume": 0.38,
-        "duration": 0.085,
-        "gap": 0.055,
-        "priority": 1
+      "wood-hit": {
+        "volume": 0.432,
+        "duration": 0.16,
+        "gap": 0.11,
+        "priority": 2
       },
-      "peach-attack": {
-        "volume": 0.2,
-        "duration": 0.18,
-        "gap": 0.12,
+      "blade-attack": {
+        "volume": 0.198,
+        "duration": 0.12,
+        "gap": 0.14,
         "priority": 0
       },
-      "peach-hit": {
-        "volume": 0.35,
-        "duration": 0.26,
-        "gap": 0.09,
-        "priority": 1
+      "blade-hit": {
+        "volume": 0.432,
+        "duration": 0.16,
+        "gap": 0.11,
+        "priority": 2
       },
-      "cleaver-attack": {
-        "volume": 0.18,
-        "duration": 0.07,
-        "gap": 0.1,
+      "heavy-attack": {
+        "volume": 0.198,
+        "duration": 0.12,
+        "gap": 0.14,
         "priority": 0
       },
-      "cleaver-hit": {
-        "volume": 0.46,
+      "heavy-hit": {
+        "volume": 0.432,
+        "duration": 0.3,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "bow-attack": {
+        "volume": 0.198,
         "duration": 0.15,
-        "gap": 0.07,
-        "priority": 1
-      },
-      "rollingpin-attack": {
-        "volume": 0.16,
-        "duration": 0.08,
-        "gap": 0.12,
+        "gap": 0.14,
         "priority": 0
       },
-      "rollingpin-hit": {
-        "volume": 0.48,
+      "bow-hit": {
+        "volume": 0.432,
+        "duration": 0.11,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "gun-attack": {
+        "volume": 0.198,
+        "duration": 0.1,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "gun-hit": {
+        "volume": 0.432,
+        "duration": 0.16,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "blast-attack": {
+        "volume": 0.198,
+        "duration": 0.18,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "blast-hit": {
+        "volume": 0.432,
+        "duration": 0.3,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "petal-attack": {
+        "volume": 0.198,
+        "duration": 0.28,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "petal-hit": {
+        "volume": 0.432,
+        "duration": 0.36,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "spirit-attack": {
+        "volume": 0.198,
+        "duration": 0.22,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "spirit-hit": {
+        "volume": 0.432,
+        "duration": 0.25,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "thunder-attack": {
+        "volume": 0.198,
+        "duration": 0.23,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "thunder-hit": {
+        "volume": 0.432,
+        "duration": 0.62,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "ritual-attack": {
+        "volume": 0.198,
+        "duration": 0.28,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "ritual-hit": {
+        "volume": 0.432,
+        "duration": 0.45,
+        "gap": 0.11,
+        "priority": 2
+      },
+      "player-hurt": {
+        "volume": 0.648,
+        "duration": 0.3,
+        "gap": 0.4,
+        "priority": 4
+      },
+      "enemy-hit": {
+        "volume": 0.18,
+        "duration": 0.085,
+        "gap": 0.14,
+        "priority": 0
+      },
+      "enemy-fall": {
+        "volume": 0.198,
         "duration": 0.2,
-        "gap": 0.09,
-        "priority": 1
-      },
-      "firecracker-attack": {
-        "volume": 0.16,
-        "duration": 0.14,
-        "gap": 0.16,
+        "gap": 0.25,
         "priority": 0
       },
-      "firecracker-hit": {
-        "volume": 0.46,
-        "duration": 0.33,
+      "crit": {
+        "volume": 0.477,
+        "duration": 0.2,
+        "gap": 0.2,
+        "priority": 2
+      },
+      "coin": {
+        "volume": 0.198,
+        "duration": 0.13,
         "gap": 0.12,
         "priority": 1
+      },
+      "heal": {
+        "volume": 0.405,
+        "duration": 0.48,
+        "gap": 0.3,
+        "priority": 3
+      },
+      "block": {
+        "volume": 0.522,
+        "duration": 0.3,
+        "gap": 0.18,
+        "priority": 4
+      },
+      "skill-ready": {
+        "volume": 0.342,
+        "duration": 0.33,
+        "gap": 0.8,
+        "priority": 3
+      },
+      "dash": {
+        "volume": 0.36,
+        "duration": 0.35,
+        "gap": 0.4,
+        "priority": 2
+      },
+      "hoof": {
+        "volume": 0.072,
+        "duration": 0.21,
+        "gap": 0.3,
+        "priority": 0
+      },
+      "footstep": {
+        "volume": 0.063,
+        "duration": 0.08,
+        "gap": 0.26,
+        "priority": 0
+      },
+      "spawn": {
+        "volume": 0.117,
+        "duration": 0.24,
+        "gap": 0.35,
+        "priority": 0
+      },
+      "melee-commit": {
+        "volume": 0.18,
+        "duration": 0.12,
+        "gap": 0.18,
+        "priority": 1
+      },
+      "enemy-bow": {
+        "volume": 0.225,
+        "duration": 0.18,
+        "gap": 0.18,
+        "priority": 1
+      },
+      "charge-warn": {
+        "volume": 0.45,
+        "duration": 0.6,
+        "gap": 0.55,
+        "priority": 3
+      },
+      "danger": {
+        "volume": 0.45,
+        "duration": 0.54,
+        "gap": 0.5,
+        "priority": 4
+      },
+      "siege": {
+        "volume": 0.405,
+        "duration": 0.55,
+        "gap": 0.35,
+        "priority": 2
+      },
+      "skill-G08": {
+        "volume": 0.558,
+        "duration": 0.095,
+        "gap": 0.08,
+        "priority": 3
+      },
+      "skill-G01": {
+        "volume": 0.558,
+        "duration": 0.7,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G03": {
+        "volume": 0.558,
+        "duration": 0.85,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G18": {
+        "volume": 0.558,
+        "duration": 0.9,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G10": {
+        "volume": 0.558,
+        "duration": 1.1,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G12": {
+        "volume": 0.558,
+        "duration": 0.65,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G20": {
+        "volume": 0.558,
+        "duration": 0.45,
+        "gap": 0.2,
+        "priority": 3
+      },
+      "skill-G07": {
+        "volume": 0.558,
+        "duration": 0.65,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G25": {
+        "volume": 0.558,
+        "duration": 0.8,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G26": {
+        "volume": 0.558,
+        "duration": 0.95,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "skill-G19": {
+        "volume": 0.558,
+        "duration": 0.62,
+        "gap": 0.2,
+        "priority": 3
+      },
+      "skill-G22": {
+        "volume": 0.558,
+        "duration": 0.29,
+        "gap": 0.2,
+        "priority": 3
+      },
+      "boss-zhangjiao-1": {
+        "volume": 0.504,
+        "duration": 0.6,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-zhangjiao-2": {
+        "volume": 0.504,
+        "duration": 0.6,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-zhangjiao-3": {
+        "volume": 0.504,
+        "duration": 0.28,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-lvbu-1": {
+        "volume": 0.504,
+        "duration": 0.6,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-lvbu-2": {
+        "volume": 0.504,
+        "duration": 0.6,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-lvbu-3": {
+        "volume": 0.504,
+        "duration": 0.3,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-dongzhuo-1": {
+        "volume": 0.504,
+        "duration": 0.3,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-dongzhuo-2": {
+        "volume": 0.504,
+        "duration": 0.13,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-dongzhuo-3": {
+        "volume": 0.504,
+        "duration": 0.3,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-yuanshao-1": {
+        "volume": 0.504,
+        "duration": 0.18,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-yuanshao-2": {
+        "volume": 0.504,
+        "duration": 0.15,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-yuanshao-3": {
+        "volume": 0.504,
+        "duration": 0.11,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-caocao-1": {
+        "volume": 0.504,
+        "duration": 0.12,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-caocao-2": {
+        "volume": 0.504,
+        "duration": 0.22,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-caocao-3": {
+        "volume": 0.504,
+        "duration": 0.6,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-menghuo-1": {
+        "volume": 0.504,
+        "duration": 0.6,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-menghuo-2": {
+        "volume": 0.504,
+        "duration": 0.12,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-menghuo-3": {
+        "volume": 0.504,
+        "duration": 0.16,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-simayi-1": {
+        "volume": 0.504,
+        "duration": 0.16,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-simayi-2": {
+        "volume": 0.504,
+        "duration": 0.45,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "boss-simayi-3": {
+        "volume": 0.504,
+        "duration": 0.3,
+        "gap": 0.4,
+        "priority": 3
+      },
+      "ui-click": {
+        "volume": 0.36,
+        "duration": 0.1,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-hero": {
+        "volume": 0.36,
+        "duration": 0.23,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-equip": {
+        "volume": 0.36,
+        "duration": 0.3,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-buy": {
+        "volume": 0.36,
+        "duration": 0.36,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-refresh": {
+        "volume": 0.36,
+        "duration": 0.33,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-sell": {
+        "volume": 0.36,
+        "duration": 0.28,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-upgrade": {
+        "volume": 0.36,
+        "duration": 0.65,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-open": {
+        "volume": 0.36,
+        "duration": 0.22,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-close": {
+        "volume": 0.36,
+        "duration": 0.12,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-denied": {
+        "volume": 0.36,
+        "duration": 0.24,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "ui-start": {
+        "volume": 0.36,
+        "duration": 0.75,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "boss-arrive": {
+        "volume": 0.36,
+        "duration": 1.3,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "wave-clear": {
+        "volume": 0.36,
+        "duration": 0.65,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "victory": {
+        "volume": 0.54,
+        "duration": 2.6,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "defeat": {
+        "volume": 0.54,
+        "duration": 1.8,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "unlock": {
+        "volume": 0.36,
+        "duration": 0.85,
+        "gap": 0.15,
+        "priority": 3
+      },
+      "sandal-hit-pcm": {
+        "volume": 0.4,
+        "duration": 0.444,
+        "gap": 0.09,
+        "priority": 2
       }
     },
     "voices": 6,
     "musicSeconds": 60,
-    "musicVolume": 0.26
+    "musicVolume": 0.26,
+    "musicScenes": {
+      "menu": {
+        "seconds": 40,
+        "volume": 0.65
+      },
+      "battle": {
+        "seconds": 60,
+        "volume": 0.72
+      },
+      "boss": {
+        "seconds": 30,
+        "volume": 0.72
+      }
+    }
   },
   "assets": {
     "bundles": [
@@ -23424,7 +25219,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "music",
         "priority": 8,
-        "sourceBytes": 2880266
+        "sourceBytes": 1054294
       },
       {
         "path": "assets/orchard/",
@@ -23456,7 +25251,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "sfx",
         "priority": 8,
-        "sourceBytes": 79220
+        "sourceBytes": 1716316
       },
       {
         "path": "assets/talismans/",
@@ -23468,6 +25263,354 @@
       }
     ],
     "media": [
+      {
+        "path": "art/audio/review-v1/sfx/blade-attack.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blade-hit.wav",
+        "bytes": 7724
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blast-attack.wav",
+        "bytes": 8684
+      },
+      {
+        "path": "art/audio/review-v1/sfx/blast-hit.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/block.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-arrive.wav",
+        "bytes": 62444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-caocao-1.wav",
+        "bytes": 55244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-caocao-2.wav",
+        "bytes": 26444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-caocao-3.wav",
+        "bytes": 105644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-dongzhuo-1.wav",
+        "bytes": 36044
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-dongzhuo-2.wav",
+        "bytes": 43244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-dongzhuo-3.wav",
+        "bytes": 67244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-lvbu-1.wav",
+        "bytes": 45644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-lvbu-2.wav",
+        "bytes": 40844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-lvbu-3.wav",
+        "bytes": 148844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-menghuo-1.wav",
+        "bytes": 43244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-menghuo-2.wav",
+        "bytes": 38444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-menghuo-3.wav",
+        "bytes": 96044
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-simayi-1.wav",
+        "bytes": 62444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-simayi-2.wav",
+        "bytes": 43244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-simayi-3.wav",
+        "bytes": 91244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-yuanshao-1.wav",
+        "bytes": 24044
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-yuanshao-2.wav",
+        "bytes": 50444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-yuanshao-3.wav",
+        "bytes": 76844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-zhangjiao-1.wav",
+        "bytes": 29804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-zhangjiao-2.wav",
+        "bytes": 76844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/boss-zhangjiao-3.wav",
+        "bytes": 57644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/bow-attack.wav",
+        "bytes": 7244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/bow-hit.wav",
+        "bytes": 5324
+      },
+      {
+        "path": "art/audio/review-v1/sfx/charge-warn.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/coin.wav",
+        "bytes": 6284
+      },
+      {
+        "path": "art/audio/review-v1/sfx/crit.wav",
+        "bytes": 9644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/danger.wav",
+        "bytes": 25964
+      },
+      {
+        "path": "art/audio/review-v1/sfx/dash.wav",
+        "bytes": 16844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/defeat.wav",
+        "bytes": 86444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/enemy-bow.wav",
+        "bytes": 8684
+      },
+      {
+        "path": "art/audio/review-v1/sfx/enemy-fall.wav",
+        "bytes": 9644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/enemy-hit.wav",
+        "bytes": 4124
+      },
+      {
+        "path": "art/audio/review-v1/sfx/footstep.wav",
+        "bytes": 3884
+      },
+      {
+        "path": "art/audio/review-v1/sfx/gun-attack.wav",
+        "bytes": 4844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/gun-hit.wav",
+        "bytes": 7724
+      },
+      {
+        "path": "art/audio/review-v1/sfx/heal.wav",
+        "bytes": 23084
+      },
+      {
+        "path": "art/audio/review-v1/sfx/heavy-attack.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/heavy-hit.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/hoof.wav",
+        "bytes": 10124
+      },
+      {
+        "path": "art/audio/review-v1/sfx/melee-commit.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/petal-attack.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "art/audio/review-v1/sfx/petal-hit.wav",
+        "bytes": 17324
+      },
+      {
+        "path": "art/audio/review-v1/sfx/player-hurt.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ritual-attack.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ritual-hit.wav",
+        "bytes": 21644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/sandal-hit.wav",
+        "bytes": 43264
+      },
+      {
+        "path": "art/audio/review-v1/sfx/siege.wav",
+        "bytes": 26444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G01.wav",
+        "bytes": 33644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G03.wav",
+        "bytes": 40844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G07.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G08.wav",
+        "bytes": 57644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G10.wav",
+        "bytes": 52844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G12.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G18.wav",
+        "bytes": 43244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G19.wav",
+        "bytes": 81644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G20.wav",
+        "bytes": 91244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G22.wav",
+        "bytes": 76844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G25.wav",
+        "bytes": 38444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-G26.wav",
+        "bytes": 45644
+      },
+      {
+        "path": "art/audio/review-v1/sfx/skill-ready.wav",
+        "bytes": 15884
+      },
+      {
+        "path": "art/audio/review-v1/sfx/spawn.wav",
+        "bytes": 11564
+      },
+      {
+        "path": "art/audio/review-v1/sfx/spirit-attack.wav",
+        "bytes": 10604
+      },
+      {
+        "path": "art/audio/review-v1/sfx/spirit-hit.wav",
+        "bytes": 12044
+      },
+      {
+        "path": "art/audio/review-v1/sfx/thunder-attack.wav",
+        "bytes": 11084
+      },
+      {
+        "path": "art/audio/review-v1/sfx/thunder-hit.wav",
+        "bytes": 29804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-buy.wav",
+        "bytes": 17324
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-click.wav",
+        "bytes": 4844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-close.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-denied.wav",
+        "bytes": 11564
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-equip.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-hero.wav",
+        "bytes": 11084
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-open.wav",
+        "bytes": 10604
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-refresh.wav",
+        "bytes": 15884
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-sell.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-start.wav",
+        "bytes": 36044
+      },
+      {
+        "path": "art/audio/review-v1/sfx/ui-upgrade.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/unlock.wav",
+        "bytes": 40844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/victory.wav",
+        "bytes": 124844
+      },
+      {
+        "path": "art/audio/review-v1/sfx/wave-clear.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "art/audio/review-v1/sfx/wood-attack.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "art/audio/review-v1/sfx/wood-hit.wav",
+        "bytes": 7724
+      },
       {
         "path": "art/audio/taoyuan-kaida-master.wav",
         "bytes": 11520044
@@ -24846,10 +26989,6 @@
         "colorType": 6
       },
       {
-        "path": "assets/music/taoyuan-kaida.wav",
-        "bytes": 2880044
-      },
-      {
         "path": "assets/orchard/decor.png",
         "bytes": 698497,
         "width": 1536,
@@ -24899,44 +27038,348 @@
         "colorType": 6
       },
       {
-        "path": "assets/sfx/beans-attack.wav",
-        "bytes": 4844
+        "path": "assets/sfx/blade-attack.wav",
+        "bytes": 5804
       },
       {
-        "path": "assets/sfx/beans-hit.wav",
-        "bytes": 4124
+        "path": "assets/sfx/blade-hit.wav",
+        "bytes": 7724
       },
       {
-        "path": "assets/sfx/cleaver-attack.wav",
-        "bytes": 3404
-      },
-      {
-        "path": "assets/sfx/cleaver-hit.wav",
-        "bytes": 7244
-      },
-      {
-        "path": "assets/sfx/firecracker-attack.wav",
-        "bytes": 6764
-      },
-      {
-        "path": "assets/sfx/firecracker-hit.wav",
-        "bytes": 15884
-      },
-      {
-        "path": "assets/sfx/peach-attack.wav",
+        "path": "assets/sfx/blast-attack.wav",
         "bytes": 8684
       },
       {
-        "path": "assets/sfx/peach-hit.wav",
-        "bytes": 12524
+        "path": "assets/sfx/blast-hit.wav",
+        "bytes": 14444
       },
       {
-        "path": "assets/sfx/rollingpin-attack.wav",
+        "path": "assets/sfx/block.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/boss-arrive.wav",
+        "bytes": 62444
+      },
+      {
+        "path": "assets/sfx/boss-caocao-1.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "assets/sfx/boss-caocao-2.wav",
+        "bytes": 10604
+      },
+      {
+        "path": "assets/sfx/boss-caocao-3.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-1.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-2.wav",
+        "bytes": 6284
+      },
+      {
+        "path": "assets/sfx/boss-dongzhuo-3.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-1.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-2.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/boss-lvbu-3.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-1.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-2.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "assets/sfx/boss-menghuo-3.wav",
+        "bytes": 7724
+      },
+      {
+        "path": "assets/sfx/boss-simayi-1.wav",
+        "bytes": 7724
+      },
+      {
+        "path": "assets/sfx/boss-simayi-2.wav",
+        "bytes": 21644
+      },
+      {
+        "path": "assets/sfx/boss-simayi-3.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-1.wav",
+        "bytes": 8684
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-2.wav",
+        "bytes": 7244
+      },
+      {
+        "path": "assets/sfx/boss-yuanshao-3.wav",
+        "bytes": 5324
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-1.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-2.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/boss-zhangjiao-3.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "assets/sfx/bow-attack.wav",
+        "bytes": 7244
+      },
+      {
+        "path": "assets/sfx/bow-hit.wav",
+        "bytes": 5324
+      },
+      {
+        "path": "assets/sfx/charge-warn.wav",
+        "bytes": 28844
+      },
+      {
+        "path": "assets/sfx/coin.wav",
+        "bytes": 6284
+      },
+      {
+        "path": "assets/sfx/crit.wav",
+        "bytes": 9644
+      },
+      {
+        "path": "assets/sfx/danger.wav",
+        "bytes": 25964
+      },
+      {
+        "path": "assets/sfx/dash.wav",
+        "bytes": 16844
+      },
+      {
+        "path": "assets/sfx/defeat.wav",
+        "bytes": 86444
+      },
+      {
+        "path": "assets/sfx/enemy-bow.wav",
+        "bytes": 8684
+      },
+      {
+        "path": "assets/sfx/enemy-fall.wav",
+        "bytes": 9644
+      },
+      {
+        "path": "assets/sfx/enemy-hit.wav",
+        "bytes": 4124
+      },
+      {
+        "path": "assets/sfx/footstep.wav",
         "bytes": 3884
       },
       {
-        "path": "assets/sfx/rollingpin-hit.wav",
-        "bytes": 9644
+        "path": "assets/sfx/gun-attack.wav",
+        "bytes": 4844
+      },
+      {
+        "path": "assets/sfx/gun-hit.wav",
+        "bytes": 7724
+      },
+      {
+        "path": "assets/sfx/heal.wav",
+        "bytes": 23084
+      },
+      {
+        "path": "assets/sfx/heavy-attack.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "assets/sfx/heavy-hit.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/hoof.wav",
+        "bytes": 10124
+      },
+      {
+        "path": "assets/sfx/melee-commit.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "assets/sfx/petal-attack.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "assets/sfx/petal-hit.wav",
+        "bytes": 17324
+      },
+      {
+        "path": "assets/sfx/player-hurt.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/ritual-attack.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "assets/sfx/ritual-hit.wav",
+        "bytes": 21644
+      },
+      {
+        "path": "assets/sfx/siege.wav",
+        "bytes": 26444
+      },
+      {
+        "path": "assets/sfx/skill-G01.wav",
+        "bytes": 33644
+      },
+      {
+        "path": "assets/sfx/skill-G03.wav",
+        "bytes": 40844
+      },
+      {
+        "path": "assets/sfx/skill-G07.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "assets/sfx/skill-G08.wav",
+        "bytes": 4604
+      },
+      {
+        "path": "assets/sfx/skill-G10.wav",
+        "bytes": 52844
+      },
+      {
+        "path": "assets/sfx/skill-G12.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "assets/sfx/skill-G18.wav",
+        "bytes": 43244
+      },
+      {
+        "path": "assets/sfx/skill-G19.wav",
+        "bytes": 29804
+      },
+      {
+        "path": "assets/sfx/skill-G20.wav",
+        "bytes": 21644
+      },
+      {
+        "path": "assets/sfx/skill-G22.wav",
+        "bytes": 13964
+      },
+      {
+        "path": "assets/sfx/skill-G25.wav",
+        "bytes": 38444
+      },
+      {
+        "path": "assets/sfx/skill-G26.wav",
+        "bytes": 45644
+      },
+      {
+        "path": "assets/sfx/skill-ready.wav",
+        "bytes": 15884
+      },
+      {
+        "path": "assets/sfx/spawn.wav",
+        "bytes": 11564
+      },
+      {
+        "path": "assets/sfx/spirit-attack.wav",
+        "bytes": 10604
+      },
+      {
+        "path": "assets/sfx/spirit-hit.wav",
+        "bytes": 12044
+      },
+      {
+        "path": "assets/sfx/thunder-attack.wav",
+        "bytes": 11084
+      },
+      {
+        "path": "assets/sfx/thunder-hit.wav",
+        "bytes": 29804
+      },
+      {
+        "path": "assets/sfx/ui-buy.wav",
+        "bytes": 17324
+      },
+      {
+        "path": "assets/sfx/ui-click.wav",
+        "bytes": 4844
+      },
+      {
+        "path": "assets/sfx/ui-close.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "assets/sfx/ui-denied.wav",
+        "bytes": 11564
+      },
+      {
+        "path": "assets/sfx/ui-equip.wav",
+        "bytes": 14444
+      },
+      {
+        "path": "assets/sfx/ui-hero.wav",
+        "bytes": 11084
+      },
+      {
+        "path": "assets/sfx/ui-open.wav",
+        "bytes": 10604
+      },
+      {
+        "path": "assets/sfx/ui-refresh.wav",
+        "bytes": 15884
+      },
+      {
+        "path": "assets/sfx/ui-sell.wav",
+        "bytes": 13484
+      },
+      {
+        "path": "assets/sfx/ui-start.wav",
+        "bytes": 36044
+      },
+      {
+        "path": "assets/sfx/ui-upgrade.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "assets/sfx/unlock.wav",
+        "bytes": 40844
+      },
+      {
+        "path": "assets/sfx/victory.wav",
+        "bytes": 124844
+      },
+      {
+        "path": "assets/sfx/wave-clear.wav",
+        "bytes": 31244
+      },
+      {
+        "path": "assets/sfx/wood-attack.wav",
+        "bytes": 5804
+      },
+      {
+        "path": "assets/sfx/wood-hit.wav",
+        "bytes": 7724
       },
       {
         "path": "assets/talismans/items.png",
