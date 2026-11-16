@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "5b0104e7-f4eb-481f-b446-04816f576da8",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "cdn-assets",
+    "bundleName": "hidden-heroes",
+    "priority": 8
+  }
+}

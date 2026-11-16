@@ -167,7 +167,7 @@
       ]
     },
     "hero-parts": {
-      "file": "assets/chronicle-ui/hero-parts.png",
+      "file": "assets/remote-content/hidden-heroes/hero-parts.png",
       "width": 512,
       "height": 768,
       "bytes": 226270,
@@ -263,7 +263,7 @@
       ]
     },
     "three-hero-portraits": {
-      "file": "assets/results/portraits.png",
+      "file": "art/runtime-youth/portraits.png",
       "width": 1152,
       "height": 768,
       "bytes": 470883,
@@ -359,7 +359,7 @@
       ]
     },
     "hero-portraits": {
-      "file": "assets/chronicle-ui/hero-portraits.png",
+      "file": "assets/remote-content/hidden-heroes/hero-portraits.png",
       "width": 768,
       "height": 768,
       "bytes": 344466,
@@ -428,7 +428,7 @@
     }
   },
   "poster": {
-    "file": "assets/campaign/poster.jpg",
+    "file": "art/runtime-youth/poster.jpg",
     "sha256": "c717097f244ef18b82b40898ddc2444aa5ff5fdafeb040f652016557f5261c8b",
     "width": 1334,
     "height": 750,

@@ -19,6 +19,7 @@ const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolea
  click(g.screens.root,'SupplyBuy-0');click(g.screens.root,'ConfirmReplacement');assert.equal(JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]),snapshot,'未选择不成交');
  click(g.screens.root,'ReplaceWeapon-1');assert.match(find(g.screens.root,'ReplacementLedger').getComponent(Label).string,/余额 -/);
  click(g.screens.root,'ConfirmReplacement');assert.equal(JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]),snapshot,'该件退款不足不成交');
+ const replacement=find(g.screens.root,'CampDialog'),outsideEvent={target:replacement,propagationStopped:false};replacement.events.end(outsideEvent);assert.equal(outsideEvent.propagationStopped,true);assert.equal(find(g.screens.root,'CampDialog'),replacement,'点遮罩不隐式取消或确认');
  click(g.screens.root,'CancelReplacement');assert.ok(!find(g.screens.root,'CampDialog'));assert.equal(JSON.stringify([g.run.gold,g.run.weapons,g.run.spent,g.run.purchasedOffers]),snapshot,'取消不卖武器不扣钱');
  click(g.screens.root,'SupplyBuy-0');click(g.screens.root,'ReplaceWeapon-2');assert.ok(!/余额 -/.test(find(g.screens.root,'ReplacementLedger').getComponent(Label).string));
  click(g.screens.root,'ConfirmReplacement');assert.equal(g.run.weapons.length,6);assert.ok(!g.run.weapons.some(w=>w.uid===2));assert.ok(g.run.weapons.some(w=>w.id==='peach'&&w.tier===2));assert.equal(g.run.purchasedOffers.length,1);assert.ok(g.run.gold>=0);
@@ -26,5 +27,6 @@ const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolea
  click(g.screens.root,'SupplyWeapon-0');assert.ok(find(g.screens.root,'RecycleWeapon'));click(g.screens.root,'CloseDialog');
  click(g.screens.root,'OpenInventory');assert.ok(find(g.screens.root,'BagNext'));click(g.screens.root,'CloseDialog');
  const oldScreen=[...g.screens.root.children];click(g.screens.root,'SupplySkip');assert.equal(g.phase,'battle');assert.equal(g.screens.root.children.length,0,'离店释放全部UI节点');assert.ok(oldScreen.every(n=>n.destroyed),'调用destroy释放其绘图模型');g.screens.resize(1400,750);g.showShop();assert.ok(find(g.screens.root,'SupplySkip'),'商店可重建');click(g.screens.root,'SupplySkip');for(const n of [g.statusPanel,g.skillButton,g.weaponHud,pause])assert.equal(n.active,true);
+ for(let i=0;i<2;i++){g.paused=true;g.menu.active=true;click(g.menu,'PauseClose');assert.equal(g.paused,false);assert.equal(g.menu.active,false,'同一暂停按钮可反复关闭，不永久锁死');}
  console.log('通过：补给布局、HUD隐藏恢复、音乐持续、满槽替换的未选/不足/取消/成交、武器和道具弹窗');
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -58,3 +58,6 @@ test-enemy-actions覆盖40×4向×7阶段、表现只读/有限坐标、近战�
 官渡第3波戟将起手距离215→165，三连刺长度210→150、半宽26→18，沿原锁向中心前70；释放.85/1.35/1.85，2.8秒回正，留出约.95秒尾部收招。NpcActionRig的三段姿态窗口同步；不削7位正式Boss的21招。
 
 表现仍只读、共享spellFx，无新增逐兵Graphics；range变化同步图鉴/数值目录与出生身份。test-kiting-results验证真实命中/出手前后/后撤/角度/收招/三连范围，test-youth保护比较只放行指定6个range与E08风up/cycle及已有说明，保留其余HP/速度/旧Boss保护。
+
+
+v9.5 E01采用PNG只搬到art/runtime-grunts作无损基线，运行改TYI1索引RGB＋原alpha压缩；两纹理仍1448×1086、4×3、每格362、12帧和动作采样不改。BufferAsset解码/校验后上传一次，无每帧解码/新材质/新Graphics。源码与帧像素必须对照基线全相等；不能恢复量化或删动作帧。详见资源参考和test-lossless-art。

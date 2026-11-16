@@ -1,5 +1,5 @@
 const fs=require('node:fs'),zlib=require('node:zlib'),assert=require('node:assert/strict');
-const file=fs.readFileSync('assets/results/portraits.png'),w=file.readUInt32BE(16),h=file.readUInt32BE(20);
+const file=fs.readFileSync('art/runtime-youth/portraits.png'),w=file.readUInt32BE(16),h=file.readUInt32BE(20);
 assert.equal(file[24],8);assert.equal(file[25],6,'失败角色图集必须包含真实alpha');assert.equal(w*2,h*3,'3×2选人/哭泣方格，不得切到相邻角色');
 assert.ok(w<=2048&&h<=2048,'运行贴图不超2048，避免低端设备纹理尺寸问题');
 const idat=[];for(let at=8;at<file.length;){const size=file.readUInt32BE(at),type=file.toString('ascii',at+4,at+8);if(type==='IDAT')idat.push(file.subarray(at+8,at+8+size));at+=size+12;}

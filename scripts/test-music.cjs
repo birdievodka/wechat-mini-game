@@ -29,6 +29,11 @@ delayed.stop(); const menuSource = source(); delayed.attach(menuSource); assert.
 const scenes=new BattleMusic(), sceneSource=source();scenes.configure(40,.65);scenes.attach(sceneSource);scenes.unlock();scenes.begin();scenes.update(41);scenes.pause();scenes.resume();assert.equal(sceneSource.currentTime,1);
 scenes.update(.5);assert.equal(sceneSource.volume,.65);scenes.duck(.5,.4);scenes.update(.02);assert.ok(sceneSource.volume<.4);scenes.update(.5);assert.equal(sceneSource.volume,.65);
 scenes.detach();const oldPlays=sceneSource.plays;scenes.update(1);assert.equal(sceneSource.plays,oldPlays);scenes.configure(30,.72);const boss=source();scenes.attach(boss);assert.equal(boss.loop,true);
+// Native autoplay is explicit; a silently blocked/throwing host retries on the first gesture only.
+const auto=new BattleMusic(),native=source();native.playing=false;let permit=false;native.play=function(){this.plays++;this.playing=permit;};
+auto.attach(native);auto.begin();auto.tryAutoplay();assert.equal(native.plays,1);assert.equal(native.playing,false);permit=true;auto.unlock();assert.equal(native.plays,2);assert.equal(native.playing,true);auto.unlock();assert.equal(native.plays,2,'gestures never restart an audible track');
+const denied=new BattleMusic(),throws=source();let blocked=true;throws.play=function(){this.plays++;if(blocked)throw Error('autoplay denied');};denied.attach(throws);denied.begin();assert.doesNotThrow(()=>denied.tryAutoplay());blocked=false;denied.unlock();assert.equal(throws.plays,2);
+const mutedAuto=new BattleMusic(),mutedSource=source();mutedAuto.setEnabled(false);mutedAuto.begin();mutedAuto.tryAutoplay();mutedAuto.attach(mutedSource);assert.equal(mutedSource.plays,0);mutedAuto.setEnabled(true);assert.equal(mutedSource.plays,1);
 for(const id of ['menu','battle','boss']){
  const file=fs.readFileSync('assets/music/'+id+'.m4a');assert.equal(file.toString('ascii',4,8),'ftyp');assert.ok(file.length>100000&&file.length<650000,'compact AAC scene loop');
 }

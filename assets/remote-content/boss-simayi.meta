@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "09133bb9-0964-58f0-8d1f-ea2d7bdf0a81",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "cdn-assets",
+    "bundleName": "boss-simayi",
+    "priority": 8
+  }
+}

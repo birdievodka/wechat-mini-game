@@ -95,6 +95,750 @@
     "boss"
   ],
   "musicFormat": "AAC mono 24kHz 64kbps",
+  "physicalSounds": [
+    {
+      "bundle": "sfx-core",
+      "name": "wood-attack",
+      "sha256": "2cd899326d1a84e5c79eb1c37e71148cacaab0215cff03decc4109de92b4b3ca",
+      "bytes": 5804
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "wood-hit",
+      "sha256": "bea7e9a0217bfc3ba22b888fe89535826ad10677ea93f7d245f777ca6afafab3",
+      "bytes": 7724
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "blade-attack",
+      "sha256": "3e6048d418094c175b9225e1945a5cfdb7be06b7b2b13bf904688b73e80b0f13",
+      "bytes": 5804
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "blade-hit",
+      "sha256": "35a109cca6956bc019dc5ea01dfc97b3e918752b7a41a85fcbc521954734b423",
+      "bytes": 7724
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "heavy-attack",
+      "sha256": "4b874bc631af27d5beff78b3251f9eb72a356d249ec4ba76c50af8377c661d85",
+      "bytes": 5804
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "heavy-hit",
+      "sha256": "3daa1154889cc222b7e6e0f33043a3272d92b1d3fcc7f021bf17a654d6d09f3c",
+      "bytes": 14444
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "bow-attack",
+      "sha256": "29cef709a2e90dc0883f5d6fede612a380d1eea1c07eadb969e478b0e63fa26d",
+      "bytes": 7244
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "bow-hit",
+      "sha256": "338e4159ceae7a5295e1d862f50caa81e8929ee2d6b38262506214659fc2bc4c",
+      "bytes": 5324
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "gun-attack",
+      "sha256": "12077d9c7f414c8893c5e2e016b6bbd7a3ae88bab0133926e93e3232320f84cc",
+      "bytes": 4844
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "gun-hit",
+      "sha256": "eda034f5472e57ab1309f0671b9e669d70b5a05f7cab5521567bf37ca90a5fd7",
+      "bytes": 7724
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "blast-attack",
+      "sha256": "360a36e33c717993aa42f2b5911d824195527049657f1673019186d32e8f0334",
+      "bytes": 8684
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "blast-hit",
+      "sha256": "5845b2615279d26841a1b602934a16e7733266fc68744fa111070176e41a6023",
+      "bytes": 14444
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "petal-attack",
+      "sha256": "28d63cc149a64e6953f9ae53e47697729222570c08873766229e708fcc268972",
+      "bytes": 13484
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "petal-hit",
+      "sha256": "f5aaad69db0e86a885fb0316581d0c53041d04318ef3dfa92928a853728fe9f3",
+      "bytes": 17324
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "spirit-attack",
+      "sha256": "202fbfe59406b38c003650b966271b49190f44322da0023123659b749b383ccf",
+      "bytes": 10604
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "spirit-hit",
+      "sha256": "4969d07266457f9835514a533e37aa861cd83fb6d5aafdc9e040bffc8d32c88d",
+      "bytes": 12044
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "thunder-attack",
+      "sha256": "c292721c2829f296cfc400097e09836261ea11cef4f5205342cb36f82ecbec9e",
+      "bytes": 11084
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "thunder-hit",
+      "sha256": "e9b99e9c6d8d5c6be7d2bb326b9c1dea58c9f21012f8f28d59488c4e25d1b78c",
+      "bytes": 29804
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ritual-attack",
+      "sha256": "8598071410566cf38b79bab8fc3195cd18de56057f4c04560cf4580ba886c4a9",
+      "bytes": 13484
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ritual-hit",
+      "sha256": "1fd76fbb3a284c728f154201e2d25f21a9c7ef3dbaf5efaca2abcd432cce17ff",
+      "bytes": 21644
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "player-hurt",
+      "sha256": "ffb9fb5604f4574357cc2863b851dd54c92c3d5924188e28fa7d9f4ca1bd814f",
+      "bytes": 14444
+    },
+    {
+      "bundle": "sfx",
+      "name": "enemy-hit",
+      "sha256": "aae20e8cecd2b4418842efed4943d951188bd5ea6a8938774e05356a9fb818b7",
+      "bytes": 4124
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "enemy-fall",
+      "sha256": "6c7b98c70ea8fc11f6fb17702939e99f16d816cc4369feb9e0db41bb3bfd8c9a",
+      "bytes": 9644
+    },
+    {
+      "bundle": "sfx",
+      "name": "crit",
+      "sha256": "17df781bef5b6179c0f504aa7fd75df2556e1fbb8b23da44748faaeddfef4b9a",
+      "bytes": 9644
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "coin",
+      "sha256": "2fd22dda62fd3b1a1ac5a06b11a1078822efc6ffc510aac0e7896c0b1335d135",
+      "bytes": 6284
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "heal",
+      "sha256": "f5032e215ae0900e4e695ad6e54f9163b4dddbcba56a91ba5ae74c40fdbea159",
+      "bytes": 23084
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "block",
+      "sha256": "cb72e9752662704327eeb5c681d7a1f90a5f62e250b29d0fd1afa8e868c00595",
+      "bytes": 14444
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "skill-ready",
+      "sha256": "89a9ccacbf2a89ba1f7b6d2f62fa7aae1a1b761973afc86d7e908f6cb4e4a84f",
+      "bytes": 15884
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "dash",
+      "sha256": "11ef22f3d89207078085727929a42ebba330f83cd171dc16f3fb6abce8deefd3",
+      "bytes": 16844
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "hoof",
+      "sha256": "37c66a15379b8c70e767cdb917b37bcc6a177d87554564f939546af825dde91e",
+      "bytes": 10124
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "footstep",
+      "sha256": "7cc09a0b7bc987058d5580ab6676da5184a0994c555c5e5743974319b38ca111",
+      "bytes": 3884
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "spawn",
+      "sha256": "5975670cdca74c9798a408902be5a6b33a7b7c88fa13361b3086aa35e1f076eb",
+      "bytes": 11564
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "melee-commit",
+      "sha256": "e32b8bac880148c8f6eea1cc4566f0856dff18394976687fe824b7b1456c8f86",
+      "bytes": 5804
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "enemy-bow",
+      "sha256": "3df4117e517b8572613f1051bc99f98a35560c2370a8f745091adf3d0bc5ae16",
+      "bytes": 8684
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "charge-warn",
+      "sha256": "a9ce90d46ef3d98104d7b70b121443bf39a0cfdfc5871fbd15127fa6788780a9",
+      "bytes": 28844
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "danger",
+      "sha256": "97507f4a25f5b41de05da90146610c791adce74c688971e1b422d2fad6028c97",
+      "bytes": 25964
+    },
+    {
+      "bundle": "sfx",
+      "name": "siege",
+      "sha256": "c4ca9b24a7d1dea8e95ca0092c6c192f5bde17c7da86780df9ad56cbb058670a",
+      "bytes": 26444
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "skill-G08",
+      "sha256": "fccb7d95564b1a25501474c69e8d6479dd9ccf8fb1c5fc41e7e61b8e21cc19be",
+      "bytes": 4604
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "skill-G01",
+      "sha256": "5a0818544c6306d0857763677e400e263b25f762eac68f841e6ac0eeb133f0c5",
+      "bytes": 33644
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "skill-G03",
+      "sha256": "38ca3d19509b57c89d7e36c5076d1815a9d22caf97844192182f35a3414abec8",
+      "bytes": 40844
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G18",
+      "sha256": "56c0bff174745eefb23fc51854a2f4f3900b091feb99ed16e0516dfadb3b800e",
+      "bytes": 43244
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G10",
+      "sha256": "dd8ba156a9f3021b0932c8fa08808d3fef4418f789bb78cb81ba9da54da22c52",
+      "bytes": 52844
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G12",
+      "sha256": "7928e7eee5e35c023550c1786d9f5192590a50cb5157989f4efcb969ee2fb81d",
+      "bytes": 31244
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G20",
+      "sha256": "ecdb7e6bbbe94b3f03d5b73bc781a584eef0706ee48cc1b5b643956da747fc45",
+      "bytes": 21644
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G07",
+      "sha256": "d9a7952057599277fa1ec2c9b983a967852d0a231730d20d6a6ba654632e6467",
+      "bytes": 31244
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G25",
+      "sha256": "1d3daf88896766042435baec6a20721e26b655e65d8a37f2f1823869152f7223",
+      "bytes": 38444
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G26",
+      "sha256": "a2b9b5f159bcd07576a2e54788fc0a717c0d172276617d2b369446b077df8bad",
+      "bytes": 45644
+    },
+    {
+      "bundle": "sfx",
+      "name": "skill-G22",
+      "sha256": "6deb1e5af6cec60ca119fe095eb5c85965a78ce25338f29f8c27b882b9250340",
+      "bytes": 13964
+    },
+    {
+      "bundle": "sfx",
+      "name": "boss-zhangjiao-1",
+      "sha256": "62242675cbff36e3c129cd7437e2e39113ef85e6b85f86f4bf8274943660d966",
+      "bytes": 28844
+    },
+    {
+      "bundle": "sfx",
+      "name": "boss-lvbu-2",
+      "sha256": "ca77fe033911367b7c0e09d75072520aa96ac9f3d0688a96465b73a3f26f279b",
+      "bytes": 28844
+    },
+    {
+      "bundle": "sfx",
+      "name": "boss-caocao-2",
+      "sha256": "9022fe09e7d9848165060b3b7858a0689c9f491986ee39e8066ea47a9d2311fc",
+      "bytes": 10604
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ui-click",
+      "sha256": "7952575cb98bf8ae33df1cf34274a2251fe245a4cececc6f983dbfd32599403e",
+      "bytes": 4844
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ui-hero",
+      "sha256": "f8f646529079dca81f4894c0f10044963a98428e85783fc7608a5cb94e92fe48",
+      "bytes": 11084
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ui-equip",
+      "sha256": "bd830ce299efa94890152efa0269c2f0591d28bbdddd1b9c6f9f150554fc38f5",
+      "bytes": 14444
+    },
+    {
+      "bundle": "sfx",
+      "name": "ui-buy",
+      "sha256": "1ded9c0185b4991ee0d3c6483b211804c8d7ecae83ac80e8d221bd31df2b8275",
+      "bytes": 17324
+    },
+    {
+      "bundle": "sfx",
+      "name": "ui-refresh",
+      "sha256": "dc3724e7d23ee13ba4748f84f261a83ec353ea9e4252322b9aeef2799943db4b",
+      "bytes": 15884
+    },
+    {
+      "bundle": "sfx",
+      "name": "ui-sell",
+      "sha256": "e43bb5e29fec814d12bd5a54f5e076d50b103f1b5b43797d907f7af82fbcafbd",
+      "bytes": 13484
+    },
+    {
+      "bundle": "sfx",
+      "name": "ui-upgrade",
+      "sha256": "7e65840bea9de8b5760ee0f621fd541a88eef7d35cf020d9342e75ae7cf6aafb",
+      "bytes": 31244
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ui-close",
+      "sha256": "8bac12418ac6a6d0ca38af44610e358508e37afd7e4c2a3f03327932e5ddf5d1",
+      "bytes": 5804
+    },
+    {
+      "bundle": "sfx",
+      "name": "ui-denied",
+      "sha256": "ca4f7624d85758c360770d82cf57b0ffb67d5fffb0780f760b3ac5bd82773dd9",
+      "bytes": 11564
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "ui-start",
+      "sha256": "e6ef5397a5fc02d42e9bd5a0d2bae9d248e4ef01f45d70bec5aa3af920d67947",
+      "bytes": 36044
+    },
+    {
+      "bundle": "sfx",
+      "name": "boss-arrive",
+      "sha256": "7378de842fec8cd9c7428e6f53e910e5c84e66135d8f262f2e3666eb20112807",
+      "bytes": 62444
+    },
+    {
+      "bundle": "sfx",
+      "name": "wave-clear",
+      "sha256": "745d3d83f3958a6283b0cebd117ecbdc1bcd4e53f4cc49406a28f001efc0fdb7",
+      "bytes": 31244
+    },
+    {
+      "bundle": "sfx",
+      "name": "victory",
+      "sha256": "87b15c1ab21753b6bd3d250a2f13c6edbe31ef3e883d3b2834b238287ad74273",
+      "bytes": 124844
+    },
+    {
+      "bundle": "sfx",
+      "name": "defeat",
+      "sha256": "de18e838da3402847f562e57345e653803dd2dcd091ece5735e2facf00284d5b",
+      "bytes": 86444
+    },
+    {
+      "bundle": "sfx",
+      "name": "unlock",
+      "sha256": "5b55031e6e6150d6f10a3b978e24bae957e9a30ea6e8dff2f474d81772ec63af",
+      "bytes": 40844
+    }
+  ],
+  "aliases": {
+    "wood-attack": {
+      "bundle": "sfx-core",
+      "name": "wood-attack"
+    },
+    "wood-hit": {
+      "bundle": "sfx-core",
+      "name": "wood-hit"
+    },
+    "boss-menghuo-3": {
+      "bundle": "sfx-core",
+      "name": "wood-hit"
+    },
+    "boss-simayi-1": {
+      "bundle": "sfx-core",
+      "name": "wood-hit"
+    },
+    "blade-attack": {
+      "bundle": "sfx-core",
+      "name": "blade-attack"
+    },
+    "boss-caocao-1": {
+      "bundle": "sfx-core",
+      "name": "blade-attack"
+    },
+    "blade-hit": {
+      "bundle": "sfx-core",
+      "name": "blade-hit"
+    },
+    "heavy-attack": {
+      "bundle": "sfx-core",
+      "name": "heavy-attack"
+    },
+    "heavy-hit": {
+      "bundle": "sfx-core",
+      "name": "heavy-hit"
+    },
+    "boss-lvbu-3": {
+      "bundle": "sfx-core",
+      "name": "heavy-hit"
+    },
+    "boss-dongzhuo-1": {
+      "bundle": "sfx-core",
+      "name": "heavy-hit"
+    },
+    "bow-attack": {
+      "bundle": "sfx-core",
+      "name": "bow-attack"
+    },
+    "boss-yuanshao-2": {
+      "bundle": "sfx-core",
+      "name": "bow-attack"
+    },
+    "bow-hit": {
+      "bundle": "sfx-core",
+      "name": "bow-hit"
+    },
+    "boss-yuanshao-3": {
+      "bundle": "sfx-core",
+      "name": "bow-hit"
+    },
+    "gun-attack": {
+      "bundle": "sfx-core",
+      "name": "gun-attack"
+    },
+    "gun-hit": {
+      "bundle": "sfx-core",
+      "name": "gun-hit"
+    },
+    "blast-attack": {
+      "bundle": "sfx-core",
+      "name": "blast-attack"
+    },
+    "blast-hit": {
+      "bundle": "sfx-core",
+      "name": "blast-hit"
+    },
+    "boss-dongzhuo-3": {
+      "bundle": "sfx-core",
+      "name": "blast-hit"
+    },
+    "boss-simayi-3": {
+      "bundle": "sfx-core",
+      "name": "blast-hit"
+    },
+    "petal-attack": {
+      "bundle": "sfx-core",
+      "name": "petal-attack"
+    },
+    "petal-hit": {
+      "bundle": "sfx-core",
+      "name": "petal-hit"
+    },
+    "spirit-attack": {
+      "bundle": "sfx-core",
+      "name": "spirit-attack"
+    },
+    "spirit-hit": {
+      "bundle": "sfx-core",
+      "name": "spirit-hit"
+    },
+    "thunder-attack": {
+      "bundle": "sfx-core",
+      "name": "thunder-attack"
+    },
+    "thunder-hit": {
+      "bundle": "sfx-core",
+      "name": "thunder-hit"
+    },
+    "skill-G19": {
+      "bundle": "sfx-core",
+      "name": "thunder-hit"
+    },
+    "ritual-attack": {
+      "bundle": "sfx-core",
+      "name": "ritual-attack"
+    },
+    "boss-zhangjiao-3": {
+      "bundle": "sfx-core",
+      "name": "ritual-attack"
+    },
+    "ritual-hit": {
+      "bundle": "sfx-core",
+      "name": "ritual-hit"
+    },
+    "boss-simayi-2": {
+      "bundle": "sfx-core",
+      "name": "ritual-hit"
+    },
+    "player-hurt": {
+      "bundle": "sfx-core",
+      "name": "player-hurt"
+    },
+    "enemy-hit": {
+      "bundle": "sfx",
+      "name": "enemy-hit"
+    },
+    "enemy-fall": {
+      "bundle": "sfx-core",
+      "name": "enemy-fall"
+    },
+    "crit": {
+      "bundle": "sfx",
+      "name": "crit"
+    },
+    "coin": {
+      "bundle": "sfx-core",
+      "name": "coin"
+    },
+    "boss-dongzhuo-2": {
+      "bundle": "sfx-core",
+      "name": "coin"
+    },
+    "heal": {
+      "bundle": "sfx-core",
+      "name": "heal"
+    },
+    "block": {
+      "bundle": "sfx-core",
+      "name": "block"
+    },
+    "skill-ready": {
+      "bundle": "sfx-core",
+      "name": "skill-ready"
+    },
+    "dash": {
+      "bundle": "sfx-core",
+      "name": "dash"
+    },
+    "hoof": {
+      "bundle": "sfx-core",
+      "name": "hoof"
+    },
+    "footstep": {
+      "bundle": "sfx-core",
+      "name": "footstep"
+    },
+    "spawn": {
+      "bundle": "sfx-core",
+      "name": "spawn"
+    },
+    "melee-commit": {
+      "bundle": "sfx-core",
+      "name": "melee-commit"
+    },
+    "boss-menghuo-2": {
+      "bundle": "sfx-core",
+      "name": "melee-commit"
+    },
+    "enemy-bow": {
+      "bundle": "sfx-core",
+      "name": "enemy-bow"
+    },
+    "boss-yuanshao-1": {
+      "bundle": "sfx-core",
+      "name": "enemy-bow"
+    },
+    "charge-warn": {
+      "bundle": "sfx-core",
+      "name": "charge-warn"
+    },
+    "boss-lvbu-1": {
+      "bundle": "sfx-core",
+      "name": "charge-warn"
+    },
+    "boss-caocao-3": {
+      "bundle": "sfx-core",
+      "name": "charge-warn"
+    },
+    "boss-menghuo-1": {
+      "bundle": "sfx-core",
+      "name": "charge-warn"
+    },
+    "danger": {
+      "bundle": "sfx-core",
+      "name": "danger"
+    },
+    "siege": {
+      "bundle": "sfx",
+      "name": "siege"
+    },
+    "skill-G08": {
+      "bundle": "sfx-core",
+      "name": "skill-G08"
+    },
+    "skill-G01": {
+      "bundle": "sfx-core",
+      "name": "skill-G01"
+    },
+    "skill-G03": {
+      "bundle": "sfx-core",
+      "name": "skill-G03"
+    },
+    "skill-G18": {
+      "bundle": "sfx",
+      "name": "skill-G18"
+    },
+    "skill-G10": {
+      "bundle": "sfx",
+      "name": "skill-G10"
+    },
+    "skill-G12": {
+      "bundle": "sfx",
+      "name": "skill-G12"
+    },
+    "skill-G20": {
+      "bundle": "sfx",
+      "name": "skill-G20"
+    },
+    "skill-G07": {
+      "bundle": "sfx",
+      "name": "skill-G07"
+    },
+    "skill-G25": {
+      "bundle": "sfx",
+      "name": "skill-G25"
+    },
+    "skill-G26": {
+      "bundle": "sfx",
+      "name": "skill-G26"
+    },
+    "skill-G22": {
+      "bundle": "sfx",
+      "name": "skill-G22"
+    },
+    "boss-zhangjiao-1": {
+      "bundle": "sfx",
+      "name": "boss-zhangjiao-1"
+    },
+    "boss-zhangjiao-2": {
+      "bundle": "sfx",
+      "name": "boss-zhangjiao-1"
+    },
+    "boss-lvbu-2": {
+      "bundle": "sfx",
+      "name": "boss-lvbu-2"
+    },
+    "boss-caocao-2": {
+      "bundle": "sfx",
+      "name": "boss-caocao-2"
+    },
+    "ui-open": {
+      "bundle": "sfx",
+      "name": "boss-caocao-2"
+    },
+    "ui-click": {
+      "bundle": "sfx-core",
+      "name": "ui-click"
+    },
+    "ui-hero": {
+      "bundle": "sfx-core",
+      "name": "ui-hero"
+    },
+    "ui-equip": {
+      "bundle": "sfx-core",
+      "name": "ui-equip"
+    },
+    "ui-buy": {
+      "bundle": "sfx",
+      "name": "ui-buy"
+    },
+    "ui-refresh": {
+      "bundle": "sfx",
+      "name": "ui-refresh"
+    },
+    "ui-sell": {
+      "bundle": "sfx",
+      "name": "ui-sell"
+    },
+    "ui-upgrade": {
+      "bundle": "sfx",
+      "name": "ui-upgrade"
+    },
+    "ui-close": {
+      "bundle": "sfx-core",
+      "name": "ui-close"
+    },
+    "ui-denied": {
+      "bundle": "sfx",
+      "name": "ui-denied"
+    },
+    "ui-start": {
+      "bundle": "sfx-core",
+      "name": "ui-start"
+    },
+    "boss-arrive": {
+      "bundle": "sfx",
+      "name": "boss-arrive"
+    },
+    "wave-clear": {
+      "bundle": "sfx",
+      "name": "wave-clear"
+    },
+    "victory": {
+      "bundle": "sfx",
+      "name": "victory"
+    },
+    "defeat": {
+      "bundle": "sfx",
+      "name": "defeat"
+    },
+    "unlock": {
+      "bundle": "sfx",
+      "name": "unlock"
+    }
+  },
   "skillSegmentation": [
     "G08 per arrow",
     "G19 per lightning",

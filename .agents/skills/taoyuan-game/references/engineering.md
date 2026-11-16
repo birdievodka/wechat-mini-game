@@ -180,3 +180,40 @@ v9.2.1运行版本stage-v9.2.1-training-hit；hurtPlayer受击bool与HP损失解
 ## v9.3音频
 
 版本stage-v9.3-audio。render-audio-review生成源试听，pack-game-audio采纳为小体积音乐与分事件音效，audio-catalog为生成源；weapon-sound定义36武器11类与六声道，BattleMusic支持场景长度/音量/短压低，GameBootstrap连接菜单/商店/真实释放和生命周期。test-audio-scenes加入npm test，新增纯数据模块audio-catalog加入目录生成器允许导入表，不关闭同步检查。不要把整段8箭/4雷/5星/箭雨试听放在cast时直接播放。详见docs/audio-integration-v93.md。
+
+
+## v9.4 CDN工程
+
+版本stage-v9.4-cdn-assets。新增game-resources/resource-gate/ResourcePrepareView、Boss按关准备与原子贴图加载。build:wechat导出remote到cdn-assets/releases并固定内容哈希URL，所有JS留本地；cdn:publish经bytedcli上传后逐文件公开HTTP/SHA256验证。预览前release/published版本必须一致，不能只build不发布新数据。详见docs/resources-cdn-v94.md与资源参考。test-resource-loading覆盖离线首关/请求合并/失败重试/取消/准备冻结，旧兼容战斗夹具显式准备Boss不等于生产启动全加载。包检查保持本地必需入口、远程配置/本地桩与不重复打包断言。源指纹包含cdn-assets清单，忽略导出二进制目录；嵌套远程Boss Bundle也必须被目录收录。用户确认微信后台downloadFile域名尚未配置，实际CDN公开成功和IDE解码不等于手机正式远程已可用。
+
+
+### 2026-11-16 正式微信账号绑定
+
+用户确认实际后台AppID为`wxbddcb8f0462f58cc`；旧`wxbf455170a0f5ea11`是测试号，不能用其域名列表判断正式后台是否配置。根project.config.json与config/build-wechat.json必须一致，Creator构建后再次断言产物AppID相同。private不得覆盖成旧号。变更后重开对应项目，保持urlCheck=true，用实际wx.downloadFile验证域名；不把配置声明或公共curl成功当微信合法域名已生效。存档按微信AppID隔离，不复制或清理旧号档。新账号包限制以新预览报告为准，不把旧测试号20MB限制当新账号结论。
+
+正式号微信验收已通过：原生下载清单HTTP200、menu音乐、吕布20帧/孟获16＋24帧按需加载、退出释放且profile未变，见art/reviews/resources/validation.json。不得将开发工具的成功报告成iPhone已实测。
+
+
+## v9.5加载与无损打包
+
+版本stage-v9.5-lossless-assets；deferred-art管理results/hidden-heroes原子加载和取消，prepareVisuals统一Boss/战报/隐藏英雄错误重试。indexed-art还原两农兵BufferAsset，vendor-inflate保留固定依赖MIT源码/指纹；只供应同步解压，所有JS仍本地。test-lossless-art加入全测试。新增build:review在Creator Web构建后复制唯一海报，捕获用独立8766/9336；微信包检查改7本地＋15远程，不删资源存在断言。新来源/生成器同任务skill:sync/check。
+
+
+### v9.6正式战场纯色背景回归修复
+
+按需加载后正式关卡不请求演武旧meadow，drawTerrainFallback仍只判断world-ground，导致把不透明兜底画在已加载的本地stage-ground上层。现改为只在没有实际MeadowTile时填兜底色；主题贴图仍留本地，无需恢复额外网络请求。六关回归覆盖正确主题/无旧meadow不遮盖/真缺图兜底，真实Cocos逐关隐藏地面贴图前后像素差验收见art/reviews/sandal-grip/validation.json。
+
+
+## v9.7触屏输入修复与手感
+
+Cocos3.8.8 UI PointerEventDispatcher先于全局input分发；全屏Canvas已有audioTouch监听时会吞掉触摸，导致input.on的摇杆收不到真实事件。摇杆改为同Canvas的TOUCH_START/MOVE/END/CANCEL捕获监听（与音频首触共存），不再依赖全局触摸。回调仍按合法激活区/首触点ID/状态保护；技能手指不抢摇杆。销毁时对称off，不能恢复只有input.on的错误路线。真实微信工具同触点先复现不动、捕获路由后约.455移动/.3可视指位与实际位移已验证；不当iPhone延迟/FPS实测。
+
+死区6%、80%行程全速、.7幂响应；独立stickThumb按真实指位绘制，clearTouch同帧清移动与可视头位，不加转向/移动惯性，最大速度/碰撞/击退不变。
+
+
+## v9.8首次音乐
+
+微信端读取music-muted设置后显式music.tryAutoplay，场景与资源就绪自动尝试菜单音乐，不再强制等待点击。浏览器默认仍等首触；若宿主静默拒绝早播，第一次真实手势在source.playing===false时重试一次，播放中的轨道不重启。同步抛错不能阻断菜单，静音/后台/单源释放/迟到场景世代保护不变。audioUnlocked仍用于音效，不能为背景音乐自动开启首屏一堆音效。测试分别覆盖允许自动播放/静默拒绝/抛错/保存静音与首次手势，微信实际读playing/currentTime，不能把Node桩称手机听感验证。
+
+
+v9.9普通面板关闭统一经panel-ui.addPanelClose，不各自画叉号或混用底部返回。BattleSpriteAtlas新增ui-close，现63格仍1024²；GameBootstrap创建atlas后立即复制ui-panel-close供暂停及异步创建界面共用，销毁仍由artFrames统一去重。处理传播拦截和可重入防护，不能把复用面板关闭按钮永久置为已提交。

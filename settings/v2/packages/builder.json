@@ -27,6 +27,32 @@
             }
           }
         }
+      },
+      "cdn-assets": {
+        "displayName": "桃园按需CDN资源",
+        "configs": {
+          "miniGame": {
+            "configMode": "fallback",
+            "fallbackOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": true
+            }
+          },
+          "web": {
+            "configMode": "fallback",
+            "fallbackOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": false
+            }
+          },
+          "native": {
+            "configMode": "fallback",
+            "fallbackOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": false
+            }
+          }
+        }
       }
     }
   }

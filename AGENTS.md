@@ -14,7 +14,7 @@
 - 纯问答、阅读、试玩没有项目变更时，不必重写 skill。
 - 最新用户需求优先；实现新规则后更新规范，不把旧约定当作拒绝变更的理由。
 
-当前v8.2为三少年小刘/小关/小张（liubei/guanyu/zhangfei ID保持，赵云/孔明隐藏）、6独立关卡×5波。1/2波45秒、第4波60秒，第3波小Boss全灭立即结束，第5波杀大Boss；无热身。每英雄关卡进度独立，36武器/60被动/12技能的内容资格与发现全账号共享；固定初始3基础武器，其余解锁武器只进商店。每关满5/5/6心、28币、一把白I、一个就绪技能，关间/死亡重试构筑全清。四商品可全买，刷新封顶20，每店重置，C05首刷优惠；所有主动15真实小兵击杀重置，演武免充能保持。Boss入场保兵并持续援军，BGM购物续播；胜利展示共享解锁差集和个人下一关。未知图鉴匿名问号。永久档taoyuan-stage-profile-v8，旧schema4不自动解释为通关记录。正式入口stage-data/stage-progress＋GameBootstrap的stageBoundary/resumeStage/endStage；旧chronicles七章表是首领形态/演武/兼容数据。见skill与docs/stage-challenge-v8/实现说明.md。
+当前v8.2为三少年小刘/小关/小张（liubei/guanyu/zhangfei ID保持，赵云/孔明隐藏）、6独立关卡×5波。1/2波45秒、第4波60秒，第3波小Boss全灭立即结束，第5波杀大Boss；无热身。每英雄关卡进度独立，36武器/60被动/12技能的内容资格与发现全账号共享；固定初始3基础武器，其余解锁武器只进商店。每关满5/5/6心、28币、一把白I、一个就绪技能，关间/死亡重试构筑全清。四商品可全买，刷新封顶20，每店重置，C05首刷优惠；所有主动15真实小兵击杀重置，演武免充能保持。Boss入场保兵并持续援军，BGM购物续播；胜利展示共享解锁差集和个人下一关。未知图鉴匿名剪影，仅露轮廓不显示原色和详情。永久档taoyuan-stage-profile-v8，旧schema4不自动解释为通关记录。正式入口stage-data/stage-progress＋GameBootstrap的stageBoundary/resumeStage/endStage；旧chronicles七章表是首领形态/演武/兼容数据。见skill与docs/stage-challenge-v8/实现说明.md。
 
 现行商店在 `survival.ts`，不要切回 `campaign.ts` 的旧 `rollShop/buyItem` 路径。按变更范围执行 `npm test`、`npm run typecheck`、`npm run check`；需要微信体验时构建并确认目标运行时版本。
 
@@ -45,3 +45,35 @@ v9.2.1演武受击：仅跳过扣血，不跳过闪红/退闪/击退/飘字/音�
 
 
 v9.3音频：三场景menu/battle/boss，音乐单源懒加载/世代号/切场释放旧解码；购物续播、后台暂停、首触解锁。86段新音效＋原草鞋，六声道、按类限频、受伤危险优先；8箭/4雷/5星/4轮箭雨由真实释放发声。audio-catalog由pack-game-audio.py生成，不能把整段试听连击当cast音效。来源/预算/验证见docs/audio-integration-v93.md与skill声音参考。
+
+
+v9.4资源：8本地核心包＋13远程静态Bundle，六后续Boss按关/演武准备，张角和40兵模块本地；源码/JS全本地。build:wechat导出不可变CDN版本，cdn:publish上传并逐文件SHA256验证，预览前release/published版本相同。86逻辑声复用66物理PCM＋草鞋。cdn-assets清单入Git，releases导出忽略；清理旧运行成人/旧曲风资源，采用版源图保留。域名lf3-static.bytednsdoc.com需用户后台downloadFile白名单，未配置不能宣称手机远程验证。见docs/resources-cdn-v94.md与资源skill。
+
+
+2026-11-16账号绑定：用户确认正式AppID为wxbddcb8f0462f58cc（原wxbf455170a0f5ea11为旧测试号）。根project.config与Creator构建配置/产物须一致；downloadFile域名按正式AppID核验，不能用旧测试号列表判断新后台。旧存档不删除/跨号搬迁，新号包限制以实际预览为准。
+
+
+v9.5资源：results和hidden-heroes也远程，首页不等隐藏英雄/哭脸；HUD原尺寸无损切行本地，低血预取哭脸/死亡等就绪，回备战释放。唯一poster在art/runtime-youth/poster.jpg，微信和build:review各复制一份到目标根。农兵用TYI1无损索引RGB＋原alpha BufferAsset，解码同1448×1086/12帧/全部RGBA，绝不再量化/缩图/删帧；原PNG/meta及指纹留art/runtime-grunts。fflate固定MIT来源由vendor-inflate生成本地TS兼容Creator，项目解析器严格类型。见docs/resources-lossless-v95.md，test-lossless-art与真实像素渲染对照必查。
+
+
+v9.6草鞋：采用红绳短椭圆草鞋与露拳稿，握拳独立前层，鞋带后跟在掌后；菜单/单草鞋战斗两手握鞋，备鞋纯装饰不占槽不增射击。多武器仍环绕/自然手，本命双剑不变。复用BattleSpriteAtlas原草鞋格2倍密度，UI/飞行/持握同形，无新纹理；见docs/sandal-grip-v96.md。
+
+
+v9.6.1图鉴：未发现四类条目改真实alpha轮廓剪影（Sprite RGB0、alpha108），列表/详情去问号；姓名/原色/数值/机制/具体获取条件仍隐藏，发现与资格分离，浏览不写进度。复用本地现有帧，不额外载入远程Boss/纹理。
+
+
+v9.7首页关卡卡简化：单层500×280，大图＋底部关名/切换，无成长题签/五波/首领徽章。六关缩略图采用runtime-stage-ui/battlefields.png的无字无旗战场环境，pack-stage-art复用stage-themes原纹理；原地面裁格不变。手机摇杆6%死区、80%行程全速、.7响应幂，摇杆头独立跟实际指位，无移动惯性，角色最高速度不变。
+
+v9.7触摸实际接入必须是Canvas节点TOUCH_START/MOVE/END/CANCEL捕获监听；仅input.on会被UI吞事件，禁止恢复。首触点ID/技能第二指/暂停与出店倒数/后台保护保持，root销毁对称off。
+
+
+v9.8行军地图：StageBrief640×400，600×400透明纸/布/红绳皮肤，原stage-map六帧＋动态纸签/箭头，1份菜单Stencil随菜单销毁；微信/Web includeModules必须含mask，真实渲染验收。技能选择列表与详情未解锁/未知剪影，名字详情资格不变。微信读取静音设置后tryAutoplay，静默受阻首触重试一次；播放中不重启、音效仍首触。见skill表现/工程参考。
+
+
+v9.9：普通面板统一panel-ui.addPanelClose右上圆形X，64触区、共享BattleSpriteAtlas第63格，仍1024²；遮罩不关闭。演武X回战场，返回首页独立底部导航。技能标题与内容两边对齐、去排序说明；地图移除两侧装饰箭头，仅保留玉印入口。结算/主商店/加载保留明确操作按钮。
+
+
+v9.10：第一关地面720×540目标格，相邻行列镜像使原非周期裁图边缘连续，保留.5像素覆盖；其他关/演武保持。复用stage-ground-1，无新纹理/材质/逐帧处理。
+
+
+v9.11：首页演武入口暂隐藏，startTraining/演武逻辑保留。头像与武器技能之间短金线＋菱形分组。原卷轴去烘焙圆玉印，改128²共用城门图标stage-switch，所有关一致；94视觉/100触区，按压.94，触摸只冒泡一次到原选关守卫。pack-stage-art确定性导出，地图本体/六关配图保持。

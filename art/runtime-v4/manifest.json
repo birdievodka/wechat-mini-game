@@ -2,7 +2,7 @@
   "source": "art/runtime-v4/sources",
   "atlases": {
     "hero-portraits": {
-      "file": "assets/chronicle-ui/hero-portraits.png",
+      "file": "assets/remote-content/hidden-heroes/hero-portraits.png",
       "width": 768,
       "height": 768,
       "bytes": 344466,
@@ -72,7 +72,7 @@
       "supersededBy": "art/runtime-youth/manifest.json"
     },
     "hero-parts": {
-      "file": "assets/chronicle-ui/hero-parts.png",
+      "file": "assets/remote-content/hidden-heroes/hero-parts.png",
       "width": 512,
       "height": 768,
       "bytes": 226270,

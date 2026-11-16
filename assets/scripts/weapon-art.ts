@@ -11,11 +11,24 @@ export function drawWeaponArt(g: Graphics, id: WeaponId, tier: Tier = 1, project
     else {g.moveTo(0,-16);g.lineTo(0,17);g.stroke();g.moveTo(0,23);g.lineTo(-5,12);g.lineTo(5,12);g.close();g.fill();g.stroke();}return;
   }
   if (id === 'sandal') {
-    g.fillColor = new Color('#eabc60'); g.roundRect(-14, -11, 28, 47, 12); g.fill(); g.stroke();
-    g.strokeColor = new Color('#9a682b'); g.lineWidth = 2;
-    for (let y = -4; y <= 28; y += 8) { g.moveTo(-10, y); g.lineTo(10, y); } g.stroke();
-    g.strokeColor = new Color('#443424'); g.lineWidth = 3.5;
-    g.moveTo(-10, 26); g.lineTo(0, 13); g.lineTo(10, 26); g.moveTo(0, 13); g.lineTo(0, -7); g.stroke();
+    // Approved red-strap shoe: heel grip at (0,0), full fist is a SEPARATE foreground layer.
+    // Compact oval, braided edge and open crossed straps stay readable at combat scale.
+    g.fillColor=new Color('#ba7e32');g.ellipse(0,18,13.5,21);g.fill();g.stroke();
+    g.fillColor=new Color('#f5c45e');g.ellipse(0,19,12.8,19.8);g.fill();g.stroke();
+    g.fillColor=new Color('#ffdb83');g.ellipse(-1,20,9.4,16.5);g.fill();
+    g.strokeColor=new Color('#c9913a');g.lineWidth=1.1;
+    for(let i=-2;i<=2;i++){const y=20+i*5,r=Math.sqrt(Math.max(0,1-i*i/13))*8.3;g.moveTo(-r,y-3);g.lineTo(r,y+3);}
+    for(const x of [-5,0,5]){g.moveTo(x-2,8);g.bezierCurveTo(x+1,16,x-1,26,x+1,32);}g.stroke();
+    g.strokeColor=new Color('#ad7430');g.lineWidth=1.2;
+    for(let i=0;i<14;i++){const a=i*Math.PI*2/14,x=Math.cos(a)*11.7,y=19+Math.sin(a)*18.6;g.moveTo(x-Math.cos(a)*1.6,y-Math.sin(a)*1.6);g.lineTo(x+Math.cos(a)*.7,y+Math.sin(a)*.7);}g.stroke();
+    // Two broad vermilion straps, outlined once, with restrained highlights.
+    for(const side of [-1,1]){
+      g.strokeColor=new Color('#633a27');g.lineWidth=6;g.moveTo(side*9,30);g.bezierCurveTo(side*5,25,-side*4,18,-side*10,12);g.stroke();
+      g.strokeColor=new Color('#da4b35');g.lineWidth=3.5;g.moveTo(side*9,30);g.bezierCurveTo(side*5,25,-side*4,18,-side*10,12);g.stroke();
+    }
+    g.fillColor=new Color('#507247');g.strokeColor=new Color('#493522');g.lineWidth=1.7;g.roundRect(-6,-3,12,7,2.5);g.fill();g.stroke();
+    g.strokeColor=new Color('#493522');g.lineWidth=6.5;g.moveTo(0,10);g.bezierCurveTo(4,3,4,-3,3,-9);g.stroke();
+    g.strokeColor=new Color('#df5139');g.lineWidth=4;g.moveTo(0,10);g.bezierCurveTo(4,3,4,-3,3,-9);g.stroke();
   } else if (id === 'pole') {
     g.fillColor=new Color('#dca348');g.strokeColor=new Color('#5a3822');g.lineWidth=2.5;
     g.moveTo(-4,-47);g.bezierCurveTo(-10,-15,-7,29,0,65);g.lineTo(7,67);g.bezierCurveTo(0,25,-2,-18,3,-47);g.close();g.fill();g.stroke();

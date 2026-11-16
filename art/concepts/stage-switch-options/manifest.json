@@ -1,0 +1,51 @@
+{
+  "tool": "built-in image_gen; separate calls per design",
+  "status": "universal icon approved and implemented in v9.11; prior options remain concept provenance",
+  "currentDirection": "one universal stage-select gate icon shared by every stage, no per-stage appearance, flags or text",
+  "priorExplorations": "jade, wood, brass, cloth arrow variants",
+  "files": [
+    {
+      "id": "jade",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-3167a3d4-ace2-4fd6-bf44-58794ade21e5.png",
+      "output": "art/concepts/stage-switch-options/jade.png",
+      "sha256": "1035de3ce199e41097b0e52f3bfc80c9df38a9020e8aa95802d5e036f73fc0e5"
+    },
+    {
+      "id": "wood",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-e74f37d2-6dbd-4022-8331-6866fd609828.png",
+      "output": "art/concepts/stage-switch-options/wood.png",
+      "sha256": "0f7cc3442c42b1f2b05ab3f40bea2ef6479eeac62aa7aa500f94dcdf36da97b2"
+    },
+    {
+      "id": "brass",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-b9bdbe4d-2dd1-4673-bb04-bade131f0b22.png",
+      "output": "art/concepts/stage-switch-options/brass.png",
+      "sha256": "2d953ce6dce24d3cdbea80ea1da240258a1433a6c585ab007cc68ab1c506a107"
+    },
+    {
+      "id": "cloth",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-069a64da-e9fc-4b62-9a47-664c4fb1db47.png",
+      "output": "art/concepts/stage-switch-options/cloth.png",
+      "sha256": "14fdc0b1eab8b0715084bf5130422abf280536440f950225cfc6cbb891c0c8cd"
+    },
+    {
+      "id": "gate",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-931d0522-b9fc-4401-ba90-1e490eb701cd.png",
+      "output": "art/concepts/stage-switch-options/gate.png",
+      "sha256": "34ae66406ce1d060602027292263c9c3f088f5d16bc7bf118172ea5a5e39e651"
+    },
+    {
+      "id": "pass",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-23f9bf63-c5f8-4f1a-b21b-b11c7227aa7e.png",
+      "output": "art/concepts/stage-switch-options/pass.png",
+      "sha256": "a408f0cb603da8cdfa4ff18a57cdeeb5676d5a6c1e52316df47533fa4553817d"
+    },
+    {
+      "id": "universal",
+      "source": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-cc0d1ed4-24ce-42e4-80bf-989dca9ec073.png",
+      "output": "art/concepts/stage-switch-options/universal.png",
+      "sha256": "1c4f5f3fed6f9b36c101aad5d22e52415efd814423ab5760f9e4a1bb54233340"
+    }
+  ],
+  "runtime": "assets/chronicle-ui/stage-switch.png; original parchment preserved without baked jade seal"
+}

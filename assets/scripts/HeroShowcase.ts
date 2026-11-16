@@ -52,7 +52,7 @@ export class HeroShowcase {
     for(const p of this.props){for(const n of [...p.children]){n.removeFromParent();n.destroy();}p.getComponent(Graphics)?.clear();p.setScale(1,1,1);p.active=false;}
     const propHero=weapon==='sandal'?'liubei':weapon==='pole'?'guanyu':weapon==='cleaver'?'zhangfei':id;
     if(growth>0){for(let i=0;i<2;i++){const p=this.props[i];p.active=i===1||id==='liubei';const sp=this.sprite(p,'GrowthHeld');sp.spriteFrame=this.frames['growth-held-'+id]||null;sp.node.getComponent(UITransform)!.setAnchorPoint(.5,.22);sp.node.getComponent(UITransform)!.setContentSize(90,90);}}else if(propHero==='liubei'){
-      for(const p of this.props){p.active=true;p.setScale(.82,.82,1);drawWeaponArt(p.getComponent(Graphics)||p.addComponent(Graphics),'sandal');}
+      for(const p of this.props){p.active=true;p.setScale(.9,.9,1);drawWeaponArt(p.getComponent(Graphics)||p.addComponent(Graphics),'sandal');}
     }else if(propHero==='guanyu'){
       const p=this.props[1];p.active=true;drawWeaponArt(p.getComponent(Graphics)||p.addComponent(Graphics),'pole');
     }else if(propHero==='zhangfei'){
@@ -75,8 +75,8 @@ export class HeroShowcase {
     let tilt=pose.bodyAngle;
     const propHero=this.weapon==='sandal'?'liubei':this.weapon==='pole'?'guanyu':this.weapon==='cleaver'?'zhangfei':this.id;
     if(this.growth>0){left={x:-42-gesture*3,y:-5+breath+gesture*5};right={x:42+gesture*3,y:-5+breath+gesture*5};leftAngle=18+gesture*8;rightAngle=-18-gesture*8;tilt+=gesture;}else if(propHero==='liubei'){
-      left={x:-41-gesture*3,y:-14+breath+gesture*3};right={x:41+gesture*3,y:-14+breath+gesture*3};
-      leftAngle=-18-gesture*12;rightAngle=18+gesture*12;
+      left={x:-35-gesture*3,y:-9+breath+gesture*3};right={x:35+gesture*3,y:-9+breath+gesture*3};
+      leftAngle=24+gesture*8;rightAngle=-24-gesture*8;
       tilt+=Math.sin(t*7)*gesture*.8;
     }else if(propHero==='guanyu'){
       const angle=(-4+gesture*11)*Math.PI/180,y=-3+breath+gesture*2;
@@ -102,7 +102,9 @@ export class HeroShowcase {
     for(const [i,p]of [left,right].entries()){
       p.y+=lift;this.feet[i].active=this.growth<2;
       const side=i?1:-1;drawHeroSleeve(this.sleeves,side,p,lift,color,this.id);
-      this.hands[i].node.setPosition(p.x,p.y);drawHeroFist(this.hands[i],this.id,side,this.id==='liubei'||this.id==='guanyu'||i===1);
+      this.hands[i].node.setPosition(p.x,p.y);const sandal=this.growth===0&&propHero==='liubei';
+      this.hands[i].node.angle=sandal?(i?rightAngle:leftAngle):0;
+      drawHeroFist(this.hands[i],this.id,side,sandal||this.id==='liubei'||this.id==='guanyu'||i===1,sandal);
       if(this.growth>0||propHero!=='guanyu'){this.props[i].setPosition(p.x,p.y);this.props[i].angle=i?rightAngle:leftAngle;}
       this.feet[i].setPosition(side*9,-19+Math.sin(t*1.6+side)*gesture*.8);this.feet[i].angle=side*gesture*3;
     }

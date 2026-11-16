@@ -1,0 +1,44 @@
+{
+  "sources": [
+    {
+      "id": "zhangjiao",
+      "path": "assets/chronicle-units/boss-zhangjiao-actions.png",
+      "sha256": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12"
+    },
+    {
+      "id": "lvbu",
+      "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
+      "sha256": "114f6d1661c501fc3558193f9db78b86254a79786ed8e0658ebd38b9229f444c"
+    },
+    {
+      "id": "dongzhuo",
+      "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
+      "sha256": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c"
+    },
+    {
+      "id": "yuanshao",
+      "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
+      "sha256": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704"
+    },
+    {
+      "id": "caocao",
+      "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
+      "sha256": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc"
+    },
+    {
+      "id": "menghuo",
+      "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
+      "sha256": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483"
+    },
+    {
+      "id": "simayi",
+      "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
+      "sha256": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7"
+    }
+  ],
+  "dest": "assets/chronicle-ui/boss-portraits.png",
+  "width": 576,
+  "height": 288,
+  "bytes": 49052,
+  "sha256": "07d1da8866619af0b6c18f8eb891cf10ba2dfe8324c525ede41dffb6ef189875"
+}

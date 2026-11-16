@@ -151,6 +151,7 @@ function generate(root) {
     if (!fs.existsSync(absolute)) return;
     const info = fs.lstatSync(absolute);
     if (info.isSymbolicLink()) throw Error(`源目录不能包含未处理软链接：${relative}`);
+    if(relative==='cdn-assets/releases')return;
     if (info.isDirectory()) {
       for (const name of fs.readdirSync(absolute).sort()) {
         if (name.startsWith('.') && name !== '.gitignore') continue;
@@ -162,7 +163,7 @@ function generate(root) {
       sources.push({ path: relative, bytes: bytes.length, sha256: hash(bytes) });
     }
   }
-  for (const entry of ['assets', 'scripts', 'config', 'settings', 'docs', 'art', '.agents/skills', 'build-templates', 'AGENTS.md', 'README.md', 'package.json', 'package-lock.json', 'project.config.json', 'tsconfig.json', '.gitignore']) scan(entry);
+  for (const entry of ['assets', 'scripts', 'cdn-assets', 'config', 'settings', 'docs', 'art', '.agents/skills', 'build-templates', 'AGENTS.md', 'README.md', 'package.json', 'package-lock.json', 'project.config.json', 'tsconfig.json', '.gitignore']) scan(entry);
   sources.sort((a, b) => a.path.localeCompare(b.path, 'en'));
   const media = sources.filter(f => /\.(png|wav|mp3)$/.test(f.path)).map(f => {
     const data = fs.readFileSync(path.join(root, f.path));
@@ -171,7 +172,7 @@ function generate(root) {
     }
     return { path: f.path, bytes: f.bytes };
   });
-  const bundles = sources.filter(f => /^assets\/[^/]+\.meta$/.test(f.path)).flatMap(f => {
+  const bundles = sources.filter(f => /^assets\/(?:remote-content\/)?[^/]+\.meta$/.test(f.path)).flatMap(f => {
     const meta = JSON.parse(fs.readFileSync(path.join(root, f.path), 'utf8'));
     if (!meta.userData?.isBundle) return [];
     const prefix = f.path.slice(0, -5) + '/';
@@ -187,7 +188,7 @@ function generate(root) {
     heroGrowth:{enabled:true,progress:'per hero consecutive first clears',heartPerClear:1,mountBaseSpeedBonus:.3,dash:heroGrowth.DASH,states:growthRows},
     stageChallenge:{waveRosters:stages.STAGE_WAVE_ROSTERS,rangedCostShares:stages.STAGE_RANGED_COST_SHARE,shooterWeight:1.5,yellowChargers:load('yellow-chargers').YELLOW_CHARGERS,spawnCostPerSecond:stages.STAGES.map((s,i)=>({stage:i+1,waves:[1,2,3,4,5].map(w=>stages.stageThreat(i+1,w)),stipends:[1,2,3,4,5].map(w=>stages.stageStipend(i+1,w))})),stages:stages.STAGES,initial:stages.INITIAL_CONTENT,starterWeapons:stages.STARTER_WEAPONS,visibleHeroes:stages.VISIBLE_HERO_IDS,themes:stages.STAGE_THEMES},
     effects: { limits: effects.FX_LIMITS }, controls: { joystick: controls.JOYSTICK },
-    startup: { tasks: startup.STARTUP_TASKS, poster:'assets/campaign/poster.jpg', template:'build-templates/wechatgame/first-screen.js' },
+    startup: { tasks: startup.STARTUP_TASKS, poster:'art/runtime-youth/poster.jpg', template:'build-templates/wechatgame/first-screen.js' },
     heroes, weapons: weaponRows, passives: itemRows, augments: s.AUGMENTS,
     consumables: c.ITEMS.filter(i => !p.PASSIVE_ITEMS.some(p => p.id === i.id)),
     enemy: { kinds: enemyKinds, warmup: Object.fromEntries(enemyKinds.map(k => [k, c.enemyStats(k, 1, 0)])), costs: Object.fromEntries(enemyKinds.map(k => [k, s.enemyCost(k)])), behavior: { archer: behavior.ARCHER, cavalry: behavior.CAVALRY, zhangjiao: behavior.ZHANGJIAO }, curve },

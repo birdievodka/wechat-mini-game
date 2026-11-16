@@ -1,0 +1,15 @@
+{
+  "status": "approved and implemented in v9.11: divider and hidden public training entry",
+  "tool": "built-in image_gen edit",
+  "reference": "art/reviews/stage-surface/menu.png",
+  "generatedOriginal": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-d3394e72-9445-4477-81f1-ea0ce560aa23.png",
+  "output": "art/concepts/menu-selector-separation/design.png",
+  "outputSha256": "733703bb73c371f50ebae866590a2a3172bc2eceb7b18d45c79fa6b1182ccb3d",
+  "designPrompt": "Use case: ui-mockup. Targeted edit of current 桃园小英雄 game screenshot. Preserve warm hand-painted Three Kingdoms chibi art, young Liu hero with two gripped straw sandals/visible fists, logo, parchment journey card, 小刘 nameplate, 图鉴 and centered 开始挑战. Hide lower-right 演武场 entry by restoring grass. On one compact translucent dark jade selector rail, retain three hero portraits on the left and weapon square/skill circle on the right. Between groups, add a short thin antique-gold vertical divider, approximately 54px high/2px wide at original screenshot x813,y550, with tiny 6px midpoint diamond and generous equal-side spacing. Align all buttons on one baseline. No additional labels, headings, counters, tooltips or side arrows. Only jade seal arrow on map. One clean full-screen mockup, no device frame or callouts.",
+  "implementationIntent": [
+    "Hide menu training entry; retain training implementation for development",
+    "Three portrait buttons left; weapon and skill right",
+    "One short gold vertical divider with small diamond, no extra text"
+  ],
+  "scope": "UI concept only; no code/build or runtime asset changes"
+}

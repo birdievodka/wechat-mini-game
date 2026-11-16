@@ -34,9 +34,9 @@ npm run check
 npm run build:wechat
 ```
 
-首次需Creator导入项目生成引擎类型。标准macOS安装路径自动识别；自定义可设置`COCOS_CREATOR`指向编辑器可执行文件。构建输出`build/wechatgame`，AppID`wxbf455170a0f5ea11`，根project.config.json已指向产物；不要手改产物。
+首次需Creator导入项目生成引擎类型。标准macOS安装路径自动识别；自定义可设置`COCOS_CREATOR`指向编辑器可执行文件。构建输出`build/wechatgame`，AppID`wxbddcb8f0462f58cc`，根project.config.json已指向产物；不要手改产物。
 
-微信开发者工具点“编译”，再“预览”扫码。本AppID当前服务端源码包限制20MB，本地安全预算19.5MiB、主包/每分包4MiB；构建脚本验证尺寸及引擎导出依赖。以最新构建和服务端结果为准，生成二维码不等于iOS战斗实测。
+微信开发者工具点“编译”，再“预览”扫码。旧测试号曾返回20MB源码包限制，本项目本地安全预算19.5MiB、主包/每分包4MiB；构建脚本验证尺寸及引擎导出依赖。以最新构建和服务端结果为准，生成二维码不等于iOS战斗实测。
 
 素材先用imagegen制作透明源图，保存于`art/runtime-v4`；再运行`node scripts/pack-chronicle-art.cjs`切格，`npm run assets:optimize`在保留尺寸/精确alpha下压缩RGB。原图不进入assets。新增运行图集在chronicle-ui/chronicle-units两共享分包，现阶段不依赖CDN。不要只压PNG字节就认为GPU内存也减少。
 
@@ -73,3 +73,9 @@ npm test覆盖真实组件状态流转、交易/保存、所有武器品质真�
 
 
 英雄成长v9已接入：个人首通+1心，本命→坐骑+30%→三连→固定冲刺→最终短甲；演武“成长”可切换0–6，Q/Shift冲刺。详见[成长实现](docs/hero-growth-proposal.md)。
+
+
+远程资源采用v9.4按需分发，微信构建后执行 `npm run cdn:publish`，确认 `cdn-assets/release.json` 与 `published.json` 版本一致再预览；手机需配置downloadFile合法域名。完整流程见[资源分发](docs/resources-cdn-v94.md)及[CDN目录](cdn-assets/README.md)。
+
+
+v9.5隐藏英雄与哭泣图按需，海报单份、农兵24帧无损编码；WebGL评审请使用 `npm run build:review`，以同时复制唯一启动海报。无损重建与检查见[资源v9.5](docs/resources-lossless-v95.md)。

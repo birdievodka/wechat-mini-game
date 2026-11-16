@@ -1,0 +1,77 @@
+{
+  "version": "stage-v9.9-panel-controls",
+  "scope": "isolated real Cocos/WebGL rendering and actual browser touch to close; engineering fixtures for shop/equipment; not iPhone FPS or touch latency",
+  "controls": [
+    {
+      "name": "SkillClose",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "StarterCancel",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Codex-返回",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "TrainingClose",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "PauseClose",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "PauseClose",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "CancelReplacement",
+      "width": 64,
+      "height": 64,
+      "texture": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "trainingClosedToBattle": true,
+  "replacementCancelledWithoutMutation": true,
+  "restored": {
+    "profile": true,
+    "storage": true,
+    "phase": "menu"
+  },
+  "errors": []
+}

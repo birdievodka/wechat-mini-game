@@ -10,21 +10,24 @@ class Node {
   static EventType = { TOUCH_END: 'end', TOUCH_START: 'start', TOUCH_CANCEL: 'cancel' };
   constructor(name = '') { this.name = name; this.children = []; this.position = { x: 0, y: 0, z: 0 }; this.active = true; this.components = new Map(); this.events = {}; }
   addChild(n) { n.parent = this; this.children.push(n); }
-  addComponent(Type) { const c = new Type(); c.node = this; this.components.set(Type, c); if ((Type === Sprite || Type === Label) && !this.components.has(Transform)) this.addComponent(Transform); return c; }
+  addComponent(Type) { const c = new Type(); c.node = this; this.components.set(Type, c); if ((Type === Sprite || Type === Label) && !this.components.has(Transform)) this.addComponent(Transform); if(Type===Mask&&!this.components.has(Graphics))this.addComponent(Graphics);return c; }
   getComponent(Type) { return this.components.get(Type); }
   setPosition(x, y = 0, z = 0) { this.position = typeof x === 'object' ? { ...x } : { x, y, z }; }
   setScale(x, y, z) { this.scale = { x, y, z }; }
   setSiblingIndex(index) {if(!this.parent)return;const a=this.parent.children,old=a.indexOf(this);if(old<0)return;a.splice(old,1);a.splice(Math.max(0,Math.min(index,a.length)),0,this);}
   getSiblingIndex() { return this.parent?this.parent.children.indexOf(this):0; }
   on(event, callback) { this.events[event] = callback; }
+  off(event, callback) { if(this.events[event]===callback)delete this.events[event]; }
   removeFromParent() { if (this.parent) this.parent.children = this.parent.children.filter(n => n !== this); this.parent = null; }
   destroy() { this.destroyed = true; }
 }
 class Graphics {}
+class Mask {static Type={GRAPHICS_STENCIL:2};}
 for (const method of ['clear', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'circle', 'rect', 'roundRect', 'close', 'bezierCurveTo', 'arc']) Graphics.prototype[method] = () => {};
 class Sprite { static SizeMode = { CUSTOM: 1 }; static Type = { SLICED: 1 }; }
 class Label { static CacheMode={NONE:0,CHAR:2}; static HorizontalAlign = { CENTER: 0 }; static VerticalAlign = { CENTER: 0 }; static Overflow = { SHRINK: 0 }; }
 class Frame { destroy() {} }
+class BinaryAsset { constructor(buffer){this.bytes=buffer;} buffer(){return this.bytes.buffer.slice(this.bytes.byteOffset,this.bytes.byteOffset+this.bytes.byteLength);} }
 class Camera { static ProjectionType = { ORTHO: 1 }; screenToWorld(p) { return p; } }
 const storage = new Map();
 let seed = 20261111;
@@ -32,15 +35,15 @@ const seeded = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; ret
 const randomMath = Object.create(Math); randomMath.random = seeded;
 const cc = {
   _decorator: { ccclass: () => c => c }, Component: class { constructor() { this.node = new Node('Scene'); this.isValid = true; } },
-  Node, Graphics, Label, Sprite, SpriteFrame: Frame, UITransform: Transform, Camera, Canvas: class {}, Color: class { constructor(value) { this.value=value; } }, Rect: class {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}, Vec3: class { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } },
-  AudioClip: class {}, AudioSource: class {
+  Node, Graphics, Mask, Label, Sprite, SpriteFrame: Frame, UITransform: Transform, Camera, Canvas: class {}, Color: class { constructor(value) { this.value=value; } }, Rect: class {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}, Vec3: class { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } },
+  ImageAsset: class {constructor(image){this.width=image?.width||1334;this.height=image?.height||750;}destroy(){}}, BufferAsset:BinaryAsset, AudioClip: class {}, AudioSource: class {
     constructor() { this.plays = 0; this.playing = false; this.currentTime = 0; }
     stop() { this.playing = false; this.currentTime = 0; }
     pause() { this.playing = false; }
     play() { this.playing = true; this.plays++; }
-  }, Texture2D: class {reset(size){Object.assign(this,size);}uploadData(data){this.data=data;}destroy(){this.destroyed=true;}}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
+  }, Texture2D: class {reset(size){Object.assign(this,size);}uploadData(data){this.uploadBytes=data.byteLength;if(this.width<=1024)this.data=data;}set image(value){this.width=value.width;this.height=value.height;}destroy(){this.destroyed=true;}}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
   dynamicAtlasManager:{enabled:true},macro:{CLEANUP_IMAGE_CACHE:false},
-  assetManager: {releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { load: (_url, _type, callback) => callback(null, { width: 768, height: 576 }) }) },
+  assetManager: {loadRemote:(_url,_options,done)=>done(null,{width:1334,height:750,destroy(){}}),releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { load: (_url, _type, callback) => callback(null, _type===BinaryAsset?new BinaryAsset(fs.readFileSync('assets/battle/'+_url+'.bin')):{ width: 768, height: 576 }) }) },
   view: { setDesignResolutionSize() {}, getVisibleSize: () => ({ width: 1334, height: 750 }) },
   input: { on() {}, off() {} }, Input: { EventType: {} }, game: { on() {}, off() {} }, Game: {},
   KeyCode: { KEY_W: 87, KEY_A: 65, KEY_S: 83, KEY_D: 68, ARROW_UP: 38, ARROW_LEFT: 37, ARROW_DOWN: 40, ARROW_RIGHT: 39 },
@@ -51,7 +54,9 @@ function load(name) {
   if (cache[name]) return cache[name];
   const out = cache[name] = {};
   const code = ts.transpileModule(fs.readFileSync(path.join('assets/scripts', name + '.ts'), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2017, experimentalDecorators: true } }).outputText;
-  vm.runInNewContext(code, { exports: out, require: id => id === 'cc' ? cc : id === 'cc/env' ? { DEBUG: false } : load(id.replace('./', '')), Math: randomMath, console }); return out;
+  const context={ exports: out, require: id => id === 'cc' ? cc : id === 'cc/env' ? { DEBUG: false } : id.startsWith('./')?load(id.slice(2)):require(id), Math: randomMath, console };Object.defineProperty(context,'wx',{get:()=>cc.wechatHost});
+  for (const name of ['setTimeout', 'clearTimeout']) Object.defineProperty(context, name, { get: () => cc.testTimers?.[name] });
+  vm.runInNewContext(code, context); return out;
 }
 const r = load('campaign');
 const { GameBootstrap } = load('GameBootstrap');
@@ -61,7 +66,7 @@ function click(root, title) {
 }
 function finishStartup(g){g.update(1/60);g.update(1/60);assert.equal(g.ready,true);}
 // Legacy battle fixtures intentionally bypass preparation to test all retained weapons/actors.
-async function newGame(id = 'liubei', weapon) { storage.delete('taoyuan-chronicle-v7'); const g = new GameBootstrap(); await g.start();finishStartup(g); assert.equal(g.phase,'menu');g.run=r.createRun(id,weapon||load('weapons').starterFor(id));g.unlockAudio();g.restart(false);assert.equal(g.phase,'battle');return g; }
+async function newGame(id = 'liubei', weapon) { storage.delete('taoyuan-chronicle-v7'); const g = new GameBootstrap(); await g.start();finishStartup(g); assert.equal(g.phase,'menu');const deferred=load('deferred-art');await new Promise((resolve,reject)=>deferred.ensureResultArt(g.artFrames,()=>true,e=>e?reject(e):resolve()));if(['zhaoyun','kongming'].includes(id))await new Promise((resolve,reject)=>deferred.ensureHiddenHeroArt(g.artFrames,()=>true,e=>e?reject(e):resolve()));const art=load('chronicle-art');await Promise.all(Array.from(art.BOSS_ART_IDS,boss=>new Promise((resolve,reject)=>art.ensureBossArt(boss,g.artFrames,()=>true,e=>e?reject(e):resolve()))));g.run=r.createRun(id,weapon||load('weapons').starterFor(id));g.unlockAudio();g.restart(false);assert.equal(g.phase,'battle');return g; }
 
 
 
@@ -82,7 +87,7 @@ if(require.main===module)(async () => {
   cc.assetManager.loadBundle=bootLoad;
   const bootError=console.error;console.error=()=>{};
   try{
-    cc.assetManager.loadBundle=(name,cb)=>bootLoad(name,(error,bundle)=>name==='battle'?cb(error,{load:(url,type,callback)=>url==='characters/soldier-sickle-actions/texture'?callback(new Error('fixture missing soldier')):bundle.load(url,type,callback)}):cb(error,bundle));
+    cc.assetManager.loadBundle=(name,cb)=>bootLoad(name,(error,bundle)=>name==='battle'?cb(error,{load:(url,type,callback)=>url==='characters/soldier-sickle-actions'?callback(new Error('fixture missing soldier')):bundle.load(url,type,callback)}):cb(error,bundle));
     const broken=new GameBootstrap();await broken.start();broken.update(2);assert.equal(broken.phase,'loading');assert.equal(broken.ready,false);assert.ok(broken.startupProgress.value<1);assert.match(broken.loadingText.string,/小兵资源加载失败/);assert.equal(broken.loadingScreen.active,true);
   }finally{cc.assetManager.loadBundle=bootLoad;console.error=bootError;}
   console.log('通过：关键角色图延迟时保留加载海报/真实进度、100%完成帧后进入选人、资源失败保留提示而非黑屏或假就绪');
@@ -154,7 +159,15 @@ if(require.main===module)(async () => {
     const leftX=held.node.position.x,rightX=free.node.position.x;arms.facing=-1;arms.updateWeapon(held,0);arms.updateFreeHand();
     assert.ok(held.node.position.x*leftX<0&&free.node.position.x*rightX<0,'arm anchors mirror with the hero');
     if(hero.id==='liubei'){
+      assert.equal(free.shoe.active,true,'approved dual-shoe pose has a visible spare');
+      assert.equal(free.equipped,undefined,'spare shoe never occupies another slot');
+      assert.equal(held.node.angle,-held.side*arms.facing*24,'shoe leans away from the face after mirroring');
+      const shots=arms.projectiles.filter(s=>s.node.active).length;held.damage=16;
       held.time=0;arms.updateWeapon(held,held.duration*.4);assert.equal(held.shoe.active,false);assert.equal(held.fist.node.active,true,'throwing the shoe never removes the hand');
+      assert.equal(free.shoe.active,true,'other hand keeps its spare during the release');
+      assert.equal(arms.projectiles.filter(s=>s.node.active).length,shots+1,'two visible shoes still produce exactly the original single shot');
+      assert.equal(free.fist.node.active,true);
+      held.time=held.duration;arms.updateWeapon(held,0);assert.equal(held.shoe.active,true,'shoe returns to the same grip on recovery');
     }
     arms.run.weapons.push({id:'cleaver',uid:2,tier:1});arms.syncWeapons();
     assert.equal(arms.naturalHands.filter(h=>h.node.active).length,2);assert.equal(arms.idleArms.node.active,true);
@@ -248,7 +261,7 @@ if(require.main===module)(async () => {
     const combo = await newGame(hero.id, def.id); combo.clearBattle(); combo.spawnClock = 999;
     assert.equal(combo.run.weapons[0].id, def.id); assert.equal(combo.run.starter, def.id);
     assert.ok(combo.weapons[0].arm.node.active && combo.weapons[1].arm.node.active, 'one weapon still renders both hands');
-    assert.equal(combo.weapons[1].equipped, undefined); assert.equal(combo.weapons[1].shoe.active, false);
+    assert.equal(combo.weapons[1].equipped, undefined); assert.equal(combo.weapons[1].shoe.active, def.id==='sandal', 'single sandal shows a spare in the other fist without another equipped weapon');
     assert.equal(combo.weapons.filter(w => w.equipped).length, 1, 'the free hand has no attack stream');
     const target = makeTarget(combo, 80, 0); target.hp = 9999; target.speed = 0; target.attackCooldown = 999;
     for (let i = 0; i < 120; i++) { target.x = 80; target.y = 0; target.vx = target.vy = 0; combo.update(1 / 60); }
@@ -263,7 +276,7 @@ if(require.main===module)(async () => {
   freeHand.run.weapons.push({ id: 'cleaver', tier: 1, uid: 2 }); freeHand.syncWeapons();
   assert.equal(freeHand.weapons[1].shoe.active, true, 'second weapon uses the existing second hand');
   freeHand.run.weapons.pop(); freeHand.syncWeapons();
-  assert.equal(freeHand.weapons[1].shoe.active, false, 'removing the second weapon restores an empty hand');
+  assert.equal(freeHand.weapons[1].shoe.active, true, 'removing the second weapon restores the decorative spare sandal');
   assert.equal(freeHand.weapons[1].arm.node.active, true);
   const mixed = await newGame(); mixed.clearBattle(); mixed.spawnClock = 999;
   mixed.run.weapons = load('weapons').WEAPONS.slice(0,6).map((w, i) => ({ id: w.id, tier: 2, uid: i + 1 })); mixed.run.nextWeaponUid = 7;
@@ -371,7 +384,8 @@ if(require.main===module)(async () => {
       assert.equal(mob.art.node.scale.x < 0, facing === 3, 'left uses mirrored right profile');
       animated.clearBattle();
     }
-    assert.equal(animated.enemyFrames[kind].length, 12);
+    animated.loadLegacyEnemy(kind);
+    assert.equal(animated.enemyFrames[kind].length, 12, 'compatibility atlas is available on explicit lazy request');
   }
 
   const advance = (g, seconds) => { for (let i = 0; i < Math.ceil(seconds * 60); i++) g.update(1 / 60); };
@@ -508,6 +522,14 @@ if(require.main===module)(async () => {
   }
   console.log('通过：五英雄可携带同一通用技能、真实路径伤害、防连点、时间不充能、暂停补给保留计数、突进保护不限英雄');
 
+  // Real displacement follows the touch vector on the first simulation step; no acceleration/coasting.
+  const response=await newGame();response.clearBattle();response.spawnClock=999;response.cooldown=999;
+  const rj=load('joystick-input').joystickCenter(response.halfWidth,response.halfHeight),rf=(x,y,id=1)=>({getLocation:()=>({x,y}),getID:()=>id});
+  response.touchStart(rf(rj.x,rj.y));response.touchMove(rf(rj.x+18,rj.y));const responseStartX=response.px;
+  response.update(1/120);assert.ok(response.px>responseStartX,'轻推首个模拟步立即移动');assert.equal(response.stickThumb.x,.3,'视觉头位不被增强曲线放大');
+  response.touchMove(rf(rj.x-48,rj.y));const beforeReverse=response.px;response.update(1/120);assert.ok(response.px<beforeReverse,'反向首步即转向');assert.equal(response.stick.x,-1);
+  response.touchEnd(rf(rj.x,rj.y));const stopX=response.px;response.update(.04);assert.equal(response.px,stopX,'松手无惯性滑行');assert.equal(response.stickThumb.x,0);
+  console.log('通过：触屏6%死区/80%行程全速/指位与速度独立/轻推首步移动/反向首步转向/松手立停');
   const controls=await newGame(),jc=load('joystick-input').joystickCenter(controls.halfWidth,controls.halfHeight);
   const finger=(x,y,id=1)=>({getLocation:()=>({x,y}),getID:()=>id});
   assert.equal(controls.joystick.node.active,true,'静止时固定摇杆可见');

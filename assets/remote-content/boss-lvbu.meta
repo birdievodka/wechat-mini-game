@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "53fe1443-e92b-568f-86d2-8abd340071e3",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "cdn-assets",
+    "bundleName": "boss-lvbu",
+    "priority": 8
+  }
+}

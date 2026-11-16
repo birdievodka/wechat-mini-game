@@ -1,3 +1,4 @@
+import {addPanelClose} from './panel-ui';
 import {Color,Graphics,Label,Layers,Node,Sprite,SpriteFrame,UITransform} from 'cc';
 import {CHAPTERS,CHRONICLE_ENEMIES} from './chronicles';
 import {COMMON_SKILLS,commonSkillFor,skillPowerText} from './common-skills';
@@ -56,7 +57,7 @@ export class TrainingView {
     p.on(Node.EventType.TOUCH_END,(e?:{propagationStopped:boolean})=>{if(e)e.propagationStopped=true;});
     this.text(p,'演武场',-418,278,36,240,52);this.text(p,`生命 ∞  ·  在场 ${state.alive}/80`,-25,286,21,440,32,'#dcd3a8');
     if(this.host.growth)this.button(p,'TrainingGrowth','成长 '+(state.growth||0)+'/6',288,278,150,()=>this.act(()=>this.host.growth!()));
-    this.button(p,'TrainingExit','返回首页',465,278,150,()=>this.host.exit());
+    addPanelClose(p,this.frames,'TrainingClose',514,278,()=>this.host.close());
     ['小兵','Boss','武器','主动技能'].forEach((t,i)=>this.button(p,'TrainingTab-'+i,t,-438+i*153,214,140,()=>{this.tab=i;this.message='';this.render();},true,this.tab===i,44));
     const entries=this.entries(),pages=Math.ceil(entries.length/12),page=this.pages[this.tab];
     entries.slice(page*12,page*12+12).forEach((item,i)=>{
@@ -103,8 +104,9 @@ export class TrainingView {
       this.button(detail,'TrainingEquipSkill',state.skillId===skill.id?'已携带 · 重新装配':'携带此技能',0,-189,310,()=>this.act(()=>this.host.skill(skill.id)),true,true,48);
     }
     this.text(p,this.message,40,254,16,600,22,'#f0d899');
-    this.button(p,'TrainingClear','清空战场',-397,-285,230,()=>this.act(()=>this.host.clear()));
-    this.button(p,'TrainingRefill','重置技能',-128,-285,230,()=>this.act(()=>this.host.refill()));
-    this.button(p,'TrainingResume','进入战场  →',350,-285,330,()=>this.host.close(),true,true,54);
+    this.button(p,'TrainingClear','清空战场',-420,-285,200,()=>this.act(()=>this.host.clear()));
+    this.button(p,'TrainingRefill','重置技能',-190,-285,200,()=>this.act(()=>this.host.refill()));
+    this.button(p,'TrainingExit','返回首页',40,-285,200,()=>this.host.exit());
+    this.button(p,'TrainingResume','进入战场  →',350,-285,300,()=>this.host.close(),true,true,54);
   }
 }

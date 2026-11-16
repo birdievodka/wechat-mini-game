@@ -13,7 +13,7 @@
   "debug": false,
   "packages": {
     "wechatgame": {
-      "appid": "wxbf455170a0f5ea11",
+      "appid": "wxbddcb8f0462f58cc",
       "orientation": "landscape"
     }
   },
@@ -24,8 +24,11 @@
     "2d",
     "ui",
     "graphics",
+    "mask",
     "audio",
     "affine-transform",
     "intersection-2d"
-  ]
+  ],
+  "server": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources/pending/",
+  "moveRemoteBundleScript": true
 }

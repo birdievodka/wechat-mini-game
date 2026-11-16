@@ -1,0 +1,214 @@
+{
+  "scope": "isolated real Cocos/WebGL engineering frames, not iPhone testing",
+  "initial": {
+    "version": "stage-v9.6-red-strap-sandal",
+    "phase": "menu",
+    "atlasCells": 62,
+    "atlasSize": [
+      1024,
+      1024
+    ],
+    "shoeCell": {
+      "x": 32,
+      "y": 5,
+      "width": 64,
+      "height": 104
+    },
+    "iconShared": true
+  },
+  "records": [
+    {
+      "facing": 1,
+      "equipped": 1,
+      "hands": [
+        {
+          "fist": true,
+          "shoe": true,
+          "angle": 24,
+          "grip": [
+            -35,
+            -4
+          ],
+          "fistInFront": true
+        },
+        {
+          "fist": true,
+          "shoe": true,
+          "angle": -24,
+          "grip": [
+            35,
+            -7
+          ],
+          "fistInFront": true
+        }
+      ]
+    },
+    {
+      "facing": -1,
+      "equipped": 1,
+      "hands": [
+        {
+          "fist": true,
+          "shoe": true,
+          "angle": -24,
+          "grip": [
+            35,
+            -4
+          ],
+          "fistInFront": true
+        },
+        {
+          "fist": true,
+          "shoe": true,
+          "angle": 24,
+          "grip": [
+            -35,
+            -7
+          ],
+          "fistInFront": true
+        }
+      ]
+    },
+    {
+      "direction": "right",
+      "shots": 1,
+      "shoe": false,
+      "fist": true,
+      "spare": true
+    },
+    {
+      "direction": "up",
+      "shots": 1,
+      "shoe": false,
+      "fist": true,
+      "spare": true
+    },
+    {
+      "direction": "left",
+      "shots": 1,
+      "shoe": false,
+      "fist": true,
+      "spare": true
+    },
+    {
+      "direction": "down",
+      "shots": 1,
+      "shoe": false,
+      "fist": true,
+      "spare": true
+    }
+  ],
+  "multi": {
+    "hands": 2,
+    "weaponHands": 0,
+    "weapons": 2
+  },
+  "switched": {
+    "spare": false,
+    "gripping": true
+  },
+  "grounds": [
+    {
+      "chapter": 1,
+      "tiles": 15,
+      "correct": true,
+      "changedPixelsWhenHidden": 1079062
+    },
+    {
+      "chapter": 2,
+      "tiles": 15,
+      "correct": true,
+      "changedPixelsWhenHidden": 1079062
+    },
+    {
+      "chapter": 3,
+      "tiles": 15,
+      "correct": true,
+      "changedPixelsWhenHidden": 1079062
+    },
+    {
+      "chapter": 4,
+      "tiles": 15,
+      "correct": true,
+      "changedPixelsWhenHidden": 1079062
+    },
+    {
+      "chapter": 5,
+      "tiles": 15,
+      "correct": true,
+      "changedPixelsWhenHidden": 1079062
+    },
+    {
+      "chapter": 6,
+      "tiles": 15,
+      "correct": true,
+      "changedPixelsWhenHidden": 1079062
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profileUnchanged": true
+  },
+  "errors": [],
+  "wechat": {
+    "readOnlyRuntime": {
+      "version": "stage-v9.6-red-strap-sandal",
+      "phase": "menu",
+      "ready": true,
+      "groundFix": true,
+      "iconShared": true,
+      "showcaseHands": [
+        {
+          "angle": 0,
+          "active": true
+        },
+        {
+          "angle": 0,
+          "active": true
+        }
+      ]
+    },
+    "previewSuccess": true,
+    "size": {
+      "total": 8724488,
+      "packages": [
+        {
+          "name": "TOTAL",
+          "size": 8724488
+        },
+        {
+          "name": "main",
+          "size": 2335552
+        },
+        {
+          "name": "/subpackages/battle/",
+          "size": 1164948
+        },
+        {
+          "name": "/subpackages/campaign/",
+          "size": 909751
+        },
+        {
+          "name": "/subpackages/chronicle-ui/",
+          "size": 795937
+        },
+        {
+          "name": "/subpackages/chronicle-units/",
+          "size": 1001319
+        },
+        {
+          "name": "/subpackages/hero-menu/",
+          "size": 808371
+        },
+        {
+          "name": "/subpackages/presentation/",
+          "size": 1129049
+        },
+        {
+          "name": "/subpackages/sfx-core/",
+          "size": 579561
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "scope": "isolated real Cocos/WebGL; local web bundles, not iOS FPS or WeChat CDN",
+  "initial": {
+    "version": "stage-v9.5-lossless-assets",
+    "phase": "menu",
+    "cry": false,
+    "hidden": false,
+    "frames": [
+      12,
+      12
+    ],
+    "sizes": [
+      [
+        1448,
+        1086
+      ],
+      [
+        1448,
+        1086
+      ]
+    ]
+  },
+  "comparisons": [
+    {
+      "kind": 0,
+      "cell": 0,
+      "changed": 0,
+      "max": 0,
+      "visible": 187909
+    },
+    {
+      "kind": 0,
+      "cell": 1,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 2,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 3,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 4,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 5,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 6,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 7,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 8,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 9,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 10,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 0,
+      "cell": 11,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 0,
+      "changed": 0,
+      "max": 0,
+      "visible": 206702
+    },
+    {
+      "kind": 1,
+      "cell": 1,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 2,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 3,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 4,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 5,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 6,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 7,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 8,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 9,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 10,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    },
+    {
+      "kind": 1,
+      "cell": 11,
+      "changed": 0,
+      "max": 0,
+      "visible": 0
+    }
+  ],
+  "renderMaxDifference": 0,
+  "renderChangedComponents": 0,
+  "result": {
+    "phase": "defeat",
+    "busy": false,
+    "cry": true,
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 384,
+      "height": 384
+    },
+    "texture": true
+  },
+  "released": {
+    "phase": "menu",
+    "cry": false
+  },
+  "hidden": {
+    "hero": "kongming",
+    "frame": true,
+    "cry": true,
+    "phase": "battle"
+  },
+  "errors": [],
+  "wechat": {
+    "scope": "WeChat DevTools actual BufferAsset decode and CDN result load, not iPhone gameplay",
+    "release": "v95-996129359b44c659",
+    "result": {
+      "before": {
+        "version": "stage-v9.5-lossless-assets",
+        "phase": "menu",
+        "appid": "wxbddcb8f0462f58cc",
+        "cry": false,
+        "hidden": false,
+        "frames": [
+          12,
+          12
+        ],
+        "textures": [
+          {
+            "w": 1448,
+            "h": 1086,
+            "valid": true
+          },
+          {
+            "w": 1448,
+            "h": 1086,
+            "valid": true
+          }
+        ]
+      },
+      "loaded": {
+        "valid": true,
+        "width": 384,
+        "height": 384
+      },
+      "returned": {
+        "phase": "menu",
+        "cry": false,
+        "profileUnchanged": true
+      }
+    },
+    "matchingRuntimeErrors": 0,
+    "posterCopies": 1
+  },
+  "wechatPreview": {
+    "runtime": "stage-v9.5-lossless-assets",
+    "success": true,
+    "size": {
+      "total": 8722193,
+      "packages": [
+        {
+          "name": "TOTAL",
+          "size": 8722193
+        },
+        {
+          "name": "main",
+          "size": 2333257
+        },
+        {
+          "name": "/subpackages/battle/",
+          "size": 1164948
+        },
+        {
+          "name": "/subpackages/campaign/",
+          "size": 909751
+        },
+        {
+          "name": "/subpackages/chronicle-ui/",
+          "size": 795937
+        },
+        {
+          "name": "/subpackages/chronicle-units/",
+          "size": 1001319
+        },
+        {
+          "name": "/subpackages/hero-menu/",
+          "size": 808371
+        },
+        {
+          "name": "/subpackages/presentation/",
+          "size": 1129049
+        },
+        {
+          "name": "/subpackages/sfx-core/",
+          "size": 579561
+        }
+      ]
+    },
+    "previousTotalBytes": 10142463,
+    "reductionPercent": 14.0
+  }
+}

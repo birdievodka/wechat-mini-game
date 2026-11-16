@@ -123,7 +123,7 @@
   "implementedSample": {
     "id": "lvbu",
     "documentation": "docs/lvbu-red-hare.md",
-    "runtimeSheet": "assets/chronicle-units/lvbu-actions.png",
+    "runtimeSheet": "assets/remote-content/boss-lvbu/lvbu-actions.png",
     "note": "Only Lv Bu implemented after approval; other six concept designs pending."
   }
 }

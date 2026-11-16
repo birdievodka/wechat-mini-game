@@ -29,7 +29,7 @@ const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex
  assert.ok(decoded<4*1024*1024,'五英雄分层合计解码低于4MiB');
  const protectedFiles=JSON.parse(fs.readFileSync('art/runtime-youth/protected.json'));
  for(const [p,sha]of Object.entries(protectedFiles.sha256)){
-  if(p==='assets/scripts/chronicles-data.ts'){
+  if(/soldier-(hoe|sickle)-actions\.png(?:\.meta)?$/.test(p)){const k=p.includes('hoe')?'hoe':'sickle';assert.equal(hash('art/runtime-grunts/'+k+'.png'+(p.endsWith('.meta')?'.meta':'')),sha,'无损打包保留既有农兵源像素与元数据');}else if(p==='assets/scripts/chronicles-data.ts'){
    const {execFileSync}=require('node:child_process');const previous=execFileSync('git',['show','a848884:'+p],{encoding:'utf8'});const current=fs.readFileSync(p,'utf8');
    // The later authorized E01 combat sample changes only its tell and description.
    // Compare semantic tables so importing that pure constant is not an art regression.

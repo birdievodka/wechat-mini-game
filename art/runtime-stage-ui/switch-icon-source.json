@@ -1,0 +1,13 @@
+{
+  "source": "art/concepts/stage-switch-options/universal.png",
+  "sourceSha256": "1c4f5f3fed6f9b36c101aad5d22e52415efd814423ab5760f9e4a1bb54233340",
+  "output": "assets/chronicle-ui/stage-switch.png",
+  "outputSha256": "6f822d8d19896eb17416c3cad32e01f08ed077c536b79aa5fbb993e72e7b59d4",
+  "size": [
+    128,
+    128
+  ],
+  "decodedBytes": 65536,
+  "processing": "trim transparent margin;120 square contain;4px transparent gutter;lossless PNG, no palette quantization",
+  "runtime": "one universal stage switch icon for all six stages, separate from parchment"
+}

@@ -1243,23 +1243,23 @@
       "description": "同一主题转小调五声色彩，沉战鼓、拨弦和短弓弦推动；紧张但不过分悲壮，旋律主动留白。",
       "gain": 1,
       "seconds": 60.0,
-      "bpm": 128,
+      "bpm": 144,
       "origin": "原创编曲／离线音色合成；非民乐实录",
-      "bytes": 811021,
-      "sha256": "27bef765d3652d575fb1a0998f3bbe8552215747a733098f9daa6787e4d0a373"
+      "bytes": 811929,
+      "sha256": "be1f8c735d1d9b95cd2f5b22186494e46b8a99f6166fe3058a0510e1375e5f7f"
     },
     {
       "id": "boss",
       "title": "阵前争锋 · 首领变奏",
       "group": "配乐",
       "file": "music/boss.m4a",
-      "description": "同速同调的战斗变奏，鼓句更密、音区下沉；依靠节奏升级压力，不靠整体加大音量。",
+      "description": "加速的同调战斗变奏，短弓切分与句尾双鼓推动；依靠节奏升级压力，不靠整体加大音量。",
       "gain": 1,
       "seconds": 30.0,
-      "bpm": 128,
+      "bpm": 160,
       "origin": "原创编曲／离线音色合成；非民乐实录",
-      "bytes": 402523,
-      "sha256": "04773f929e58dd57346c90c2697fb0b2d04c93f913c5f627171db82710ac29ce"
+      "bytes": 408870,
+      "sha256": "dc34ad2df676d5cd05eca77bc8aaab8c42994cf2abd28778d6d249013138bafa"
     },
     {
       "id": "battle-mix",
@@ -2080,8 +2080,8 @@
         ]
       ],
       "origin": "离线示意混音；非游戏实录",
-      "bytes": 395237,
-      "sha256": "2794c08bbd1f11f0cc3853eeb082b79c926f7f3fe05fd042102c32fc48685fe9"
+      "bytes": 398069,
+      "sha256": "288817df1347e5bf4055d9aca41506a765db525166179496767c7ca4bfe5b6f7"
     },
     {
       "id": "menu-mix",
@@ -2321,19 +2321,19 @@
     },
     {
       "id": "battle",
-      "peakDbFS": -2.798058254778529,
-      "rmsDbFS": -20.00001261637308,
+      "peakDbFS": -3.8185213887175227,
+      "rmsDbFS": -20.000023154999745,
       "loopBoundaryDelta": 0.0
     },
     {
       "id": "boss",
-      "peakDbFS": -4.44983001288474,
-      "rmsDbFS": -19.999999686042912,
+      "peakDbFS": -4.177986241928884,
+      "rmsDbFS": -20.00002283724931,
       "loopBoundaryDelta": 0.0
     },
     {
       "id": "battle-mix",
-      "peakDbFS": -5.210802553703461,
+      "peakDbFS": -5.568746773098376,
       "acceptedEvents": 202
     },
     {

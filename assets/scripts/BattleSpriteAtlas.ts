@@ -35,16 +35,24 @@ export class BattleSpriteAtlas {
   private bake():void {
     // Cocos' browser/WeChat document adapter creates an offscreen 2D canvas here.
     if(typeof document==='undefined')return;
-    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i)]);
+    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close']);
     const canvas=document.createElement('canvas');canvas.width=CELL*COLUMNS;canvas.height=CELL*Math.ceil(keys.length/COLUMNS);
     const ctx=canvas.getContext('2d');if(!ctx)return;
     for(let i=0;i<keys.length;i++){
       ctx.save();ctx.beginPath();ctx.rect(i%COLUMNS*CELL,Math.floor(i/COLUMNS)*CELL,CELL,CELL);ctx.clip();ctx.translate(i%COLUMNS*CELL+64,Math.floor(i/COLUMNS)*CELL+80);ctx.scale(1,-1);
       const g=new CanvasDrawing(ctx),key=keys[i];
-      if(i<WEAPONS.length)drawWeaponArt(g as unknown as Graphics,WEAPONS[i].id,1,true);
+      if(i<WEAPONS.length){
+        // Use the same cell at 2x density for the small shoe's red straps/braid.
+        // Logical grip/size are restored below; no extra atlas or draw per projectile.
+        if(key==='weapon-sandal'){ctx.scale(2,2);ctx.translate(0,-4);}
+        drawWeaponArt(g as unknown as Graphics,WEAPONS[i].id,1,true);
+      }
       else if(key.indexOf('skill-')===0)drawSkillIcon(g as unknown as Graphics,Number(key.slice(6)));
       else if(key.indexOf('hud-slot-')===0){
         const tier=Number(key.slice(9));g.fillColor=tier?new Color(255,239,205,235):new Color(40,61,42,180);g.strokeColor=new Color(tier?TIER_COLORS[tier-1]:'#80916c');g.lineWidth=tier?2.5:1.5;g.roundRect(-33,-29,66,58,10);g.fill();g.stroke();
+      }
+      else if(key==='ui-close'){
+        g.fillColor=new Color('#355e40');g.strokeColor=new Color('#d6be85');g.lineWidth=1.5;g.circle(0,0,23);g.fill();g.stroke();g.strokeColor=new Color('#fff0d2');g.lineWidth=2.5;g.moveTo(-6,-6);g.lineTo(6,6);g.moveTo(-6,6);g.lineTo(6,-6);g.stroke();
       }
       else if(key.indexOf('ui-pill-')===0){
         g.fillColor=new Color('#392a20');g.roundRect(-26,-29,52,52,18);g.fill();
@@ -77,7 +85,8 @@ export class BattleSpriteAtlas {
       for(let y=0;y<CELL;y++)for(let x=0;x<CELL;x++)if(pixels[((ty+y)*canvas.width+tx+x)*4+3]){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
       if(right<left)continue;left=Math.max(0,left-2);top=Math.max(0,top-2);right=Math.min(CELL-1,right+2);bottom=Math.min(CELL-1,bottom+2);
       const width=right-left+1,height=bottom-top+1,frame=new SpriteFrame();frame.texture=this.texture;frame.rect=new Rect(tx+left,ty+top,width,height);
-      this.cells[keys[i]]={frame,width,height,x:left+width/2-64,y:80-top-height/2};
+      const shoe=keys[i]==='weapon-sandal',density=shoe?2:1;
+      this.cells[keys[i]]={frame,width:width/density,height:height/density,x:(left+width/2-64)/density,y:(80-top-height/2)/density+(shoe?4:0)};
     }
     canvas.width=canvas.height=0;
   }

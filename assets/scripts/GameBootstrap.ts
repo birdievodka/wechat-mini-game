@@ -1,3 +1,4 @@
+import {addPanelClose} from './panel-ui';
 import {HeroMount} from './HeroMount';
 import {drawGrowthAttack,drawMountDash} from './growth-effects';
 import {growthClears,growthTitle,dashName,newMountDash,beginMountDash,stepMountDash} from './hero-growth';
@@ -17,7 +18,11 @@ import {GAME_NAME} from './game-brand';
 import {COMMON_SKILLS,DEFAULT_SKILL,availableSkill,commonSkillFor,skillKillRequirement} from './common-skills';
 import {CommonSkillRuntime} from './CommonSkillRuntime';
 import {CommonSkillEffects} from './CommonSkillEffects';
-import {loadChronicleArt} from './chronicle-art';
+import {loadChronicleArt,ensureBossArt,releaseBossArt,bossArtReady} from './chronicle-art';
+import {loadGameBundle,stageBosses} from './game-resources';
+import {decodeLoadingArt} from './indexed-art';
+import {ensureResultArt,ensureHiddenHeroArt,releaseResultArt} from './deferred-art';
+import {ResourcePrepareView} from './ResourcePrepareView';
 import {LvbuState,createLvbuState,updateLvbu,lvbuFrame,lvbuBusy,LVBU_EVENT} from './lvbu-boss';
 import {drawLvbuEffects} from './lvbu-effects';
 import {BossBattle,BossUnit,BossUnitKind,ReforgedState,createBossState,bossFrame} from './boss-battle';
@@ -27,17 +32,17 @@ import {CHAPTERS,CHRONICLE_ENEMIES,chapterFor,archetypeFor,scaledEnemy,chapterTh
 import {isExtraWeapon,extraHitFactor} from './extra-weapons';
 import {ChronicleSave,SavePoint,SAVE_KEY,copyPoint} from './chronicle-save';
 import {
-  _decorator, assetManager, AssetManager, AudioClip, AudioSource, Camera, Canvas, Color, Component, EventKeyboard, EventTouch,
+  _decorator, assetManager, AssetManager, BufferAsset, AudioClip, AudioSource, Camera, Canvas, Color, Component, EventKeyboard, EventTouch,
   director, dynamicAtlasManager, macro, game, Game, Graphics, ImageAsset, input, Input, KeyCode, Label, Layers, Node,
   Rect, ResolutionPolicy, Sprite, SpriteFrame, Texture2D,
   UITransform, Vec3, view, sys,
 } from 'cc';
-import { DEBUG } from 'cc/env';
+import { DEBUG, PREVIEW } from 'cc/env';
 import { RuntimeHealth, HealthHost } from './runtime-health';
 import { BattleMusic, MUSIC_SCENES } from './battle-music';
-import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound, bossSound, enemySound } from './weapon-sound';
+import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound, bossSound, enemySound, soundAsset } from './weapon-sound';
 import { movement, sweepEllipseTime, sectorHitsCircle } from './combat-math';
-import { JOYSTICK, joystickCenter, joystickVector } from './joystick-input';
+import { JOYSTICK, joystickCenter, joystickVector, joystickThumb } from './joystick-input';
 import {ParticleSprites} from './ParticleSprites';
 import {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import { CombatEffects, drawSwordTrail, effectInk } from './combat-effects';
@@ -202,6 +207,7 @@ private playerSlowUntil=0;
   private torsoBob = 0;
   private bodyFrame: SpriteFrame | null = null;
   private soldierFrames: SpriteFrame[][] = [];
+  private soldierTextures:Texture2D[]=[];
   private enemyFrames: Partial<Record<EnemyKind, SpriteFrame[]>> = {};
   private enemyZones: EnemyZone[] = [];
   private bossEffects?:BossEffects;
@@ -243,6 +249,7 @@ private playerSlowUntil=0;
   private touchId: number | null = null;
   private origin = { x: 0, y: 0 };
   private stick = { x: 0, y: 0 };
+  private stickThumb = { x: 0, y: 0 };
   private px = 0;
   private py = 0;
   private age = 0;
@@ -279,6 +286,10 @@ private playerSlowUntil=0;
   private musicMode:'menu'|'battle'|'boss'='menu';
   private musicRequest=0;
   private musicClip?:AudioClip;
+  private nextLeadHit = 0;
+  private dangerUntil = 0;
+  private weaponVoiceVolumes: (number | undefined)[] = [];
+  private quieterSkillReleases = new Set<string>();
   private voiceOwners:(Enemy|undefined)[]=[];
 
   private musicButton!: Label;
@@ -286,6 +297,13 @@ private playerSlowUntil=0;
   private clips: Partial<Record<SoundId, AudioClip>> = {};
   private soundGate = new SoundGate();
   private loggedSounds = new Set<string>();
+  private soundLoading=new Set<string>();
+  private optionalLoaded=new Set<string>();
+  private optionalLoading=new Set<string>();
+  private resourceView?:ResourcePrepareView;
+  private resourceBusy=false;
+  private resourceSerial=0;
+  private retryResource?:()=>void;
   private soundButton!: Label;
   private layoutReady = false;
   private halfWidth = 667;
@@ -306,6 +324,7 @@ private playerSlowUntil=0;
   private startupCompletePainted=false;
   private startupTexture?:Texture2D;
   private startupImage?:ImageAsset;
+  private startupRemoteImage=false;
 
   async start(): Promise<void> {
     // All production art already shares authored atlases. Avoid another 2048² copy
@@ -342,6 +361,7 @@ private playerSlowUntil=0;
     this.fx = this.node2D(this.battlefield, 'ImpactEffects').addComponent(Graphics);
     this.particleSprites=new ParticleSprites(this.fx.node,effectInk);
     this.battleSprites=new BattleSpriteAtlas();
+    const panelClose=this.battleSprites.copyFrame('ui-close');if(panelClose)this.artFrames['ui-panel-close']=panelClose;
     this.initCommonSkill();
     this.terrain = this.node2D(this.battlefield,'Terrain'); this.terrain.setSiblingIndex(1);
     this.hero = this.node2D(this.world, 'LiuBei');this.mount=new HeroMount(this.hero,this.artFrames);
@@ -402,7 +422,8 @@ private playerSlowUntil=0;
     this.menu = this.node2D(this.ui, 'PauseMenu');
     const shade = this.menu.addComponent(Graphics); shade.fillColor = new Color(20, 30, 20, 220);
     shade.roundRect(-180, -300, 360, 455, 24); shade.fill();
-    this.label(this.menu, GAME_NAME, 0, 110, 30, '#fff3d4');
+    this.label(this.menu, GAME_NAME, -20, 110, 25, '#fff3d4');
+    addPanelClose(this.menu,this.artFrames,'PauseClose',136,110,()=>{if(this.playerHp>0){this.paused=false;this.menu.active=false;this.drawStick();this.unlockAudio();this.music.resume();}});
     this.button('继续战斗', 0, 40, () => { if (this.playerHp > 0) { this.paused = false; this.menu.active = false; this.drawStick(); this.unlockAudio(); this.music.resume(); } }, this.menu);
     this.button('返回选人', 0, -35, () => this.showMainMenu(), this.menu);
     this.soundButton = this.button('音效：开启', 0, -110, () => {
@@ -433,11 +454,7 @@ private playerSlowUntil=0;
     this.loadingScreen = this.node2D(this.ui, 'LoadingScreen');
     this.loadingView=new LoadingView(this.loadingScreen);this.loadingText=this.loadingView.status;
     const startup=startupBridge();this.startupProgress=new StartupProgress(startup?.progress);
-    if(startup?.image){
-      this.startupImage=new ImageAsset(startup.image);const texture=this.startupTexture=new Texture2D();texture.image=this.startupImage;
-      const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,startup.image.width,startup.image.height);
-      this.artFrames.poster=frame;this.loadingView?.setPoster(frame,startup.image.width,startup.image.height);this.markStartup('campaign:poster');
-    }
+    const posterArt=this.loadStartupPoster(startup?.image).catch(error=>{this.failStartup('海报资源加载失败，请重新进入');console.error(error);});
     this.drawStartupProgress();
     this.layoutBattlefield();
     const menuArt=this.loadHeroMenuArt().catch(error=>{this.loadingView?.showTitleFallback();this.startupProgress.skipMenuArt();this.drawStartupProgress();console.warn('选角素材加载失败，使用基础布局',error);});
@@ -466,12 +483,14 @@ private playerSlowUntil=0;
         if (this.audioUnlocked && !this.muted) this.soundButton.string = '音效：开启';
       });
     }
-    this.loadMusic(); this.loadWeaponSounds(); this.loadOrchardArt();
+    this.loadMusic(); this.loadWeaponSounds();
     this.root.on(Node.EventType.TOUCH_START,this.audioTouch,this,true);
-    input.on(Input.EventType.TOUCH_START, this.touchStart, this);
-    input.on(Input.EventType.TOUCH_MOVE, this.touchMove, this);
-    input.on(Input.EventType.TOUCH_END, this.touchEnd, this);
-    input.on(Input.EventType.TOUCH_CANCEL, this.touchEnd, this);
+    // UI dispatch precedes global input and may swallow a touch (including the
+    // full-screen audio-unlock listener). Capture it on the same Canvas instead.
+    this.root.on(Node.EventType.TOUCH_START, this.touchStart, this, true);
+    this.root.on(Node.EventType.TOUCH_MOVE, this.touchMove, this, true);
+    this.root.on(Node.EventType.TOUCH_END, this.touchEnd, this, true);
+    this.root.on(Node.EventType.TOUCH_CANCEL, this.touchEnd, this, true);
     input.on(Input.EventType.KEY_DOWN, this.keyDown, this);
     input.on(Input.EventType.KEY_UP, this.keyUp, this);
     this.detachKeyboard = attachDesktopKeyboard(
@@ -483,31 +502,26 @@ private playerSlowUntil=0;
     );
     game.on(Game.EVENT_HIDE, this.onBackground, this);
     game.on(Game.EVENT_SHOW, this.onForeground, this);
-    ['sickle', 'hoe'].forEach((kind, index) => {
-      this.resources.load(`characters/soldier-${kind}-actions/texture`, Texture2D, (error, texture) => {
-        if (!this.isValid) return;
-        if (error) { this.failStartup('小兵资源加载失败，请重新进入'); console.error(error); return; }
-        const frames: SpriteFrame[] = [];
-        for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
-          const frame = new SpriteFrame(); frame.texture = texture;
-          frame.rect = new Rect(col * texture.width / 4, row * texture.height / 3, texture.width / 4, texture.height / 3);
-          frames.push(frame);
-        }
-        this.soldierFrames[index] = frames;
-        this.markStartup('soldier:'+kind);
-        this.enemies.forEach(e => this.drawEnemy(e));
-        this.checkReady();
+    ['sickle','hoe'].forEach((kind,index)=>{
+      this.resources.load(`characters/soldier-${kind}-actions`,BufferAsset,async (error,asset)=>{
+        if(error){this.failStartup('小兵资源加载失败，请重新进入');console.error(error);return;}
+        if(!this.isValid){assetManager.releaseAsset(asset);return;}
+        try{const decoded=await decodeLoadingArt(new Uint8Array(asset.buffer()),()=>this.isValid);
+          if(!decoded||!this.isValid)return;
+          const texture=new Texture2D();this.soldierTextures.push(texture);texture.reset({width:decoded.width,height:decoded.height});texture.uploadData(decoded.pixels);
+          this.soldierFrames[index]=Array.from({length:12},(_,i)=>{const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(i%4*decoded.width/4,Math.floor(i/4)*decoded.height/3,decoded.width/4,decoded.height/3);return f;});
+          this.markStartup('soldier:'+kind);this.enemies.forEach(e=>this.drawEnemy(e));this.checkReady();
+        }catch(e){this.failStartup('小兵资源校验失败，请重新进入');console.error(e);}finally{assetManager.releaseAsset(asset);}
       });
     });
     try {
       const bundle = await new Promise<AssetManager.Bundle>((resolve, reject) => assetManager.loadBundle('campaign', (error, b) => error ? reject(error) : resolve(b)));
       if(!this.isValid)return;this.markStartup('campaign');
-      await Promise.all(CAMPAIGN_ART.filter(name=>name!=='poster'||!this.artFrames.poster).map(name => new Promise<void>((resolve, reject) => {
+      await Promise.all(CAMPAIGN_ART.map(name => new Promise<void>((resolve, reject) => {
         bundle.load(`${name}/texture`, Texture2D, (error, texture) => {
           if (error) { reject(error); return; }
           if (!this.isValid) { resolve(); return; }
           const frame = new SpriteFrame(); frame.texture = texture; frame.rect = new Rect(0, 0, texture.width, texture.height); this.artFrames[name] = frame;
-          if(name==='poster')this.loadingView?.setPoster(frame,texture.width,texture.height);
           if (name === 'camp-paper') { frame.insetLeft = 44; frame.insetRight = 44; frame.insetTop = 44; frame.insetBottom = 44; }
           if (name === 'camp-stats') ['hp', 'power', 'damage', 'haste', 'speed', 'armor', 'crit', 'range', 'regen', 'pickup', 'area', 'coin'].forEach((key, index) => {
             const icon = new SpriteFrame(); icon.texture = texture;
@@ -525,28 +539,16 @@ private playerSlowUntil=0;
           this.markStartup('campaign:'+name);resolve();
         });
       })));
-      const enemyBundle = await new Promise<AssetManager.Bundle>((resolve, reject) => assetManager.loadBundle('enemies', (error, b) => error ? reject(error) : resolve(b)));
-      if(!this.isValid)return;this.markStartup('enemies');
-      await Promise.all(ENEMY_ART.map(([kind, name]) => new Promise<void>((resolve, reject) => {
-        enemyBundle.load(`${name}/texture`, Texture2D, (error, texture) => {
-          if (error) { reject(error); return; }
-          if (!this.isValid) { resolve(); return; }
-          const frames: SpriteFrame[] = [];
-          for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
-            const frame = new SpriteFrame(); frame.texture = texture;
-            frame.rect = new Rect(col * texture.width / 4, row * texture.height / 3, texture.width / 4, texture.height / 3); frames.push(frame);
-          }
-          this.enemyFrames[kind] = frames;this.markStartup('enemy:'+kind); resolve();
-        });
-      })));
       if (!this.isValid) return;
       await loadChronicleArt(this.artFrames,()=>this.isValid);for(const i of [24,25]){const f=this.battleSprites.copyFrame('skill-'+i);if(f)this.artFrames['skill-'+i]=f;}this.markStartup('chronicles');
       await Promise.all([
-        this.loadResultArt(),
+        posterArt,
         this.loadPresentationArt(),
         menuArt,
       ]);
       if(!this.isValid)return;
+      const sandalIcon=this.battleSprites.copyFrame('weapon-sandal');
+      if(sandalIcon){this.artFrames['icon-sandal']?.destroy();this.artFrames['icon-sandal']=sandalIcon;}
       // Resolve legacy keys to the current youth art, without decoding six old portraits.
       for(const id of ['liubei','guanyu','zhangfei']){
         this.artFrames[id]=this.artFrames['hero-select-'+id];
@@ -561,6 +563,7 @@ private playerSlowUntil=0;
       try { this.bestClear=Number(sys.localStorage.getItem('taoyuan-chronicle-clear-best-v7'))||0; this.bestSurvival = Number(sys.localStorage.getItem('taoyuan-survival-best')) || 0; this.bestWave = Number(sys.localStorage.getItem('taoyuan-best')) || 0; this.muted = sys.localStorage.getItem('taoyuan-muted') === 'true'; this.musicMuted = sys.localStorage.getItem('taoyuan-music-muted') === 'true'; } catch (_) { /* optional local persistence */ }
       this.soundButton.string = this.muted ? '音效：关闭' : '音效：开启';
       this.musicButton.string = this.musicMuted ? '音乐：关闭' : '音乐：开启'; this.music.setEnabled(!this.musicMuted);
+      if(typeof wx!=='undefined')this.music.tryAutoplay();
       this.checkReady();
     } catch (error) { this.failStartup('角色资源加载失败，请重新进入'); console.error(error); }
   }
@@ -571,7 +574,7 @@ private playerSlowUntil=0;
     await Promise.all(['background','atlas','logo'].map(name=>new Promise<void>((resolve,reject)=>{
       bundle.load((name==='background'?'training-ground':name)+'/texture',Texture2D,(error,texture)=>{
         if(error){reject(error);return;}if(!this.isValid){resolve();return;}
-        if(name==='background'||name==='logo'){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,texture.width,texture.height);this.artFrames['hero-menu-'+name]=frame;if(name==='logo')this.loadingView?.setLogo(frame);}
+        if(name==='background'||name==='logo'){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,texture.width,texture.height);this.artFrames['hero-menu-'+name]=frame;if(name==='background'&&PREVIEW&&!this.artFrames.poster)this.loadingView?.setPoster(frame,texture.width,texture.height);if(name==='logo')this.loadingView?.setLogo(frame);}
         else{
           const cw=texture.width/3,ch=texture.height/2;
           ['liubei','guanyu','zhangfei','logo','title','start'].forEach((key,i)=>{if(key==='logo')return;const frame=new SpriteFrame();frame.texture=texture;frame.rect=i<3?new Rect(i*cw,0,cw,ch):new Rect((i-3)*cw,ch+ch*.25,cw,ch*.5);this.artFrames['hero-menu-'+key]=frame;});
@@ -580,26 +583,27 @@ private playerSlowUntil=0;
     })));
   }
 
-  private async loadResultArt():Promise<void> {
-    const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('results',(error,b)=>error?reject(error):resolve(b)));
-    if(!this.isValid)return;this.markStartup('results');
-    const texture=await new Promise<Texture2D>((resolve,reject)=>bundle.load('portraits/texture',Texture2D,(error,t)=>error?reject(error):resolve(t)));
-    if(!this.isValid)return;
-    const width=texture.width/3,height=texture.height/2;
-    (['liubei','guanyu','zhangfei'] as const).forEach((id,i)=>{
-      for(const [row,prefix] of [[0,'hero-select-'],[1,'result-']] as const){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(i*width,row*height,width,height);this.artFrames[prefix+id]=frame;}
-    });
-    this.markStartup('results:portraits');
+  private loadStartupPoster(image?:HTMLImageElement):Promise<void> {
+    const apply=(source:ImageAsset)=>{this.startupImage=source;const texture=this.startupTexture=new Texture2D();texture.image=source;const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(0,0,texture.width,texture.height);this.artFrames.poster=f;this.loadingView?.setPoster(f,texture.width,texture.height);this.markStartup('poster');};
+    if(image){apply(new ImageAsset(image));return Promise.resolve();}
+    return new Promise((resolve,reject)=>assetManager.loadRemote<ImageAsset>('startup-poster.jpg',{ext:'.jpg'},(error,asset)=>{if(error&&PREVIEW){const f=this.artFrames['hero-menu-background'];if(f)this.loadingView?.setPoster(f,f.rect.width,f.rect.height);this.markStartup('poster');resolve();return;}if(error){this.failStartup('海报资源加载失败，请重新进入');reject(error);return;}if(!this.isValid){assetManager.releaseAsset(asset);resolve();return;}this.startupRemoteImage=true;apply(asset);resolve();}));
   }
-
+  private prefetchResultArt():void {if(this.artFrames['result-'+this.run.heroId])return;ensureResultArt(this.artFrames,()=>this.isValid&&this.phase==='battle',()=>{});}
+  private prepareResult(action:()=>void):void {
+    this.prepareVisuals(this.artFrames['result-'+this.run.heroId]?[]:[(alive,done)=>ensureResultArt(this.artFrames,alive,done)],action,'正在整理战报…','桃园战报');
+  }
+  private prepareHero(id:HeroId,action:()=>void):void {
+    this.prepareVisuals(['zhaoyun','kongming'].indexOf(id)<0||this.artFrames['hero-'+id+'-open']?[]:[(alive,done)=>ensureHiddenHeroArt(this.artFrames,alive,done)],action);
+  }
   private async loadPresentationArt():Promise<void> {
     const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('presentation',(error,b)=>error?reject(error):resolve(b)));
     if(!this.isValid)return;this.markStartup('presentation');
-    await Promise.all(['icons','weapon-revision','butcher-knife','heroes'].map(name=>new Promise<void>((resolve,reject)=>{
+    await Promise.all(['icons','weapon-revision','butcher-knife','heroes','hero-hud'].map(name=>new Promise<void>((resolve,reject)=>{
       bundle.load((name==='background'?'training-ground':name)+'/texture',Texture2D,(error,texture)=>{
         if(error){reject(error);return;}if(!this.isValid){resolve();return;}
         const frame=(key:string,rect:number[]):void=>{const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(rect[0],rect[1],rect[2],rect[3]);this.artFrames[key]=f;};
-        if(name==='icons')Object.keys(WEAPON_ICON_RECTS).forEach(id=>frame('icon-'+id,WEAPON_ICON_RECTS[id as WeaponId]!));
+        if(name==='hero-hud')for(const [i,id] of ['liubei','guanyu','zhangfei'].entries())frame('hero-select-'+id,[i*texture.width/3,0,texture.width/3,texture.height]);
+        else if(name==='icons')Object.keys(WEAPON_ICON_RECTS).forEach(id=>frame('icon-'+id,WEAPON_ICON_RECTS[id as WeaponId]!));
         else if(name==='weapon-revision')for(const id of ['pole'] as const)frame('icon-'+id,WEAPON_ICON_PATCH_RECTS[id]);
         else if(name==='butcher-knife')frame('icon-cleaver',BUTCHER_ICON_RECT);
         else Object.keys(HERO_PART_RECTS).filter(id=>['liubei','guanyu','zhangfei'].indexOf(id)>=0).forEach(id=>HERO_PART_RECTS[id].forEach((rect,i)=>frame('hero-'+id+'-'+['open','closed','torso'][i],rect)));
@@ -642,7 +646,7 @@ private playerSlowUntil=0;
     const texture=poster?.texture;poster?.destroy();
     if(this.startupTexture){this.startupTexture.destroy();this.startupTexture=undefined;}
     else if(texture)assetManager.releaseAsset(texture);
-    this.startupImage?.destroy();this.startupImage=undefined;
+    if(this.startupImage){if(this.startupRemoteImage)assetManager.releaseAsset(this.startupImage);else this.startupImage.destroy();}this.startupImage=undefined;
     const startup=startupBridge();if(startup)delete startup.image;
   }
   private markStartup(id:string):void {this.startupProgress.mark(id);this.drawStartupProgress();}
@@ -699,6 +703,7 @@ private playerSlowUntil=0;
       return;
     }
     if(this.ready&&!this.backgrounded){const audioDt=Math.min(Math.max(delta,0),.08);this.soundGate.update(audioDt);if(!this.paused)this.music.update(audioDt);for(let i=0;i<this.voiceOwners.length;i++){const e=this.voiceOwners[i];if(e&&(e.hp<=0||(e.stunUntil||0)>this.age)){this.soundSources[i]?.stop();this.voiceOwners[i]=undefined;}}}
+    if(this.resourceBusy)return;
     if(this.ready&&this.phase==='menu'){if(!this.backgrounded)this.screens.update(delta);return;}
     if(this.ready&&this.phase==='battle'&&this.finishVictory())return;
     if(this.ready&&(this.phase==='defeat'||this.phase==='victory')){this.screens.update(delta);return;}
@@ -867,7 +872,7 @@ private playerSlowUntil=0;
     if (this.phase!=='battle'||this.paused||this.backgrounded||this.trainingPanel?.root.active||this.victoryPending||this.playerHp <= 0 || this.hurtTime > 0 || this.protectionTime > 0 ) return false;
     if(this.commonSkill.block(sourceX,sourceY+24))return false;
     this.lastDamage = 1;
-    if(!this.trainingMode)this.playerHp = Math.max(0, this.playerHp - this.lastDamage);
+    if(!this.trainingMode){this.playerHp = Math.max(0, this.playerHp - this.lastDamage);if(this.playerHp<=2)this.prefetchResultArt();}
     this.hurtTime = 1.2 + this.perks.invincible;
     this.refreshStats(); this.pushNearbyEnemies();
     const dx = this.px - sourceX, dy = this.py - sourceY, distance = Math.hypot(dx, dy);
@@ -972,11 +977,17 @@ private playerSlowUntil=0;
       w.node.getComponent(Graphics)!.clear();w.fist.node.active=this.run.weapons.length===1&&w.equipped?.id!=='sword';
       drawHeroFist(w.fist,this.run.heroId,w.side*this.facing,!!w.equipped);
       w.offhand.active = false; w.trail.clear();w.strikeStarted=false;w.impactPlayed=false; w.node.active=!!w.equipped || (i===1 && this.run.weapons.length===1); w.time = w.duration; w.cooldown = i * .06;
-      if (!w.equipped) { w.stats = undefined; w.shoe.active = false; return; }
+      if (!w.equipped) { w.stats = undefined; w.shoe.active = false;
+        if(i===1&&this.run.weapons.length===1&&this.run.weapons[0].id==='sandal'){
+          for(const n of [...w.shoe.children]){n.removeFromParent();n.destroy();}
+          drawWeaponArt(w.shoe.getComponent(Graphics)!,'sandal');w.shoe.setPosition(0,0);
+        }return; }
       w.stats = weaponStatsFor(this.run, w.equipped);
       drawWeaponArt(w.shoe.getComponent(Graphics)!, w.equipped.id, w.equipped.tier);
       const existing=w.shoe.children.find(n=>n.name==='WeaponSprite');if(existing){existing.removeFromParent();existing.destroy();}
-      const sig=!!w.equipped.signature&&(this.run.growth||0)>0;const frame=this.artFrames[sig?'growth-held-'+this.run.heroId:'weapon-'+w.equipped.id];if(frame){w.shoe.getComponent(Graphics)!.clear();const n=this.node2D(w.shoe,'WeaponSprite'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(78,78);n.setPosition(0,18);if(sig){n.getComponent(UITransform)!.setAnchorPoint(.5,.22);n.getComponent(UITransform)!.setContentSize(90,90);n.setPosition(0,0);}else if(['smg','shotgun','rocket'].indexOf(w.equipped.id)>=0||isExtraWeapon(w.equipped.id))n.angle=45;}
+      const sig=!!w.equipped.signature&&(this.run.growth||0)>0;const frame=this.artFrames[sig?'growth-held-'+this.run.heroId:'weapon-'+w.equipped.id];
+      if(w.equipped.id==='sandal'&&this.battleSprites.ready){w.shoe.getComponent(Graphics)!.clear();const sp=this.battleSprites.add(w.shoe,'weapon-sandal');if(sp)sp.node.name='WeaponSprite';}
+      else if(frame){w.shoe.getComponent(Graphics)!.clear();const n=this.node2D(w.shoe,'WeaponSprite'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(78,78);n.setPosition(0,18);if(sig){n.getComponent(UITransform)!.setAnchorPoint(.5,.22);n.getComponent(UITransform)!.setContentSize(90,90);n.setPosition(0,0);}else if(['smg','shotgun','rocket'].indexOf(w.equipped.id)>=0||isExtraWeapon(w.equipped.id))n.angle=45;}
       let off=w.offhand.children.find(n=>n.name==='SignatureOffhand');if(sig&&this.run.heroId==='liubei'){if(!off){off=this.node2D(w.offhand,'SignatureOffhand');off.addComponent(Sprite).sizeMode=Sprite.SizeMode.CUSTOM;off.getComponent(UITransform)!.setAnchorPoint(.5,.22);off.getComponent(UITransform)!.setContentSize(90,90);off.setSiblingIndex(0);}off.getComponent(Sprite)!.spriteFrame=this.artFrames['growth-held-liubei'];off.active=true;}else if(off)off.active=false;
       w.shoe.setPosition(0, 0); w.shoe.active = true;
     });
@@ -990,13 +1001,15 @@ private playerSlowUntil=0;
     if (!this.presentSubstep||this.run.weapons.length !== 1) return;
     const hand = this.weapons[1], held = this.weapons[0]; if (!hand || !held) return;
     if(held.equipped?.id==='sword'){hand.arm.node.active=false;hand.node.active=false;return;}
-    const side=this.facing,wrist=relaxedWrist(side,this.torsoBob,this.handBob,this.walkPhase,this.walkBlend);
+    const sandal=held.equipped?.id==='sandal',side=this.facing,wrist=sandal?
+      {x:side*HERO_ARMS.heldX,y:-7+this.torsoBob+this.handBob+Math.sin(this.walkPhase)*this.walkBlend*2}:
+      relaxedWrist(side,this.torsoBob,this.handBob,this.walkPhase,this.walkBlend);
     const {x,y}=wrist;
-    hand.arm.node.active = true; hand.shoe.active = false; hand.offhand.active = false;
+    hand.arm.node.active = true; hand.shoe.active = sandal; hand.offhand.active = false;
     const g = hand.arm;g.clear();drawHeroSleeve(g,side,wrist,this.torsoBob,heroFor(this.run).color,this.run.heroId);
-    if(hand.fist){hand.fist.node.active=true;drawHeroFist(hand.fist,this.run.heroId,side,false);}
+    if(hand.fist){hand.fist.node.active=true;drawHeroFist(hand.fist,this.run.heroId,side,sandal,sandal);}
     hand.node.setPosition(x, y); hand.node.setScale(.85, .85, 1);
-    hand.node.angle = -side*8;
+    hand.node.angle = -side*(sandal?24:8);
     this.placeArmBehindHead(hand.arm.node);
     if(hand.node.getSiblingIndex()!==this.hero.children.length-1)hand.node.setSiblingIndex(this.hero.children.length-1);
   }
@@ -1018,10 +1031,10 @@ private playerSlowUntil=0;
     const arm = w.arm;
     if(this.presentSubstep&&!orbit){arm.clear();drawHeroSleeve(arm,side,{x:hx,y:hy},this.torsoBob,heroFor(this.run).color,this.run.heroId);}
     arm.node.active=!orbit;
-    w.node.setPosition(hx, hy); w.node.angle = active ? sweep * 180 / Math.PI - 90 : (signature?side:w.side) * -12;
+    w.node.setPosition(hx, hy); w.node.angle = active ? sweep * 180 / Math.PI - 90 : w.equipped.id==='sandal'?-side*24:(signature?side:w.side) * -12;
     w.node.setScale(orbit ? .78 : .85,orbit ? .78 : .85,1); const layer=orbit&&anchor.behind?1:this.hero.children.length-1;if(w.node.getSiblingIndex()!==layer)w.node.setSiblingIndex(layer);
     if(!orbit)this.placeArmBehindHead(w.arm.node);
-    if(w.fist){w.fist.node.active=!orbit;drawHeroFist(w.fist,this.run.heroId,side,true);}
+    if(w.fist){w.fist.node.active=!orbit;drawHeroFist(w.fist,this.run.heroId,side,true,w.equipped.id==='sandal');}
     if(this.presentSubstep&&melee)w.trail.clear();
     if (this.presentSubstep && melee && !signature && t > .2 && t < .7) {
       const r = w.stats.range * .78; w.trail.strokeColor = new Color(255, 238, 182, 165); w.trail.lineWidth = 4;
@@ -1089,9 +1102,9 @@ private playerSlowUntil=0;
       else if(id==='zhangfei'&&phase===0)hit=along>=-radius&&along<=s.range+radius&&Math.abs(across)<25+radius;
       else hit=sectorHitsCircle(dx,dy,s.range*(third?1.15:1),w.angle,third?Math.min(220,s.arc+45):id==='zhangfei'?120:s.arc,radius);
       if(!hit)continue;w.hit.add(e);hits++;this.hitEnemy(e,Math.atan2(dy,dx),w.damage*(third?1.5:1),s.knockback,w.equipped!.id,false,false,w.equipped!.tier);if(id==='liubei'&&third&&hits>=3)break;
-    }if(hits)this.playWeaponSound(w.equipped!.id,'hit');
+    }if(hits)this.playWeaponSound(w.equipped!.id,'hit',third);
   }
-  private castMountDash():void {if(this.phase!=='battle'||this.paused||this.backgrounded||this.trainingPanel?.root.active||this.resumeCountdown>0||this.playerHp<=0||this.commonSkill.dashing)return;if(this.trainingMode)this.mountDash.cooldown=0;if(beginMountDash(this.mountDash,this.run.heroId,this.run.growth||0,this.heading)){this.unlockAudio();this.playSound('dash');this.playerVx=this.playerVy=0;this.dashDrawKey='';this.drawDashButton();}}
+  private castMountDash():void {if(this.resourceBusy||this.phase!=='battle'||this.paused||this.backgrounded||this.trainingPanel?.root.active||this.resumeCountdown>0||this.playerHp<=0||this.commonSkill.dashing)return;if(this.trainingMode)this.mountDash.cooldown=0;if(beginMountDash(this.mountDash,this.run.heroId,this.run.growth||0,this.heading)){this.unlockAudio();this.playSound('dash');this.playerVx=this.playerVy=0;this.dashDrawKey='';this.drawDashButton();}}
   private drawDashButton():void {if(!this.dashButton||!this.dashLabel)return;const visible=(this.run.growth||0)>=4&&this.phase==='battle';this.dashButton.active=visible;if(!visible)return;const remain=Math.ceil(this.mountDash.cooldown),key=this.run.heroId+':'+remain;if(key===this.dashDrawKey)return;this.dashDrawKey=key;const g=this.dashButton.getComponent(Graphics)!;g.clear();g.fillColor=new Color('#294a38');g.strokeColor=new Color(remain?'#8d9374':'#ffda83');g.lineWidth=3;g.circle(0,0,43);g.fill();g.stroke();const sp=this.dashButton.children.find(n=>n.name==='MountDashIcon')!.getComponent(Sprite)!;sp.spriteFrame=this.artFrames['mount-'+this.run.heroId+'-5'];this.dashLabel.string=remain?remain+'s':dashName(this.run.heroId);}
   private meleeStrike(w: Weapon,multiplier=1,hitSet=w.hit): void {
     const stats = w.stats!, weaponId = w.equipped!.id;
@@ -1426,11 +1439,21 @@ private playerSlowUntil=0;
     if((e.born||0)<=0)e.art.node.active=!e.animal;
     const kind = e.kind || 'soldier', cell = enemyAnimationCell(kind, e.direction, e.walk, e.moving !== false, e.attack);
     if(e.archetype||e.bossSkin||e.bossUnit){this.drawChronicleEnemy(e);return;}
+    if(kind!=='soldier'&&!this.enemyFrames[kind])this.loadLegacyEnemy(kind);
     const frame=kind==='soldier'?this.soldierFrames[e.weaponKind]?.[cell]||null:this.enemyFrames[kind]?.[cell]||null;
     if(e.art.spriteFrame!==frame)e.art.spriteFrame=frame;
     const hit=e.flash>0;if(e.visualHit!==hit){e.art.color=hit?ENEMY_HIT:ENEMY_NORMAL;e.visualHit=hit;}
   }
 
+  private loadLegacyEnemy(kind:EnemyKind):void {
+    const name=ENEMY_ART.find(([id])=>id===kind)?.[1];if(!name||this.optionalLoading.has('legacy-'+name))return;
+    this.optionalLoading.add('legacy-'+name);loadGameBundle('enemies',(error,bundle)=>{
+      if(error||!bundle){this.optionalLoading.delete('legacy-'+name);return;}
+      bundle.load(name+'/texture',Texture2D,(e,t)=>{this.optionalLoading.delete('legacy-'+name);if(e||!this.isValid)return;
+        this.enemyFrames[kind]=Array.from({length:12},(_,i)=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%4*t.width/4,Math.floor(i/4)*t.height/3,t.width/4,t.height/3);return f;});
+      });
+    });
+  }
   private spawnNext(kind: EnemyKind = enemyKind(this.run.wave, Math.random, this.run.survivalSeconds),archetype?:string,encounterChapter?:number): Enemy {
     let e = this.enemies.find(v => v.hp <= 0 && v.dead <= 0);
     if (!e) { e = this.createEnemy(this.enemies.length); this.enemies.push(e); }
@@ -1599,17 +1622,27 @@ private playerSlowUntil=0;
   }
 
   private loadWeaponSounds(): void {
-    assetManager.loadBundle('sfx', (error, bundle) => {
-      if (!this.isValid) return;
-      if (error) { console.warn('武器音效分包加载失败', error); return; }
-      for (const name of GENERATED_SOUNDS) bundle.load(name, AudioClip, (loadError, clip) => {
-        if (!this.isValid) return;
-        if (loadError) { console.warn('武器音效加载失败', name, loadError); return; }
-        this.clips[name] = clip;
+    // Core samples are local. Deferred samples are fetched only on use/prefetch.
+    for(const id of GENERATED_SOUNDS)if(soundAsset(id).bundle==='sfx-core')this.loadSound(id);
+  }
+  private loadSound(id:Exclude<SoundId,'sandal-hit-pcm'>):void {
+    const asset=soundAsset(id),key=asset.bundle+'/'+asset.name;
+    if(this.clips[id]||this.soundLoading.has(key))return;this.soundLoading.add(key);
+    loadGameBundle(asset.bundle,(error,bundle)=>{
+      if(error||!bundle){this.soundLoading.delete(key);console.warn('音效资源稍后重试',id);return;}
+      bundle.load(asset.name,AudioClip,(loadError,clip)=>{
+        this.soundLoading.delete(key);if(!this.isValid){if(clip)assetManager.releaseAsset(clip);return;}
+        if(loadError){console.warn('音效暂不可用',id);return;}
+        for(const alias of GENERATED_SOUNDS){const a=soundAsset(alias);if(a.bundle===asset.bundle&&a.name===asset.name)this.clips[alias]=clip;}
       });
     });
   }
-
+  private prefetchSounds():void {
+    for(const w of this.run.weapons)for(const event of ['attack','hit'] as const){const id=weaponSound(w.id,event);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
+    const skill=('skill-'+this.run.skillId) as SoundId;if(skill!=='sandal-hit-pcm'&&SOUND_CUES[skill])this.loadSound(skill);
+    for(const id of ['ui-buy','ui-refresh','ui-sell','ui-upgrade','victory','defeat','unlock','boss-arrive','wave-clear'] as const)this.loadSound(id);
+    const bosses=this.trainingMode?[]:stageBosses(this.run.chapter);for(const boss of bosses)for(let i=0;i<3;i++){const id=bossSound(boss,i);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
+  }
   private selectMusic(mode:'menu'|'battle'|'boss',restart=false):void {
     if(this.musicMode===mode&&this.musicLoaded&&!restart)return;
     this.musicMode=mode;this.musicLoaded=false;this.musicRequest++;
@@ -1641,19 +1674,34 @@ private playerSlowUntil=0;
   }
   private unlockAudio(): void { this.audioUnlocked = true; this.music.unlock(); }
 
-  private playWeaponSound(weapon: WeaponId, event: SoundEvent): void {
+  private playWeaponSound(weapon: WeaponId, event: SoundEvent, finisher = false): void {
     const name = weaponSound(weapon, event);
-    if (name) this.playSound(name, SOUND_CUES[name].volume);
+    if (name) this.playSound(name, SOUND_CUES[name].volume, SOUND_CUES[name].priority, undefined, finisher ? 'finisher' : event);
   }
-  private playSound(name: SoundId, volume: number = SOUND_CUES[name].volume, priority: number = SOUND_CUES[name].priority, owner?:Enemy): void {
+  private playSound(name: SoundId, volume: number = SOUND_CUES[name].volume, priority: number = SOUND_CUES[name].priority, owner?:Enemy, weaponEvent?:SoundEvent | 'finisher'): void {
     const clip = this.clips[name];
+    if(!clip&&name!=='sandal-hit-pcm'){this.loadSound(name);return;} // Never replay a late impact.
     if (!this.audioUnlocked || this.muted || this.backgrounded || !clip || !this.soundSources.length) return;
     const index = this.soundGate.acquire(name, priority); if (index === undefined) return;
     const source = this.soundSources[index];this.voiceOwners[index]=owner;
     if(priority>=3&&this.phase==='battle')this.music.duck(.5,.4);
+    const now = this.soundGate.elapsed;
+    this.weaponVoiceVolumes[index] = undefined;
+    if (weaponEvent) {
+      if (weaponEvent === 'attack') volume *= .71;
+      else if (now < this.nextLeadHit && weaponEvent !== 'finisher') volume *= .45;
+      else this.nextLeadHit = now + .1;
+      this.weaponVoiceVolumes[index] = volume;
+      if (now < this.dangerUntil) volume *= .4;
+    } else if (this.phase === 'battle' && (name === 'player-hurt' || name === 'danger' || name === 'charge-warn' || name.startsWith('boss-'))) {
+      this.dangerUntil = now + .32;
+      this.weaponVoiceVolumes.forEach((gain, i) => {
+        if (gain !== undefined) this.soundSources[i].volume = gain * .4;
+      });
+    }
     source.stop(); source.clip = clip; source.volume = volume; source.play();
   }
-  private stopSounds(): void { for (const source of this.soundSources) source.stop(); this.soundGate.reset(); this.voiceOwners.length=0; }
+  private stopSounds(): void { for (const source of this.soundSources) source.stop(); this.soundGate.reset(); this.voiceOwners.length=0; this.weaponVoiceVolumes.length=0; this.nextLeadHit=0; this.dangerUntil=0; this.quieterSkillReleases.clear(); }
   private onBackground(): void { this.health?.record('background');this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
   private onForeground(): void {
     this.backgrounded = false;this.health?.record('foreground');
@@ -1707,25 +1755,27 @@ private playerSlowUntil=0;
     this.playSound(id,gain*falloff,SOUND_CUES[id].priority,e);
   }
   private touchStart(event: EventTouch): void {
-    if (this.touchId !== null || this.paused || this.trainingPanel?.root.active || this.playerHp <= 0 || this.phase !== 'battle') return;
+    if (this.resourceBusy || this.touchId !== null || this.paused || this.trainingPanel?.root.active || this.playerHp <= 0 || this.phase !== 'battle') return;
     const p = this.localPoint(event);
+    if(!Number.isFinite(p.x)||!Number.isFinite(p.y))return;
     if (Math.abs(p.x) > this.halfWidth || Math.abs(p.y) > this.halfHeight) return;
     const center=joystickCenter(this.halfWidth,this.halfHeight);
     if(Math.hypot(p.x-center.x,p.y-center.y)>JOYSTICK.activation)return;
     this.unlockAudio();
     this.touchId=event.getID();this.origin=center;
-    this.stick=joystickVector(p.x-center.x,p.y-center.y);this.drawStick();
+    this.stick=joystickVector(p.x-center.x,p.y-center.y);this.stickThumb=joystickThumb(p.x-center.x,p.y-center.y);this.drawStick();
   }
   private touchMove(event: EventTouch): void {
     if (event.getID() !== this.touchId) return;
     const p = this.localPoint(event);
-    this.stick=joystickVector(p.x-this.origin.x,p.y-this.origin.y);this.drawStick();
+    if(!Number.isFinite(p.x)||!Number.isFinite(p.y))return;
+    this.stick=joystickVector(p.x-this.origin.x,p.y-this.origin.y);this.stickThumb=joystickThumb(p.x-this.origin.x,p.y-this.origin.y);this.drawStick();
   }
   private touchEnd(event: EventTouch): void { if (event.getID() === this.touchId) this.clearTouch(); }
   private keyDown(event: EventKeyboard): void {
     this.unlockAudio();
     if (!this.muted && this.clips['sandal-hit-pcm']) this.soundButton.string = '音效：开启';
-    if (this.paused || this.phase !== 'battle') return;
+    if (this.resourceBusy || this.paused || this.phase !== 'battle') return;
     if(event.keyCode===81||event.keyCode===16){this.castMountDash();return;}
     if(event.keyCode===32 || event.keyCode===69){this.castSkill();return;}
     if ([KeyCode.KEY_W, KeyCode.KEY_A, KeyCode.KEY_S, KeyCode.KEY_D,
@@ -1734,7 +1784,7 @@ private playerSlowUntil=0;
     }
   }
   private keyUp(event: EventKeyboard): void { this.keys.delete(event.keyCode); }
-  private clearTouch(): void { this.touchId = null; this.stick = { x: 0, y: 0 }; if (this.joystick) this.drawStick(); }
+  private clearTouch(): void { this.touchId = null; this.stick = { x: 0, y: 0 }; this.stickThumb={x:0,y:0};if (this.joystick) this.drawStick(); }
   private clearInput(): void { this.keys.clear(); this.clearTouch(); }
   private drawStick(): void {
     const g=this.joystick;g.clear();
@@ -1747,7 +1797,7 @@ private playerSlowUntil=0;
     g.strokeColor=new Color(154,185,122,active?145:65);g.lineWidth=1;g.circle(x,y,JOYSTICK.radius*.88);g.stroke();
     for(let i=0;i<4;i++){const a=i*Math.PI/2,c=Math.cos(a),s=Math.sin(a),r=JOYSTICK.radius*.76;g.fillColor=new Color(243,229,195,active?160:95);
       g.moveTo(x+c*(r+5),y+s*(r+5));g.lineTo(x+c*(r-3)-s*4,y+s*(r-3)+c*4);g.lineTo(x+c*(r-3)+s*4,y+s*(r-3)-c*4);g.close();g.fill();}
-    const kx=x+this.stick.x*JOYSTICK.travel,ky=y+this.stick.y*JOYSTICK.travel;
+    const kx=x+this.stickThumb.x*JOYSTICK.travel,ky=y+this.stickThumb.y*JOYSTICK.travel;
     g.fillColor=new Color(28,43,31,90);g.circle(kx+2,ky-4,JOYSTICK.knob+2);g.fill();
     g.fillColor=new Color(active?'#d9e5ba':'#d3d8b9');g.strokeColor=new Color('#fff0c8');g.lineWidth=2;g.circle(kx,ky,JOYSTICK.knob);g.fill();g.stroke();
     g.strokeColor=new Color('#99ad7c');g.lineWidth=2;g.circle(kx,ky,JOYSTICK.knob*.76);g.stroke();
@@ -1838,28 +1888,45 @@ private playerSlowUntil=0;
     const saved=!won||saveProfile(sys.localStorage,this.profile);this.clearBattle();this.setBattleVisible(false);this.paused=false;
     this.playSound(won?'victory':'defeat');if(won&&reward&&(reward.weapons.length||reward.passives.length||reward.skills.length))this.playSound('unlock',.25);
     if(won&&reward)this.screens.stageResult(this.run,this.kills,reward,()=>{this.selectedStage=Math.min(highestStage(this.profile,this.run.heroId),this.run.chapter+1);this.profile.preferences[this.run.heroId]={stage:this.selectedStage,weapon:this.run.starter,skill:this.run.skillId};saveProfile(sys.localStorage,this.profile);this.showMainMenu();},()=>this.showMainMenu(),saved);
-    else this.screens.survivalResult(this.run,this.kills,0,false,()=>this.restart(false),()=>this.showMainMenu(),false,0,false);
+    else this.prepareResult(()=>this.screens.survivalResult(this.run,this.kills,0,false,()=>this.restart(false),()=>this.showMainMenu(),false,0,false));
   }
   private profile:StageProfile=newProfile();
   private selectedStage=1;
   private showMainMenu(): void {
     if (!this.ready) return;
     this.trainingPanel?.hide();this.trainingMode=false;
+    this.resourceSerial++;this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;
     this.phase = 'menu'; this.testMode = false; this.paused = false; this.stopSounds(); this.clearBattle(); this.setBattleVisible(false);
+    releaseBossArt(this.artFrames,released=>{for(const e of this.enemies){if(e.art.spriteFrame&&released.has(e.art.spriteFrame))e.art.spriteFrame=null;for(const sp of [...(e.rigParts||[]),...(e.lvbuGhosts||[]),...(e.chargeGhosts||[])])if(sp.spriteFrame&&released.has(sp.spriteFrame))sp.spriteFrame=null;}});
     if(!visibleHero(this.run.heroId))this.run=createRun('liubei');
     this.selectMusic('menu',true);
     this.screens.menu(this.run.heroId,(id,skill,weapon,stage)=>{
       if(this.phase!=='menu'||!weapon||!stage||!canChallenge(this.profile,id,stage,weapon,skill))return;
-      this.unlockAudio();this.selectedStage=stage;this.run=createStageRun(this.profile,id,stage,weapon,skill)!;this.restart(false);
+      this.unlockAudio();this.selectedStage=stage;this.run=createStageRun(this.profile,id,stage,weapon,skill)!;this.prepareBosses(stageBosses(stage),()=>this.restart(false));
     },()=>this.screens.codex(()=>this.showMainMenu(),this.profile),this.run.skillId,(id,skill)=>this.startTraining(id,skill),{
       profile:this.profile,stage:this.selectedStage,weapon:this.run.starter,
       changed:()=>saveProfile(sys.localStorage,this.profile),
     });
+    releaseResultArt(this.artFrames);
   }
 
+  private prepareBosses(ids:string[],action:()=>void):void {
+    this.prepareVisuals(ids.filter(id=>!bossArtReady(this.artFrames,id)).map(id=>(alive:()=>boolean,done:(error?:Error)=>void)=>ensureBossArt(id,this.artFrames,alive,done)),action);
+  }
+  private prepareVisuals(tasks:((alive:()=>boolean,done:(error?:Error)=>void)=>void)[],action:()=>void,message='正在准备战场资源…',title='整装待发'):void {
+    if(!tasks.length){action();return;}
+    const serial=++this.resourceSerial;this.resourceBusy=true;this.clearInput();let remaining=tasks.length,failed=false;
+    this.retryResource=()=>this.prepareVisuals(tasks,action,message,title);this.resourceView?.hide();
+    this.resourceView=new ResourcePrepareView(this.ui,()=>this.retryResource?.(),()=>this.showMainMenu(),title);this.resourceView.show(message);
+    for(const task of tasks)task(()=>this.isValid&&serial===this.resourceSerial,error=>{
+      if(serial!==this.resourceSerial||!this.isValid||failed)return;
+      if(error){failed=true;this.resourceView?.show('资源下载失败，请检查网络后重试',true);return;}
+      if(--remaining===0){this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;action();}
+    });
+  }
   private startTraining(id:HeroId,skill:string):void {
     if(this.phase!=='menu')return;
-    this.trainingMode=true;this.unlockAudio();this.run=createRun(id,starterFor(id),skill);this.restart(true);this.openTrainingPanel();
+    this.prepareHero(id,()=>{this.trainingMode=true;this.unlockAudio();this.run=createRun(id,starterFor(id),skill);this.restart(true);this.openTrainingPanel();});
   }
   private trainingAlive():number {return this.enemies.filter(e=>e.hp>0&&!e.animal).length;}
   private openTrainingPanel():void {
@@ -1875,7 +1942,7 @@ private playerSlowUntil=0;
       },
       skill:id=>{
         if(!this.trainingMode||!COMMON_SKILLS.some(s=>s.id===id))return '技能不存在';
-        this.commonSkill.reset();this.run.skillId=id;this.run.skillHealChapter=0;this.skillCharge=this.skillRequirement();this.skillDrawKey='';this.drawSkillButton();return '已装配 '+commonSkillFor(id).name;
+        this.commonSkill.reset();this.run.skillId=id;this.prefetchSounds();this.run.skillHealChapter=0;this.skillCharge=this.skillRequirement();this.skillDrawKey='';this.drawSkillButton();return '已装配 '+commonSkillFor(id).name;
       },
       clear:()=>{if(!this.trainingMode)return '';this.clearBattle(true);this.syncWeapons();this.drawProgress();return '战场已清空，装备保留';},
       growth:()=>{if(!this.trainingMode)return '';const n=((this.run.growth||0)+1)%7;this.run.growth=n;const old=this.run.weapons[0];this.run.weapons[0]={uid:old.uid,id:(n?this.run.heroId==='liubei'?'twin-swords':this.run.heroId==='guanyu'?'guandao':'serpent-spear':starterFor(this.run.heroId)) as WeaponId,tier:old.tier,signature:true,invested:0};this.mountDash=newMountDash();this.commonSkill.reset();this.applyHeroPresentation();this.stats=this.currentStats();this.playerHp=heroMaxHearts(this.run);this.syncWeapons();this.drawPlayerHealth();this.drawProgress();return growthTitle(this.run.heroId,n)+' · 演武形态，不写正式进度';},
@@ -1890,15 +1957,16 @@ private playerSlowUntil=0;
     const chapter=boss?CHAPTERS.find(c=>String(c.id)===id):undefined,d=boss?undefined:CHRONICLE_ENEMIES.find(e=>e.id===id);
     if(boss?!chapter:!d)return '目标不存在';
     const amount=Math.min(count,80-this.trainingAlive());
-    if(boss)this.selectMusic('boss');for(let i=0;i<amount;i++)this.spawnNext(boss?'chief':d!.kind,boss?undefined:d!.id,chapter?.id);
-    this.drawProgress();return amount?`已加入 ${chapter?.boss||d!.name} ×${amount}`:'战场已满（80名），请先清空或击败敌军';
+    const spawn=()=>{if(!this.trainingMode)return;if(boss)this.selectMusic('boss');const available=Math.min(amount,80-this.trainingAlive());for(let i=0;i<available;i++)this.spawnNext(boss?'chief':d!.kind,boss?undefined:d!.id,chapter?.id);this.drawProgress();};
+    if(boss&&chapter)this.prepareBosses([chapter.bossId],spawn);else spawn();
+    return this.resourceBusy?'正在准备首领资源…':amount?`已加入 ${chapter?.boss||d!.name} ×${amount}`:'战场已满（80名），请先清空或击败敌军';
   }
   private equipTrainingWeapon(id:string,tier:Tier,slot:number):string {
     const d=WEAPONS.find(w=>w.id===id);
     if(!this.trainingMode||!d||[1,2,3,4].indexOf(tier)<0||!Number.isInteger(slot)||slot<0||slot>5||slot>this.run.weapons.length)return '请选择有效的武器、品级和装备槽';
     const weapon={id:d.id,tier,uid:this.run.nextWeaponUid++};
     if(slot<this.run.weapons.length)this.run.weapons[slot]=weapon;else this.run.weapons.push(weapon);
-    this.syncWeapons();this.refreshStats();this.drawWeaponHud();return `已装备 ${d.name} · ${['I','II','III','IV'][tier-1]}`;
+    this.syncWeapons();this.refreshStats();this.prefetchSounds();this.drawWeaponHud();return `已装备 ${d.name} · ${['I','II','III','IV'][tier-1]}`;
   }
 
   private restart(testMode = this.testMode): void {
@@ -1956,7 +2024,7 @@ private playerSlowUntil=0;
       this.bestWave = Math.max(this.bestWave, this.run.wave);
       try { sys.localStorage.setItem('taoyuan-best', String(this.bestWave)); } catch (_) { /* optional */ }
     }
-    this.rebuildMeadow();this.drawPlayerHealth(); this.drawProgress(); this.selectMusic('battle',true);this.playSound('ui-start');
+    this.rebuildMeadow();this.drawPlayerHealth(); this.drawProgress(); this.selectMusic('battle',true);this.playSound('ui-start');this.loadOrchardArt();this.prefetchSounds();
   }
 
   private collectAllCoins(): void {
@@ -2067,7 +2135,7 @@ private playerSlowUntil=0;
     if(record){this.bestClear=elapsed;try{sys.localStorage.setItem('taoyuan-chronicle-clear-best-v7',String(this.bestClear));}catch(_){} }
     if(won){try{sys.localStorage.removeItem(SAVE_KEY);}catch(_){}}else if(this.chapterEntry){this.savedPoint=copyPoint(this.chapterEntry);this.savedPoint.run.elapsed=Math.max(this.savedPoint.run.elapsed,this.run.elapsed);this.savedPoint.run.retries=(this.run.retries||0)+1;this.writeSave('battle',this.savedPoint);}
     this.clearBattle(); this.setBattleVisible(false); this.paused = false;this.playSound(won?'victory':'defeat');
-    this.screens.survivalResult(this.run,this.kills,this.bestClear,record,()=>won?this.restart():this.retryChapter(),()=>this.showMainMenu(),this.testMode,WAVE_SECONDS-this.remaining,won);
+    const display=()=>this.screens.survivalResult(this.run,this.kills,this.bestClear,record,()=>won?this.restart():this.retryChapter(),()=>this.showMainMenu(),this.testMode,WAVE_SECONDS-this.remaining,won);if(won)display();else this.prepareResult(display);
   }
 
   private updateOrnaments(): void {
@@ -2087,8 +2155,15 @@ private playerSlowUntil=0;
     this.heroName.string = heroFor(this.run).name;
     this.xpBar.node.active=false;this.drawSkillButton();this.drawDashButton();
     const boss = this.enemies.find(e => (e.kind === 'chief'||e.miniBoss) && e.hp > 0);
-    const miniCount=this.enemies.filter(e=>e.hp>0&&e.miniCharge).length,groupHp=this.enemies.filter(e=>e.hp>0&&e.miniCharge).reduce((n,e)=>n+e.hp,0),barHp=boss?.miniCharge?groupHp:boss?.hp||0,barMax=boss?.miniCharge?YELLOW_CHARGERS.hp*YELLOW_CHARGERS.count:boss?.maxHp||1;
-    const bossKey=`${barHp}:${boss?.maxHp||0}:${boss?.encounterChapter||this.run.chapter}:${this.halfHeight}`;
+    let barHp = boss?.hp || 0, miniCount = 0;
+    if (boss?.miniCharge) {
+      barHp = 0;
+      for (const enemy of this.enemies) {
+        if (enemy.hp > 0 && enemy.miniCharge) { miniCount++; barHp += enemy.hp; }
+      }
+    }
+    const barMax = boss?.miniCharge ? YELLOW_CHARGERS.hp * YELLOW_CHARGERS.count : boss?.maxHp || 1;
+    const bossKey=`${barHp}:${barMax}:${miniCount}:${boss?.encounterChapter||this.run.chapter}:${this.halfHeight}`;
     if(bossKey===this.bossDrawKey)return;this.bossDrawKey=bossKey;this.bossBar.clear();
     this.bossLabel.string = boss ? `${boss.miniBoss?stageFor(this.run.chapter).miniBoss:chapterFor(boss.encounterChapter||this.run.chapter).boss}  ${boss.miniCharge?miniCount+'/3 · ':''}${Math.ceil(barHp)}/${barMax}` : '';
     if (boss) {
@@ -2105,7 +2180,9 @@ private playerSlowUntil=0;
 
   private drawTerrainFallback():void {
     const g=this.ground;g.clear();
-    if(!this.artFrames['world-ground']){g.fillColor=new Color('#b7ca8f');g.rect(-WORLD.halfWidth,-WORLD.halfHeight,WORLD.width,WORLD.height);g.fill();}
+    // Theme tiles are local and valid without the optional training meadow.
+    // Never paint the opaque fallback OVER an already attached theme texture.
+    if(!this.meadowTiles.length){g.fillColor=new Color('#b7ca8f');g.rect(-WORLD.halfWidth,-WORLD.halfHeight,WORLD.width,WORLD.height);g.fill();}
     // Sparse ground-level flowers only; no roads, fences, boulders or permanent large props.
     const count=Math.round(WORLD.width*WORLD.height/45000);
     if(this.run.challenge)drawStageGround(g,this.run.chapter,WORLD.halfWidth,WORLD.halfHeight);
@@ -2120,10 +2197,13 @@ private playerSlowUntil=0;
   private rebuildMeadow():void {
     for(const n of this.meadowTiles){n.removeFromParent();n.destroy();}this.meadowTiles=[];
     const stageFrame=this.run.challenge?this.artFrames['stage-ground-'+this.run.chapter]:undefined,frame=stageFrame||this.artFrames['world-ground'];if(frame){
-      const cols=Math.ceil(WORLD.width/520),rows=Math.ceil(WORLD.height/470),w=WORLD.width/cols,h=WORLD.height/rows;
+      // The chapter-one crop is not periodic. Alternate reflections make both sides
+      // sample the same source edge, rather than joining unrelated light/dark edges.
+      const mirrored=!!stageFrame&&this.run.chapter===1;
+      const cols=Math.ceil(WORLD.width/(mirrored?720:520)),rows=Math.ceil(WORLD.height/(mirrored?540:470)),w=WORLD.width/cols,h=WORLD.height/rows;
       for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
         const n=this.node2D(this.battlefield,'MeadowTile'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.color=new Color(this.run.challenge&&!stageFrame?STAGE_THEMES[this.run.chapter-1].ground:'#ffffff');n.getComponent(UITransform)!.setContentSize(w+.5,h+.5);
-        n.setPosition(-WORLD.halfWidth+(col+.5)*w,-WORLD.halfHeight+(row+.5)*h);n.setSiblingIndex(0);this.meadowTiles.push(n);
+        n.setPosition(-WORLD.halfWidth+(col+.5)*w,-WORLD.halfHeight+(row+.5)*h);if(mirrored)n.setScale(col%2?-1:1,row%2?-1:1,1);n.setSiblingIndex(0);this.meadowTiles.push(n);
       }
     }this.ground.node.setSiblingIndex(this.meadowTiles.length);this.drawTerrainFallback();
   }
@@ -2131,9 +2211,11 @@ private playerSlowUntil=0;
   private loadOrchardArt(): void {
     // Independent small bundles keep the WeChat main package within its limit.
     const load=(bundle:string,name:string,apply:(t:Texture2D)=>void):void=>{
-      assetManager.loadBundle(bundle,(err,b)=>{if(err){console.warn('桃园素材加载失败',bundle,err);return;}b.load(name+'/texture',Texture2D,(error,t)=>{if(error||!this.isValid)return;apply(t);});});
+      const key=bundle+'/'+name;if(this.optionalLoaded.has(key)||this.optionalLoading.has(key))return;this.optionalLoading.add(key);
+      loadGameBundle(bundle,(err,b)=>{if(err||!b){this.optionalLoading.delete(key);console.warn('可选资源暂不可用',bundle);return;}
+        b.load(name+'/texture',Texture2D,(error,t)=>{this.optionalLoading.delete(key);if(error||!this.isValid)return;this.optionalLoaded.add(key);apply(t);});});
     };
-    load('meadow','ground',t=>{const f=new SpriteFrame();f.texture=t;this.artFrames['world-ground']=f;this.rebuildMeadow();});
+    if(this.trainingMode)load('meadow','ground',t=>{const f=new SpriteFrame();f.texture=t;this.artFrames['world-ground']=f;this.rebuildMeadow();});
     load('orchard','decor',t=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(0,0,t.width/3,t.height/2);this.artFrames['peach-tree']=f;});
     load('talismans','items',t=>{for(let i=0;i<48;i++){const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%8*t.width/8,Math.floor(i/8)*t.height/6,t.width/8,t.height/6);this.artFrames['item-'+PASSIVE_ITEMS[i].id]=f;}if(this.phase==='shop')this.showShop();});
     load('arsenal','weapons',t=>{
@@ -2150,7 +2232,17 @@ private playerSlowUntil=0;
     if(id==='thunder'){
       this.playWeaponSound(id,'attack');let from={x,y};const used=new Set<Enemy>();
       for(let i=0;i<(stats.chainTargets||3);i++){
-        const e=this.enemies.filter(e=>e.hp>0 && !e.animal && (e.born||0)<=0 && !used.has(e) && Math.hypot(e.x-from.x,e.y+34-from.y)<(i?260:stats.range)).sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y))[0];
+        let e: Enemy | undefined;
+        let nearest = Infinity;
+        const range = i ? 260 : stats.range;
+        for (const candidate of this.enemies) {
+          if (candidate.hp <= 0 || candidate.animal || (candidate.born || 0) > 0 || used.has(candidate)) continue;
+          const dx = candidate.x - from.x, dy = candidate.y - from.y;
+          // Range is measured to the hit point; priority uses the ground position.
+          if (dx * dx + (dy + 34) * (dy + 34) >= range * range) continue;
+          const distance = dx * dx + dy * dy;
+          if (distance < nearest) { nearest = distance; e = candidate; }
+        }
         if(!e)break;used.add(e);this.combatFx.beam('thunder',from.x,from.y,e.x,e.y+34);this.hitEnemy(e,angle,Math.round(w.damage*(i?.5:1)),stats.knockback,id,false);from={x:e.x,y:e.y+34};
       }this.playWeaponSound(id,'hit');return;
     }
@@ -2191,11 +2283,15 @@ private playerSlowUntil=0;
     if(event==='hit'){if(id==='G25')this.playSound('spirit-hit',.26);return;}
     if(event==='pre'){this.playSound(id==='G19'?'thunder-attack':'ritual-attack',.16);return;}
     const multi=['G08','G19','G20','G22'].indexOf(id)>=0;
-    if(event==='cast'&&multi||event==='release'&&!multi)return;
-    const cue=('skill-'+id) as SoundId;if(SOUND_CUES[cue])this.playSound(cue);
+    if (multi && event === 'cast') { this.quieterSkillReleases.delete(id); return; }
+    if (!multi && event === 'release') return;
+    const cue=('skill-'+id) as SoundId;if (!SOUND_CUES[cue]) return;
+    const gain = multi && this.quieterSkillReleases.has(id) ? .65 : 1;
+    this.playSound(cue, SOUND_CUES[cue].volume * gain);
+    if (multi) this.quieterSkillReleases.add(id);
   }
   private castSkill():void {
-    if(this.mountDash.remaining>0||this.phase!=='battle'||this.paused||this.trainingPanel?.root.active||this.backgrounded||this.resumeCountdown>0||this.playerHp<=0||(!this.trainingMode&&this.skillCharge<this.skillRequirement()))return;
+    if(this.resourceBusy||this.mountDash.remaining>0||this.phase!=='battle'||this.paused||this.trainingPanel?.root.active||this.backgrounded||this.resumeCountdown>0||this.playerHp<=0||(!this.trainingMode&&this.skillCharge<this.skillRequirement()))return;
     this.unlockAudio();let power=0;for(const w of this.run.weapons)power+=weaponDps(this.run,w);power*=1+this.perks.skillDamage;
     if(this.commonSkill.cast(this.run.skillId,power)){this.skillCharge=this.trainingMode?this.skillRequirement():0;this.skillDrawKey='';this.drawSkillButton();}
   }
@@ -2280,14 +2376,15 @@ private playerSlowUntil=0;
   }
 
   onDestroy(): void {
+    this.resourceSerial++;this.resourceView?.hide();this.resourceView=undefined;
     this.health?.destroy();
-    input.off(Input.EventType.TOUCH_START, this.touchStart, this); input.off(Input.EventType.TOUCH_MOVE, this.touchMove, this);
-    input.off(Input.EventType.TOUCH_END, this.touchEnd, this); input.off(Input.EventType.TOUCH_CANCEL, this.touchEnd, this);
+    this.root?.off(Node.EventType.TOUCH_START, this.touchStart, this, true);this.root?.off(Node.EventType.TOUCH_MOVE, this.touchMove, this, true);
+    this.root?.off(Node.EventType.TOUCH_END, this.touchEnd, this, true);this.root?.off(Node.EventType.TOUCH_CANCEL, this.touchEnd, this, true);
     input.off(Input.EventType.KEY_DOWN, this.keyDown, this); input.off(Input.EventType.KEY_UP, this.keyUp, this);
     this.detachKeyboard?.();
     game.off(Game.EVENT_HIDE, this.onBackground, this);
     game.off(Game.EVENT_SHOW, this.onForeground, this);
-    this.stopSounds();for(const source of this.soundSources)source.clip=null;for(const clip of Object.values(this.clips))if(clip)assetManager.releaseAsset(clip);this.clips={};this.music.stop();this.musicRequest++;if(this.musicClip){assetManager.releaseAsset(this.musicClip);this.musicClip=undefined;}
+    this.stopSounds();for(const source of this.soundSources)source.clip=null;for(const clip of Array.from(new Set(Object.values(this.clips))))if(clip)assetManager.releaseAsset(clip);this.clips={};this.music.stop();this.musicRequest++;if(this.musicClip){assetManager.releaseAsset(this.musicClip);this.musicClip=undefined;}
     this.enemies.forEach(e => e.art.spriteFrame = null);
     if(this.avatar)this.avatar.spriteFrame=null;if(this.body)this.body.spriteFrame=null;if(this.head)this.head.spriteFrame=null;
     const frames=new Set<SpriteFrame>();
@@ -2295,9 +2392,9 @@ private playerSlowUntil=0;
     Object.keys(this.enemyFrames).forEach(kind=>this.enemyFrames[kind as EnemyKind]?.forEach(f=>frames.add(f)));
     Object.keys(this.artFrames).forEach(k=>frames.add(this.artFrames[k]));this.itemFrames.forEach(f=>frames.add(f));
     if(this.avatarFrame)frames.add(this.avatarFrame);if(this.bodyFrame)frames.add(this.bodyFrame);
-    frames.forEach(f=>f.destroy());
+    frames.forEach(f=>f.destroy());this.soldierTextures.forEach(t=>t.destroy());this.soldierTextures=[];
     this.particleSprites?.destroy();this.battleSprites?.destroy();this.bossEffects?.destroy();
-    this.startupTexture?.destroy();this.startupImage?.destroy();
+    this.startupTexture?.destroy();if(this.startupImage){if(this.startupRemoteImage)assetManager.releaseAsset(this.startupImage);else this.startupImage.destroy();}
   }
   private clamp(n: number, min: number, max: number): number { return Math.max(min, Math.min(max, n)); }
   private node2D(parent: Node, name: string): Node { const n = new Node(name); n.layer = Layers.Enum.UI_2D; parent.addChild(n); return n; }

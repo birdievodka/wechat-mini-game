@@ -17,7 +17,7 @@
 
 ## 视觉与布局
 
-- 海报来源：`assets/campaign/poster.jpg`，批准少年版刘关张合影，约198KiB；源图/提示在art/runtime-youth，与五英雄采用同一少年身份和画风。
+- 海报来源：`art/runtime-youth/poster.jpg`，批准少年版刘关张合影，约198KiB；源图/提示在art/runtime-youth，与五英雄采用同一少年身份和画风。
 - 等比cover铺满、顶部对齐，宽屏优先保留人物头部，裁底部空白；不要拉扁人物。
 - 引擎前置画面仅海报与进度条；Cocos Loading复用选人界面的 `hero-menu/logo.png` 透明Logo（等比宽380，窄屏不超过视野宽减112），位于进度条上方；状态文字为“英雄集结中… n%”。hero-menu分包在加载界面建立后即并行请求，Logo未就绪时不显示替代字形，首次就绪后显示固定Logo；仅图片失败且尚未展示Logo时显示同名文字备用。标题模式一经确定，不因其他菜单素材失败或晚到图片再次切换；与选人共用SpriteFrame，不新增重复纹理。
 - 横屏逻辑高度750；进度宽 `min(520,视野宽−112)`、中心距底为视野高10%，轨道20高，绿芯12高。前后画面位置衔接，避免重排跳动。
@@ -52,3 +52,15 @@ LoadingView在Logo请求期间保持标题区待定，不能先显示系统字�
 ## v9.1加载后退场与当前角色依赖
 
 加载成功后GameBootstrap.retireLoadingSurface销毁LoadingScreen（含2个Graphics模型），清loadingView引用与artFrames.poster，释放仅此界面使用的海报texture/ImageAsset，delete bridge.image。resize与markStartup可面对已退场画面；失败画面保持。liubei-body仍是逻辑就绪任务，现由presentation/heroes少年torso＋results肖像完成，不再请求旧6MiB成人身体。CAMPAIGN_ART删除5张被少年图覆盖的旧图请求；旧键作别名。test-campaign的延迟角色测试应拦presentation/heroes，而非已不用的旧身体文件。标题/进度/错误和两帧门槛保持。
+
+
+v9.4启动依赖去掉旧enemies整包/三类兼容帧和六后续Boss动画；本地紧凑Boss肖像保留图鉴/选关，张角与40模块兵首关必需仍本地。可选插画不在start请求，music远程失败不挡菜单。真实启动进度只计当前关键任务，保留完成帧两次提交；新关Boss由独立准备/重试UI加载，不混入首屏进度。
+
+
+## v9.5当前启动
+
+STARTUP_TASKS移除results两项、新增本地hero-hud，poster独立任务。首页不等待隐藏英雄/哭泣；三头像及少年身体由presentation就绪，农兵由两BufferAsset还原后按原12格就绪。海报源已移到art/runtime-youth/poster.jpg，每个目标仅根目录一份；Cocos桥无原图时用loadRemote读取同根文件，不走campaign重复图。Web评审用build:review。进度任务全齐精确98%，complete才100%，两帧退场和失败提示不变。详见resources-lossless-v95。
+
+Editor PREVIEW无构建根JPG时可复用hero-menu背景，避免编辑器调试阻塞；正式构建缺失JPG仍错误，不掩盖漏拷贝。
+
+本地士兵动作图按8 KiB压缩输入增量解压、每16384像素分段展开与校验；启动解码累计约4毫秒后让出事件循环，销毁中的场景停止解码。仅完整通过RGBA校验后上传纹理并结算启动任务。

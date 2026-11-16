@@ -1,0 +1,25 @@
+{
+  "tool": "built-in image_gen",
+  "image": "battlefields.png",
+  "reference": "assets/hero-menu/training-ground.jpg",
+  "prompt": "Use case: stylized-concept. Asset type: a single production atlas of SIX different Three Kingdoms battlefield LANDSCAPE THUMBNAILS for the existing bright handdrawn chibi game 桃园小英雄. Input reference is STYLE ONLY: copy its warm brown outlines, painterly flat cel patches, cute rounded props, fresh saturated greens, cozy appealing game backgrounds. DO NOT copy its flags or cherry-blossom framing into every scene.\nCRITICAL USER REQUIREMENT: ABSOLUTELY NO TEXT anywhere, no Chinese characters, no letters, no numbers, no pseudo-writing, no logos, no watermark, no captions, no plaques, no decorative calligraphy. ABSOLUTELY NO FLAGS or banners or pennants, so no risk of flag inscriptions. NO people/hero portraits/monsters, NO UI frames or buttons or borders.\nOutput is ONE seamless rectangular contact atlas: exactly TWO EQUAL COLUMNS and THREE EQUAL ROWS, six separated-by-straight-panel-boundaries landscape scenes, each scene fills its full rectangular tile edge-to-edge. No gutters, no outer margin, no rounded corners, no gaps. Overall landscape canvas around 1536x1024, each tile a wide panorama. Each tile has horizon in upper third, important identifying environmental shapes in central horizontal band; thumbnails must remain legible after tiny reduction. Detailed but uncluttered environments, distinct battlefield identity, no colossal focal object filling the entire image. No dark grim realism. Maintain same illustration quality and sunlit vividness throughout, even night scene luminous and readable.\nRow 1 LEFT: early rural yellow-turban uprising battlefield: rolling bright green grass, distant low village roofs, small abandoned rustic barricade and rounded rocks at edge, light dust, blue sky with fluffy clouds. Empty open grass in foreground, broad accessible battlefield feeling.\nRow 1 RIGHT: Hulao fortress battle: imposing squat ancient Chinese tan stone pass and gate between green mountain cliffs, reddish tiled roof watchtowers, timber chevaux-de-frise near lower edges, amber dusty approach. Nothing written on gate or towers.\nRow 2 LEFT: Guandu army-camp battlefield: open teal-green and ochre plain, two rows of distant ivory campaign tents, simple dark wood palisade and one small watchtower, dusty supply-cart wheels at edge. No tents adorned with any marks.\nRow 2 RIGHT: Red Cliffs river battle: wide glowing blue river, traditional Chinese wooden warship silhouettes with unmarked sails near shore, distant connected ships with tasteful orange flames and soft smoke reflected in water, sunset-to-indigo sky. Large scene reads as river battle, not a giant fire texture. No writing on sails, no flags.\nRow 3 LEFT: southern jungle battle: lush emerald tropical valley, enormous but rounded broadleaf plants framing low sides, bamboo bridge and low earthen trail in mid-distance, hazy green mountains, sunbeams. Central clear battle clearing. No temples with inscriptions.\nRow 3 RIGHT: Wuzhang highland battlefield: wide lavender-blue grassy highland at dusk, low gray craggy foothills, distant organized tiny empty camp tents, soft violet sky and peach horizon, a few scattered old stone blocks at side. Elegant determined final-battle atmosphere, still colorful game art and readable.\nEach panel should be a believable lovingly illustrated game location, not a title card. Ground colors, architecture and atmospheric lighting distinguish stages. Never add labels to help explain the scenes. All six images entirely text-free, flag-free. No artwork overflow across cell boundaries.",
+  "layout": {
+    "columns": 2,
+    "rows": 3,
+    "order": [
+      "黄巾起义",
+      "虎牢讨董",
+      "官渡争锋",
+      "赤壁鏖兵",
+      "南中平蛮",
+      "五丈原决战"
+    ]
+  },
+  "constraints": [
+    "no text, numbers or pseudo writing",
+    "no flags, banners or pennants",
+    "landscapes only; no characters or UI"
+  ],
+  "runtime": "thumbnail rows of assets/chronicle-ui/stage-themes.jpg; existing ground rows preserved",
+  "sha256": "e26779972eef6155fbd7a83427892f4e7bb50e2dedd0d17366ebc3d7d98ed60b"
+}

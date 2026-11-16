@@ -26,10 +26,14 @@ for (const file of ['game.js', 'game.json', 'project.config.json']) {
   }
 }
 // Raw local image is available before any resource bundle or engine scene starts.
-copyFileSync(resolve(root,'assets/campaign/poster.jpg'),resolve(root,'build/wechatgame/startup-poster.jpg'));
+copyFileSync(resolve(root,'art/runtime-youth/poster.jpg'),resolve(root,'build/wechatgame/startup-poster.jpg'));
 const assert = require('node:assert/strict');
+const expectedAppId=JSON.parse(readFileSync(resolve(root,'project.config.json'),'utf8')).appid;
+assert.equal(JSON.parse(readFileSync(resolve(root,'config/build-wechat.json'),'utf8')).packages.wechatgame.appid,expectedAppId,'Creator与仓库AppID不一致');
+assert.equal(JSON.parse(readFileSync(resolve(root,'build/wechatgame/project.config.json'),'utf8')).appid,expectedAppId,'微信构建仍绑定旧AppID');
 assert.equal(readFileSync(resolve(root,'build/wechatgame/first-screen.js'),'utf8'),readFileSync(resolve(root,'build-templates/wechatgame/first-screen.js'),'utf8'),'自定义启动海报模板未生效');
 assert.equal(JSON.parse(readFileSync(resolve(root,'build/wechatgame/src/settings.json'),'utf8')).splashScreen.totalTime,0,'引擎插屏必须关闭，避免海报前后再次显示引擎标识');
+require('./stage-cdn-assets.cjs').stageCdnAssets();
 require('./check-package-size.cjs');
 require('./check-engine-imports.cjs');
 console.log('构建完成：请用微信开发者工具导入 build/wechatgame。');

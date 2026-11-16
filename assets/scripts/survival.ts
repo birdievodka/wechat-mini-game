@@ -5,7 +5,7 @@ import { PASSIVE_ITEMS, eligiblePassive, passivePreview, passiveBonuses } from '
 import { Run, heroMaxHearts, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BUDGET } from './campaign';
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 
-export const SURVIVAL_VERSION = 'stage-v9.3-audio';
+export const SURVIVAL_VERSION = 'stage-v9.11-menu-gate';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;

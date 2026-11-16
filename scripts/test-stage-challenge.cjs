@@ -4,7 +4,7 @@ const P=load('stage-progress'),D=load('stage-data'),C=load('campaign'),S=load('s
 const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolean);
 const labels=n=>[n.getComponent(cc.Label)?.string||'',...n.children.flatMap(labels)];
 async function prepare(hero='liubei',stage=1,profile=P.newProfile()){
- storage.clear();const g=new GameBootstrap();await g.start();finishStartup(g);g.profile=profile;g.run=C.createRun(hero);g.selectedStage=stage;g.profile.preferences[hero]={stage,weapon:W.starterFor(hero),skill:'G01'};g.showMainMenu();if(hero==='liubei'&&stage===1){click(g.screens.root,'HeroStageSelect');click(g.screens.root,'StageChoice-2');click(g.screens.root,'ConfirmStage');assert.ok(find(g.screens.root,'StageSelection'),'锁定关卡确认不可选择');click(g.screens.root,'StageChoice-1');click(g.screens.root,'ConfirmStage');}click(g.screens.root,'StartHero');assert.equal(g.phase,'battle');return g;
+ storage.clear();const g=new GameBootstrap();await g.start();finishStartup(g);g.profile=profile;g.run=C.createRun(hero);g.selectedStage=stage;g.profile.preferences[hero]={stage,weapon:W.starterFor(hero),skill:'G01'};g.showMainMenu();if(hero==='liubei'&&stage===1){const brief=find(g.screens.root,'HeroStageSelect');assert.equal(brief.getComponent(cc.UITransform).height,400);assert.ok(find(brief,'CurrentStageTitle'));assert.ok(!find(brief,'JourneyTitle'));assert.ok(!find(brief,'StageBossBadge-0'));assert.ok(!labels(brief).includes('五波挑战'));click(g.screens.root,'HeroStageSelect');click(g.screens.root,'StageChoice-2');click(g.screens.root,'ConfirmStage');assert.ok(find(g.screens.root,'StageSelection'),'锁定关卡确认不可选择');click(g.screens.root,'StageChoice-1');click(g.screens.root,'ConfirmStage');}click(g.screens.root,'StartHero');assert.equal(g.phase,'battle');return g;
 }
 function advance(g,wave){g.run.waveTime=D.waveSeconds(wave);g.remaining=0;g.stageBoundary();}
 (async()=>{
@@ -32,7 +32,19 @@ function advance(g,wave){g.run.waveTime=D.waveSeconds(wave);g.remaining=0;g.stag
  const g=await prepare();g.resumeCountdown=0;const enemy=g.spawnNext('soldier','E01');enemy.born=0;enemy.x=g.px;enemy.y=g.py;g.drawEnemy(enemy);assert.ok(P.isKnown(g.profile,'enemies','E01'));const off=g.spawnNext('spearman','E11');off.born=0;off.x=100000;g.drawEnemy(off);assert.equal(P.isKnown(g.profile,'enemies','E11'),false);
  g.skillCharge=0;for(let i=0;i<15;i++){const e=g.spawnNext('soldier','E01');e.born=0;g.hitEnemy(e,0,1e9,0,'sandal',false,true);assert.equal(g.skillCharge,i+1);}g.run.inventory.F08=100;g.refreshStats();assert.equal(g.skillRequirement(),15);g.skillCharge=14;g.castSkill();assert.equal(g.skillCharge,14);g.skillCharge=15;g.castSkill();assert.equal(g.skillCharge,0);
  g.showMainMenu();click(g.screens.root,'图鉴');const codex=g.screens.codexView;codex.tab=1;codex.selected=W.WEAPONS.findIndex(w=>!P.isKnown(g.profile,'weapons',w.id));codex.render();const text=labels(codex.root).join('|');assert.ok(text.includes('尚未发现'));assert.ok(!text.includes(W.WEAPONS[codex.selected].name));
- console.log('通过：正式可见才发现/屏外不发现/图鉴匿名占位/15击杀重置且不受道具影响');
+ // Every unknown catalogue category uses its real alpha silhouette, never a question mark or a coloured reveal.
+ const flatten=n=>[n,...n.children.flatMap(flatten)],savedDiscovery=JSON.stringify(g.profile);
+ for(const [tab,sub]of [[0,0],[0,1],[1,0],[2,0]]){
+  codex.tab=tab;codex.sub=sub;codex.filter=0;const entries=codex.entries(),index=entries.findIndex(e=>!codex.known(e));assert.ok(index>=0);
+  codex.selected=index;codex.page=Math.floor(index/12);codex.render();const e=entries[index],all=flatten(codex.root),unknown=all.filter(n=>n.name==='CodexSilhouette');
+  assert.ok(unknown.some(n=>n.getComponent(cc.Sprite)?.spriteFrame===g.artFrames[e.key]),'unknown detail preserves the true alpha contour');
+  assert.ok(unknown.every(n=>n.getComponent(cc.Sprite).color.value===0),'zero RGB conceals original colours and internal details');
+  assert.ok(!labels(codex.root).includes('?'));assert.ok(labels(codex.root).includes('尚未发现'));assert.ok(!labels(codex.root).includes(e.name),'unknown name remains hidden');
+ }
+ assert.equal(JSON.stringify(g.profile),savedDiscovery,'browsing silhouettes never discovers or unlocks content');
+ codex.tab=1;codex.sub=0;codex.filter=0;codex.page=0;codex.selected=W.WEAPONS.findIndex(w=>w.id==='sandal');codex.render();
+ assert.ok(!labels(codex.root).includes('尚未发现'));assert.ok(labels(codex.root).includes('草鞋'));assert.ok(flatten(codex.root).some(n=>n.name==='icon-sandal'&&n.getComponent(cc.Sprite)?.spriteFrame===g.artFrames['icon-sandal']),'known content keeps the full colour illustration');
+ console.log('通过：正式可见才发现/屏外不发现/四类图鉴匿名剪影与已发现彩色详情/浏览不改进度/15击杀重置且不受道具影响');
  // Exercise new mini-boss AI through the real component, including destructible star links.
  for(const stage of[3,4,5,6]){const p=P.newProfile();for(let i=1;i<stage;i++)P.recordClear(p,'liubei',i,260,100,5);const miniGame=await prepare('liubei',stage,p);miniGame.resumeCountdown=0;miniGame.run.stageWave=3;miniGame.spawnStageBoss(true);const mini=miniGame.enemies.find(e=>e.hp>0&&e.miniBoss);Object.assign(mini,{born:0,x:100,y:0,attack:-1,miniTime:0,miniPhase:stage===4||stage===5?1:0});miniGame.updateChronicleEnemy(mini,.01);assert.ok(mini.attack>=0,'小首领进入真实攻击阶段');if(stage===1||stage===3||stage===5)assert.ok(miniGame.enemyZones.some(z=>z.source===mini));if(stage===4)assert.equal(miniGame.enemies.filter(e=>e.hp>0&&e.miniOwner===mini).length,2);if(stage===6){const stars=miniGame.enemies.filter(e=>e.hp>0&&e.miniOwner===mini);assert.equal(stars.length,3);mini.attack=-1;mini.miniTime=0;miniGame.updateChronicleEnemy(mini,.01);assert.ok(miniGame.enemyZones.some(z=>z.anchor));const stone=stars[0];stone.born=0;miniGame.hitEnemy(stone,0,1e9,0,'sandal',false,true);assert.ok(miniGame.enemyZones.every(z=>z.source!==stone&&z.anchor!==stone),'拆星石立即解除相关雷链');}miniGame.onDestroy();}
  console.log('通过：四类精英真实招式/错拍援军/可拆星石与雷链清理');

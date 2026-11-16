@@ -376,7 +376,7 @@ def compose(kind, bpm, bars):
                     pitch = {78: 77, 83: 84, 73: 72}.get(pitch, pitch)
                 if section % 4 == 2:
                     pitch -= 12
-                n('lute', pitch, base + b, length, .21 if menu else .18, -.18)
+                n('lute', pitch, base + b, length if menu else length * .76, .21 if menu else .18, -.18)
         if bar % 4 == 3:
             for b, pitch in [(1, 69), (2, 74), (3, 76 if menu else 77)]:
                 n('answer', pitch, base + b, .55, .075 if menu else .045, .18, 'flute')
@@ -384,13 +384,13 @@ def compose(kind, bpm, bars):
         for j, pitch in enumerate(voicings[pos]):
             n('lute', pitch, base + .25 + .19 * j, .7, .095 if menu else .055, -.32 + j * .3)
             if not menu:
-                n('strings', pitch, base + .5, .37, .07 if not boss else .09, -.22 + j * .22, 'bowed')
-                n('strings', pitch, base + 2.5, .30, .06 if not boss else .08, -.22 + j * .22, 'bowed')
+                n('strings', pitch, base + .5, .25, .07 if not boss else .09, -.22 + j * .22, 'bowed')
+                n('strings', pitch, base + (2.75 if boss else 2.5), .22, .06 if not boss else .08, -.22 + j * .22, 'bowed')
         for b in ([0, 2.5] if menu else [0, 1.5, 2, 3.5]):
-            n('bass', roots[pos] + (12 if b == 3.5 else 0), base + b, .65, .19 if menu else .23, 0, 'bass')
+            n('bass', roots[pos] + (12 if b == 3.5 else 0), base + b, .65 if menu else .42, .19 if menu else .23, 0, 'bass')
         drum_beats = [0] if menu else [0, 1.5, 2]
         if boss:
-            drum_beats += [2.75, 3.5]
+            drum_beats += [3.5] if pos != 3 else [2.75, 3.5]
         for b in drum_beats:
             overlay(tracks['drum'], drum(), (base + b) * beat, .09 if menu else .27, 0, True)
         if not menu:
@@ -424,8 +424,8 @@ def compose(kind, bpm, bars):
 music_data = {}
 for key, title, bpm, bars, desc in [
     ('menu', '桃园小聚 · 备战', 96, 16, '暖木弹拨、稀疏笛答句、轻木扣；有少年气，留出呼吸，不走儿歌或喜庆庙会路线。'),
-    ('battle', '少年出阵 · 战斗', 128, 32, '同一主题转小调五声色彩，沉战鼓、拨弦和短弓弦推动；紧张但不过分悲壮，旋律主动留白。'),
-    ('boss', '阵前争锋 · 首领变奏', 128, 16, '同速同调的战斗变奏，鼓句更密、音区下沉；依靠节奏升级压力，不靠整体加大音量。'),
+    ('battle', '少年出阵 · 战斗', 144, 36, '同一主题转小调五声色彩，沉战鼓、拨弦和短弓弦推动；紧张但不过分悲壮，旋律主动留白。'),
+    ('boss', '阵前争锋 · 首领变奏', 160, 20, '加速的同调战斗变奏，短弓切分与句尾双鼓推动；依靠节奏升级压力，不靠整体加大音量。'),
 ]:
     mix, score = compose(key, bpm, bars)
     music_data[key] = mix

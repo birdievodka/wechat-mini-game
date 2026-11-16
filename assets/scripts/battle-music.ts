@@ -1,18 +1,20 @@
 /** AudioSource-compatible port; keeping the music clock independent makes lifecycle testable. */
 export interface MusicSource {
   loop: boolean; volume: number; currentTime: number;
+  readonly playing?: boolean;
   play(): void; pause(): void; stop(): void;
 }
 
 export const MUSIC_SECONDS = 60;
 export const MUSIC_VOLUME = .26;
-export const MUSIC_SCENES={menu:{seconds:40,volume:.65},battle:{seconds:60,volume:.72},boss:{seconds:30,volume:.72}};
+export const MUSIC_SCENES={menu:{seconds:40,volume:.65},battle:{seconds:60,volume:.60},boss:{seconds:30,volume:.60}};
 
 export class BattleMusic {
   private source?: MusicSource;
   private running = false;
   private paused = false;
   private unlocked = false;
+  private gesture = false;
   private enabled = true;
   private playing = false;
   private elapsed = 0;
@@ -30,7 +32,14 @@ export class BattleMusic {
     this.source?.stop(); this.source = source; source.loop = true; source.volume = 0;
     this.playing = false; this.sync();
   }
-  unlock(): void { this.unlocked = true; this.sync(); }
+  /** Native mini-game hosts may play on entry. Browser autoplay stays gesture gated. */
+  tryAutoplay(): void { this.unlocked = true; this.sync(); }
+  unlock(): void {
+    // A host can silently reject an early play without throwing. Retry once on
+    // the first real gesture, but never restart an already audible track.
+    if(!this.gesture&&this.playing&&this.source?.playing===false)this.playing=false;
+    this.gesture=true;this.unlocked = true; this.sync();
+  }
   setEnabled(enabled: boolean): void { this.enabled = enabled; this.sync(); }
   begin(): void {
     this.stop(); this.running = true; this.paused = false; this.sync();
@@ -63,7 +72,7 @@ export class BattleMusic {
     if (play && !this.playing) {
       // Late download, unmute and resume all join the current round's musical phrase.
       this.source.currentTime = this.elapsed; this.source.volume = 0; this.fade = 0;
-      this.source.play(); this.playing = true;
+      try{this.source.play();this.playing = true;}catch(_){this.playing=false;}
     } else if (!play && this.playing) {
       this.source.pause(); this.source.volume = 0; this.playing = false;
     }

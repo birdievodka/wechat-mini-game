@@ -523,6 +523,352 @@ export const AUDIO_CUES = {
     "priority": 2
   }
 } as const;
+export const SOUND_ASSETS = {
+  "wood-attack": {
+    "bundle": "sfx-core",
+    "name": "wood-attack"
+  },
+  "wood-hit": {
+    "bundle": "sfx-core",
+    "name": "wood-hit"
+  },
+  "boss-menghuo-3": {
+    "bundle": "sfx-core",
+    "name": "wood-hit"
+  },
+  "boss-simayi-1": {
+    "bundle": "sfx-core",
+    "name": "wood-hit"
+  },
+  "blade-attack": {
+    "bundle": "sfx-core",
+    "name": "blade-attack"
+  },
+  "boss-caocao-1": {
+    "bundle": "sfx-core",
+    "name": "blade-attack"
+  },
+  "blade-hit": {
+    "bundle": "sfx-core",
+    "name": "blade-hit"
+  },
+  "heavy-attack": {
+    "bundle": "sfx-core",
+    "name": "heavy-attack"
+  },
+  "heavy-hit": {
+    "bundle": "sfx-core",
+    "name": "heavy-hit"
+  },
+  "boss-lvbu-3": {
+    "bundle": "sfx-core",
+    "name": "heavy-hit"
+  },
+  "boss-dongzhuo-1": {
+    "bundle": "sfx-core",
+    "name": "heavy-hit"
+  },
+  "bow-attack": {
+    "bundle": "sfx-core",
+    "name": "bow-attack"
+  },
+  "boss-yuanshao-2": {
+    "bundle": "sfx-core",
+    "name": "bow-attack"
+  },
+  "bow-hit": {
+    "bundle": "sfx-core",
+    "name": "bow-hit"
+  },
+  "boss-yuanshao-3": {
+    "bundle": "sfx-core",
+    "name": "bow-hit"
+  },
+  "gun-attack": {
+    "bundle": "sfx-core",
+    "name": "gun-attack"
+  },
+  "gun-hit": {
+    "bundle": "sfx-core",
+    "name": "gun-hit"
+  },
+  "blast-attack": {
+    "bundle": "sfx-core",
+    "name": "blast-attack"
+  },
+  "blast-hit": {
+    "bundle": "sfx-core",
+    "name": "blast-hit"
+  },
+  "boss-dongzhuo-3": {
+    "bundle": "sfx-core",
+    "name": "blast-hit"
+  },
+  "boss-simayi-3": {
+    "bundle": "sfx-core",
+    "name": "blast-hit"
+  },
+  "petal-attack": {
+    "bundle": "sfx-core",
+    "name": "petal-attack"
+  },
+  "petal-hit": {
+    "bundle": "sfx-core",
+    "name": "petal-hit"
+  },
+  "spirit-attack": {
+    "bundle": "sfx-core",
+    "name": "spirit-attack"
+  },
+  "spirit-hit": {
+    "bundle": "sfx-core",
+    "name": "spirit-hit"
+  },
+  "thunder-attack": {
+    "bundle": "sfx-core",
+    "name": "thunder-attack"
+  },
+  "thunder-hit": {
+    "bundle": "sfx-core",
+    "name": "thunder-hit"
+  },
+  "skill-G19": {
+    "bundle": "sfx-core",
+    "name": "thunder-hit"
+  },
+  "ritual-attack": {
+    "bundle": "sfx-core",
+    "name": "ritual-attack"
+  },
+  "boss-zhangjiao-3": {
+    "bundle": "sfx-core",
+    "name": "ritual-attack"
+  },
+  "ritual-hit": {
+    "bundle": "sfx-core",
+    "name": "ritual-hit"
+  },
+  "boss-simayi-2": {
+    "bundle": "sfx-core",
+    "name": "ritual-hit"
+  },
+  "player-hurt": {
+    "bundle": "sfx-core",
+    "name": "player-hurt"
+  },
+  "enemy-hit": {
+    "bundle": "sfx",
+    "name": "enemy-hit"
+  },
+  "enemy-fall": {
+    "bundle": "sfx-core",
+    "name": "enemy-fall"
+  },
+  "crit": {
+    "bundle": "sfx",
+    "name": "crit"
+  },
+  "coin": {
+    "bundle": "sfx-core",
+    "name": "coin"
+  },
+  "boss-dongzhuo-2": {
+    "bundle": "sfx-core",
+    "name": "coin"
+  },
+  "heal": {
+    "bundle": "sfx-core",
+    "name": "heal"
+  },
+  "block": {
+    "bundle": "sfx-core",
+    "name": "block"
+  },
+  "skill-ready": {
+    "bundle": "sfx-core",
+    "name": "skill-ready"
+  },
+  "dash": {
+    "bundle": "sfx-core",
+    "name": "dash"
+  },
+  "hoof": {
+    "bundle": "sfx-core",
+    "name": "hoof"
+  },
+  "footstep": {
+    "bundle": "sfx-core",
+    "name": "footstep"
+  },
+  "spawn": {
+    "bundle": "sfx-core",
+    "name": "spawn"
+  },
+  "melee-commit": {
+    "bundle": "sfx-core",
+    "name": "melee-commit"
+  },
+  "boss-menghuo-2": {
+    "bundle": "sfx-core",
+    "name": "melee-commit"
+  },
+  "enemy-bow": {
+    "bundle": "sfx-core",
+    "name": "enemy-bow"
+  },
+  "boss-yuanshao-1": {
+    "bundle": "sfx-core",
+    "name": "enemy-bow"
+  },
+  "charge-warn": {
+    "bundle": "sfx-core",
+    "name": "charge-warn"
+  },
+  "boss-lvbu-1": {
+    "bundle": "sfx-core",
+    "name": "charge-warn"
+  },
+  "boss-caocao-3": {
+    "bundle": "sfx-core",
+    "name": "charge-warn"
+  },
+  "boss-menghuo-1": {
+    "bundle": "sfx-core",
+    "name": "charge-warn"
+  },
+  "danger": {
+    "bundle": "sfx-core",
+    "name": "danger"
+  },
+  "siege": {
+    "bundle": "sfx",
+    "name": "siege"
+  },
+  "skill-G08": {
+    "bundle": "sfx-core",
+    "name": "skill-G08"
+  },
+  "skill-G01": {
+    "bundle": "sfx-core",
+    "name": "skill-G01"
+  },
+  "skill-G03": {
+    "bundle": "sfx-core",
+    "name": "skill-G03"
+  },
+  "skill-G18": {
+    "bundle": "sfx",
+    "name": "skill-G18"
+  },
+  "skill-G10": {
+    "bundle": "sfx",
+    "name": "skill-G10"
+  },
+  "skill-G12": {
+    "bundle": "sfx",
+    "name": "skill-G12"
+  },
+  "skill-G20": {
+    "bundle": "sfx",
+    "name": "skill-G20"
+  },
+  "skill-G07": {
+    "bundle": "sfx",
+    "name": "skill-G07"
+  },
+  "skill-G25": {
+    "bundle": "sfx",
+    "name": "skill-G25"
+  },
+  "skill-G26": {
+    "bundle": "sfx",
+    "name": "skill-G26"
+  },
+  "skill-G22": {
+    "bundle": "sfx",
+    "name": "skill-G22"
+  },
+  "boss-zhangjiao-1": {
+    "bundle": "sfx",
+    "name": "boss-zhangjiao-1"
+  },
+  "boss-zhangjiao-2": {
+    "bundle": "sfx",
+    "name": "boss-zhangjiao-1"
+  },
+  "boss-lvbu-2": {
+    "bundle": "sfx",
+    "name": "boss-lvbu-2"
+  },
+  "boss-caocao-2": {
+    "bundle": "sfx",
+    "name": "boss-caocao-2"
+  },
+  "ui-open": {
+    "bundle": "sfx",
+    "name": "boss-caocao-2"
+  },
+  "ui-click": {
+    "bundle": "sfx-core",
+    "name": "ui-click"
+  },
+  "ui-hero": {
+    "bundle": "sfx-core",
+    "name": "ui-hero"
+  },
+  "ui-equip": {
+    "bundle": "sfx-core",
+    "name": "ui-equip"
+  },
+  "ui-buy": {
+    "bundle": "sfx",
+    "name": "ui-buy"
+  },
+  "ui-refresh": {
+    "bundle": "sfx",
+    "name": "ui-refresh"
+  },
+  "ui-sell": {
+    "bundle": "sfx",
+    "name": "ui-sell"
+  },
+  "ui-upgrade": {
+    "bundle": "sfx",
+    "name": "ui-upgrade"
+  },
+  "ui-close": {
+    "bundle": "sfx-core",
+    "name": "ui-close"
+  },
+  "ui-denied": {
+    "bundle": "sfx",
+    "name": "ui-denied"
+  },
+  "ui-start": {
+    "bundle": "sfx-core",
+    "name": "ui-start"
+  },
+  "boss-arrive": {
+    "bundle": "sfx",
+    "name": "boss-arrive"
+  },
+  "wave-clear": {
+    "bundle": "sfx",
+    "name": "wave-clear"
+  },
+  "victory": {
+    "bundle": "sfx",
+    "name": "victory"
+  },
+  "defeat": {
+    "bundle": "sfx",
+    "name": "defeat"
+  },
+  "unlock": {
+    "bundle": "sfx",
+    "name": "unlock"
+  }
+} as const;
 export const WEAPON_AUDIO_FAMILIES:Record<string,string> = {
   "sandal": "sandal",
   "pole": "wood",

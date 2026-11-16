@@ -1,7 +1,7 @@
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {HeroShowcase} from './HeroShowcase';
 import {growthClears,growthTitle,growthRewardText,signatureId,dashName} from './hero-growth';
-import {Color,Graphics,Label,Node,Sprite,SpriteFrame,Rect,UITransform} from 'cc';
+import {Color,Graphics,Label,Mask,Node,Sprite,SpriteFrame,Rect,UITransform} from 'cc';
 import {Run,heroFor,heroMaxHearts,ITEMS} from './campaign';
 import {STAGES,stageFor,bossDisplayName,STAGE_THEMES,STARTER_WEAPONS} from './stage-data';
 import {StageProfile,StageReward,highestStage} from './stage-progress';
@@ -9,6 +9,7 @@ import {WeaponId,weaponFor} from './weapons';
 import {commonSkillFor} from './common-skills';
 import {addWeaponIcon} from './presentation-art';
 import {clockText} from './survival';
+import {addPanelClose} from './panel-ui';
 const C={jade:'#294e3c',paper:'#fff0d2',gold:'#efd08a',ink:'#48351e',red:'#cf512f',muted:'#b3c1a4'};
 class StageSurface {
  readonly root:Node;readonly panel:Node;
@@ -32,19 +33,32 @@ class StageSurface {
  protected picture(p:Node,key:string,x:number,y:number,size:number){const f=this.frames[key];if(!f)return;const n=this.node(p,key);n.setPosition(x,y);const s=n.addComponent(Sprite);s.spriteFrame=f;s.sizeMode=Sprite.SizeMode.CUSTOM;const r=f.rect;n.getComponent(UITransform)!.setContentSize(size*r.width/Math.max(r.width,r.height),size*r.height/Math.max(r.width,r.height));}
  close(){this.root.removeFromParent();this.root.destroy();}
 }
-/** Selected stage is a full illustrated card, not a text-only placeholder panel. */
+/** A reusable parchment map skin; the scene, title and universal gate remain live layers. */
 export class StageBriefView extends StageSurface {
- constructor(parent:Node,frames:Record<string,SpriteFrame>){super(parent,frames,'HeroStageSelect',500,380,false);}
+ private landscape:Sprite;
+ constructor(parent:Node,frames:Record<string,SpriteFrame>){
+  super(parent,frames,'HeroStageSelect',640,400,false);
+  const skin=this.panel.children.find(n=>n.name==='JadeSkin');if(skin)skin.active=false;
+  // A small, menu-only stencil keeps the picture behind the irregular parchment
+  // and away from the red cord. It is destroyed together with the menu on battle entry.
+  const window=this.node(this.panel,'JourneyWindow');window.addComponent(UITransform).setContentSize(560,280);
+  const mask=window.addComponent(Mask);mask.type=Mask.Type.GRAPHICS_STENCIL;
+  const clip=window.getComponent(Graphics)!;clip.clear();clip.moveTo(-235,138);clip.lineTo(278,145);clip.lineTo(252,-132);clip.lineTo(-281,-130);clip.close();clip.fill();
+  const image=this.node(window,'CurrentStageLandscape');image.setPosition(0,8);this.landscape=image.addComponent(Sprite);this.landscape.sizeMode=Sprite.SizeMode.CUSTOM;
+  // The actual window is taller than the former 2.5:1 card; crop horizontally,
+  // not stretch the landscape. Fit cover the aperture with the same source frame.
+  image.getComponent(UITransform)!.setContentSize(550,550*128/264);
+  const paper=this.node(this.panel,'JourneyParchment');const sp=paper.addComponent(Sprite);sp.spriteFrame=frames['stage-journey'];sp.sizeMode=Sprite.SizeMode.CUSTOM;paper.getComponent(UITransform)!.setContentSize(600,400);
+  const switchButton=this.node(this.panel,'StageSwitchButton');switchButton.setPosition(190,-108);switchButton.addComponent(UITransform).setContentSize(100,100);
+  const icon=this.node(switchButton,'StageSwitchIcon'),gate=icon.addComponent(Sprite);gate.spriteFrame=frames['stage-switch'];gate.sizeMode=Sprite.SizeMode.CUSTOM;icon.getComponent(UITransform)!.setContentSize(94,94);
+  switchButton.on(Node.EventType.TOUCH_START,()=>switchButton.setScale(.94,.94,1));switchButton.on(Node.EventType.TOUCH_CANCEL,()=>switchButton.setScale(1,1,1));switchButton.on(Node.EventType.TOUCH_END,()=>switchButton.setScale(1,1,1));
+  // Touch end bubbles once to HeroStageSelect, retaining its lock/selection guard.
+
+ }
  setSelection(profile:StageProfile,hero:string,stage:number):void {
-  const p=this.panel;for(const n of [...p.children])if(n.name!=='JadeSkin'){n.removeFromParent();n.destroy();}
-  const d=stageFor(stage),name=heroFor({heroId:hero} as Run).name,done=Object.keys(profile.heroes[hero]||{}).length;
-  const tab=this.box(p,'JourneyTitle',0,187,360,48);this.text(tab,name+' · '+growthTitle(hero,growthClears(profile,hero)),0,0,27,330,40).fontFamily='serif';
-  const image=this.node(p,'CurrentStageLandscape');image.setPosition(0,91);const sp=image.addComponent(Sprite);sp.spriteFrame=this.frames['stage-thumb-'+stage];sp.sizeMode=Sprite.SizeMode.CUSTOM;image.getComponent(UITransform)!.setContentSize(444,124);
-  this.text(p,String(stage).padStart(2,'0')+' '+d.name,0,-5,35,440,52).fontFamily='serif';
-  this.text(p,'五波挑战',0,-48,21,250,34,C.gold);this.flourish(p,-173,-47);this.flourish(p,170,-47);
-  const badges=[{key:stage===2?'boss-lvbu':'enemy-'+['E06','','E08','E21','E25','E40'][stage-1]+'-front',name:stage===1?'冲锋精英 ×3':d.miniBoss},{key:'boss-'+d.boss,name:bossDisplayName(d.boss)}];
-  badges.forEach((b,i)=>{const n=this.box(p,'StageBossBadge-'+i,(i-.5)*218,-98,200,55);this.picture(n,b.key,-60,3,63);this.text(n,b.name,28,0,20,132,44).fontFamily='serif';});
-  this.text(p,'更换关卡 ›',0,-153,25,340,43).fontFamily='serif';this.flourish(p,-170,-153);this.flourish(p,169,-153);
+  const p=this.panel,old=p.children.find(n=>n.name==='CurrentStageTitle');if(old){old.removeFromParent();old.destroy();}
+  this.landscape.spriteFrame=this.frames['stage-map-'+stage]||this.frames['stage-thumb-'+stage];
+  const title=this.text(p,String(stage).padStart(2,'0')+'  '+stageFor(stage).name,-130,-122,27,254,48,C.ink);title.fontFamily='serif';title.node.name='CurrentStageTitle';
  }
 }
 export class StagePickerView extends StageSurface {
@@ -54,13 +68,13 @@ export class StagePickerView extends StageSurface {
   this.picture(this.panel,'hero-'+hero+'-open',-205,270,74);
   this.text(this.panel,heroFor({heroId:hero} as Run).name+'的征程',-33,270,40,490,62).fontFamily='serif';
   const count=this.box(this.panel,'StageProgress',373,270,220,46);this.text(count,'已通关 '+Object.keys(profile.heroes[hero]||{}).length+'/6',0,0,22,200,40).fontFamily='serif';
-  this.button(this.panel,'StageCancel','×',565,316,58,()=>{this.close();close();});
+  addPanelClose(this.panel,frames,'StageCancel',538,273,()=>{this.close();close();});
   let refresh=()=>{};const marks:Node[]=[];
   STAGES.forEach((d,i)=>{
    const open=i+1<=highestStage(profile,hero),done=!!profile.heroes[hero]?.[d.id],n=this.box(this.panel,'StageChoice-'+(i+1),(i%3-1)*366,132-Math.floor(i/3)*215,346,204,open?C.jade:'#344c43');
    const image=this.node(n,'ThemeThumbnail');image.setPosition(0,36);const sp=image.addComponent(Sprite);sp.spriteFrame=this.frames['stage-thumb-'+(i+1)];sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.color=new Color(open?'#ffffff':'#82968a');image.getComponent(UITransform)!.setContentSize(326,116);
    this.text(n,String(i+1).padStart(2,'0')+' '+d.name,0,-48,27,320,43,open?C.paper:'#c5cbb9').fontFamily='serif';
-   if(open)this.text(n,done?'✓ 已通关':'可挑战',0,-84,19,290,30,C.gold).fontFamily='serif';else this.lock(n,0,-85);
+   if(open)this.text(n,done?'✓ 已通关':'可挑战',0,-84,19,290,30,C.gold).fontFamily='serif';else this.lock(n,0,-6); // Center the full silhouette, including the shackle.
    const m=this.glow(n,342,200);m.active=this.selected===i+1;marks.push(m);
    n.on(Node.EventType.TOUCH_END,()=>{this.selected=i+1;marks.forEach((mark,j)=>mark.active=j===i);refresh();});
   });
@@ -77,7 +91,7 @@ export class StagePickerView extends StageSurface {
 }
 export class StarterSelectView extends StageSurface {
  constructor(parent:Node,frames:Record<string,SpriteFrame>,selected:WeaponId,choose:(id:WeaponId)=>void,close:()=>void){super(parent,frames,'StarterSelection',900,450);this.text(this.panel,'选择初始武器',0,173,34,720,56);this.text(this.panel,'基础 I 级 · 开局装备一把',0,119,20,700,36,C.gold);
- STARTER_WEAPONS.forEach((id,i)=>{const n=this.box(this.panel,'StarterChoice-'+id,(i-1)*270,-17,240,206,id===selected?'#647744':'#365a43');const art=addWeaponIcon(n,frames,id,1,105);art.setPosition(0,28);this.text(n,weaponFor(id).name,0,-54,25,228,42);this.text(n,id===selected?'已选择':'携带',0,-88,18,210,32,C.gold);n.on(Node.EventType.TOUCH_END,()=>{choose(id);this.close();});});this.button(this.panel,'StarterCancel','返回',0,-178,260,()=>{this.close();close();});}
+ STARTER_WEAPONS.forEach((id,i)=>{const n=this.box(this.panel,'StarterChoice-'+id,(i-1)*270,-17,240,206,id===selected?'#647744':'#365a43');const art=addWeaponIcon(n,frames,id,1,105);art.setPosition(0,28);this.text(n,weaponFor(id).name,0,-54,25,228,42);this.text(n,id===selected?'已选择':'携带',0,-88,18,210,32,C.gold);n.on(Node.EventType.TOUCH_END,()=>{choose(id);this.close();});});addPanelClose(this.panel,frames,'StarterCancel',398,173,()=>{this.close();close();});}
 }
 export class StageClearView extends StageSurface {
  private showcase:HeroShowcase;private background?:Sprite;
@@ -116,7 +130,7 @@ export class StageClearView extends StageSurface {
      if(this.root.children.some(v=>v.name==='RewardDetails'))return;
      const card=this.box(this.root,'RewardDetails',0,0,800,370,C.paper),desc=kind==='weapons'?weaponFor(id as WeaponId).desc:kind==='skills'?commonSkillFor(id).effect:ITEMS.find(v=>v.id===id)?.desc||'';
      this.text(card,name,0,120,34,730,55,C.ink);this.text(card,desc,0,20,24,730,130,C.ink);this.text(card,kind==='skills'?'全英雄可用 · 击杀15名小兵重置':'全英雄可用 · 商店刷出后购买',0,-78,20,730,40,'#55784e');
-     this.button(card,'RewardDetailsClose','知道了',0,-139,300,()=>{card.removeFromParent();card.destroy();});
+     addPanelClose(card,frames,'RewardDetailsClose',348,133,()=>{card.removeFromParent();card.destroy();});
     });
    });
   });
@@ -135,5 +149,5 @@ export class StageClearView extends StageSurface {
 
 /** Read-only permanent growth details, kept out of the combat HUD. */
 export class GrowthDetailView extends StageSurface {
- constructor(parent:Node,frames:Record<string,SpriteFrame>,id:Run['heroId'],count:number,close:()=>void){super(parent,frames,'HeroGrowthDetails',960,590);this.text(this.panel,'本命成长 · '+growthTitle(id,count),0,238,34,860,60,C.gold);this.text(this.panel,'本命占一个武器位 · 每关首通增加1心',0,180,21,850,40);const names=['黄巾起义','虎牢讨董','官渡争锋','赤壁鏖兵','南中平蛮','五丈原决战'];for(let i=0;i<6;i++){const y=111-i*49;this.text(this.panel,(i<count?'✓ ':'○ ')+names[i],-297,y,22,220,40,i<count?C.gold:C.muted);this.text(this.panel,growthRewardText(id,i+1),120,y,21,590,40,i<count?C.paper:C.muted);}this.button(this.panel,'GrowthClose','返回',0,-244,320,()=>{this.close();close();});}
+ constructor(parent:Node,frames:Record<string,SpriteFrame>,id:Run['heroId'],count:number,close:()=>void){super(parent,frames,'HeroGrowthDetails',960,590);this.text(this.panel,'本命成长 · '+growthTitle(id,count),-35,238,34,720,60,C.gold);this.text(this.panel,'本命占一个武器位 · 每关首通增加1心',0,180,21,850,40);const names=['黄巾起义','虎牢讨董','官渡争锋','赤壁鏖兵','南中平蛮','五丈原决战'];for(let i=0;i<6;i++){const y=111-i*49;this.text(this.panel,(i<count?'✓ ':'○ ')+names[i],-297,y,22,220,40,i<count?C.gold:C.muted);this.text(this.panel,growthRewardText(id,i+1),120,y,21,590,40,i<count?C.paper:C.muted);}addPanelClose(this.panel,frames,'GrowthClose',428,243,()=>{this.close();close();});}
 }

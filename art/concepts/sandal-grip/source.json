@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "adopted": "A red strap, exposed fist revision",
+  "conceptSha256": "355a7d2e73e5ba522bd05f5efdf337e504a17e40c23349351d9712a52167aaeb",
+  "request": "Preserve young Liu identity. Compact gold woven straw sandals, crossed red straps, green heel binding. Both fists fully visible in foreground, thumb and knuckles wrapping heel strap. Natural low bent arms, no face occlusion.",
+  "implementation": [
+    "assets/scripts/weapon-art.ts",
+    "assets/scripts/hero-arms.ts",
+    "assets/scripts/HeroShowcase.ts",
+    "assets/scripts/GameBootstrap.ts",
+    "assets/scripts/BattleSpriteAtlas.ts"
+  ],
+  "runtimeRasterAdded": false
+}

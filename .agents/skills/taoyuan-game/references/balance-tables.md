@@ -2,7 +2,7 @@
 
 由 `npm run skill:sync` 从当前代码生成，请修改源码后重新生成。机制、实际调用和已知差异见人工参考；配置字段不代表已接入效果。
 
-版本：`stage-v9.3-audio`。六关独立构筑、无热身，购物与暂停不计时。
+版本：`stage-v9.11-menu-gate`。六关独立构筑、无热身，购物与暂停不计时。
 
 ## 角色开局与技能
 
@@ -148,18 +148,26 @@ C05只降低每次进店的第一次刷新；收益递减后取整，第二份�
 | Bundle | 优先级 | 源码素材 MiB |
 | --- | --- | --- |
 | arsenal | 8 | 0.657026 |
-| battle | 8 | 2.117927 |
-| campaign | 8 | 1.691676 |
-| chronicle-ui | 8 | 1.260497 |
-| chronicle-units | 8 | 1.889573 |
+| battle | 8 | 1.110738 |
+| campaign | 8 | 0.870584 |
+| chronicle-ui | 8 | 1.108963 |
+| chronicle-units | 8 | 0.958591 |
 | enemies | 8 | 1.359329 |
 | hero-menu | 8 | 0.772444 |
 | meadow | 8 | 1.466496 |
-| music | 8 | 1.005453 |
+| music | 8 | 1.005545 |
 | orchard | 8 | 0.667081 |
-| presentation | 8 | 0.849237 |
-| results | 8 | 0.450016 |
-| sfx | 8 | 1.636806 |
+| presentation | 8 | 1.080447 |
+| boss-caocao | 8 | 0.089108 |
+| boss-dongzhuo | 8 | 0.137 |
+| boss-lvbu | 8 | 0.202144 |
+| boss-menghuo | 8 | 0.276484 |
+| boss-simayi | 8 | 0.115224 |
+| boss-yuanshao | 8 | 0.111023 |
+| hidden-heroes | 8 | 0.546196 |
+| results | 8 | 0.219935 |
+| sfx-core | 8 | 0.554249 |
+| sfx | 8 | 0.789093 |
 | talismans | 8 | 1.024598 |
 
 以上为源码目录字节，包含meta，并非发布包大小。PNG尺寸、资源路径、源码指纹见机器目录；微信包限制与验证见工程参考。

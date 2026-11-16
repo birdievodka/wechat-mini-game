@@ -8,3 +8,6 @@ local/
 profiles/
 build/
 native/
+
+# Generated immutable CDN exports; source images remain tracked in assets/.
+cdn-assets/releases/

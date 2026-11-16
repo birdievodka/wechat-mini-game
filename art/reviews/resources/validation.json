@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-16",
+  "scope": "WeChat DevTools real wx.downloadFile and Cocos bundle/texture preparation in training; not an iPhone device run",
+  "appid": "wxbddcb8f0462f58cc",
+  "previousAppid": "wxbf455170a0f5ea11",
+  "version": "stage-v9.4-cdn-assets",
+  "release": "v94-476bd66998d2c168",
+  "urlCheck": true,
+  "result": {
+    "menghuo": {
+      "busy": false,
+      "retryShown": false,
+      "frames": 16,
+      "beasts": 24,
+      "boss": "menghuo",
+      "textureValid": true
+    },
+    "lvbu": {
+      "busy": false,
+      "retryShown": false,
+      "frames": 20,
+      "boss": "lvbu",
+      "textureValid": true,
+      "next": "正在准备首领资源…"
+    },
+    "download": {
+      "pending": false,
+      "ok": true,
+      "status": 200,
+      "appid": "wxbddcb8f0462f58cc"
+    },
+    "returned": {
+      "phase": "menu",
+      "remoteFrames": 0,
+      "profileUnchanged": true
+    }
+  },
+  "matchingRuntimeErrors": 0,
+  "restoredMenu": true,
+  "preview": {
+    "success": true,
+    "sourceBytes": 10142463,
+    "mainBytes": 2294478,
+    "appid": "wxbddcb8f0462f58cc"
+  }
+}

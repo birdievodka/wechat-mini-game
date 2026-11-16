@@ -1,3 +1,4 @@
+import {addPanelClose} from './panel-ui';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {growthClears,signatureId} from './hero-growth';
 import {StagePickerView,StageBriefView,StarterSelectView,StageClearView,GrowthDetailView} from './StageViews';
@@ -92,6 +93,7 @@ export class CampaignView {
     const heroName=this.bold(p,'',options?-265:0,-90,30,'#fff0d2',126,43);heroName.node.name='ShowcaseHeroName';heroName.fontFamily='serif';
     const rail=this.node(p,'HeroPortraitRail').addComponent(Graphics);
     rail.fillColor=new Color(16,34,25,145);rail.strokeColor=new Color(229,204,143,65);rail.lineWidth=1;rail.roundRect(-346,-229,692,111,24);rail.fill();rail.stroke();
+    if(options){const divider=this.node(p,'HeroLoadoutDivider');divider.setPosition(94,-175);const d=divider.addComponent(Graphics);d.strokeColor=new Color('#d5b66d');d.lineWidth=1.5;d.moveTo(0,-27);d.lineTo(0,-7);d.moveTo(0,7);d.lineTo(0,27);d.stroke();d.fillColor=new Color('#eed08b');d.moveTo(0,4);d.lineTo(4,0);d.lineTo(0,-4);d.lineTo(-4,0);d.close();d.fill();}
     const portraits:HeroPortraitSlot[]=[];
     heroes.forEach((hero,i)=>{
       const n=this.node(p,hero.id);n.setPosition((i-(heroes.length-1)/2)*130+(options?-130:0),-175);n.addComponent(UITransform).setContentSize(100,100);
@@ -144,7 +146,7 @@ export class CampaignView {
       updateLoadout();updateSkill();
     }
     if(codex)this.action(p,'图鉴',-516,-289,164,()=>codex());
-    if(training)this.action(p,'演武场',516,-289,164,()=>{if(starting||choosing)return;starting=true;training(this.selection,this.selectionSkill);});
+    // The training runtime remains available to development tools; its public entry is hidden.
   }
 
   codex(close:()=>void,profile?:StageProfile):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close,profile);this.codexView.resize(this.width,this.height);}
@@ -268,8 +270,9 @@ export class CampaignView {
     const major=!run.challenge&&run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
     this.jadePanel(p,1140,650);
     const title=run.challenge?'桃园补给':bossPrep?chapterFor(run.chapter).boss+' · 战前补给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天命强化':'桃园补给';
-    this.bold(p,title,-315,278,34,'#ffedba',460,50);
-    this.text(p,'可购买多件',-437,238,18,'#c5d1b5',210,30);
+    const headerLeft=run.challenge?-532:-528;
+    const heading=this.bold(p,title,headerLeft+230,278,34,'#ffedba',460,50);heading.horizontalAlign=Label.HorizontalAlign.LEFT;
+    const hint=this.text(p,'可购买多件',headerLeft+230,238,18,'#c5d1b5',460,30);hint.horizontalAlign=Label.HorizontalAlign.LEFT;
     this.sprite(p,this.frames['ui-coin'],414,274,34,34);
     const balance=this.bold(p,String(run.gold),482,274,32,'#ffe1a0',90,46);balance.node.name='SupplyBalance';
     if(major)this.campButton(p,'SupplyNormal','普通补给 ›',40,271,180,normal,'secondary');
@@ -282,7 +285,7 @@ export class CampaignView {
       if(card.weapon)this.weaponIcon(n,card.weapon.id,card.weapon.tier,0,67,1.25);
       else this.itemIcon(n,id,0,67,.95);
       this.bold(n,card.title,0,3,run.challenge?23:26,'#fff0c8',run.challenge?236:302,40);
-      const desc=this.text(n,card.desc.split('\n').slice(0,3).join('\n'),0,-59,18,'#e4eacb',run.challenge?234:300,80);if(run.challenge)desc.node.on(Node.EventType.TOUCH_END,()=>{const details=this.dialog(card.title,850,420);this.text(details,card.desc,0,35,24,'#fff0d2',770,220);this.campButton(details,'SupplyDetailsClose','返回',0,-152,260,()=>{const overlay=details.parent!;overlay.removeFromParent();overlay.destroy();},'secondary');});
+      const desc=this.text(n,card.desc.split('\n').slice(0,3).join('\n'),0,-59,18,'#e4eacb',run.challenge?234:300,80);if(run.challenge)desc.node.on(Node.EventType.TOUCH_END,()=>{const details=this.dialog(card.title,850,420,'SupplyDetailsClose');this.text(details,card.desc,0,35,24,'#fff0d2',770,220);});
       const enabled=canBuySupply(run,id),sold=run.purchasedOffers.indexOf(id)>=0,full=card.weapon&&parseWeaponOffer(id)&&run.weapons.length===6;
       const title=sold?'已购入':!enabled?(run.gold<card.price?'铜钱不足':'暂不可购'):`${card.price} ${full?'替换':'购买'}`;
       this.campButton(n,'SupplyBuy-'+i,title,0,-137,run.challenge?230:296,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
@@ -325,7 +328,7 @@ export class CampaignView {
   }
 
   private replacementDialog(run:Run,id:string,buy:(id:string,uid?:number)=>void):void {
-    const card=supplyCard(run,id),p=this.dialog('替换武器',1100,620),marks:Node[]=[];let selected:EquippedWeapon|undefined;
+    const card=supplyCard(run,id),p=this.dialog('替换武器',1100,620,'CancelReplacement'),marks:Node[]=[];let selected:EquippedWeapon|undefined;
     const incoming=this.node(p,'IncomingWeapon');incoming.setPosition(-263,120);this.jadePanel(incoming,498,176,false);
     this.text(incoming,'换入',-194,60,17,'#c7d1b6',70,26);
     if(card.weapon){this.weaponIcon(incoming,card.weapon.id,card.weapon.tier,-173,-2,1.15);this.bold(incoming,weaponFor(card.weapon.id).name,53,49,25,'#fff0d2',300,36);this.tierBand(incoming,card.weapon.tier,54,5,284,card.from);}
@@ -336,11 +339,10 @@ export class CampaignView {
     this.text(oldPreview,'从下方选择一件旧武器',0,-2,22,'#c7d1b6',420,62);
     this.text(p,'选择要换下的武器',-350,8,18,'#dfd8b7',320,28);
     const ledger=this.text(p,`当前 ${run.gold}  ·  购买 −${card.price}  ·  请选择换下武器`,0,-181,21,'#ead9ac',1010,48);ledger.node.name='ReplacementLedger';
-    const close=():void=>{const overlay=p.parent!;overlay.removeFromParent();overlay.destroy();};
     const updateConfirm=():void=>{
       const old=p.children.find(n=>n.name==='ConfirmReplacement');if(old){old.removeFromParent();old.destroy();}
       const affordable=!!selected&&run.gold+recycleValue(run,selected.uid)>=card.price;
-      this.campButton(p,'ConfirmReplacement',selected&&!affordable?'铜钱不足':'确认替换',323,-253,350,()=>{if(selected&&canBuySupply(run,id)&&run.gold+recycleValue(run,selected.uid)>=card.price)buy(id,selected.uid);},'primary',affordable);
+      this.campButton(p,'ConfirmReplacement',selected&&!affordable?'铜钱不足':'确认替换',0,-253,350,()=>{if(selected&&canBuySupply(run,id)&&run.gold+recycleValue(run,selected.uid)>=card.price)buy(id,selected.uid);},'primary',affordable);
     };
     run.weapons.forEach((w,i)=>{
       const n=this.node(p,'ReplaceWeapon-'+w.uid);n.setPosition((i-2.5)*166,-83);n.addComponent(UITransform).setContentSize(150,126);this.jadePanel(n,150,126,false);
@@ -358,7 +360,7 @@ export class CampaignView {
         ledger.string=`当前 ${run.gold}  ＋  回收 ${refund}  −  购买 ${card.price}  ＝  余额 ${left}`;ledger.color=new Color(left<0?'#f3a796':'#ead9ac');updateConfirm();
       });
     });
-    this.campButton(p,'CancelReplacement','取消',-323,-253,350,close,'secondary');updateConfirm();
+    updateConfirm();
   }
 
   stageResult(run:Run,kills:number,reward:StageReward,next:()=>void,menu:()=>void,saved:boolean):void {
@@ -454,21 +456,17 @@ export class CampaignView {
     });
   }
 
-  private dialog(title: string, width: number, height: number): Node {
+  private dialog(title: string, width: number, height: number, closeName = 'CloseDialog'): Node {
     const content=this.content!; // Dialog actions belong to the currently visible screen.
     const old = content.children.find(n => n.name === 'CampDialog'); if (old) { old.removeFromParent(); old.destroy(); }
     const overlay = this.node(content, 'CampDialog'); overlay.addComponent(UITransform).setContentSize(3000, 2000);
     const shade = overlay.addComponent(Graphics); shade.fillColor = new Color(35, 45, 34, 170); shade.rect(-1500, -1000, 3000, 2000); shade.fill();
     const close = (): void => { overlay.removeFromParent(); overlay.destroy(); };
-    overlay.on(Node.EventType.TOUCH_END, (event?: { target: Node }) => { if (!event || event.target === overlay) close(); });
+    overlay.on(Node.EventType.TOUCH_END, (event?: { propagationStopped: boolean }) => { if(event)event.propagationStopped=true; });
     const box = this.node(overlay, 'DialogPaper'); box.addComponent(UITransform).setContentSize(width, height); if(content.name==='SupplyContent')this.jadePanel(box,width,height);else this.paper(box, width, height);
     box.on(Node.EventType.TOUCH_END, (event?: { propagationStopped: boolean }) => { if (event) event.propagationStopped = true; });
     this.bold(box, title, 0, height / 2 - 50, 32, content.name==='SupplyContent'?'#ffedba':C.green, width - 150, 50);
-    if(content.name==='SupplyContent'){
-      const button=this.node(box,'CloseDialog');button.setPosition(width/2-44,height/2-44);button.addComponent(UITransform).setContentSize(64,64);
-      const g=button.addComponent(Graphics);g.fillColor=new Color('#355e40');g.strokeColor=new Color('#c7ba82');g.lineWidth=1.5;g.circle(0,0,21);g.fill();g.stroke();
-      this.bold(button,'×',0,1,27,'#f4e7c0',42,42);button.on(Node.EventType.TOUCH_END,(event?:{propagationStopped:boolean})=>{if(event)event.propagationStopped=true;close();});
-    }else this.campButton(box, 'CloseDialog', '×', width / 2 - 48, height / 2 - 48, 54, close, 'secondary');
+    addPanelClose(box,this.frames,closeName,width/2-52,height/2-52,close);
     return box;
   }
 

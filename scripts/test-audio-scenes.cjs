@@ -1,10 +1,29 @@
 const assert=require('node:assert/strict');
-const {newGame,load,cc}=require('./test-campaign.cjs');
+const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-campaign.cjs');
 (async()=>{
+ const musicMuted=storage.get('taoyuan-music-muted');cc.wechatHost={};
+ try{
+  storage.delete('taoyuan-music-muted');const boot=new GameBootstrap();await boot.start();finishStartup(boot);assert.equal(boot.phase,'menu');assert.equal(boot.audioUnlocked,false);assert.equal(boot.musicSource.playing,true,'WeChat menu attempts music without touching');boot.update(.08);assert.ok(boot.musicSource.volume>0);boot.onDestroy();
+  storage.set('taoyuan-music-muted','true');const muted=new GameBootstrap();await muted.start();finishStartup(muted);assert.equal(muted.musicSource.playing,false,'saved music mute wins over autoplay');muted.onDestroy();
+ }finally{delete cc.wechatHost;if(musicMuted===undefined)storage.delete('taoyuan-music-muted');else storage.set('taoyuan-music-muted',musicMuted);}
  const g=await newGame();g.showMainMenu();g.unlockAudio();
  assert.equal(g.musicMode,'menu');assert.ok(g.musicSource.playing);
  const before=g.musicSource.currentTime;g.update(.08);g.music.pause();g.music.resume();assert.ok(g.musicSource.currentTime>before,'menu clock advances');
  g.restart(false);assert.equal(g.musicMode,'battle');const source=g.musicSource,plays=source.plays;
+ g.stopSounds();
+ for(const id of ['blade-hit','gun-hit','wood-attack','danger']) g.clips[id]={name:id};
+ g.playSound('blade-hit',1,2,undefined,'hit');
+ g.playSound('gun-hit',1,2,undefined,'hit');
+ assert.equal(g.soundSources[0].volume,1);
+ assert.equal(g.soundSources[1].volume,.45);
+ g.playSound('danger');
+ assert.equal(g.soundSources[0].volume,.4);
+ g.playSound('wood-attack',1,1,undefined,'attack');
+ assert.equal(g.soundSources[3].volume,.71*.4);
+ g.soundGate.update(.5);
+ g.playSound('blade-hit',1,2,undefined,'hit');
+ assert.equal(g.soundSources[0].volume,1);
+ g.stopSounds();
  g.showShop();g.update(.08);assert.equal(source.playing,true);assert.equal(source.plays,plays,'shop never restarts battle track');
  g.onBackground();assert.equal(source.playing,false);const stopped=g.musicSource.plays;g.playSound('ui-click');assert.equal(g.musicSource.plays,stopped);g.onForeground();assert.equal(source.playing,true);
  g.showMainMenu();const pending=[],released=[],old=cc.assetManager.loadBundle,release=cc.assetManager.releaseAsset;

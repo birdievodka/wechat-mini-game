@@ -1,0 +1,32 @@
+{
+  "source": "art/runtime-youth/portraits.png",
+  "sourceSha256": "0bd7004a5b13426b80bef62d74fb4c8b7011da5a5c8078242cb5e36f5da4db7e",
+  "outputs": [
+    {
+      "file": "assets/presentation/hero-hud.png",
+      "width": 1152,
+      "height": 384,
+      "sourceRect": [
+        0,
+        0,
+        1152,
+        384
+      ],
+      "bytes": 241449,
+      "sha256": "2a216d26f96dc2b59fc5d6fa72b196e59b7c6672ea43a0bc7093a211ff916b16"
+    },
+    {
+      "file": "assets/results/portraits.png",
+      "width": 1152,
+      "height": 384,
+      "sourceRect": [
+        0,
+        384,
+        1152,
+        384
+      ],
+      "bytes": 229626,
+      "sha256": "684f724cb917236199bd4e722b3ddd4027dc98ded39cbe7e1d9018858312ed8f"
+    }
+  ]
+}

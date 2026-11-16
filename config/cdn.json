@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "project": "taoyuan-mini-heroes",
+  "provider": "bytedcli-cdn",
+  "directory": "taoyuan-mini-heroes/resources",
+  "baseUrl": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources",
+  "remoteBundles": [
+    "arsenal",
+    "talismans",
+    "meadow",
+    "orchard",
+    "music",
+    "sfx",
+    "enemies",
+    "boss-lvbu",
+    "boss-dongzhuo",
+    "boss-yuanshao",
+    "boss-caocao",
+    "boss-menghuo",
+    "boss-simayi",
+    "results",
+    "hidden-heroes"
+  ],
+  "retention": "immutable releases; do not delete versions used by published clients"
+}

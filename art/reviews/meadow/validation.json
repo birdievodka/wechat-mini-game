@@ -1,0 +1,158 @@
+{
+  "version": "stage-v9.10-meadow-seams",
+  "scope": "isolated real Cocos/WebGL engineering terrain fixture; old tiling reconstructed for before, current rebuild for after; not iPhone FPS",
+  "layout": {
+    "tiles": 9,
+    "rect": [
+      {
+        "x": -720,
+        "y": -375,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": 1,
+        "sy": 1
+      },
+      {
+        "x": 0,
+        "y": -375,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": -1,
+        "sy": 1
+      },
+      {
+        "x": 720,
+        "y": -375,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": 1,
+        "sy": 1
+      },
+      {
+        "x": -720,
+        "y": 0,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": 1,
+        "sy": -1
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": -1,
+        "sy": -1
+      },
+      {
+        "x": 720,
+        "y": 0,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": 1,
+        "sy": -1
+      },
+      {
+        "x": -720,
+        "y": 375,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": 1,
+        "sy": 1
+      },
+      {
+        "x": 0,
+        "y": 375,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": -1,
+        "sy": 1
+      },
+      {
+        "x": 720,
+        "y": 375,
+        "w": 720.5,
+        "h": 375.5,
+        "sx": 1,
+        "sy": 1
+      }
+    ],
+    "texture": [
+      960,
+      640
+    ],
+    "sampleRect": {
+      "x": 2,
+      "y": 130,
+      "width": 316,
+      "height": 188
+    },
+    "width": 2160,
+    "height": 1125
+  },
+  "camera": [
+    {
+      "name": "north-east",
+      "x": 300,
+      "y": 140
+    },
+    {
+      "name": "south-west",
+      "x": -300,
+      "y": -140
+    }
+  ],
+  "later": [
+    {
+      "chapter": 2,
+      "tiles": 15,
+      "unmirrored": true,
+      "correct": true
+    },
+    {
+      "chapter": 3,
+      "tiles": 15,
+      "unmirrored": true,
+      "correct": true
+    },
+    {
+      "chapter": 4,
+      "tiles": 15,
+      "unmirrored": true,
+      "correct": true
+    },
+    {
+      "chapter": 5,
+      "tiles": 15,
+      "unmirrored": true,
+      "correct": true
+    },
+    {
+      "chapter": 6,
+      "tiles": 15,
+      "unmirrored": true,
+      "correct": true
+    }
+  ],
+  "header": {
+    "cardLeft": -532,
+    "edges": [
+      {
+        "name": "桃园补给",
+        "left": -532,
+        "alignment": 0
+      },
+      {
+        "name": "可购买多件",
+        "left": -532,
+        "alignment": 0
+      }
+    ]
+  },
+  "restored": {
+    "profile": true,
+    "storage": true,
+    "phase": "menu"
+  },
+  "errors": []
+}

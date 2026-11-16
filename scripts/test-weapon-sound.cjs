@@ -5,13 +5,14 @@ const ts = require('typescript');
 const vm = require('node:vm');
 const out = {};
 Object.assign(out,require('./test-campaign.cjs').load('weapon-sound'));
-const { SOUND_CUES, GENERATED_SOUNDS, weaponSound, SoundGate, SFX_VOICES } = out;
+const { SOUND_CUES, GENERATED_SOUNDS, weaponSound, SoundGate, SFX_VOICES, soundAsset } = out;
 assert.equal(weaponSound('sandal', 'attack'), undefined, 'shoe never adds a whoosh');
 assert.equal(weaponSound('sandal', 'hit'), 'sandal-hit-pcm');
 assert.equal(new Set(['sandal','pole','peach','cleaver','firecracker'].map(w => weaponSound(w,'hit'))).size,5);
 const hashes = new Set();
 for (const id of GENERATED_SOUNDS) {
-  const wav = fs.readFileSync(`assets/sfx/${id}.wav`), cue = SOUND_CUES[id];
+  const asset=soundAsset(id);
+  const wav = fs.readFileSync(`assets/${asset.bundle}/${asset.name}.wav`), cue = SOUND_CUES[id];
   assert.equal(wav.toString('ascii',0,4),'RIFF'); assert.equal(wav.readUInt16LE(20),1);
   assert.equal(wav.readUInt16LE(22),1); assert.equal(wav.readUInt32LE(24),24000); assert.equal(wav.readUInt16LE(34),16);
   assert.ok(Math.abs(wav.readUInt32LE(40)/48000-cue.duration)<.001, id+' duration matches voice budget');
@@ -22,6 +23,7 @@ for (const id of GENERATED_SOUNDS) {
   hashes.add(crypto.createHash('sha256').update(wav).digest('hex'));
 }
 assert.ok(GENERATED_SOUNDS.length>=80&&hashes.size>=50,'complete categorized effects; intentional theme reuse allowed');
+assert.equal(hashes.size,66,'86 logical cues use 66 unique physical PCM samples');
 const gate = new SoundGate(2);
 assert.equal(gate.acquire('gun-hit'),0); assert.equal(gate.acquire('gun-hit'),undefined,'crowd hits do not stack identical sounds');
 assert.equal(gate.acquire('blade-hit'),1,'different weapon can sound in the same frame');

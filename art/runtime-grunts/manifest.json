@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "codec": "TYI1 indexed RGB + exact alpha / zlib",
+  "entries": [
+    {
+      "kind": "sickle",
+      "source": "art/runtime-grunts/sickle.png",
+      "sourceSha256": "70510f5119c5097e2400f6bbd3062ad15490fa1f7d983dc99e448e59215ab8e8",
+      "dest": "assets/battle/characters/soldier-sickle-actions.bin",
+      "sha256": "5cf81ba1d517bac4aad52b7ac69e856182989692587b7de586190d0af42ec75e",
+      "width": 1448,
+      "height": 1086,
+      "columns": 4,
+      "rows": 3,
+      "frames": 12,
+      "rgbaSha256": "6b862484848090ca0731292ce825afc10f809797dfd527eebfd9cbdb08f963ea",
+      "sourceBytes": 786652,
+      "bytes": 559612,
+      "colors": 256
+    },
+    {
+      "kind": "hoe",
+      "source": "art/runtime-grunts/hoe.png",
+      "sourceSha256": "60512704f89f8e0b22fed890a296a354fe8ec6ecd3066308a60df071ee641544",
+      "dest": "assets/battle/characters/soldier-hoe-actions.bin",
+      "sha256": "2e7414548d70d65c13f07952727d9a8b17f83d0a1273bb89170fe83cc1dbe301",
+      "width": 1448,
+      "height": 1086,
+      "columns": 4,
+      "rows": 3,
+      "frames": 12,
+      "rgbaSha256": "b0989a5d2419a05d93931950761d26eadcc1f73d9e51697bac726ec89d70e8f7",
+      "sourceBytes": 788248,
+      "bytes": 560871,
+      "colors": 256
+    }
+  ]
+}

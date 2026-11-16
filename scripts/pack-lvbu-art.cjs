@@ -1,6 +1,6 @@
 // Deterministic extraction and registration of approved artwork, no new drawing.
 const fs=require('node:fs'),crypto=require('node:crypto'),sharp=require('sharp');
-const sources=['art/runtime-lvbu/source.png','art/runtime-lvbu/trot-source.png'],dest='assets/chronicle-units/lvbu-actions.png',cell=192;
+const sources=['art/runtime-lvbu/source.png','art/runtime-lvbu/trot-source.png'],dest='assets/remote-content/boss-lvbu/lvbu-actions.png',cell=192;
 async function extract(source,rows){
  const {data,info}=await sharp(source).ensureAlpha().raw().toBuffer({resolveWithObject:true});
  const {width:w,height:h}=info,n=w*h,seen=new Uint8Array(n),queue=new Uint32Array(n),components=[];

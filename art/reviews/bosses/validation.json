@@ -2269,12 +2269,12 @@
     "assets/scripts/chronicle-save.ts": "ab9a607fbe4c90cef3ed6e807284515fe6aa45c2c7835e2ff7fba3c360240758",
     "assets/scripts/ResultView.ts": "667b9d6e3391e4325c66079f3350ce1ec7d16e9fbc693de303d6f50ba5db1714",
     "assets/chronicle-units/boss-zhangjiao-actions.png": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12",
-    "assets/chronicle-units/boss-dongzhuo-actions.png": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c",
-    "assets/chronicle-units/boss-yuanshao-actions.png": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704",
-    "assets/chronicle-units/boss-caocao-actions.png": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc",
-    "assets/chronicle-units/boss-menghuo-actions.png": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483",
-    "assets/chronicle-units/boss-simayi-actions.png": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7",
-    "assets/chronicle-units/boss-beasts.png": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26",
+    "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c",
+    "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704",
+    "assets/remote-content/boss-caocao/boss-caocao-actions.png": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc",
+    "assets/remote-content/boss-menghuo/boss-menghuo-actions.png": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483",
+    "assets/remote-content/boss-simayi/boss-simayi-actions.png": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7",
+    "assets/remote-content/boss-menghuo/boss-beasts.png": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26",
     "assets/chronicle-units/boss-props.png": "9ac52c9e729fc60c2db42056a8bc2f9366e39c94cfe8425f0db986fe8e7732ed"
   }
 }

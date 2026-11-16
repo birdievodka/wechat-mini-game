@@ -19,6 +19,7 @@
     "2d",
     "ui",
     "graphics",
+    "mask",
     "audio",
     "affine-transform",
     "intersection-2d"

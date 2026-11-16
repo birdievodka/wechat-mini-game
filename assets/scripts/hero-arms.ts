@@ -30,9 +30,17 @@ export function drawHeroSleeve(g:Graphics,side:number,wrist:ArmPoint,bob:number,
   g.lineTo(wrist.x-nx*4,wrist.y-ny*4);g.lineTo(cuff.x-nx*4+ux*2,cuff.y-ny*4+uy*2);g.close();g.fill();g.stroke();
 }
 /** Render after the held weapon so the thumb and curled fingers visibly wrap the grip. */
-export function drawHeroFist(g:Graphics,hero:string,side:number,gripping:boolean):void {
-  const key=hero+':'+side+':'+gripping;if(fistCache.get(g)===key)return;fistCache.set(g,key);
+export function drawHeroFist(g:Graphics,hero:string,side:number,gripping:boolean,exposed=false):void {
+  const key=hero+':'+side+':'+gripping+':'+exposed;if(fistCache.get(g)===key)return;fistCache.set(g,key);
   g.clear();g.fillColor=new Color(handSkin(hero));g.strokeColor=new Color(INK);g.lineWidth=2;
+  if(exposed&&gripping){
+    g.roundRect(-8,-7,16,16,6);g.fill();g.stroke();
+    g.strokeColor=new Color('#bd805b');g.lineWidth=1;
+    for(const y of [-3.8,.1,3.7]){g.moveTo(side*.5,y);g.bezierCurveTo(side*2,y-.6,side*4,y-.6,side*5,y-.1);}g.stroke();
+    g.fillColor=new Color(handSkin(hero));g.strokeColor=new Color(INK);g.lineWidth=1.7;
+    g.ellipse(-side*3.8,5.5,4.3,3.6);g.fill();g.stroke();
+    return;
+  }
   g.roundRect(-7,-6,14,13,5);g.fill();g.stroke();
   if(gripping){
     g.ellipse(-side*4,3,3.8,4);g.fill();g.stroke();

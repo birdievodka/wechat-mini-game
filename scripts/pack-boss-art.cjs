@@ -28,8 +28,8 @@ async function pack(name,sprites,cols,rows,groups=[],centered=false,actor=false)
   layers.push({input:await sharp(a.buf,{raw:{width:a.width,height:a.height,channels:4}}).resize(w,h).png().toBuffer(),left:i%cols*cell+left,top:Math.floor(i/cols)*cell+top});
   cells.push({index:i,source:a.source,sourceRect:a.sourceRect,content:[left,top,w,h],anchor:[left+a.anchor[0]*p.scale,top+a.anchor[1]*p.scale]});
  }
- const dest='assets/chronicle-units/'+name+'.png';await sharp({create:{width:cols*cell,height:rows*cell,channels:4,background:{r:0,g:0,b:0,alpha:0}}}).composite(layers).png({compressionLevel:9,palette:true,colours:128,dither:0}).toFile(dest);
- if(!fs.existsSync(dest+'.meta')){const m=JSON.parse(fs.readFileSync('assets/chronicle-units/lvbu-actions.png.meta'));m.uuid=crypto.randomUUID();const sub=m.subMetas['6c48a'];sub.uuid=m.uuid+'@6c48a';sub.displayName=name;sub.userData.imageUuidOrDatabaseUri=m.uuid;m.userData.redirect=sub.uuid;fs.writeFileSync(dest+'.meta',JSON.stringify(m,null,2)+'\n');}
+ const dest=(name==='boss-zhangjiao-actions'||name==='boss-props'?'assets/chronicle-units/':'assets/remote-content/boss-'+(name==='boss-beasts'?'menghuo':name.slice(5,-8))+'/')+name+'.png';await sharp({create:{width:cols*cell,height:rows*cell,channels:4,background:{r:0,g:0,b:0,alpha:0}}}).composite(layers).png({compressionLevel:9,palette:true,colours:128,dither:0}).toFile(dest);
+ if(!fs.existsSync(dest+'.meta')){const m=JSON.parse(fs.readFileSync('assets/remote-content/boss-lvbu/lvbu-actions.png.meta'));m.uuid=crypto.randomUUID();const sub=m.subMetas['6c48a'];sub.uuid=m.uuid+'@6c48a';sub.displayName=name;sub.userData.imageUuidOrDatabaseUri=m.uuid;m.userData.redirect=sub.uuid;fs.writeFileSync(dest+'.meta',JSON.stringify(m,null,2)+'\n');}
  return {dest,sha256:hash(dest),width:cols*cell,height:rows*cell,bytes:fs.statSync(dest).size,rgbaMiB:cols*rows*cell*cell*4/1048576,cells};
 }
 (async()=>{const atlases=[];for(const id of actors)atlases.push(await pack('boss-'+id+'-actions',await extract(root+id+'-source.png',4,4),4,4,[[0,1,2,3,4],[8,9,10,11,12]],false,true));

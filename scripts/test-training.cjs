@@ -6,7 +6,7 @@ const advance=(g,t)=>{for(let i=0;i<Math.ceil(t*60);i++)g.update(1/60);};
 const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtime-health').sort());
 (async()=>{
  const g=await newGame();g.run.gold=123;g.saveCheckpoint('battle');g.showMainMenu();let saved=progress();
- click(g.screens.root,'liubei');click(g.screens.root,'HeroSkillSelect');click(g.screens.root,'SkillChoice-G03');click(g.screens.root,'ConfirmSkill');saved=progress();click(g.screens.root,'演武场');
+ click(g.screens.root,'liubei');click(g.screens.root,'HeroSkillSelect');click(g.screens.root,'SkillChoice-G03');click(g.screens.root,'ConfirmSkill');saved=progress();assert.equal(find(g.screens.root,'演武场'),undefined,'首页隐藏演武入口，开发用演武功能保留');g.startTraining(g.screens.selection,g.screens.selectionSkill);
  assert.equal(g.trainingMode,true);assert.equal(g.testMode,true);assert.equal(g.phase,'battle');assert.equal(g.trainingPanel.root.active,true);assert.equal(g.run.heroId,'liubei');assert.equal(g.run.skillId,'G03');assert.equal(g.playerHp,5);assert.match(g.healthText.string,/∞/);assert.equal(g.trainingAlive(),0);assert.equal(progress(),saved,'进入演武场不覆盖正式存档');
  const panel=g.trainingPanel,at=[g.px,g.py,g.age];g.keys.add(cc.KeyCode.ARROW_RIGHT);advance(g,2);g.castSkill();assert.deepEqual([g.px,g.py,g.age],at,'配置面板冻结移动和模拟');assert.equal(g.skillCharge,g.skillRequirement());
  g.onBackground();g.onForeground();assert.equal(g.paused,false);assert.equal(g.menu.active,false);assert.equal(panel.root.active,true);

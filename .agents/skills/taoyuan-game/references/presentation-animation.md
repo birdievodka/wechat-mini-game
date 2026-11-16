@@ -83,3 +83,24 @@ v9.1现行少年头/身体/眨眼不变。旧兼容liubei/guanyu/zhangfei与_bod
 ## v9.2结算与走位
 
 胜利StageClearView放大英雄并统一脚底，复用背景/少年头/坐骑/原有动作，不再用大框和空白共享摘要。7–12心单行.8大小，状态卡加宽，暂停依真实宽度避让；不改变受击体积。
+
+
+## v9.6草鞋采用稿覆盖
+
+短金编织椭圆草鞋＋红交叉带＋绿后跟，露拳抓住后跟红带。HeroShowcase草鞋握点±35/−9，鞋缩放.9、向外24°（亮相再外摆8°），握拳与道具同旋转、手位在武器之前。战斗/飞行/UI统一weapon-art形状；BattleSpriteAtlas原草鞋格2倍密度、逻辑尺寸回除，icon-sandal启动后以该共享格覆盖旧Y带图标，无新纹理。单草鞋另一手装饰备鞋，不多装备或额外射击。采用概念和验收见art/concepts/sandal-grip与art/reviews/sandal-grip。
+
+
+## v9.7清爽关卡卡与无字战场图
+
+首页StageBriefView改500×280单层轻描边玉绿卡，464×185.6战场大图＋底部关卡序号/名称＋“切换 ›”。去成长题签、五波重复说明、首领嵌套徽章和金色花纹；整卡仍可选关，独立英雄进度/锁定规则不变。选关弹窗仍3×2，使用相同六图。
+
+六张配图来自art/runtime-stage-ui/battlefields.png（内置image_gen；完整提示/哈希在battlefields-source.json），仅乡野战场/关隘/军营/江战/密林/高原，不含文字、数字、旗帜、题字和UI。pack-stage-art按2×3源图逐格裁到原960×640共用stage-themes上部128，六关地面下部192的原源裁格/缩放保留。不增纹理或远程包，不恢复旧stage-picker概念里带字配图。关名只由界面Label显示。
+
+
+## v9.8行军地图备战卡
+
+采用art/concepts/stage-journey/design.png。StageBriefView为640×400触摸区：600×400透明纸张/布底/红绳/纸签/空白玉印皮肤，原stage-themes切264×128的stage-map六帧放在后层，纸签名字与三枚箭头由实时UI绘制。图片无文字无旗；不把整张菜单概念当贴图。采用源/完整内置image_gen提示/哈希在art/runtime-stage-ui/journey-source.json，pack-stage-art确定性导出stage-journey.png，alpha不重复量化。
+
+镂空窗仅一份菜单Graphics stencil（Mask.Type.GRAPHICS_STENCIL），避免配图从红绳外侧漏出。微信与Web评审的includeModules必须含mask；仅2d/graphics不导出Mask，不能只看类型检查即称运行成功。进入战斗时CampaignView.hide销毁整个菜单/遮罩节点，纹理600×400约0.92MiB、下载303230 bytes，六张配图不复制、不改战斗地面。
+
+技能选择页的列表/详情，未解锁或未发现都用同源alpha剪影（RGB0/alpha108）；未知姓名/强度/收益仍隐藏，已发现可读详情，未解锁不可携带。图鉴与选择页两条独立路径都要验证，不能只修CodexView。

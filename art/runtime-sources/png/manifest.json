@@ -9,36 +9,6 @@
     "rgbRmse": 4.9866,
     "alpha": "identical"
   },
-  "assets/battle/characters/liubei-bean-body.png": {
-    "sourceSha": "a9bc5e507123bfafa76c1033aa7b5e5712769f533946b355c2556ddb62f9523a",
-    "outputSha": "da3cb081c10629c2ba22724b08d5a7ba9720e0a6600844a05a52dfd38a9c8c11",
-    "sourceBytes": 967848,
-    "outputBytes": 599116,
-    "width": 1303,
-    "height": 1207,
-    "rgbRmse": 0.8551,
-    "alpha": "identical"
-  },
-  "assets/battle/characters/soldier-hoe-actions.png": {
-    "sourceSha": "1c3a35942afa15e2ceee902f644a3a9bf8bfbd2c7cedfb77ac337ad6ee545a32",
-    "outputSha": "60512704f89f8e0b22fed890a296a354fe8ec6ecd3066308a60df071ee641544",
-    "sourceBytes": 1545039,
-    "outputBytes": 788248,
-    "width": 1448,
-    "height": 1086,
-    "rgbRmse": 1.8504,
-    "alpha": "identical"
-  },
-  "assets/battle/characters/soldier-sickle-actions.png": {
-    "sourceSha": "3c8cf3cd97901218627111298effc09521e28bf8a68f8a6de98ff480f311e79b",
-    "outputSha": "70510f5119c5097e2400f6bbd3062ad15490fa1f7d983dc99e448e59215ab8e8",
-    "sourceBytes": 1477662,
-    "outputBytes": 786652,
-    "width": 1448,
-    "height": 1086,
-    "rgbRmse": 1.805,
-    "alpha": "identical"
-  },
   "assets/campaign/camp-paper.png": {
     "sourceSha": "2d55154fd06c3cafcda23b4db43d9ee9131db4c53e3fdd8d562831253dda8813",
     "outputSha": "a5bfd6b38f78521377478f119670417b7e1c8e653f3acfe64bfd8ee3cbf5011d",
@@ -259,16 +229,6 @@
     "rgbRmse": 1.8018,
     "alpha": "identical"
   },
-  "assets/results/portraits.png": {
-    "sourceSha": "f6633ef22e5de09133c54b7fd5ae7cea0b68222917b8d2082ef0232404af71fd",
-    "outputSha": "28664936717c159f938665de9369f43a8a2e8eb2883e6707a52cbd5f9c915502",
-    "sourceBytes": 1068744,
-    "outputBytes": 424724,
-    "width": 1152,
-    "height": 768,
-    "rgbRmse": 3.1084,
-    "alpha": "identical"
-  },
   "assets/talismans/items.png": {
     "sourceSha": "102be57c9416ba83b73446b25741ec35173efa18bd7305a785923a3945375177",
     "outputSha": "73492d5b1628b2e6bc03ad68db16c1f8307a64919fb96b2f3b041b266e93946c",
@@ -279,7 +239,7 @@
     "rgbRmse": 5.4558,
     "alpha": "identical"
   },
-  "assets/chronicle-ui/hero-parts.png": {
+  "assets/remote-content/hidden-heroes/hero-parts.png": {
     "sourceSha": "568da57c8ac984b61df2725c49f38ebb6fa57a59513cedca763ba250062d7f73",
     "outputSha": "45b68d5bb54c377d304158cd3c4ad0c7744d639bcd2a4fea235aefab47c4f03f",
     "sourceBytes": 519214,
@@ -289,7 +249,7 @@
     "rgbRmse": 1.9516,
     "alpha": "identical"
   },
-  "assets/chronicle-ui/hero-portraits.png": {
+  "assets/remote-content/hidden-heroes/hero-portraits.png": {
     "sourceSha": "17403b626edf189a03b3f922a9619da6431c9892889db39aab112fcc0527277e",
     "outputSha": "aa0c713d72ed9c1507976dc4e89ea2ee5f1636fb5a237bbc5d7f853bea706eab",
     "sourceBytes": 930104,
@@ -377,6 +337,36 @@
     "width": 576,
     "height": 384,
     "rgbRmse": 3.0083,
+    "alpha": "identical"
+  },
+  "art/runtime-grunts/sickle.png": {
+    "sourceSha": "3c8cf3cd97901218627111298effc09521e28bf8a68f8a6de98ff480f311e79b",
+    "outputSha": "70510f5119c5097e2400f6bbd3062ad15490fa1f7d983dc99e448e59215ab8e8",
+    "sourceBytes": 1477662,
+    "outputBytes": 786652,
+    "width": 1448,
+    "height": 1086,
+    "rgbRmse": 1.805,
+    "alpha": "identical"
+  },
+  "art/runtime-grunts/hoe.png": {
+    "sourceSha": "1c3a35942afa15e2ceee902f644a3a9bf8bfbd2c7cedfb77ac337ad6ee545a32",
+    "outputSha": "60512704f89f8e0b22fed890a296a354fe8ec6ecd3066308a60df071ee641544",
+    "sourceBytes": 1545039,
+    "outputBytes": 788248,
+    "width": 1448,
+    "height": 1086,
+    "rgbRmse": 1.8504,
+    "alpha": "identical"
+  },
+  "art/runtime-youth/portraits.png": {
+    "sourceSha": "f6633ef22e5de09133c54b7fd5ae7cea0b68222917b8d2082ef0232404af71fd",
+    "outputSha": "28664936717c159f938665de9369f43a8a2e8eb2883e6707a52cbd5f9c915502",
+    "sourceBytes": 1068744,
+    "outputBytes": 424724,
+    "width": 1152,
+    "height": 768,
+    "rgbRmse": 3.1084,
     "alpha": "identical"
   }
 }

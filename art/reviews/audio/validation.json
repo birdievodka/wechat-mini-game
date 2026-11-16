@@ -1,0 +1,215 @@
+{
+  "scope": "isolated real Cocos/WebAudio desktop fixture; not iOS listening or phone FPS. UI launch/key skill, controlled hit/shop/music fixtures; no player profile involved.",
+  "initial": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "menu",
+    "mode": "menu",
+    "loaded": true,
+    "playing": false,
+    "volume": 0,
+    "time": 0,
+    "duration": 40.106667,
+    "clip": "menu",
+    "sfx": 61,
+    "physicalSfx": 43,
+    "voices": 6,
+    "started": []
+  },
+  "menu": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "menu",
+    "mode": "menu",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.65,
+    "time": 1.0775000000000003,
+    "duration": 40.106667,
+    "clip": "menu",
+    "sfx": 61,
+    "physicalSfx": 43,
+    "voices": 6,
+    "started": [
+      "ui-hero"
+    ]
+  },
+  "battle": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "battle",
+    "mode": "battle",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.72,
+    "time": 1.7203999999761581,
+    "duration": 60.117333,
+    "clip": "battle",
+    "sfx": 72,
+    "physicalSfx": 53,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start"
+    ]
+  },
+  "feedback": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "battle",
+    "mode": "battle",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.36,
+    "time": 2.281399999976158,
+    "duration": 60.117333,
+    "clip": "battle",
+    "sfx": 72,
+    "physicalSfx": 53,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start",
+      "skill-G01",
+      "spawn",
+      "player-hurt"
+    ]
+  },
+  "shop": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "shop",
+    "mode": "battle",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.72,
+    "time": 2.7899999999701977,
+    "duration": 60.117333,
+    "clip": "battle",
+    "sfx": 74,
+    "physicalSfx": 54,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start",
+      "skill-G01",
+      "spawn",
+      "player-hurt"
+    ]
+  },
+  "boss": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "shop",
+    "mode": "boss",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.72,
+    "time": 0.764700000017881,
+    "duration": 30.122667,
+    "clip": "boss",
+    "sfx": 74,
+    "physicalSfx": 54,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start",
+      "skill-G01",
+      "spawn",
+      "player-hurt"
+    ]
+  },
+  "background": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "shop",
+    "mode": "boss",
+    "loaded": true,
+    "playing": false,
+    "volume": 0,
+    "time": 0.7659999999999998,
+    "duration": 30.122667,
+    "clip": "boss",
+    "sfx": 74,
+    "physicalSfx": 54,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start",
+      "skill-G01",
+      "spawn",
+      "player-hurt"
+    ]
+  },
+  "foreground": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "shop",
+    "mode": "boss",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.5582400000095368,
+    "time": 1.1029999999999998,
+    "duration": 30.122667,
+    "clip": "boss",
+    "sfx": 74,
+    "physicalSfx": 54,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start",
+      "skill-G01",
+      "spawn",
+      "player-hurt"
+    ]
+  },
+  "returned": {
+    "version": "stage-v9.4-cdn-assets",
+    "phase": "menu",
+    "mode": "menu",
+    "loaded": true,
+    "playing": true,
+    "volume": 0.65,
+    "time": 0.6624000000059603,
+    "duration": 40.106667,
+    "clip": "menu",
+    "sfx": 74,
+    "physicalSfx": 54,
+    "voices": 6,
+    "started": [
+      "ui-hero",
+      "ui-click",
+      "ui-start",
+      "skill-G01",
+      "spawn",
+      "player-hurt"
+    ]
+  },
+  "lazyMenu": {
+    "lvbu": false,
+    "menghuo": false,
+    "beasts": false
+  },
+  "lvbu": {
+    "busy": false,
+    "frames": 20,
+    "boss": "lvbu",
+    "frame": true
+  },
+  "menghuo": {
+    "busy": false,
+    "frames": 16,
+    "beasts": 24,
+    "boss": "menghuo",
+    "frame": true
+  },
+  "released": {
+    "phase": "menu",
+    "remoteFrames": 0,
+    "portrait": true,
+    "stale": false
+  },
+  "reloaded": {
+    "frames": 20,
+    "valid": true
+  },
+  "errors": []
+}

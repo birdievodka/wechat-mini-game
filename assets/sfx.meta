@@ -7,7 +7,7 @@
   "subMetas": {},
   "userData": {
     "isBundle": true,
-    "bundleConfigID": "battle-subpackage",
+    "bundleConfigID": "cdn-assets",
     "bundleName": "sfx",
     "priority": 8
   }

@@ -1,0 +1,39 @@
+{
+  "version": "stage-v9.11-menu-gate",
+  "scope": "isolated real Cocos/WebGL; actual browser touch to gate, map, loadout controls and start; not iPhone FPS",
+  "initial": {
+    "version": "stage-v9.11-menu-gate",
+    "trainingHidden": true,
+    "divider": true,
+    "gateTarget": [
+      100,
+      100
+    ],
+    "iconTexture": [
+      128,
+      128
+    ],
+    "parchment": true
+  },
+  "pressed": 0.94,
+  "picker": {
+    "count": 1,
+    "hasLocks": true
+  },
+  "unchanged": {
+    "profile": true,
+    "storage": true
+  },
+  "battle": {
+    "phase": "battle",
+    "wave": 1,
+    "menus": 0,
+    "training": false
+  },
+  "restored": {
+    "phase": "menu",
+    "profile": true,
+    "storage": true
+  },
+  "errors": []
+}

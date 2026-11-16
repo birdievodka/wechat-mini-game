@@ -1,10 +1,49 @@
 {
+  "thumbnailSource": "art/runtime-stage-ui/battlefields.png",
+  "thumbnailSourceSha256": "e26779972eef6155fbd7a83427892f4e7bb50e2dedd0d17366ebc3d7d98ed60b",
+  "thumbnailCrops": [
+    {
+      "left": 2,
+      "top": 2,
+      "width": 764,
+      "height": 337
+    },
+    {
+      "left": 770,
+      "top": 2,
+      "width": 764,
+      "height": 337
+    },
+    {
+      "left": 2,
+      "top": 343,
+      "width": 764,
+      "height": 337
+    },
+    {
+      "left": 770,
+      "top": 343,
+      "width": 764,
+      "height": 337
+    },
+    {
+      "left": 2,
+      "top": 684,
+      "width": 764,
+      "height": 338
+    },
+    {
+      "left": 770,
+      "top": 684,
+      "width": 764,
+      "height": 338
+    }
+  ],
   "source": "art/concepts/stage-challenge-v8/themes.png",
   "sourceSha256": "4c3402b7b1090a65d7f758f8418247bb2cce0fa156993151ffb9328d2996dd40",
   "output": "assets/chronicle-ui/stage-themes.jpg",
   "width": 960,
   "height": 640,
   "decodedBytes": 2457600,
-  "description": "approved source crops, 3x2 cells 320 square: thumbnail top128, ground lower192",
-  "thumbnailSource": "art/concepts/stage-challenge-v8/stage-picker.png"
+  "description": "text-free battlefield atlas thumbs; original ground crops unchanged; runtime 3x2 cells 320 square: thumbnail top128, ground lower192"
 }

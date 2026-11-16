@@ -1,0 +1,48 @@
+{
+  "scope": "isolated real Cocos/WebGL, not iPhone verification",
+  "version": "stage-v9.6.1-codex-silhouettes",
+  "records": [
+    {
+      "category": "enemies",
+      "shapes": 13,
+      "validShapes": true,
+      "selectedFrame": true,
+      "questionMark": false,
+      "nameHidden": true,
+      "profileUnchanged": true
+    },
+    {
+      "category": "bosses",
+      "shapes": 8,
+      "validShapes": true,
+      "selectedFrame": true,
+      "questionMark": false,
+      "nameHidden": true,
+      "profileUnchanged": true
+    },
+    {
+      "category": "weapons",
+      "shapes": 10,
+      "validShapes": true,
+      "selectedFrame": true,
+      "questionMark": false,
+      "nameHidden": true,
+      "profileUnchanged": true
+    },
+    {
+      "category": "skills",
+      "shapes": 10,
+      "validShapes": true,
+      "selectedFrame": true,
+      "questionMark": false,
+      "nameHidden": true,
+      "profileUnchanged": true
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profileUnchanged": true,
+    "storageUnchanged": true
+  },
+  "errors": []
+}

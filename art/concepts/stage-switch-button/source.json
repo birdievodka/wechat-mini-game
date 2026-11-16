@@ -1,0 +1,9 @@
+{
+  "status": "proposal-awaiting-user-confirmation; runtime unchanged",
+  "tool": "built-in image_gen edit",
+  "reference": "art/concepts/menu-selector-separation/design.png",
+  "generatedOriginal": "/Users/bytedance/.codex/generated_images/01a1c96a-12fb-7a01-a5e1-efa8f4863c71/exec-e16dc88e-29c9-4924-99bc-216f234389ee.png",
+  "output": "art/concepts/stage-switch-button/design.png",
+  "sha256": "99f9b949f484172c7f823c7496a21fdc2ac22f7acadf171ce0ad07e93bba3f15",
+  "scope": "Keep original parchment map. Replace only bottom-right large circular seal with compact jade rounded-rect 换关 chevron button. No game code changes."
+}

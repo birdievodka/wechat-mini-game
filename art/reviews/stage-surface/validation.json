@@ -1,0 +1,122 @@
+{
+  "scope": "isolated real Cocos/WebGL, real browser touch dispatch and real Cocos rendering; not iPhone latency/FPS testing",
+  "initial": {
+    "version": "stage-v9.9-panel-controls",
+    "briefHeight": 400,
+    "title": true,
+    "growthTab": false,
+    "bossBadge": false,
+    "parchment": true,
+    "window": true,
+    "atlas": [
+      960,
+      640
+    ]
+  },
+  "picker": {
+    "thumbnails": [
+      {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 128
+      },
+      {
+        "x": 320,
+        "y": 0,
+        "width": 320,
+        "height": 128
+      },
+      {
+        "x": 640,
+        "y": 0,
+        "width": 320,
+        "height": 128
+      },
+      {
+        "x": 0,
+        "y": 320,
+        "width": 320,
+        "height": 128
+      },
+      {
+        "x": 320,
+        "y": 320,
+        "width": 320,
+        "height": 128
+      },
+      {
+        "x": 640,
+        "y": 320,
+        "width": 320,
+        "height": 128
+      }
+    ],
+    "locked": true
+  },
+  "skills": {
+    "shapes": 10,
+    "valid": true,
+    "question": false,
+    "stillLocked": true
+  },
+  "origin": {
+    "x": 165,
+    "y": 590,
+    "speed": 300,
+    "phase": "battle",
+    "blocked": false
+  },
+  "light": {
+    "touch": 11,
+    "x": 2.291480691504664,
+    "stick": {
+      "x": 0.4546588670394201,
+      "y": -7.178990116083983e-16
+    },
+    "thumb": {
+      "x": 0.2999999999999981,
+      "y": -4.736951571734001e-16
+    },
+    "samples": [],
+    "inner": [
+      1440,
+      750
+    ]
+  },
+  "moved": 9.097723927832808,
+  "reverse": {
+    "x": 5.841925096093652,
+    "stick": {
+      "x": -1,
+      "y": -5.921189464667487e-16
+    }
+  },
+  "reversedX": -16.718074918211464,
+  "multi": {
+    "id": 11,
+    "stick": {
+      "x": -1,
+      "y": -5.921189464667487e-16
+    }
+  },
+  "release": {
+    "x": -28.838074911058907,
+    "stick": {
+      "x": 0,
+      "y": 0
+    },
+    "thumb": {
+      "x": 0,
+      "y": 0
+    },
+    "id": null
+  },
+  "stoppedX": -28.838074911058907,
+  "restored": {
+    "phase": "menu",
+    "profileUnchanged": true,
+    "storageUnchanged": true
+  },
+  "errors": []
+}

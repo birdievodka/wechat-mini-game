@@ -14,3 +14,5 @@
 当前三英雄/基础3修订提示在three-heroes-starters-prompts.json，生成方式均为内置image_gen。prompts.json、result-prompts.json、discovery-loadout-prompts.json保留先前生成/局部修订的来源记录，当前采用稿以manifest.json的哈希和sources为准，不以早期提示里的5英雄或初始5把为现行规则。
 
 以上全是概念图，不是Cocos/微信实机或已接入素材。名字/奖励以本轮方案和解锁清单为准。布局实装仍需自然手脚/眨眼/展示动作，不能把静态稿当已完成角色动画；主题图不引入大型碰撞物。
+
+2026-11-16 v9.7：旧stage-picker.png仅保留历史方案参考，停止作为运行缩略图源。现行无字无旗战场图在art/runtime-stage-ui/battlefields.png，首页卡片为简洁大图/关名/切换，详细来源见同目录battlefields-source.json。

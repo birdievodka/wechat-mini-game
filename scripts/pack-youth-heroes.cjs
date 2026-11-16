@@ -48,14 +48,14 @@ async function main(){
  }
  const partEntries=which=>[0,1,2].flatMap(row=>which.map(col=>({part:parts[row*5+col],paired:row<2?parts[(1-row)*5+col]:undefined})));
  await atlas('three-hero-parts','assets/presentation/heroes.png',3,3,256,partEntries([0,1,2]));
- await atlas('hero-parts','assets/chronicle-ui/hero-parts.png',2,3,256,partEntries([3,4]));
- await atlas('three-hero-portraits','assets/results/portraits.png',3,2,384,[0,1].flatMap(row=>[0,1,2].map(col=>({part:portraits[row*5+col]}))));
- await atlas('hero-portraits','assets/chronicle-ui/hero-portraits.png',2,2,384,[0,1].flatMap(row=>[3,4].map(col=>({part:portraits[row*5+col]}))));
- await sharp(root+'/sources/poster.png').resize(1334,750).jpeg({quality:85,mozjpeg:true}).toFile('assets/campaign/poster.jpg');
+ await atlas('hero-parts','assets/remote-content/hidden-heroes/hero-parts.png',2,3,256,partEntries([3,4]));
+ await atlas('three-hero-portraits','art/runtime-youth/portraits.png',3,2,384,[0,1].flatMap(row=>[0,1,2].map(col=>({part:portraits[row*5+col]}))));
+ await atlas('hero-portraits','assets/remote-content/hidden-heroes/hero-portraits.png',2,2,384,[0,1].flatMap(row=>[3,4].map(col=>({part:portraits[row*5+col]}))));
+ await sharp(root+'/sources/poster.png').resize(1334,750).jpeg({quality:85,mozjpeg:true}).toFile('art/runtime-youth/poster.jpg');
  await sharp('art/branding/avatar-source.png').resize(512,512).png({compressionLevel:9}).toFile('art/branding/avatar.png');
  const sourceFiles=['parts','portraits','poster'].map(n=>root+'/sources/'+n+'.png').concat('art/branding/avatar-source.png');
  const manifest={version:'youth-heroes-v1',baseCommit:'a848884',ids,source:'built-in image_gen',sources:sourceFiles.map(file=>({file,sha256:sha(fs.readFileSync(file))})),atlases,
-  poster:{file:'assets/campaign/poster.jpg',sha256:sha(fs.readFileSync('assets/campaign/poster.jpg')),width:1334,height:750,quality:85},
+  poster:{file:'art/runtime-youth/poster.jpg',sha256:sha(fs.readFileSync('art/runtime-youth/poster.jpg')),width:1334,height:750,quality:85},
   avatar:{file:'art/branding/avatar.png',sha256:sha(fs.readFileSync('art/branding/avatar.png')),width:512,height:512}};
  fs.writeFileSync(root+'/manifest.json',JSON.stringify(manifest,null,2)+'\n');
  const legacyPath='art/runtime-v4/manifest.json',legacy=JSON.parse(fs.readFileSync(legacyPath));
@@ -63,4 +63,5 @@ async function main(){
  fs.writeFileSync(legacyPath,JSON.stringify(legacy,null,2)+'\n');
  for(const a of Object.values(atlases))console.log(a.file,a.width,a.height,(a.bytes/1024).toFixed(1)+' KiB');
 }
-main().catch(e=>{console.error(e);process.exitCode=1;});
+const {execFileSync}=require('node:child_process');
+main().then(()=>execFileSync(process.execPath,['scripts/pack-deferred-art.cjs'],{stdio:'inherit'})).catch(e=>{console.error(e);process.exitCode=1;});

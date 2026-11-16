@@ -18,9 +18,12 @@ function pngs(dir) {
 async function main() {
   fs.mkdirSync(archive, { recursive: true });
   const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath)) : {};
+  const lossless=new Set(JSON.parse(fs.readFileSync(path.join(root,'art/runtime-youth/deferred-manifest.json'))).outputs.map(x=>x.file));
+  lossless.add('assets/chronicle-ui/stage-journey.png'); // adopted parchment alpha; rebuilt from its own generated source
   let before = 0, after = 0;
   for (const file of pngs(path.join(root, 'assets')).sort()) {
     const name = path.relative(root, file).split(path.sep).join('/');
+    if(lossless.has(name)){console.log(name+': exact split, skip requantization');continue;}
     const current = fs.readFileSync(file), previous = manifest[name];
     const input = previous?.outputSha === hash(current)
       ? fs.readFileSync(path.join(archive, previous.sourceSha + '.png')) : current;
