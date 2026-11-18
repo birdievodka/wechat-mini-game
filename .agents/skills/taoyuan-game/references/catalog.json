@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v9.11-menu-gate",
+    "version": "stage-v9.12-stability",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "b6073defe199eb234a7ebe185da02ceda08ba4dfeef93621f6126bae2d5e9cea",
+    "fingerprint": "0a4bb5da21709a374479cdd93176b60df40af8115be58c90a91af54787c580f4",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 32417,
-        "sha256": "029471225e81e6c5e22b771fcf654be53b5e1aa8ea369b2d397421c4d709318b"
+        "bytes": 32791,
+        "sha256": "36475b32c005427c3f16d8fe27dfacedbf0e03387bff95d6e86bb8b86ac57ef5"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 25952,
-        "sha256": "049b29fdeee3d2bd5beff7f3f79c5456efb6bf81399c49c957cf96bc3c822fb6"
+        "bytes": 26454,
+        "sha256": "d82962efe25d7aa7d812ea11cc1601438b9cda259bee150b8028e8751c123bd6"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -115,8 +115,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 18188,
-        "sha256": "4b7e4bfa6596f66e120e136eab1913fbfad393ace482447261c949f042b40508"
+        "bytes": 20934,
+        "sha256": "f18101654ae4966f81d95a589a3e439ffa03311099333070a508ccdde3674501"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
@@ -175,8 +175,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 15290,
-        "sha256": "9a01d5fbc32979855846a19548fadf882bfbce205f3ce01bed967dba4ea708f5"
+        "bytes": 15693,
+        "sha256": "1868feececa9197f7cf85d0c67ee19e3b375722a5d7809a44d272f45cbee1386"
       },
       {
         "path": ".gitignore",
@@ -185,8 +185,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 11250,
-        "sha256": "5aa713c64d30b5e5103c1661ae54241cb9176b14a4011865f4ad6106a60815e4"
+        "bytes": 11761,
+        "sha256": "77f1a21d3a5d6c61f19b5b7cd606def21724fc1e6c6e0a4b988604be65d05263"
       },
       {
         "path": "art/audio/review-v1/browser-validation.json",
@@ -2299,6 +2299,46 @@
         "sha256": "e88d1fd0c3558d39dfc901b940d585c4bfb91c8087358016c0f7b8ec968628e8"
       },
       {
+        "path": "art/reviews/stability-v912/native-health.json",
+        "bytes": 717,
+        "sha256": "fe84731e8970026068e073a13c6d057d736294a827e87b9523e8f57814668cf8"
+      },
+      {
+        "path": "art/reviews/stability-v912/native-result.jpg",
+        "bytes": 37474,
+        "sha256": "8650aff17fd5ef4e96f65803ec5f677ed740e99052c8c83d5d254bd68b218895"
+      },
+      {
+        "path": "art/reviews/stability-v912/pressure.json",
+        "bytes": 402611,
+        "sha256": "b6af27fcdcd5fc25e615d1ec9c3a885d52e71d2bb7423751db9aae301403818e"
+      },
+      {
+        "path": "art/reviews/stability-v912/pressure.png",
+        "bytes": 839721,
+        "sha256": "dbbb2de55acf8618e4ddf53a825cdb20ca06023972bca74e6eec07dbf29b9579"
+      },
+      {
+        "path": "art/reviews/stability-v912/props-after.json",
+        "bytes": 3383,
+        "sha256": "a93fce6449ecfc97410f6b19d12fcea2d2a298b420b915dc88bb19c805fb29e9"
+      },
+      {
+        "path": "art/reviews/stability-v912/props-after.png",
+        "bytes": 519050,
+        "sha256": "c51ac67bde9da785a3abae3adefb9fcc39bf0b7fe95df9dd016ef37a7a5b928a"
+      },
+      {
+        "path": "art/reviews/stability-v912/props-before.json",
+        "bytes": 5271,
+        "sha256": "53defc17d27e49b5015e7be47eb706ae3e8f92f5a1b12c62f0effba122156f84"
+      },
+      {
+        "path": "art/reviews/stability-v912/README.md",
+        "bytes": 1038,
+        "sha256": "0d8eec722759af51f69c6be478b62d0999017c9095883fe512ac7daf22b7caa8"
+      },
+      {
         "path": "art/reviews/stage-surface/battle.png",
         "bytes": 478468,
         "sha256": "0203a1cf6d3ef81b68899411994afa467f5a26297729a8afa8679cfe954dbe20"
@@ -3685,8 +3725,8 @@
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts",
-        "bytes": 9576,
-        "sha256": "558ede60ba047736273879751997057cfe6a43f06fe1ea41fdff2a51c12c9155"
+        "bytes": 9787,
+        "sha256": "af07c08f0d3e95685f0019acedfd2f38becc91f2c44378c93135b2f441191aca"
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts.meta",
@@ -3955,8 +3995,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 226221,
-        "sha256": "3920dfd7d1c83930ef89867b0abbc555146c29fd7bbdefc3bfe94cefdc2ac068"
+        "bytes": 227901,
+        "sha256": "cd2c42a6e550dc3763a40b4338c3acf223cfe8df583318a79c3750a47b3cf0b2"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -4092,6 +4132,16 @@
         "path": "assets/scripts/lvbu-effects.ts.meta",
         "bytes": 171,
         "sha256": "b16ebb7642b9a1df2754416c6a62b039ef4d59cb0f6fbabdb3d1d2fa681f4e16"
+      },
+      {
+        "path": "assets/scripts/native-sfx.ts",
+        "bytes": 3922,
+        "sha256": "a8a1727a260ba471b1960db31a86764fa784555b2b74be44de5203bcfdbe9cd7"
+      },
+      {
+        "path": "assets/scripts/native-sfx.ts.meta",
+        "bytes": 171,
+        "sha256": "7e917afc1c40c8f90c9a2154dde86f48493e3d0f160f79c9b5ade81f2f4586ae"
       },
       {
         "path": "assets/scripts/npc-art-layout.ts",
@@ -4276,7 +4326,7 @@
       {
         "path": "assets/scripts/survival.ts",
         "bytes": 16999,
-        "sha256": "42f6cded02ff3c8958d198fe09fb71bbe69451c083f7f04d76c34f85883644bd"
+        "sha256": "549ffda2ce7cc3355175386ce68f4cbb7f4a57f312079b6513ea4069db1fb86f"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -4347,6 +4397,16 @@
         "path": "assets/scripts/weapons.ts.meta",
         "bytes": 171,
         "sha256": "41a2d23e153d58ab77ea60b85c7006d0988d2b60234602dd261bd938612be87b"
+      },
+      {
+        "path": "assets/scripts/world-prop-art.ts",
+        "bytes": 2504,
+        "sha256": "96cf10e6dedf6071f20233def182381a9fe3206122aa7fb60ef260be423d50a4"
+      },
+      {
+        "path": "assets/scripts/world-prop-art.ts.meta",
+        "bytes": 171,
+        "sha256": "bf1bb0379acc88820970383c78a902609eb37efb885dbefee6929d5d06e011c0"
       },
       {
         "path": "assets/scripts/world-rules.ts",
@@ -5199,6 +5259,11 @@
         "sha256": "0fa28303fe26ed4b1712767723efff6c5c6b758ff763e2fca4ce8269324ca177"
       },
       {
+        "path": "docs/performance-v912.json",
+        "bytes": 1506,
+        "sha256": "66717c3b102713d2b452fc6990633dfc6b7de20d48a36b7604dafb4cdec5e9fe"
+      },
+      {
         "path": "docs/performance-wechat-baseline.json",
         "bytes": 12697,
         "sha256": "ff015938f6fd1235d9a804b30d414051d759719e4f60c9c377e8b6dc120af80a"
@@ -5252,6 +5317,11 @@
         "path": "docs/skill-vfx-v5.2.md",
         "bytes": 7307,
         "sha256": "e19fd458311241d85dcdae7abe85244783b61fbdc119105f67f67cd5d152414e"
+      },
+      {
+        "path": "docs/stability-v912.md",
+        "bytes": 3467,
+        "sha256": "239808f97f80d49eb11423bb87977a28bf691069c2af9648247cad84cf9643c8"
       },
       {
         "path": "docs/stage-challenge-v8/README.md",
@@ -5310,8 +5380,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 2099,
-        "sha256": "b01cf7405b1007149f50a489763a2650009367bccaf5046c471b9583d9f83711"
+        "bytes": 2135,
+        "sha256": "a7dd781d895eaa9141de998585d2425acedaa35ad32b3ba3ebd04516b7a045a8"
       },
       {
         "path": "project.config.json",
@@ -5459,14 +5529,19 @@
         "sha256": "dd30bb5d50dcb138b89ccc5f0e853b7d4f6f9c5231fe28dcf7bcbb15e2c4501e"
       },
       {
+        "path": "scripts/diagnose-props-memory.mjs",
+        "bytes": 4751,
+        "sha256": "9007cd632f947eaf2992be32fa620fa7342b8f474ccc83a93c76532d51ad47fd"
+      },
+      {
         "path": "scripts/diagnose-session-memory.mjs",
         "bytes": 5105,
         "sha256": "dd83af6329c4c5431cdf50f850211dcc4ab516ede843fabd879582f958181d0d"
       },
       {
         "path": "scripts/diagnose-stability.mjs",
-        "bytes": 6220,
-        "sha256": "327a8398ca8febd885f2a0fcd09c1fac2c8baa918be3dc740995c8fc9461714e"
+        "bytes": 7170,
+        "sha256": "5976dcb53dd9797ffc462dfe07c1ac3e03f2e8914bd0dc04969d1cc1f0249235"
       },
       {
         "path": "scripts/fixtures/bosses-review.js",
@@ -5684,9 +5759,14 @@
         "sha256": "78bf95534964d225820689b2b62669cd64f15f29d3137717fa85ff6a5d477480"
       },
       {
+        "path": "scripts/test-native-sfx.cjs",
+        "bytes": 4914,
+        "sha256": "35ac5211a24294b698ec96ce409c5ccae917d127dc6a19916367c57ece29e986"
+      },
+      {
         "path": "scripts/test-performance.cjs",
-        "bytes": 14570,
-        "sha256": "d6d27a0b651fc58d5362776929ecd6558053ecea0a3a2a2a86859600b88dc9b1"
+        "bytes": 15629,
+        "sha256": "8746c44e190652fb7571e5aafa53a2ef2cb9a7ef09f7f1c49092861aa828a7e6"
       },
       {
         "path": "scripts/test-presentation-art.cjs",
@@ -26920,6 +27000,20 @@
         "width": 1280,
         "height": 960,
         "colorType": 6
+      },
+      {
+        "path": "art/reviews/stability-v912/pressure.png",
+        "bytes": 839721,
+        "width": 1440,
+        "height": 663,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/stability-v912/props-after.png",
+        "bytes": 519050,
+        "width": 1440,
+        "height": 663,
+        "colorType": 2
       },
       {
         "path": "art/reviews/stage-surface/battle.png",

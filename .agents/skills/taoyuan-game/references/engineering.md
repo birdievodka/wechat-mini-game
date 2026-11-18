@@ -217,3 +217,6 @@ Cocos3.8.8 UI PointerEventDispatcher先于全局input分发；全屏Canvas已有
 
 
 v9.9普通面板关闭统一经panel-ui.addPanelClose，不各自画叉号或混用底部返回。BattleSpriteAtlas新增ui-close，现63格仍1024²；GameBootstrap创建atlas后立即复制ui-panel-close供暂停及异步创建界面共用，销毁仍由artFrames统一去重。处理传播拦截和可重入防护，不能把复用面板关闭按钮永久置为已提交。
+
+
+v9.12新增native-sfx.ts（固定原生音效与串行加载队列）和world-prop-art.ts（复用旧程序造型）。npm test纳入test-native-sfx；性能测试验证小物件Sprite分支。diagnose-props-memory使用隔离9391/8791，前后必须等目标版本、绕过缓存并确认导航；diagnose-stability可通过STABILITY_ORIGIN/CDP_PORT隔离、BOSS_CHAPTERS明确图集并预取。真机闪退日志与桌面计数分开，不把桌面6声道桩测试说成已实测iPhone无闪退。

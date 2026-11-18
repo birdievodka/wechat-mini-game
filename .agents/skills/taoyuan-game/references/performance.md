@@ -124,3 +124,17 @@ v9.4补充：不改敌数/特效预算，主要降低包体与启动常驻解码
 v9.10首关静态地面格由目标520×470改720×540并交替镜像，相同960×640共用主题纹理；1440×750视野对应2160×1125地图从15降为9个Sprite，不新增材质/图片/动态混合，不据此宣称手机FPS提升。后五关和演武保持。
 
 远程分包请求18秒无结果即结束本次请求，允许资源准备界面重试；晚到回调不覆盖新结果。战斗HUD仅在冲锋精英组出现时汇总其血量，雷击每跳一次遍历选最近目标，保持命中点范围与脚底距离排序。
+
+
+## v9.12再次闪退排查：原生音频与小物件缓冲
+
+用户再次报告战斗闪退，当前仍没有该iPhone的系统终止日志或确定机型。下面为已证实的资源管理问题，不等同于证明这次闪退的唯一根因。
+
+- 本机3.8.8的audio-downloader.loadAudioPlayer会为每个AudioClip创建AudioPlayer；minigame/player-minigame.loadNative进一步创建InnerAudioContext。AudioSource换clip又异步创建播放器。原6声道限的是播放，并不限制已缓存音效元数据与异步加载所持的原生实例。微信改用NativeSfx固定6实例，切66物理音色只换src，保留SoundGate优先级/限频/压低和所有实际出招时序；BGM仍单源、购物续播。浏览器保留Cocos AudioSource路径。
+- 音效元数据AudioLoadQueue单并发；读Cocos 3.8.8 AudioSource同源的clip._nativeAsset.url缓存路径（只读，缺失退public nativeUrl）后，立即releaseAsset，不能长期保存FX AudioClip。音乐单源不受此释放。不能直接为每个cue创建原生context。失败30秒退避，超时/迟到/销毁回调释放；NativeSfx销毁即使stop抛错仍逐个destroy。异常记录每秒最多一次，累计次数写低频快照；后台/静音/优先危险声保持。
+- 中性小动物、树兜底、回血心/桃与精英冠的原程序路径抽到world-prop-art，启动时烘焙7格加到原BattleSpriteAtlas。现在70格1024×1152（4.5MiB），只比63格多0.5MiB，不增源图、不降源分辨率、不改掉落/生命/敌数/判定。树已有贴图继续用原Sprite。动物容器可留空Graphics供旧回退，但原生图集可用时不fill/stroke，不产生逐只GPU模型；回血物/精英冠直接Sprite。
+- Graphics.clear仅将既有GPU模型的IA计数归零，不销毁submodel分配的65535顶点缓冲；不要认为对象inactive或clear就释放了GPU。已有菜单destroy的释放规则继续保留。
+
+同视口真实Cocos/WebGL中性物件工程夹具：3动物＋4回血物＋3精英标记，旧新增23,595,160B绘图缓冲、清场仍持有；新新增1,068B，模型20→10，加上图集0.5MiB，合计139.10→117.10MiB，净减22.00MiB。只代表该工程场景的GPU计数，不是iOS进程RSS或帧率；长战斗与恢复证据见docs/stability-v912.md及art/reviews/stability-v912。
+
+回归test-native-sfx覆盖66音色万次切换仍6实例、元数据释放、缓存路径复用、串行队列、失败中途初始化/stop失败销毁/迟到回调/错误风暴限频；test-performance补动物/桃树复用/回血Sprite无独立Graphics。diagnose-props-memory只用隔离loopback；diagnose-stability支持隔离端口/明确版本，预先真正加载目标Boss图集，不能用缺图Boss低估压力。

@@ -1,3 +1,5 @@
+import {drawWorldProp} from './world-prop-art';
+import {NativeSfx,NativeSoundHost,AudioLoadQueue} from './native-sfx';
 import {addPanelClose} from './panel-ui';
 import {HeroMount} from './HeroMount';
 import {drawGrowthAttack,drawMountDash} from './growth-effects';
@@ -58,7 +60,7 @@ import { WeaponId, EquippedWeapon, WeaponStats, Tier, WEAPON_LIMIT, WEAPONS, TIE
 import { weaponStatsFor, weaponDps, combineWeapon, recycleWeapon, toggleOfferLock } from './campaign';
 import { drawLightningSpell, drawTaoistCast, LIGHTNING_AFTERGLOW } from './enemy-spell-effects';
 import { attachDesktopKeyboard, KeyboardSurface, WeChatKeyboard } from './desktop-keyboard';
-declare const wx: (WeChatKeyboard & HealthHost) | undefined;
+declare const wx: (WeChatKeyboard & HealthHost & NativeSoundHost) | undefined;
 import { HeroId, EnemyKind, Phase, Run, Stats, Upgrade, ITEMS, WAVE_NAMES, WAVE_SECONDS,
   createRun, heroFor, statsFor, gainXp, xpNeeded, damageTaken, regenPerSecond, buyItem, rollShop, rerollShop,
   availableUpgrades, randomSample, chooseUpgrade, waveRule, enemyKind, enemyStats, stipendFor, waveOutcome } from './campaign';
@@ -84,7 +86,7 @@ export interface Enemy { npcRig?:NpcActionRig; gruntPose?:GruntPose;chargeGhosts
   nextCycleUntil?:number;specialCooldown?:number;sidestepLeft?:number;
   encounterChapter?:number;archetype?:string;bossSkin?:string;bossTimers?:number[];bossMove?:BossAction;bossAge?:number;bossNext?:number;fired?:boolean;object?:'flag'|'clone'|'eye'|'boss-unit';slowUntil?:number;slowFactor?:number;firstHits?:Map<number,number>;rigParts?:Sprite[];rigKey?:string;rigSize?:number;rigTint?:string;
   stagger?:number; staggerCooldown?:number; stunUntil?:number; elite?:boolean;
-  animal?: 'chicken' | 'rabbit' | 'pig' | 'tree'; animalArt?: Graphics; ttl?: number; bornTotal?: number; farAge?: number;
+  animal?: 'chicken' | 'rabbit' | 'pig' | 'tree'; animalArt?: Graphics;animalSprite?:Sprite; ttl?: number; bornTotal?: number; farAge?: number;
   birthRig?:Node;birthSprites?:Sprite[];warningDrawn?:boolean;visualHit?:boolean;moving?: boolean; chargeHit?: boolean;
   kind?: EnemyKind; maxHp?: number; damage?: number; born?: number; warning?: Graphics; skill?: number;
   node: Node; art: Sprite; text: Label; weaponKind: number; direction: number; walk: number; attack: number; attackCooldown: number; attackAngle: number;
@@ -184,7 +186,7 @@ private playerSlowUntil=0;
   private difficultyNotice = 0;
   private difficultyLabel!: Label;
   private meadowTiles:Node[]=[];
-  private hearts: { kind?:'heart'|'peach'; node:Node; x:number;y:number;age:number;active:boolean;attracted:boolean }[] = [];
+  private hearts: { kind?:'heart'|'peach';sprite?:Sprite; node:Node; x:number;y:number;age:number;active:boolean;attracted:boolean }[] = [];
   private hintText!: Label;
   private weaponHud!: Node;
   private weaponHudKey = '';
@@ -298,6 +300,11 @@ private playerSlowUntil=0;
   private soundGate = new SoundGate();
   private loggedSounds = new Set<string>();
   private soundLoading=new Set<string>();
+  private nativeSfx?:NativeSfx;
+  private soundUrls:Partial<Record<SoundId,string>>={};
+  private soundLoads=new AudioLoadQueue(1);
+  private soundRetryAfter=new Map<string,number>();
+  private audioDisposed=false;
   private optionalLoaded=new Set<string>();
   private optionalLoading=new Set<string>();
   private resourceView?:ResourcePrepareView;
@@ -337,6 +344,7 @@ private playerSlowUntil=0;
         alive:this.enemies.reduce((n,e)=>n+Number(e.hp>0),0),projectileNodes:this.projectiles.length,coinNodes:this.coins.length,
         particles:this.combatFx.particles.active,weapons:this.run.weapons.map(w=>w.id+':'+w.tier),growth:this.run.growth||0,os:sys.os,osVersion:sys.osVersion,
         atlasReady:this.battleSprites?.ready,enemyShotNodes:this.enemyShots.length,
+        sfxBackend:this.nativeSfx?'native-fixed':'cocos',sfxPlayed:this.nativeSfx?.played||0,sfxErrors:this.nativeSfx?.failures||0,sfxVoices:this.nativeSfx?.size||this.soundSources.length,sfxUrls:Object.keys(this.soundUrls).length,sfxLoading:this.soundLoads.loading,sfxQueued:this.soundLoads.waiting,
         gfxBuffers:director?.root?.device?.memoryStatus?.bufferSize,gfxTextures:director?.root?.device?.memoryStatus?.textureSize}),
       ()=>{this.pressureSeconds=15;this.combatFx.particles.trimTrails();});
     view.setDesignResolutionSize(1334, 750, ResolutionPolicy.FIXED_HEIGHT);
@@ -467,7 +475,8 @@ private playerSlowUntil=0;
     } catch (error) {
       this.failStartup('资源下载失败，请重新进入'); console.error(error); return;
     }
-    for (let i = 0; i < SFX_VOICES; i++) {
+    this.nativeSfx=NativeSfx.create(typeof wx==='undefined'?undefined:wx,SFX_VOICES,message=>this.health?.record('audio-error',message));
+    for (let i = 0; !this.nativeSfx && i < SFX_VOICES; i++) {
       const source = this.node2D(this.root, `Voice${i}`).addComponent(AudioSource);
       source.playOnAwake = false; this.soundSources.push(source);
       if (DEBUG) source.node.on(AudioSource.EventType.STARTED, () => {
@@ -476,11 +485,15 @@ private playerSlowUntil=0;
       });
     }
     for (const name of ['sandal-hit-pcm'] as const) {
-      this.resources.load(`audio/${name}`, AudioClip, (error, clip) => {
-        if (!this.isValid) return;
-        if (error) { this.soundButton.string = '音效加载失败'; console.warn('音效加载失败', name, error); return; }
-        this.clips[name] = clip;
-        if (this.audioUnlocked && !this.muted) this.soundButton.string = '音效：开启';
+      this.soundLoads.enqueue(release=>{
+        this.resources.load(`audio/${name}`, AudioClip, (error, clip) => {
+          try{
+            if (!this.isValid||this.audioDisposed) {if(clip)assetManager.releaseAsset(clip);return;}
+            if (error) { this.soundButton.string = '音效加载失败'; console.warn('音效加载失败', name, error); return; }
+            this.cacheSoundClip([name],clip);
+            if (this.audioUnlocked && !this.muted) this.soundButton.string = '音效：开启';
+          }finally{release();}
+        });
       });
     }
     this.loadMusic(); this.loadWeaponSounds();
@@ -702,7 +715,7 @@ private playerSlowUntil=0;
       }
       return;
     }
-    if(this.ready&&!this.backgrounded){const audioDt=Math.min(Math.max(delta,0),.08);this.soundGate.update(audioDt);if(!this.paused)this.music.update(audioDt);for(let i=0;i<this.voiceOwners.length;i++){const e=this.voiceOwners[i];if(e&&(e.hp<=0||(e.stunUntil||0)>this.age)){this.soundSources[i]?.stop();this.voiceOwners[i]=undefined;}}}
+    if(this.ready&&!this.backgrounded){const audioDt=Math.min(Math.max(delta,0),.08);this.soundGate.update(audioDt);if(!this.paused)this.music.update(audioDt);for(let i=0;i<this.voiceOwners.length;i++){const e=this.voiceOwners[i];if(e&&(e.hp<=0||(e.stunUntil||0)>this.age)){this.nativeSfx?.stopVoice(i);this.soundSources[i]?.stop();this.voiceOwners[i]=undefined;}}}
     if(this.resourceBusy)return;
     if(this.ready&&this.phase==='menu'){if(!this.backgrounded)this.screens.update(delta);return;}
     if(this.ready&&this.phase==='battle'&&this.finishVictory())return;
@@ -1625,16 +1638,39 @@ private playerSlowUntil=0;
     // Core samples are local. Deferred samples are fetched only on use/prefetch.
     for(const id of GENERATED_SOUNDS)if(soundAsset(id).bundle==='sfx-core')this.loadSound(id);
   }
+  private cacheSoundClip(ids:SoundId[],clip:AudioClip):boolean {
+    if(this.nativeSfx){
+      // Cocos 3.8.8 AudioSource uses this same metadata URL: on WeChat it can
+      // be a downloaded cache path. Keep it before releasing the player metadata;
+      // falling back to the public URL also supports packaged/remote samples.
+      const url=clip._nativeAsset?.url||clip.nativeUrl;if(url)for(const id of ids)this.soundUrls[id]=url;
+      assetManager.releaseAsset(clip);return !!url;
+    }
+    for(const id of ids)this.clips[id]=clip;return true;
+  }
   private loadSound(id:Exclude<SoundId,'sandal-hit-pcm'>):void {
     const asset=soundAsset(id),key=asset.bundle+'/'+asset.name;
-    if(this.clips[id]||this.soundLoading.has(key))return;this.soundLoading.add(key);
-    loadGameBundle(asset.bundle,(error,bundle)=>{
-      if(error||!bundle){this.soundLoading.delete(key);console.warn('音效资源稍后重试',id);return;}
-      bundle.load(asset.name,AudioClip,(loadError,clip)=>{
-        this.soundLoading.delete(key);if(!this.isValid){if(clip)assetManager.releaseAsset(clip);return;}
-        if(loadError){console.warn('音效暂不可用',id);return;}
-        for(const alias of GENERATED_SOUNDS){const a=soundAsset(alias);if(a.bundle===asset.bundle&&a.name===asset.name)this.clips[alias]=clip;}
-      });
+    if(this.audioDisposed||this.clips[id]||this.soundUrls[id]||this.soundLoading.has(key)||(this.soundRetryAfter.get(key)||0)>Date.now())return;
+    this.soundLoading.add(key);
+    this.soundLoads.enqueue(release=>{
+      if(this.audioDisposed||!this.isValid){this.soundLoading.delete(key);release();return;}
+      let settled=false;let timer:ReturnType<typeof setTimeout>|undefined;
+      const finish=(error?:Error|null,clip?:AudioClip):void=>{
+        if(settled){if(clip&&!Object.values(this.clips).includes(clip))assetManager.releaseAsset(clip);return;}settled=true;
+        if(timer!==undefined)clearTimeout(timer);this.soundLoading.delete(key);
+        try{
+          if(this.audioDisposed||!this.isValid){if(clip)assetManager.releaseAsset(clip);return;}
+          const aliases=GENERATED_SOUNDS.filter(alias=>{const a=soundAsset(alias);return a.bundle===asset.bundle&&a.name===asset.name;});
+          if(error||!clip||!this.cacheSoundClip(aliases,clip)){this.soundRetryAfter.set(key,Date.now()+30000);console.warn('音效暂不可用',id,error);}
+          else this.soundRetryAfter.delete(key);
+        }finally{release();}
+      };
+      if(typeof setTimeout==='function')timer=setTimeout(()=>finish(new Error('音效加载超时')),30000);
+      try{loadGameBundle(asset.bundle,(error,bundle)=>{
+        if(error||!bundle){finish(error||new Error('音效分包不可用'));return;}
+        if(this.audioDisposed||!this.isValid){finish();return;}
+        bundle.load(asset.name,AudioClip,(error,clip)=>finish(error,clip));
+      });}catch(error){finish(error instanceof Error?error:new Error(String(error)));}
     });
   }
   private prefetchSounds():void {
@@ -1654,14 +1690,14 @@ private playerSlowUntil=0;
     this.loadMusic();
   }
   private loadMusic(): void {
-    if(this.musicLoading||this.musicLoaded)return;
+    if(this.audioDisposed||this.musicLoading||this.musicLoaded)return;
     this.musicLoading=true;const request=this.musicRequest,mode=this.musicMode;
     assetManager.loadBundle('music',(error,bundle)=>{
-      if(!this.isValid)return;
+      if(!this.isValid||this.audioDisposed){this.musicLoading=false;return;}
       if(error){this.musicLoading=false;console.warn('音乐分包加载失败',error);return;}
       bundle.load(mode,AudioClip,(loadError,clip)=>{
         this.musicLoading=false;
-        if(!this.isValid){if(clip)assetManager.releaseAsset(clip);return;}
+        if(!this.isValid||this.audioDisposed){if(clip)assetManager.releaseAsset(clip);return;}
         if(request!==this.musicRequest){if(clip)assetManager.releaseAsset(clip);this.loadMusic();return;}
         if(loadError){console.warn('音乐加载失败',mode,loadError);return;}
         this.musicClip=clip;this.musicLoaded=true;
@@ -1679,9 +1715,9 @@ private playerSlowUntil=0;
     if (name) this.playSound(name, SOUND_CUES[name].volume, SOUND_CUES[name].priority, undefined, finisher ? 'finisher' : event);
   }
   private playSound(name: SoundId, volume: number = SOUND_CUES[name].volume, priority: number = SOUND_CUES[name].priority, owner?:Enemy, weaponEvent?:SoundEvent | 'finisher'): void {
-    const clip = this.clips[name];
-    if(!clip&&name!=='sandal-hit-pcm'){this.loadSound(name);return;} // Never replay a late impact.
-    if (!this.audioUnlocked || this.muted || this.backgrounded || !clip || !this.soundSources.length) return;
+    const clip = this.clips[name],url=this.soundUrls[name];
+    if(!clip&&!url&&name!=='sandal-hit-pcm'){this.loadSound(name);return;} // Never replay a late impact.
+    if (!this.audioUnlocked || this.muted || this.backgrounded || (!clip&&!url) || !(this.nativeSfx?.size||this.soundSources.length)) return;
     const index = this.soundGate.acquire(name, priority); if (index === undefined) return;
     const source = this.soundSources[index];this.voiceOwners[index]=owner;
     if(priority>=3&&this.phase==='battle')this.music.duck(.5,.4);
@@ -1696,12 +1732,13 @@ private playerSlowUntil=0;
     } else if (this.phase === 'battle' && (name === 'player-hurt' || name === 'danger' || name === 'charge-warn' || name.startsWith('boss-'))) {
       this.dangerUntil = now + .32;
       this.weaponVoiceVolumes.forEach((gain, i) => {
-        if (gain !== undefined) this.soundSources[i].volume = gain * .4;
+        if (gain !== undefined){if(this.nativeSfx)this.nativeSfx.setVolume(i,gain*.4);else this.soundSources[i].volume=gain*.4;}
       });
     }
-    source.stop(); source.clip = clip; source.volume = volume; source.play();
+    if(this.nativeSfx){this.nativeSfx.play(index,url!,volume);return;}
+    source.stop(); source.clip = clip!; source.volume = volume; source.play();
   }
-  private stopSounds(): void { for (const source of this.soundSources) source.stop(); this.soundGate.reset(); this.voiceOwners.length=0; this.weaponVoiceVolumes.length=0; this.nextLeadHit=0; this.dangerUntil=0; this.quieterSkillReleases.clear(); }
+  private stopSounds(): void { this.nativeSfx?.stopAll();for (const source of this.soundSources) source.stop(); this.soundGate.reset(); this.voiceOwners.length=0; this.weaponVoiceVolumes.length=0; this.nextLeadHit=0; this.dangerUntil=0; this.quieterSkillReleases.clear(); }
   private onBackground(): void { this.health?.record('background');this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
   private onForeground(): void {
     this.backgrounded = false;this.health?.record('foreground');
@@ -1869,7 +1906,7 @@ private playerSlowUntil=0;
     const e=this.spawnNext(archetype?archetypeFor(archetype).kind:'chief',archetype,encounter);
     if(mini&&this.run.chapter===1){e.miniCharge=createYellowCharge(index||0);e.speed=YELLOW_CHARGERS.chaseSpeed;}
     e.miniBoss=mini;e.elite=mini;e.hp=e.maxHp=mini?stage.miniBossHp:stage.bossHp;e.born=e.bornTotal=1.5;
-    if(mini&&archetype){if(!e.eliteMark){const n=this.node2D(e.node,'MiniBossCrown'),g=n.addComponent(Graphics);g.fillColor=new Color('#f6d279');g.strokeColor=new Color('#6c4929');g.lineWidth=1.5;g.moveTo(-15,0);g.lineTo(-18,15);g.lineTo(-7,9);g.lineTo(0,22);g.lineTo(7,9);g.lineTo(18,15);g.lineTo(15,0);g.close();g.fill();g.stroke();e.eliteMark=n;}e.eliteMark.active=true;e.eliteMark.setScale(1,1,1);e.eliteMark.setPosition(0,e.kind==='cavalry'?105:83);e.node.setScale(1.2,1.2,1);e.speed=archetypeFor(archetype).speed;e.attackCooldown=1.5;}
+    if(mini&&archetype){if(!e.eliteMark){const n=this.node2D(e.node,'MiniBossCrown');if(!this.battleSprites.add(n,'prop-crown'))drawWorldProp(n.addComponent(Graphics),'crown');e.eliteMark=n;}e.eliteMark.active=true;e.eliteMark.setScale(1,1,1);e.eliteMark.setPosition(0,e.kind==='cavalry'?105:83);e.node.setScale(1.2,1.2,1);e.speed=archetypeFor(archetype).speed;e.attackCooldown=1.5;}
     if(e.miniCharge){
       e.speed=YELLOW_CHARGERS.chaseSpeed;if(e.eliteMark){e.eliteMark.setPosition(0,70);e.eliteMark.setScale(.65,.65,1);}const towardCentre=Math.abs(this.px)>WORLD.halfWidth-430||Math.abs(this.py)>WORLD.halfHeight-350,base=towardCentre?Math.atan2(-this.py,-this.px):this.heading,angle=base+((index||0)-1)*.85,r=Math.min(360,this.halfHeight*.88);
       e.x=this.clamp(this.px+Math.cos(angle)*r,-WORLD.halfWidth+65,WORLD.halfWidth-65);e.y=this.clamp(this.py+Math.sin(angle)*r,-WORLD.halfHeight+65,WORLD.halfHeight-85);e.direction=enemyDirection(this.px-e.x,this.py-e.y,0);e.node.setPosition(e.x,e.y);
@@ -2320,17 +2357,18 @@ private playerSlowUntil=0;
   }
 
   private drawAnimal(e:Enemy):void {
-    const g=e.animalArt!;g.clear();const old=g.node.children.find(n=>n.name==='TreeSprite');if(old){old.removeFromParent();old.destroy();}
-    if(e.animal==='tree'){
-      const frame=this.artFrames['peach-tree'];if(frame){const n=this.node2D(g.node,'TreeSprite'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(82,86);n.setPosition(0,28);}
-      else{g.strokeColor=new Color('#6e5132');g.lineWidth=9;g.moveTo(0,0);g.lineTo(0,36);g.stroke();g.fillColor=new Color('#83ad6b');g.circle(-16,37,20);g.circle(16,38,20);g.circle(0,53,18);g.fill();g.fillColor=new Color('#f0a1b8');for(const [x,y]of [[-17,39],[11,49],[16,32]]){g.circle(x,y,6);g.fill();}}
-      return;
-    }g.lineWidth=2.5;g.strokeColor=new Color('#65513b');g.fillColor=new Color(e.animal==='pig'?'#efa5aa':'#fff3d3');
-    g.ellipse(0,13,e.animal==='pig'?24:18,17);g.fill();g.stroke();g.circle(10,29,12);g.fill();g.stroke();
-    if(e.animal==='chicken'){g.fillColor=new Color('#d45843');g.circle(6,42,5);g.circle(13,43,5);g.fill();g.fillColor=new Color('#dfad49');g.moveTo(21,32);g.lineTo(30,28);g.lineTo(21,25);g.close();g.fill();g.stroke();g.lineWidth=3;g.moveTo(-7,0);g.lineTo(-9,-7);g.moveTo(8,0);g.lineTo(10,-7);g.stroke();}
-    else if(e.animal==='rabbit'){g.fillColor=new Color('#fff3d3');g.ellipse(6,47,5,15);g.ellipse(19,45,5,15);g.fill();g.stroke();g.fillColor=new Color('#edb9b7');g.ellipse(6,48,2,9);g.ellipse(19,46,2,9);g.fill();}
-    else{g.fillColor=new Color('#e18b98');g.ellipse(22,25,9,7);g.fill();g.stroke();g.ellipse(-12,-1,6,5);g.ellipse(10,-1,6,5);g.fill();}
-    g.fillColor=new Color('#493123');g.circle(14,33,2);g.fill();
+    const g=e.animalArt!;g.clear();const frame=e.animal==='tree'?this.artFrames['peach-tree']:undefined;
+    if(frame){
+      if(!e.animalSprite){const n=this.node2D(g.node,'TreeSprite');e.animalSprite=n.addComponent(Sprite);e.animalSprite.sizeMode=Sprite.SizeMode.CUSTOM;}
+      const sp=e.animalSprite;sp.spriteFrame=frame;sp.node.active=true;sp.node.getComponent(UITransform)!.setContentSize(82,86);sp.node.setPosition(0,28);return;
+    }
+    if(this.battleSprites.ready){
+      const key='prop-'+e.animal;
+      let cached=false;if(!e.animalSprite){e.animalSprite=this.battleSprites.add(g.node,key);cached=!!e.animalSprite;}else cached=this.battleSprites.set(e.animalSprite,key);
+      if(cached&&e.animalSprite){e.animalSprite.node.active=true;return;}
+    }
+    if(e.animalSprite)e.animalSprite.node.active=false;
+    drawWorldProp(g,e.animal!);
   }
 
   private updateAnimal(e:Enemy,dt:number):void {
@@ -2353,12 +2391,10 @@ private playerSlowUntil=0;
 
   private dropHeart(x:number,y:number,kind:'heart'|'peach'='heart'):void {
     if(this.hearts.filter(h=>h.active).length>=4)return;let h=this.hearts.find(h=>!h.active);
-    if(!h){const node=this.node2D(this.world,'LifeHeart');node.addComponent(Graphics);h={node,x,y,age:0,active:false,attracted:false};this.hearts.push(h);}
-    const g=h.node.getComponent(Graphics)!;g.clear();g.strokeColor=new Color('#fff1cf');g.lineWidth=2.5;
-    if(kind==='peach'){
-      g.fillColor=new Color('#f1a3b1');g.moveTo(0,1);g.bezierCurveTo(-27,9,-17,36,0,27);g.bezierCurveTo(17,36,27,9,0,1);g.close();g.fill();g.stroke();
-      g.strokeColor=new Color('#d77c98');g.lineWidth=1.5;g.moveTo(0,5);g.bezierCurveTo(5,14,4,21,0,27);g.stroke();g.fillColor=new Color('#78ad60');g.moveTo(0,27);g.bezierCurveTo(0,39,14,40,17,36);g.bezierCurveTo(13,29,7,28,0,27);g.fill();
-    }else{g.fillColor=new Color('#f17c75');g.moveTo(0,0);g.bezierCurveTo(-30,18,-10,42,0,26);g.bezierCurveTo(10,42,30,18,0,0);g.close();g.fill();g.stroke();}
+    if(!h){const node=this.node2D(this.world,'LifeHeart');h={node,x,y,age:0,active:false,attracted:false};this.hearts.push(h);}
+    const key='prop-'+kind;
+    if(this.battleSprites.ready){if(!h.sprite)h.sprite=this.battleSprites.add(h.node,key);else this.battleSprites.set(h.sprite,key);}
+    if(!h.sprite){const g=h.node.getComponent(Graphics)||h.node.addComponent(Graphics);g.clear();drawWorldProp(g,kind);}
     h.node.name=kind==='peach'?'HealingPeach':'LifeHeart';Object.assign(h,{kind,x,y,age:0,active:true,attracted:false});h.node.active=true;h.node.setPosition(x,y);
   }
 
@@ -2377,6 +2413,7 @@ private playerSlowUntil=0;
 
   onDestroy(): void {
     this.resourceSerial++;this.resourceView?.hide();this.resourceView=undefined;
+    this.audioDisposed=true;this.soundLoads.destroy();this.soundLoading.clear();this.soundRetryAfter.clear();this.soundUrls={};
     this.health?.destroy();
     this.root?.off(Node.EventType.TOUCH_START, this.touchStart, this, true);this.root?.off(Node.EventType.TOUCH_MOVE, this.touchMove, this, true);
     this.root?.off(Node.EventType.TOUCH_END, this.touchEnd, this, true);this.root?.off(Node.EventType.TOUCH_CANCEL, this.touchEnd, this, true);
@@ -2384,7 +2421,7 @@ private playerSlowUntil=0;
     this.detachKeyboard?.();
     game.off(Game.EVENT_HIDE, this.onBackground, this);
     game.off(Game.EVENT_SHOW, this.onForeground, this);
-    this.stopSounds();for(const source of this.soundSources)source.clip=null;for(const clip of Array.from(new Set(Object.values(this.clips))))if(clip)assetManager.releaseAsset(clip);this.clips={};this.music.stop();this.musicRequest++;if(this.musicClip){assetManager.releaseAsset(this.musicClip);this.musicClip=undefined;}
+    this.stopSounds();this.nativeSfx?.destroy();this.nativeSfx=undefined;for(const source of this.soundSources)source.clip=null;for(const clip of Array.from(new Set(Object.values(this.clips))))if(clip)assetManager.releaseAsset(clip);this.clips={};this.music.stop();this.musicRequest++;if(this.musicClip){assetManager.releaseAsset(this.musicClip);this.musicClip=undefined;}
     this.enemies.forEach(e => e.art.spriteFrame = null);
     if(this.avatar)this.avatar.spriteFrame=null;if(this.body)this.body.spriteFrame=null;if(this.head)this.head.spriteFrame=null;
     const frames=new Set<SpriteFrame>();

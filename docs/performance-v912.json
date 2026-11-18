@@ -1,0 +1,59 @@
+{
+  "version": "stage-v9.12-stability",
+  "scope": "real desktop Cocos/WebGL GPU counters; native simulator and fake-host SFX validation are separate; not original iPhone RSS/FPS or crash root cause",
+  "props": {
+    "before": {
+      "buffers": 47203968,
+      "textures": 98652216
+    },
+    "after": {
+      "buffers": 23609876,
+      "textures": 99176504
+    },
+    "beforeExtraBuffers": 23595160,
+    "afterExtraBuffers": 1068,
+    "retainedOldAfterClear": 47203968,
+    "retainedNewAfterClear": 23609876,
+    "netSavedBytes": 23069804
+  },
+  "long": {
+    "frames": 18000,
+    "simulationSeconds": 300.0,
+    "renderEvery": 1,
+    "bosses": [
+      "lvbu",
+      "dongzhuo"
+    ],
+    "enemyNodeMax": 80,
+    "warmBufferMin": 54448164,
+    "warmBufferMax": 54448632,
+    "warmTextureMin": 97672344,
+    "warmTextureMax": 97672492,
+    "errors": 0,
+    "storageRestored": true
+  },
+  "nativeSfx": {
+    "fixedVoices": 6,
+    "metadataLoadConcurrency": 1,
+    "testSwitches": 10000,
+    "cueFiles": 66,
+    "music": "independent Cocos single source; not counted as SFX",
+    "phoneCrashConfirmedResolved": false,
+    "simulator": {
+      "version": "stage-v9.12-stability",
+      "actualPlayCallbacks": 29,
+      "errors": 0,
+      "voices": 6,
+      "loading": 0,
+      "queued": 0,
+      "consoleErrorMatches": 0
+    }
+  },
+  "evidence": "art/reviews/stability-v912",
+  "build": {
+    "mainMiB": 2.25,
+    "localTotalMiB": 8.69,
+    "cdn": "v95-996129359b44c659",
+    "previewGenerated": true
+  }
+}

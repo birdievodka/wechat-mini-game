@@ -1,3 +1,4 @@
+import {drawWorldProp,WORLD_PROPS,WorldProp} from './world-prop-art';
 import {Color,Graphics,Node,Rect,Sprite,SpriteFrame,Texture2D,UITransform} from 'cc';
 import {WEAPONS,TIER_COLORS} from './weapons';
 import {drawWeaponArt} from './weapon-art';
@@ -35,7 +36,7 @@ export class BattleSpriteAtlas {
   private bake():void {
     // Cocos' browser/WeChat document adapter creates an offscreen 2D canvas here.
     if(typeof document==='undefined')return;
-    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close']);
+    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close',...WORLD_PROPS.map(id=>'prop-'+id)]);
     const canvas=document.createElement('canvas');canvas.width=CELL*COLUMNS;canvas.height=CELL*Math.ceil(keys.length/COLUMNS);
     const ctx=canvas.getContext('2d');if(!ctx)return;
     for(let i=0;i<keys.length;i++){
@@ -47,6 +48,7 @@ export class BattleSpriteAtlas {
         if(key==='weapon-sandal'){ctx.scale(2,2);ctx.translate(0,-4);}
         drawWeaponArt(g as unknown as Graphics,WEAPONS[i].id,1,true);
       }
+      else if(key.indexOf('prop-')===0)drawWorldProp(g as unknown as Graphics,key.slice(5) as WorldProp);
       else if(key.indexOf('skill-')===0)drawSkillIcon(g as unknown as Graphics,Number(key.slice(6)));
       else if(key.indexOf('hud-slot-')===0){
         const tier=Number(key.slice(9));g.fillColor=tier?new Color(255,239,205,235):new Color(40,61,42,180);g.strokeColor=new Color(tier?TIER_COLORS[tier-1]:'#80916c');g.lineWidth=tier?2.5:1.5;g.roundRect(-33,-29,66,58,10);g.fill();g.stroke();

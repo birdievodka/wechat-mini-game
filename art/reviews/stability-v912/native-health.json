@@ -1,0 +1,37 @@
+{
+  "version": "stage-v9.12-stability",
+  "snapshot": {
+    "phase": "battle",
+    "stage": 1,
+    "wave": 1,
+    "hero": "liubei",
+    "skill": "G01",
+    "seconds": 10,
+    "enemyNodes": 12,
+    "alive": 9,
+    "projectileNodes": 0,
+    "coinNodes": 2,
+    "particles": 0,
+    "weapons": [
+      "pole:1"
+    ],
+    "growth": 0,
+    "os": "Unknown",
+    "osVersion": "10.0.1",
+    "atlasReady": true,
+    "enemyShotNodes": 1,
+    "sfxBackend": "native-fixed",
+    "sfxPlayed": 29,
+    "sfxErrors": 0,
+    "sfxVoices": 6,
+    "sfxUrls": 72,
+    "sfxLoading": 0,
+    "sfxQueued": 0,
+    "gfxBuffers": 42494276,
+    "gfxTextures": 94830352
+  },
+  "frames": 551,
+  "slowFrames": 2,
+  "maxFrameMs": 60,
+  "events": []
+}

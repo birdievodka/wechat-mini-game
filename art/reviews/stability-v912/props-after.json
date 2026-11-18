@@ -1,0 +1,181 @@
+{
+  "version": "stage-v9.12-stability",
+  "scope": "isolated real desktop Cocos/WebGL neutral-prop allocation fixture; not normal spawn limits, iOS RSS, FPS or root cause",
+  "initial": {
+    "buffers": 23608808,
+    "textures": 99176504,
+    "models": [
+      {
+        "name": "Ground",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "LiuBei",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "LeftFoot",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "RightFoot",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "WeaponArm",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "WeaponArm",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "GripFist",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "HeldWeapon",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "GripFist",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "FixedJoystick",
+        "active": true,
+        "submodels": 1
+      }
+    ],
+    "enemies": 8
+  },
+  "populated": {
+    "buffers": 23609876,
+    "textures": 99176504,
+    "models": [
+      {
+        "name": "Ground",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "LiuBei",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "LeftFoot",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "RightFoot",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "WeaponArm",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "WeaponArm",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "GripFist",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "HeldWeapon",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "GripFist",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "FixedJoystick",
+        "active": true,
+        "submodels": 1
+      }
+    ],
+    "enemies": 8
+  },
+  "cleared": {
+    "buffers": 23609876,
+    "textures": 99176504,
+    "models": [
+      {
+        "name": "Ground",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "LiuBei",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "LeftFoot",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "RightFoot",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "WeaponArm",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "WeaponArm",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "GripFist",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "HeldWeapon",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "GripFist",
+        "active": true,
+        "submodels": 1
+      },
+      {
+        "name": "FixedJoystick",
+        "active": true,
+        "submodels": 1
+      }
+    ],
+    "enemies": 8
+  },
+  "restored": {
+    "phase": "menu",
+    "profile": true,
+    "storage": true
+  },
+  "errors": []
+}
