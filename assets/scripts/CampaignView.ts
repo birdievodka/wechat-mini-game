@@ -2,6 +2,8 @@ import {addPanelClose} from './panel-ui';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {growthClears,signatureId} from './hero-growth';
 import {StagePickerView,StageBriefView,StarterSelectView,StageClearView,GrowthDetailView} from './StageViews';
+import {endlessUnlocked} from './endless';
+import {SettingsView} from './StageViews';
 import {StageProfile,StageReward,highestStage,unlocked,visibleHero} from './stage-progress';
 import {STAGES,stageFor,bossDisplayName,STARTER_WEAPONS} from './stage-data';
 import {GAME_NAME} from './game-brand';
@@ -29,6 +31,8 @@ interface HeroPortraitSlot {node:Node;selected:Node;}
 
 /** Screens own their input surfaces; combat never runs underneath an open screen. */
 export class CampaignView {
+  get selectedHero():HeroId{return this.selection;}
+
   readonly root: Node;
   private content?: Node;
   private campMode = false;
@@ -70,7 +74,7 @@ export class CampaignView {
     if (subtitle) this.text(this.content, subtitle, 0, 265, 20, '#e6d8bc', 1100, 36);
     return this.content;
   }
-  menu(selected: HeroId, start: (hero: HeroId,skill:string,weapon?:WeaponId,stage?:number) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void,options?:{profile:StageProfile;stage:number;weapon:WeaponId;changed:()=>void}): void {
+  menu(selected: HeroId, start: (hero: HeroId,skill:string,weapon?:WeaponId,stage?:number) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void,options?:{profile:StageProfile;stage:number;weapon:WeaponId;changed:()=>void;development?:boolean;endless?:(hero:HeroId,skill:string,weapon:WeaponId)=>void;settings?:(parent:Node,hero:HeroId)=>void}): void {
     this.resultView=undefined;this.heroShowcase=undefined;this.codexView=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.campMode=false;this.heroMenu=true;this.selection=selected;this.selectionSkill=availableSkill(skill);
@@ -145,8 +149,18 @@ export class CampaignView {
       weaponCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;if(growthClears(options.profile,this.selection)>0){new GrowthDetailView(p,this.frames,this.selection,growthClears(options.profile,this.selection),()=>choosing=false);return;}new StarterSelectView(p,this.frames,weapon,id=>{weapon=id;choosing=false;persist();updateLoadout();},()=>choosing=false);});
       updateLoadout();updateSkill();
     }
-    if(codex)this.action(p,'图鉴',-516,-289,164,()=>codex());
-    // The training runtime remains available to development tools; its public entry is hidden.
+    if(codex)this.action(p,'图鉴',-516,options?.development?-43:-125,164,()=>{if(!choosing&&!starting)codex();});
+    if(options?.endless)this.action(p,'无尽模式',-516,options?.development?-125:-207,164,()=>{
+      if(choosing||starting)return;
+      if(!endlessUnlocked(options.profile,this.selection)){
+        choosing=true;
+        new SettingsView(p,this.frames,()=>choosing=false).message('无尽模式尚未解锁','使用当前英雄通关全部六关后解锁');
+        return;
+      }
+      starting=true;persist();options.endless!(this.selection,this.selectionSkill,weapon);
+    });
+    if(options?.settings)this.action(p,'设置',-516,-289,164,()=>{if(!choosing&&!starting)options.settings!(p,this.selection);});
+    if(options?.development&&training)this.action(p,'演武场',-516,-207,164,()=>{if(choosing||starting)return;starting=true;persist();training(this.selection,this.selectionSkill);});
   }
 
   codex(close:()=>void,profile?:StageProfile):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close,profile);this.codexView.resize(this.width,this.height);}

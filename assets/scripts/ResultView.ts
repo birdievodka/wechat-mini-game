@@ -1,3 +1,4 @@
+import {PetView} from './PetView';
 import { Color, Graphics, Label, Layers, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { heroFor, Run, WAVE_SECONDS } from './campaign';
 import { clockText } from './survival';
@@ -14,7 +15,7 @@ export class ResultView {
   readonly content:Node;
   private background?:Sprite;
   private shade:Graphics;
-  private portrait?:Node;
+  private portrait?:Node;private pet?:PetView;private petHero='liubei';private growth=0;
   private age=0;
   constructor(parent:Node,private frames:Record<string,SpriteFrame>,run:Run,kills:number,best:number,record:boolean,
     retry:()=>void,menu:()=>void,testing:boolean,warmupElapsed=0,private won=false){
@@ -35,6 +36,7 @@ export class ResultView {
     const cry=this.sprite(p,frames[(won?'hero-select-':'result-')+run.heroId],-385,32,340,340,won?'VictoryHero':'CryingHero');
     if(cry)this.portrait=cry.node;
     else if(!won)this.tearFallback(p); // A win must never show a tear fallback.
+    this.petHero=run.heroId;this.growth=run.growth||0;const petAnchor=this.node(p,'ResultPetAnchor');petAnchor.setPosition(-402,-125);petAnchor.setScale(1.5,1.5,1);this.pet=new PetView(petAnchor,frames);this.pet.showcase(run.heroId,this.growth,0,!won);
     this.text(p,heroFor(run).name,-385,-172,29,P.paper,360,48,true).node.name='ResultHeroName';
     this.text(p,(won?WIN_QUIPS:QUIPS)[run.heroId],-385,-215,20,'#d5d2b3',430,42).node.name='ResultQuip';
 
@@ -46,7 +48,7 @@ export class ResultView {
     this.text(paper,won?'通关用时':run.wave===1?'本局坚持':'本局坚持',-188,175,20,P.green,180,36,true).node.name='ResultTimeLabel';
     const badge=this.node(paper,'ResultBadge');badge.setPosition(208,175);badge.angle=record?-4:0;
     const seal=badge.addComponent(Graphics);seal.fillColor=new Color(record?'#f1d18b':'#e9ddbd');seal.roundRect(-85,-20,170,40,12);seal.fill();
-    this.text(badge,testing?'内部测试':won?(record?'刷新通关纪录':'征程已通关'):run.challenge?'本关挑战':run.wave===1?'桃园热身':`第${run.chapter}章 · 未破阵`,0,0,18,record?'#95512b':P.green,158,34,true);
+    this.text(badge,run.endless?'无尽模式':testing?'内部测试':won?(record?'刷新通关纪录':'征程已通关'):run.challenge?'本关挑战':run.wave===1?'桃园热身':`第${run.chapter}章 · 未破阵`,0,0,18,record?'#95512b':P.green,158,34,true);
     const elapsed=run.elapsed>0?run.elapsed:run.wave===1?Math.max(0,Math.min(WAVE_SECONDS,warmupElapsed)):WAVE_SECONDS+run.survivalSeconds;
     this.text(paper,clockText(elapsed),-51,98,92,P.ink,474,118,true).node.name='ResultTime';
     const stamp=this.node(paper,won?'VictorySeal':'DefeatSeal');stamp.setPosition(246,86);stamp.angle=-10;
@@ -54,7 +56,7 @@ export class ResultView {
     ink.lineWidth=1;ink.roundRect(-28,-28,56,56,3);ink.stroke();this.text(stamp,won?'胜':'败',0,0,43,'#b55d40',62,62,true).fontFamily='serif';
     const rules=this.node(paper,'ResultDividers').addComponent(Graphics);rules.strokeColor=new Color('#dcc9a5');rules.lineWidth=1.5;
     for(const y of [30,-64]){rules.moveTo(-282,y);rules.lineTo(282,y);}rules.stroke();
-    const stats=[['击败敌兵',String(kills)],[won?'最快通关':run.challenge?'到达关卡':'到达章节',won?clockText(best||elapsed):`${run.chapter}/${run.challenge?6:CHAPTERS.length}`],['剩余铜钱',String(run.gold)]];
+    const stats=[['击败敌兵',String(kills)],[run.endless?'难度等级':won?'最快通关':run.challenge?'到达关卡':'到达章节',run.endless?String(1+(run.endlessTier||0)):won?clockText(best||elapsed):`${run.chapter}/${run.challenge?6:CHAPTERS.length}`],['剩余铜钱',String(run.gold)]];
     stats.forEach(([label,value],i)=>{
       const x=(i-1)*202;this.text(paper,value,x,-4,i===1?35:38,P.ink,184,55,true).node.name='ResultStat-'+i;
       this.text(paper,label,x,-43,17,P.muted,184,30);
@@ -72,7 +74,7 @@ export class ResultView {
     }
     let committed=false;const commit=(action:()=>void):void=>{if(committed)return;committed=true;action();};
     this.button(p,'ResultMenu','返回选人',67,-272,270,false,()=>commit(menu));
-    this.button(p,'ResultRetry',won?'再来一局':run.challenge?'再战本关':'重试本章',410,-272,330,true,()=>commit(retry));
+    this.button(p,'ResultRetry',run.endless?'再战无尽':won?'再来一局':run.challenge?'再战本关':'重试本章',410,-272,330,true,()=>commit(retry));
     this.resize(1334,750);
   }
   resize(width:number,height:number):void {
@@ -81,7 +83,7 @@ export class ResultView {
     if(this.background)this.background.node.getComponent(UITransform)!.setContentSize(Math.max(width,height*2.13),Math.max(height,width/2.13));
   }
   update(dt:number):void {
-    this.age+=Math.min(.05,Math.max(0,dt));if(!this.portrait)return;
+    this.age+=Math.min(.05,Math.max(0,dt));this.pet?.showcase(this.petHero,this.growth,this.age,!this.won);if(!this.portrait)return;
     if(this.won){this.portrait.setPosition(-385,32+Math.sin(this.age*3)*2);this.portrait.angle=Math.sin(this.age*2)*1.2;return;}
     const beat=this.age%2.8,sob=beat<.9?Math.sin(beat*25)*Math.exp(-beat*3):0;
     this.portrait.setPosition(-385,32+Math.abs(sob)*2);this.portrait.angle=sob*.65;

@@ -5,7 +5,7 @@ import { PASSIVE_ITEMS, eligiblePassive, passivePreview, passiveBonuses } from '
 import { Run, heroMaxHearts, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BUDGET } from './campaign';
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 
-export const SURVIVAL_VERSION = 'stage-v9.14-all-stage-ground';
+export const SURVIVAL_VERSION = 'stage-v9.18-endless-settings';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;
@@ -54,7 +54,7 @@ export function eligibleItem(run: Run, id: string): boolean {
 export const refreshPrice = (run: Run): number => run.challenge ? Math.max(1,Math.min(20,5+3*run.rerolls)-(run.rerolls===0?Math.max(0,5-passiveBonuses(run.inventory).refresh):0)) : run.rerolls === 0 ? passiveBonuses(run.inventory).refresh : 5 + 3 * run.rerolls;
 export function supplyWeaponPrice(run: Run, id: string, tier: Tier): number {
   const d = weaponFor(id as typeof WEAPONS[number]['id']);
-  if(run.challenge)return Math.max(1,Math.round(Math.max(20,d.price)*[1,1.6,2.5,4][tier-1]*(1-passiveBonuses(run.inventory).discount)));
+  if(run.challenge){const wave=run.supplyMode==='departure'?0:run.endless?Math.min(4,Math.max(1,run.endlessTier||1)):Math.min(4,run.stageWave||1);return Math.max(1,Math.round(Math.max(20,d.price)*[1,1.7,2.9,4.6][tier-1]*[1,1,1.1,1.2,1.3][wave]*(1-passiveBonuses(run.inventory).discount)));}
   return Math.max(1,Math.round(basePrice(run) * (d.starter||id===run.starter ? 1 : d.price / 28) * [1,1.6,2.5,4][tier-1] * (1-passiveBonuses(run.inventory).discount)));
 }
 export function upgradeOffer(w: {uid:number;tier:Tier}): string { return `u:${w.uid}:${w.tier+1}`; }
@@ -142,27 +142,30 @@ export function rerollSupply(run: Run, random = Math.random): boolean {
 }
 
 /** Stage shelves keep four sold slots and enforce the shared content whitelist before weighting. */
+export const STAGE_UPGRADE_CHANCE=.12;
+export const shopDistanceWeapon=(w:typeof WEAPONS[number]):boolean=>w.category==='ranged'||w.category==='magic'&&w.range>=300&&w.id!=='sword'&&w.id!=='star-lamps';
 export function rollStageSupply(run:Run,random=Math.random):void {
- const cards:string[]=[],prices:Record<string,number>={};const wave=run.supplyMode==='departure'?0:Math.min(4,run.stageWave||1);
- const distribution=[[1,0,0,0],[.7,.3,0,0],[.4,.5,.1,0],[.2,.55,.25,0],[.1,.5,.35,.05]][wave];
+ const cards:string[]=[],prices:Record<string,number>={};const wave=run.supplyMode==='departure'?0:run.endless?Math.min(4,Math.max(1,run.endlessTier||1)):Math.min(4,run.stageWave||1);
+ const distribution=[[1,0,0,0],[.7,.3,0,0],[.35,.5,.15,0],[.15,.45,.35,.05],[.05,.25,.5,.2]][wave];
  const add=(id:string,price:number)=>{if(cards.includes(id))return false;cards.push(id);prices[id]=Math.max(1,Math.round(price));return true;};
  const tier=():Tier=>{let r=random();for(let i=0;i<4;i++){r-=distribution[i];if(r<=0)return (i+1) as Tier;}return 1;};
- const weapon=()=>{
-  const t=tier(),owned=run.weapons.map(w=>w.id),categories=run.weapons.map(w=>weaponFor(w.id).category);
-  const pool=unlockedWeapons(0,run).filter(w=>!cards.includes(weaponOffer(w.id,t))),matching=pool.filter(w=>owned.includes(w.id)),family=pool.filter(w=>categories.includes(w.category));
-  const fresh=pool.filter(w=>run.newWeaponIds?.includes(w.id)&&categories.includes(w.category));
-  const r=random(),choices=wave>0&&cards.length===1&&fresh.length?fresh:r<.5&&matching.length?matching:r<.8&&family.length?family:pool;
-  const d=choices[Math.min(choices.length-1,Math.floor(random()*choices.length))];
+ const weapon=(distance=false,upgrade=false)=>{
   const up=run.weapons.filter(w=>w.tier<4&&!cards.includes(upgradeOffer(w)));
-  if(up.length&&wave>0&&(random()<.35||wave===4&&cards.length===0)){const w=up[Math.floor(random()*up.length)];add(upgradeOffer(w),supplyWeaponPrice(run,w.id,(w.tier+1) as Tier)-supplyWeaponPrice(run,w.id,w.tier));}
-  else if(d)add(weaponOffer(d.id,t),supplyWeaponPrice(run,d.id,t));
+  if(upgrade&&up.length){const w=up[Math.floor(random()*up.length)],next=supplyWeaponPrice(run,w.id,(w.tier+1) as Tier);add(upgradeOffer(w),next-supplyWeaponPrice(run,w.id,w.tier)+Math.ceil(next*.2));return;}
+  const t=tier(),owned=run.weapons.map(w=>w.id),shown=cards.map(id=>parseWeaponOffer(id)?.id);
+  let pool=unlockedWeapons(0,run).filter(w=>!shown.includes(w.id));
+  if(!pool.length)pool=unlockedWeapons(0,run).filter(w=>!cards.includes(weaponOffer(w.id,t)));
+  if(distance){const ranged=pool.filter(shopDistanceWeapon);if(ranged.length)pool=ranged;}
+  const novel=pool.filter(w=>!owned.includes(w.id)),matching=pool.filter(w=>owned.includes(w.id)),fresh=pool.filter(w=>run.newWeaponIds?.includes(w.id));
+  const r=random(),choices=fresh.length&&r<.35?fresh:novel.length&&r<.8?novel:matching.length&&r<.95?matching:pool;
+  const d=choices[Math.min(choices.length-1,Math.floor(random()*choices.length))];if(d)add(weaponOffer(d.id,t),supplyWeaponPrice(run,d.id,t));
  };
  if(wave===0){add(weaponOffer(run.starter,1),run.rerolls===0?Math.min(28,supplyWeaponPrice(run,run.starter,1)):supplyWeaponPrice(run,run.starter,1));const pool=WEAPONS.filter(w=>['sandal','pole','cleaver'].includes(w.id)&&w.id!==run.starter);const w=pool[Math.floor(random()*pool.length)];add(weaponOffer(w.id,1),Math.min(28,supplyWeaponPrice(run,w.id,1)));}
- else {weapon();weapon();}
+ else {weapon(true);weapon(false,random()<STAGE_UPGRADE_CHANCE);}
  const eligible=ITEMS.filter(i=>i.id!=='bun'&&eligibleItem(run,i.id));
- if(wave===3){const pool=AUGMENTS.filter(a=>!run.augments.includes(a.id)&&(!a.needs||owns(run,a.needs))&&(a.id!=='all-in'||run.weapons.length>=4)&&(a.id!=='specialist'||run.weapons.some(w=>run.weapons.filter(v=>v.id===w.id).length>=2)));const a=pool[Math.floor(random()*pool.length)];if(a)add('a:'+a.id,48);}
+ if(wave===3){const pool=AUGMENTS.filter(a=>!run.augments.includes(a.id)&&(!a.needs||owns(run,a.needs))&&(a.id!=='all-in'||run.weapons.length>=4)&&(a.id!=='specialist'||run.weapons.some(w=>run.weapons.filter(v=>v.id===w.id).length>=2)));const a=pool[Math.floor(random()*pool.length)];if(a)add('a:'+a.id,Math.round(60*(1+.1*(run.chapter-1))*(1-passiveBonuses(run.inventory).discount)));}
  if(run.hearts<heroMaxHearts(run)&&(run.hearts<=2||(run.healMisses||0)>=2)&&eligibleItem(run,'bun'))add('bun',28);
- for(const item of randomSample(eligible,eligible.length,random)){if(cards.length>=4)break;add(item.id,Math.max(12,Math.min(32,Math.round(item.price*16))));}
+ for(const item of randomSample(eligible,eligible.length,random)){if(cards.length>=4)break;add(item.id,Math.max(12,Math.min(32,Math.round(item.price*16)))*(1+.18*Math.min(8,run.inventory[item.id]||0))*(1-passiveBonuses(run.inventory).discount));}
  // Initial pool always contains three affordable general passives; fallback never unlocks new content.
  for(const id of ['A01','A02','C01']){if(cards.length>=4)break;if(eligibleItem(run,id))add(id,12);}
  if(!cards.some(id=>prices[id]<=run.gold)&&run.gold>0){const slot=cards.length-1;cards[slot]='A01';prices.A01=Math.min(12,run.gold);}

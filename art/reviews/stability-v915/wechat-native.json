@@ -1,0 +1,13 @@
+{
+  "version": "stage-v9.15-session-audio",
+  "phase": "menu",
+  "nativeMusic": true,
+  "playing": true,
+  "duration": 40.01866666666667,
+  "music": "menu",
+  "files": 44,
+  "voices": 6,
+  "ownSourcePaths": true,
+  "errors": 0,
+  "liveAudioClips": 0
+}

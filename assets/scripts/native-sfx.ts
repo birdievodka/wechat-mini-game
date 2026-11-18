@@ -10,6 +10,7 @@ export interface NativeSoundHost {createInnerAudioContext?:()=>NativeSoundContex
 export class NativeSfx {
   private closed=false;private reportedAt=-Infinity;private errorCount=0;
   private voices:NativeSoundContext[]=[];
+  private paths:(string|undefined)[]=[];
   private errors:((event:unknown)=>void)[]=[];private starts:(()=>void)[]=[];private playedCount=0;
   static create(host:NativeSoundHost|undefined,count:number,report:(message:string)=>void):NativeSfx|undefined {
     if(!host?.createInnerAudioContext)return;
@@ -17,7 +18,7 @@ export class NativeSfx {
     try{for(let i=0;i<count;i++){
       const voice=host.createInnerAudioContext();pool.voices.push(voice);
       voice.autoplay=false;voice.loop=false;voice.volume=0;
-      const error=(event:unknown)=>pool.report('native-sfx '+String((event as {errMsg?:unknown})?.errMsg||'playback error').slice(0,180));
+      const error=(event:unknown)=>{pool.paths[i]=undefined;pool.report('native-sfx '+String((event as {errMsg?:unknown})?.errMsg||'playback error').slice(0,180));};
       pool.errors.push(error);voice.onError?.(error);const started=()=>{if(!pool.closed)pool.playedCount++};pool.starts.push(started);voice.onPlay?.(started);
     }return pool;}catch(_){pool.destroy();report('native-sfx initialization failed');return;}
   }
@@ -28,8 +29,10 @@ export class NativeSfx {
   get size():number{return this.voices.length;}
   play(index:number,url:string,volume:number):void {
     const voice=this.voices[index];if(this.closed||!voice||!url)return;
-    try{voice.stop();if(voice.src!==url)voice.src=url;voice.volume=Math.max(0,Math.min(1,volume));voice.play();}
-    catch(_){this.report('native-sfx play failed');}
+    // Some hosts normalize src on read. Compare our assigned path, otherwise an
+    // unchanged cue can unnecessarily reload its decoder on every hit.
+    try{voice.stop();if(this.paths[index]!==url){voice.src=url;this.paths[index]=url;}voice.volume=Math.max(0,Math.min(1,volume));voice.play();}
+    catch(_){this.paths[index]=undefined;this.report('native-sfx play failed');}
   }
   setVolume(index:number,volume:number):void {if(!this.closed&&this.voices[index])try{this.voices[index].volume=Math.max(0,Math.min(1,volume));}catch(_){/* optional audio */}}
   stopVoice(index:number):void {try{this.voices[index]?.stop();}catch(_){/* native host may already be closing */}}
@@ -42,11 +45,11 @@ export class NativeSfx {
       try{voice.stop();}catch(_){/* destroy must still run if stop fails */}
       try{voice.destroy();}catch(_){/* host may already have closed this player */}
     });
-    this.voices.length=0;this.errors.length=0;this.starts.length=0;
+    this.voices.length=0;this.paths.length=0;this.errors.length=0;this.starts.length=0;
   }
 }
 
-/** Native clip metadata also owns a player: serialize acquisition and release it promptly. */
+/** Bound file/download work independently of the six playback voices. */
 export class AudioLoadQueue {
   private jobs:((done:()=>void,alive:()=>boolean)=>void)[]=[];
   private cancels=new Set<()=>void>();

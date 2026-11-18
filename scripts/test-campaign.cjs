@@ -43,7 +43,7 @@ const cc = {
     play() { this.playing = true; this.plays++; }
   }, Texture2D: class {reset(size){Object.assign(this,size);}uploadData(data){this.uploadBytes=data.byteLength;if(this.width<=1024)this.data=data;}set image(value){this.width=value.width;this.height=value.height;}destroy(){this.destroyed=true;}}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
   dynamicAtlasManager:{enabled:true},macro:{CLEANUP_IMAGE_CACHE:false},
-  assetManager: {loadRemote:(_url,_options,done)=>done(null,{width:1334,height:750,destroy(){}}),releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { load: (_url, _type, callback) => callback(null, _type===BinaryAsset?new BinaryAsset(fs.readFileSync('assets/battle/'+_url+'.bin')):{ width: 768, height: 576 }) }) },
+  assetManager: {utils:{getUrlWithUuid:(uuid,options)=>'packaged/'+uuid+options.nativeExt},loadRemote:(_url,_options,done)=>done(null,{width:1334,height:750,destroy(){}}),releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { getInfoWithPath:path=>({uuid:_name+'/'+path}),load: (_url, _type, callback) => callback(null, _type===BinaryAsset?new BinaryAsset(fs.readFileSync('assets/battle/'+_url+'.bin')):{ width: 768, height: 576 }) }) },
   view: { setDesignResolutionSize() {}, getVisibleSize: () => ({ width: 1334, height: 750 }) },
   input: { on() {}, off() {} }, Input: { EventType: {} }, game: { on() {}, off() {} }, Game: {},
   KeyCode: { KEY_W: 87, KEY_A: 65, KEY_S: 83, KEY_D: 68, ARROW_UP: 38, ARROW_LEFT: 37, ARROW_DOWN: 40, ARROW_RIGHT: 39 },

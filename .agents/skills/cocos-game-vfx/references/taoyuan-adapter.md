@@ -90,3 +90,7 @@ npm run build:wechat
 `scripts/fixtures/lvbu-review.js`支持独立Cocos与微信上下文，菜单守卫、120秒恢复、存档核对。微信裁剪后的全局cc未必导出UITransform；工程检查可只读已有Node的_uiProps.uiTransformComp，不因调试需求把引擎模块重新整包导出。不同阶段截图哈希完全相同必须判为旧帧、丢弃，不以运行时阶段变化推断图像已更新。当前平台限制与预览见art/reviews/lvbu/validation.json。
 
 v6.4小跑修复案例：移动速度提高后不能沿用按travel/12再floor(walk*1.5)切整身冲锋帧。独立步态按140世界单位一循环，腿部四帧，上身在打包时统一注册；alpha边界包含腿部运动，逐帧bbox居中会使头身抽搐。加减速、近身追赶区间和朝向滞回与帧选择分开验证。
+
+## v9.16首领强化案例
+
+袁绍rain与曹操sword-field必须进BossBattle共享6危险区，start先预留完整数量、add池化重置lockAt/locationLocked，渲染不推进时钟。E40未来棋子锁定前隐藏，锁定后完整.85秒预告。孟获护体金弧直接消费bossBeastCharging，与hitEnemy/技能候选/拉扯入口同源；收招撤盾，不能靠画面颜色当免伤状态。复用原2 Graphics与86Sprite。真实WebGL定帧art/reviews/balance-v916，capture-balance-review带隔离/恢复，不当手机性能证明。

@@ -11,26 +11,24 @@ function context(){return {src:'',volume:0,loop:false,autoplay:false,plays:0,sto
  pool.destroy();pool.destroy();pool.play(0,'ignored',1);assert.ok(voices.every(c=>c.destroys===1&&!c.error&&!c.started));assert.equal(pool.size,0);
  const partial=[];assert.equal(NativeSfx.create({createInnerAudioContext(){if(partial.length===2)throw Error('limit');const c=context();partial.push(c);return c}},6,()=>{}),undefined);assert.ok(partial.every(c=>c.destroys===1));assert.equal(NativeSfx.create(undefined,6,()=>{}),undefined);
  const broken=context(),brokenPool=NativeSfx.create({createInnerAudioContext:()=>broken},1,()=>{});broken.stop=()=>{throw Error('native stop failed')};brokenPool.destroy();assert.equal(broken.destroys,1,'teardown still destroys a player when stop throws');
+ let writes=0;const normalized=context();Object.defineProperty(normalized,'src',{get(){throw Error('native src round trip must not be needed')},set(){writes++}});const cached=NativeSfx.create({createInnerAudioContext:()=>normalized},1,()=>{});for(let i=0;i<1000;i++)cached.play(0,'same.wav',.4);assert.equal(writes,1,'same cue reuses the decoded source despite a normalizing host');normalized.error({errMsg:'fixture'});cached.play(0,'same.wav',.4);assert.equal(writes,2,'playback failure permits a fresh source assignment');cached.destroy();
  const q=new AudioLoadQueue(1),pending=[];let running=0,peak=0,completed=0;
  for(let i=0;i<100;i++)q.enqueue(done=>{peak=Math.max(peak,++running);pending.push(()=>{running--;completed++;done();done()})});
  assert.equal(pending.length,1);while(pending.length)pending.shift()();assert.equal(completed,100);assert.equal(peak,1);assert.equal(q.loading,0);assert.equal(q.waiting,0);
  const late=new AudioLoadQueue(1);let finish,notStarted=0;late.enqueue(done=>finish=done);late.enqueue(()=>notStarted++);late.destroy();finish();assert.equal(notStarted,0);assert.equal(late.loading,0);
 
- const baseLoad=cc.assetManager.loadBundle,baseRelease=cc.assetManager.releaseAsset,liveMeta=new Set(),physical=[],native=[];let defer=false,waiting=[];
- cc.wechatHost={createInnerAudioContext(){const c=context();native.push(c);return c}};
- cc.assetManager.loadBundle=(bundle,done)=>baseLoad(bundle,(error,b)=>done(error,{load(path,type,cb){
-   if(type!==cc.AudioClip)return b.load(path,type,cb);
-   const clip={nativeUrl:'https://example.invalid/'+bundle+'/'+path,_nativeAsset:{url:'cached://'+bundle+'/'+path}};liveMeta.add(clip);physical.push(clip.nativeUrl);
-   if(defer&&bundle!=='music')waiting.push(()=>cb(null,clip));else cb(null,clip);
+ const baseLoad=cc.assetManager.loadBundle,native=[];let metadata=0;
+ cc.wechatHost={createInnerAudioContext(){const c=context();c.pause=()=>{};c.seek=()=>{};native.push(c);return c}};
+ cc.assetManager.loadBundle=(bundle,done)=>baseLoad(bundle,(error,b)=>done(error,{...b,load(path,type,cb){
+   if(type===cc.AudioClip){metadata++;throw Error('native file resolution must never instantiate AudioClip')}
+   return b.load(path,type,cb);
  }}));
- cc.assetManager.releaseAsset=asset=>{liveMeta.delete(asset);baseRelease(asset)};
  try{
   const g=await newGame();for(const id of GENERATED_SOUNDS)g.loadSound(id);
-  assert.equal(native.length,6);assert.equal(g.soundSources.length,0,'WeChat FX never instantiate Cocos AudioSource players');assert.equal(Object.keys(g.clips).length,0,'no SFX AudioClip metadata is kept resident');
-  assert.ok(liveMeta.size<=1,'only the current music clip metadata remains');assert.ok(Object.keys(g.soundUrls).length>=GENERATED_SOUNDS.length);assert.ok(Object.values(g.soundUrls).every(url=>url.startsWith('cached://')),'retain Cocos downloaded paths rather than re-fetching remote URLs on every cast');
-  for(let i=0;i<1000;i++){g.soundGate.update(.5);g.playSound(GENERATED_SOUNDS[i%GENERATED_SOUNDS.length])}assert.equal(native.length,6);
-  const first=GENERATED_SOUNDS.find(id=>load('weapon-sound').soundAsset(id).bundle==='sfx-core');delete g.soundUrls[first];defer=true;g.loadSound(first);assert.equal(waiting.length,1);assert.equal(g.soundLoads.loading,1);g.onDestroy();waiting.shift()();
-  assert.ok(native.every(c=>c.destroys===1));assert.equal(Object.keys(g.soundUrls).length,0,'late metadata cannot resurrect a destroyed bank');assert.equal(g.soundLoads.loading,0);assert.equal(liveMeta.size,0);
- }finally{cc.assetManager.loadBundle=baseLoad;cc.assetManager.releaseAsset=baseRelease;cc.wechatHost=undefined;}
- console.log('通过：66音色万次切换固定6原生播放器、加载并发1、元数据立即释放、销毁/迟到回调/中途失败无残留');
+  assert.equal(native.length,7);assert.equal(g.soundSources.length,0);assert.equal(g.musicSource,undefined);assert.equal(metadata,0,'native BGM and FX never load AudioClip metadata');assert.equal(Object.keys(g.clips).length,0);
+  assert.ok(Object.keys(g.soundUrls).length>=GENERATED_SOUNDS.length);assert.ok(Object.values(g.soundUrls).every(url=>url.startsWith('packaged/')));
+  for(let i=0;i<10000;i++){g.soundGate.update(.5);g.playSound(GENERATED_SOUNDS[i%GENERATED_SOUNDS.length]);if(i%50===0)g.selectMusic(['menu','battle','boss'][i%3],true)}assert.equal(native.length,7,'200 music transitions plus ten thousand FX still seven contexts');
+  g.onDestroy();assert.ok(native.every(c=>c.destroys===1));assert.equal(Object.keys(g.soundUrls).length,0);assert.equal(g.soundLoads.loading,0);
+ }finally{cc.assetManager.loadBundle=baseLoad;cc.wechatHost=undefined;}
+ console.log('通过：66音色万次切换固定6原生播放器、加载并发1、原生零AudioClip、200次音乐切换固定7源、销毁/中途失败无残留');
 })().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,133 @@
+{
+  "scope": "continuous wall-clock real desktop WebGL, same component; controlled invulnerable mixed-enemy/stage transition fixture, not a player run or iPhone memory/FPS",
+  "seconds": 1,
+  "samples": [
+    {
+      "phase": "battle",
+      "age": 0.037699999988079075,
+      "frames": 1,
+      "stage": 1,
+      "buffers": 40232536,
+      "textures": 74013704,
+      "assets": 42,
+      "heap": 146212580,
+      "enemies": 80,
+      "alive": 80,
+      "worldNodes": 81,
+      "audio": {
+        "created": 7,
+        "live": 7,
+        "peak": 7,
+        "played": 3,
+        "errors": 0,
+        "srcChanges": 4,
+        "firstErrors": []
+      },
+      "nativeMusic": true,
+      "musicReady": true,
+      "musicPlaying": true,
+      "sfxUrls": 61,
+      "wallSeconds": 0
+    }
+  ],
+  "errors": [],
+  "version": "stage-v9.15-session-audio",
+  "crossStage": [
+    {
+      "stage": 2,
+      "phase": "battle",
+      "bosses": [
+        "lvbu",
+        "dongzhuo"
+      ],
+      "buffers": 63871604,
+      "textures": 103915220,
+      "audio": {
+        "created": 7,
+        "live": 7,
+        "peak": 7,
+        "played": 244,
+        "errors": 0,
+        "srcChanges": 243,
+        "firstErrors": []
+      }
+    },
+    {
+      "stage": 2,
+      "phase": "battle",
+      "bosses": [
+        "lvbu",
+        "dongzhuo"
+      ],
+      "buffers": 63871604,
+      "textures": 103915220,
+      "audio": {
+        "created": 7,
+        "live": 7,
+        "peak": 7,
+        "played": 250,
+        "errors": 0,
+        "srcChanges": 252,
+        "firstErrors": []
+      }
+    },
+    {
+      "stage": 2,
+      "phase": "battle",
+      "bosses": [
+        "lvbu",
+        "dongzhuo"
+      ],
+      "buffers": 63871604,
+      "textures": 103915220,
+      "audio": {
+        "created": 7,
+        "live": 7,
+        "peak": 7,
+        "played": 255,
+        "errors": 0,
+        "srcChanges": 261,
+        "firstErrors": []
+      }
+    },
+    {
+      "stage": 2,
+      "phase": "battle",
+      "bosses": [
+        "lvbu",
+        "dongzhuo"
+      ],
+      "buffers": 63871604,
+      "textures": 103915220,
+      "audio": {
+        "created": 7,
+        "live": 7,
+        "peak": 7,
+        "played": 262,
+        "errors": 0,
+        "srcChanges": 270,
+        "firstErrors": []
+      }
+    },
+    {
+      "stage": 2,
+      "phase": "battle",
+      "bosses": [
+        "lvbu",
+        "dongzhuo"
+      ],
+      "buffers": 63871604,
+      "textures": 103915220,
+      "audio": {
+        "created": 7,
+        "live": 7,
+        "peak": 7,
+        "played": 269,
+        "errors": 0,
+        "srcChanges": 279,
+        "firstErrors": []
+      }
+    }
+  ],
+  "storageRestored": true
+}

@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v9.14-all-stage-ground",
+    "version": "stage-v9.18-endless-settings",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "c069da6f1cf47b9234d6c28065b59b6f708a984c8c91379c5fedbf1e9a6fc79c",
+    "fingerprint": "458d2fcbf17cc62d00041acdc0dda4c1c8c605df50ca9f302a40a0909739c7ee",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -25,8 +25,8 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/taoyuan-adapter.md",
-        "bytes": 7594,
-        "sha256": "29649a253659d1243cb16263a64208ebf702928787e9e8bb93363dad154a7129"
+        "bytes": 8142,
+        "sha256": "965d1109060e91c435abbb7b778977c0d248c0a379aadac727ea889ec847f063"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/verification.md",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 34431,
-        "sha256": "e0a1bc090d02e70cdb996d2c26100e8c861e4fdaaefde8c554843d39cb3f2002"
+        "bytes": 37356,
+        "sha256": "8cca995c95e015b9c972c7aa35eb507625cf31717bbeb61824f99e84b4ff8e96"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -60,23 +60,23 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/combat-effects.md",
-        "bytes": 12111,
-        "sha256": "6946741f41a450061dae4d3e63bcb32ddb21b1e5b5b043837d328180cec217fc"
+        "bytes": 12879,
+        "sha256": "6d87b975ba8a951c246c87c49e98c1d8d1dfbe1f5edf0b11416579cc8899a1e1"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 5375,
-        "sha256": "97b50fbb81f621d8a3621566bdbf05d5de65cad9b0075be180db4db8f44e8be6"
+        "bytes": 5686,
+        "sha256": "d65f84d76bb2a50be912f06d396db5337de056d62d457cf7c60a696a2d789f3a"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/enemy-actions.md",
-        "bytes": 7493,
-        "sha256": "e8f7597bd9752d3bf0cb39bf66cfd3217102fa2aa32d7f8f0381be9f36d5c3a5"
+        "bytes": 7902,
+        "sha256": "b4afbc70ffc8d5f313a7f3ad74625f4b16bff8d4fd848a84a1f5501ee66f45e9"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 27558,
-        "sha256": "cc7d96986df762c4dc211b4e104f93c867d5f06d22d20e4a6d24122c3d335cbf"
+        "bytes": 30941,
+        "sha256": "c086e5518aec7690787daaf1e9c835ce114ef17eb596a9a75b2b8fe9eb586a9d"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -85,8 +85,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/gameplay.md",
-        "bytes": 6667,
-        "sha256": "d25802f108f6221af82a25a3517df339499217972dc5ca9633507fe2d7b9d47b"
+        "bytes": 9844,
+        "sha256": "2dbb6142cab71a84f4ffc6b7c950d9b9827b412e7410587cf34ae7a6d2ecf766"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/hero-arms.md",
@@ -95,13 +95,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/hero-growth.md",
-        "bytes": 669,
-        "sha256": "09f6e15175432e3b42baabf00df7a12f8eaaad2833a8840b3c7c30839c3c8598"
+        "bytes": 1823,
+        "sha256": "9a39087462dfb1a93e33ba356784aa305edbd1fd1aef4fcd9c1535c93ce9c50c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/known-gaps.md",
-        "bytes": 2123,
-        "sha256": "fc3decc88a8ad0a2879b59dabe9e939b59fcf5f1709e1c4e61719846bd68afc2"
+        "bytes": 2419,
+        "sha256": "2d4c4483be679db828d35628c99656baa1ff6cbf6e197b721a9711f48a05240d"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/lvbu-boss.md",
@@ -115,8 +115,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 23788,
-        "sha256": "16fb0c7c95f41f59240669f9086aa776e319f11413fdc3c2898c6a324b52d110"
+        "bytes": 30831,
+        "sha256": "c14629347a78df06c95e47b2f2aa965d3548766076676298cc4c97ef3294865a"
+      },
+      {
+        "path": ".agents/skills/taoyuan-game/references/pets.md",
+        "bytes": 3858,
+        "sha256": "20c0711e127db71c90a6b7a8ba6889ae7108ce4588644c63877e55b827c6b898"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
@@ -125,8 +130,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
-        "bytes": 12886,
-        "sha256": "92af01aaf70e5dff9de2b55f9bdf3e21fc4d8ca6059817fdf4d3ee06ae36c66d"
+        "bytes": 13838,
+        "sha256": "f88bd0ca440753fe39821728c90c4deae5b9c002808de2ebc3052967a36cf563"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
@@ -135,13 +140,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/seven-bosses.md",
-        "bytes": 3910,
-        "sha256": "b1b9959e7950b9099d945e7207c8421be1f9e6daa720af7b240840da1a2c8033"
+        "bytes": 4474,
+        "sha256": "6a941b7723d4c675b90c190fbf536c094e03ca9b9732210d4ccfe964da60574b"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/stage-challenge-proposal.md",
-        "bytes": 9329,
-        "sha256": "3da23a4039520398fb5edf75b55066924a0d86a2acb63d9aa19d89c85db37991"
+        "bytes": 9967,
+        "sha256": "4a398c1b1ef6980224f2ad30529bebc3e1d4ffb85a3e38be08f4cdb9f3c61243"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/startup-loading.md",
@@ -150,18 +155,18 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/training.md",
-        "bytes": 4951,
-        "sha256": "735eef22e6b201535cd963b79277dfc793df6997519c994d5917018ebbbe1907"
+        "bytes": 7472,
+        "sha256": "74e4bde8785bba5a610661119e81eece77aa4d32bc84f2be548a870958e6b723"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapon-evolution.md",
-        "bytes": 5460,
-        "sha256": "e95ede454c60d0513682791a277db753863b8cd34a1558bbfe623239706e04fd"
+        "bytes": 5726,
+        "sha256": "f5eb7a0139a94c0f362aa43358fa00600192b9567500c060a9d65148369b497c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapons-items.md",
-        "bytes": 8735,
-        "sha256": "4a7d0b6d6e7022aabf66da9aa238070265b1bd7ea182e049d46eefef024a9218"
+        "bytes": 9844,
+        "sha256": "8fb52d52e779ee2d58025b68aeeacaaed27cbd15c51a2cd3eac9e59860480693"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/youth-heroes.md",
@@ -170,13 +175,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 23262,
-        "sha256": "85b9fa92f2fe4d3cc8ad63b72534ec521421a4a2e4235eba4d0f3a8ab3b2269a"
+        "bytes": 24199,
+        "sha256": "1eb488f9d7d017b6d4c3b40b44530999c11e30add3e8899df47197c3388f94fe"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 16414,
-        "sha256": "78e32cd66c50e81bc0fa390f337bbfbe348cb0c98c772c87f9e2ae59c9970c6e"
+        "bytes": 19178,
+        "sha256": "79f4e3a9a37b9f1be3b8dc14692bea74fbcacd1fe2e3229938d2c68a62165ec3"
       },
       {
         "path": ".gitignore",
@@ -185,8 +190,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 12996,
-        "sha256": "2d8ea345124cab913b77797fe71676fbda728a8453217ab2f282c6cc1ef551cb"
+        "bytes": 14856,
+        "sha256": "6c57906caff793843d82d9436c687596f2e1c39469ec5c5361ed4fcc25c497c1"
       },
       {
         "path": "art/audio/review-v1/browser-validation.json",
@@ -804,6 +809,26 @@
         "sha256": "31621d92391a2fe55c444d3dc5b3f6c7ad3e9423bfb85f232888a548605fab52"
       },
       {
+        "path": "art/concepts/hero-pets/design.png",
+        "bytes": 2734260,
+        "sha256": "c3d51edc2f481a84cd7d5fdd0b290a6f48aa0fbead0e04043bc51a901ac6acd4"
+      },
+      {
+        "path": "art/concepts/hero-pets/manifest.json",
+        "bytes": 769,
+        "sha256": "2ad673eaa5b0125fda62dcabb9247c285ef3dd8b6a0031a3c8be4188c6b2e3bd"
+      },
+      {
+        "path": "art/concepts/hero-pets/prompt.txt",
+        "bytes": 5224,
+        "sha256": "00d599922d9091ac6ffb79c076accc3045ed2c1f381ed047e5d5253f43ed2248"
+      },
+      {
+        "path": "art/concepts/hero-pets/README.md",
+        "bytes": 757,
+        "sha256": "d66bb86f2fcc3a866bd15979b650aa074949799f65519fa47640e00461011e5b"
+      },
+      {
         "path": "art/concepts/hero-select-v4.2/manifest.json",
         "bytes": 2303,
         "sha256": "4cdd125eec781984e1969e590cf4049ca74f48730b9cc267cf5d2bf633e0e612"
@@ -1164,6 +1189,71 @@
         "sha256": "994f2e9780e995509d966e93f640be07d882ff3609494e368061569d437810d9"
       },
       {
+        "path": "art/reviews/balance-v916/caocao-crescents.png",
+        "bytes": 140496,
+        "sha256": "1a29a4e374c244ade16d00b03d0d5f4b808ba6791b522a0ca061d261cf374403"
+      },
+      {
+        "path": "art/reviews/balance-v916/caocao-sword-field.png",
+        "bytes": 189799,
+        "sha256": "99351d62d1c9b7e8ba6623d5e591afc7a48508833144868d0c2dac03eedb2f28"
+      },
+      {
+        "path": "art/reviews/balance-v916/formation-cross.png",
+        "bytes": 148413,
+        "sha256": "57e2058c6a81f39e71c851f71b8cd0390f68bcc6c3b7e59b628c1d1c0e192d9f"
+      },
+      {
+        "path": "art/reviews/balance-v916/menghuo-armoured-charge.png",
+        "bytes": 206654,
+        "sha256": "0fb6c5137d4dd731b18974524afa64e6ad82ee52e5ca048dbdf39facfe8281aa"
+      },
+      {
+        "path": "art/reviews/balance-v916/menghuo-elephant.png",
+        "bytes": 210261,
+        "sha256": "5fd2f82de880a2057eae984e3ba737768e479d8dc67e02a7bdaf6db9848ade09"
+      },
+      {
+        "path": "art/reviews/balance-v916/overview.png",
+        "bytes": 615658,
+        "sha256": "2cf942468635c7bef8ad73963e7f37634cf7ad758f264adf6ec04384ae5952d0"
+      },
+      {
+        "path": "art/reviews/balance-v916/simayi-meteors.png",
+        "bytes": 186333,
+        "sha256": "bc9bf14477cadf5c22656915ba2b20df783ae47603ca94070236e2c5bd684668"
+      },
+      {
+        "path": "art/reviews/balance-v916/simayi-stones.png",
+        "bytes": 176848,
+        "sha256": "fa2d4bbac4ff9d8f3cdbddb9c15ecd5bda46e363d34688cc5af74c6b4525fd1e"
+      },
+      {
+        "path": "art/reviews/balance-v916/validation.json",
+        "bytes": 9393,
+        "sha256": "6b22331c4179855306b1d0750e3b2d52240631ee2f54a2a66b588008d295a34e"
+      },
+      {
+        "path": "art/reviews/balance-v916/weapon-audit.json",
+        "bytes": 6145,
+        "sha256": "bb1ca06c9d3daaeb6f0bde5bfa67ed7da6d69ca962810c902a742a4b69409b12"
+      },
+      {
+        "path": "art/reviews/balance-v916/wechat-menu.jpg",
+        "bytes": 78810,
+        "sha256": "5813380915049c4a6b91b6612903dafc40236db862ee24d075f7d09c038e5cbf"
+      },
+      {
+        "path": "art/reviews/balance-v916/yuanshao-rain.png",
+        "bytes": 202752,
+        "sha256": "c78bd26a0ffb304c747b7769a52aa8713f30deb1cd7fc170815247ed58e6dd65"
+      },
+      {
+        "path": "art/reviews/balance-v916/yuanshao-volley.png",
+        "bytes": 213315,
+        "sha256": "45e404ea035419c3e5ecd535381ee34f55ffede0fca9bb09e9bd2cb814c91ced"
+      },
+      {
         "path": "art/reviews/bosses/caocao.gif",
         "bytes": 1296248,
         "sha256": "5db7fa0ef0343c94f48f11d37719983a39dedca31e7a8c4f3b110a68aea7e04f"
@@ -1262,6 +1352,46 @@
         "path": "art/reviews/codex/weapons.png",
         "bytes": 182598,
         "sha256": "e6f30ae8e0084801aeb2cf6ca224663efc18da772cacb8344c7cf4c47297a725"
+      },
+      {
+        "path": "art/reviews/endless-settings/boss.png",
+        "bytes": 902658,
+        "sha256": "489da9220c1565f516eb01af2f885036173d161f65fa4af153f1972ee2c07a88"
+      },
+      {
+        "path": "art/reviews/endless-settings/confirm.png",
+        "bytes": 835957,
+        "sha256": "f5a014956144b5198729ae4234412a86246479fc8797369d0c45616c83438787"
+      },
+      {
+        "path": "art/reviews/endless-settings/endless.png",
+        "bytes": 903205,
+        "sha256": "b05e5b3321759d080c40145e5f776d4e8295de44b478f8758c3eb28e93854a99"
+      },
+      {
+        "path": "art/reviews/endless-settings/menu.png",
+        "bytes": 1284666,
+        "sha256": "c238fdbda25c7fed8e40f2613130596dfafb5589d9f03d6517bc3c07e3db9284"
+      },
+      {
+        "path": "art/reviews/endless-settings/progress.png",
+        "bytes": 843207,
+        "sha256": "1c6c321ab60def2e3c36a8b71767c1a09be98f8cd72342a6ecf182948eec5691"
+      },
+      {
+        "path": "art/reviews/endless-settings/settings.png",
+        "bytes": 842942,
+        "sha256": "435e597734df627bf7a17e8c2d0f83860afcd46630811c4dfd250e5525dedb39"
+      },
+      {
+        "path": "art/reviews/endless-settings/shop.png",
+        "bytes": 418061,
+        "sha256": "29c629c1ed04b0bab893b714aa7e406149da8f2dde635d68db7038771378f043"
+      },
+      {
+        "path": "art/reviews/endless-settings/validation.json",
+        "bytes": 266,
+        "sha256": "5b43ea224554c56770add637126a5519cd7d16ce4890fa6857fe3e2f788f9896"
       },
       {
         "path": "art/reviews/enemy-actions/all-0-idle.jpg",
@@ -2219,6 +2349,56 @@
         "sha256": "a1660cfa021682a61c4c08c2f77abcb6ac57988018eef03e9e725a4db1a1cdad"
       },
       {
+        "path": "art/reviews/pets-v917/guanyu-attack.png",
+        "bytes": 916089,
+        "sha256": "3adacb5705cf724aaa68cdfd4079e7edd46ae8d5a813343d13a762e0556afd2d"
+      },
+      {
+        "path": "art/reviews/pets-v917/guanyu-idle.png",
+        "bytes": 908475,
+        "sha256": "feebfbcb7bb4beb287c9b8f001e326efa270b7f9cfb9689789b8a3f61423d746"
+      },
+      {
+        "path": "art/reviews/pets-v917/liubei-attack.png",
+        "bytes": 915500,
+        "sha256": "d10929eeaba9908861a61a968d2033d1fc577c3446a3cab4f7e73f7bd101c9d5"
+      },
+      {
+        "path": "art/reviews/pets-v917/liubei-idle.png",
+        "bytes": 911570,
+        "sha256": "4534cbedb45bce1b12e82b22a308a932009bbcfcf2b30ddffc5151bccad257b0"
+      },
+      {
+        "path": "art/reviews/pets-v917/overview.png",
+        "bytes": 1662903,
+        "sha256": "650edbde2ed5f5f39ef0266f910afb9d50c75796d46d26d9e72cca4a36a18a87"
+      },
+      {
+        "path": "art/reviews/pets-v917/pet-first-clear.png",
+        "bytes": 633933,
+        "sha256": "4e3c9f3f311da58744dc05d1ed8fe77058f3ece25722c1916cddd9f93cad5bcf"
+      },
+      {
+        "path": "art/reviews/pets-v917/validation.json",
+        "bytes": 2741,
+        "sha256": "4ea34b74e02ccd7d31b0aaacd92c34f71b963e36568f6a990e5f2d03f62b6d59"
+      },
+      {
+        "path": "art/reviews/pets-v917/wechat-menu.jpg",
+        "bytes": 75521,
+        "sha256": "d55191c64e3d264b43bcfa86cde5c9d2d124271833a95e91868cec0cf72df229"
+      },
+      {
+        "path": "art/reviews/pets-v917/zhangfei-attack.png",
+        "bytes": 911285,
+        "sha256": "df8b4de2554c9f89e542bf930707c5b1bc24eee459ea6fbbcb9420fe6ee8d1ec"
+      },
+      {
+        "path": "art/reviews/pets-v917/zhangfei-idle.png",
+        "bytes": 912625,
+        "sha256": "41cc311172c2013f6ea7ab106fade176f6ae537997b345d04cc361a475e45c7c"
+      },
+      {
         "path": "art/reviews/resources/validation.json",
         "bytes": 1099,
         "sha256": "5b4ce2a740ed938f703a90876f8dfcb02a3ae818e540b77e7abacb0129378d9c"
@@ -2469,6 +2649,41 @@
         "sha256": "b969c79098e529748eb435061cccd76897c8bc051804cc8e4ab655642091b186"
       },
       {
+        "path": "art/reviews/stability-v915/before-long-session.json",
+        "bytes": 11161,
+        "sha256": "f645c2142e1d8005b17da6c68ee38bb5b63272da40d0954ef71d01baa777ffb3"
+      },
+      {
+        "path": "art/reviews/stability-v915/engine-audio-error.json",
+        "bytes": 417,
+        "sha256": "d86fa3605feb074957d746e0d6c4346fffa277e79e203fccc9a0f2902b70b445"
+      },
+      {
+        "path": "art/reviews/stability-v915/final-long-session.json",
+        "bytes": 21685,
+        "sha256": "bdef00197085636c7eee19c931c5bb54377b83aa72206459f12331f23b5ea80e"
+      },
+      {
+        "path": "art/reviews/stability-v915/formal-cross-stage.json",
+        "bytes": 2675,
+        "sha256": "7ad2536ebb4a7e1faf3c44fa07ff6bab37b3d18cac3f16f66efbd4add228e221"
+      },
+      {
+        "path": "art/reviews/stability-v915/long-session.jpg",
+        "bytes": 190303,
+        "sha256": "e8dfb8620bc459e8e2b7857ae60f71c667162ebc02b65f20198c7a48c29d5a95"
+      },
+      {
+        "path": "art/reviews/stability-v915/summary.json",
+        "bytes": 919,
+        "sha256": "4e104afbe251284566c352082bb2c26520bc9bd40d1298e869962611038bbc23"
+      },
+      {
+        "path": "art/reviews/stability-v915/wechat-native.json",
+        "bytes": 252,
+        "sha256": "d54696c3890d136339dcf8759a5f569e382c8ab3b34e1e8cbbe15fb27600480b"
+      },
+      {
         "path": "art/reviews/stage-surface/battle.png",
         "bytes": 478468,
         "sha256": "0203a1cf6d3ef81b68899411994afa467f5a26297729a8afa8679cfe954dbe20"
@@ -2562,6 +2777,91 @@
         "path": "art/reviews/stages/yellow-trio.png",
         "bytes": 1069037,
         "sha256": "b1eb59b21ca36a4dcbe8720dd43cf47433a131b092399606a2257560d3dd4978"
+      },
+      {
+        "path": "art/reviews/standing-wechat/actual-runtime.json",
+        "bytes": 110072,
+        "sha256": "9a6eb0b6f42d23ed0f7779f9c472478b2e5d8cf4786db2a6ce180e5bc91d32f1"
+      },
+      {
+        "path": "art/reviews/standing-wechat/after-menghuo.png",
+        "bytes": 61916,
+        "sha256": "9d563a52f0e6bfc3ad4ad43e7b2a3f8e0e99c8cd5f8a792eee77142e2b034793"
+      },
+      {
+        "path": "art/reviews/standing-wechat/build-fingerprint.json",
+        "bytes": 319,
+        "sha256": "f277fbc11dd05d8ef98c72cf929934571c9c3272159661494b3f58e3559acf29"
+      },
+      {
+        "path": "art/reviews/standing-wechat/dongzhuo.png",
+        "bytes": 102914,
+        "sha256": "2fc0fff5adaea0da9ac6338adaa5fd4fad8bda1b6c2ac78375d16dffc97f1fb9"
+      },
+      {
+        "path": "art/reviews/standing-wechat/post-test-window.json",
+        "bytes": 421,
+        "sha256": "db56b8ce5ae3ba936e8a65a5c9ce79e325a165f0bcad72c4a6fe1704175de120"
+      },
+      {
+        "path": "art/reviews/standing-wechat/restored.json",
+        "bytes": 342,
+        "sha256": "73965f538b1416c51efdd2320a23e6cf3c37d05f674a97dede73a1432622de60"
+      },
+      {
+        "path": "art/reviews/standing-wechat/simayi.png",
+        "bytes": 51191,
+        "sha256": "0971c610ab9a18e39387b60626dfa3636226ee6a4a10e7066967581a48e13f70"
+      },
+      {
+        "path": "art/reviews/standing-wechat/summary.json",
+        "bytes": 886,
+        "sha256": "21fe24d379740748d112f9f4ae5fb3e11fb8b15c4ee77095fe1827acaf1e4679"
+      },
+      {
+        "path": "art/reviews/standing-wechat/zhangjiao.png",
+        "bytes": 49591,
+        "sha256": "8d75f58a294efdea7f3e8e52b2e80774f44f496979bef14f47d2f81f400ff649"
+      },
+      {
+        "path": "art/reviews/training-forms/guanyu-battle.png",
+        "bytes": 599644,
+        "sha256": "daab4a6e72ec13422f5043bcfb5f9e1d37417e7436d4ab91d61d208c8d5556da"
+      },
+      {
+        "path": "art/reviews/training-forms/guanyu-panel.png",
+        "bytes": 325391,
+        "sha256": "7c2628dcb8461548168f34bb8f2882b2a99e58b57d149caaa35c3f1f713b81f7"
+      },
+      {
+        "path": "art/reviews/training-forms/liubei-battle.png",
+        "bytes": 603853,
+        "sha256": "c326d988d7e6ad8fca70ffe8dad2f1188262ddac2fe75ba77d18fb6d220177da"
+      },
+      {
+        "path": "art/reviews/training-forms/liubei-panel.png",
+        "bytes": 333369,
+        "sha256": "e6731c43cf28a094ce4a64ed195f8bf80739b60008088b6b9e2d1843acad09af"
+      },
+      {
+        "path": "art/reviews/training-forms/overview.png",
+        "bytes": 1187480,
+        "sha256": "d3193984c2c4d30750f266b7bd40c59960d33405068afa05cdaa156deaee32e8"
+      },
+      {
+        "path": "art/reviews/training-forms/validation.json",
+        "bytes": 6197,
+        "sha256": "685a990bf542912cf64c08d486e98c060104b0b0f37e190657c4647b426ae6f4"
+      },
+      {
+        "path": "art/reviews/training-forms/zhangfei-battle.png",
+        "bytes": 601154,
+        "sha256": "32e22ffff93894d91ee0f9ab41a04cf33aec85329d16551643ae0636a7d1aa83"
+      },
+      {
+        "path": "art/reviews/training-forms/zhangfei-panel.png",
+        "bytes": 326323,
+        "sha256": "103a71879b977c07b432a3fff42e16a962efbaf35d27002209c611b5148b59e8"
       },
       {
         "path": "art/reviews/training-hit/accepted-hit.jpg",
@@ -2862,6 +3162,26 @@
         "path": "art/runtime-lvbu/trot-source.png",
         "bytes": 1384131,
         "sha256": "7f8d0b5af3ee8fff95d0498555166b0b54b92692f82801bd8a5f4b0ec220cad7"
+      },
+      {
+        "path": "art/runtime-pets/manifest.json",
+        "bytes": 4272,
+        "sha256": "3e3a5c3b5e83c8e682ba92a8998bb5f85993456cb70f82668f39cb3c762519a0"
+      },
+      {
+        "path": "art/runtime-pets/prompt.txt",
+        "bytes": 2848,
+        "sha256": "c4dc3a336c69f1644bf145cb5bc112cc5c3f67e078fd03e072bc5ec34cf6772e"
+      },
+      {
+        "path": "art/runtime-pets/README.md",
+        "bytes": 526,
+        "sha256": "9b3ebb521bc2881db836d524f8a4a15a283243b1504204be1281205ef5eae48f"
+      },
+      {
+        "path": "art/runtime-pets/source.png",
+        "bytes": 1696109,
+        "sha256": "79853ef51992e3fcd9aab566ebd238a92424d8886b0c4e480e63a246ebcf03c9"
       },
       {
         "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
@@ -3190,8 +3510,8 @@
       },
       {
         "path": "art/runtime-youth/protected.json",
-        "bytes": 6395,
-        "sha256": "d26f8d7d84fc1c49d216f7bc2f8c98412ca4dbd0dc12999618b9799769bf467c"
+        "bytes": 6470,
+        "sha256": "cc5030134db4067898a2dd322def485752580d4c92a6695206cc13aae438ad50"
       },
       {
         "path": "art/runtime-youth/README.md",
@@ -3799,6 +4119,21 @@
         "sha256": "4bb10e517f5c04708ef096b358ba5e8818cb28d413f9f1072bde909a06ece046"
       },
       {
+        "path": "assets/remote-content/pets.meta",
+        "bytes": 274,
+        "sha256": "b1d9d15d116522129486a4d9f40e05ae6a910b8fa9abfde5a4a5c52cc0c43e42"
+      },
+      {
+        "path": "assets/remote-content/pets/pets.png",
+        "bytes": 292298,
+        "sha256": "f4c89a23efc4cb3fb2fa764f30d60cd62950c4ab32935c8ca955d31ad7280249"
+      },
+      {
+        "path": "assets/remote-content/pets/pets.png.meta",
+        "bytes": 988,
+        "sha256": "8f018b7fb040f8d19570d7aedd62233ea484ddf1c072182a4b03a06c644025d9"
+      },
+      {
         "path": "assets/results.meta",
         "bytes": 277,
         "sha256": "08f3202fe825483f46dddd2fe240b63068b702f81f5c6f44686dc3140747a9dd"
@@ -3875,8 +4210,8 @@
       },
       {
         "path": "assets/scripts/boss-battle.ts",
-        "bytes": 16936,
-        "sha256": "7044f61da565d888169eb24e0281c4a5b2131303d4994887925e36a705b5c7bc"
+        "bytes": 19592,
+        "sha256": "a9ac6205c38c476d59a551f1090b6724bbf518df9fbb3f02b153a9a2f2aaacfe"
       },
       {
         "path": "assets/scripts/boss-battle.ts.meta",
@@ -3885,8 +4220,8 @@
       },
       {
         "path": "assets/scripts/boss-effects.ts",
-        "bytes": 11335,
-        "sha256": "f08b55864b8fb4614704eb9b45e801b85ebd922f8583ede9552c35a1756e92dc"
+        "bytes": 14310,
+        "sha256": "3e5a51779131a1649f76c26bbe3cd978e0db239ad59c1157f8d3890af3031c7f"
       },
       {
         "path": "assets/scripts/boss-effects.ts.meta",
@@ -3895,8 +4230,8 @@
       },
       {
         "path": "assets/scripts/boss-roster.ts",
-        "bytes": 3361,
-        "sha256": "c955eb63fcddd95461003c27c8b8e14003e147ed949d65645621d7599282f37e"
+        "bytes": 3569,
+        "sha256": "c8b61b1fe65a28c06f28d5558dda4056dc4d136fbe623beadf5f476f260578fd"
       },
       {
         "path": "assets/scripts/boss-roster.ts.meta",
@@ -3915,8 +4250,8 @@
       },
       {
         "path": "assets/scripts/campaign.ts",
-        "bytes": 22240,
-        "sha256": "2c3ae1993c2e668672fe7df82d526aacbec9513b9a3ab3cb1bfcdc1eb2347b50"
+        "bytes": 22279,
+        "sha256": "7bd79ab3ac0a8b37ff4bfa28ffa0c60b5ae0f62888e7cd17b8f8a782c9fcee3e"
       },
       {
         "path": "assets/scripts/campaign.ts.meta",
@@ -3925,8 +4260,8 @@
       },
       {
         "path": "assets/scripts/CampaignView.ts",
-        "bytes": 51135,
-        "sha256": "da7e4a98b4bc8d07a6ad0e4e31cfd903c284baf98a8a55b0f34da3077ef0ad23"
+        "bytes": 52152,
+        "sha256": "9fd716be291ddc76d1b583d8f95900302c8562576e42183ed10b35e101009c59"
       },
       {
         "path": "assets/scripts/CampaignView.ts.meta",
@@ -3935,8 +4270,8 @@
       },
       {
         "path": "assets/scripts/chronicle-art.ts",
-        "bytes": 5588,
-        "sha256": "f0687669778027aece416cfd2cce1be9e92f9e6555db2276764a1e23bd6d8bc7"
+        "bytes": 5726,
+        "sha256": "21e6250870c8cae7e41b3bc01d100f961c78af626770117284f93695db4ff57e"
       },
       {
         "path": "assets/scripts/chronicle-art.ts.meta",
@@ -3955,8 +4290,8 @@
       },
       {
         "path": "assets/scripts/chronicles-data.ts",
-        "bytes": 26510,
-        "sha256": "02a5a9723cef50af4509b014b2dffee725d8a638a6bd379dce2b35e4a2e273ae"
+        "bytes": 26511,
+        "sha256": "c3d28f9fb21d1edc868ce59e3581d03d3c95912fffe1225a437961e211d78dc5"
       },
       {
         "path": "assets/scripts/chronicles-data.ts.meta",
@@ -4035,8 +4370,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 13796,
-        "sha256": "92d9632b4c66454c3c71a162b3266e31fe334d36381836b13e9bca02bc28a3db"
+        "bytes": 13868,
+        "sha256": "e5a7f91c4dd0982a26072787b05ba754507ca45ca69599a035841d2b7157fa0d"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -4062,6 +4397,16 @@
         "path": "assets/scripts/desktop-keyboard.ts.meta",
         "bytes": 171,
         "sha256": "4a61e66936ecb20d5ab7a0c045de39569c53d9d5bc07ae48522b267814f7cda1"
+      },
+      {
+        "path": "assets/scripts/endless.ts",
+        "bytes": 845,
+        "sha256": "df89729031ef9b63493b0ac7e42aac1bc561d4a21c518be4748c0ea7e1c52b8c"
+      },
+      {
+        "path": "assets/scripts/endless.ts.meta",
+        "bytes": 142,
+        "sha256": "bd4552c71fcb22b8e4512bebdcf1a18028d03d83323166dc7186dc1325a916f6"
       },
       {
         "path": "assets/scripts/enemy-action-effects.ts",
@@ -4135,8 +4480,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 232937,
-        "sha256": "3423ab18c79c2b797d05db227c26eb14fa501ecc8ee42df4c183646f4fac5c20"
+        "bytes": 247480,
+        "sha256": "971fcb3d5972f1c42280e873ced3d67b81dc5ea4bc470a99b453b106f21541dd"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -4155,8 +4500,8 @@
       },
       {
         "path": "assets/scripts/growth-effects.ts",
-        "bytes": 3343,
-        "sha256": "5401b81744b53dbf12be79c1e30bd058b58806505a38fdebcec4d368febf2565"
+        "bytes": 3347,
+        "sha256": "d93a2d82cb6bfe3581ff9c046b5d2119344f9e31bed1a98073ae9b076262ac2e"
       },
       {
         "path": "assets/scripts/growth-effects.ts.meta",
@@ -4195,8 +4540,8 @@
       },
       {
         "path": "assets/scripts/hero-growth.ts",
-        "bytes": 2940,
-        "sha256": "73194d98a110d7ca4855731b94177b62d0b68ad7c5876def82f159d736685b03"
+        "bytes": 2982,
+        "sha256": "a9d248520f1db05b7d8ab7b8e70a820cf53c33f9f841ef5f62ee51ef8f843e85"
       },
       {
         "path": "assets/scripts/hero-growth.ts.meta",
@@ -4225,8 +4570,8 @@
       },
       {
         "path": "assets/scripts/HeroShowcase.ts",
-        "bytes": 8017,
-        "sha256": "bf3c39c7a768225b74e23363013bfed41052bcf7467b5aeaf2fbeecafe7804af"
+        "bytes": 8271,
+        "sha256": "c3dcd498e0a7308a137b27cfb0f15aa606cdcc439a9e974ad686f42f1f318614"
       },
       {
         "path": "assets/scripts/HeroShowcase.ts.meta",
@@ -4294,9 +4639,29 @@
         "sha256": "b16ebb7642b9a1df2754416c6a62b039ef4d59cb0f6fbabdb3d1d2fa681f4e16"
       },
       {
+        "path": "assets/scripts/native-audio-files.ts",
+        "bytes": 2827,
+        "sha256": "7c45e868f51b4efb4c0089f99ca1a64736aa030ff441364bff351607e6cb1693"
+      },
+      {
+        "path": "assets/scripts/native-audio-files.ts.meta",
+        "bytes": 171,
+        "sha256": "8998487f12e04fbb4062524c9249713f7afd3f783393ca91de5318d65ee62dea"
+      },
+      {
+        "path": "assets/scripts/native-music.ts",
+        "bytes": 3630,
+        "sha256": "d1550fa5300f3b5eca693495778421c1196d50e32c8838ad79b16e39f635134b"
+      },
+      {
+        "path": "assets/scripts/native-music.ts.meta",
+        "bytes": 171,
+        "sha256": "fe50488d65542ec0826686577c7e165b4386666751320d67cf49b00628807dbf"
+      },
+      {
         "path": "assets/scripts/native-sfx.ts",
-        "bytes": 4272,
-        "sha256": "9ab7720d878bc2ab05ee4cfb0a6955800b730b30bac28d4994bc0469e278b27c"
+        "bytes": 4552,
+        "sha256": "e81cad9f562543e2985aa24604f8fdf26bfd8dc1538ab1708cde25eed12a497e"
       },
       {
         "path": "assets/scripts/native-sfx.ts.meta",
@@ -4364,6 +4729,36 @@
         "sha256": "ffcc5e28f3aaae87ea5cd63fcfedc2473d0c8b4ef7611f338507adac15c949b7"
       },
       {
+        "path": "assets/scripts/pet-art.ts",
+        "bytes": 872,
+        "sha256": "a82329fab7aaa9994609ef135fe4c5262206bc5685eabb3316c1431a7d73e581"
+      },
+      {
+        "path": "assets/scripts/pet-art.ts.meta",
+        "bytes": 171,
+        "sha256": "f8718902338d41013ccfb33e31dba0efb0eb7ec2fde8712d256c985bba76729d"
+      },
+      {
+        "path": "assets/scripts/pets.ts",
+        "bytes": 7323,
+        "sha256": "58448aa8538f06aa2db9a71e5ebc5f3908690618aed28282b7bf08e39070aadd"
+      },
+      {
+        "path": "assets/scripts/pets.ts.meta",
+        "bytes": 171,
+        "sha256": "85a766302a8b91aef2a60b66bb37579276f4482813ed39582f74c5f18de7b204"
+      },
+      {
+        "path": "assets/scripts/PetView.ts",
+        "bytes": 4027,
+        "sha256": "8019bf682393bb9c734cb256fc69bb2ec77131832cc7dc37d69dddbac4a1d4ae"
+      },
+      {
+        "path": "assets/scripts/PetView.ts.meta",
+        "bytes": 171,
+        "sha256": "66992b0dfa15c5dc6fc709ae81b10ff2cbfc70d287b47bf7e9a4d03893d896b9"
+      },
+      {
         "path": "assets/scripts/presentation-art.ts",
         "bytes": 2226,
         "sha256": "2fd8f4e8dadcf67d9f024003b7b4a2245937ddf33970e7be115aaa0cc7012342"
@@ -4395,8 +4790,8 @@
       },
       {
         "path": "assets/scripts/ResultView.ts",
-        "bytes": 9904,
-        "sha256": "b3d3e58a874baa318b513cf38191ef4affe3570182b741810434694beb5fdaa9"
+        "bytes": 10443,
+        "sha256": "a9e26d12ef35fd21a157297f92c36becb23c5ca4e6c104194b5de7f1e94dde18"
       },
       {
         "path": "assets/scripts/ResultView.ts.meta",
@@ -4435,8 +4830,8 @@
       },
       {
         "path": "assets/scripts/stage-data.ts",
-        "bytes": 8240,
-        "sha256": "485bc75fc877b6ad3f7a6557f9bcac4462b3972f091496b58c08199053eb8486"
+        "bytes": 10269,
+        "sha256": "2e81c1cbfb9cae153f081a32a7d67f075494fa208ab7ad7cb77f4fe590aedfc1"
       },
       {
         "path": "assets/scripts/stage-data.ts.meta",
@@ -4445,8 +4840,8 @@
       },
       {
         "path": "assets/scripts/stage-progress.ts",
-        "bytes": 5573,
-        "sha256": "d7fb365f53bb1922aee98445e163909c6da3f8ee253fc39f68b0c24eb3a5414b"
+        "bytes": 7057,
+        "sha256": "a626a5da41673a45286ac78af9d37280406d6dbe9683b9d62f31f700513a183f"
       },
       {
         "path": "assets/scripts/stage-progress.ts.meta",
@@ -4465,8 +4860,8 @@
       },
       {
         "path": "assets/scripts/StageViews.ts",
-        "bytes": 18260,
-        "sha256": "2ccaa8ad549ff77eafe8775176770540e702fab7a9ab67a138f212ae682618bf"
+        "bytes": 21631,
+        "sha256": "7d37e05b1f34cb9770647b5c1868afc3ca245ddbab864edd4a94dcf2a3b06411"
       },
       {
         "path": "assets/scripts/StageViews.ts.meta",
@@ -4485,8 +4880,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 17006,
-        "sha256": "56a8c21346fc4369f8e3ba743da2231c84663d25feb18395ac0cf603fa0549dc"
+        "bytes": 17737,
+        "sha256": "ecd269f48dd2fd9cbc0c20ca173a103ddc03cb673cb2c48760fd0265ff4e6552"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -4505,8 +4900,8 @@
       },
       {
         "path": "assets/scripts/TrainingView.ts",
-        "bytes": 10485,
-        "sha256": "27ef9781fcd2b02ef505ffff75ff7d381887e6ffb3ffa37ca11836b7f8188d28"
+        "bytes": 15583,
+        "sha256": "56a093784cc0da9637422fb245fe9526a1c1b7d1920831cb12d423923e56e19a"
       },
       {
         "path": "assets/scripts/TrainingView.ts.meta",
@@ -4550,8 +4945,8 @@
       },
       {
         "path": "assets/scripts/weapons.ts",
-        "bytes": 9509,
-        "sha256": "4a281b818d509ae78b859e8e21796ac77a1a279534d5b03acd39f7797df78c93"
+        "bytes": 9533,
+        "sha256": "4e76043c199a739d88b3306810e61a2b90c5cdc352c7a4b66dce6cd3d0921645"
       },
       {
         "path": "assets/scripts/weapons.ts.meta",
@@ -5291,7 +5686,7 @@
       {
         "path": "cdn-assets/published.json",
         "bytes": 251,
-        "sha256": "0d4bd830cd15191496e199b57d20d8924403727438d6d22a599aa2b240e55dc1"
+        "sha256": "46dbba6d945213128604458194d5b5b3b75b1defc59e4290b0271493e70dd72c"
       },
       {
         "path": "cdn-assets/README.md",
@@ -5300,8 +5695,8 @@
       },
       {
         "path": "cdn-assets/release.json",
-        "bytes": 23138,
-        "sha256": "a6dd018be7ecbfca516f60201061cdfb00567ff075e1f1cf0abdfea741e5a5ea"
+        "bytes": 23905,
+        "sha256": "11e73ca9905f892d321deb571691a5b3641f66e59eefff50b57650113a0c1a7f"
       },
       {
         "path": "config/build-camp-review.json",
@@ -5315,8 +5710,8 @@
       },
       {
         "path": "config/cdn.json",
-        "bytes": 605,
-        "sha256": "f2f25c4660bb93d97be5e169af5cc436cdb7d406a04b5b6719df08e319c8d45a"
+        "bytes": 617,
+        "sha256": "4eb1ceb150f179c4b287b0e0c6120bc8ae0b14250f8243fc9ee57bd425e67478"
       },
       {
         "path": "docs/audio-integration-v93.md",
@@ -5327,6 +5722,11 @@
         "path": "docs/audio-review-v1.md",
         "bytes": 8407,
         "sha256": "fb912e5b6c78da950dde50b79bfca37404885f5a8254cd19fbadd295eee29970"
+      },
+      {
+        "path": "docs/balance-v916.md",
+        "bytes": 14656,
+        "sha256": "63dd3d74ff86f115a73e961584641aa4cdfc9b6e247941ad89ed1a15937735da"
       },
       {
         "path": "docs/battle-music.md",
@@ -5345,8 +5745,8 @@
       },
       {
         "path": "docs/design/01-campaign-and-bosses.md",
-        "bytes": 10188,
-        "sha256": "55a5cefadc1b9f0b9a8a0b71e79e4c3bdc70bd30f1843798688d88d33e49d791"
+        "bytes": 10347,
+        "sha256": "26a54b68a8947f9c9fbf86ee66f2e52051ba59f21ac15797e9b6981c5a556766"
       },
       {
         "path": "docs/design/02-enemy-codex.md",
@@ -5395,8 +5795,8 @@
       },
       {
         "path": "docs/hero-growth-proposal.md",
-        "bytes": 6816,
-        "sha256": "afeca5e4a016240d0afd210baddcd9ebbcee8a5d075cf4c8088d26654629f1b5"
+        "bytes": 12448,
+        "sha256": "d89ff7369da9533ab925acf69e4310470e63cf5f17d2e8a7ce03bd7210606e79"
       },
       {
         "path": "docs/lvbu-red-hare.md",
@@ -5434,6 +5834,11 @@
         "sha256": "ff015938f6fd1235d9a804b30d414051d759719e4f60c9c377e8b6dc120af80a"
       },
       {
+        "path": "docs/pets-and-unlocks-v917.md",
+        "bytes": 7085,
+        "sha256": "f9a4a96c143dda417c6663c6835f4245cf6b28fc8b693e132435a4a1202e4592"
+      },
+      {
         "path": "docs/resources-cdn-v94.md",
         "bytes": 6715,
         "sha256": "d45246692f0c1bc522ea08cf9d5917106c02f7d2717dade8f9b95c3cf9cfbbe6"
@@ -5460,8 +5865,8 @@
       },
       {
         "path": "docs/seven-bosses.md",
-        "bytes": 6852,
-        "sha256": "ee5d98dea92a92f125f04d819cfd2346133dce98a5ae50c9108a78f7fd7d43c0"
+        "bytes": 7008,
+        "sha256": "4b059e92f1f02bdc5746c3db552b765367c0a40bc29797e3ee97759c265fb9a8"
       },
       {
         "path": "docs/skill-review/feishu-document.json",
@@ -5492,6 +5897,11 @@
         "path": "docs/stability-v912.md",
         "bytes": 3467,
         "sha256": "239808f97f80d49eb11423bb87977a28bf691069c2af9648247cad84cf9643c8"
+      },
+      {
+        "path": "docs/stability-v915.md",
+        "bytes": 4836,
+        "sha256": "ade941c3f900197fc30392e23d9598625e39f481de0a6a5ae047bbbe571631c9"
       },
       {
         "path": "docs/stage-challenge-v8/README.md",
@@ -5539,6 +5949,11 @@
         "sha256": "f0e23d6a1d5448c7b7d976b9e35361dcdad6885d321518a77976fcd48fcf1747"
       },
       {
+        "path": "docs/standing-stability-wechat.md",
+        "bytes": 4815,
+        "sha256": "2dc04abb54f4e268139723bb0ae5c16fe177105a067696ebfce1de00e85eee70"
+      },
+      {
         "path": "docs/weapon-sounds.md",
         "bytes": 843,
         "sha256": "e33aa76ae60b68a6ba416da3e8726a361671514fd60bc9ee4616b98caf1243b1"
@@ -5550,8 +5965,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 2177,
-        "sha256": "dbc473af34d43fe6c482d831fed4f95b3573864978e0f587b02e10fd4530f1b1"
+        "bytes": 2341,
+        "sha256": "1efbe293c0e2e43eaf575dc0ae6f2731f141c49f70cb1d328f85c60d57498e2a"
       },
       {
         "path": "project.config.json",
@@ -5570,13 +5985,13 @@
       },
       {
         "path": "scripts/build-review.cjs",
-        "bytes": 720,
-        "sha256": "adefbeca3de0237b7bcbc9d39c9aced654a89b2862805a2f18e2273054da2793"
+        "bytes": 769,
+        "sha256": "0295ff43859f36ea067332f67a9fa48872e34067781d174e75a9f208d030ab75"
       },
       {
         "path": "scripts/build-wechat.cjs",
-        "bytes": 2536,
-        "sha256": "df412ff1c1d6fad02c42b37ba2c98eec616b184be0ecd4e9b531c96cd95546dc"
+        "bytes": 2585,
+        "sha256": "ab2c3aea69b79047b1c01157ff4efa76f396b2c762708ad505bccf24ec5d8019"
       },
       {
         "path": "scripts/capture-all-ground-review.mjs",
@@ -5587,6 +6002,11 @@
         "path": "scripts/capture-audio-review.mjs",
         "bytes": 8066,
         "sha256": "17a79bc1244d476548c27c68b014f900d1b5ad74332acb6143bc66fe547098e3"
+      },
+      {
+        "path": "scripts/capture-balance-review.mjs",
+        "bytes": 5268,
+        "sha256": "96717c1ac2e7e43072f3e3a754bdb3edbd9adeaff0eef4327bb76a363ac64317"
       },
       {
         "path": "scripts/capture-bosses-review.mjs",
@@ -5649,6 +6069,11 @@
         "sha256": "3d81b7b857069aa036a4af738be0b94cb79827f7df68f0c85fd517713e353f2e"
       },
       {
+        "path": "scripts/capture-pets-review.mjs",
+        "bytes": 7049,
+        "sha256": "9ee9df7b3000efcaea716bbb583dd67db47e14485094b24cefca5e356502879e"
+      },
+      {
         "path": "scripts/capture-sandal-review.mjs",
         "bytes": 7425,
         "sha256": "a4e26af5ba58f9e77062d1c6f197d04d8fb4381933afe09e09a97fb4cc873687"
@@ -5667,6 +6092,11 @@
         "path": "scripts/capture-stage-surface-review.mjs",
         "bytes": 7522,
         "sha256": "4a33bd3668db34048a0d8965cd3293e957035d4eba9ae097f28b7f121f22d1fd"
+      },
+      {
+        "path": "scripts/capture-training-forms-review.mjs",
+        "bytes": 5505,
+        "sha256": "6f6dcf26a95dbf63dfe619fd81eb95ed3aee753658c4c2a562e55930889b6134"
       },
       {
         "path": "scripts/capture-training-hit.mjs",
@@ -5702,6 +6132,16 @@
         "path": "scripts/check.cjs",
         "bytes": 1941,
         "sha256": "dd30bb5d50dcb138b89ccc5f0e853b7d4f6f9c5231fe28dcf7bcbb15e2c4501e"
+      },
+      {
+        "path": "scripts/cocos-build-lock.cjs",
+        "bytes": 1835,
+        "sha256": "010c1cf1f467f451a45ddbdc6b5cf5cb6d136834df7b225eb0e192f4934130d6"
+      },
+      {
+        "path": "scripts/diagnose-long-session.mjs",
+        "bytes": 9095,
+        "sha256": "c3418850d7b118be1dd5726d5aee25a1207de657412ba5e4dbd6d59cbf1ecf46"
       },
       {
         "path": "scripts/diagnose-props-memory.mjs",
@@ -5819,6 +6259,11 @@
         "sha256": "69d6a6100edafd77fe664f3210d52b52483c1a3b5d713cc2660b6be2f2f3e14d"
       },
       {
+        "path": "scripts/pack-pet-art.cjs",
+        "bytes": 2386,
+        "sha256": "c9b3afb065a87d49cab14553167438786fc0e9e132107cf8e46cac1467faff41"
+      },
+      {
         "path": "scripts/pack-stage-art.cjs",
         "bytes": 4924,
         "sha256": "3ef89cb81ac73f448858fdce154970dd5c5290388f9d2ddaec95e48f4f52cf33"
@@ -5865,18 +6310,23 @@
       },
       {
         "path": "scripts/test-audio-scenes.cjs",
-        "bytes": 4690,
-        "sha256": "62598fdbfddd04b8c5480efc2479e48df98b1d9788d4c35e0bdc22aeed4f6e1e"
+        "bytes": 4944,
+        "sha256": "4d624b33fba2490f64747ddeff31a552e6ffc0d6edd7da6c4c5865f728a5df43"
+      },
+      {
+        "path": "scripts/test-battle-balance.cjs",
+        "bytes": 8381,
+        "sha256": "395d2f19a8f4dc0c69f81a1b2d7a1221bb5b3262d3a7ce91806aa5e5f54c80b8"
       },
       {
         "path": "scripts/test-bosses.cjs",
-        "bytes": 12429,
-        "sha256": "b7a8037e0dcfca0b3d62b25500f194c8d4a76fd2426a682882835a2594f21651"
+        "bytes": 12564,
+        "sha256": "23470bc0fb2fc9891429c615a38ddc332b9bab0265fc1ba0003811c77ae4c021"
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 89854,
-        "sha256": "7c9a2a70aa2ac41abfb67599b33a2e52e96458ffde478be35eafc54ca1b199c4"
+        "bytes": 89974,
+        "sha256": "48da78db3323feacd1100d6b3fa33c482322223e0c61c27e9547ed5cc10a5bec"
       },
       {
         "path": "scripts/test-chronicles.cjs",
@@ -5899,6 +6349,11 @@
         "sha256": "66a6b7250dadece41257cd494d6a6af2679c3e07e69381755ea5ea01d2551d55"
       },
       {
+        "path": "scripts/test-endless-settings.cjs",
+        "bytes": 4864,
+        "sha256": "eecca7226ce1aa7d501ba4b5b8f1f728c64d4fdfb797c9724182eb6cb455caf3"
+      },
+      {
         "path": "scripts/test-enemy-actions.cjs",
         "bytes": 6062,
         "sha256": "baaa95eecf280fab1d3422d11e0de58b5f47de118e657c6f22b9ea87c116dd5b"
@@ -5915,13 +6370,13 @@
       },
       {
         "path": "scripts/test-hero-growth.cjs",
-        "bytes": 8249,
-        "sha256": "695a7fc11e1620b453f18676262ff925caab53df6a1a96d259aecbfd60d1d072"
+        "bytes": 8318,
+        "sha256": "68112fc973384277ac6eb14fb221b6c15dea0887a8a7c45d392c77dc8715ac77"
       },
       {
         "path": "scripts/test-kiting-results.cjs",
         "bytes": 5423,
-        "sha256": "2d6de9890fda856f54db2ac0b2a4af984fcddd84ce7b96ccb358460e98b28cf7"
+        "sha256": "6dc7eea8f9d0528ca5929c498b7be7d6ef6dd2ba0f76560495a0d315d5e44019"
       },
       {
         "path": "scripts/test-lossless-art.cjs",
@@ -5939,14 +6394,24 @@
         "sha256": "78bf95534964d225820689b2b62669cd64f15f29d3137717fa85ff6a5d477480"
       },
       {
+        "path": "scripts/test-native-audio-files.cjs",
+        "bytes": 4574,
+        "sha256": "1c7bfc0ea3e917cef7571b5f0e4f863482a5397ae36ef005acab600409d5f800"
+      },
+      {
         "path": "scripts/test-native-sfx.cjs",
-        "bytes": 4914,
-        "sha256": "35ac5211a24294b698ec96ce409c5ccae917d127dc6a19916367c57ece29e986"
+        "bytes": 4801,
+        "sha256": "d46a2bdab62badb8fbf7ccdd315d0de4768b43d9c737e18780552250ca5e08ce"
       },
       {
         "path": "scripts/test-performance.cjs",
         "bytes": 15669,
         "sha256": "11f6a51b4e92c52eb89c535fe4bbe8a5f461799ab0b4ae62d93f80bba0097587"
+      },
+      {
+        "path": "scripts/test-pets-unlocks.cjs",
+        "bytes": 9024,
+        "sha256": "89ee0c23f341b8e6f5029855573cce8ba8094c0f59bb2635a422db8a315808ea"
       },
       {
         "path": "scripts/test-presentation-art.cjs",
@@ -5965,8 +6430,8 @@
       },
       {
         "path": "scripts/test-review-stability.cjs",
-        "bytes": 14015,
-        "sha256": "3fe35c4562ec2f5f83b90cd0d0da94fd15aa658e401ed57c76d482280f28cb57"
+        "bytes": 14077,
+        "sha256": "5d29f50631cfba5414013ddf5fdd6df185b47fbb2e2b2a79242ce4417f4b76d7"
       },
       {
         "path": "scripts/test-skill-recast.cjs",
@@ -5980,8 +6445,8 @@
       },
       {
         "path": "scripts/test-stage-challenge.cjs",
-        "bytes": 14181,
-        "sha256": "3507227ebc0b89e932049a25e3e4aef8948e5ed61fb830d144d7fb6ca5b2f41e"
+        "bytes": 14188,
+        "sha256": "92f841853e99ea0e5bbab70d527753f4d9da01afd88fb80c0bcb62253f54d94a"
       },
       {
         "path": "scripts/test-startup.cjs",
@@ -5990,8 +6455,8 @@
       },
       {
         "path": "scripts/test-training.cjs",
-        "bytes": 10415,
-        "sha256": "38738d7ad91575fceeadc27555a55f3da7961495d53dda24a5ca2219143c625e"
+        "bytes": 13440,
+        "sha256": "4e82404ac84c290537f0e72ad22beef8dd5ebfa00a8de72ff1febafe2d934833"
       },
       {
         "path": "scripts/test-ui-layout.cjs",
@@ -6015,8 +6480,8 @@
       },
       {
         "path": "scripts/test-youth-heroes.cjs",
-        "bytes": 5222,
-        "sha256": "44f37528a3a1e22c4eaca03605689d1887ef02903086120de0278e28cec90dc9"
+        "bytes": 5025,
+        "sha256": "44e6dce808cf60c458dfee167dfc209bba163ac1bc0096df93fd95a472c8ffa3"
       },
       {
         "path": "scripts/vendor-inflate.cjs",
@@ -6069,7 +6534,8 @@
     "enemyArchetypes": 40,
     "bossEncounters": 7,
     "bossPeople": 7,
-    "genericSkills": 12
+    "genericSkills": 12,
+    "pets": 3
   },
   "rules": {
     "initialShop": false,
@@ -6102,19 +6568,27 @@
   "heroGrowth": {
     "enabled": true,
     "progress": "per hero consecutive first clears",
-    "heartPerClear": 1,
+    "heartPerStage": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "petAfterStage": 5,
     "mountBaseSpeedBonus": 0.3,
     "dash": {
       "cooldown": 6,
       "duration": {
-        "liubei": 0.22,
-        "guanyu": 0.25,
-        "zhangfei": 0.3
+        "liubei": 0.28,
+        "guanyu": 0.28,
+        "zhangfei": 0.32
       },
       "distance": {
-        "liubei": 240,
-        "guanyu": 200,
-        "zhangfei": 160
+        "liubei": 420,
+        "guanyu": 420,
+        "zhangfei": 360
       }
     },
     "states": [
@@ -6151,7 +6625,8 @@
         "combo": false,
         "mounted": false,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "liubei",
@@ -6186,7 +6661,8 @@
         "combo": false,
         "mounted": false,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "liubei",
@@ -6221,13 +6697,14 @@
         "combo": false,
         "mounted": true,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "liubei",
         "clears": 3,
         "title": "双剑三连",
-        "maxHearts": 8,
+        "maxHearts": 7,
         "speed": 390,
         "signature": "twin-swords",
         "tier": 1,
@@ -6256,13 +6733,14 @@
         "combo": true,
         "mounted": true,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "liubei",
         "clears": 4,
         "title": "双剑三连",
-        "maxHearts": 9,
+        "maxHearts": 7,
         "speed": 390,
         "signature": "twin-swords",
         "tier": 1,
@@ -6291,13 +6769,14 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "liubei",
         "clears": 5,
         "title": "仁德小英雄",
-        "maxHearts": 10,
+        "maxHearts": 7,
         "speed": 390,
         "signature": "twin-swords",
         "tier": 1,
@@ -6326,13 +6805,14 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": true
+        "finalOutfit": true,
+        "pet": "桃桃兔"
       },
       {
         "hero": "liubei",
         "clears": 6,
         "title": "仁德小英雄",
-        "maxHearts": 11,
+        "maxHearts": 7,
         "speed": 390,
         "signature": "twin-swords",
         "tier": 1,
@@ -6361,7 +6841,8 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": true
+        "finalOutfit": true,
+        "pet": "桃桃兔"
       },
       {
         "hero": "guanyu",
@@ -6396,7 +6877,8 @@
         "combo": false,
         "mounted": false,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "guanyu",
@@ -6431,7 +6913,8 @@
         "combo": false,
         "mounted": false,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "guanyu",
@@ -6466,13 +6949,14 @@
         "combo": false,
         "mounted": true,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "guanyu",
         "clears": 3,
         "title": "青龙三连斩",
-        "maxHearts": 8,
+        "maxHearts": 7,
         "speed": 448.5,
         "signature": "guandao",
         "tier": 1,
@@ -6501,13 +6985,14 @@
         "combo": true,
         "mounted": true,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "guanyu",
         "clears": 4,
         "title": "青龙三连斩",
-        "maxHearts": 9,
+        "maxHearts": 7,
         "speed": 448.5,
         "signature": "guandao",
         "tier": 1,
@@ -6536,13 +7021,14 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "guanyu",
         "clears": 5,
         "title": "少年武圣",
-        "maxHearts": 10,
+        "maxHearts": 7,
         "speed": 448.5,
         "signature": "guandao",
         "tier": 1,
@@ -6571,13 +7057,14 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": true
+        "finalOutfit": true,
+        "pet": "小青蛟"
       },
       {
         "hero": "guanyu",
         "clears": 6,
         "title": "少年武圣",
-        "maxHearts": 11,
+        "maxHearts": 7,
         "speed": 448.5,
         "signature": "guandao",
         "tier": 1,
@@ -6606,7 +7093,8 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": true
+        "finalOutfit": true,
+        "pet": "小青蛟"
       },
       {
         "hero": "zhangfei",
@@ -6641,7 +7129,8 @@
         "combo": false,
         "mounted": false,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "zhangfei",
@@ -6676,7 +7165,8 @@
         "combo": false,
         "mounted": false,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "zhangfei",
@@ -6711,13 +7201,14 @@
         "combo": false,
         "mounted": true,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "zhangfei",
         "clears": 3,
         "title": "震地三连",
-        "maxHearts": 9,
+        "maxHearts": 8,
         "speed": 351,
         "signature": "serpent-spear",
         "tier": 1,
@@ -6746,13 +7237,14 @@
         "combo": true,
         "mounted": true,
         "dash": false,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "zhangfei",
         "clears": 4,
         "title": "震地三连",
-        "maxHearts": 10,
+        "maxHearts": 8,
         "speed": 351,
         "signature": "serpent-spear",
         "tier": 1,
@@ -6781,13 +7273,14 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": false
+        "finalOutfit": false,
+        "pet": null
       },
       {
         "hero": "zhangfei",
         "clears": 5,
         "title": "燕人小霸王",
-        "maxHearts": 11,
+        "maxHearts": 8,
         "speed": 351,
         "signature": "serpent-spear",
         "tier": 1,
@@ -6816,13 +7309,14 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": true
+        "finalOutfit": true,
+        "pet": "橘虎崽"
       },
       {
         "hero": "zhangfei",
         "clears": 6,
         "title": "燕人小霸王",
-        "maxHearts": 12,
+        "maxHearts": 8,
         "speed": 351,
         "signature": "serpent-spear",
         "tier": 1,
@@ -6851,9 +7345,103 @@
         "combo": true,
         "mounted": true,
         "dash": true,
-        "finalOutfit": true
+        "finalOutfit": true,
+        "pet": "橘虎崽"
       }
     ]
+  },
+  "pets": {
+    "afterPersonalClear": 5,
+    "occupiesWeaponSlot": false,
+    "canBeAttacked": false,
+    "blocksEnemyShots": false,
+    "damageFromWeapons": false,
+    "maxShots": 2,
+    "atlas": "assets/remote-content/pets/pets.png",
+    "atlasRgbaBytes": 1048576,
+    "rules": {
+      "liubei": {
+        "interval": 1.2,
+        "damage": 42,
+        "range": 400
+      },
+      "guanyu": {
+        "interval": 1.5,
+        "damage": 54,
+        "range": 165
+      },
+      "zhangfei": {
+        "interval": 1.8,
+        "damage": 60,
+        "range": 220
+      }
+    },
+    "lowStageDamage": [
+      0.4,
+      0.5,
+      0.65,
+      0.8,
+      0.9,
+      1
+    ]
+  },
+  "weaponUnlocks": {
+    "profileVersion": 2,
+    "commonPerStage": [
+      [
+        "peach"
+      ],
+      [
+        "halberd"
+      ],
+      [
+        "heavy-crossbow"
+      ],
+      [
+        "oil-jar"
+      ],
+      [
+        "feather-fan"
+      ],
+      [
+        "star-lamps"
+      ]
+    ],
+    "perHero": {
+      "liubei": [
+        "firecracker",
+        "qinggang",
+        "phoenix-bow",
+        "smg",
+        "taiping-book",
+        "wood-ox"
+      ],
+      "guanyu": [
+        "seven-saber",
+        "chain-hook",
+        "repeater",
+        "yitian",
+        "thunder",
+        "bagua"
+      ],
+      "zhangfei": [
+        "gourd",
+        "twin-halberds",
+        "hand-halberd",
+        "shotgun",
+        "thunder-bomb",
+        "rocket"
+      ]
+    },
+    "reserved": [
+      "sword",
+      "silver-spear",
+      "ancient-saber",
+      "trident",
+      "caltrops",
+      "wood-kite"
+    ],
+    "legacyGrantsPreserved": true
   },
   "stageChallenge": {
     "waveRosters": [
@@ -7063,9 +7651,9 @@
         "waves": [
           1.5,
           1.9,
-          1.2,
-          2.4,
-          2.4
+          1.5,
+          2.6,
+          3
         ],
         "stipends": [
           25,
@@ -7080,9 +7668,9 @@
         "waves": [
           1.875,
           2.375,
-          1.5,
-          3,
-          3
+          1.875,
+          3.25,
+          3.75
         ],
         "stipends": [
           28,
@@ -7097,9 +7685,9 @@
         "waves": [
           2.2875,
           2.8975,
-          1.83,
-          3.66,
-          3.66
+          2.2875,
+          3.965,
+          4.575
         ],
         "stipends": [
           30,
@@ -7114,9 +7702,9 @@
         "waves": [
           2.7375,
           3.4675,
-          2.19,
-          4.38,
-          4.38
+          2.7375,
+          4.745,
+          5.475
         ],
         "stipends": [
           33,
@@ -7131,9 +7719,9 @@
         "waves": [
           3.225,
           4.085,
-          2.58,
-          5.16,
-          5.16
+          3.225,
+          5.59,
+          6.45
         ],
         "stipends": [
           35,
@@ -7148,9 +7736,9 @@
         "waves": [
           3.75,
           4.75,
-          3,
-          6,
-          6
+          3.75,
+          6.5,
+          7.5
         ],
         "stipends": [
           38,
@@ -7182,12 +7770,7 @@
         "targetPreBossBudget": 403,
         "firstClear": {
           "weapons": [
-            "taiping-book",
-            "thunder",
-            "gourd",
-            "seven-saber",
-            "peach",
-            "firecracker"
+            "peach"
           ],
           "passives": [
             "A07",
@@ -7233,13 +7816,7 @@
         "targetPreBossBudget": 493,
         "firstClear": {
           "weapons": [
-            "halberd",
-            "guandao",
-            "serpent-spear",
-            "chain-hook",
-            "sword",
-            "twin-swords",
-            "silver-spear"
+            "halberd"
           ],
           "passives": [
             "A08",
@@ -7285,13 +7862,7 @@
         "targetPreBossBudget": 603,
         "firstClear": {
           "weapons": [
-            "phoenix-bow",
-            "heavy-crossbow",
-            "repeater",
-            "trident",
-            "caltrops",
-            "hand-halberd",
-            "feather-fan"
+            "heavy-crossbow"
           ],
           "passives": [
             "C03",
@@ -7337,11 +7908,6 @@
         "targetPreBossBudget": 713,
         "firstClear": {
           "weapons": [
-            "qinggang",
-            "yitian",
-            "ancient-saber",
-            "twin-halberds",
-            "smg",
             "oil-jar"
           ],
           "passives": [
@@ -7369,7 +7935,7 @@
         "unlock": "current hero clears previous stage",
         "waves": 5,
         "boss": "menghuo",
-        "miniBoss": "象兵统领",
+        "miniBoss": "象兵统领与双护卫",
         "roster": [
           "E24",
           "E25",
@@ -7384,10 +7950,7 @@
         "targetPreBossBudget": 813,
         "firstClear": {
           "weapons": [
-            "shotgun",
-            "rocket",
-            "thunder-bomb",
-            "wood-ox"
+            "feather-fan"
           ],
           "passives": [
             "E04",
@@ -7433,9 +7996,7 @@
         "targetPreBossBudget": 918,
         "firstClear": {
           "weapons": [
-            "star-lamps",
-            "bagua",
-            "wood-kite"
+            "star-lamps"
           ],
           "passives": [
             "D05",
@@ -7903,9 +8464,9 @@
       ],
       "firstShopPrices": [
         20,
-        32,
-        50,
-        80
+        34,
+        58,
+        92
       ],
       "sound": {
         "attack": null,
@@ -8130,9 +8691,9 @@
       ],
       "firstShopPrices": [
         20,
-        32,
-        50,
-        80
+        34,
+        58,
+        92
       ],
       "sound": {
         "attack": "wood-attack",
@@ -8357,9 +8918,9 @@
       ],
       "firstShopPrices": [
         20,
-        32,
-        50,
-        80
+        34,
+        58,
+        92
       ],
       "sound": {
         "attack": "petal-attack",
@@ -8584,9 +9145,9 @@
       ],
       "firstShopPrices": [
         20,
-        32,
-        50,
-        80
+        34,
+        58,
+        92
       ],
       "sound": {
         "attack": "blade-attack",
@@ -8811,9 +9372,9 @@
       ],
       "firstShopPrices": [
         20,
-        32,
-        50,
-        80
+        34,
+        58,
+        92
       ],
       "sound": {
         "attack": "blast-attack",
@@ -9038,9 +9599,9 @@
       ],
       "firstShopPrices": [
         39,
-        62,
-        98,
-        156
+        66,
+        113,
+        179
       ],
       "sound": {
         "attack": "gun-attack",
@@ -9265,9 +9826,9 @@
       ],
       "firstShopPrices": [
         39,
-        62,
-        98,
-        156
+        66,
+        113,
+        179
       ],
       "sound": {
         "attack": "gun-attack",
@@ -9492,9 +10053,9 @@
       ],
       "firstShopPrices": [
         45,
-        72,
-        113,
-        180
+        77,
+        131,
+        207
       ],
       "sound": {
         "attack": "blast-attack",
@@ -9729,9 +10290,9 @@
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "spirit-attack",
@@ -9743,7 +10304,7 @@
       "name": "五雷符",
       "category": "magic",
       "starter": false,
-      "damage": 46,
+      "damage": 23,
       "interval": 1.25,
       "range": 390,
       "speed": 0,
@@ -9760,7 +10321,7 @@
           "tier": 1,
           "name": "普通 I",
           "color": "#c5c5ad",
-          "damage": 46,
+          "damage": 23,
           "interval": 1.25,
           "range": 390,
           "quality": 1,
@@ -9781,7 +10342,7 @@
           "tier": 2,
           "name": "精良 II",
           "color": "#519ec9",
-          "damage": 62.1,
+          "damage": 31.05,
           "interval": 1.2,
           "range": 400,
           "quality": 2,
@@ -9802,7 +10363,7 @@
           "tier": 3,
           "name": "稀有 III",
           "color": "#a46bc2",
-          "damage": 82.8,
+          "damage": 41.4,
           "interval": 1.15,
           "range": 410,
           "quality": 3,
@@ -9823,7 +10384,7 @@
           "tier": 4,
           "name": "传说 IV",
           "color": "#d45a48",
-          "damage": 110.4,
+          "damage": 55.2,
           "interval": 1.1,
           "range": 420,
           "quality": 4,
@@ -9844,7 +10405,7 @@
       "openingStatsByHero": [
         {
           "hero": "liubei",
-          "damage": 46,
+          "damage": 23,
           "interval": 1.25,
           "range": 390,
           "quality": 1,
@@ -9864,11 +10425,11 @@
           "pierceFactor": 0.7,
           "splashFactor": 0.55,
           "spread": 1,
-          "singleTargetDpsCeiling": 37.72
+          "singleTargetDpsCeiling": 18.86
         },
         {
           "hero": "guanyu",
-          "damage": 46,
+          "damage": 23,
           "interval": 1.470588,
           "range": 390,
           "quality": 1,
@@ -9888,11 +10449,11 @@
           "pierceFactor": 0.7,
           "splashFactor": 0.55,
           "spread": 1,
-          "singleTargetDpsCeiling": 32.062
+          "singleTargetDpsCeiling": 16.031
         },
         {
           "hero": "zhangfei",
-          "damage": 46,
+          "damage": 23,
           "interval": 1.086957,
           "range": 390,
           "quality": 1,
@@ -9912,11 +10473,11 @@
           "pierceFactor": 0.7,
           "splashFactor": 0.55,
           "spread": 1,
-          "singleTargetDpsCeiling": 43.378
+          "singleTargetDpsCeiling": 21.689
         },
         {
           "hero": "zhaoyun",
-          "damage": 46,
+          "damage": 23,
           "interval": 1.25,
           "range": 390,
           "quality": 1,
@@ -9936,11 +10497,11 @@
           "pierceFactor": 0.7,
           "splashFactor": 0.55,
           "spread": 1,
-          "singleTargetDpsCeiling": 37.72
+          "singleTargetDpsCeiling": 18.86
         },
         {
           "hero": "kongming",
-          "damage": 46,
+          "damage": 23,
           "interval": 1.25,
           "range": 429,
           "quality": 1,
@@ -9960,14 +10521,14 @@
           "pierceFactor": 0.7,
           "splashFactor": 0.55,
           "spread": 1,
-          "singleTargetDpsCeiling": 37.72
+          "singleTargetDpsCeiling": 18.86
         }
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "thunder-attack",
@@ -10210,9 +10771,9 @@
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "ritual-attack",
@@ -10438,9 +10999,9 @@
       ],
       "firstShopPrices": [
         32,
-        51,
-        80,
-        128
+        54,
+        93,
+        147
       ],
       "sound": {
         "attack": "blade-attack",
@@ -10666,9 +11227,9 @@
       ],
       "firstShopPrices": [
         46,
-        74,
-        115,
-        184
+        78,
+        133,
+        212
       ],
       "sound": {
         "attack": "heavy-attack",
@@ -10894,9 +11455,9 @@
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "heavy-attack",
@@ -11122,9 +11683,9 @@
       ],
       "firstShopPrices": [
         48,
-        77,
-        120,
-        192
+        82,
+        139,
+        221
       ],
       "sound": {
         "attack": "heavy-attack",
@@ -11350,9 +11911,9 @@
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "heavy-attack",
@@ -11578,9 +12139,9 @@
       ],
       "firstShopPrices": [
         40,
-        64,
-        100,
-        160
+        68,
+        116,
+        184
       ],
       "sound": {
         "attack": "blade-attack",
@@ -11806,9 +12367,9 @@
       ],
       "firstShopPrices": [
         48,
-        77,
-        120,
-        192
+        82,
+        139,
+        221
       ],
       "sound": {
         "attack": "blade-attack",
@@ -12034,9 +12595,9 @@
       ],
       "firstShopPrices": [
         38,
-        61,
-        95,
-        152
+        65,
+        110,
+        175
       ],
       "sound": {
         "attack": "blade-attack",
@@ -12262,9 +12823,9 @@
       ],
       "firstShopPrices": [
         44,
-        70,
-        110,
-        176
+        75,
+        128,
+        202
       ],
       "sound": {
         "attack": "blade-attack",
@@ -12490,9 +13051,9 @@
       ],
       "firstShopPrices": [
         44,
-        70,
-        110,
-        176
+        75,
+        128,
+        202
       ],
       "sound": {
         "attack": "heavy-attack",
@@ -12718,9 +13279,9 @@
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "heavy-attack",
@@ -12946,9 +13507,9 @@
       ],
       "firstShopPrices": [
         30,
-        48,
-        75,
-        120
+        51,
+        87,
+        138
       ],
       "sound": {
         "attack": "bow-attack",
@@ -13174,9 +13735,9 @@
       ],
       "firstShopPrices": [
         40,
-        64,
-        100,
-        160
+        68,
+        116,
+        184
       ],
       "sound": {
         "attack": "bow-attack",
@@ -13402,9 +13963,9 @@
       ],
       "firstShopPrices": [
         38,
-        61,
-        95,
-        152
+        65,
+        110,
+        175
       ],
       "sound": {
         "attack": "bow-attack",
@@ -13630,9 +14191,9 @@
       ],
       "firstShopPrices": [
         44,
-        70,
-        110,
-        176
+        75,
+        128,
+        202
       ],
       "sound": {
         "attack": "bow-attack",
@@ -13858,9 +14419,9 @@
       ],
       "firstShopPrices": [
         34,
-        54,
-        85,
-        136
+        58,
+        99,
+        156
       ],
       "sound": {
         "attack": "blade-attack",
@@ -14086,9 +14647,9 @@
       ],
       "firstShopPrices": [
         36,
-        58,
-        90,
-        144
+        61,
+        104,
+        166
       ],
       "sound": {
         "attack": "blade-attack",
@@ -14314,9 +14875,9 @@
       ],
       "firstShopPrices": [
         34,
-        54,
-        85,
-        136
+        58,
+        99,
+        156
       ],
       "sound": {
         "attack": "blast-attack",
@@ -14542,9 +15103,9 @@
       ],
       "firstShopPrices": [
         44,
-        70,
-        110,
-        176
+        75,
+        128,
+        202
       ],
       "sound": {
         "attack": "blast-attack",
@@ -14770,9 +15331,9 @@
       ],
       "firstShopPrices": [
         34,
-        54,
-        85,
-        136
+        58,
+        99,
+        156
       ],
       "sound": {
         "attack": "ritual-attack",
@@ -15007,9 +15568,9 @@
       ],
       "firstShopPrices": [
         38,
-        61,
-        95,
-        152
+        65,
+        110,
+        175
       ],
       "sound": {
         "attack": "thunder-attack",
@@ -15235,9 +15796,9 @@
       ],
       "firstShopPrices": [
         46,
-        74,
-        115,
-        184
+        78,
+        133,
+        212
       ],
       "sound": {
         "attack": "ritual-attack",
@@ -15463,9 +16024,9 @@
       ],
       "firstShopPrices": [
         44,
-        70,
-        110,
-        176
+        75,
+        128,
+        202
       ],
       "sound": {
         "attack": "ritual-attack",
@@ -15691,9 +16252,9 @@
       ],
       "firstShopPrices": [
         42,
-        67,
-        105,
-        168
+        71,
+        122,
+        193
       ],
       "sound": {
         "attack": "wood-attack",
@@ -15919,9 +16480,9 @@
       ],
       "firstShopPrices": [
         40,
-        64,
-        100,
-        160
+        68,
+        116,
+        184
       ],
       "sound": {
         "attack": "gun-attack",
@@ -22223,35 +22784,37 @@
           {
             "name": "四世箭阵",
             "kind": "summon",
-            "cd": 7.2,
+            "cd": 5,
             "windup": 1,
-            "description": "列阵1秒＋绷弦0.7秒 · 四箭齐射\n平行箭速280，中央180宽通道",
+            "description": "本体五箭扇射＋四弓手两轮齐射\n箭速340；弓手可击杀，箭阵保留缺口",
             "count": 4,
             "units": [
               "E11"
             ],
-            "speed": 280
+            "speed": 340
           },
           {
             "name": "官渡弩阵",
             "kind": "summon",
-            "cd": 12,
+            "cd": 8.5,
             "windup": 1.1,
-            "description": "两台可拆弩车，各520生命\n交替上弦1秒，重弩速度300，7秒后撤",
+            "description": "耐久弩车交替三连重弩，箭速360\n同步锁定一圈箭雨，预警后落地",
             "count": 2,
             "units": [
               "E35"
             ],
-            "duration": 7
+            "duration": 8.5,
+            "radius": 94
           },
           {
             "name": "万军齐射",
             "kind": "summon",
-            "cd": 13,
+            "cd": 10.5,
             "windup": 1.1,
-            "description": "列阵1.1秒＋绷弦0.7秒 · 三轮箭墙\n令旗变向后再放箭，缺口始终可见",
+            "description": "半血：三轮变向箭墙＋三处错时箭雨\n箭雨R92、落点固定；离开圈后再穿缺口",
             "count": 4,
-            "speed": 280
+            "speed": 340,
+            "radius": 92
           }
         ]
       },
@@ -22286,33 +22849,35 @@
           {
             "name": "倚天连刃",
             "kind": "shots",
-            "cd": 5.5,
+            "cd": 4.5,
             "windup": 0.9,
-            "description": "两道银锋错时飞行，间隔0.65秒\n速度290 · 刃宽68，锁向不追踪",
-            "count": 2,
-            "speed": 290,
-            "delay": 0.65
+            "description": "一刃起手、双刃交叉、双刃追压\n三拍共五道银锋，速度340，锁向不追尾",
+            "count": 5,
+            "speed": 340,
+            "delay": 0.5
           },
           {
             "name": "疑兵换影",
             "kind": "clone",
-            "cd": 10,
-            "windup": 1,
-            "description": "本体横移120 · 留两个纸影5秒\n纸影各90生命、可打散，不隐身不免伤",
+            "cd": 7,
+            "windup": 0.95,
+            "description": "本体横移160，两纸影蓄势后各斩一道剑气\n原位置出现R145剑阵；纸影可击杀阻止出招",
             "count": 2,
-            "duration": 5
+            "duration": 5.5,
+            "radius": 145
           },
           {
             "name": "虎豹合围",
             "kind": "summon",
-            "cd": 13,
+            "cd": 10,
             "windup": 1.1,
-            "description": "两骑分别蓄势后锁向直冲\n错开1.3秒，本体最后补一道剑气",
+            "description": "两名耐久虎豹骑错开1.3秒锁向冲锋\n本体三段剑气＋R160落剑，横向走位避让",
             "count": 2,
             "units": [
               "E21"
             ],
-            "speed": 440
+            "speed": 520,
+            "radius": 160
           }
         ]
       },
@@ -22349,26 +22914,27 @@
             "kind": "summon",
             "cd": 8,
             "windup": 1,
-            "description": "四头战猪各438生命 · 速度320\n刨地蓄势后直冲，击倒可打开缺口",
+            "description": "四头战猪从远处列阵，刨地0.55秒\n速度520直冲1.25秒；冲锋无敌，收招可攻击",
             "count": 4,
-            "speed": 320
+            "speed": 520
           },
           {
             "name": "群狼围猎",
             "kind": "summon",
             "cd": 10,
             "windup": 1,
-            "description": "三狼各275生命 · 先绕两侧包抄\n各自再伏身0.9秒，锁旧位置扑击",
-            "count": 3
+            "description": "三狼绕侧包抄，伏身0.75秒后锁向扑击\n速度660；扑击无敌，结束后恢复可受伤",
+            "count": 3,
+            "speed": 660
           },
           {
             "name": "万象开道",
             "kind": "summon",
             "cd": 14,
             "windup": 1.2,
-            "description": "两象各1125生命 · 速度230\n前后错开1.5秒，直线重踏后离场",
+            "description": "两象错开1.5秒，踏地蓄势0.8秒\n速度380冲锋1.45秒；冲锋无敌，收招可攻击",
             "count": 2,
-            "speed": 230
+            "speed": 380
           }
         ]
       },
@@ -22403,31 +22969,31 @@
           {
             "name": "落子成灾",
             "kind": "zones",
-            "cd": 6,
-            "windup": 1,
-            "description": "三枚棋子R78 · 间隔0.4秒落地\n落点锁定、中央预告、落后0.55秒收光",
+            "cd": 4.8,
+            "windup": 0.8,
+            "description": "三枚棋子R78 · 每隔0.28秒落地\n首枚0.8秒预告，落点锁定，余光无伤",
             "count": 3,
             "radius": 78,
-            "delay": 0.4
+            "delay": 0.28
           },
           {
             "name": "阴阳双龙",
             "kind": "shots",
-            "cd": 10,
-            "windup": 1.1,
-            "description": "黑白双龙沿固定曲线穿场\n速度210 · 中间最窄安全通道180",
+            "cd": 8,
+            "windup": 0.85,
+            "description": "黑白双龙沿固定曲线穿场\n速度260 · 中央180宽安全通道保留",
             "count": 2,
-            "speed": 210
+            "speed": 260
           },
           {
             "name": "五丈星劫",
             "kind": "zones",
-            "cd": 13,
-            "windup": 1.15,
-            "description": "三枚星石R92 · 间隔0.55秒落下\n格点预告、不覆盖整张棋盘",
+            "cd": 10.5,
+            "windup": 0.9,
+            "description": "三枚星石R92 · 每隔0.35秒落下\n首枚0.9秒预告，不覆盖整张棋盘",
             "count": 3,
             "radius": 92,
-            "delay": 0.55
+            "delay": 0.35
           }
         ]
       }
@@ -22871,7 +23437,7 @@
         "group": "骑兵",
         "kind": "cavalry",
         "first": 1,
-        "hp": 110,
+        "hp": 176,
         "speed": 118,
         "range": 260,
         "cycle": 3.67,
@@ -22883,7 +23449,7 @@
         "radius": 34,
         "firstStage": 2,
         "firstChapterValues": {
-          "hp": 100,
+          "hp": 161,
           "speed": 118.708,
           "coins": 4,
           "damage": 1
@@ -22895,7 +23461,7 @@
         "group": "骑兵",
         "kind": "cavalry",
         "first": 2,
-        "hp": 190,
+        "hp": 304,
         "speed": 92,
         "range": 300,
         "cycle": 4.6,
@@ -22907,7 +23473,7 @@
         "radius": 34,
         "firstStage": 6,
         "firstChapterValues": {
-          "hp": 286,
+          "hp": 457,
           "speed": 94.76,
           "coins": 5,
           "damage": 1
@@ -22919,7 +23485,7 @@
         "group": "骑兵",
         "kind": "cavalry",
         "first": 5,
-        "hp": 160,
+        "hp": 256,
         "speed": 132,
         "range": 300,
         "cycle": 4.2,
@@ -22931,7 +23497,7 @@
         "radius": 34,
         "firstStage": 4,
         "firstChapterValues": {
-          "hp": 189,
+          "hp": 303,
           "speed": 134.376,
           "coins": 5,
           "damage": 1
@@ -22943,7 +23509,7 @@
         "group": "骑兵",
         "kind": "cavalry",
         "first": 5,
-        "hp": 100,
+        "hp": 160,
         "speed": 120,
         "range": 420,
         "cycle": 3,
@@ -22955,7 +23521,7 @@
         "radius": 34,
         "firstStage": 3,
         "firstChapterValues": {
-          "hp": 104,
+          "hp": 166,
           "speed": 121.44,
           "coins": 4,
           "damage": 1
@@ -22967,7 +23533,7 @@
         "group": "骑兵",
         "kind": "cavalry",
         "first": 5,
-        "hp": 120,
+        "hp": 192,
         "speed": 126,
         "range": 430,
         "cycle": 3.6,
@@ -22979,7 +23545,7 @@
         "radius": 34,
         "firstStage": 2,
         "firstChapterValues": {
-          "hp": 109,
+          "hp": 175,
           "speed": 126.756,
           "coins": 4,
           "damage": 1
@@ -22991,7 +23557,7 @@
         "group": "骑兵",
         "kind": "cavalry",
         "first": 6,
-        "hp": 88,
+        "hp": 141,
         "speed": 138,
         "range": 240,
         "cycle": 4.1,
@@ -23003,7 +23569,7 @@
         "radius": 34,
         "firstStage": 5,
         "firstChapterValues": {
-          "hp": 118,
+          "hp": 188,
           "speed": 141.312,
           "coins": 4,
           "damage": 1
@@ -23015,7 +23581,7 @@
         "group": "重骑",
         "kind": "cavalry",
         "first": 6,
-        "hp": 320,
+        "hp": 512,
         "speed": 62,
         "range": 330,
         "cycle": 5,
@@ -23027,7 +23593,7 @@
         "radius": 48,
         "firstStage": 5,
         "firstChapterValues": {
-          "hp": 428,
+          "hp": 684,
           "speed": 63.488,
           "coins": 7,
           "damage": 1
@@ -23795,219 +24361,219 @@
         "weaponPrices": {
           "sandal": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "pole": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "peach": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "cleaver": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "firecracker": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "smg": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "shotgun": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "rocket": [
             45,
-            72,
-            113,
-            180
+            77,
+            131,
+            207
           ],
           "sword": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "thunder": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "gourd": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "twin-swords": [
             32,
-            51,
-            80,
-            128
+            54,
+            93,
+            147
           ],
           "guandao": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "serpent-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "halberd": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "silver-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "qinggang": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "yitian": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "seven-saber": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "ancient-saber": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "twin-halberds": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "trident": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "caltrops": [
             30,
-            48,
-            75,
-            120
+            51,
+            87,
+            138
           ],
           "repeater": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "phoenix-bow": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "heavy-crossbow": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "hand-halberd": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "chain-hook": [
             36,
-            58,
-            90,
-            144
+            61,
+            104,
+            166
           ],
           "oil-jar": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "thunder-bomb": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "feather-fan": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "taiping-book": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "star-lamps": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "bagua": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "wood-ox": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "wood-kite": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ]
         }
       },
@@ -24017,219 +24583,219 @@
         "weaponPrices": {
           "sandal": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "pole": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "peach": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "cleaver": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "firecracker": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "smg": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "shotgun": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "rocket": [
             45,
-            72,
-            113,
-            180
+            77,
+            131,
+            207
           ],
           "sword": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "thunder": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "gourd": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "twin-swords": [
             32,
-            51,
-            80,
-            128
+            54,
+            93,
+            147
           ],
           "guandao": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "serpent-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "halberd": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "silver-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "qinggang": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "yitian": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "seven-saber": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "ancient-saber": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "twin-halberds": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "trident": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "caltrops": [
             30,
-            48,
-            75,
-            120
+            51,
+            87,
+            138
           ],
           "repeater": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "phoenix-bow": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "heavy-crossbow": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "hand-halberd": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "chain-hook": [
             36,
-            58,
-            90,
-            144
+            61,
+            104,
+            166
           ],
           "oil-jar": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "thunder-bomb": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "feather-fan": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "taiping-book": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "star-lamps": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "bagua": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "wood-ox": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "wood-kite": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ]
         }
       },
@@ -24239,219 +24805,219 @@
         "weaponPrices": {
           "sandal": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "pole": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "peach": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "cleaver": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "firecracker": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "smg": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "shotgun": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "rocket": [
             45,
-            72,
-            113,
-            180
+            77,
+            131,
+            207
           ],
           "sword": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "thunder": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "gourd": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "twin-swords": [
             32,
-            51,
-            80,
-            128
+            54,
+            93,
+            147
           ],
           "guandao": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "serpent-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "halberd": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "silver-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "qinggang": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "yitian": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "seven-saber": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "ancient-saber": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "twin-halberds": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "trident": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "caltrops": [
             30,
-            48,
-            75,
-            120
+            51,
+            87,
+            138
           ],
           "repeater": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "phoenix-bow": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "heavy-crossbow": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "hand-halberd": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "chain-hook": [
             36,
-            58,
-            90,
-            144
+            61,
+            104,
+            166
           ],
           "oil-jar": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "thunder-bomb": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "feather-fan": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "taiping-book": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "star-lamps": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "bagua": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "wood-ox": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "wood-kite": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ]
         }
       },
@@ -24461,219 +25027,219 @@
         "weaponPrices": {
           "sandal": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "pole": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "peach": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "cleaver": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "firecracker": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "smg": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "shotgun": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "rocket": [
             45,
-            72,
-            113,
-            180
+            77,
+            131,
+            207
           ],
           "sword": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "thunder": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "gourd": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "twin-swords": [
             32,
-            51,
-            80,
-            128
+            54,
+            93,
+            147
           ],
           "guandao": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "serpent-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "halberd": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "silver-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "qinggang": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "yitian": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "seven-saber": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "ancient-saber": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "twin-halberds": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "trident": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "caltrops": [
             30,
-            48,
-            75,
-            120
+            51,
+            87,
+            138
           ],
           "repeater": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "phoenix-bow": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "heavy-crossbow": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "hand-halberd": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "chain-hook": [
             36,
-            58,
-            90,
-            144
+            61,
+            104,
+            166
           ],
           "oil-jar": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "thunder-bomb": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "feather-fan": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "taiping-book": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "star-lamps": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "bagua": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "wood-ox": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "wood-kite": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ]
         }
       },
@@ -24683,219 +25249,219 @@
         "weaponPrices": {
           "sandal": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "pole": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "peach": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "cleaver": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "firecracker": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "smg": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "shotgun": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "rocket": [
             45,
-            72,
-            113,
-            180
+            77,
+            131,
+            207
           ],
           "sword": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "thunder": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "gourd": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "twin-swords": [
             32,
-            51,
-            80,
-            128
+            54,
+            93,
+            147
           ],
           "guandao": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "serpent-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "halberd": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "silver-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "qinggang": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "yitian": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "seven-saber": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "ancient-saber": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "twin-halberds": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "trident": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "caltrops": [
             30,
-            48,
-            75,
-            120
+            51,
+            87,
+            138
           ],
           "repeater": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "phoenix-bow": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "heavy-crossbow": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "hand-halberd": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "chain-hook": [
             36,
-            58,
-            90,
-            144
+            61,
+            104,
+            166
           ],
           "oil-jar": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "thunder-bomb": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "feather-fan": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "taiping-book": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "star-lamps": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "bagua": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "wood-ox": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "wood-kite": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ]
         }
       },
@@ -24905,219 +25471,219 @@
         "weaponPrices": {
           "sandal": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "pole": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "peach": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "cleaver": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "firecracker": [
             20,
-            32,
-            50,
-            80
+            34,
+            58,
+            92
           ],
           "smg": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "shotgun": [
             39,
-            62,
-            98,
-            156
+            66,
+            113,
+            179
           ],
           "rocket": [
             45,
-            72,
-            113,
-            180
+            77,
+            131,
+            207
           ],
           "sword": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "thunder": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "gourd": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "twin-swords": [
             32,
-            51,
-            80,
-            128
+            54,
+            93,
+            147
           ],
           "guandao": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "serpent-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "halberd": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "silver-spear": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "qinggang": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "yitian": [
             48,
-            77,
-            120,
-            192
+            82,
+            139,
+            221
           ],
           "seven-saber": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "ancient-saber": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "twin-halberds": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "trident": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "caltrops": [
             30,
-            48,
-            75,
-            120
+            51,
+            87,
+            138
           ],
           "repeater": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ],
           "phoenix-bow": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "heavy-crossbow": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "hand-halberd": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "chain-hook": [
             36,
-            58,
-            90,
-            144
+            61,
+            104,
+            166
           ],
           "oil-jar": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "thunder-bomb": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "feather-fan": [
             34,
-            54,
-            85,
-            136
+            58,
+            99,
+            156
           ],
           "taiping-book": [
             38,
-            61,
-            95,
-            152
+            65,
+            110,
+            175
           ],
           "star-lamps": [
             46,
-            74,
-            115,
-            184
+            78,
+            133,
+            212
           ],
           "bagua": [
             44,
-            70,
-            110,
-            176
+            75,
+            128,
+            202
           ],
           "wood-ox": [
             42,
-            67,
-            105,
-            168
+            71,
+            122,
+            193
           ],
           "wood-kite": [
             40,
-            64,
-            100,
-            160
+            68,
+            116,
+            184
           ]
         }
       }
@@ -25965,6 +26531,14 @@
         "sourceBytes": 572728
       },
       {
+        "path": "assets/remote-content/pets/",
+        "isBundle": true,
+        "bundleConfigID": "cdn-assets",
+        "bundleName": "pets",
+        "priority": 8,
+        "sourceBytes": 293286
+      },
+      {
         "path": "assets/results/",
         "isBundle": true,
         "bundleConfigID": "cdn-assets",
@@ -26459,6 +27033,13 @@
         "colorType": 2
       },
       {
+        "path": "art/concepts/hero-pets/design.png",
+        "bytes": 2734260,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
         "path": "art/concepts/hero-select-v4.2/training-ground-source.png",
         "bytes": 1921152,
         "width": 1672,
@@ -26704,6 +27285,76 @@
         "colorType": 2
       },
       {
+        "path": "art/reviews/balance-v916/caocao-crescents.png",
+        "bytes": 140496,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/caocao-sword-field.png",
+        "bytes": 189799,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/formation-cross.png",
+        "bytes": 148413,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/menghuo-armoured-charge.png",
+        "bytes": 206654,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/menghuo-elephant.png",
+        "bytes": 210261,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/overview.png",
+        "bytes": 615658,
+        "width": 1440,
+        "height": 1500,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/balance-v916/simayi-meteors.png",
+        "bytes": 186333,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/simayi-stones.png",
+        "bytes": 176848,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/yuanshao-rain.png",
+        "bytes": 202752,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/balance-v916/yuanshao-volley.png",
+        "bytes": 213315,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
         "path": "art/reviews/bosses/caocao.png",
         "bytes": 733533,
         "width": 1800,
@@ -26772,6 +27423,55 @@
         "width": 1440,
         "height": 750,
         "colorType": 6
+      },
+      {
+        "path": "art/reviews/endless-settings/boss.png",
+        "bytes": 902658,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-settings/confirm.png",
+        "bytes": 835957,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-settings/endless.png",
+        "bytes": 903205,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-settings/menu.png",
+        "bytes": 1284666,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-settings/progress.png",
+        "bytes": 843207,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-settings/settings.png",
+        "bytes": 842942,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-settings/shop.png",
+        "bytes": 418061,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
       },
       {
         "path": "art/reviews/enemy-actions/pressure.png",
@@ -27145,6 +27845,62 @@
         "colorType": 2
       },
       {
+        "path": "art/reviews/pets-v917/guanyu-attack.png",
+        "bytes": 916089,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/pets-v917/guanyu-idle.png",
+        "bytes": 908475,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/pets-v917/liubei-attack.png",
+        "bytes": 915500,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/pets-v917/liubei-idle.png",
+        "bytes": 911570,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/pets-v917/overview.png",
+        "bytes": 1662903,
+        "width": 1440,
+        "height": 1125,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/pets-v917/pet-first-clear.png",
+        "bytes": 633933,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/pets-v917/zhangfei-attack.png",
+        "bytes": 911285,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/pets-v917/zhangfei-idle.png",
+        "bytes": 912625,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
         "path": "art/reviews/sandal-grip/ground-1.png",
         "bytes": 841392,
         "width": 1440,
@@ -27425,6 +28181,71 @@
         "colorType": 6
       },
       {
+        "path": "art/reviews/standing-wechat/after-menghuo.png",
+        "bytes": 61916
+      },
+      {
+        "path": "art/reviews/standing-wechat/dongzhuo.png",
+        "bytes": 102914
+      },
+      {
+        "path": "art/reviews/standing-wechat/simayi.png",
+        "bytes": 51191
+      },
+      {
+        "path": "art/reviews/standing-wechat/zhangjiao.png",
+        "bytes": 49591
+      },
+      {
+        "path": "art/reviews/training-forms/guanyu-battle.png",
+        "bytes": 599644,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/training-forms/guanyu-panel.png",
+        "bytes": 325391,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/training-forms/liubei-battle.png",
+        "bytes": 603853,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/training-forms/liubei-panel.png",
+        "bytes": 333369,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/training-forms/overview.png",
+        "bytes": 1187480,
+        "width": 1440,
+        "height": 1125,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/training-forms/zhangfei-battle.png",
+        "bytes": 601154,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/training-forms/zhangfei-panel.png",
+        "bytes": 326323,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
         "path": "art/reviews/training/skills-wechat.png",
         "bytes": 643094,
         "width": 1722,
@@ -27590,6 +28411,13 @@
         "bytes": 1384131,
         "width": 1774,
         "height": 887,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-pets/source.png",
+        "bytes": 1696109,
+        "width": 971,
+        "height": 1619,
         "colorType": 6
       },
       {
@@ -28245,6 +29073,13 @@
         "bytes": 344466,
         "width": 768,
         "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "assets/remote-content/pets/pets.png",
+        "bytes": 292298,
+        "width": 512,
+        "height": 512,
         "colorType": 6
       },
       {

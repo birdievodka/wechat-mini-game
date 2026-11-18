@@ -1,0 +1,411 @@
+{
+  "version": "stage-v9.16-battle-pressure",
+  "scope": "real Cocos WebGL engineering keyframes, isolated browser; not phone play/FPS",
+  "records": [
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "官渡弩阵",
+      "index": 1,
+      "time": 1.6,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 9999,
+      "hazards": [
+        {
+          "kind": "rain",
+          "age": 1.5999999999999968,
+          "delay": 1.55,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [
+        {
+          "kind": "cart",
+          "phase": "windup",
+          "x": -260,
+          "y": -160,
+          "hp": 1950
+        },
+        {
+          "kind": "cart",
+          "phase": "ready",
+          "x": -260,
+          "y": 160,
+          "hp": 1950
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "yuanshao-rain.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "万军齐射",
+      "index": 2,
+      "time": 2.4,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "rain",
+          "age": 2.399999999999994,
+          "delay": 2.35,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "rain",
+          "age": 2.399999999999994,
+          "delay": 2.9000000000000004,
+          "x": 0,
+          "y": 155
+        },
+        {
+          "kind": "arrow",
+          "age": 0.6000000000000003,
+          "delay": 0,
+          "x": -18.938397166155653,
+          "y": -90.29257516230123
+        },
+        {
+          "kind": "arrow",
+          "age": 0.6000000000000003,
+          "delay": 0,
+          "x": -36.39676701262522,
+          "y": -12.220779215852815
+        },
+        {
+          "kind": "arrow",
+          "age": 0.6000000000000003,
+          "delay": 0,
+          "x": -75.6780991671817,
+          "y": 163.4407616636562
+        },
+        {
+          "kind": "arrow",
+          "age": 0.6000000000000003,
+          "delay": 0,
+          "x": -93.13646901365126,
+          "y": 241.51255761010466
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -242.41891306286433,
+          "y": -170.26715884782033,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -259.87728290933387,
+          "y": -92.1953629013719,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -299.15861506389035,
+          "y": 83.46617797813711,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -316.6169849103599,
+          "y": 161.53797392458557,
+          "hp": 423
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "yuanshao-volley.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "倚天连刃",
+      "index": 0,
+      "time": 1.8,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 1.4,
+          "x": -80.90398314078922,
+          "y": -12.78105224379162
+        },
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 1.4,
+          "x": -80.90398314078922,
+          "y": 72.78105224379162
+        },
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 1.9,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 1.9,
+          "x": -210,
+          "y": 30
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "caocao-crescents.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "疑兵换影",
+      "index": 1,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "sword-field",
+          "age": 1.799999999999996,
+          "delay": 1.75,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [
+        {
+          "kind": "decoy",
+          "phase": "windup",
+          "x": -260,
+          "y": -130,
+          "hp": 630
+        },
+        {
+          "kind": "decoy",
+          "phase": "windup",
+          "x": -260,
+          "y": 130,
+          "hp": 630
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "caocao-sword-field.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "猪突猛进",
+      "index": 0,
+      "time": 1.9,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -248.00000000000074,
+          "y": -157.5,
+          "hp": 1500
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -248.00000000000074,
+          "y": -52.5,
+          "hp": 1500
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -248.00000000000074,
+          "y": 52.5,
+          "hp": 1500
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -248.00000000000074,
+          "y": 157.5,
+          "hp": 1500
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "menghuo-armoured-charge.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "万象开道",
+      "index": 2,
+      "time": 2.2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "elephant",
+          "phase": "attack",
+          "x": -231.7149375662235,
+          "y": -276.1565679728623,
+          "hp": 3000
+        },
+        {
+          "kind": "elephant",
+          "phase": "ready",
+          "x": -280.5658139895032,
+          "y": 334.3767695585438,
+          "hp": 3000
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "menghuo-elephant.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "落子成灾",
+      "index": 0,
+      "time": 0.9,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "stone",
+          "age": 0.8999999999999992,
+          "delay": 0.8,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "stone",
+          "age": 0.8999999999999992,
+          "delay": 1.08,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "stone",
+          "age": 0.8999999999999992,
+          "delay": 1.36,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "simayi-stones.png"
+    },
+    {
+      "version": "stage-v9.16-battle-pressure",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "五丈星劫",
+      "index": 2,
+      "time": 1.05,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "meteor",
+          "age": 1.0499999999999987,
+          "delay": 0.9,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "meteor",
+          "age": 1.0499999999999987,
+          "delay": 1.25,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "meteor",
+          "age": 1.0499999999999987,
+          "delay": 1.6,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay",
+      "file": "simayi-meteors.png"
+    }
+  ],
+  "restored": {
+    "restored": true,
+    "saveUnchanged": true,
+    "version": "stage-v9.16-battle-pressure",
+    "storageRestored": true
+  },
+  "errors": [],
+  "wechat": {
+    "version": "stage-v9.16-battle-pressure",
+    "ready": true,
+    "phase": "menu",
+    "hp": 5,
+    "scope": "read-only runtime confirmation after simulator refresh; normal health, no gameplay/save injection",
+    "screenshot": "wechat-menu.jpg",
+    "appid": "wxbddcb8f0462f58cc",
+    "previewGenerated": true,
+    "packageBytes": 9124528,
+    "cdnVersion": "v95-996129359b44c659"
+  },
+  "tests": {
+    "fullRegression": "passed",
+    "typecheck": "passed",
+    "battleBalance": "passed (6000 shelves plus real spawner/coin/beast/settlement calls)",
+    "heroGrowthAndResults": "passed",
+    "checkAndSkill": "passed"
+  }
+}

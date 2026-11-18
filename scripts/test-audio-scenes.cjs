@@ -1,10 +1,10 @@
 const assert=require('node:assert/strict');
 const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-campaign.cjs');
 (async()=>{
- const musicMuted=storage.get('taoyuan-music-muted');cc.wechatHost={};
+ const musicMuted=storage.get('taoyuan-music-muted');cc.wechatHost={createInnerAudioContext(){return {src:'',volume:0,autoplay:false,loop:false,onPlay(fn){this.start=fn},play(){this.start?.()},pause(){},stop(){},destroy(){}}}};
  try{
-  storage.delete('taoyuan-music-muted');const boot=new GameBootstrap();await boot.start();finishStartup(boot);assert.equal(boot.phase,'menu');assert.equal(boot.audioUnlocked,false);assert.equal(boot.musicSource.playing,true,'WeChat menu attempts music without touching');boot.update(.08);assert.ok(boot.musicSource.volume>0);boot.onDestroy();
-  storage.set('taoyuan-music-muted','true');const muted=new GameBootstrap();await muted.start();finishStartup(muted);assert.equal(muted.musicSource.playing,false,'saved music mute wins over autoplay');muted.onDestroy();
+  storage.delete('taoyuan-music-muted');const boot=new GameBootstrap();await boot.start();finishStartup(boot);assert.equal(boot.phase,'menu');assert.equal(boot.audioUnlocked,false);assert.equal(boot.nativeMusic.playing,true,'WeChat menu attempts music without touching');boot.update(.08);assert.ok(boot.nativeMusic.volume>0);assert.equal(boot.musicSource,undefined,'native music never creates Cocos metadata/player pair');boot.onDestroy();
+  storage.set('taoyuan-music-muted','true');const muted=new GameBootstrap();await muted.start();finishStartup(muted);assert.equal(muted.nativeMusic.playing,false,'saved music mute wins over autoplay');muted.onDestroy();
  }finally{delete cc.wechatHost;if(musicMuted===undefined)storage.delete('taoyuan-music-muted');else storage.set('taoyuan-music-muted',musicMuted);}
  const g=await newGame();g.showMainMenu();g.unlockAudio();
  assert.equal(g.musicMode,'menu');assert.ok(g.musicSource.playing);

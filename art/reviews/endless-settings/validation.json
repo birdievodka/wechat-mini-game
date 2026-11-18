@@ -1,0 +1,14 @@
+{
+  "scope": "Isolated Cocos WebGL engineering fixture; no phone verification",
+  "version": "stage-v9.18-endless-settings",
+  "mode": true,
+  "tier": 1,
+  "phase": "battle",
+  "bosses": [
+    {
+      "id": "dongzhuo",
+      "hp": 7200
+    }
+  ],
+  "remaining": 30
+}

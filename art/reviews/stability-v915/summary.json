@@ -1,0 +1,21 @@
+{
+  "version": "stage-v9.15-session-audio",
+  "scope": "Real desktop Cocos/WebGL + HTMLAudio native-port bridge; not iPhone RSS/FPS or original crash reproduction",
+  "wallClockPressureSeconds": 360,
+  "pressureFramesAt350Seconds": 20514,
+  "renderBufferRangeBytes": [
+    42641516,
+    42641660
+  ],
+  "textureRangeBytes": [
+    103769708,
+    103769708
+  ],
+  "fixedAudioContexts": 7,
+  "actualStartsAt350Seconds": 7959,
+  "audioErrors": 0,
+  "formalScriptErrors": 0,
+  "productionCrossStageCycles": 5,
+  "storageRestored": true,
+  "pressureCaveat": "The 6-minute pressure segment completed. Original post-pressure fixture incorrectly forced a zero-second clear, which production recordClear correctly rejected. Formal path fixed to a controlled 180-second record and tested separately. Pressure snapshots recovered from original JSONL; no claim of original full harness success or retained CDP exception history."
+}

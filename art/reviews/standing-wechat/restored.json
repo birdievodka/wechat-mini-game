@@ -1,0 +1,17 @@
+{
+  "phase": "menu",
+  "hero": "liubei",
+  "normalMaxHp": 5,
+  "hp": 5,
+  "hasCurrentStatsOverride": false,
+  "hasUpdateOverride": false,
+  "testClosed": true,
+  "restored": true,
+  "version": "stage-v9.15-session-audio",
+  "memory": {
+    "bufferSize": 127490312,
+    "textureSize": 96809348
+  },
+  "sourceVoices": 6,
+  "musicSource": true
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "sandal",
+    "name": "草鞋",
+    "kind": "ranged",
+    "interval": 0.6,
+    "range": 360,
+    "white": 27.3,
+    "red": 74.5,
+    "price": 12
+  },
+  {
+    "id": "pole",
+    "name": "扁担",
+    "kind": "melee",
+    "interval": 0.9,
+    "range": 165,
+    "white": 36.4,
+    "red": 99.4,
+    "price": 14
+  },
+  {
+    "id": "peach",
+    "name": "桃花枝",
+    "kind": "magic",
+    "interval": 1,
+    "range": 360,
+    "white": 26.6,
+    "red": 72.7,
+    "price": 16
+  },
+  {
+    "id": "cleaver",
+    "name": "杀猪尖刀",
+    "kind": "melee",
+    "interval": 0.42,
+    "range": 135,
+    "white": 49.3,
+    "red": 146.1,
+    "price": 12
+  },
+  {
+    "id": "firecracker",
+    "name": "爆竹",
+    "kind": "magic",
+    "interval": 1.45,
+    "range": 390,
+    "white": 29.7,
+    "red": 81,
+    "price": 18
+  },
+  {
+    "id": "smg",
+    "name": "桃园突突枪",
+    "kind": "ranged",
+    "interval": 0.16,
+    "range": 400,
+    "white": 32,
+    "red": 87.4,
+    "price": 39
+  },
+  {
+    "id": "shotgun",
+    "name": "村口霰弹枪",
+    "kind": "ranged",
+    "interval": 0.9,
+    "range": 300,
+    "white": 36.4,
+    "red": 99.4,
+    "price": 39
+  },
+  {
+    "id": "rocket",
+    "name": "二踢脚火箭筒",
+    "kind": "ranged",
+    "interval": 2,
+    "range": 500,
+    "white": 40,
+    "red": 109,
+    "price": 45
+  },
+  {
+    "id": "sword",
+    "name": "青莲飞剑",
+    "kind": "magic",
+    "interval": 0.5,
+    "range": 150,
+    "white": 32.8,
+    "red": 89.5,
+    "price": 42
+  },
+  {
+    "id": "thunder",
+    "name": "五雷符",
+    "kind": "magic",
+    "interval": 1.25,
+    "range": 390,
+    "white": 18.9,
+    "red": 51.4,
+    "price": 42
+  },
+  {
+    "id": "gourd",
+    "name": "吞天葫芦",
+    "kind": "magic",
+    "interval": 1.6,
+    "range": 240,
+    "white": 19.2,
+    "red": 78.6,
+    "price": 42
+  },
+  {
+    "id": "twin-swords",
+    "name": "双股剑",
+    "kind": "melee",
+    "interval": 0.52,
+    "range": 145,
+    "white": 36.3,
+    "red": 99.1,
+    "price": 32
+  },
+  {
+    "id": "guandao",
+    "name": "青龙偃月刀",
+    "kind": "melee",
+    "interval": 1.15,
+    "range": 200,
+    "white": 44.6,
+    "red": 141.8,
+    "price": 46
+  },
+  {
+    "id": "serpent-spear",
+    "name": "丈八蛇矛",
+    "kind": "melee",
+    "interval": 0.7,
+    "range": 240,
+    "white": 43.9,
+    "red": 179.7,
+    "price": 42
+  },
+  {
+    "id": "halberd",
+    "name": "方天画戟",
+    "kind": "melee",
+    "interval": 1.1,
+    "range": 210,
+    "white": 39.1,
+    "red": 149.4,
+    "price": 48
+  },
+  {
+    "id": "silver-spear",
+    "name": "龙胆银枪",
+    "kind": "melee",
+    "interval": 0.48,
+    "range": 220,
+    "white": 49.3,
+    "red": 181.4,
+    "price": 42
+  },
+  {
+    "id": "qinggang",
+    "name": "青釭剑",
+    "kind": "melee",
+    "interval": 0.58,
+    "range": 155,
+    "white": 48.2,
+    "red": 131.4,
+    "price": 40
+  },
+  {
+    "id": "yitian",
+    "name": "倚天剑",
+    "kind": "melee",
+    "interval": 0.8,
+    "range": 175,
+    "white": 50.1,
+    "red": 147.7,
+    "price": 48
+  },
+  {
+    "id": "seven-saber",
+    "name": "七星宝刀",
+    "kind": "melee",
+    "interval": 0.62,
+    "range": 145,
+    "white": 47.2,
+    "red": 133.5,
+    "price": 38
+  },
+  {
+    "id": "ancient-saber",
+    "name": "古锭刀",
+    "kind": "melee",
+    "interval": 1.05,
+    "range": 175,
+    "white": 45.1,
+    "red": 123.1,
+    "price": 44
+  },
+  {
+    "id": "twin-halberds",
+    "name": "双铁戟",
+    "kind": "melee",
+    "interval": 0.56,
+    "range": 150,
+    "white": 43.2,
+    "red": 150.1,
+    "price": 44
+  },
+  {
+    "id": "trident",
+    "name": "三尖刀",
+    "kind": "melee",
+    "interval": 0.85,
+    "range": 195,
+    "white": 41,
+    "red": 145.4,
+    "price": 42
+  },
+  {
+    "id": "caltrops",
+    "name": "铁蒺藜",
+    "kind": "ranged",
+    "interval": 1.2,
+    "range": 260,
+    "white": 10.3,
+    "red": 24.6,
+    "price": 30
+  },
+  {
+    "id": "repeater",
+    "name": "诸葛连弩",
+    "kind": "ranged",
+    "interval": 0.65,
+    "range": 430,
+    "white": 25.2,
+    "red": 103.2,
+    "price": 40
+  },
+  {
+    "id": "phoenix-bow",
+    "name": "麒麟弓",
+    "kind": "ranged",
+    "interval": 0.95,
+    "range": 540,
+    "white": 33.2,
+    "red": 91.7,
+    "price": 38
+  },
+  {
+    "id": "heavy-crossbow",
+    "name": "贯石弩",
+    "kind": "ranged",
+    "interval": 1.6,
+    "range": 650,
+    "white": 35.2,
+    "red": 96.1,
+    "price": 44
+  },
+  {
+    "id": "hand-halberd",
+    "name": "手戟",
+    "kind": "ranged",
+    "interval": 0.62,
+    "range": 340,
+    "white": 40,
+    "red": 138.9,
+    "price": 34
+  },
+  {
+    "id": "chain-hook",
+    "name": "锁链钩",
+    "kind": "ranged",
+    "interval": 0.9,
+    "range": 320,
+    "white": 22.8,
+    "red": 62.1,
+    "price": 36
+  },
+  {
+    "id": "oil-jar",
+    "name": "火油壶",
+    "kind": "magic",
+    "interval": 1.8,
+    "range": 360,
+    "white": 12.3,
+    "red": 33.5,
+    "price": 34
+  },
+  {
+    "id": "thunder-bomb",
+    "name": "震天雷",
+    "kind": "magic",
+    "interval": 2.1,
+    "range": 400,
+    "white": 29.3,
+    "red": 79.9,
+    "price": 44
+  },
+  {
+    "id": "feather-fan",
+    "name": "白羽扇",
+    "kind": "magic",
+    "interval": 0.75,
+    "range": 380,
+    "white": 24.6,
+    "red": 67.1,
+    "price": 34
+  },
+  {
+    "id": "taiping-book",
+    "name": "太平要术",
+    "kind": "magic",
+    "interval": 1.3,
+    "range": 420,
+    "white": 30,
+    "red": 81.7,
+    "price": 38
+  },
+  {
+    "id": "star-lamps",
+    "name": "七星灯",
+    "kind": "magic",
+    "interval": 0.5,
+    "range": 160,
+    "white": 24.6,
+    "red": 67.1,
+    "price": 46
+  },
+  {
+    "id": "bagua",
+    "name": "八阵图",
+    "kind": "magic",
+    "interval": 1.4,
+    "range": 400,
+    "white": 18.3,
+    "red": 49.9,
+    "price": 44
+  },
+  {
+    "id": "wood-ox",
+    "name": "木牛机关",
+    "kind": "ranged",
+    "interval": 0.3,
+    "range": 350,
+    "white": 30.7,
+    "red": 113.2,
+    "price": 42
+  },
+  {
+    "id": "wood-kite",
+    "name": "木鸢飞翼",
+    "kind": "ranged",
+    "interval": 0.9,
+    "range": 450,
+    "white": 18.2,
+    "red": 74.5,
+    "price": 40
+  }
+]

@@ -19,7 +19,8 @@
     "boss-menghuo",
     "boss-simayi",
     "results",
-    "hidden-heroes"
+    "hidden-heroes",
+    "pets"
   ],
   "retention": "immutable releases; do not delete versions used by published clients"
 }

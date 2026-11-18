@@ -1,0 +1,255 @@
+{
+  "generator": "built-in image_gen",
+  "reference": "art/concepts/hero-pets/design.png",
+  "prompt": "prompt.txt",
+  "source": "art/runtime-pets/source.png",
+  "sourceSha256": "79853ef51992e3fcd9aab566ebd238a92424d8886b0c4e480e63a246ebcf03c9",
+  "dest": "assets/remote-content/pets/pets.png",
+  "width": 512,
+  "height": 512,
+  "rgbaBytes": 1048576,
+  "bytes": 292298,
+  "sha256": "f4c89a23efc4cb3fb2fa764f30d60cd62950c4ab32935c8ca955d31ad7280249",
+  "cells": [
+    {
+      "index": 0,
+      "hero": "liubei",
+      "pose": 0,
+      "crop": {
+        "left": 34,
+        "top": 71,
+        "width": 238,
+        "height": 280
+      },
+      "size": [
+        94,
+        110
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 1,
+      "hero": "guanyu",
+      "pose": 0,
+      "crop": {
+        "left": 305,
+        "top": 113,
+        "width": 321,
+        "height": 234
+      },
+      "size": [
+        106,
+        78
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 2,
+      "hero": "zhangfei",
+      "pose": 0,
+      "crop": {
+        "left": 650,
+        "top": 127,
+        "width": 285,
+        "height": 224
+      },
+      "size": [
+        98,
+        77
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 3,
+      "hero": "liubei",
+      "pose": 1,
+      "crop": {
+        "left": 34,
+        "top": 367,
+        "width": 238,
+        "height": 277
+      },
+      "size": [
+        94,
+        109
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 4,
+      "hero": "guanyu",
+      "pose": 1,
+      "crop": {
+        "left": 305,
+        "top": 410,
+        "width": 322,
+        "height": 232
+      },
+      "size": [
+        107,
+        77
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 5,
+      "hero": "zhangfei",
+      "pose": 1,
+      "crop": {
+        "left": 651,
+        "top": 423,
+        "width": 284,
+        "height": 221
+      },
+      "size": [
+        98,
+        76
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 6,
+      "hero": "liubei",
+      "pose": 2,
+      "crop": {
+        "left": 37,
+        "top": 670,
+        "width": 227,
+        "height": 259
+      },
+      "size": [
+        89,
+        102
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 7,
+      "hero": "guanyu",
+      "pose": 2,
+      "crop": {
+        "left": 304,
+        "top": 714,
+        "width": 317,
+        "height": 215
+      },
+      "size": [
+        105,
+        71
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 8,
+      "hero": "zhangfei",
+      "pose": 2,
+      "crop": {
+        "left": 652,
+        "top": 729,
+        "width": 280,
+        "height": 200
+      },
+      "size": [
+        97,
+        69
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 9,
+      "hero": "liubei",
+      "pose": 3,
+      "crop": {
+        "left": 38,
+        "top": 954,
+        "width": 224,
+        "height": 261
+      },
+      "size": [
+        88,
+        103
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 10,
+      "hero": "guanyu",
+      "pose": 3,
+      "crop": {
+        "left": 303,
+        "top": 993,
+        "width": 320,
+        "height": 212
+      },
+      "size": [
+        106,
+        70
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 11,
+      "hero": "zhangfei",
+      "pose": 3,
+      "crop": {
+        "left": 652,
+        "top": 931,
+        "width": 284,
+        "height": 275
+      },
+      "size": [
+        98,
+        95
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 12,
+      "hero": "liubei",
+      "pose": 4,
+      "crop": {
+        "left": 23,
+        "top": 1255,
+        "width": 251,
+        "height": 268
+      },
+      "size": [
+        99,
+        105
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 13,
+      "hero": "guanyu",
+      "pose": 4,
+      "crop": {
+        "left": 301,
+        "top": 1302,
+        "width": 332,
+        "height": 209
+      },
+      "size": [
+        110,
+        69
+      ],
+      "baseline": 118
+    },
+    {
+      "index": 14,
+      "hero": "zhangfei",
+      "pose": 4,
+      "crop": {
+        "left": 635,
+        "top": 1298,
+        "width": 319,
+        "height": 206
+      },
+      "size": [
+        110,
+        71
+      ],
+      "baseline": 118
+    }
+  ]
+}

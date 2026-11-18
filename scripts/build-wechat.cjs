@@ -12,6 +12,7 @@ if (!editor || !existsSync(editor)) {
   console.error('请安装 Cocos Creator 3.8.8，并设置 COCOS_CREATOR 为编辑器可执行文件的绝对路径。详见 README。');
   process.exit(1);
 }
+require('./cocos-build-lock.cjs').acquire(root);
 const result = spawnSync(editor, [
   '--project', root,
   '--build', `configPath=${resolve(root, 'config/build-wechat.json')}`,

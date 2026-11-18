@@ -224,3 +224,27 @@ v9.12新增native-sfx.ts（固定原生音效与串行加载队列）和world-pr
 v9.13（stage-v9.13-lifecycle）：新增load-lifetime/asset-scope共享一次性截止与资源租约、graphics-content四共享FX空清理跟踪；GameBootstrap.requestAudio统一原草鞋/附加音效/音乐，refreshWeaponArt只换帧。test-review-stability纳入npm test，覆盖生产懒加载和退出/异常竞态，不能用旧newGame预载全部素材夹具代替。diagnose-review-lifecycle只连8791/9391隔离目录，100次UI循环/20次真实组件析构及存储恢复。报告落实范围与保留项见docs/review-stability-v913.md；修改BossEffects只准同key帧身份失效修复，少年保护测试仍保留原绘图哈希。
 
 v9.14（stage-v9.14-all-stage-ground）：正式六关rebuildMeadow统一同边镜像/720×540目标块，chronicle-art六地面帧统一2px内缩；不改缩略图或演武。test-resource-loading对六关验证对应帧、316×188采样、行列镜像/块数及缺图兜底。capture-all-ground-review使用独立8791/9391和明确版本，逐关before/after/移动镜头及存档恢复；运行图片复用现有本地图集，CDN版本不变。
+
+
+v9.15运行版本stage-v9.15-session-audio。新增native-audio-files/native-music，微信端AudioClip仅作公开索引类型，不执行load/解码；browser仍requestAudio/AssetScope。test-native-audio-files加入npm test；diagnose-long-session采用禁缓存/新文档/版本守卫，只对独立8791/9391；长会话、正式胜利跨关和临时HTMLAudio桥严格标工程夹具，保存/恢复独立档。微信验收可由automation_evaluate的globalThis.__gameContextWindow.cc读取真实组件，不以旧本地health/menu截图当新版运行证明；预览前核对release/published一致。详见docs/stability-v915.md。
+
+
+2026-11-18百万生命站桩完成后，已按用户要求删除临时驱动和注入脚本，仅保留docs/standing-stability-wechat.md及art/reviews/standing-wechat取证。正式源码/微信构建不得引入__standingStability、百万生命覆盖、自动购物/自动技能/自动逐关逻辑；普通单元与稳定性回归仍保留。生成新预览前重新构建，并核对正常5/5/6基础生命及当前运行时无站桩注入。
+
+## v9.16当前覆盖
+
+运行版本stage-v9.16-battle-pressure；test-battle-balance.cjs纳入npm test，覆盖6000合法货架/远程保底/升阶分布/五雷符减半/兽群冲锋免伤恢复/E40锁定与安全格/金币静音/生命封顶与长冲刺。capture-balance-review.mjs只连独立8791/9391浏览器，有限守卫和恢复；实景见art/reviews/balance-v916。 详见[本版规则与设计提案](../../../../docs/balance-v916.md)。
+
+## 已实施：灵宠与个人武器奖励 v9.17
+
+test-pets-unlocks已入npm test；capture-pets-review仅8793/9393自有浏览器、menu守卫/120秒回收/profile和storage恢复、不能在用户微信战斗注入。build-review/build-wechat共用cocos-build-lock，防并行Creator写同库。宠物与奖励规则见pets；合并并行任务后实际版本读SURVIVAL_VERSION，不倒改其他任务版本。 细则见[pets](pets.md)与[实现说明](../../../../docs/pets-and-unlocks-v917.md)。
+
+
+### 演武英雄形态直选（2026-11-18）
+
+TrainingView第五页与顶端快捷入口直选三英雄×0–6，HeroShowcase在配置冻结时独立更新，hide清引用/销毁子树。GameBootstrap.setTrainingForm受trainingMode/phase/resourceBusy及英雄/整数范围保护，5/6宠物资源先准备后原子应用，保持其他装备、敌人和位置；退出恢复trainingReturnRun中的备战选择，防止沙盒英雄污染正式菜单偏好。test-training覆盖21种组合、实际头身/头像/武器/坐骑/技能/宠物、动态预览与模拟冻结、额外武器保留/合法性/退出隔离；test-hero-growth改走真实直选应用入口。
+
+capture-training-forms-review仅连独立8793/9393，真实Cocos节点触摸事件驱动21组合与6张画面，120秒守卫、恢复原profile/storage，见art/reviews/training-forms。只是WebGL工程验收，不是手机FPS/稳定性数据。复用现有本地成长及按需宠物图集，CDN不变。
+
+
+2026-11-18分配热点收尾：无尽筛选改一次计数＋复用40项候选，演武形态页改活动内增量更新；没有数值/素材/原生音频或池容量变化。按用户要求本轮不跑npm test、专项/长测或重采集；只做代码审查、typecheck/check/skill同步、微信构建及CDN清单一致性检查，不宣称已做运行回归。

@@ -1,4 +1,4 @@
-/** v8 fixed stages: balance is independent of player equipment. */
+/** v8 fixed stages: HP stays stage-fixed; post-shopping arrival pressure is bounded by weapon slots. */
 export const STARTER_WEAPONS = ['sandal','pole','cleaver'] as const;
 export const VISIBLE_HERO_IDS = ['liubei','guanyu','zhangfei'] as const;
 export const INITIAL_CONTENT = {"weapons": ["sandal", "pole", "cleaver"], "passives": ["A01", "A02", "A03", "A04", "A05", "A06", "B01", "B02", "B03", "B07", "B08", "C01", "C04", "C05", "C07", "C08", "D01", "D02", "D09", "D10", "D20", "E01", "E02", "E03"], "skills": ["G08", "G01", "G03"]} as const;
@@ -23,12 +23,7 @@ export const STAGES = [
     "targetPreBossBudget": 403,
     "firstClear": {
       "weapons": [
-        "taiping-book",
-        "thunder",
-        "gourd",
-        "seven-saber",
-        "peach",
-        "firecracker"
+        "peach"
       ],
       "passives": [
         "A07",
@@ -74,13 +69,7 @@ export const STAGES = [
     "targetPreBossBudget": 493,
     "firstClear": {
       "weapons": [
-        "halberd",
-        "guandao",
-        "serpent-spear",
-        "chain-hook",
-        "sword",
-        "twin-swords",
-        "silver-spear"
+        "halberd"
       ],
       "passives": [
         "A08",
@@ -126,13 +115,7 @@ export const STAGES = [
     "targetPreBossBudget": 603,
     "firstClear": {
       "weapons": [
-        "phoenix-bow",
-        "heavy-crossbow",
-        "repeater",
-        "trident",
-        "caltrops",
-        "hand-halberd",
-        "feather-fan"
+        "heavy-crossbow"
       ],
       "passives": [
         "C03",
@@ -178,11 +161,6 @@ export const STAGES = [
     "targetPreBossBudget": 713,
     "firstClear": {
       "weapons": [
-        "qinggang",
-        "yitian",
-        "ancient-saber",
-        "twin-halberds",
-        "smg",
         "oil-jar"
       ],
       "passives": [
@@ -210,7 +188,7 @@ export const STAGES = [
     "unlock": "current hero clears previous stage",
     "waves": 5,
     "boss": "menghuo",
-    "miniBoss": "象兵统领",
+    "miniBoss": "象兵统领与双护卫",
     "roster": [
       "E24",
       "E25",
@@ -225,10 +203,7 @@ export const STAGES = [
     "targetPreBossBudget": 813,
     "firstClear": {
       "weapons": [
-        "shotgun",
-        "rocket",
-        "thunder-bomb",
-        "wood-ox"
+        "feather-fan"
       ],
       "passives": [
         "E04",
@@ -274,9 +249,7 @@ export const STAGES = [
     "targetPreBossBudget": 918,
     "firstClear": {
       "weapons": [
-        "star-lamps",
-        "bagua",
-        "wood-kite"
+        "star-lamps"
       ],
       "passives": [
         "D05",
@@ -300,7 +273,13 @@ export const STAGES = [
 ] as const;
 export const stageFor=(n:number)=>STAGES[Math.max(0,Math.min(5,Math.floor(n)-1))];
 export const waveSeconds=(wave:number)=>[45,45,60,60,Infinity][Math.max(0,Math.min(4,wave-1))];
-export const stageThreat=(n:number,wave:number)=>stageFor(n).spawnCostPerSecond*[.75,.95,.60,1.2,1.2][Math.max(0,Math.min(4,wave-1))];
+export const STAGE_SPAWN_FACTORS=[.75,.95,.75,1.3,1.5];
+/** One starter keeps the old opening. Shopping adds bounded, visible pressure. */
+export const stageLoadoutPressure=(weapons:number)=>1+.1*Math.max(0,Math.min(4,Math.floor(weapons)-1));
+export const stageThreat=(n:number,wave:number,weapons=1)=>stageFor(n).spawnCostPerSecond*STAGE_SPAWN_FACTORS[Math.max(0,Math.min(4,wave-1))]*(wave<=1?1:stageLoadoutPressure(weapons));
+export const stageSpawnBudget=(n:number,wave:number,weapons=1)=>({count:26+(n-1)*6,cost:22+(n-1)*6+(wave<=1||weapons<=1?0:Math.min(10,(weapons-1)*2+Math.max(0,wave-3)))});
+/** Denser post-shopping waves should not multiply the gold supply at the same rate. */
+export const stageCoinMultiplier=(wave:number,weapons=1)=>1.25*[1,.95,.9,.9,.7][Math.max(0,Math.min(4,wave-1))]/(wave<=1?1:stageLoadoutPressure(weapons));
 export const stageEnemyHp=(base:number,n:number,wave:number)=>Math.round(base*stageFor(n).ordinaryHpFactor*[.8,.95,1,1.1,1.1][Math.max(0,Math.min(4,wave-1))]);
 export const stageStipend=(n:number,wave:number)=>wave===1?Math.ceil(1.25*(20+2*(n-1))):wave===2?Math.ceil(1.25*(25+3*(n-1))):wave===3?25+5*(n-1):wave===4?Math.ceil(1.25*(35+5*(n-1))):0;
 export const miniArchetype=(n:number)=>['E06','','E08','E21','E25','E40'][n-1]||'E06';
@@ -315,8 +294,11 @@ export const STAGE_THEMES=[
 
 export const bossDisplayName=(id:string)=>({zhangjiao:'张角',lvbu:'吕布',dongzhuo:'董卓',yuanshao:'袁绍',caocao:'曹操',menghuo:'孟获',simayi:'司马懿'} as Record<string,string>)[id]||id;
 
-/** Explicit per-wave composition; ranged cost share rises, total threat/count budgets stay fixed. */
+/** Gradual ranged pressure; mounted archers consume both the ranged and rider budgets. */
 export const STAGE_RANGED_COST_SHARE=[.24,.30,.38,.40,.38,.42];
+export const stageRangedShare=(n:number,wave:number)=>Math.min(.62,STAGE_RANGED_COST_SHARE[n-1]+[0,.06,.10,.15,.20][Math.max(0,Math.min(4,wave-1))]);
+export const stageRangedWindups=(wave:number)=>[4,4,5,5,6][Math.max(0,Math.min(4,wave-1))];
+export const ELEPHANT_ESCORTS={count:3,guardHpFactor:.55,stagger:1.1};
 export const STAGE_WAVE_ROSTERS:string[][][]=[
  [['E01','E11'],['E01','E11'],['E01','E11'],['E01','E11','E15','E39'],['E01','E11','E15','E39']],
  [['E02','E03','E17'],['E02','E03','E04','E19','E17'],['E02','E03','E17'],['E02','E04','E23','E17','E06','E18'],['E02','E03','E04','E19','E23','E17']],
@@ -326,4 +308,14 @@ export const STAGE_WAVE_ROSTERS:string[][][]=[
  [['E08','E16','E20'],['E08','E32','E34','E40'],['E08','E16','E20'],['E08','E16','E37','E38','E14'],['E08','E16','E20','E32','E40']],
 ];
 export const STAGE_SHOOTERS=['E11','E12','E13','E14','E15','E16','E17','E18','E22','E23','E28','E31','E32','E35'];
-export function pickStageUnit(pool:string[],random:number):string|undefined {let total=0;for(const id of pool)total+=STAGE_SHOOTERS.includes(id)?1.5:1;let t=Math.max(0,Math.min(.999999,random))*total;for(const id of pool){t-=STAGE_SHOOTERS.includes(id)?1.5:1;if(t<0)return id;}return pool[pool.length-1];}
+export const isStageRanged=(id:string)=>STAGE_SHOOTERS.includes(id)||['E29','E30','E33','E34','E36','E37','E38','E39','E40'].includes(id);
+export function pickStageUnit(pool:string[],random:number,wave=1):string|undefined {const weight=1.5+.15*Math.max(0,Math.min(4,wave-1));let total=0;for(const id of pool)total+=STAGE_SHOOTERS.includes(id)?weight:1;let t=Math.max(0,Math.min(.999999,random))*total;for(const id of pool){t-=STAGE_SHOOTERS.includes(id)?weight:1;if(t<0)return id;}return pool[pool.length-1];}
+
+/** v9.17: shared eligibility, awarded by each hero's first clear. */
+export const HERO_WEAPON_REWARDS:Record<string,string[]>={liubei:['firecracker','qinggang','phoenix-bow','smg','taiping-book','wood-ox'],guanyu:['seven-saber','chain-hook','repeater','yitian','thunder','bagua'],zhangfei:['gourd','twin-halberds','hand-halberd','shotgun','thunder-bomb','rocket']};
+export const LEGACY_WEAPON_REWARDS:string[][]=[["taiping-book","thunder","gourd","seven-saber","peach","firecracker"],["halberd","guandao","serpent-spear","chain-hook","sword","twin-swords","silver-spear"],["phoenix-bow","heavy-crossbow","repeater","trident","caltrops","hand-halberd","feather-fan"],["qinggang","yitian","ancient-saber","twin-halberds","smg","oil-jar"],["shotgun","rocket","thunder-bomb","wood-ox"],["star-lamps","bagua","wood-kite"]];
+export const RESERVED_WEAPONS=['sword','silver-spear','ancient-saber','trident','caltrops','wood-kite'];
+export function stageRewardWeapons(stage:number,hero:string):string[]{return [...stageFor(stage).firstClear.weapons,...(HERO_WEAPON_REWARDS[hero]?.[stage-1]?[HERO_WEAPON_REWARDS[hero][stage-1]]:[])];}
+
+/** The arena uses the same encounter HP as the six-stage challenge. */
+export const stageBossHp=(id:string):number=>id==='lvbu'?stageFor(2).miniBossHp:(STAGES.find(s=>s.boss===id)||STAGES[0]).bossHp;

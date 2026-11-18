@@ -1,0 +1,9 @@
+{
+  "observedAfterSuccessfulRestore": true,
+  "runtimeQueryError": "cant find runtimeid by projectpath",
+  "consoleQueryError": "project window not found, open the project first",
+  "developerToolsMainProcessStillRunning": true,
+  "wechatMainProcessStillRunning": true,
+  "cause": "Unknown: window closed or runtime detached; not evidence of the reported iPhone whole-WeChat crash",
+  "systemCrashReportObserved": false
+}

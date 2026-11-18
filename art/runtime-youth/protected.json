@@ -1,6 +1,6 @@
 {
   "baseCommit": "a848884",
-  "scope": "Boss and soldier assets and rules must not change in youth hero update",
+  "scope": "Youth art protection; later authorized readable NPC actions, kiting ranges and v9.16 cavalry/Boss rebalance verified separately by behavior tests",
   "sha256": {
     "assets/battle/characters/soldier-hoe-actions.png": "60512704f89f8e0b22fed890a296a354fe8ec6ecd3066308a60df071ee641544",
     "assets/battle/characters/soldier-hoe-actions.png.meta": "54f0f10e3cd0a5c7cac17915ca8f9d386f036c78be7b4b8deb4d31179ad4a4fa",
@@ -32,11 +32,11 @@
     "assets/chronicle-units/troops-b-back.png.meta": "30ecc10fb7e1a7851f6b25bc7f2007dc2b5f7803bb587dbfb29acc861d542c73",
     "assets/chronicle-units/troops-b-front.png": "00989faea0160dc7f242546dcb19a2ae8530058b4709c81415fc13f347bdcbb4",
     "assets/chronicle-units/troops-b-front.png.meta": "790f6f31f9e4ca2eeaa6417481744769684c45e1dc132090d79c0f20d3e8c17d",
-    "assets/scripts/boss-battle.ts": "b2b0b755da39cc48e66b406adde172254a88167e3c0cbd589678b7ca3164a1bf",
+    "assets/scripts/boss-battle.ts": "a9ac6205c38c476d59a551f1090b6724bbf518df9fbb3f02b153a9a2f2aaacfe",
     "assets/scripts/boss-battle.ts.meta": "73599a9ce52e28a15ec0e839fe154bbba644cf820d2f0b8ee52cc5c67cc1c8c2",
-    "assets/scripts/boss-effects.ts": "27f91024ddc6f6631eca8c5dfcc0e70c4419f1a820b8400d70881c088597d5e8",
+    "assets/scripts/boss-effects.ts": "3e5a51779131a1649f76c26bbe3cd978e0db239ad59c1157f8d3890af3031c7f",
     "assets/scripts/boss-effects.ts.meta": "0d9a3747255e211c21543bf0beea87d3ef1d8635f0ad78a60e14c96055d2ded3",
-    "assets/scripts/boss-roster.ts": "c955eb63fcddd95461003c27c8b8e14003e147ed949d65645621d7599282f37e",
+    "assets/scripts/boss-roster.ts": "c8b61b1fe65a28c06f28d5558dda4056dc4d136fbe623beadf5f476f260578fd",
     "assets/scripts/boss-roster.ts.meta": "0213a5ecef68169fa950196b169a4125434ad3663bf16acb04a8d645266ad113",
     "assets/scripts/chronicles-data.ts": "a22c99fadeb5a6cad49c5958b4c5d5cd1e20ef41cc7cd895aec9b5648fdabdad",
     "assets/scripts/chronicles-data.ts.meta": "7a505515cd70809317d602e08f0de63be99d553b13f81ece1e6ea31eb670bec1",

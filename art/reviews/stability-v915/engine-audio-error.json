@@ -1,0 +1,9 @@
+{
+  "scope": "Extracted installed Cocos 3.8.8 loadNative with simulated host errors; not an iPhone crash reproduction",
+  "file": "/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/pal/audio/minigame/player-minigame.js",
+  "engineSHA256": "8edc02dca3f8358e0a5014ff100204939a966aa4b80b25000b1330717e80ee5e",
+  "attempts": 100,
+  "created": 100,
+  "destroyed": 0,
+  "live": 100
+}

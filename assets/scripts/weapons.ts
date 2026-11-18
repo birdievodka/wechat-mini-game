@@ -18,7 +18,7 @@ export const WEAPONS: WeaponDefinition[] = [
   { id: 'shotgun', name: '村口霰弹枪', category: 'ranged', starter: false, damage: 8, interval: .9, range: 300, speed: 820, knockback: 160, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 39, desc: '五发散弹 · 近身破围' },
   { id: 'rocket', name: '二踢脚火箭筒', category: 'ranged', starter: false, damage: 78, interval: 2, range: 500, speed: 420, knockback: 330, area: 125, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 45, desc: '大范围爆炸 · 慢速重击' },
   { id: 'sword', name: '青莲飞剑', category: 'magic', starter: false, damage: 16, interval: .5, range: 150, speed: 580, knockback: 100, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 42, desc: '三剑环身 · 旋转接触伤害' },
-  { id: 'thunder', name: '五雷符', category: 'magic', starter: false, damage: 46, interval: 1.25, range: 390, speed: 0, knockback: 130, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 42, desc: '连锁落雷 · 跳跃三人' },
+  { id: 'thunder', name: '五雷符', category: 'magic', starter: false, damage: 23, interval: 1.25, range: 390, speed: 0, knockback: 130, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 42, desc: '连锁落雷 · 跳跃三人' },
   { id: 'gourd', name: '吞天葫芦', category: 'magic', starter: false, damage: 5, interval: 1.6, range: 240, speed: 0, knockback: 0, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 42, desc: '六段吸风 · 轻聚怪' },
 ];
 WEAPONS.push(...EXTRA_WEAPONS);
@@ -52,7 +52,7 @@ export const WEAPON_EVOLUTION = {
 const clamp = (n: number, low: number, high: number): number => Math.max(low, Math.min(high, n));
 export function calculateWeapon(w: Pick<EquippedWeapon, 'id' | 'tier'>, b: WeaponModifiers, hero: string): WeaponStats {
   const d = weaponFor(w.id), q = w.tier - 1;
-  const coefficient=Math.max(.15,Math.min(1.5,d.interval/.8))/(w.id==='shotgun'?5:w.id==='gourd'?6:isExtraWeapon(w.id)?extraHitFactor(w.id,w.tier):1);
+  const coefficient=Math.max(.15,Math.min(1.5,d.interval/.8))/(w.id==='shotgun'?5:w.id==='gourd'?6:isExtraWeapon(w.id)?extraHitFactor(w.id,w.tier):1)*(w.id==='thunder'?.5:1);
   const e:Evolution=(WEAPON_EVOLUTION as Record<WeaponId,Evolution>)[w.id];
   return { damage: Math.max(1, (d.damage * [1, 1.35, 1.8, 2.4][q] + (Math.max(0, b.power) + clamp(b[d.category], 0, 30))*coefficient) * (1 + Math.max(-.75, b.damage))),
     interval: d.interval * [1, .96, .92, .88][q] / (1 + Math.max(-.4, b.haste)),

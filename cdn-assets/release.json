@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "v95-996129359b44c659",
-  "baseUrl": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources/v95-996129359b44c659",
+  "version": "v95-5eb9f0730a24a17b",
+  "baseUrl": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources/v95-5eb9f0730a24a17b",
   "requiredDownloadDomain": "https://lf3-static.bytednsdoc.com",
   "bundles": [
     "arsenal",
@@ -16,11 +16,12 @@
     "meadow",
     "music",
     "orchard",
+    "pets",
     "results",
     "sfx",
     "talismans"
   ],
-  "totalBytes": 9078396,
+  "totalBytes": 9371302,
   "files": [
     {
       "path": "remote/arsenal/config.json",
@@ -316,6 +317,26 @@
       "path": "remote/orchard/native/76/76c26a2d-35d5-4cbe-a96f-73b51f11bf69.png",
       "bytes": 698497,
       "sha256": "7a578779eaefc9e2c799cfbc61dd4fad0e35ec3b209095ff2172d3c447e37971"
+    },
+    {
+      "path": "remote/pets/config.json",
+      "bytes": 387,
+      "sha256": "80512d5bca8898f7f7cea2fd6daff116cb4b5aa27797a8ba41d41cef37a252f9"
+    },
+    {
+      "path": "remote/pets/import/4c/4c96f704-bad5-5584-a035-57e9dceed2ec.json",
+      "bytes": 72,
+      "sha256": "60928632edcd22b5694a8c22de01de0d2cbb6f374103242a99a4394cc767f44d"
+    },
+    {
+      "path": "remote/pets/import/4c/4c96f704-bad5-5584-a035-57e9dceed2ec@6c48a.json",
+      "bytes": 149,
+      "sha256": "3986b9dee714f74a9ad79c42982bc7b1d19e61396f91853decf2c4b3565d611c"
+    },
+    {
+      "path": "remote/pets/native/4c/4c96f704-bad5-5584-a035-57e9dceed2ec.png",
+      "bytes": 292298,
+      "sha256": "f4c89a23efc4cb3fb2fa764f30d60cd62950c4ab32935c8ca955d31ad7280249"
     },
     {
       "path": "remote/results/config.json",

@@ -1,0 +1,154 @@
+{
+  "version": "stage-v9.18-endless-settings",
+  "scope": "actual Cocos WebGL engineering action keyframes; no phone FPS or player playthrough claim",
+  "records": [
+    {
+      "hero": "liubei",
+      "pose": "idle",
+      "time": 0.16,
+      "active": true,
+      "petPose": -1,
+      "shots": 0,
+      "enemyHp": [
+        1000,
+        1000,
+        1000
+      ],
+      "hearts": 7,
+      "petSize": [
+        72,
+        72
+      ],
+      "gfx": {
+        "buffers": 106197668,
+        "textures": 101260424
+      }
+    },
+    {
+      "hero": "liubei",
+      "pose": "attack",
+      "time": 0.99,
+      "active": true,
+      "petPose": 0.39833333333333476,
+      "shots": 1,
+      "enemyHp": [
+        958,
+        1000,
+        1000
+      ],
+      "hearts": 7,
+      "petSize": [
+        72,
+        72
+      ],
+      "gfx": {
+        "buffers": 44850252,
+        "textures": 100311016
+      }
+    },
+    {
+      "hero": "guanyu",
+      "pose": "idle",
+      "time": 0.16,
+      "active": true,
+      "petPose": -1,
+      "shots": 0,
+      "enemyHp": [
+        1000,
+        1000,
+        1000
+      ],
+      "hearts": 7,
+      "petSize": [
+        72,
+        72
+      ],
+      "gfx": {
+        "buffers": 47209768,
+        "textures": 100311016
+      }
+    },
+    {
+      "hero": "guanyu",
+      "pose": "attack",
+      "time": 0.86,
+      "active": true,
+      "petPose": 0.2683333333333339,
+      "shots": 0,
+      "enemyHp": [
+        946,
+        1000,
+        1000
+      ],
+      "hearts": 7,
+      "petSize": [
+        72,
+        72
+      ],
+      "gfx": {
+        "buffers": 47209768,
+        "textures": 100314864
+      }
+    },
+    {
+      "hero": "zhangfei",
+      "pose": "idle",
+      "time": 0.16,
+      "active": true,
+      "petPose": -1,
+      "shots": 0,
+      "enemyHp": [
+        1000,
+        1000,
+        1000
+      ],
+      "hearts": 8,
+      "petSize": [
+        72,
+        72
+      ],
+      "gfx": {
+        "buffers": 47209768,
+        "textures": 100314864
+      }
+    },
+    {
+      "hero": "zhangfei",
+      "pose": "attack",
+      "time": 1.09,
+      "active": true,
+      "petPose": 0.4983333333333355,
+      "shots": 0,
+      "enemyHp": [
+        940,
+        976,
+        1000
+      ],
+      "hearts": 8,
+      "petSize": [
+        72,
+        72
+      ],
+      "gfx": {
+        "buffers": 47209768,
+        "textures": 100313772
+      }
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "storage": true
+  },
+  "errors": [],
+  "wechat": {
+    "version": "stage-v9.18-endless-settings",
+    "ready": true,
+    "phase": "menu",
+    "hp": 5,
+    "preview": true,
+    "packageBytes": 9150918,
+    "mainBytes": 2399724,
+    "cdnVersion": "v95-5eb9f0730a24a17b",
+    "userProgressMutated": false
+  }
+}

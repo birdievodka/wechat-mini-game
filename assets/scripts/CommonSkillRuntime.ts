@@ -1,4 +1,5 @@
 import type {Enemy} from './GameBootstrap';
+import {bossBeastCharging} from './boss-battle';
 import {sweepEllipseTime} from './combat-math';
 import {commonSkillFor} from './common-skills';
 import {CommonSkillEffects} from './CommonSkillEffects';
@@ -35,7 +36,7 @@ export class CommonSkillRuntime {
  get damageMultiplier():number{return 1;}
  get hasteMultiplier():number{return this.hasteTime>0?this.hasteRate:1;}
  speedFor(current:number,_base:number):number{return current;}
- private eligible(e:Enemy):boolean{return e.hp>0&&!e.animal&&(e.born||0)<=0;}
+ private eligible(e:Enemy):boolean{return e.hp>0&&!e.animal&&!bossBeastCharging(e)&&(e.born||0)<=0;}
  private group(id:string):Group{const d=commonSkillFor(id);return {hits:new Map(),maxTargets:d.maxTargets,maxHits:d.maxHits};}
  private hit(e:Enemy,id:string,power:number,group:Group,angle:number,knockback=100):boolean {
   const d=commonSkillFor(id),count=group.hits.get(e)||0;

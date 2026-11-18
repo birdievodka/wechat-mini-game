@@ -90,3 +90,11 @@ v7全七Boss已接真实模拟与两层共享Graphics/最多86材质Sprite。雷
 ## v9英雄成长更新
 
 v9本命三连使用growth-effects.ts：刘短金白斜锋/X，关暖白月牙/短青玉龙首，张象牙红橙楔/震地冠/短裂纹；动画命中共真实攻击时钟，颜色缓存，不新增每敌Graphics。成长三连替代signature原品质附加连段，各目标每次一次；刘X最多3人第三击1.5倍。G03A版保持。冲刺金红短定向尾迹走现有g.fx；完整见[成长v9](hero-growth.md)。
+
+## v9.16当前覆盖
+
+共享BossEffects增加rain/sword-field两种只读绘制；孟获实际冲锋金色前弧与速度线，E40落点按lockAt锁定后才显形。沿用2 Graphics、≤86复用Sprite，无新增纹理或池；伤害仍BossBattle真实几何/时间。 详见[本版规则与设计提案](../../../../docs/balance-v916.md)。
+
+## 已实施：灵宠与个人武器奖励 v9.17
+
+PetRuntime只模拟，PetView只读；兔核两颗共享160活跃友弹、青刃一次≤6敌/165/140°、虎扑落地≤5敌/70。真实命中统一hitEnemy petSource，绕过武器/技能增益，仍保留敌防御；失败/池满不伪造命中，所有状态购物后台冻结。 细则见[pets](pets.md)与[实现说明](../../../../docs/pets-and-unlocks-v917.md)。

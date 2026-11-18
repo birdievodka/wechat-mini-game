@@ -1,3 +1,4 @@
+import {PetView} from './PetView';
 import {HeroMount} from './HeroMount';
 import {WeaponId} from './weapons';
 import {Color,Graphics,Node,Sprite,SpriteFrame,UITransform} from 'cc';
@@ -9,7 +10,7 @@ import {drawWeaponArt} from './weapon-art';
 /** Menu-only puppet. Owns its clock and props; never creates a Run, attacks or reads combat RNG. */
 export class HeroShowcase {
   readonly root:Node;
-  private rig:Node;private mount:HeroMount;private growth=0;
+  private rig:Node;private mount:HeroMount;private pet:PetView;private growth=0;
   private body:Sprite;
   private headPivot:Node;
   private head:Sprite;
@@ -23,7 +24,7 @@ export class HeroShowcase {
   private open?:SpriteFrame;
   private closed?:SpriteFrame;
   constructor(parent:Node,private frames:Record<string,SpriteFrame>){
-    this.root=this.node(parent,'HeroShowcase');
+    this.root=this.node(parent,'HeroShowcase');this.pet=new PetView(this.root,this.frames);
     const shadow=this.node(this.root,'ShowcaseShadow').addComponent(Graphics);
     shadow.fillColor=new Color(74,49,24,35);shadow.ellipse(0,-21,31,6);shadow.fill();
     this.rig=this.node(this.root,'ShowcaseRig');this.mount=new HeroMount(this.rig,this.frames);
@@ -67,6 +68,7 @@ export class HeroShowcase {
   }
   update(delta:number):void{
     this.time+=Math.min(.05,Math.max(0,delta));
+    this.pet.showcase(this.id,this.growth,this.time);
     const t=this.time,pose=heroIdlePose(this.id,t,0);
     // Immediate greeting on selection, then one small signature gesture every 5.8 seconds.
     const phase=t%5.8,gesture=phase<1.05?Math.sin(phase/1.05*Math.PI):0;
@@ -109,7 +111,7 @@ export class HeroShowcase {
       this.feet[i].setPosition(side*9,-19+Math.sin(t*1.6+side)*gesture*.8);this.feet[i].angle=side*gesture*3;
     }
     // Tiny prop highlights, confined to the stage; no battle effect or audio is emitted.
-    const g=this.sparkle;g.clear();
+    const g=this.sparkle;g.clear();if(this.pet.sprite.node.active){g.fillColor=new Color(74,49,24,35);g.ellipse(-75,-20,18,4);g.fill();}
     if(gesture>.4){g.strokeColor=new Color(224,160,57,Math.round((gesture-.4)*180));g.lineWidth=1;
       for(const side of [-1,1]){const x=side*61,y=9+gesture*12;g.moveTo(x-3,y);g.lineTo(x+3,y);g.moveTo(x,y-3);g.lineTo(x,y+3);}g.stroke();}
   }

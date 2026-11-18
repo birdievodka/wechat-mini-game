@@ -1,0 +1,27 @@
+{
+  "status": "approved; implemented through art/runtime-pets and PetRuntime/PetView",
+  "generator": "built-in image_gen",
+  "date": "2026-11-18",
+  "image": "design.png",
+  "sha256": "c3d51edc2f481a84cd7d5fdd0b290a6f48aa0fbead0e04043bc51a901ac6acd4",
+  "prompt": "prompt.txt",
+  "reference": "art/concepts/hero-youth/design.png",
+  "pets": [
+    {
+      "hero": "liubei",
+      "name": "桃桃兔",
+      "attack": "桃核弹射"
+    },
+    {
+      "hero": "guanyu",
+      "name": "小青蛟",
+      "attack": "甩尾青刃"
+    },
+    {
+      "hero": "zhangfei",
+      "name": "橘虎崽",
+      "attack": "肉掌扑击"
+    }
+  ],
+  "scope": "appearance, idle/attack concept poses and approximate hero-relative scale; not actual Cocos frames or animation assets"
+}

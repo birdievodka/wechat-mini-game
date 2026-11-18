@@ -152,3 +152,46 @@ RuntimeHealth合并同类首/末/次数，最多8类，首严重及时落盘，�
 专项`test-review-stability`包含加载挂起/旧新资源交错、订阅者抛错、万次错误/坏存储、音频初始化失败恢复/元数据同步释放、六剑外观迟到、100轮演武配置、3万组CCD差分。真实场景/组件循环与GPU压力证据见docs/review-stability-v913.md和art/reviews/stability-v913；不是iPhone实测或原机闪退根因证明。
 
 v9.14六关普通裁图统一连续镜像/2px图集采样内缩，较大静态地面块降低重复。1440×750视口下第2–6关15→9个Sprite，首关9保持；仍共用同一960×640主题纹理，无新增贴图/材质/Graphics或逐帧处理，不将少6个静态Sprite宣称为手机FPS提升。实际地面/镜头取证见art/reviews/grounds，演武原布局保持。
+
+
+## v9.15：四分钟整微信退出后的音频路径修订
+
+用户补充设备为iPhone 15 Pro Max，约4分钟，第一关进入第二关及第二关董卓附近整个微信退出。仍没有iOS/微信版本与Jetsam/系统崩溃记录；不能把下面的缺口证明直接当作该手机的终止原因或宣称已根治。
+
+本机Cocos 3.8.8 `pal/audio/minigame/player-minigame.js` 的 `AudioPlayerMinigame.loadNative` 在创建InnerAudioContext后，错误分支只注销canplay/error并reject，没有destroy。独立提取该函数、注入100次host失败，创建100/销毁0。v9.13虽然及时释放成功的AudioClip，但这个失败分支从未返回clip，应用租约无法销毁其中的播放器。因此不能继续以“串行加载/成功立即释放”作为微信端的最终方案。
+
+`NativeAudioFiles`使用Bundle.getInfoWithPath(path,AudioClip)仅查UUID，再由assetManager.utils.getUrlWithUuid({isNative:true,nativeExt})解析正式bundle基址/原生文件版本；这是公开索引/转换，不调用bundle.load(AudioClip)，不手拼UUID/CDN路径。项目音乐均.m4a，原草鞋及66物理FX均.wav，保持原文件/音色与CDN版本。本地包路径直接播放，远程wx.downloadFile只缓存tempFilePath，每会话最多3音乐＋67FX文件位置，不常驻解码/metadata；SFX仍单并发，音乐独立1请求，超时/取消abort、迟到结果不发布、失败30秒退避。退出注销/abort/清位置缓存；临时文件由微信管理，不跨会话永久堆积。
+
+`NativeSfx`按各声道记录自己最后写入的源路径，不读可能规范化的host.src来判断相等；同音色连续1000次只设一次src，避免无意义重解码。播放失败失效该记录以便重试。
+
+`NativeMusic`实现既有BattleMusic端口，整场只有1音乐上下文，三配乐切src复用；与NativeSfx6个合计7个，不再按场景创建音乐metadata/播放双实例。首次自动播放/首触重试、静音、后台暂停/恢复、危险压低、原.45秒淡入和购物续播保持。音量量化到千分位仅跳过相同原生写入（稳态300秒0次重复），不改变音色；listeners逐项注销、stop失败仍destroy。初始化失败各源独立30秒退避，不回退微信整库Cocos解码。浏览器继续原Cocos AudioSource，不能将浏览器分支数据当原生源数量。
+
+新增本地快照sessionSeconds（真实会话时长）、nativeMusic、nativeFiles；保留5秒/聚合8事件/previous单层，无上传。test-native-audio-files覆盖UUID/版本地址、WAV/M4A、200次缓存、百次下载失败零临时播放器、超时abort/取消/迟到/销毁、canplay时seek、300秒稳态零重复音量命令和逐监听清理。test-native-sfx覆盖200次音乐切换＋万次音效始终7个实际host实例，原6声道/优先级/发声时机回归不变。
+
+长测脚本diagnose-long-session只允许8791/9391独立loopback，有版本/新文档/禁缓存守卫、真实时间watchdog与完整存档恢复。按墙钟连续渲染6分钟，同一组件80混编/六IV武器/技能反复释放，约2分钟切到吕布和董卓；可选HTMLAudio桥验证真实Cocos索引及原生端口的固定7源（该桥仍非微信/iOS）。另覆盖正式endStage胜利→下一关菜单→生产prepareBosses→吕布/董卓五次，证据在docs/stability-v915.md和art/reviews/stability-v915。不得把这些桌面计数、JS堆、模拟host失败当iOS进程RSS、FPS或原机闪退复现。
+
+
+### 已完成并清理的百万生命站桩测试
+
+2026-11-18用户授权的1000000生命、零方向输入逐关测试已完成；临时生命/自动购物/技能/下一关仅在运行时注入，结束已恢复原Run/profile/方法和全部taoyuan存储。随后按用户要求删除临时站桩驱动及运行时注入脚本，不能再把历史命令当当前工程入口。正式生命保持小刘5/小关5/小张6加个人成长，不自动购物/释放技能/过关；测试结果与截图保留供审查。
+
+微信storage应以length/key枚举而非Object.keys；legacy全局cc不保证包含UITransform导出，可按cc.UITransform注册名查询。此为测试中验证出的平台差异，不是正式生命规则变更。
+
+本次实际站桩结果：六关1510秒自然完成、观察1524秒，85870帧/2167击败/16108次音效，声音错误/脚本异常/内存告警0，普通真实池高水位23敌/17友弹/12敌弹，不是满预算极限。战斗buffer74.30–78.83MiB/texture90.36–95.81MiB，购物峰值197.18MiB。恢复原始5心/方法/档已核验，未把百万生命写入正式源码或包。返回菜单单次gfx约213.91MiB仍值得按绘图模型审查，不能称持续泄漏；后置项目窗口关闭/运行时不可用原因未定，主进程仍在，不算iPhone整微信复现。完整数据与范围见docs/standing-stability-wechat.md和art/reviews/standing-wechat。
+
+## v9.16当前覆盖
+
+本版提高投放密度而非提高敌实体80/敌弹80/危险区6/召唤12/战兽6/器械2上限；普通人数不变，成本池最多+10。4/4/5/5/6普通远程起手。BossEffects复用原Graphics/≤86Sprite，无新图集。测试混合80Boss1200帧及独立WebGL定帧与iPhone长时间退出分开报告，不声称此平衡补丁修复iOS。 详见[本版规则与设计提案](../../../../docs/balance-v916.md)。
+
+## 已实施：灵宠与个人武器奖励 v9.17
+
+灵宠每英雄仅1个Sprite、2颗纯状态弹、10Hz索敌，动画15帧共512²/1MiB远程图集；阴影/弹/尾扫/爪印复用friendlyGroundFx/fx，不增Graphics/粒子系统/刚体或80敌池。普通弹与宠物弹活跃合计160。清场清引用，切无宠菜单释放纹理。 细则见[pets](pets.md)与[实现说明](../../../../docs/pets-and-unlocks-v917.md)。
+
+
+## 2026-11-18：无尽刷兵与演武形态页分配热点
+
+spawnEndlessEnemy每次调度只遍历敌军一次，统计存活数、普通数、成本、远程数和兵种计数；复用40种计数字典与最多40项候选数组，取消候选筛选中的逐兵种filter临时数组。保持CHRONICLE_ENEMIES候选顺序、原成本/远程/单兵种上限、一次随机抽样（含空候选/满员时）及原出兵间隔，不能通过降低密度换性能。
+
+TrainingView只在当前英雄形态页活动期间保留FormSurface与同一个HeroShowcase。切英雄/阶段、应用及异步资源就绪只更新文本、图标、发生变化的选中底板；预览hero/growth未变不setHero，避免重建道具和重置眨眼时钟。应用按钮/顶部快捷入口实时读取当前选择/快照，不能沿用首次建页捕获的成长值。切其他页或hide仍销毁全部相关节点并清formSurface/showcase引用，禁止以隐藏缓存重现v8.3战斗占用问题。
+
+本轮按用户要求不运行测试/长测或操作当前对局；仅代码等价审查、TypeScript/工程/来源检查及发布构建。这里的结构性分配减少不是手机FPS、峰值内存下降或新的无闪退保证；上一版实景截图不作为本轮重采集结果。

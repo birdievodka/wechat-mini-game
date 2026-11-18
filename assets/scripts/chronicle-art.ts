@@ -42,8 +42,8 @@ export function ensureBossArt(id:string,frames:Record<string,SpriteFrame>,alive:
 }
 
 /** Scene actors have been hidden before calling this; local portraits are kept. */
-export function releaseBossArt(frames:Record<string,SpriteFrame>,detach?:(removed:Set<SpriteFrame>)=>void):Set<SpriteFrame> {
- cancelArtGroups(frames,name=>name.startsWith('boss-'));const removed=new Set<SpriteFrame>(),textures=new Set<SpriteFrame['texture']>();
- for(const key of Object.keys(frames))if(key.startsWith('lvbu-action-')||key.startsWith('boss-beast-')||REFORGED_BOSSES.some(id=>id!=='zhangjiao'&&key.startsWith('boss-'+id+'-action-'))){removed.add(frames[key]);textures.add(frames[key].texture);delete frames[key];}
+export function releaseBossArt(frames:Record<string,SpriteFrame>,detach?:(removed:Set<SpriteFrame>)=>void,keepIds:string[]=[]):Set<SpriteFrame> {
+ cancelArtGroups(frames,name=>name.startsWith('boss-')&&!keepIds.some(id=>name==='boss-'+id));const removed=new Set<SpriteFrame>(),textures=new Set<SpriteFrame['texture']>();
+ for(const key of Object.keys(frames))if(key.startsWith('lvbu-action-')&&!keepIds.includes('lvbu')||key.startsWith('boss-beast-')&&!keepIds.includes('menghuo')||REFORGED_BOSSES.some(id=>id!=='zhangjiao'&&!keepIds.includes(id)&&key.startsWith('boss-'+id+'-action-'))){removed.add(frames[key]);textures.add(frames[key].texture);delete frames[key];}
  detach?.(removed);for(const f of removed)f.destroy();for(const t of textures)releaseArtTexture(frames,t);return removed;
 }

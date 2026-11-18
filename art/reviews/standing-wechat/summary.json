@@ -1,0 +1,32 @@
+{
+  "version": "stage-v9.15-session-audio",
+  "scope": "Actual macOS WeChat developer-tools runtime; authorized million-HP real-time standing test, not phone FPS/RSS or a real user clear. All waves/Boss damage/weapon/shop prices are production rules.",
+  "naturalCompletionSeconds": 1510,
+  "observationSeconds": 1524,
+  "frames": 85870,
+  "clearedStages": 6,
+  "kills": 2167,
+  "purchases": 178,
+  "skillCasts": 143,
+  "acceptedDamageObserved": 720,
+  "soundStarts": 16108,
+  "audioErrors": 0,
+  "memoryWarningOrScriptEvents": [],
+  "storageRestored": true,
+  "battleBufferMiBRange": [
+    74.3,
+    78.83
+  ],
+  "battleTextureMiBRange": [
+    90.36,
+    95.81
+  ],
+  "shopGpuBytesPeak": 206760832,
+  "enemyPoolPeak": 23,
+  "friendlyProjectilePoolPeak": 17,
+  "enemyProjectilePoolPeak": 12,
+  "slowFrames": 27,
+  "maxFrameMs": 307,
+  "inputAlwaysZero": true,
+  "buildUnchanged": true
+}

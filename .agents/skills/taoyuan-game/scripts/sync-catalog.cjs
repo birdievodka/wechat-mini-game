@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['audio-catalog','hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
+  const allowed = new Set(['pets','endless','audio-catalog','hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -178,14 +178,16 @@ function generate(root) {
     const prefix = f.path.slice(0, -5) + '/';
     return [{ path: prefix, ...meta.userData, sourceBytes: sources.filter(s => s.path.startsWith(prefix)).reduce((n, s) => n + s.bytes, 0) }];
   });
-  const heroGrowth=load('hero-growth'),progress=load('stage-progress');
-  const growthRows=heroGrowth.GROWTH_HEROES.flatMap(id=>Array.from({length:7},(_,clears)=>{const profile=progress.newProfile();for(let i=1;i<=clears;i++)progress.recordClear(profile,id,i,240,100,5);const run=c.createStageRun(profile,id,Math.min(6,clears+1),w.starterFor(id),'G03'),weapon=run.weapons[0],stats=c.statsFor(run);return {hero:id,clears,title:heroGrowth.growthTitle(id,clears),maxHearts:stats.maxHp,speed:stats.speed,signature:weapon.id,tier:weapon.tier,weaponStats:c.weaponStatsFor(run,weapon),singleTargetDpsCeiling:c.weaponDps(run,weapon),combo:clears>=3,mounted:clears>=2,dash:clears>=4,finalOutfit:clears>=5};}));
+  const heroGrowth=load('hero-growth'),progress=load('stage-progress'),pets=load('pets');
+  const growthRows=heroGrowth.GROWTH_HEROES.flatMap(id=>Array.from({length:7},(_,clears)=>{const profile=progress.newProfile();for(let i=1;i<=clears;i++)progress.recordClear(profile,id,i,240,100,5);const run=c.createStageRun(profile,id,Math.min(6,clears+1),w.starterFor(id),'G03'),weapon=run.weapons[0],stats=c.statsFor(run);return {hero:id,clears,title:heroGrowth.growthTitle(id,clears),maxHearts:stats.maxHp,speed:stats.speed,signature:weapon.id,tier:weapon.tier,weaponStats:c.weaponStatsFor(run,weapon),singleTargetDpsCeiling:c.weaponDps(run,weapon),combo:clears>=3,mounted:clears>=2,dash:clears>=4,finalOutfit:clears>=5,pet:clears>=5?pets.petName(id):null};}));
   const catalog = clean({ schemaVersion: 2, game: { name: load('game-brand').GAME_NAME, version: s.SURVIVAL_VERSION,
     creator: JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).creator.version },
     provenance: { fingerprint: hash(JSON.stringify(sources)), files: sources },
-    counts: { heroes: heroes.length, stages: stages.STAGES.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length, enemyArchetypes:chronicles.CHRONICLE_ENEMIES.length, bossEncounters:chronicles.CHAPTERS.length, bossPeople:new Set(chronicles.CHAPTERS.map(ch=>ch.bossId)).size, genericSkills:chronicles.GENERIC_SKILLS.length },
+    counts: { heroes: heroes.length, stages: stages.STAGES.length, weapons: weaponRows.length, passives: itemRows.length, augments: s.AUGMENTS.length, enemyArchetypes:chronicles.CHRONICLE_ENEMIES.length, bossEncounters:chronicles.CHAPTERS.length, bossPeople:new Set(chronicles.CHAPTERS.map(ch=>ch.bossId)).size, genericSkills:chronicles.GENERIC_SKILLS.length,pets:pets.PET_HEROES.length },
     rules: {initialShop:false,warmupSeconds:0,waveSeconds:[45,45,60,60,null],wave3End:'all miniBosses defeated; immediate',wave3CountdownVisible:false,wave5End:'boss defeated',initialGold:28,shopOffers:4,refreshCap:20,skillKillRequirement:15,stageProgress:'per hero',contentUnlocks:'account shared; advanced weapons shop only',carryEquipment:false,weaponLimit:w.WEAPON_LIMIT,defaultWorld:world.WORLD},
-    heroGrowth:{enabled:true,progress:'per hero consecutive first clears',heartPerClear:1,mountBaseSpeedBonus:.3,dash:heroGrowth.DASH,states:growthRows},
+    heroGrowth:{enabled:true,progress:'per hero consecutive first clears',heartPerStage:[1,1,0,0,0,0],petAfterStage:5,mountBaseSpeedBonus:.3,dash:heroGrowth.DASH,states:growthRows},
+    pets:{afterPersonalClear:5,occupiesWeaponSlot:false,canBeAttacked:false,blocksEnemyShots:false,damageFromWeapons:false,maxShots:2,atlas:'assets/remote-content/pets/pets.png',atlasRgbaBytes:1048576,rules:pets.PET_RULES,lowStageDamage:[1,2,3,4,5,6].map(pets.petDamageScale)},
+    weaponUnlocks:{profileVersion:2,commonPerStage:stages.STAGES.map(s=>s.firstClear.weapons),perHero:stages.HERO_WEAPON_REWARDS,reserved:stages.RESERVED_WEAPONS,legacyGrantsPreserved:true},
     stageChallenge:{waveRosters:stages.STAGE_WAVE_ROSTERS,rangedCostShares:stages.STAGE_RANGED_COST_SHARE,shooterWeight:1.5,yellowChargers:load('yellow-chargers').YELLOW_CHARGERS,spawnCostPerSecond:stages.STAGES.map((s,i)=>({stage:i+1,waves:[1,2,3,4,5].map(w=>stages.stageThreat(i+1,w)),stipends:[1,2,3,4,5].map(w=>stages.stageStipend(i+1,w))})),stages:stages.STAGES,initial:stages.INITIAL_CONTENT,starterWeapons:stages.STARTER_WEAPONS,visibleHeroes:stages.VISIBLE_HERO_IDS,themes:stages.STAGE_THEMES},
     effects: { limits: effects.FX_LIMITS }, controls: { joystick: controls.JOYSTICK },
     startup: { tasks: startup.STARTUP_TASKS, poster:'art/runtime-youth/poster.jpg', template:'build-templates/wechatgame/first-screen.js' },
@@ -222,6 +224,8 @@ function generate(root) {
     '## 个人首通成长（白I本命、无道具）\n',table(['英雄','首通数','形态','最大心','移速','本命','单体理论DPS','三连 / 冲刺'],growthRows.map(r=>[r.hero,r.clears,r.title,r.maxHearts,r.speed,r.signature,round(r.singleTargetDpsCeiling),(r.combo?'三连':'单击')+' / '+(r.dash?'6秒':'无')])),
     '本命只占六槽之一，三连替代原品质附加连段；范围收益另计。成长规则见hero-growth.md。\n',
     `## ${catalog.chronicles.genericSkills.length}通用技能（综合威力升序）\n`,table(['技能','威力阶','基础击杀需求','伤害/收益','范围','持续','真实机制'],catalog.chronicles.genericSkills.map(s=>[s.id+' / '+s.name,s.powerTier,s.killCharge,s.damage,s.range,s.duration,s.effect])),
+    '## 南中首通灵宠\n',table(['英雄','宠物','间隔','基础伤害','射程'],pets.PET_HEROES.map(id=>[id,pets.petName(id),pets.PET_RULES[id].interval,pets.PET_RULES[id].damage,pets.PET_RULES[id].range])),
+    '不占武器位/不可受击或挡弹；宠物独立伤害，低关缩放/击杀充能同规则；详见pets.md。\n',
     '## 六关固定曲线\n',table(['关 / 大首领','小首领 / HP','大首领 HP','普通兵HP倍率','五波投入成本/秒','目标Boss前金币'],stages.STAGES.map((d,i)=>[d.name+' / '+d.boss,d.miniBoss+' / '+d.miniBossHp,d.bossHp,d.ordinaryHpFactor,[1,2,3,4,5].map(w=>stages.stageThreat(i+1,w)).join(' / '),d.targetPreBossBudget])),
     '\n每波普通兵HP倍率0.8/0.95/1/1.1/1.1；移速只随关卡微增，预警与弹速不加快。Boss不读取装备动态抬血。经济与完成率仍需手机实测。\n',
 

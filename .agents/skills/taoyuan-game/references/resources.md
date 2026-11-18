@@ -93,3 +93,10 @@ v9.10首关地面SpriteFrame从原格内缩2px排除图集邻区串色（316×18
 
 
 v9.11通用城门独立Sprite，stage-switch.png本地chronicle-ui包128²/64KiB解码，含4px透明安全边；pack-stage-art由universal.png确定性导出。原stage-journey源图已去烘焙玉印，仍600×400；六主题图/地面与远程资源版本不变。源/提示/输出指纹分别在journey-source.json、journey-no-seal-prompt.txt、switch-icon-source.json。
+
+
+v9.15原生音频按需直接解析Bundle公开UUID索引/assetManager.utils版本URL；本地包直接路径、远程downloadFile缓存当前会话临时路径。不再通过AudioClip加载声音metadata，以免临时原生播放器失败泄漏；原音乐M4A/全部FX WAV文件与发布CDN版本不变，源码仍本地。临时路径随会话、上下文退出销毁/请求abort，不能为修音频重新复制整库声音进主包。详见性能v9.15。
+
+## 已实施：灵宠与个人武器奖励 v9.17
+
+新增pets第16远程静态Bundle，512²动作图292298字节/1MiB解码，取得宠物才预取/正式准备；首屏无请求。art/runtime-pets保存image_gen源/提示/manifest，scripts/pack-pet-art.cjs确定性导出15帧。不把概念板打包；改资源后必须build:wechat→cdn:publish逐文件校验→cdn:check才可给新二维码。 细则见[pets](pets.md)与[实现说明](../../../../docs/pets-and-unlocks-v917.md)。

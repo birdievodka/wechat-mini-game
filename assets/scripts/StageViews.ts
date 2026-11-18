@@ -1,10 +1,11 @@
+import {petName,petFrameKey} from './pets';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {HeroShowcase} from './HeroShowcase';
 import {growthClears,growthTitle,growthRewardText,signatureId,dashName} from './hero-growth';
 import {Color,Graphics,Label,Mask,Node,Sprite,SpriteFrame,Rect,UITransform} from 'cc';
 import {Run,heroFor,heroMaxHearts,ITEMS} from './campaign';
-import {STAGES,stageFor,bossDisplayName,STAGE_THEMES,STARTER_WEAPONS} from './stage-data';
-import {StageProfile,StageReward,highestStage} from './stage-progress';
+import {STAGES,stageFor,bossDisplayName,STAGE_THEMES,STARTER_WEAPONS,stageRewardWeapons} from './stage-data';
+import {StageProfile,StageReward,highestStage,pendingStageWeapons} from './stage-progress';
 import {WeaponId,weaponFor} from './weapons';
 import {commonSkillFor} from './common-skills';
 import {addWeaponIcon} from './presentation-art';
@@ -82,8 +83,8 @@ export class StagePickerView extends StageSurface {
   refresh=()=>{
    for(const n of [...footer.children]){n.removeFromParent();n.destroy();}const old=this.panel.children.find(n=>n.name==='ConfirmStage');if(old){old.removeFromParent();old.destroy();}
    const d=stageFor(this.selected),open=this.selected<=highestStage(profile,hero);
-   this.text(footer,open?'首通解锁':'尚未解锁',-467,-248,23,170,46,C.gold).fontFamily='serif';
-   [['武器',d.firstClear.weapons.length],['道具',d.firstClear.passives.length],['技能',d.firstClear.skills.length]].forEach(([label,count],i)=>{const badge=this.box(footer,'RewardCategory-'+i,-282+i*159,-248,145,47);this.text(badge,label+' +'+count,0,0,20,130,39,C.gold);});
+   this.text(footer,open?(profile.heroes[hero]?.[d.id]?'奖励已领取':'首通解锁'):'尚未解锁',-467,-248,23,170,46,C.gold).fontFamily='serif';
+   [['武器',pendingStageWeapons(profile,hero,this.selected).length],['道具',d.firstClear.passives.length],['技能',d.firstClear.skills.length]].forEach(([label,count],i)=>{const badge=this.box(footer,'RewardCategory-'+i,-282+i*159,-248,145,47);this.text(badge,label+' +'+count,0,0,20,130,39,C.gold);});
    this.button(this.panel,'ConfirmStage',open?'选择此关':'尚未解锁',373,-248,300,()=>{if(open){choose(this.selected);this.close();}},open,true);
    this.text(footer,open?'通关当前关卡后解锁下一关':'本英雄通关上一关后解锁',0,-304,17,1050,24,'#d4d3b1');
   };refresh();
@@ -106,9 +107,9 @@ export class StageClearView extends StageSurface {
   this.showcase=new HeroShowcase(p,frames);this.showcase.setHero(run.heroId,signatureId(run.heroId,growth) as WeaponId,growth);
   const size=growth>=2?2.2:2.8;this.showcase.root.setPosition(-420,-140+(growth>=2?30:19)*size);this.showcase.root.setScale(size,size,1);
   this.text(p,heroFor(run).name+' · '+growthTitle(run.heroId,growth),-420,-185,27,360,46,C.paper).node.name='ClearHeroTitle';
-  const base=heroFor(run).hp,before=base+(reward.growthBefore||0),after=base+growth;
-  this.text(p,reward.firstHeroClear?`♥  生命上限  ${before} → ${after}`:`♥  生命上限 ${after}`,-420,-225,23,360,40,C.gold).node.name='ClearHeartReward';
-  const feature=run.chapter===1?weaponFor(signatureId(run.heroId,growth) as WeaponId).name+'解锁':run.chapter===2?(run.heroId==='liubei'?'白马':run.heroId==='guanyu'?'赤兔':'黑猪')+' · 移速+30%':run.chapter===3?'本命三连解锁':run.chapter===4?dashName(run.heroId)+'解锁':run.chapter===5?'最终形象解锁':'桃园留名';
+  const base=heroFor(run).hp,before=base+Math.min(2,reward.growthBefore||0),after=base+Math.min(2,growth);
+  this.text(p,reward.firstHeroClear&&after>before?`♥  生命上限  ${before} → ${after}`:`♥  生命上限 ${after}`,-420,-225,23,360,40,C.gold).node.name='ClearHeartReward';
+  const feature=run.chapter===1?weaponFor(signatureId(run.heroId,growth) as WeaponId).name+'解锁':run.chapter===2?(run.heroId==='liubei'?'白马':run.heroId==='guanyu'?'赤兔':'黑猪')+' · 移速+30%':run.chapter===3?'本命三连解锁':run.chapter===4?dashName(run.heroId)+'解锁':run.chapter===5?'短甲进阶 · '+petName(run.heroId)+'加入':'桃园留名';
   this.text(p,reward.firstHeroClear?feature:'成长已保存 · 重复挑战不叠加',-420,-257,19,360,32,C.muted).node.name='ClearGrowthFeature';
   const paper=this.box(p,'ClearRewards',185,34,800,456,C.paper);
   const fresh=reward.weapons.length+reward.passives.length+reward.skills.length;
@@ -117,12 +118,13 @@ export class StageClearView extends StageSurface {
   this.text(paper,`用时 ${clockText(run.elapsed)}     击败 ${kills}     剩余生命 ${run.hearts}/${heroMaxHearts(run)}`,0,143,20,748,36,'#887255').node.name='ClearStats';
   const groups=[['weapons','武器'],['passives','道具'],['skills','技能']] as const;
   groups.forEach(([kind,label],row)=>{
-   const all=s.firstClear[kind],y=65-row*101;this.text(paper,label+' '+all.length,-340,y,20,92,38,'#436047');
+   const all=kind==='weapons'?stageRewardWeapons(run.chapter,run.heroId):s.firstClear[kind],y=65-row*101;this.text(paper,label+' '+all.length,-340,y,20,92,38,'#436047');
    if(!all.length){this.text(paper,'—',0,y,22,600,42,'#9b947e');return;}
-   const spacing=Math.min(102,622/all.length);
+   const spacing=Math.min(kind==='weapons'?210:102,622/all.length);
    all.forEach((id,i)=>{
     const n=this.node(paper,'Reward-'+id);n.setPosition(18+(i-(all.length-1)/2)*spacing,y);n.addComponent(UITransform).setContentSize(spacing-4,88);
     if(kind==='weapons'){const art=addWeaponIcon(n,frames,id as WeaponId,1,58);art.setPosition(0,9);}else this.picture(n,kind==='skills'?'skill-'+commonSkillFor(id).icon:frames['item-'+id]?'item-'+id:'ui-power',0,9,58);
+    if(kind==='weapons')this.text(n,s.firstClear.weapons.some(w=>w===id)?'公共首通':heroFor(run).name+'首通',0,53,12,spacing-3,22,'#54724d');
     const name=kind==='weapons'?weaponFor(id as WeaponId).name:kind==='skills'?commonSkillFor(id).name:ITEMS.find(v=>v.id===id)?.name||id;
     this.text(n,name,0,-31,16,spacing-3,34,C.ink);
     if((reward[kind] as string[]).includes(id))this.text(n,'新',30,34,12,24,22,C.red).node.name='RewardNew';
@@ -134,6 +136,7 @@ export class StageClearView extends StageSurface {
     });
    });
   });
+  if(run.chapter===5){const n=this.node(p,'PetReward');n.setPosition(478,85);this.picture(n,petFrameKey(run.heroId),0,11,66);this.text(n,petName(run.heroId),0,-40,18,150,32,'#436047');this.text(n,reward.petUnlocked?'新伙伴加入':'伙伴已获得',0,59,15,150,26,C.red);}
   this.text(p,saved?(run.chapter<6?`下一战 · ${stageFor(run.chapter+1).name}`:'六关告捷，桃园留名！'):'保存失败，请保留游戏并重试保存',185,-236,22,790,38,saved?C.gold:'#ffb894').node.name='ClearNextStage';
   let committed=false;const once=(f:()=>void)=>{if(committed)return;committed=true;f();};
   const cta=(name:string,title:string,x:number,w:number,action:()=>void,primary:boolean,enabled=true)=>{
@@ -149,5 +152,56 @@ export class StageClearView extends StageSurface {
 
 /** Read-only permanent growth details, kept out of the combat HUD. */
 export class GrowthDetailView extends StageSurface {
- constructor(parent:Node,frames:Record<string,SpriteFrame>,id:Run['heroId'],count:number,close:()=>void){super(parent,frames,'HeroGrowthDetails',960,590);this.text(this.panel,'本命成长 · '+growthTitle(id,count),-35,238,34,720,60,C.gold);this.text(this.panel,'本命占一个武器位 · 每关首通增加1心',0,180,21,850,40);const names=['黄巾起义','虎牢讨董','官渡争锋','赤壁鏖兵','南中平蛮','五丈原决战'];for(let i=0;i<6;i++){const y=111-i*49;this.text(this.panel,(i<count?'✓ ':'○ ')+names[i],-297,y,22,220,40,i<count?C.gold:C.muted);this.text(this.panel,growthRewardText(id,i+1),120,y,21,590,40,i<count?C.paper:C.muted);}addPanelClose(this.panel,frames,'GrowthClose',428,243,()=>{this.close();close();});}
+ constructor(parent:Node,frames:Record<string,SpriteFrame>,id:Run['heroId'],count:number,close:()=>void){super(parent,frames,'HeroGrowthDetails',960,590);this.text(this.panel,'本命成长 · '+growthTitle(id,count),-35,238,34,720,60,C.gold);this.text(this.panel,'本命占一个武器位 · 仅前两关首通各增加1心',0,180,21,850,40);const names=['黄巾起义','虎牢讨董','官渡争锋','赤壁鏖兵','南中平蛮','五丈原决战'];for(let i=0;i<6;i++){const y=111-i*49;this.text(this.panel,(i<count?'✓ ':'○ ')+names[i],-297,y,22,220,40,i<count?C.gold:C.muted);this.text(this.panel,growthRewardText(id,i+1),120,y,21,590,40,i<count?C.paper:C.muted);}addPanelClose(this.panel,frames,'GrowthClose',428,243,()=>{this.close();close();});}
+}
+
+export class SettingsView extends StageSurface {
+ constructor(parent:Node,frames:Record<string,SpriteFrame>,private onClose:()=>void) {
+  super(parent,frames,'SettingsPanel',740,560);
+  addPanelClose(this.panel,frames,'SettingsClose',310,225,()=>{this.close();this.onClose();});
+ }
+ private body():Node {
+  const old=this.panel.children.find(n=>n.name==='SettingsContent');
+  if(old){old.removeFromParent();old.destroy();}
+  return this.node(this.panel,'SettingsContent');
+ }
+ message(title:string,detail:string):void {
+  const p=this.body();
+  this.text(p,title,0,150,30,580,55);
+  this.text(p,detail,0,20,23,620,100);
+ }
+ settings(music:()=>boolean,sound:()=>boolean,toggleMusic:()=>void,toggleSound:()=>void,progress:()=>void):void {
+  const p=this.body();
+  this.text(p,'设置',0,210,34);
+  const refresh=()=>this.settings(music,sound,toggleMusic,toggleSound,progress);
+  this.button(p,'MusicSetting','背景音乐 · '+(music()?'开启':'关闭'),0,100,400,()=>{toggleMusic();refresh();});
+  this.button(p,'SoundSetting','音效 · '+(sound()?'开启':'关闭'),0,0,400,()=>{toggleSound();refresh();});
+  this.button(p,'ProgressSetting','游戏进度',0,-120,400,progress);
+ }
+ progress(profile:StageProfile,reset:(()=>boolean)|undefined,back:()=>void):void {
+  const p=this.body();
+  this.text(p,'游戏进度',0,210,34);
+  for(const [i,id] of ['liubei','guanyu','zhangfei'].entries()){
+   const count=growthClears(profile,id),name=heroFor({heroId:id} as Run).name;
+   this.picture(p,'hero-'+id+'-open',-240,120-i*80,64);
+   this.text(p,name+'    '+count+' / 6 关',-20,120-i*80,25,330);
+   this.text(p,count===6?'无尽已解锁':'无尽未解锁',225,120-i*80,19,190);
+  }
+  this.button(p,'ProgressBack','返回设置',reset?-155:0,-180,250,back);
+  if(reset)this.button(p,'ResetProgress','清空进度',155,-180,250,()=>this.confirmReset(profile,reset,back));
+ }
+ private confirmReset(profile:StageProfile,reset:()=>boolean,back:()=>void):void {
+  const p=this.body();
+  this.text(p,'确认清空全部进度？',0,175,31,600);
+  this.text(p,'将清空三位英雄的通关、成长、灵宠、无尽资格，\n以及共享解锁和图鉴发现。此操作无法撤销。',0,40,22,650,130);
+  const error=this.text(p,'',0,-80,20,620,45,'#ffd0bb');
+  let submitted=false;
+  this.button(p,'CancelReset','取消',-155,-180,250,()=>this.progress(profile,reset,back));
+  this.button(p,'ConfirmReset','确认清空',155,-180,250,()=>{
+   if(submitted)return;
+   submitted=true;
+   if(reset()){this.close();this.onClose();}
+   else{submitted=false;error.string='保存失败，进度尚未清空，请重试';}
+  },true,true);
+ }
 }

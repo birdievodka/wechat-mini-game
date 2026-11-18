@@ -14,7 +14,7 @@ const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolea
   g.run=C.createStageRun(g.profile,'liubei',1,'sandal','G03');g.playerHp=5;g.run.elapsed=196;g.kills=323;g.endStage(true);
   assert.ok(find(g.screens.root,'ClearLandscape'));assert.ok(find(g.screens.root,'ClearHeartReward').getComponent(cc.Label).string.includes('5 → 6'));
   for(const kind of ['weapons','passives','skills'])for(const id of D.STAGES[0].firstClear[kind])assert.ok(find(g.screens.root,'Reward-'+id),'已共享也展示实际图标');
-  assert.equal(all(g.screens.root).filter(n=>n.name==='RewardNew').length,shared?0:14);
+  assert.equal(all(g.screens.root).filter(n=>n.name==='RewardNew').length,shared?1:10);
   click(g.screens.root,'Reward-peach');assert.ok(find(g.screens.root,'RewardDetails'));click(g.screens.root,'RewardDetailsClose');
   click(g.screens.root,'StageClearNext');assert.equal(g.phase,'menu');
  }
