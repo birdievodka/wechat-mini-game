@@ -28,7 +28,7 @@ export class SoundGate {
   private voices: { until: number; priority: number; started: number }[];
   constructor(count = SFX_VOICES) { this.voices = Array.from({ length: count }, () => ({ until: 0, priority: -1, started: 0 })); }
   get elapsed(): number { return this.time; }
-  update(delta: number): void { this.time += Math.max(0, delta); }
+  update(delta: number): void { if(Number.isFinite(delta)&&delta>=0)this.time+=Math.min(delta,60); }
   reset(): void { this.time = 0; this.next = {}; this.voices.forEach(v => { v.until = 0; v.priority = -1; }); }
   acquire(id: SoundId, priority: number = SOUND_CUES[id].priority): number | undefined {
     if ((this.next[id] || 0) > this.time) return;

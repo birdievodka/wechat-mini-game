@@ -220,3 +220,7 @@ v9.9普通面板关闭统一经panel-ui.addPanelClose，不各自画叉号或混
 
 
 v9.12新增native-sfx.ts（固定原生音效与串行加载队列）和world-prop-art.ts（复用旧程序造型）。npm test纳入test-native-sfx；性能测试验证小物件Sprite分支。diagnose-props-memory使用隔离9391/8791，前后必须等目标版本、绕过缓存并确认导航；diagnose-stability可通过STABILITY_ORIGIN/CDP_PORT隔离、BOSS_CHAPTERS明确图集并预取。真机闪退日志与桌面计数分开，不把桌面6声道桩测试说成已实测iPhone无闪退。
+
+v9.13（stage-v9.13-lifecycle）：新增load-lifetime/asset-scope共享一次性截止与资源租约、graphics-content四共享FX空清理跟踪；GameBootstrap.requestAudio统一原草鞋/附加音效/音乐，refreshWeaponArt只换帧。test-review-stability纳入npm test，覆盖生产懒加载和退出/异常竞态，不能用旧newGame预载全部素材夹具代替。diagnose-review-lifecycle只连8791/9391隔离目录，100次UI循环/20次真实组件析构及存储恢复。报告落实范围与保留项见docs/review-stability-v913.md；修改BossEffects只准同key帧身份失效修复，少年保护测试仍保留原绘图哈希。
+
+v9.14（stage-v9.14-all-stage-ground）：正式六关rebuildMeadow统一同边镜像/720×540目标块，chronicle-art六地面帧统一2px内缩；不改缩略图或演武。test-resource-loading对六关验证对应帧、316×188采样、行列镜像/块数及缺图兜底。capture-all-ground-review使用独立8791/9391和明确版本，逐关before/after/移动镜头及存档恢复；运行图片复用现有本地图集，CDN版本不变。

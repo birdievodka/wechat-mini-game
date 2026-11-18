@@ -1,3 +1,6 @@
+import {trackGraphicsContent} from './graphics-content';
+import {AssetScope,artScope,releaseArtTexture} from './asset-scope';
+import {notifySafely} from './load-lifetime';
 import {drawWorldProp} from './world-prop-art';
 import {NativeSfx,NativeSoundHost,AudioLoadQueue} from './native-sfx';
 import {addPanelClose} from './panel-ui';
@@ -23,7 +26,7 @@ import {CommonSkillEffects} from './CommonSkillEffects';
 import {loadChronicleArt,ensureBossArt,releaseBossArt,bossArtReady} from './chronicle-art';
 import {loadGameBundle,stageBosses} from './game-resources';
 import {decodeLoadingArt} from './indexed-art';
-import {ensureResultArt,ensureHiddenHeroArt,releaseResultArt} from './deferred-art';
+import {ensureResultArt,ensureHiddenHeroArt,releaseResultArt,cancelArtGroups} from './deferred-art';
 import {ResourcePrepareView} from './ResourcePrepareView';
 import {LvbuState,createLvbuState,updateLvbu,lvbuFrame,lvbuBusy,LVBU_EVENT} from './lvbu-boss';
 import {drawLvbuEffects} from './lvbu-effects';
@@ -103,7 +106,7 @@ interface Weapon { extraPhase?:number;extraCooldown?:number;
   fist:Graphics;
   orbitBlades?:Node[]; orbitPrevious?:{x:number;y:number}[]; orbitHits?:Map<Enemy,number>;
   equipped?: EquippedWeapon; stats?: WeaponStats; cooldown: number; duration: number; damage: number; offhand: Node;
-  strikes?: number;
+  strikes?: number;loadoutKey?:string;
   node: Node; shoe: Node; arm: Graphics; trail: Graphics; time: number; angle: number; side: number;
   aimX?: number; aimY?: number; hit: Set<Enemy>; lastX: number; lastY: number;
 }
@@ -125,6 +128,7 @@ private playerSlowUntil=0;
   private readonly buildVersion = SURVIVAL_VERSION;
   private phase: Phase = 'loading';
   private health?:RuntimeHealth;
+  private profileDirty=false;private profileTimer:ReturnType<typeof setTimeout>|undefined;
   private pressureSeconds=0;
   private particleSprites!:ParticleSprites;
   private battleSprites!:BattleSpriteAtlas;
@@ -136,6 +140,8 @@ private playerSlowUntil=0;
   private stats: Stats = statsFor(this.run);
   private screens!: CampaignView;
   private artFrames: Record<string, SpriteFrame> = {};
+  private assets=artScope(this.artFrames);
+  private nativeAudio=false;private nativeRetryAt=0;private badFrames=0;
   private itemFrames: SpriteFrame[] = [];
   private ornaments: Node[] = [];
   private heroName!: Label;
@@ -230,6 +236,7 @@ private playerSlowUntil=0;
   private weapons: Weapon[] = [];
   private projectiles: Projectile[] = [];
   private projectileContacts:{e:Enemy;t:number}[]=[];
+  private separationEnemies:Enemy[]=[];
   private depthNodes:Node[]=[];
   private presentSubstep=true;
   private heroTint='';
@@ -282,6 +289,8 @@ private playerSlowUntil=0;
   private music = new BattleMusic();
   private musicMuted = false;
   private backgrounded = false;
+  private musicCancel?:()=>void;
+  private musicRetryAt=0;
   private musicLoading = false;
   private musicLoaded = false;
   private musicSource?: AudioSource;
@@ -344,7 +353,7 @@ private playerSlowUntil=0;
         alive:this.enemies.reduce((n,e)=>n+Number(e.hp>0),0),projectileNodes:this.projectiles.length,coinNodes:this.coins.length,
         particles:this.combatFx.particles.active,weapons:this.run.weapons.map(w=>w.id+':'+w.tier),growth:this.run.growth||0,os:sys.os,osVersion:sys.osVersion,
         atlasReady:this.battleSprites?.ready,enemyShotNodes:this.enemyShots.length,
-        sfxBackend:this.nativeSfx?'native-fixed':'cocos',sfxPlayed:this.nativeSfx?.played||0,sfxErrors:this.nativeSfx?.failures||0,sfxVoices:this.nativeSfx?.size||this.soundSources.length,sfxUrls:Object.keys(this.soundUrls).length,sfxLoading:this.soundLoads.loading,sfxQueued:this.soundLoads.waiting,
+        sfxBackend:this.nativeSfx?'native-fixed':this.nativeAudio?'native-retry':'cocos',sfxPlayed:this.nativeSfx?.played||0,sfxErrors:this.nativeSfx?.failures||0,sfxVoices:this.nativeSfx?.size||this.soundSources.length,sfxUrls:Object.keys(this.soundUrls).length,sfxLoading:this.soundLoads.loading,sfxQueued:this.soundLoads.waiting,
         gfxBuffers:director?.root?.device?.memoryStatus?.bufferSize,gfxTextures:director?.root?.device?.memoryStatus?.textureSize}),
       ()=>{this.pressureSeconds=15;this.combatFx.particles.trimTrails();});
     view.setDesignResolutionSize(1334, 750, ResolutionPolicy.FIXED_HEIGHT);
@@ -362,11 +371,11 @@ private playerSlowUntil=0;
     canvas.cameraComponent = camera; canvas.alignCanvasWithScreen = true;
     this.battlefield = this.node2D(this.root,'Battlefield');
     this.ground = this.node2D(this.battlefield, 'Ground').addComponent(Graphics);
-    this.friendlyGroundFx = this.node2D(this.battlefield, 'FriendlyGroundEffects').addComponent(Graphics);
-    this.dangerFx = this.node2D(this.battlefield, 'EnemySpells').addComponent(Graphics);
+    this.friendlyGroundFx = trackGraphicsContent(this.node2D(this.battlefield, 'FriendlyGroundEffects').addComponent(Graphics));
+    this.dangerFx = trackGraphicsContent(this.node2D(this.battlefield, 'EnemySpells').addComponent(Graphics));
     this.world = this.node2D(this.battlefield, 'World');
-    this.spellFx = this.node2D(this.battlefield, 'EnemySpellBursts').addComponent(Graphics);
-    this.fx = this.node2D(this.battlefield, 'ImpactEffects').addComponent(Graphics);
+    this.spellFx = trackGraphicsContent(this.node2D(this.battlefield, 'EnemySpellBursts').addComponent(Graphics));
+    this.fx = trackGraphicsContent(this.node2D(this.battlefield, 'ImpactEffects').addComponent(Graphics));
     this.particleSprites=new ParticleSprites(this.fx.node,effectInk);
     this.battleSprites=new BattleSpriteAtlas();
     const panelClose=this.battleSprites.copyFrame('ui-close');if(panelClose)this.artFrames['ui-panel-close']=panelClose;
@@ -468,15 +477,15 @@ private playerSlowUntil=0;
     const menuArt=this.loadHeroMenuArt().catch(error=>{this.loadingView?.showTitleFallback();this.startupProgress.skipMenuArt();this.drawStartupProgress();console.warn('选角素材加载失败，使用基础布局',error);});
     try {
       this.resources = await new Promise<AssetManager.Bundle>((resolve, reject) => {
-        assetManager.loadBundle('battle', (error, bundle) => error ? reject(error) : resolve(bundle));
+        this.assets.request<AssetManager.Bundle>(done=>assetManager.loadBundle('battle',done),(error,bundle)=>error||!bundle?reject(error||new Error('资源包为空')):resolve(bundle));
       });
-      if (!this.isValid) return;
+      if (!this.isValid||this.assets.disposed) return;
       this.markStartup('battle');
     } catch (error) {
       this.failStartup('资源下载失败，请重新进入'); console.error(error); return;
     }
-    this.nativeSfx=NativeSfx.create(typeof wx==='undefined'?undefined:wx,SFX_VOICES,message=>this.health?.record('audio-error',message));
-    for (let i = 0; !this.nativeSfx && i < SFX_VOICES; i++) {
+    this.nativeAudio=typeof wx!=='undefined';this.ensureNativeAudio();
+    for (let i = 0; !this.nativeAudio && i < SFX_VOICES; i++) {
       const source = this.node2D(this.root, `Voice${i}`).addComponent(AudioSource);
       source.playOnAwake = false; this.soundSources.push(source);
       if (DEBUG) source.node.on(AudioSource.EventType.STARTED, () => {
@@ -484,18 +493,7 @@ private playerSlowUntil=0;
         if (name && !this.loggedSounds.has(name)) { this.loggedSounds.add(name); console.info('[sfx] started', name); }
       });
     }
-    for (const name of ['sandal-hit-pcm'] as const) {
-      this.soundLoads.enqueue(release=>{
-        this.resources.load(`audio/${name}`, AudioClip, (error, clip) => {
-          try{
-            if (!this.isValid||this.audioDisposed) {if(clip)assetManager.releaseAsset(clip);return;}
-            if (error) { this.soundButton.string = '音效加载失败'; console.warn('音效加载失败', name, error); return; }
-            this.cacheSoundClip([name],clip);
-            if (this.audioUnlocked && !this.muted) this.soundButton.string = '音效：开启';
-          }finally{release();}
-        });
-      });
-    }
+    this.loadSound('sandal-hit-pcm');
     this.loadMusic(); this.loadWeaponSounds();
     this.root.on(Node.EventType.TOUCH_START,this.audioTouch,this,true);
     // UI dispatch precedes global input and may swallow a touch (including the
@@ -516,24 +514,23 @@ private playerSlowUntil=0;
     game.on(Game.EVENT_HIDE, this.onBackground, this);
     game.on(Game.EVENT_SHOW, this.onForeground, this);
     ['sickle','hoe'].forEach((kind,index)=>{
-      this.resources.load(`characters/soldier-${kind}-actions`,BufferAsset,async (error,asset)=>{
+      this.assets.load(this.resources,`characters/soldier-${kind}-actions`,BufferAsset,async (error,asset)=>{
         if(error){this.failStartup('小兵资源加载失败，请重新进入');console.error(error);return;}
-        if(!this.isValid){assetManager.releaseAsset(asset);return;}
-        try{const decoded=await decodeLoadingArt(new Uint8Array(asset.buffer()),()=>this.isValid);
-          if(!decoded||!this.isValid)return;
+        if(!asset)return;if(!this.isValid||this.assets.disposed){this.assets.release(asset);return;}
+        try{const decoded=await new Promise<Awaited<ReturnType<typeof decodeLoadingArt>>>((resolve,reject)=>this.assets.request<Awaited<ReturnType<typeof decodeLoadingArt>>>(done=>{decodeLoadingArt(new Uint8Array(asset.buffer()),()=>this.isValid&&!this.assets.disposed).then(v=>done(null,v),e=>done(e));},(error,value)=>error?reject(error):resolve(value)));
+          if(!decoded||!this.isValid||this.assets.disposed)return;
           const texture=new Texture2D();this.soldierTextures.push(texture);texture.reset({width:decoded.width,height:decoded.height});texture.uploadData(decoded.pixels);
           this.soldierFrames[index]=Array.from({length:12},(_,i)=>{const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(i%4*decoded.width/4,Math.floor(i/4)*decoded.height/3,decoded.width/4,decoded.height/3);return f;});
           this.markStartup('soldier:'+kind);this.enemies.forEach(e=>this.drawEnemy(e));this.checkReady();
-        }catch(e){this.failStartup('小兵资源校验失败，请重新进入');console.error(e);}finally{assetManager.releaseAsset(asset);}
+        }catch(e){this.failStartup('小兵资源校验失败，请重新进入');console.error(e);}finally{this.assets.release(asset);}
       });
     });
     try {
-      const bundle = await new Promise<AssetManager.Bundle>((resolve, reject) => assetManager.loadBundle('campaign', (error, b) => error ? reject(error) : resolve(b)));
-      if(!this.isValid)return;this.markStartup('campaign');
-      await Promise.all(CAMPAIGN_ART.map(name => new Promise<void>((resolve, reject) => {
-        bundle.load(`${name}/texture`, Texture2D, (error, texture) => {
-          if (error) { reject(error); return; }
-          if (!this.isValid) { resolve(); return; }
+      const bundle = await this.loadCoreBundle('campaign');
+      if(!this.isValid||this.assets.disposed)return;this.markStartup('campaign');
+      await Promise.all(CAMPAIGN_ART.map(async name => {
+          const texture=await this.loadCoreTexture(bundle,`${name}/texture`);
+          if (!this.isValid||this.assets.disposed) return;
           const frame = new SpriteFrame(); frame.texture = texture; frame.rect = new Rect(0, 0, texture.width, texture.height); this.artFrames[name] = frame;
           if (name === 'camp-paper') { frame.insetLeft = 44; frame.insetRight = 44; frame.insetTop = 44; frame.insetBottom = 44; }
           if (name === 'camp-stats') ['hp', 'power', 'damage', 'haste', 'speed', 'armor', 'crit', 'range', 'regen', 'pickup', 'area', 'coin'].forEach((key, index) => {
@@ -549,17 +546,16 @@ private playerSlowUntil=0;
           if (name === 'items') for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) {
             const icon = new SpriteFrame(); icon.texture = texture; icon.rect = new Rect(col * texture.width / 4, row * texture.height / 3, texture.width / 4, texture.height / 3); this.itemFrames.push(icon);
           }
-          this.markStartup('campaign:'+name);resolve();
-        });
-      })));
-      if (!this.isValid) return;
-      await loadChronicleArt(this.artFrames,()=>this.isValid);for(const i of [24,25]){const f=this.battleSprites.copyFrame('skill-'+i);if(f)this.artFrames['skill-'+i]=f;}this.markStartup('chronicles');
+          this.markStartup('campaign:'+name);
+      }));
+      if (!this.isValid||this.assets.disposed) return;
+      await loadChronicleArt(this.artFrames,()=>this.isValid&&!this.assets.disposed);for(const i of [24,25]){const f=this.battleSprites.copyFrame('skill-'+i);if(f)this.artFrames['skill-'+i]=f;}this.markStartup('chronicles');
       await Promise.all([
         posterArt,
         this.loadPresentationArt(),
         menuArt,
       ]);
-      if(!this.isValid)return;
+      if(!this.isValid||this.assets.disposed)return;
       const sandalIcon=this.battleSprites.copyFrame('weapon-sandal');
       if(sandalIcon){this.artFrames['icon-sandal']?.destroy();this.artFrames['icon-sandal']=sandalIcon;}
       // Resolve legacy keys to the current youth art, without decoding six old portraits.
@@ -581,27 +577,29 @@ private playerSlowUntil=0;
     } catch (error) { this.failStartup('角色资源加载失败，请重新进入'); console.error(error); }
   }
 
+  private loadCoreBundle(name:string):Promise<AssetManager.Bundle> {return new Promise((resolve,reject)=>this.assets.request<AssetManager.Bundle>(done=>assetManager.loadBundle(name,done),(error,bundle)=>error||!bundle?reject(error||new Error('资源包为空')):resolve(bundle)));}
+
+  private loadCoreTexture(bundle:AssetManager.Bundle,path:string):Promise<Texture2D> {return new Promise((resolve,reject)=>this.assets.load(bundle,path,Texture2D,(error,t)=>error||!t?reject(error||new Error('贴图为空')):resolve(t)));}
+
   private async loadHeroMenuArt():Promise<void> {
-    const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('hero-menu',(error,b)=>error?reject(error):resolve(b)));
-    if(!this.isValid)return;this.markStartup('hero-menu');
-    await Promise.all(['background','atlas','logo'].map(name=>new Promise<void>((resolve,reject)=>{
-      bundle.load((name==='background'?'training-ground':name)+'/texture',Texture2D,(error,texture)=>{
-        if(error){reject(error);return;}if(!this.isValid){resolve();return;}
+    const bundle=await this.loadCoreBundle('hero-menu');
+    if(!this.isValid||this.assets.disposed)return;this.markStartup('hero-menu');
+    await Promise.all(['background','atlas','logo'].map(async name=>{
+        const texture=await this.loadCoreTexture(bundle,(name==='background'?'training-ground':name)+'/texture');if(!this.isValid||this.assets.disposed)return;
         if(name==='background'||name==='logo'){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(0,0,texture.width,texture.height);this.artFrames['hero-menu-'+name]=frame;if(name==='background'&&PREVIEW&&!this.artFrames.poster)this.loadingView?.setPoster(frame,texture.width,texture.height);if(name==='logo')this.loadingView?.setLogo(frame);}
         else{
           const cw=texture.width/3,ch=texture.height/2;
           ['liubei','guanyu','zhangfei','logo','title','start'].forEach((key,i)=>{if(key==='logo')return;const frame=new SpriteFrame();frame.texture=texture;frame.rect=i<3?new Rect(i*cw,0,cw,ch):new Rect((i-3)*cw,ch+ch*.25,cw,ch*.5);this.artFrames['hero-menu-'+key]=frame;});
-        }this.markStartup('menu:'+name);resolve();
-      });
-    })));
+        }this.markStartup('menu:'+name);
+    }));
   }
 
   private loadStartupPoster(image?:HTMLImageElement):Promise<void> {
     const apply=(source:ImageAsset)=>{this.startupImage=source;const texture=this.startupTexture=new Texture2D();texture.image=source;const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(0,0,texture.width,texture.height);this.artFrames.poster=f;this.loadingView?.setPoster(f,texture.width,texture.height);this.markStartup('poster');};
-    if(image){apply(new ImageAsset(image));return Promise.resolve();}
-    return new Promise((resolve,reject)=>assetManager.loadRemote<ImageAsset>('startup-poster.jpg',{ext:'.jpg'},(error,asset)=>{if(error&&PREVIEW){const f=this.artFrames['hero-menu-background'];if(f)this.loadingView?.setPoster(f,f.rect.width,f.rect.height);this.markStartup('poster');resolve();return;}if(error){this.failStartup('海报资源加载失败，请重新进入');reject(error);return;}if(!this.isValid){assetManager.releaseAsset(asset);resolve();return;}this.startupRemoteImage=true;apply(asset);resolve();}));
+    if(image){try{apply(new ImageAsset(image));return Promise.resolve();}catch(error){return Promise.reject(error);}}
+    return new Promise((resolve,reject)=>this.assets.request<ImageAsset>(done=>assetManager.loadRemote<ImageAsset>('startup-poster.jpg',{ext:'.jpg'},done),(error,asset)=>{try{if(error&&PREVIEW){const f=this.artFrames['hero-menu-background'];if(f)this.loadingView?.setPoster(f,f.rect.width,f.rect.height);this.markStartup('poster');resolve();return;}if(error){this.failStartup('海报资源加载失败，请重新进入');reject(error);return;}if(!asset||!this.isValid||this.assets.disposed){if(asset)assetManager.releaseAsset(asset);resolve();return;}this.startupRemoteImage=true;this.assets.own(asset);apply(asset);resolve();}catch(error){reject(error);}},18000,asset=>assetManager.releaseAsset(asset)));
   }
-  private prefetchResultArt():void {if(this.artFrames['result-'+this.run.heroId])return;ensureResultArt(this.artFrames,()=>this.isValid&&this.phase==='battle',()=>{});}
+  private prefetchResultArt():void {if(this.artFrames['result-'+this.run.heroId])return;ensureResultArt(this.artFrames,()=>this.isValid&&!this.assets.disposed&&this.phase==='battle',()=>{});}
   private prepareResult(action:()=>void):void {
     this.prepareVisuals(this.artFrames['result-'+this.run.heroId]?[]:[(alive,done)=>ensureResultArt(this.artFrames,alive,done)],action,'正在整理战报…','桃园战报');
   }
@@ -609,20 +607,18 @@ private playerSlowUntil=0;
     this.prepareVisuals(['zhaoyun','kongming'].indexOf(id)<0||this.artFrames['hero-'+id+'-open']?[]:[(alive,done)=>ensureHiddenHeroArt(this.artFrames,alive,done)],action);
   }
   private async loadPresentationArt():Promise<void> {
-    const bundle=await new Promise<AssetManager.Bundle>((resolve,reject)=>assetManager.loadBundle('presentation',(error,b)=>error?reject(error):resolve(b)));
-    if(!this.isValid)return;this.markStartup('presentation');
-    await Promise.all(['icons','weapon-revision','butcher-knife','heroes','hero-hud'].map(name=>new Promise<void>((resolve,reject)=>{
-      bundle.load((name==='background'?'training-ground':name)+'/texture',Texture2D,(error,texture)=>{
-        if(error){reject(error);return;}if(!this.isValid){resolve();return;}
+    const bundle=await this.loadCoreBundle('presentation');
+    if(!this.isValid||this.assets.disposed)return;this.markStartup('presentation');
+    await Promise.all(['icons','weapon-revision','butcher-knife','heroes','hero-hud'].map(async name=>{
+        const texture=await this.loadCoreTexture(bundle,(name==='background'?'training-ground':name)+'/texture');if(!this.isValid||this.assets.disposed)return;
         const frame=(key:string,rect:number[]):void=>{const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(rect[0],rect[1],rect[2],rect[3]);this.artFrames[key]=f;};
         if(name==='hero-hud')for(const [i,id] of ['liubei','guanyu','zhangfei'].entries())frame('hero-select-'+id,[i*texture.width/3,0,texture.width/3,texture.height]);
         else if(name==='icons')Object.keys(WEAPON_ICON_RECTS).forEach(id=>frame('icon-'+id,WEAPON_ICON_RECTS[id as WeaponId]!));
         else if(name==='weapon-revision')for(const id of ['pole'] as const)frame('icon-'+id,WEAPON_ICON_PATCH_RECTS[id]);
         else if(name==='butcher-knife')frame('icon-cleaver',BUTCHER_ICON_RECT);
         else Object.keys(HERO_PART_RECTS).filter(id=>['liubei','guanyu','zhangfei'].indexOf(id)>=0).forEach(id=>HERO_PART_RECTS[id].forEach((rect,i)=>frame('hero-'+id+'-'+['open','closed','torso'][i],rect)));
-        this.markStartup('presentation:'+name);resolve();
-      });
-    })));
+        this.markStartup('presentation:'+name);
+    }));
   }
 
   private applyHeroPresentation():void {
@@ -642,7 +638,7 @@ private playerSlowUntil=0;
   }
 
   private checkReady(): void {
-    if (this.ready || this.startupCanEnter || this.startupProgress.error || !this.startupProgress.allSettled || !this.screens || !this.bodyFrame || !this.soldierFrames[0] || !this.soldierFrames[1]) return;
+    if (this.assets.disposed || this.ready || this.startupCanEnter || this.startupProgress.error || !this.startupProgress.allSettled || !this.screens || !this.bodyFrame || !this.soldierFrames[0] || !this.soldierFrames[1]) return;
     this.artFrames['enemy-E01-front']=this.soldierFrames[0][0];this.artFrames['enemy-E01-back']=this.soldierFrames[0][8];
     this.startupProgress.complete();this.startupCanEnter=true;this.drawStartupProgress();
   }
@@ -659,11 +655,12 @@ private playerSlowUntil=0;
     const texture=poster?.texture;poster?.destroy();
     if(this.startupTexture){this.startupTexture.destroy();this.startupTexture=undefined;}
     else if(texture)assetManager.releaseAsset(texture);
-    if(this.startupImage){if(this.startupRemoteImage)assetManager.releaseAsset(this.startupImage);else this.startupImage.destroy();}this.startupImage=undefined;
+    if(this.startupImage){if(this.startupRemoteImage)this.assets.release(this.startupImage);else this.startupImage.destroy();}this.startupImage=undefined;
     const startup=startupBridge();if(startup)delete startup.image;
   }
-  private markStartup(id:string):void {this.startupProgress.mark(id);this.drawStartupProgress();}
-  private failStartup(message:string):void {this.startupProgress.fail(message);this.drawStartupProgress();}
+  private markStartup(id:string):void {if(this.assets.disposed)return;this.startupProgress.mark(id);this.drawStartupProgress();}
+  private failStartup(message:string):void {
+    if(this.audioDisposed||this.assets.disposed)return;this.startupProgress.fail(message);this.drawStartupProgress();}
 
   /** Local browser art review only; release WeChat builds remove this DEBUG branch. */
   private openCampReview(): void {
@@ -700,7 +697,9 @@ private playerSlowUntil=0;
   }
 
   update(delta: number): void {
-    this.layoutBattlefield();
+    if(!Number.isFinite(delta)||delta<0){this.health?.record('invalid-frame','非有限或负delta');if(++this.badFrames>=3&&this.ready&&this.phase==='battle'){this.paused=true;this.clearInput();this.menu.active=true;}return;}this.badFrames=0;
+    if(!Number.isFinite(this.px)||!Number.isFinite(this.py)){this.health?.record('invalid-position');this.paused=true;this.clearInput();this.px=Number.isFinite(this.px)?this.px:0;this.py=Number.isFinite(this.py)?this.py:0;this.hero?.setPosition(this.px,this.py);if(this.menu)this.menu.active=true;return;}
+    this.ensureNativeAudio();this.layoutBattlefield();
     if(this.ready&&this.phase==='battle'&&!this.paused&&!this.backgrounded){
       this.health?.frame(delta);
       if(this.pressureSeconds>0){this.pressureSeconds=Math.max(0,this.pressureSeconds-Math.min(delta,.08));if(!this.pressureSeconds)this.combatFx.particles.trailsEnabled=true;}
@@ -715,11 +714,11 @@ private playerSlowUntil=0;
       }
       return;
     }
-    if(this.ready&&!this.backgrounded){const audioDt=Math.min(Math.max(delta,0),.08);this.soundGate.update(audioDt);if(!this.paused)this.music.update(audioDt);for(let i=0;i<this.voiceOwners.length;i++){const e=this.voiceOwners[i];if(e&&(e.hp<=0||(e.stunUntil||0)>this.age)){this.nativeSfx?.stopVoice(i);this.soundSources[i]?.stop();this.voiceOwners[i]=undefined;}}}
+    if(this.ready&&!this.backgrounded){if(!this.musicLoaded&&!this.musicLoading&&Date.now()>=this.musicRetryAt)this.loadMusic();const audioDt=Math.min(Math.max(delta,0),.08);this.soundGate.update(audioDt);if(!this.paused)this.music.update(audioDt);for(let i=0;i<this.voiceOwners.length;i++){const e=this.voiceOwners[i];if(e&&(e.hp<=0||(e.stunUntil||0)>this.age)){this.nativeSfx?.stopVoice(i);this.soundSources[i]?.stop();this.voiceOwners[i]=undefined;}}}
     if(this.resourceBusy)return;
-    if(this.ready&&this.phase==='menu'){if(!this.backgrounded)this.screens.update(delta);return;}
+    if(this.ready&&this.phase==='menu'){if(!this.backgrounded)this.screens.update(Math.min(delta,.08));return;}
     if(this.ready&&this.phase==='battle'&&this.finishVictory())return;
-    if(this.ready&&(this.phase==='defeat'||this.phase==='victory')){this.screens.update(delta);return;}
+    if(this.ready&&(this.phase==='defeat'||this.phase==='victory')){this.screens.update(Math.min(delta,.08));return;}
     // The music clock continues while shopping/counting down; combat remains frozen.
 
     if (!this.ready || this.paused || this.backgrounded || this.phase !== 'battle' || this.trainingPanel?.root.active) return;
@@ -763,6 +762,7 @@ private playerSlowUntil=0;
   }
 
   private simulate(dt: number): void {
+    if(!Number.isFinite(dt)||dt<0)return;
     this.combatFx.update(dt);
     this.updateSkill(dt);this.updateExtraFields(dt);if(this.finishVictory())return;this.updateWildlife(dt);
     this.difficultyNotice=Math.max(0,this.difficultyNotice-dt);if(this.difficultyLabel)this.difficultyLabel.string=this.difficultyNotice>0?(this.run.bossEncounter?(this.run.challenge?bossDisplayName(stageFor(this.run.chapter).boss):chapterFor(this.run.chapter).boss)+'来袭':'难度升级'):'';
@@ -810,10 +810,10 @@ private playerSlowUntil=0;
       e.previousHitX = center.x; e.previousHitY = center.y;
       const previousAttack=e.attack;this.updateEnemy(e,dt);this.commonSkill.enemyUpdated(e,previousAttack);
     }
-    // 软分离防止小兵重叠成一个点。
-    for (let i = 0; i < this.enemies.length; i++) for (let j = i + 1; j < this.enemies.length; j++) {
-      const a = this.enemies[i], b = this.enemies[j];
-      if (a.hp <= 0 || b.hp <= 0 || a.bossUnit || b.bossUnit) continue;
+    // Same ordered pairs and live positions, with retired/dead slots excluded once.
+    const separation=this.separationEnemies;separation.length=0;for(const e of this.enemies)if(e.hp>0&&!e.bossUnit)separation.push(e);
+    for (let i = 0; i < separation.length; i++) for (let j = i + 1; j < separation.length; j++) {
+      const a = separation[i], b = separation[j];
       const dx = b.x - a.x, dy = b.y - a.y, squared = dx*dx+dy*dy;
       if (squared < 1764 && squared > .000001) {
         const d=Math.sqrt(squared);
@@ -985,6 +985,8 @@ private playerSlowUntil=0;
       addWeaponIcon(n,this.artFrames,equipped.id,equipped.tier,64);
     });
     this.weapons.forEach((w, i) => {
+      const eq=this.run.weapons[i],key=[this.run.heroId,this.run.growth||0,eq?.uid,eq?.id,eq?.tier,!!eq?.signature,this.run.weapons.length].join(':');
+      if(w.loadoutKey===key){w.equipped=eq;if(eq)w.stats=weaponStatsFor(this.run,eq);return;}w.loadoutKey=key;
       for(const blade of w.orbitBlades||[]){blade.removeFromParent();blade.destroy();}w.orbitBlades=[];w.orbitPrevious=undefined;w.orbitHits=new Map();
       if(w.equipped?.uid!==this.run.weapons[i]?.uid)w.strikes=0;w.equipped = this.run.weapons[i]; w.arm.node.active = this.run.weapons.length===1 && (!!w.equipped || i===1); w.trail.node.active = !!w.equipped;
       w.node.getComponent(Graphics)!.clear();w.fist.node.active=this.run.weapons.length===1&&w.equipped?.id!=='sword';
@@ -1006,6 +1008,19 @@ private playerSlowUntil=0;
     });
     for (const w of this.weapons) if (w.equipped) this.updateWeapon(w, 0);
     this.updateFreeHand();this.updateRestingArms();if(this.weaponHud){this.weaponHudKey='';this.drawWeaponHud();}
+  }
+
+  /** Texture arrivals are cosmetic: no combat update, equipment rebuild or CCD mutation. */
+  private refreshWeaponArt():void {
+    for(const w of this.weapons){
+      if(!w.equipped)continue;
+      const sig=!!w.equipped.signature&&(this.run.growth||0)>0,frame=this.artFrames[sig?'growth-held-'+this.run.heroId:'weapon-'+w.equipped.id];
+      if(w.equipped.id==='sandal'||!frame)continue;
+      let n=w.shoe.children.find(n=>n.name==='WeaponSprite');
+      if(!n){n=this.node2D(w.shoe,'WeaponSprite');n.addComponent(Sprite).sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(78,78);n.setPosition(0,18);if(sig){n.getComponent(UITransform)!.setAnchorPoint(.5,.22);n.getComponent(UITransform)!.setContentSize(90,90);n.setPosition(0,0);}else if(['smg','shotgun','rocket'].includes(w.equipped.id)||isExtraWeapon(w.equipped.id))n.angle=45;w.shoe.getComponent(Graphics)?.clear();}
+      const sp=n.getComponent(Sprite)!;if(sp.spriteFrame!==frame)sp.spriteFrame=frame;
+    }
+    if(this.weaponHud){this.weaponHudKey='';this.drawWeaponHud();}
   }
 
   /** An empty equipment slot is not a missing arm. Only the first pair are anatomical hands. */
@@ -1462,13 +1477,14 @@ private playerSlowUntil=0;
     const name=ENEMY_ART.find(([id])=>id===kind)?.[1];if(!name||this.optionalLoading.has('legacy-'+name))return;
     this.optionalLoading.add('legacy-'+name);loadGameBundle('enemies',(error,bundle)=>{
       if(error||!bundle){this.optionalLoading.delete('legacy-'+name);return;}
-      bundle.load(name+'/texture',Texture2D,(e,t)=>{this.optionalLoading.delete('legacy-'+name);if(e||!this.isValid)return;
+      this.assets.load(bundle,name+'/texture',Texture2D,(e,t)=>{this.optionalLoading.delete('legacy-'+name);if(e||!t||!this.isValid||this.assets.disposed)return;
         this.enemyFrames[kind]=Array.from({length:12},(_,i)=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%4*t.width/4,Math.floor(i/4)*t.height/3,t.width/4,t.height/3);return f;});
       });
     });
   }
   private spawnNext(kind: EnemyKind = enemyKind(this.run.wave, Math.random, this.run.survivalSeconds),archetype?:string,encounterChapter?:number): Enemy {
-    let e = this.enemies.find(v => v.hp <= 0 && v.dead <= 0);
+    let e = this.enemies.find(v => v.hp <= 0 && v.dead <= 0)
+      || this.enemies.find(v=>v.hp<=0&&v.dead<=1.15&&!v.node.active);
     if (!e) { e = this.createEnemy(this.enemies.length); this.enemies.push(e); }
     e.kind = kind;e.encounterChapter=encounterChapter;e.archetype=archetype;e.bossSkin=kind==='chief'?chapterFor(encounterChapter||this.run.chapter).bossId:undefined; this.spawnEnemy(e, this.testMode ? Math.floor(Math.random() * 8) : this.spawnSerial++); return e;
   }
@@ -1634,45 +1650,55 @@ private playerSlowUntil=0;
     }
   }
 
+  private ensureNativeAudio():void {if(!this.nativeAudio||this.nativeSfx||this.audioDisposed||Date.now()<this.nativeRetryAt)return;this.nativeRetryAt=Date.now()+30000;this.nativeSfx=NativeSfx.create(typeof wx==='undefined'?undefined:wx,SFX_VOICES,message=>this.health?.record('audio-error',message));}
+
   private loadWeaponSounds(): void {
     // Core samples are local. Deferred samples are fetched only on use/prefetch.
     for(const id of GENERATED_SOUNDS)if(soundAsset(id).bundle==='sfx-core')this.loadSound(id);
   }
+  private requestAudio(bundleName:string,path:string,done:(error:Error|null,clip?:AudioClip)=>void,ms=30000,local?:AssetManager.Bundle):()=>void {
+    const lease=new AssetScope();let active=true;
+    return this.assets.request<AudioClip>(finish=>{
+      const loaded=(error:Error|null,bundle?:AssetManager.Bundle)=>{
+        if(!active||this.audioDisposed){finish(new Error('声音请求已取消'));return;}
+        if(error||!bundle){finish(error||new Error('声音分包不可用'));return;}
+        lease.load(bundle,path,AudioClip,finish,ms);
+      };
+      if(local)loaded(null,local);else loadGameBundle(bundleName,loaded);
+    },(error,clip)=>{
+      active=false;if(!error&&clip&&!this.audioDisposed)this.assets.own(clip);
+      try{done(error,clip);}finally{lease.destroy();}
+    },ms);
+  }
+
   private cacheSoundClip(ids:SoundId[],clip:AudioClip):boolean {
-    if(this.nativeSfx){
+    if(this.nativeAudio){
       // Cocos 3.8.8 AudioSource uses this same metadata URL: on WeChat it can
       // be a downloaded cache path. Keep it before releasing the player metadata;
       // falling back to the public URL also supports packaged/remote samples.
       const url=clip._nativeAsset?.url||clip.nativeUrl;if(url)for(const id of ids)this.soundUrls[id]=url;
-      assetManager.releaseAsset(clip);return !!url;
+      this.assets.release(clip);return !!url;
     }
     for(const id of ids)this.clips[id]=clip;return true;
   }
-  private loadSound(id:Exclude<SoundId,'sandal-hit-pcm'>):void {
-    const asset=soundAsset(id),key=asset.bundle+'/'+asset.name;
+  private loadSound(id:SoundId):void {
+    const asset=id==='sandal-hit-pcm'?{bundle:'battle',name:'audio/sandal-hit-pcm'}:soundAsset(id),key=asset.bundle+'/'+asset.name;
     if(this.audioDisposed||this.clips[id]||this.soundUrls[id]||this.soundLoading.has(key)||(this.soundRetryAfter.get(key)||0)>Date.now())return;
     this.soundLoading.add(key);
-    this.soundLoads.enqueue(release=>{
-      if(this.audioDisposed||!this.isValid){this.soundLoading.delete(key);release();return;}
-      let settled=false;let timer:ReturnType<typeof setTimeout>|undefined;
-      const finish=(error?:Error|null,clip?:AudioClip):void=>{
-        if(settled){if(clip&&!Object.values(this.clips).includes(clip))assetManager.releaseAsset(clip);return;}settled=true;
-        if(timer!==undefined)clearTimeout(timer);this.soundLoading.delete(key);
+    this.soundLoads.enqueue((release,live)=>{
+      this.requestAudio(asset.bundle,asset.name,(error,clip)=>{
+        this.soundLoading.delete(key);
         try{
-          if(this.audioDisposed||!this.isValid){if(clip)assetManager.releaseAsset(clip);return;}
-          const aliases=GENERATED_SOUNDS.filter(alias=>{const a=soundAsset(alias);return a.bundle===asset.bundle&&a.name===asset.name;});
-          if(error||!clip||!this.cacheSoundClip(aliases,clip)){this.soundRetryAfter.set(key,Date.now()+30000);console.warn('音效暂不可用',id,error);}
+          if(this.audioDisposed||!this.isValid){if(clip)this.assets.release(clip);return;}
+          if(!live()){if(clip)this.assets.release(clip);this.soundRetryAfter.set(key,Date.now()+30000);return;}
+          const aliases=id==='sandal-hit-pcm'?[id]:GENERATED_SOUNDS.filter(alias=>{const a=soundAsset(alias);return a.bundle===asset.bundle&&a.name===asset.name;});
+          if(error||!clip||!this.cacheSoundClip(aliases,clip)){this.soundRetryAfter.set(key,Date.now()+30000);this.health?.record('sfx-load-error',error);}
           else this.soundRetryAfter.delete(key);
         }finally{release();}
-      };
-      if(typeof setTimeout==='function')timer=setTimeout(()=>finish(new Error('音效加载超时')),30000);
-      try{loadGameBundle(asset.bundle,(error,bundle)=>{
-        if(error||!bundle){finish(error||new Error('音效分包不可用'));return;}
-        if(this.audioDisposed||!this.isValid){finish();return;}
-        bundle.load(asset.name,AudioClip,(error,clip)=>finish(error,clip));
-      });}catch(error){finish(error instanceof Error?error:new Error(String(error)));}
+      },30000,id==='sandal-hit-pcm'?this.resources:undefined);
     });
   }
+
   private prefetchSounds():void {
     for(const w of this.run.weapons)for(const event of ['attack','hit'] as const){const id=weaponSound(w.id,event);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
     const skill=('skill-'+this.run.skillId) as SoundId;if(skill!=='sandal-hit-pcm'&&SOUND_CUES[skill])this.loadSound(skill);
@@ -1681,33 +1707,30 @@ private playerSlowUntil=0;
   }
   private selectMusic(mode:'menu'|'battle'|'boss',restart=false):void {
     if(this.musicMode===mode&&this.musicLoaded&&!restart)return;
-    this.musicMode=mode;this.musicLoaded=false;this.musicRequest++;
+    this.musicMode=mode;this.musicLoaded=false;this.musicRequest++;this.musicRetryAt=0;const cancel=this.musicCancel;this.musicCancel=undefined;
     this.music.detach();this.music.stop();
     if(this.musicSource)this.musicSource.clip=null;
-    if(this.musicClip){assetManager.releaseAsset(this.musicClip);this.musicClip=undefined;}
+    if(this.musicClip){this.assets.release(this.musicClip);this.musicClip=undefined;}
     this.music.configure(MUSIC_SCENES[mode].seconds,MUSIC_SCENES[mode].volume);
     this.music.begin();if(this.backgrounded||this.paused)this.music.pause();
-    this.loadMusic();
+    cancel?.();this.loadMusic();
   }
   private loadMusic(): void {
     if(this.audioDisposed||this.musicLoading||this.musicLoaded)return;
     this.musicLoading=true;const request=this.musicRequest,mode=this.musicMode;
-    assetManager.loadBundle('music',(error,bundle)=>{
-      if(!this.isValid||this.audioDisposed){this.musicLoading=false;return;}
-      if(error){this.musicLoading=false;console.warn('音乐分包加载失败',error);return;}
-      bundle.load(mode,AudioClip,(loadError,clip)=>{
-        this.musicLoading=false;
-        if(!this.isValid||this.audioDisposed){if(clip)assetManager.releaseAsset(clip);return;}
-        if(request!==this.musicRequest){if(clip)assetManager.releaseAsset(clip);this.loadMusic();return;}
-        if(loadError){console.warn('音乐加载失败',mode,loadError);return;}
-        this.musicClip=clip;this.musicLoaded=true;
-        if(!this.musicSource){this.musicSource=this.node2D(this.root,'BattleMusic').addComponent(AudioSource);this.musicSource.playOnAwake=false;}
-        this.musicSource.clip=clip;this.music.attach(this.musicSource);
-        if(this.backgrounded||this.paused)this.music.pause();
-        if(DEBUG)console.info('[music] loaded',mode,'duration',this.musicSource.duration);
-      });
-    });
+    this.musicCancel=this.requestAudio('music',mode,(error,clip)=>{
+      this.musicLoading=false;
+      if(!this.isValid||this.audioDisposed){if(clip)this.assets.release(clip);return;}
+      if(request!==this.musicRequest){if(clip)this.assets.release(clip);this.loadMusic();return;}
+      if(error||!clip){this.health?.record('music-load-error',error);this.musicRetryAt=Date.now()+30000;return;}
+      this.musicRetryAt=0;this.musicClip=clip;this.musicLoaded=true;
+      if(!this.musicSource){this.musicSource=this.node2D(this.root,'BattleMusic').addComponent(AudioSource);this.musicSource.playOnAwake=false;}
+      this.musicSource.clip=clip;this.music.attach(this.musicSource);
+      if(this.backgrounded||this.paused)this.music.pause();
+      if(DEBUG)console.info('[music] loaded',mode,'duration',this.musicSource.duration);
+    },18000);
   }
+
   private unlockAudio(): void { this.audioUnlocked = true; this.music.unlock(); }
 
   private playWeaponSound(weapon: WeaponId, event: SoundEvent, finisher = false): void {
@@ -1716,7 +1739,7 @@ private playerSlowUntil=0;
   }
   private playSound(name: SoundId, volume: number = SOUND_CUES[name].volume, priority: number = SOUND_CUES[name].priority, owner?:Enemy, weaponEvent?:SoundEvent | 'finisher'): void {
     const clip = this.clips[name],url=this.soundUrls[name];
-    if(!clip&&!url&&name!=='sandal-hit-pcm'){this.loadSound(name);return;} // Never replay a late impact.
+    if(!clip&&!url){this.loadSound(name);return;} // Never replay a late impact.
     if (!this.audioUnlocked || this.muted || this.backgrounded || (!clip&&!url) || !(this.nativeSfx?.size||this.soundSources.length)) return;
     const index = this.soundGate.acquire(name, priority); if (index === undefined) return;
     const source = this.soundSources[index];this.voiceOwners[index]=owner;
@@ -1739,7 +1762,7 @@ private playerSlowUntil=0;
     source.stop(); source.clip = clip!; source.volume = volume; source.play();
   }
   private stopSounds(): void { this.nativeSfx?.stopAll();for (const source of this.soundSources) source.stop(); this.soundGate.reset(); this.voiceOwners.length=0; this.weaponVoiceVolumes.length=0; this.nextLeadHit=0; this.dangerUntil=0; this.quieterSkillReleases.clear(); }
-  private onBackground(): void { this.health?.record('background');this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
+  private onBackground(): void { this.health?.record('background');this.health?.flush();this.flushProfile();this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
   private onForeground(): void {
     this.backgrounded = false;this.health?.record('foreground');
     if(this.trainingMode&&this.trainingPanel?.root.active){this.paused=false;this.menu.active=false;this.music.resume();}
@@ -1870,7 +1893,8 @@ private playerSlowUntil=0;
     this.setBattleHudVisible(visible);this.menu.active=false;this.clearInput();
   }
 
-  private markDiscovery(kind:'enemies'|'weapons'|'skills',id:string):void {if(id&&discover(this.profile,kind,id))saveProfile(sys.localStorage,this.profile);}
+  private flushProfile():boolean {if(this.profileTimer!==undefined){clearTimeout(this.profileTimer);this.profileTimer=undefined;}if(!this.profileDirty)return true;const saved=saveProfile(sys.localStorage,this.profile);if(saved)this.profileDirty=false;return saved;}
+  private markDiscovery(kind:'enemies'|'weapons'|'skills',id:string):void {if(id&&discover(this.profile,kind,id)){this.profileDirty=true;if(this.profileTimer===undefined&&typeof setTimeout==='function')this.profileTimer=setTimeout(()=>{this.profileTimer=undefined;this.flushProfile();},200);}}
   private stageBoundary():boolean {
     if(this.phase!=='battle'||this.run.stageWave===5)return false;
     // The miniboss is the wave objective; defeating it ends wave 3 immediately.
@@ -1922,7 +1946,7 @@ private playerSlowUntil=0;
   }
   private endStage(won:boolean):void {
     this.phase=won?'victory':'defeat';this.collectAllCoins();const reward=won?recordClear(this.profile,this.run.heroId,this.run.chapter,this.run.elapsed,this.kills,this.playerHp):undefined;
-    const saved=!won||saveProfile(sys.localStorage,this.profile);this.clearBattle();this.setBattleVisible(false);this.paused=false;
+    const saved=!won||saveProfile(sys.localStorage,this.profile);this.flushProfile();this.clearBattle();this.setBattleVisible(false);this.paused=false;
     this.playSound(won?'victory':'defeat');if(won&&reward&&(reward.weapons.length||reward.passives.length||reward.skills.length))this.playSound('unlock',.25);
     if(won&&reward)this.screens.stageResult(this.run,this.kills,reward,()=>{this.selectedStage=Math.min(highestStage(this.profile,this.run.heroId),this.run.chapter+1);this.profile.preferences[this.run.heroId]={stage:this.selectedStage,weapon:this.run.starter,skill:this.run.skillId};saveProfile(sys.localStorage,this.profile);this.showMainMenu();},()=>this.showMainMenu(),saved);
     else this.prepareResult(()=>this.screens.survivalResult(this.run,this.kills,0,false,()=>this.restart(false),()=>this.showMainMenu(),false,0,false));
@@ -1933,7 +1957,7 @@ private playerSlowUntil=0;
     if (!this.ready) return;
     this.trainingPanel?.hide();this.trainingMode=false;
     this.resourceSerial++;this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;
-    this.phase = 'menu'; this.testMode = false; this.paused = false; this.stopSounds(); this.clearBattle(); this.setBattleVisible(false);
+    this.flushProfile();this.phase = 'menu'; this.testMode = false; this.paused = false; this.stopSounds(); this.clearBattle(); this.setBattleVisible(false);
     releaseBossArt(this.artFrames,released=>{for(const e of this.enemies){if(e.art.spriteFrame&&released.has(e.art.spriteFrame))e.art.spriteFrame=null;for(const sp of [...(e.rigParts||[]),...(e.lvbuGhosts||[]),...(e.chargeGhosts||[])])if(sp.spriteFrame&&released.has(sp.spriteFrame))sp.spriteFrame=null;}});
     if(!visibleHero(this.run.heroId))this.run=createRun('liubei');
     this.selectMusic('menu',true);
@@ -1955,7 +1979,7 @@ private playerSlowUntil=0;
     const serial=++this.resourceSerial;this.resourceBusy=true;this.clearInput();let remaining=tasks.length,failed=false;
     this.retryResource=()=>this.prepareVisuals(tasks,action,message,title);this.resourceView?.hide();
     this.resourceView=new ResourcePrepareView(this.ui,()=>this.retryResource?.(),()=>this.showMainMenu(),title);this.resourceView.show(message);
-    for(const task of tasks)task(()=>this.isValid&&serial===this.resourceSerial,error=>{
+    for(const task of tasks)task(()=>this.isValid&&!this.assets.disposed&&serial===this.resourceSerial,error=>{
       if(serial!==this.resourceSerial||!this.isValid||failed)return;
       if(error){failed=true;this.resourceView?.show('资源下载失败，请检查网络后重试',true);return;}
       if(--remaining===0){this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;action();}
@@ -1994,7 +2018,7 @@ private playerSlowUntil=0;
     const chapter=boss?CHAPTERS.find(c=>String(c.id)===id):undefined,d=boss?undefined:CHRONICLE_ENEMIES.find(e=>e.id===id);
     if(boss?!chapter:!d)return '目标不存在';
     const amount=Math.min(count,80-this.trainingAlive());
-    const spawn=()=>{if(!this.trainingMode)return;if(boss)this.selectMusic('boss');const available=Math.min(amount,80-this.trainingAlive());for(let i=0;i<available;i++)this.spawnNext(boss?'chief':d!.kind,boss?undefined:d!.id,chapter?.id);this.drawProgress();};
+    const spawn=()=>{if(!this.trainingMode)return;if(this.trainingPanel?.root.active)for(const e of this.enemies)if(e.hp<=0){e.dead=0;e.node.active=false;}if(boss)this.selectMusic('boss');const available=Math.min(amount,80-this.trainingAlive());for(let i=0;i<available;i++)this.spawnNext(boss?'chief':d!.kind,boss?undefined:d!.id,chapter?.id);this.drawProgress();};
     if(boss&&chapter)this.prepareBosses([chapter.bossId],spawn);else spawn();
     return this.resourceBusy?'正在准备首领资源…':amount?`已加入 ${chapter?.boss||d!.name} ×${amount}`:'战场已满（80名），请先清空或击败敌军';
   }
@@ -2021,7 +2045,7 @@ private playerSlowUntil=0;
   }
 
   private clearBattle(keepMusic=false): void {
-    this.mountDash=newMountDash();this.dashDrawKey='';this.weapons.forEach(w=>w.strikes=0);this.victoryPending=false;this.depthNodes.length=0;
+    this.mountDash=newMountDash();this.dashDrawKey='';this.weapons.forEach(w=>{w.strikes=0;w.loadoutKey=undefined;});this.victoryPending=false;this.depthNodes.length=0;
     this.bossBattle.clear();this.bossEffects?.clear();
     this.coins.forEach(c => { c.active = false; c.node.active = false; });
     this.projectiles.forEach(p => { p.remaining = 0; p.node.active = false; });
@@ -2171,7 +2195,7 @@ private playerSlowUntil=0;
     const record=won&&!this.testMode&&(!this.bestClear||elapsed<this.bestClear);
     if(record){this.bestClear=elapsed;try{sys.localStorage.setItem('taoyuan-chronicle-clear-best-v7',String(this.bestClear));}catch(_){} }
     if(won){try{sys.localStorage.removeItem(SAVE_KEY);}catch(_){}}else if(this.chapterEntry){this.savedPoint=copyPoint(this.chapterEntry);this.savedPoint.run.elapsed=Math.max(this.savedPoint.run.elapsed,this.run.elapsed);this.savedPoint.run.retries=(this.run.retries||0)+1;this.writeSave('battle',this.savedPoint);}
-    this.clearBattle(); this.setBattleVisible(false); this.paused = false;this.playSound(won?'victory':'defeat');
+    this.flushProfile();this.clearBattle(); this.setBattleVisible(false); this.paused = false;this.playSound(won?'victory':'defeat');
     const display=()=>this.screens.survivalResult(this.run,this.kills,this.bestClear,record,()=>won?this.restart():this.retryChapter(),()=>this.showMainMenu(),this.testMode,WAVE_SECONDS-this.remaining,won);if(won)display();else this.prepareResult(display);
   }
 
@@ -2234,9 +2258,9 @@ private playerSlowUntil=0;
   private rebuildMeadow():void {
     for(const n of this.meadowTiles){n.removeFromParent();n.destroy();}this.meadowTiles=[];
     const stageFrame=this.run.challenge?this.artFrames['stage-ground-'+this.run.chapter]:undefined,frame=stageFrame||this.artFrames['world-ground'];if(frame){
-      // The chapter-one crop is not periodic. Alternate reflections make both sides
-      // sample the same source edge, rather than joining unrelated light/dark edges.
-      const mirrored=!!stageFrame&&this.run.chapter===1;
+      // All six authored crops are non-periodic. Alternate both axes so adjacent
+      // tiles sample the same edge; larger cells also reduce visible repetition.
+      const mirrored=!!stageFrame;
       const cols=Math.ceil(WORLD.width/(mirrored?720:520)),rows=Math.ceil(WORLD.height/(mirrored?540:470)),w=WORLD.width/cols,h=WORLD.height/rows;
       for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
         const n=this.node2D(this.battlefield,'MeadowTile'),sp=n.addComponent(Sprite);sp.spriteFrame=frame;sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.color=new Color(this.run.challenge&&!stageFrame?STAGE_THEMES[this.run.chapter-1].ground:'#ffffff');n.getComponent(UITransform)!.setContentSize(w+.5,h+.5);
@@ -2250,14 +2274,14 @@ private playerSlowUntil=0;
     const load=(bundle:string,name:string,apply:(t:Texture2D)=>void):void=>{
       const key=bundle+'/'+name;if(this.optionalLoaded.has(key)||this.optionalLoading.has(key))return;this.optionalLoading.add(key);
       loadGameBundle(bundle,(err,b)=>{if(err||!b){this.optionalLoading.delete(key);console.warn('可选资源暂不可用',bundle);return;}
-        b.load(name+'/texture',Texture2D,(error,t)=>{this.optionalLoading.delete(key);if(error||!this.isValid)return;this.optionalLoaded.add(key);apply(t);});});
+        this.assets.load(b,name+'/texture',Texture2D,(error,t)=>{this.optionalLoading.delete(key);if(error||!t||!this.isValid||this.assets.disposed)return;this.optionalLoaded.add(key);apply(t);});});
     };
     if(this.trainingMode)load('meadow','ground',t=>{const f=new SpriteFrame();f.texture=t;this.artFrames['world-ground']=f;this.rebuildMeadow();});
     load('orchard','decor',t=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(0,0,t.width/3,t.height/2);this.artFrames['peach-tree']=f;});
     load('talismans','items',t=>{for(let i=0;i<48;i++){const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%8*t.width/8,Math.floor(i/8)*t.height/6,t.width/8,t.height/6);this.artFrames['item-'+PASSIVE_ITEMS[i].id]=f;}if(this.phase==='shop')this.showShop();});
     load('arsenal','weapons',t=>{
       ['smg','shotgun','rocket','sword','thunder','gourd'].forEach((id,i)=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%3*t.width/3,Math.floor(i/3)*t.height/2,t.width/3,t.height/2);this.artFrames['weapon-'+id]=f;});
-      if(this.ready){this.syncWeapons();if(this.phase==='shop')this.showShop();}
+      if(this.ready){this.refreshWeaponArt();if(this.phase==='shop')this.showShop();}
     });
   }
 
@@ -2412,27 +2436,34 @@ private playerSlowUntil=0;
   }
 
   onDestroy(): void {
-    this.resourceSerial++;this.resourceView?.hide();this.resourceView=undefined;
-    this.audioDisposed=true;this.soundLoads.destroy();this.soundLoading.clear();this.soundRetryAfter.clear();this.soundUrls={};
-    this.health?.destroy();
-    this.root?.off(Node.EventType.TOUCH_START, this.touchStart, this, true);this.root?.off(Node.EventType.TOUCH_MOVE, this.touchMove, this, true);
-    this.root?.off(Node.EventType.TOUCH_END, this.touchEnd, this, true);this.root?.off(Node.EventType.TOUCH_CANCEL, this.touchEnd, this, true);
-    input.off(Input.EventType.KEY_DOWN, this.keyDown, this); input.off(Input.EventType.KEY_UP, this.keyUp, this);
-    this.detachKeyboard?.();
-    game.off(Game.EVENT_HIDE, this.onBackground, this);
-    game.off(Game.EVENT_SHOW, this.onForeground, this);
-    this.stopSounds();this.nativeSfx?.destroy();this.nativeSfx=undefined;for(const source of this.soundSources)source.clip=null;for(const clip of Array.from(new Set(Object.values(this.clips))))if(clip)assetManager.releaseAsset(clip);this.clips={};this.music.stop();this.musicRequest++;if(this.musicClip){assetManager.releaseAsset(this.musicClip);this.musicClip=undefined;}
-    this.enemies.forEach(e => e.art.spriteFrame = null);
-    if(this.avatar)this.avatar.spriteFrame=null;if(this.body)this.body.spriteFrame=null;if(this.head)this.head.spriteFrame=null;
+    if(this.audioDisposed)return;this.audioDisposed=true;this.resourceSerial++;
+    const clean=(action:()=>void)=>notifySafely(action);
+    clean(()=>{this.resourceView?.hide();this.resourceView=undefined;});
+    clean(()=>this.flushProfile());clean(()=>this.health?.destroy());
+    clean(()=>this.soundLoads.destroy());this.soundLoading.clear();this.soundRetryAfter.clear();this.soundUrls={};
+    clean(()=>this.musicCancel?.());clean(()=>cancelArtGroups(this.artFrames));
+    for(const [event,fn]of [[Node.EventType.TOUCH_START,this.touchStart],[Node.EventType.TOUCH_MOVE,this.touchMove],[Node.EventType.TOUCH_END,this.touchEnd],[Node.EventType.TOUCH_CANCEL,this.touchEnd],[Node.EventType.TOUCH_START,this.audioTouch]] as const)clean(()=>this.root?.off(event,fn,this,true));
+    clean(()=>input.off(Input.EventType.KEY_DOWN,this.keyDown,this));clean(()=>input.off(Input.EventType.KEY_UP,this.keyUp,this));clean(()=>this.detachKeyboard?.());
+    clean(()=>game.off(Game.EVENT_HIDE,this.onBackground,this));clean(()=>game.off(Game.EVENT_SHOW,this.onForeground,this));
+    clean(()=>this.stopSounds());clean(()=>this.nativeSfx?.destroy());this.nativeSfx=undefined;
+    for(const source of this.soundSources)clean(()=>{source.stop();source.clip=null;});
+    for(const clip of Array.from(new Set(Object.values(this.clips))))if(clip)clean(()=>this.assets.release(clip));this.clips={};
+    clean(()=>this.music.stop());this.musicRequest++;if(this.musicSource)clean(()=>{this.musicSource!.stop();this.musicSource!.clip=null;});if(this.musicClip){clean(()=>this.assets.release(this.musicClip!));this.musicClip=undefined;}
+    // Component-only destroy must also detach all descendant sprite references.
+    const detach=(n:Node)=>{clean(()=>{const sp=n.getComponent(Sprite);if(sp)sp.spriteFrame=null;});for(const child of n.children)detach(child);};if(this.root)detach(this.root);
     const frames=new Set<SpriteFrame>();
     this.soldierFrames.forEach(row=>row.forEach(f=>frames.add(f)));
     Object.keys(this.enemyFrames).forEach(kind=>this.enemyFrames[kind as EnemyKind]?.forEach(f=>frames.add(f)));
+    Object.values(this.rigFrames).forEach(row=>row.forEach(f=>frames.add(f)));this.rigFrames={};
     Object.keys(this.artFrames).forEach(k=>frames.add(this.artFrames[k]));this.itemFrames.forEach(f=>frames.add(f));
     if(this.avatarFrame)frames.add(this.avatarFrame);if(this.bodyFrame)frames.add(this.bodyFrame);
-    frames.forEach(f=>f.destroy());this.soldierTextures.forEach(t=>t.destroy());this.soldierTextures=[];
-    this.particleSprites?.destroy();this.battleSprites?.destroy();this.bossEffects?.destroy();
-    this.startupTexture?.destroy();if(this.startupImage){if(this.startupRemoteImage)assetManager.releaseAsset(this.startupImage);else this.startupImage.destroy();}
+    frames.forEach(f=>clean(()=>f.destroy()));this.soldierTextures.forEach(t=>clean(()=>t.destroy()));this.soldierTextures=[];
+    clean(()=>this.particleSprites?.destroy());clean(()=>this.battleSprites?.destroy());clean(()=>this.bossEffects?.destroy());
+    clean(()=>this.startupTexture?.destroy());if(this.startupImage)clean(()=>{if(this.startupRemoteImage)this.assets.release(this.startupImage!);else this.startupImage!.destroy();});
+    clean(()=>{if(this.root){this.root.active=false;this.root.destroy();}});
+    clean(()=>this.assets.destroy());
   }
+
   private clamp(n: number, min: number, max: number): number { return Math.max(min, Math.min(max, n)); }
   private node2D(parent: Node, name: string): Node { const n = new Node(name); n.layer = Layers.Enum.UI_2D; parent.addChild(n); return n; }
   private label(parent: Node, text: string, x: number, y: number, size: number, color = '#37432c'): Label {

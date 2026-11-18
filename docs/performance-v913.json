@@ -1,0 +1,62 @@
+{
+  "version": "stage-v9.13-lifecycle",
+  "scope": "isolated real desktop Cocos/WebGL; UI loops + scene/component destruction, not iPhone RSS/FPS or original crash reproduction",
+  "lifecycle": {
+    "uiLoops": 100,
+    "componentDestructions": 20,
+    "returnedMenuBufferMin": 80251832,
+    "returnedMenuBufferMax": 80251832,
+    "retiredBufferMin": 28288,
+    "retiredBufferMax": 28288,
+    "retiredTextureMin": 4221488,
+    "retiredTextureMax": 4221488,
+    "retiredAssetMin": 15,
+    "retiredAssetMax": 17,
+    "errors": 0,
+    "storageRestored": true
+  },
+  "faultTests": {
+    "repeatedErrors": 10000,
+    "failedStorageWrites": 10000,
+    "ccdReferenceCases": 30000,
+    "trainingConfigCycles": 100,
+    "nativeVoices": 6,
+    "cachedMetadataBurst": 66,
+    "boundedRequests": true
+  },
+  "phoneCrashConfirmedResolved": false,
+  "evidence": "art/reviews/stability-v913",
+  "pressure": {
+    "simulationFrames": 1800,
+    "simulationSeconds": 30.0,
+    "renderEvery": 1,
+    "loadedBosses": [
+      "lvbu",
+      "dongzhuo"
+    ],
+    "enemyNodeMax": 80,
+    "warmBuffersMin": 54448008,
+    "warmBuffersMax": 54448152,
+    "warmTexturesMin": 97672344,
+    "warmTexturesMax": 97672492,
+    "errors": 0,
+    "storageRestored": true
+  },
+  "nativeSimulator": {
+    "sfxBackend": "native-fixed",
+    "sfxPlayed": 41,
+    "sfxErrors": 0,
+    "sfxVoices": 6,
+    "sfxUrls": 72,
+    "sfxLoading": 0,
+    "sfxQueued": 0,
+    "consoleErrorMatches": 0
+  },
+  "build": {
+    "mainMiB": 2.27,
+    "totalMiB": 8.71,
+    "previewTotalBytes": 9110715,
+    "cdnVersion": "v95-996129359b44c659",
+    "previewGenerated": true
+  }
+}

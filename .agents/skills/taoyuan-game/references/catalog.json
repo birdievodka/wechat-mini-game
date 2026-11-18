@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v9.12-stability",
+    "version": "stage-v9.14-all-stage-ground",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "0a4bb5da21709a374479cdd93176b60df40af8115be58c90a91af54787c580f4",
+    "fingerprint": "c069da6f1cf47b9234d6c28065b59b6f708a984c8c91379c5fedbf1e9a6fc79c",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 32791,
-        "sha256": "36475b32c005427c3f16d8fe27dfacedbf0e03387bff95d6e86bb8b86ac57ef5"
+        "bytes": 34431,
+        "sha256": "e0a1bc090d02e70cdb996d2c26100e8c861e4fdaaefde8c554843d39cb3f2002"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 26454,
-        "sha256": "d82962efe25d7aa7d812ea11cc1601438b9cda259bee150b8028e8751c123bd6"
+        "bytes": 27558,
+        "sha256": "cc7d96986df762c4dc211b4e104f93c867d5f06d22d20e4a6d24122c3d335cbf"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -115,8 +115,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 20934,
-        "sha256": "f18101654ae4966f81d95a589a3e439ffa03311099333070a508ccdde3674501"
+        "bytes": 23788,
+        "sha256": "16fb0c7c95f41f59240669f9086aa776e319f11413fdc3c2898c6a324b52d110"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
@@ -175,8 +175,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 15693,
-        "sha256": "1868feececa9197f7cf85d0c67ee19e3b375722a5d7809a44d272f45cbee1386"
+        "bytes": 16414,
+        "sha256": "78e32cd66c50e81bc0fa390f337bbfbe348cb0c98c772c87f9e2ae59c9970c6e"
       },
       {
         "path": ".gitignore",
@@ -185,8 +185,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 11761,
-        "sha256": "77f1a21d3a5d6c61f19b5b7cd606def21724fc1e6c6e0a4b988604be65d05263"
+        "bytes": 12996,
+        "sha256": "2d8ea345124cab913b77797fe71676fbda728a8453217ab2f282c6cc1ef551cb"
       },
       {
         "path": "art/audio/review-v1/browser-validation.json",
@@ -1519,6 +1519,101 @@
         "sha256": "3881aa0660204fdea8b9e4d7f795bde9bc6914f7b7a68ded4a5a2b5dbc800c9f"
       },
       {
+        "path": "art/reviews/grounds/after-1.png",
+        "bytes": 834819,
+        "sha256": "ff402a1837918f25780eeb2a2d41a79fcac4d2b9e89688c1eb186367f5f65795"
+      },
+      {
+        "path": "art/reviews/grounds/after-2.png",
+        "bytes": 822100,
+        "sha256": "5d37a6ec0c7c6e437d20cc58cf541aa4fbddd4f90cb43b10ac91900bf0244d6b"
+      },
+      {
+        "path": "art/reviews/grounds/after-3.png",
+        "bytes": 954334,
+        "sha256": "ba90a00978fc6efc3110c992b83c9bbeabf8c5739627b469d3aa4837db99747e"
+      },
+      {
+        "path": "art/reviews/grounds/after-4.png",
+        "bytes": 763339,
+        "sha256": "3de1398a3fc680fee699c3fd0fefca1ab12e8fa1f293e04f7706cc26ae7a5798"
+      },
+      {
+        "path": "art/reviews/grounds/after-5.png",
+        "bytes": 928104,
+        "sha256": "ba50720a5da7a24dd1d87e01229e68a44e88e12adaf6ccc71dd39b37a1a7acac"
+      },
+      {
+        "path": "art/reviews/grounds/after-6.png",
+        "bytes": 902278,
+        "sha256": "77a266cccb8cf11794316e4edadef5fb29e0a426e381d70357247e866e555dfc"
+      },
+      {
+        "path": "art/reviews/grounds/before-1.png",
+        "bytes": 834819,
+        "sha256": "ff402a1837918f25780eeb2a2d41a79fcac4d2b9e89688c1eb186367f5f65795"
+      },
+      {
+        "path": "art/reviews/grounds/before-2.png",
+        "bytes": 341293,
+        "sha256": "8bf02cf703fdb698c8092dc96c7ddd99901af5003761a878dc6be2f5e6b50a00"
+      },
+      {
+        "path": "art/reviews/grounds/before-3.png",
+        "bytes": 391048,
+        "sha256": "31cc358d2a206ab0a12c24287303396e47fe57e05cdb25b5f71493181f87a973"
+      },
+      {
+        "path": "art/reviews/grounds/before-4.png",
+        "bytes": 320659,
+        "sha256": "069b41b7fee8e0172f289a35f6b1a53a6b3ecb9d39b2942d3dd90bf8231b3f77"
+      },
+      {
+        "path": "art/reviews/grounds/before-5.png",
+        "bytes": 380481,
+        "sha256": "5bbf15f3f650676e57d594312cb7d3509a090f1bf6f4bbf2a6a95ef697a6cedd"
+      },
+      {
+        "path": "art/reviews/grounds/before-6.png",
+        "bytes": 372831,
+        "sha256": "c05f2f6670616b718e1750dd4100594b68e3e23993a194242aac4b0e696dda18"
+      },
+      {
+        "path": "art/reviews/grounds/comparison-2.jpg",
+        "bytes": 149372,
+        "sha256": "b9533b64d76963130223d0298f773571aa4819e456a773f6a963ad567deb3626"
+      },
+      {
+        "path": "art/reviews/grounds/move-2.png",
+        "bytes": 821970,
+        "sha256": "994c3fcc89f27e8843a824f0fb0cb7a67ab59859119f78e36da27fe2b5cd426f"
+      },
+      {
+        "path": "art/reviews/grounds/move-4.png",
+        "bytes": 763774,
+        "sha256": "a110927557d5c7f45a285675b1f7126e078166554935a20f29009f899daa8f89"
+      },
+      {
+        "path": "art/reviews/grounds/move-6.png",
+        "bytes": 903147,
+        "sha256": "d55968d27ccf742b78db6fc0873ad2f02319f8848bec6bb2c24ecb42422c4a04"
+      },
+      {
+        "path": "art/reviews/grounds/overview.jpg",
+        "bytes": 239355,
+        "sha256": "f9c6e7c4edda9ccd627f517a079e259eaf7551e08cc37ff437299c8b167246d5"
+      },
+      {
+        "path": "art/reviews/grounds/README.md",
+        "bytes": 1106,
+        "sha256": "131404727336e3d1e180e4c35d625faec3bbe92d0395ab9faf7b854891d43393"
+      },
+      {
+        "path": "art/reviews/grounds/validation.json",
+        "bytes": 8757,
+        "sha256": "9856e3831acc33784f474087722fc9e8a8b097b53bbfc838318e01fd92606b45"
+      },
+      {
         "path": "art/reviews/grunt-melee/attack.gif",
         "bytes": 5908166,
         "sha256": "1a0c540b79cf64bcdf6316c7aabd0182bf3899e6f20dd978d1fd29ef72646993"
@@ -2337,6 +2432,41 @@
         "path": "art/reviews/stability-v912/README.md",
         "bytes": 1038,
         "sha256": "0d8eec722759af51f69c6be478b62d0999017c9095883fe512ac7daf22b7caa8"
+      },
+      {
+        "path": "art/reviews/stability-v913/lifecycle.json",
+        "bytes": 6775,
+        "sha256": "3e405faf09b58a2d8f5c9b41ffc552e751fc12a44417722aa959f0cb2f3b513c"
+      },
+      {
+        "path": "art/reviews/stability-v913/lifecycle.png",
+        "bytes": 783904,
+        "sha256": "379df076a758d4481b2204c5c13c265eeb560a2a2cac255eb8d173d681121c14"
+      },
+      {
+        "path": "art/reviews/stability-v913/native-health.json",
+        "bytes": 717,
+        "sha256": "9af13f697b5c9d43f123990cdf3c411255087ace365e139891ab56f5983194b5"
+      },
+      {
+        "path": "art/reviews/stability-v913/native-menu.jpg",
+        "bytes": 65348,
+        "sha256": "8b71321b49d2f538a188136e280f0b656584d570c5c43f14debff536aa432d36"
+      },
+      {
+        "path": "art/reviews/stability-v913/pressure.json",
+        "bytes": 46217,
+        "sha256": "3413cb297c54aa401185f53d8def587f2c1692eb941cd518ad24f7b6d96087c3"
+      },
+      {
+        "path": "art/reviews/stability-v913/pressure.png",
+        "bytes": 1575960,
+        "sha256": "6df7c0c1c6a5cd3f901b444cca27f61a9cf45d3280c054352b655156b0719154"
+      },
+      {
+        "path": "art/reviews/stability-v913/README.md",
+        "bytes": 1139,
+        "sha256": "b969c79098e529748eb435061cccd76897c8bc051804cc8e4ab655642091b186"
       },
       {
         "path": "art/reviews/stage-surface/battle.png",
@@ -3704,6 +3834,16 @@
         "sha256": "de9c720c3a9514b85acd9c1f7a38c22017e54d117e013979af3942f2b13c6466"
       },
       {
+        "path": "assets/scripts/asset-scope.ts",
+        "bytes": 4245,
+        "sha256": "f71e7b6d7d5202cc2f560923be4be590143d131fa73bf27c5a9c0db39b7b5fe4"
+      },
+      {
+        "path": "assets/scripts/asset-scope.ts.meta",
+        "bytes": 171,
+        "sha256": "1d7af746df85681aac8e610d31243c433c6e7ba5154961a9937f56c1b8a5f5be"
+      },
+      {
         "path": "assets/scripts/audio-catalog.ts",
         "bytes": 16498,
         "sha256": "e9f4f8b5c0f433d3a89475d2a90fff8df434c096d319f4d909f7d6434e1d9285"
@@ -3715,8 +3855,8 @@
       },
       {
         "path": "assets/scripts/battle-music.ts",
-        "bytes": 3497,
-        "sha256": "5383df94f8c8655e86e235a2c874debd97e3514ae965393708f108b18fb28b09"
+        "bytes": 3545,
+        "sha256": "1ee8171de5ec189065efff0c4d9840ca05615652b28cb200fd2033df7eab8981"
       },
       {
         "path": "assets/scripts/battle-music.ts.meta",
@@ -3745,8 +3885,8 @@
       },
       {
         "path": "assets/scripts/boss-effects.ts",
-        "bytes": 11311,
-        "sha256": "27f91024ddc6f6631eca8c5dfcc0e70c4419f1a820b8400d70881c088597d5e8"
+        "bytes": 11335,
+        "sha256": "f08b55864b8fb4614704eb9b45e801b85ebd922f8583ede9552c35a1756e92dc"
       },
       {
         "path": "assets/scripts/boss-effects.ts.meta",
@@ -3795,8 +3935,8 @@
       },
       {
         "path": "assets/scripts/chronicle-art.ts",
-        "bytes": 6760,
-        "sha256": "69d8d253267960016c621dfe6f2646b862949323e560c27196d4dfa2361cbbd6"
+        "bytes": 5588,
+        "sha256": "f0687669778027aece416cfd2cce1be9e92f9e6555db2276764a1e23bd6d8bc7"
       },
       {
         "path": "assets/scripts/chronicle-art.ts.meta",
@@ -3855,8 +3995,8 @@
       },
       {
         "path": "assets/scripts/combat-math.ts",
-        "bytes": 1973,
-        "sha256": "af0573d9d572c56fb4aa01f512387f1c2e9052366dd907098bfa7f4e2c4c5cad"
+        "bytes": 2219,
+        "sha256": "9b253b461870369165018fed8b792804c9f104f5e095e97ffa896d8989ee96d2"
       },
       {
         "path": "assets/scripts/combat-math.ts.meta",
@@ -3895,8 +4035,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 13756,
-        "sha256": "79a8268a383df6928cf02359bd315b64780bb1fbf50074cbb1fc0a1a10996bf5"
+        "bytes": 13796,
+        "sha256": "92d9632b4c66454c3c71a162b3266e31fe334d36381836b13e9bca02bc28a3db"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -3905,8 +4045,8 @@
       },
       {
         "path": "assets/scripts/deferred-art.ts",
-        "bytes": 3584,
-        "sha256": "1a5b617ee411e8fecc005198a0c5e2e91abb1f1e3727c8e31aded615b81e4bba"
+        "bytes": 4442,
+        "sha256": "d026b0e78bddbd5335b79586d34b09b741abfd4fda080e8bb52a1ee037348c00"
       },
       {
         "path": "assets/scripts/deferred-art.ts.meta",
@@ -3995,13 +4135,23 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 227901,
-        "sha256": "cd2c42a6e550dc3763a40b4338c3acf223cfe8df583318a79c3750a47b3cf0b2"
+        "bytes": 232937,
+        "sha256": "3423ab18c79c2b797d05db227c26eb14fa501ecc8ee42df4c183646f4fac5c20"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
         "bytes": 171,
         "sha256": "94c06a01e3cfdedf59560af39491d5f9ffc9508f77c5fb483457b1ece5ea31b9"
+      },
+      {
+        "path": "assets/scripts/graphics-content.ts",
+        "bytes": 778,
+        "sha256": "3ab5d037181480b6b54a9802f0eb862f44088c3cb188ebe54460c806e85a5829"
+      },
+      {
+        "path": "assets/scripts/graphics-content.ts.meta",
+        "bytes": 171,
+        "sha256": "60d865ce93117e1f5abf1da1b389d31dc7817c4ffa68b11296832afc31f9302f"
       },
       {
         "path": "assets/scripts/growth-effects.ts",
@@ -4104,6 +4254,16 @@
         "sha256": "faae70de90aaa0a66fb393c8b8da5c1a2f9f82bac795dbe6c1bce520e1fbf687"
       },
       {
+        "path": "assets/scripts/load-lifetime.ts",
+        "bytes": 1022,
+        "sha256": "934438b1f75e5efb1b963bb997fc7b8a8b552128684cd35a69bf4ce93adf46bd"
+      },
+      {
+        "path": "assets/scripts/load-lifetime.ts.meta",
+        "bytes": 171,
+        "sha256": "854590bd1ae40fad806dfb97f5c0179cf9785c842093e7017545b81a96f9e812"
+      },
+      {
         "path": "assets/scripts/LoadingView.ts",
         "bytes": 3843,
         "sha256": "58e79ee5a84120700ce3f5761279718ed9c01a9a3080e8ef4b1a61296396f4b4"
@@ -4135,8 +4295,8 @@
       },
       {
         "path": "assets/scripts/native-sfx.ts",
-        "bytes": 3922,
-        "sha256": "a8a1727a260ba471b1960db31a86764fa784555b2b74be44de5203bcfdbe9cd7"
+        "bytes": 4272,
+        "sha256": "9ab7720d878bc2ab05ee4cfb0a6955800b730b30bac28d4994bc0469e278b27c"
       },
       {
         "path": "assets/scripts/native-sfx.ts.meta",
@@ -4165,8 +4325,8 @@
       },
       {
         "path": "assets/scripts/NpcActionRig.ts",
-        "bytes": 4609,
-        "sha256": "09edc1940f5e3bdb273abd43b7d8e44a7b7d4afcc79140779b9f026bdd4bbf09"
+        "bytes": 5125,
+        "sha256": "5c15541a92d233795cdac9583a727df0371202418df6d52fe0092ab7b56bbc9a"
       },
       {
         "path": "assets/scripts/NpcActionRig.ts.meta",
@@ -4215,8 +4375,8 @@
       },
       {
         "path": "assets/scripts/resource-gate.ts",
-        "bytes": 1131,
-        "sha256": "e0f56043969ee456e4a6ce9bee66e49758d09069157ba937187963d5d9fff6d0"
+        "bytes": 1213,
+        "sha256": "f46eb255c68fe67ffc9ae3d5547e90271a3b95f75a99744f83a2c8c92d498910"
       },
       {
         "path": "assets/scripts/resource-gate.ts.meta",
@@ -4245,8 +4405,8 @@
       },
       {
         "path": "assets/scripts/runtime-health.ts",
-        "bytes": 3103,
-        "sha256": "7d04c50b08b253ee155e04db44dd7cdd25bf87f9ac4f37057c4ce4d32b543526"
+        "bytes": 4375,
+        "sha256": "849f154796d74e0ab8feb730cfff0bc11c870d46ee34bc51210c18ef46b6a71e"
       },
       {
         "path": "assets/scripts/runtime-health.ts.meta",
@@ -4285,8 +4445,8 @@
       },
       {
         "path": "assets/scripts/stage-progress.ts",
-        "bytes": 5125,
-        "sha256": "c94067c8394148a424574afec9cca9fd09943084ae56c55a640bc2d60f6d064e"
+        "bytes": 5573,
+        "sha256": "d7fb365f53bb1922aee98445e163909c6da3f8ee253fc39f68b0c24eb3a5414b"
       },
       {
         "path": "assets/scripts/stage-progress.ts.meta",
@@ -4325,8 +4485,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 16999,
-        "sha256": "549ffda2ce7cc3355175386ce68f4cbb7f4a57f312079b6513ea4069db1fb86f"
+        "bytes": 17006,
+        "sha256": "56a8c21346fc4369f8e3ba743da2231c84663d25feb18395ac0cf603fa0549dc"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -4380,8 +4540,8 @@
       },
       {
         "path": "assets/scripts/weapon-sound.ts",
-        "bytes": 2488,
-        "sha256": "6d22aabc0395f6d45b2474351694e4397a8128a2e0657d9a729c3b13b59b800e"
+        "bytes": 2522,
+        "sha256": "be07df23bd78def25e070ce2829c493eb77246071fb3503256c93b129a267705"
       },
       {
         "path": "assets/scripts/weapon-sound.ts.meta",
@@ -5264,6 +5424,11 @@
         "sha256": "66717c3b102713d2b452fc6990633dfc6b7de20d48a36b7604dafb4cdec5e9fe"
       },
       {
+        "path": "docs/performance-v913.json",
+        "bytes": 1620,
+        "sha256": "418bc03885f40dd3b57e8803d216027a634970f7f082fd7b6b1037c9589dbf4b"
+      },
+      {
         "path": "docs/performance-wechat-baseline.json",
         "bytes": 12697,
         "sha256": "ff015938f6fd1235d9a804b30d414051d759719e4f60c9c377e8b6dc120af80a"
@@ -5282,6 +5447,11 @@
         "path": "docs/resources.md",
         "bytes": 2265,
         "sha256": "d32094678d626c9a0368d2a65199beafb9d8d5c091ab0e7e926b7cafe2e052db"
+      },
+      {
+        "path": "docs/review-stability-v913.md",
+        "bytes": 7367,
+        "sha256": "41820b27c522c95945a5cc96b5ba5fde1054b4530901f921ffa3926ef6d2062d"
       },
       {
         "path": "docs/sandal-grip-v96.md",
@@ -5380,8 +5550,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 2135,
-        "sha256": "a7dd781d895eaa9141de998585d2425acedaa35ad32b3ba3ebd04516b7a045a8"
+        "bytes": 2177,
+        "sha256": "dbc473af34d43fe6c482d831fed4f95b3573864978e0f587b02e10fd4530f1b1"
       },
       {
         "path": "project.config.json",
@@ -5407,6 +5577,11 @@
         "path": "scripts/build-wechat.cjs",
         "bytes": 2536,
         "sha256": "df412ff1c1d6fad02c42b37ba2c98eec616b184be0ecd4e9b531c96cd95546dc"
+      },
+      {
+        "path": "scripts/capture-all-ground-review.mjs",
+        "bytes": 7038,
+        "sha256": "91c69d41da3a91d10d9f12b3ea279fce5cdc5eeb3d04e92324f3972d8acfcde0"
       },
       {
         "path": "scripts/capture-audio-review.mjs",
@@ -5532,6 +5707,11 @@
         "path": "scripts/diagnose-props-memory.mjs",
         "bytes": 4751,
         "sha256": "9007cd632f947eaf2992be32fa620fa7342b8f474ccc83a93c76532d51ad47fd"
+      },
+      {
+        "path": "scripts/diagnose-review-lifecycle.mjs",
+        "bytes": 5615,
+        "sha256": "979018b1acad90263df4f94965f30ee672103487a1788ea5258ab9156baff156"
       },
       {
         "path": "scripts/diagnose-session-memory.mjs",
@@ -5685,8 +5865,8 @@
       },
       {
         "path": "scripts/test-audio-scenes.cjs",
-        "bytes": 4521,
-        "sha256": "89fb120d60ddeee212ae50dc8d3b78eb339358c4929acd66f7eb7ff256ccdabe"
+        "bytes": 4690,
+        "sha256": "62598fdbfddd04b8c5480efc2479e48df98b1d9788d4c35e0bdc22aeed4f6e1e"
       },
       {
         "path": "scripts/test-bosses.cjs",
@@ -5765,8 +5945,8 @@
       },
       {
         "path": "scripts/test-performance.cjs",
-        "bytes": 15629,
-        "sha256": "8746c44e190652fb7571e5aafa53a2ef2cb9a7ef09f7f1c49092861aa828a7e6"
+        "bytes": 15669,
+        "sha256": "11f6a51b4e92c52eb89c535fe4bbe8a5f461799ab0b4ae62d93f80bba0097587"
       },
       {
         "path": "scripts/test-presentation-art.cjs",
@@ -5775,13 +5955,18 @@
       },
       {
         "path": "scripts/test-resource-loading.cjs",
-        "bytes": 6655,
-        "sha256": "4d4605dcf761c78a9e13ffa9d9ecd7260191af71b3be1de5963afbc6b0130e0f"
+        "bytes": 7277,
+        "sha256": "20809456dfdadcf467b5e105c161ed761e234670d3cb40378a78f802186f167d"
       },
       {
         "path": "scripts/test-result-art.cjs",
         "bytes": 1902,
         "sha256": "225a654956f993269b34d69154774e1c952596149bbf526242492086644aee4b"
+      },
+      {
+        "path": "scripts/test-review-stability.cjs",
+        "bytes": 14015,
+        "sha256": "3fe35c4562ec2f5f83b90cd0d0da94fd15aa658e401ed57c76d482280f28cb57"
       },
       {
         "path": "scripts/test-skill-recast.cjs",
@@ -5830,8 +6015,8 @@
       },
       {
         "path": "scripts/test-youth-heroes.cjs",
-        "bytes": 4904,
-        "sha256": "b47dd2b778c7c620e9f1165dbb3df0cf949e1a92da67c7706f9abd9c0c169e4d"
+        "bytes": 5222,
+        "sha256": "44f37528a3a1e22c4eaca03605689d1887ef02903086120de0278e28cec90dc9"
       },
       {
         "path": "scripts/vendor-inflate.cjs",
@@ -26596,6 +26781,111 @@
         "colorType": 6
       },
       {
+        "path": "art/reviews/grounds/after-1.png",
+        "bytes": 834819,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/after-2.png",
+        "bytes": 822100,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/after-3.png",
+        "bytes": 954334,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/after-4.png",
+        "bytes": 763339,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/after-5.png",
+        "bytes": 928104,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/after-6.png",
+        "bytes": 902278,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/before-1.png",
+        "bytes": 834819,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/before-2.png",
+        "bytes": 341293,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/before-3.png",
+        "bytes": 391048,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/before-4.png",
+        "bytes": 320659,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/before-5.png",
+        "bytes": 380481,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/before-6.png",
+        "bytes": 372831,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/move-2.png",
+        "bytes": 821970,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/move-4.png",
+        "bytes": 763774,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/grounds/move-6.png",
+        "bytes": 903147,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
         "path": "art/reviews/grunt-melee/direction-0.png",
         "bytes": 1040774,
         "width": 1500,
@@ -27013,6 +27303,20 @@
         "bytes": 519050,
         "width": 1440,
         "height": 663,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/stability-v913/lifecycle.png",
+        "bytes": 783904,
+        "width": 1440,
+        "height": 663,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/stability-v913/pressure.png",
+        "bytes": 1575960,
+        "width": 1440,
+        "height": 1100,
         "colorType": 2
       },
       {

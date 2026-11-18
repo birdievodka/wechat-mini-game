@@ -52,12 +52,15 @@ assert.deepEqual(Array.from(stageBosses(2)),['lvbu','dongzhuo']);
    g.run.chapter=chapter;opaqueFills=0;g.rebuildMeadow();assert.ok(g.meadowTiles.length>0,'local theme creates ground tiles');
    assert.ok(g.meadowTiles.every(n=>n.getComponent(cc.Sprite).spriteFrame===g.artFrames['stage-ground-'+chapter]));
    assert.equal(opaqueFills,0,'opaque fallback must never cover a loaded theme');
+   const tiles=g.meadowTiles,cols=Math.ceil(WORLD.width/720),rows=Math.ceil(WORLD.height/540),f=g.artFrames['stage-ground-'+chapter];
+   assert.equal(tiles.length,cols*rows);assert.equal(f.rect.width,316);assert.equal(f.rect.height,188);
+   for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){const t=tiles.find(n=>Math.abs(n.position.x-(-WORLD.halfWidth+(col+.5)*WORLD.width/cols))<1e-6&&Math.abs(n.position.y-(-WORLD.halfHeight+(row+.5)*WORLD.height/rows))<1e-6);assert.ok(t);assert.equal(t.scale.x,col%2?-1:1);assert.equal(t.scale.y,row%2?-1:1);}
   }
   const theme=g.artFrames['stage-ground-6'];delete g.artFrames['stage-ground-6'];opaqueFills=0;g.rebuildMeadow();
   assert.equal(g.meadowTiles.length,0);assert.equal(opaqueFills,1,'genuinely missing textures still show a safe ground');
   g.artFrames['stage-ground-6']=theme;g.rebuildMeadow();
  }finally{g.ground.rect=rect;if(oldWorld)g.artFrames['world-ground']=oldWorld;}
- console.log('通过：六关本地地面不被纯色兜底遮盖、远程草图缺失不影响正式地面、确实缺图仍安全兜底');
+ console.log('通过：六关本地地面不被纯色兜底遮盖、远程草图缺失不影响正式地面、确实缺图仍安全兜底、六关镜像同边连续/2px采样隔离/较大格减少重复');
  const manifest=require('../art/audio/runtime-manifest.json');assert.equal(manifest.physicalSounds.length,66);assert.equal(Object.keys(load('audio-catalog').SOUND_ASSETS).length,86);
  console.log('通过：资源请求合并/失败重试/同步异常、离线首屏与首关、首领双图原子加载/取消、战斗准备冻结和离开保护、66份音效文件复用86事件');
 })().catch(e=>{console.error(e);process.exit(1)});

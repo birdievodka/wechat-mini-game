@@ -27,13 +27,14 @@ const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-camp
  g.showShop();g.update(.08);assert.equal(source.playing,true);assert.equal(source.plays,plays,'shop never restarts battle track');
  g.onBackground();assert.equal(source.playing,false);const stopped=g.musicSource.plays;g.playSound('ui-click');assert.equal(g.musicSource.plays,stopped);g.onForeground();assert.equal(source.playing,true);
  g.showMainMenu();const pending=[],released=[],old=cc.assetManager.loadBundle,release=cc.assetManager.releaseAsset;
+ const {forgetGameBundle}=load('game-resources');forgetGameBundle('music');
  cc.assetManager.releaseAsset=x=>released.push(x);cc.assetManager.loadBundle=(name,cb)=>name==='music'?cb(null,{load:(id,type,done)=>pending.push({id,done})}):old(name,cb);
  try{
-  g.selectMusic('battle',true);g.selectMusic('boss');assert.equal(pending.length,1);
+  g.selectMusic('battle',true);g.selectMusic('boss');assert.equal(pending.length,2,'switch cancels the hung old generation immediately');
   const stale={name:'battle-stale'};pending.shift().done(null,stale);assert.ok(released.includes(stale));assert.equal(pending[0].id,'boss');
   g.onBackground();const boss={name:'boss-current'};pending.shift().done(null,boss);assert.equal(g.musicSource.clip,boss);assert.equal(g.musicSource.playing,false,'late download cannot play in background');
   g.onForeground();assert.ok(g.musicSource.playing);g.showMainMenu();assert.ok(released.includes(boss),'scene switch releases prior decoded music');
- }finally{cc.assetManager.loadBundle=old;cc.assetManager.releaseAsset=release;}
+ }finally{g.onDestroy();cc.assetManager.loadBundle=old;cc.assetManager.releaseAsset=release;forgetGameBundle('music');}
  // Real skill tasks emit each release, rather than a prerecorded future montage.
  for(const [id,count] of [['G08',8],['G19',4],['G20',5],['G22',4]]){
   const s=await newGame();s.spawnClock=999;s.commonSkill.reset();const e=s.spawnNext('soldier');Object.assign(e,{x:180,y:0,born:0,hp:1e7,maxHp:1e7,speed:0});

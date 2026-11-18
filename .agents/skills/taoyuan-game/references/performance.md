@@ -138,3 +138,17 @@ v9.10首关静态地面格由目标520×470改720×540并交替镜像，相同96
 同视口真实Cocos/WebGL中性物件工程夹具：3动物＋4回血物＋3精英标记，旧新增23,595,160B绘图缓冲、清场仍持有；新新增1,068B，模型20→10，加上图集0.5MiB，合计139.10→117.10MiB，净减22.00MiB。只代表该工程场景的GPU计数，不是iOS进程RSS或帧率；长战斗与恢复证据见docs/stability-v912.md及art/reviews/stability-v912。
 
 回归test-native-sfx覆盖66音色万次切换仍6实例、元数据释放、缓存路径复用、串行队列、失败中途初始化/stop失败销毁/迟到回调/错误风暴限频；test-performance补动物/桃树复用/回血Sprite无独立Graphics。diagnose-props-memory只用隔离loopback；diagnose-stability支持隔离端口/明确版本，预先真正加载目标Boss图集，不能用缺图Boss低估压力。
+
+## v9.13 审查落实：异常路径与生命周期
+
+`load-lifetime`的真实时间截止/一次完成及`asset-scope`的场景和发布租约覆盖核心美术、二进制/解码、可选图、原草鞋、音效与音乐。普通加载阶段18秒、音效/队列30秒、音乐整笔18秒、Boss/deferred整组20秒；首屏为多阶段截止，不承诺整屏18秒。所有退出撤销计时器与订阅，旧纹理在新发布期间有身份保护，同身份多旧回调只持一份临时租约。加载资产addRef/decRef、程序纹理destroy，不force release共享图；最后无外部引用AudioClip须在全部订阅交付后立即释放，不能让66个同步缓存metadata播放器全部拖到下一tick。组件单独销毁也解除Sprite引用、销毁自建Canvas、释放含rigFrames的派生帧和租约；清理项逐个隔离。
+
+微信原生池失败不能退回Cocos全音色常驻：保持URL缓存、30秒退避重建，浏览器才用Cocos声道。原草鞋走同一有界/去重/重试路径；音乐切场立即取消旧请求。异步arsenal只refreshWeaponArt，不syncWeapons/updateWeapon；装备真正变化才使对应槽失效，不能改正在出招的time/cooldown/hit/orbitPrevious。
+
+RuntimeHealth合并同类首/末/次数，最多8类，首严重及时落盘，后续批量限频；storage失败也推进限频窗口。on/off逐项隔离，后台/析构flush。发现事件200ms批量落盘，关键语义出口flush。坏档只接受合法ID/去重、输入128KiB上限。
+
+软分离保持原实时位置与配对次序，仅预先过滤死亡槽；CCD增加相对扫掠AABB、窄相/首次排序不变。NpcActionRig按最终可见性/袖色/锚点/尺寸/位置/角度缓存，四共享FX跟踪路径/填充/描边，空→空不实际clear、内容结束清一次。无动作减帧/删特效。敌池先完全退休再不可见死亡尾部复用；演武配置编辑退休死槽，100轮冻结配置夹具80槽。未引入丢兵的总节点硬上限，完整空间网格/全量属性缓存另做差分，不把源操作量上界当手机耗时。
+
+专项`test-review-stability`包含加载挂起/旧新资源交错、订阅者抛错、万次错误/坏存储、音频初始化失败恢复/元数据同步释放、六剑外观迟到、100轮演武配置、3万组CCD差分。真实场景/组件循环与GPU压力证据见docs/review-stability-v913.md和art/reviews/stability-v913；不是iPhone实测或原机闪退根因证明。
+
+v9.14六关普通裁图统一连续镜像/2px图集采样内缩，较大静态地面块降低重复。1440×750视口下第2–6关15→9个Sprite，首关9保持；仍共用同一960×640主题纹理，无新增贴图/材质/Graphics或逐帧处理，不将少6个静态Sprite宣称为手机FPS提升。实际地面/镜头取证见art/reviews/grounds，演武原布局保持。

@@ -154,6 +154,7 @@ export class CommonSkillRuntime {
   }guard.previousX=this.h.x;guard.previousY=this.h.y;
  }
  update(dt:number):void{
+  if(!Number.isFinite(dt)||dt<0)return;
   if(dt<=0)return;
   this.sweepTime=Math.max(0,this.sweepTime-dt);this.poseTime=Math.max(0,this.poseTime-dt);this.hasteTime=Math.max(0,this.hasteTime-dt);
   this.shieldTime=Math.max(0,this.shieldTime-dt);this.blockGrace=Math.max(0,this.blockGrace-dt);this.effects.update(dt);this.effects.track(this.h.x,this.h.y,this.h.angle,dt);

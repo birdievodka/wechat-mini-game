@@ -1,0 +1,328 @@
+{
+  "version": "stage-v9.13-lifecycle",
+  "scope": "isolated real desktop Cocos/WebGL; UI loops + scene/component destruction, not iPhone RSS/FPS or original crash reproduction",
+  "samples": [
+    {
+      "scene": 0,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 54,
+      "heap": 116632136
+    },
+    {
+      "scene": 0,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 119376352
+    },
+    {
+      "scene": 1,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93284508,
+      "assets": 58,
+      "heap": 157671550
+    },
+    {
+      "scene": 1,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 160263515
+    },
+    {
+      "scene": 2,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 53,
+      "heap": 226271378
+    },
+    {
+      "scene": 2,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 17,
+      "heap": 228850086
+    },
+    {
+      "scene": 3,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 47,
+      "heap": 266683809
+    },
+    {
+      "scene": 3,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 193940105
+    },
+    {
+      "scene": 4,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 46,
+      "heap": 286446808
+    },
+    {
+      "scene": 4,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 80088766
+    },
+    {
+      "scene": 5,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 48,
+      "heap": 114775543
+    },
+    {
+      "scene": 5,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 117447363
+    },
+    {
+      "scene": 6,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 48,
+      "heap": 118478322
+    },
+    {
+      "scene": 6,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 121109521
+    },
+    {
+      "scene": 7,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 50,
+      "heap": 116478876
+    },
+    {
+      "scene": 7,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 119041383
+    },
+    {
+      "scene": 8,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 49,
+      "heap": 214477020
+    },
+    {
+      "scene": 8,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 133378438
+    },
+    {
+      "scene": 9,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 51,
+      "heap": 217164912
+    },
+    {
+      "scene": 9,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 219777841
+    },
+    {
+      "scene": 10,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 74415324,
+      "assets": 47,
+      "heap": 193239564
+    },
+    {
+      "scene": 10,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 195853984
+    },
+    {
+      "scene": 11,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 60,
+      "heap": 285461502
+    },
+    {
+      "scene": 11,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 288033470
+    },
+    {
+      "scene": 12,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 60,
+      "heap": 321733349
+    },
+    {
+      "scene": 12,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 16,
+      "heap": 324273261
+    },
+    {
+      "scene": 13,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 58,
+      "heap": 341663280
+    },
+    {
+      "scene": 13,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 80589430
+    },
+    {
+      "scene": 14,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 60,
+      "heap": 147753002
+    },
+    {
+      "scene": 14,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 82280043
+    },
+    {
+      "scene": 15,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 59,
+      "heap": 173236904
+    },
+    {
+      "scene": 15,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 175794684
+    },
+    {
+      "scene": 16,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 59,
+      "heap": 193026471
+    },
+    {
+      "scene": 16,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 80629031
+    },
+    {
+      "scene": 17,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 62,
+      "heap": 151378795
+    },
+    {
+      "scene": 17,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 99374243
+    },
+    {
+      "scene": 18,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 58,
+      "heap": 216763640
+    },
+    {
+      "scene": 18,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 80983827
+    },
+    {
+      "scene": 19,
+      "phase": "returned-menu",
+      "buffers": 80251832,
+      "textures": 93288348,
+      "assets": 60,
+      "heap": 99550313
+    },
+    {
+      "scene": 19,
+      "phase": "destroyed-component",
+      "buffers": 28288,
+      "textures": 4221488,
+      "assets": 15,
+      "heap": 102427195
+    }
+  ],
+  "errors": [],
+  "storageRestored": true
+}

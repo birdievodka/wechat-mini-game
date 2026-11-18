@@ -34,7 +34,7 @@ export class BossEffects {
  private sprite(key:string,x:number,y:number,w:number,h:number,angle=0,alpha=1):void {
   const frame=this.frames[key];if(!frame||this.used>=86)return;let slot=this.slots[this.used++];
   if(!slot){const n=new Node('BossMaterial');n.layer=Layers.Enum.UI_2D;this.parent.addChild(n);const sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;const transform=n.getComponent(UITransform)!;slot={sprite:sp,transform,key:'',width:0,height:0};this.slots.push(slot);}
-  const sp=slot.sprite;sp.node.active=true;if(slot.key!==key){sp.spriteFrame=frame;slot.key=key;}if(slot.width!==w||slot.height!==h){slot.transform.setContentSize(w,h);slot.width=w;slot.height=h;}
+  const sp=slot.sprite;sp.node.active=true;if(slot.key!==key||sp.spriteFrame!==frame){sp.spriteFrame=frame;slot.key=key;}if(slot.width!==w||slot.height!==h){slot.transform.setContentSize(w,h);slot.width=w;slot.height=h;}
   sp.node.setPosition(x,y);sp.node.angle=angle;
   sp.color=WHITE[Math.max(0,Math.min(32,Math.round(alpha*32)))];
  }

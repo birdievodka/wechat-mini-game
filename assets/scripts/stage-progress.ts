@@ -1,3 +1,7 @@
+import {CHRONICLE_ENEMIES} from './chronicles';
+import {CHAPTERS} from './chronicles';
+import {WEAPONS} from './weapons';
+import {COMMON_SKILLS} from './common-skills';
 import {growthClears,signatureId} from './hero-growth';
 import {INITIAL_CONTENT,STAGES,STARTER_WEAPONS,VISIBLE_HERO_IDS} from './stage-data';
 export const PROFILE_KEY='taoyuan-stage-profile-v8';
@@ -8,12 +12,13 @@ export type ContentKind='weapons'|'passives'|'skills';
 export const visibleHero=(id:string)=>VISIBLE_HERO_IDS.some(h=>h===id);
 export function newProfile():StageProfile{return {version:1,pendingWeapons:[],heroes:{},discovered:{enemies:[],weapons:[...INITIAL_CONTENT.weapons],skills:[...INITIAL_CONTENT.skills]},preferences:{}};}
 export function readProfile(storage:ProfileStorage):StageProfile {
- const p=newProfile();try{const raw=JSON.parse(storage.getItem(PROFILE_KEY)||'null');if(raw?.version!==1)return p;
+ const p=newProfile();try{const text=storage.getItem(PROFILE_KEY)||'null';if(text.length>131072)return p;const raw=JSON.parse(text);if(raw?.version!==1)return p;
  for(const hero of ['liubei','guanyu','zhangfei','zhaoyun','kongming']){const records:Record<string,ClearRecord>={};for(const stage of STAGES){const r=raw.heroes?.[hero]?.[stage.id];if(!r)break;if(![r.seconds,r.kills,r.hearts,r.clears].every(Number.isFinite)||r.seconds<=0||r.kills<0||r.hearts<0||r.hearts>(hero==='zhangfei'?12:11)||r.clears<1)break;records[stage.id]={seconds:r.seconds,kills:Math.floor(r.kills),hearts:Math.floor(r.hearts),clears:Math.floor(r.clears)};}p.heroes[hero]=records;
 }
  for(const hero of ['liubei','guanyu','zhangfei','zhaoyun','kongming']){const pref=raw.preferences?.[hero];if(pref)p.preferences[hero]={stage:Math.max(1,Math.min(highestStage(p,hero),Math.floor(pref.stage)||1)),weapon:STARTER_WEAPONS.some(w=>w===pref.weapon)?pref.weapon:hero==='guanyu'?'pole':hero==='zhangfei'?'cleaver':'sandal',skill:unlocked(p,'skills').includes(pref.skill)?pref.skill:'G01'};}
- p.pendingWeapons=Array.isArray(raw.pendingWeapons)?raw.pendingWeapons.filter((id:unknown)=>typeof id==='string'&&unlocked(p,'weapons').includes(id)):[];
- for(const kind of ['enemies','weapons','skills'] as const){const ids=raw.discovered?.[kind];if(Array.isArray(ids))p.discovered[kind]=Array.from(new Set([...p.discovered[kind],...ids.filter((v:unknown)=>typeof v==='string'&&v.length<60)]));}
+ p.pendingWeapons=Array.isArray(raw.pendingWeapons)?Array.from(new Set<string>(raw.pendingWeapons.filter((id:unknown)=>typeof id==='string'&&unlocked(p,'weapons').includes(id)))):[];
+ const known={enemies:new Set([...CHRONICLE_ENEMIES.map(e=>e.id),...CHAPTERS.map(c=>'boss-'+c.bossId)]),weapons:new Set(WEAPONS.map(w=>w.id)),skills:new Set(COMMON_SKILLS.map(s=>s.id))};
+ for(const kind of ['enemies','weapons','skills'] as const){const ids=raw.discovered?.[kind];if(Array.isArray(ids))p.discovered[kind]=Array.from(new Set([...p.discovered[kind],...ids.filter((v:unknown)=>typeof v==='string'&&known[kind].has(v as never))]));}
  }catch(_){/* A bad or legacy run never manufactures stage clears. */}return p;
 }
 export function saveProfile(storage:ProfileStorage,p:StageProfile):boolean{try{storage.setItem(PROFILE_KEY,JSON.stringify(p));return true;}catch(error){console.warn('关卡进度保存失败',error);return false;}}

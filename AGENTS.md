@@ -80,3 +80,7 @@ v9.11：首页演武入口暂隐藏，startTraining/演武逻辑保留。头像�
 
 
 v9.12稳定性：微信SFX固定NativeSfx六原生实例，Cocos音效元数据单并发、取缓存src即释放，30秒退避/迟到及销毁保护；浏览器继续Cocos AudioSource。BGM独立单源/购物续播。7类中性小物件加入共用BattleSpriteAtlas，70格1024×1152/4.5MiB，动物/回血/精英冠不逐个Graphics。规则、出兵及核心特效不改。新增test-native-sfx、道具GPU前后对照与长压力，见skill性能v9.12；无iOS系统日志不能宣称确诊原机闪退。
+
+v9.13审查落实：load-lifetime/asset-scope统一截止与场景/发布租约；核心阶段18秒、Boss/deferred整组20秒、音乐18秒、音效/队列30秒，取消/迟到/多订阅隔离。原草鞋同通用加载，微信原生池失败30秒退避，禁止Cocos全库回退；最后无人引用AudioClip立即释放metadata。arsenal只refreshWeaponArt，不重置攻击；RuntimeHealth同类聚合限频（写失败也限频）、逐监听/析构隔离。组件销毁解除Sprite/派生帧/自建Canvas/资源；NpcActionRig最终值缓存，四共享FX空清理跟踪；保守CCD筛选和原配对顺序、不可见尸体复用/演武配置退休。未减特效/敌数/画质或用硬满池丢兵。见docs/review-stability-v913.md及skill性能参考；真实GPU工程数据不能当iPhone闪退结论。
+
+v9.14六关地面：正式stage-ground全部720×540目标格、列X/行Y交替镜像，SpriteFrame全部内缩2px为316×188，保留.5px覆盖。第二至六关由15→9静态块（1440×750视口），首关保持9；同960×640纹理/原六主题色调，无新图、材质或每帧处理，缩略图和演武不改。见skill画风参考及art/reviews/grounds；不要再仅对第一关开启镜像/防串色。

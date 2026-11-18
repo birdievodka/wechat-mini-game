@@ -1,6 +1,7 @@
 /** 移动向量限长，避免斜向移动快于直线。 */
 export function movement(x: number, y: number): { x: number; y: number } {
-  const length = Math.sqrt(x * x + y * y);
+  if(!Number.isFinite(x)||!Number.isFinite(y))return {x:0,y:0};
+  const length = Math.hypot(x,y);
   const divisor = Math.max(1, length);
   return { x: x / divisor, y: y / divisor };
 }
@@ -25,6 +26,8 @@ export function sweptHit(ax: number, ay: number, bx: number, by: number,
 /** 线段进入椭圆的最早时刻；无交点返回 null，支持相对运动检测。 */
 export function sweepEllipseTime(ax: number, ay: number, bx: number, by: number,
   rx: number, ry: number): number | null {
+  // Conservative swept AABB rejection in relative coordinates; narrow phase/TOI unchanged.
+  if(Math.min(ax,bx)>rx||Math.max(ax,bx)<-rx||Math.min(ay,by)>ry||Math.max(ay,by)<-ry)return null;
   const x = ax / rx, y = ay / ry, dx = (bx - ax) / rx, dy = (by - ay) / ry;
   const c = x * x + y * y - 1;
   if (c <= 0) return 0;

@@ -1,3 +1,4 @@
+import {boundedCall} from './load-lifetime';
 /** Fixed native voices. Loading an AudioClip must not retain one extra player per cue. */
 export interface NativeSoundContext {
   src:string;volume:number;loop:boolean;autoplay:boolean;
@@ -21,7 +22,7 @@ export class NativeSfx {
     }return pool;}catch(_){pool.destroy();report('native-sfx initialization failed');return;}
   }
   private constructor(private diagnostic:(message:string)=>void){}
-  private report(message:string):void {this.errorCount++;const now=Date.now();if(now-this.reportedAt<1000)return;this.reportedAt=now;this.diagnostic(message);}
+  private report(message:string):void {if(this.closed)return;this.errorCount++;const now=Date.now();if(now-this.reportedAt<1000)return;this.reportedAt=now;this.diagnostic(message);}
   get failures():number{return this.errorCount;}
   get played():number{return this.playedCount;}
   get size():number{return this.voices.length;}
@@ -47,19 +48,20 @@ export class NativeSfx {
 
 /** Native clip metadata also owns a player: serialize acquisition and release it promptly. */
 export class AudioLoadQueue {
-  private jobs:((done:()=>void)=>void)[]=[];
+  private jobs:((done:()=>void,alive:()=>boolean)=>void)[]=[];
+  private cancels=new Set<()=>void>();
   private active=0;private closed=false;private draining=false;
   constructor(private limit=1){}
   get loading():number{return this.active;}
   get waiting():number{return this.jobs.length;}
-  enqueue(job:(done:()=>void)=>void):void {if(this.closed)return;this.jobs.push(job);this.drain();}
+  enqueue(job:(done:()=>void,alive:()=>boolean)=>void):void {if(this.closed)return;this.jobs.push(job);this.drain();}
   private drain():void {
     if(this.closed||this.draining)return;this.draining=true;
     try{while(!this.closed&&this.active<this.limit&&this.jobs.length){
-      const job=this.jobs.shift()!;this.active++;let finished=false;
-      const done=()=>{if(finished)return;finished=true;this.active--;this.drain();};
-      try{job(done);}catch(_){done();}
+      const job=this.jobs.shift()!;this.active++;let finished=false,cancel:()=>void;
+      cancel=boundedCall<void>(complete=>job(()=>complete(null),()=>!finished&&!this.closed),()=>{if(finished)return;finished=true;this.cancels.delete(cancel);this.active--;this.drain();},30000);
+      if(!finished)this.cancels.add(cancel);
     }}finally{this.draining=false;}
   }
-  destroy():void {this.closed=true;this.jobs.length=0;}
+  destroy():void {this.closed=true;this.jobs.length=0;for(const cancel of Array.from(this.cancels))cancel();this.cancels.clear();}
 }

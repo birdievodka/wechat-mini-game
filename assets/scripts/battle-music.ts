@@ -57,6 +57,7 @@ export class BattleMusic {
     if (this.source) this.source.volume = 0;
   }
   update(delta: number): void {
+    if(!Number.isFinite(delta)||delta<0)return;
     if (!this.running || this.paused) return;
     this.elapsed = (this.elapsed + Math.max(0, delta)) % this.seconds;
     if (this.playing && this.source) {
