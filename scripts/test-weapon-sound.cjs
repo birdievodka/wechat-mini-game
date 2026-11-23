@@ -30,6 +30,17 @@ assert.equal(gate.acquire('blade-hit'),1,'different weapon can sound in the same
 assert.equal(gate.acquire('petal-attack'),undefined,'release cannot steal a live impact');
 assert.notEqual(gate.acquire('player-hurt',4),undefined,'player damage can preempt an impact');
 gate.update(.2); assert.notEqual(gate.acquire('gun-hit'),undefined); gate.reset(); assert.equal(gate.acquire('gun-hit'),0);
+// Six simultaneous automatic weapons share one swing and two impact accents.
+const layered = new SoundGate();
+const families = ['wood','gun','blade','heavy','bow','blast'];
+for (const event of ['attack','hit']) {
+  const played = families.filter(f => layered.acquire(f+'-'+event, event==='attack'?0:2, event)!==undefined);
+  assert.equal(played.length,event==='attack'?1:2);
+}
+assert.notEqual(layered.acquire('danger'),undefined);
+assert.notEqual(layered.acquire('player-hurt'),undefined);
+layered.update(.16);
+assert.notEqual(layered.acquire('bow-hit',2,'hit'),undefined);
 const crowded = new SoundGate();
 for (let i=0;i<100;i++) { const id=GENERATED_SOUNDS[i%GENERATED_SOUNDS.length]; const voice=crowded.acquire(id); assert.ok(voice===undefined || voice>=0 && voice<SFX_VOICES); crowded.update(.003); }
 console.log('通过：36武器分类音色、草鞋无风声、全部PCM无静音/削波/端点跳变、同帧混音/同声限频、命中优先与六声道上限');

@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto'),sharp=require('sharp');
-const {load,newGame,click,cc}=require('./test-campaign.cjs');
+const {useDevelopmentHost,load,newGame,click,cc}=require('./test-campaign.cjs');
 const {LVBU_ACTIONS,createLvbuState,startLvbuMove,updateLvbu,lvbuFrame,lvbuBusy,LVBU_EVENT}=load('lvbu-boss');
 const {BOSS_ACTIONS,CHAPTERS}=load('chronicles');
 const actor=()=>({x:-300,y:0,hp:1000,maxHp:1000,speed:100,attack:-1,attackAngle:0,bossTimers:[0,0,0],bossNext:0});
@@ -65,7 +65,7 @@ const run=(e,s,seconds,tx=0,ty=0)=>{let hits=0,releases=0;for(let t=0;t<seconds-
  g.clearBattle();const big=g.spawnNext('chief',undefined,2);Object.assign(big,{x:0,y:0,born:0,previousHitX:0,previousHitY:88});big.art.node.setPosition(0,0);
  const before=big.hp;g.launchProjectile(-150,168,0,g.run.weapons[0],{...g.weapons[0].stats,speed:1000,range:400},50);g.updateProjectiles(.3);assert.ok(big.hp<before,'放大骑将头身区域仍能被飞鞋命中');
  const outside=big.hp;big.previousHitX=0;big.previousHitY=88;g.launchProjectile(-150,235,0,g.run.weapons[0],{...g.weapons[0].stats,speed:1000,range:400},50);g.updateProjectiles(.3);assert.equal(big.hp,outside,'头盔羽毛上方掠过不算命中');
- g.showMainMenu();g.startTraining(g.screens.selection,g.screens.selectionSkill);click(g.trainingPanel.root,'TrainingResume');g.clearBattle();g.px=0;g.py=0;
+ g.showMainMenu();useDevelopmentHost();g.startTraining(g.screens.selection,g.screens.selectionSkill);click(g.trainingPanel.root,'TrainingResume');g.clearBattle();g.px=0;g.py=0;
  for(let i=0;i<80;i++){const b=g.spawnNext('chief',undefined,2);b.born=0;b.x=-250+(i%8)*60;b.y=-150+Math.floor(i/8)*30;b.hp=b.maxHp*.4;}
  let peak=0;for(let f=0;f<300;f++){g.age+=1/60;for(const b of g.enemies)if(b.hp>0)g.updateEnemy(b,1/60);if(f%15===0)g.updateEffects(0);const busy=g.enemies.filter(b=>b.hp>0&&lvbuBusy(b.lvbu)).length;peak=Math.max(peak,busy);assert.ok(busy<=4);assert.ok(busy+g.enemyZones.length<=6);}
  assert.equal(peak,4);assert.ok(g.enemies.every(b=>!b.lvbuGhosts||b.lvbuGhosts.length===2));g.clearBattle();assert.ok(g.enemies.every(b=>!b.lvbu));assert.equal(g.enemyZones.length,0);

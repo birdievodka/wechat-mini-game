@@ -4,7 +4,13 @@ import {EXTRA_WEAPONS} from './extra-weapons';
 import {REFORGED_BOSSES} from './boss-roster';
 import {artScope,releaseArtTexture} from './asset-scope';
 import {ensureSheets,cancelArtGroups} from './deferred-art';
+import {VFX_MATERIAL_KEYS} from './vfx-materials';
 export const BOSS_ART_IDS=['zhangjiao','lvbu','dongzhuo','yuanshao','caocao','menghuo','simayi'];
+export const bossActionKeys:Record<string,string[]>={};
+for(const id of BOSS_ART_IDS){
+ const prefix=id==='lvbu'?'lvbu-action-':'boss-'+id+'-action-';
+ bossActionKeys[id]=Array.from({length:id==='lvbu'?20:16},(_,i)=>prefix+i);
+}
 export const bossArtReady=(frames:Record<string,SpriteFrame>,id:string):boolean=>!!frames[id==='lvbu'?'lvbu-action-0':'boss-'+id+'-action-0']&&(id!=='menghuo'||!!frames['boss-beast-23']);
 export async function loadChronicleArt(frames:Record<string,SpriteFrame>,alive:()=>boolean):Promise<void>{
  const scope=artScope(frames);
@@ -13,6 +19,7 @@ export async function loadChronicleArt(frames:Record<string,SpriteFrame>,alive:(
  const load=(bundle:AssetManager.Bundle,name:string)=>new Promise<Texture2D>((resolve,reject)=>scope.load(bundle,name+'/texture',Texture2D,(e,t)=>e||!t?reject(e||new Error('贴图为空')):resolve(t)));
  const atlas=async(bundle:AssetManager.Bundle,name:string,cols:number,rows:number,keys:string[])=>{const t=await load(bundle,name);if(!alive()){releaseArtTexture(frames,t);return;}keys.forEach((key,i)=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%cols*t.width/cols,Math.floor(i/cols)*t.height/rows,t.width/cols,t.height/rows);frames[key]=f;});};
  await Promise.all([
+  atlas(presentation,'vfx-materials',4,4,VFX_MATERIAL_KEYS.map(k=>'vfx-'+k)),
   atlas(presentation,'growth',6,4,Array.from({length:24},(_,i)=>i<18?'mount-'+['liubei','guanyu','zhangfei'][Math.floor(i/6)]+'-'+i%6:i<21?'growth-torso-'+['liubei','guanyu','zhangfei'][i-18]:'growth-held-'+['liubei','guanyu','zhangfei'][i-21])),
   atlas(ui,'weapons',5,5,EXTRA_WEAPONS.map(w=>'icon-'+w.id)),
   atlas(ui,'stage-jade',1,1,['stage-panel']),
@@ -21,7 +28,7 @@ export async function loadChronicleArt(frames:Record<string,SpriteFrame>,alive:(
   atlas(ui,'stage-themes',3,2,Array.from({length:6},(_,i)=>'stage-cell-'+(i+1))),
   atlas(ui,'skills',6,4,Array.from({length:24},(_,i)=>'skill-'+i)),
   atlas(ui,'boss-portraits',4,2,BOSS_ART_IDS.map(id=>'boss-'+id)),
-  atlas(units,'boss-zhangjiao-actions',4,4,Array.from({length:16},(_,i)=>'boss-zhangjiao-action-'+i)),
+  atlas(units,'boss-zhangjiao-actions',4,4,bossActionKeys.zhangjiao),
   atlas(units,'boss-props',4,4,Array.from({length:16},(_,i)=>'boss-prop-'+i)),
   ...['a','b'].reduce<Promise<void>[]>((all,g,gi)=>[...all,...['front','back'].map(async v=>{const t=await load(units,'troops-'+g+'-'+v);if(!alive()){releaseArtTexture(frames,t);return;}const cell=(index:number,b:readonly number[]=[0,0,96,96])=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(index%5*96+b[0],Math.floor(index/5)*96+b[1],b[2],b[3]);return f;};const sleeve=cell(60,NPC_GEAR_BOUNDS[40]),fist=cell(61,NPC_GEAR_BOUNDS[41]),shield=cell(62,NPC_GEAR_BOUNDS[42]);for(let i=0;i<20;i++){const key='E'+('0'+(gi*20+i+1)).slice(-2)+'-'+v;frames['enemy-'+key]=cell(i);frames['npc-body-'+key]=cell(i+20);frames['npc-gear-'+key]=cell(i+40,NPC_GEAR_BOUNDS[gi*20+i]);frames['npc-sleeve-'+key]=sleeve;frames['npc-fist-'+key]=fist;frames['npc-shield-'+key]=shield;}})],[]),
  ]);
@@ -35,8 +42,8 @@ export async function loadChronicleArt(frames:Record<string,SpriteFrame>,alive:(
 export function ensureBossArt(id:string,frames:Record<string,SpriteFrame>,alive:()=>boolean,done:(error?:Error)=>void):void {
  if(bossArtReady(frames,id)){done();return;}
  if(!BOSS_ART_IDS.includes(id)){done(new Error('未知首领：'+id));return;}
- const name=id==='lvbu'?'lvbu-actions':'boss-'+id+'-actions',cols=4,rows=id==='lvbu'?5:4,prefix=id==='lvbu'?'lvbu-action-':'boss-'+id+'-action-';
- const sheets=[{name,columns:cols,rows,keys:Array.from({length:cols*rows},(_,i)=>prefix+i)}];
+ const name=id==='lvbu'?'lvbu-actions':'boss-'+id+'-actions',cols=4,rows=id==='lvbu'?5:4;
+ const sheets=[{name,columns:cols,rows,keys:bossActionKeys[id]}];
  if(id==='menghuo')sheets.push({name:'boss-beasts',columns:6,rows:4,keys:Array.from({length:24},(_,i)=>'boss-beast-'+i)});
  ensureSheets('boss-'+id,sheets,frames,alive,done);
 }

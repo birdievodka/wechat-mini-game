@@ -5,7 +5,8 @@ const KINDS:EnemyActionKind[]=['slash','slash','thrust','slash','slash','heavy',
 const GEAR=['hoe','saber','spear','saber','dagger','axe','hammer','halberd','flag','medicine','bow','crossbow','repeater','heavy-crossbow','spear','javelin','dagger','axe','spear','spear','saber','bow','crossbow','saber','staff','club','saber','blowgun','oil','torch','musket','triple-gun','bomb','firecracker','crossbow','catapult','cannon','oil','talisman','fan'];
 const SLEEVES=['#d8a349','#657445','#8c8b94','#3f5273','#4d4148','#ba4437','#89888f','#785195','#d7a148','#4d7347','#3c536b','#8c8d96','#744b89','#3a4662','#557840','#6b4b7c','#b4483d','#547244','#c8a158','#5e6172','#af4d40','#405879','#945b4c','#4f6f3e','#608557','#4e7044','#b89648','#50733d','#c84d36','#c34337','#388384','#405779','#b34532','#c58541','#856f3c','#81613d','#a97332','#765c3a','#d7b54d','#e4e9df'];
 const SPECS=KINDS.map((kind,i):EnemyActionSpec=>({id:'E'+('0'+(i+1)).slice(-2),kind,gear:GEAR[i],sleeve:SLEEVES[i],dual:i===4,shield:i===3||i===26,mounted:i>=18&&i<=24,axis:['bow','crossbow','repeater','heavy-crossbow','musket','triple-gun','blowgun'].includes(GEAR[i])?0:90}));
-export const enemyActionSpec=(id:string):EnemyActionSpec=>SPECS[Math.max(0,Math.min(39,Number(id.slice(1))-1))];
+const SPEC_BY_ID:Record<string,EnemyActionSpec>=Object.create(null);for(const spec of SPECS)SPEC_BY_ID[spec.id]=spec;
+export const enemyActionSpec=(id:string):EnemyActionSpec=>SPEC_BY_ID[id]||SPECS[Math.max(0,Math.min(39,Number(id.slice(1))-1))];
 export function readableWindup(id:string,original:number):number {
  const k=enemyActionSpec(id).kind;
  return Math.max(original,k==='slash'?.44:k==='heavy'?.6:k==='thrust'?.48:k==='bow'?.28:k==='throw'?.4:0);

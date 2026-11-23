@@ -1,0 +1,211 @@
+{
+  "version": "stage-v10.1-runtime-audit",
+  "scope": "480 seconds accelerated Cocos/WebGL simulation; 80 initial enemies, actual reported 6 weapon tiers + G25, render every 30 frames. Not a phone/JSC/FPS test; no normal-stage progress or shop roundtrip.",
+  "initial": {
+    "version": "stage-v10.1-runtime-audit",
+    "quads": 0,
+    "allocated": 59,
+    "enemies": 80,
+    "bufferBytes": 96921892,
+    "textureBytes": 75644844
+  },
+  "samples": [
+    {
+      "seconds": 29.999999999998938,
+      "shots": 0,
+      "enemyShots": 7,
+      "particles": 133,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 24,
+      "allocated": 59,
+      "enemies": 78,
+      "bufferBytes": 42653024,
+      "textureBytes": 75214288
+    },
+    {
+      "seconds": 59.999999999997236,
+      "shots": 0,
+      "enemyShots": 2,
+      "particles": 144,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 35,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75214288
+    },
+    {
+      "seconds": 90.00000000001769,
+      "shots": 0,
+      "enemyShots": 1,
+      "particles": 127,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 28,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 120.00000000004157,
+      "shots": 0,
+      "enemyShots": 3,
+      "particles": 171,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 34,
+      "allocated": 59,
+      "enemies": 78,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 150.0000000000279,
+      "shots": 0,
+      "enemyShots": 2,
+      "particles": 144,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 37,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 180.00000000000063,
+      "shots": 0,
+      "enemyShots": 8,
+      "particles": 114,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 21,
+      "allocated": 59,
+      "enemies": 78,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 209.99999999997334,
+      "shots": 0,
+      "enemyShots": 0,
+      "particles": 142,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 25,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 239.99999999994606,
+      "shots": 0,
+      "enemyShots": 3,
+      "particles": 116,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 36,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 269.99999999991877,
+      "shots": 0,
+      "enemyShots": 2,
+      "particles": 161,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 31,
+      "allocated": 59,
+      "enemies": 78,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 299.9999999998915,
+      "shots": 0,
+      "enemyShots": 3,
+      "particles": 136,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 20,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 329.9999999998642,
+      "shots": 0,
+      "enemyShots": 6,
+      "particles": 166,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 41,
+      "allocated": 59,
+      "enemies": 78,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 359.9999999998369,
+      "shots": 0,
+      "enemyShots": 3,
+      "particles": 93,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 16,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 389.99999999980963,
+      "shots": 1,
+      "enemyShots": 3,
+      "particles": 145,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 21,
+      "allocated": 59,
+      "enemies": 78,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 419.99999999978235,
+      "shots": 0,
+      "enemyShots": 6,
+      "particles": 136,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 36,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 449.99999999975506,
+      "shots": 1,
+      "enemyShots": 3,
+      "particles": 119,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 30,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    },
+    {
+      "seconds": 479.9999999997278,
+      "shots": 0,
+      "enemyShots": 6,
+      "particles": 129,
+      "version": "stage-v10.1-runtime-audit",
+      "quads": 15,
+      "allocated": 59,
+      "enemies": 79,
+      "bufferBytes": 42653024,
+      "textureBytes": 75236424
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profileUnchanged": true,
+    "storageUnchanged": true
+  }
+}

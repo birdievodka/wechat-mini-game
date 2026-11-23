@@ -94,3 +94,37 @@ v9.17灵宠/武器奖励已实装并与并行v9.18入口合并：S05个人首通
 演武英雄形态页：三英雄×0–6阶段可直接选择，右侧动态预览后应用；替换首槽本命并保留品级/其他五槽/敌军，清旧友弹和临时技能、同步头像身体/坐骑/冲刺/宠物。5/6资源就绪后原子应用；退出恢复进入前备战选择，不写正式成长/发现/新英雄偏好。见training参考。
 
 分配热点维护：无尽刷兵一次遍历统计并复用40项计数/候选；保持随机次数、候选顺序与原密度。演武形态页仅活动内复用FormSurface/HeroShowcase，按钮读当前选择，切页/收起必须销毁清引用，不能缓存隐藏Graphics进入战斗。详见performance/training。
+
+v9.19音乐恢复：canplay仅首次补seek/仍需且未实际起播才补play，pause/stop撤销意图。原生play/src/onError通知当前曲失效、仅删该曲临时路径、5秒退避重载；仍固定6音效＋1音乐、零AudioClip元数据，不能每次失败新建播放器。原音源/音量/购物续播保持。
+
+v9.21诊断：v9.20后用户仍反馈无尽第6分钟高负载整微信退出，根因未定。设置→运行诊断可显式复制本机上一战斗/当前记录，18条5秒紧凑趋势＋峰值/8类聚合事件/单层previous，菜单重开不冲掉战斗记录。render-diagnostics只读已有节点/Graphics模型/IA，不能调用会分配的getRenderDataList或改引擎缓冲容量；无自动上传/新常驻战斗Graphics。11月17日旧Jetsam中WeChat仅largestProcess、无reason，不能认定为本次被杀证据。
+
+18:14实际WeChat日志确认：正式AppID的WAJSGameService线程出现EXC_BAD_ACCESS/SIGSEGV、0x8，顶部为JavaScriptCore JSRopeString解析/属性读取；此记录非Jetsam。日志未给项目JS行号，字符串/Label/贴图键/JS原生桥仅为后续排查方向，不能把v9.21诊断包称为已修复，不把vmSummary虚拟地址空间当RSS。原始日志不入Git，详见docs/stability-v921.md。
+
+v9.21.1诊断页支持分页摘要截图＋复制完整报告，剪贴板失败显示真实errMsg/errCode；可选绘图字段缺失逐模型隔离，safeSnapshot异常仍保上局导出，禁止空报告/统一boolean吞原因。短夹具test-runtime-report只测导出故障，无真实剪贴板/用户档/战斗长测；不宣称修复JSC SIGSEGV。
+
+v9.22伤害数字：BattleNumber接enemy.text(node/string)，同BattleSpriteAtlas原空余第88格烘焙13字；尺寸仍1024×1408/5.5MiB，节点惰性复用/24格坏输入界，颜色/字号/根动作/时序/伤害不变。数字失败只回退Label，不可禁用原图集；Sprite解除后销毁共享帧。作为JSC字符串/属性栈的规避，未确诊源行或根治。NativeMusic未赋源不发stop/pause/play，后续错误含曲目/操作/原始码，保留6+1/原曲/购物续播/两次恢复。用户旧快照326s/第10轮、13活敌/23池，0警告/JS错及每会话1音乐错不等同根因；见docs/stability-v922.md。
+BattleNumber.string仅缓存值/dirty，GameBootstrap.lateUpdate每帧绘制前合并flush，避免同帧霰弹/持续伤害多次改Sprite；不得移回每次hit立即排版。
+
+v9.20无尽内存：商店卡片/品质条/玉绿面板/遮罩/部分图标共用87格1024×1408/5.5MiB同BattleSpriteAtlas；菱形独立Sprite，禁止恢复独立卡片Graphics常态。无尽确认继续先销毁商店子树再准备Boss，Run购买状态保留。前台商店纳入5秒故障快照并标mode/tier/Boss图集；静态Cocos11→0个Shop Graphics与约23.75MiB图形资源下降不等于原机根因或手机实测。
+
+v9.20音乐恢复上限：同曲播放失败只自动重试两次（5秒/30秒），临时文件仅额外刷新一次；超额等实际切曲/明确重开/用户手动开启，不能因同曲无尽补给清额度或无限5秒换路径。固定6+1源不变。
+
+
+v10.0全量特效：用户已授权133项方案全面实施。运行stage-v10.0-material-vfx；36武器/12主动/21Boss/40兵/成长骑宠与八反馈/七精英沿真实入口换表现，数值/碰撞/充能不变。vfx-brush连续凸条＋vfx-materials四共享层96总/64普通/28-4-32-32分层，新增一张1024²4MiB透明材质，本命连招共用世界层，禁止逐兵/逐命中新Graphics/Canvas。原横扫renderer仍A版；原PNG身份与Boss逻辑哈希保留。原概念册仅docs，新运行源/提示/哈希art/runtime-vfx-v10；真实132帧与两组加速GPU平台在art/reviews/vfx-v10，不当iPhoneFPS/旧闪退根治。包10.06MiB、presentation2.35，原CDN版本未变。见docs/vfx-upgrade-v10/实现说明.md。
+
+v10.1退出排查：NpcActionRig按身份/前后方向查帧，spec与材质键预建；共享FX脏封装固定0–6参数，禁止恢复逐指令rest数组。Boss条用数值状态比较。诊断保留同会话最近battleSnapshot，previous单层、18趋势/8事件保持，写盘失败原因/峰值趋势可截图；savedAt0不显示1970。用户两张图上局v9.22/248秒、当前v10菜单，不能据此认定v10导致退出；旧JSC SIGSEGV与本次是否同因未定。详见docs/stability-v101.md。
+
+v10.4 横扫六合以已采用的 A 稿「金锋回旋」为表现基准，沿用原始月牙刃面、暖白锋边与真实命中的金色碎屑。设计原图见 art/concepts/sweep-v5.1/01-golden-cleave.png。v10.2 金线与 v10.3 游龙均已撤下；其他技能继续使用 v10 特效。
+
+v10.5 三少年共享的其余 11 招主动技能接入 skill-vfx-v10 的双侧收尖笔触，各自沿用真实弹道、火线、扩圈、剑轨与落点。主体用共享 Graphics 的实体色面与局部亮锋，复用箭形、受击碎锋和眩晕星；G03 继续使用独立 A 版与基线校验。武器及敌方特效仍按各自入口。
+
+v10.6 大范围表现覆盖火烧连营、水淹七军、八门金锁、震军号令、星落五丈原、万箭齐发与雷霆万钧。以地面底色、移动主体和局部收尾形成前后层，仍由同一场景时钟和伤害节拍驱动。同层共享 Graphics，无额外纹理或逐弹新节点。详见战斗特效参考。
+
+v10.7 雷霆万钧聚云0.20秒后四雷同帧判定，共用一次预声和雷鸣；独立入射方向在单目标重叠时仍可辨，同敌最多2雷、总18目标。v10.7.1 星落五丈原改为九颗陨石在0.35–1.47秒依次落地，间隔0.14秒，末颗触发终击星阵，每颗在下落开始时锁定落点。火烧连营改为横向点火、连续卷焰与随四次灼烧传递的亮锋，沿用480×80判定。
+
+v10.8 武器与首领表现按真实出手、弹道、命中、危险区分层。36把武器、7位首领21招与本命连招的维护入口见项目 skill 的 combat-effects、weapon-evolution，以及 cocos-game-vfx 的 implementation、taoyuan-adapter。延续共享绘制与既有对象上限。
+
+v10.9 武器与首领全套特效参照十二个英雄主动技，按刃、冲锋、箭、火水、阵、雷、落体、状态与回波选择对应画法。具体映射与同尺度验收见 combat-effects；各招仍由自己的真实事件和时钟推进。
+
+v10.9.1 演武配置底板复用已有 UI 九宫格；演武按模拟时间单独采样，零秒战斗仍保留，收起配置立即记录。演武高频重合的部分大招共用短时视觉，不改判伤或正式模式。见项目 skill 的 training 与 performance。

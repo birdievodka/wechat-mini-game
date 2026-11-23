@@ -14,6 +14,24 @@ const {newGame,load,Graphics,Node,cc,storage}=require('./test-campaign.cjs');
  const quads=[...particleRoot.children],upload=renderer.texture.data;let paths=0;const vector=new Graphics();vector.fill=vector.stroke=()=>paths++;visual.draw(vector,vector,0,0,667,375,true);assert.equal(paths,0,'sprite path does not tessellate particle geometry');
  for(let frame=0;frame<240;frame++)renderer.draw(visual.particles,0,0,667,375);assert.equal(renderer.texture.data,upload,'texture uploaded once');assert.deepEqual(particleRoot.children,quads,'no particle-node churn');
  renderer.draw(visual.particles,99999,99999,667,375);assert.ok(quads.every(n=>!n.active),'offscreen particles are culled without changing physics');assert.equal(visual.particles.active,280);renderer.draw(visual.particles,0,0,667,375);renderer.clear();assert.ok(quads.every(n=>!n.active),'clear removes stale particles immediately');renderer.destroy();assert.equal(particleRoot.children.length,0);assert.equal(renderer.texture.destroyed,true,'GPU mask released');
+ // Regression from the endless Zhang Fei loadout: stable slot order must not reorder the Cocos tree.
+ const equipped=await newGame('zhangfei');
+ const ids=['serpent-spear','serpent-spear','guandao','peach','thunder-bomb','wood-kite'];
+ equipped.run.growth=6;
+ equipped.run.weapons=ids.map((id,i)=>({id,uid:i+1,tier:[1,1,1,1,2,4][i],signature:i===0}));
+ equipped.syncWeapons();equipped.spawnClock=999;
+ const slots=equipped.weapons.map(w=>w.node);
+ const positions=()=>equipped.hero.children.filter(n=>slots.includes(n)).map(n=>slots.indexOf(n));
+ assert.deepEqual(positions(),[2,1,0,3,4,5]);
+ let reorders=0;
+ for(const n of equipped.hero.children){
+   const reorder=n.setSiblingIndex.bind(n);n.setSiblingIndex=index=>{reorders++;reorder(index)};
+ }
+ for(let i=0;i<120;i++)equipped.update(1/60);
+ assert.equal(reorders,0);assert.deepEqual(positions(),[2,1,0,3,4,5]);
+ equipped.run.weapons.splice(1,1);equipped.syncWeapons();equipped.update(1/60);
+ assert.ok(equipped.weapons[1].node.getSiblingIndex()<equipped.headPivot.getSiblingIndex());
+ equipped.onDestroy();
  const requests=[],baseLoad=cc.assetManager.loadBundle;
  cc.assetManager.loadBundle=(name,callback)=>baseLoad(name,(error,bundle)=>callback(error,{load:(url,type,done)=>{requests.push([name,url]);bundle.load(url,type,done);}}));
  const boot=await newGame();cc.assetManager.loadBundle=baseLoad;
@@ -74,7 +92,7 @@ const {newGame,load,Graphics,Node,cc,storage}=require('./test-campaign.cjs');
  mix.onDestroy();
  const {RuntimeHealth,HEALTH_KEY}=load('runtime-health');const events={},removed={};
  const host={};for(const name of ['MemoryWarning','Error','UnhandledRejection']){host['on'+name]=fn=>events[name]=fn;host['off'+name]=fn=>removed[name]=fn;}
- let warnings=0;const recorder=new RuntimeHealth(host,cc.sys.localStorage,'fixture',()=>({phase:'battle',enemies:80}),()=>warnings++);
+ let warnings=0;const recorder=new RuntimeHealth(host,cc.sys.localStorage,'fixture',()=>({phase:'battle',seconds:15,enemies:80}),()=>warnings++);
  for(let i=0;i<20;i++)events.MemoryWarning({level:i});events.Error(new Error('fixture error'));events.UnhandledRejection({reason:new Error('fixture rejection')});
  recorder.frame(15);const health=JSON.parse(storage.get(HEALTH_KEY));assert.equal(warnings,20);assert.equal(health.events.length,3);assert.equal(health.events[0].count,20);assert.match(health.events[1].detail,/fixture error/);assert.match(health.events[2].detail,/fixture rejection/);assert.equal(health.snapshot.enemies,80);assert.ok(storage.get(HEALTH_KEY).length<5000);
  const savedListeners={...events};const recorded=new RuntimeHealth(host,cc.sys.localStorage,'next',()=>({phase:'battle',stage:1,wave:5,atlasReady:true,gfxBuffers:123,gfxTextures:456}),()=>{});recorded.frame(4.9);assert.equal(JSON.parse(storage.get(HEALTH_KEY)).version,'fixture');recorded.frame(.1);const checkpoint=JSON.parse(storage.get(HEALTH_KEY));assert.equal(checkpoint.version,'next');assert.equal(checkpoint.snapshot.wave,5);assert.equal(checkpoint.snapshot.gfxBuffers,123);assert.equal(checkpoint.previous.version,'fixture');assert.equal(checkpoint.previous.previous,undefined);recorded.record('error',{stack:'x'.repeat(3000)});assert.equal(JSON.parse(storage.get(HEALTH_KEY)).events.at(-1).detail.length,1000);recorded.destroy();

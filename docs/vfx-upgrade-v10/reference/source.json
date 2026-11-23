@@ -1,0 +1,23 @@
+{
+  "source": "user-supplied local video",
+  "path": "/Users/bytedance/Downloads/6af1d4b8dc464ebc9bb6bb623c750ff2_raw.mp4",
+  "sha256": "249c4b5e13e19da447594d3403fd6632e627e0eefdc6742963fb3ef5605e0e19",
+  "durationSeconds": 2.8006122448979593,
+  "sourcePixels": [
+    1290,
+    2796
+  ],
+  "method": "AVFoundation, 15 ordered samples at 0.2s; selected image crops for private design analysis",
+  "selectedSeconds": [
+    0.6,
+    1.6,
+    2.4
+  ],
+  "cropIn645x1398Frame": [
+    65,
+    170,
+    485,
+    850
+  ],
+  "status": "reference only; not game assets or generated implementation preview"
+}

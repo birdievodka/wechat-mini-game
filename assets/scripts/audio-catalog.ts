@@ -2,19 +2,19 @@
 export const AUDIO_CUES = {
   "wood-attack": {
     "volume": 0.198,
-    "duration": 0.12,
+    "duration": 0.089583,
     "gap": 0.14,
     "priority": 0
   },
   "wood-hit": {
     "volume": 0.432,
-    "duration": 0.16,
+    "duration": 0.14,
     "gap": 0.11,
     "priority": 2
   },
   "blade-attack": {
     "volume": 0.198,
-    "duration": 0.12,
+    "duration": 0.102417,
     "gap": 0.14,
     "priority": 0
   },
@@ -26,97 +26,97 @@ export const AUDIO_CUES = {
   },
   "heavy-attack": {
     "volume": 0.198,
-    "duration": 0.12,
+    "duration": 0.121583,
     "gap": 0.14,
     "priority": 0
   },
   "heavy-hit": {
     "volume": 0.432,
-    "duration": 0.3,
+    "duration": 0.19,
     "gap": 0.11,
     "priority": 2
   },
   "bow-attack": {
     "volume": 0.198,
-    "duration": 0.15,
+    "duration": 0.067208,
     "gap": 0.14,
     "priority": 0
   },
   "bow-hit": {
     "volume": 0.432,
-    "duration": 0.11,
+    "duration": 0.105,
     "gap": 0.11,
     "priority": 2
   },
   "gun-attack": {
     "volume": 0.198,
-    "duration": 0.1,
+    "duration": 0.057583,
     "gap": 0.14,
     "priority": 0
   },
   "gun-hit": {
     "volume": 0.432,
-    "duration": 0.16,
+    "duration": 0.09,
     "gap": 0.11,
     "priority": 2
   },
   "blast-attack": {
     "volume": 0.198,
-    "duration": 0.18,
+    "duration": 0.147208,
     "gap": 0.14,
     "priority": 0
   },
   "blast-hit": {
     "volume": 0.432,
-    "duration": 0.3,
+    "duration": 0.23,
     "gap": 0.11,
     "priority": 2
   },
   "petal-attack": {
     "volume": 0.198,
-    "duration": 0.28,
+    "duration": 0.083208,
     "gap": 0.14,
     "priority": 0
   },
   "petal-hit": {
     "volume": 0.432,
-    "duration": 0.36,
+    "duration": 0.13,
     "gap": 0.11,
     "priority": 2
   },
   "spirit-attack": {
     "volume": 0.198,
-    "duration": 0.22,
+    "duration": 0.115208,
     "gap": 0.14,
     "priority": 0
   },
   "spirit-hit": {
     "volume": 0.432,
-    "duration": 0.25,
+    "duration": 0.18,
     "gap": 0.11,
     "priority": 2
   },
   "thunder-attack": {
     "volume": 0.198,
-    "duration": 0.23,
+    "duration": 0.140792,
     "gap": 0.14,
     "priority": 0
   },
   "thunder-hit": {
     "volume": 0.432,
-    "duration": 0.62,
+    "duration": 0.22,
     "gap": 0.11,
     "priority": 2
   },
   "ritual-attack": {
     "volume": 0.198,
-    "duration": 0.28,
+    "duration": 0.115208,
     "gap": 0.14,
     "priority": 0
   },
   "ritual-hit": {
     "volume": 0.432,
-    "duration": 0.45,
+    "duration": 0.18,
     "gap": 0.11,
     "priority": 2
   },
@@ -284,7 +284,7 @@ export const AUDIO_CUES = {
   },
   "skill-G19": {
     "volume": 0.558,
-    "duration": 0.62,
+    "duration": 0.22,
     "gap": 0.2,
     "priority": 3
   },
@@ -308,7 +308,7 @@ export const AUDIO_CUES = {
   },
   "boss-zhangjiao-3": {
     "volume": 0.5040000000000001,
-    "duration": 0.28,
+    "duration": 0.115208,
     "gap": 0.4,
     "priority": 3
   },
@@ -326,13 +326,13 @@ export const AUDIO_CUES = {
   },
   "boss-lvbu-3": {
     "volume": 0.5040000000000001,
-    "duration": 0.3,
+    "duration": 0.19,
     "gap": 0.4,
     "priority": 3
   },
   "boss-dongzhuo-1": {
     "volume": 0.5040000000000001,
-    "duration": 0.3,
+    "duration": 0.19,
     "gap": 0.4,
     "priority": 3
   },
@@ -344,7 +344,7 @@ export const AUDIO_CUES = {
   },
   "boss-dongzhuo-3": {
     "volume": 0.5040000000000001,
-    "duration": 0.3,
+    "duration": 0.23,
     "gap": 0.4,
     "priority": 3
   },
@@ -356,19 +356,19 @@ export const AUDIO_CUES = {
   },
   "boss-yuanshao-2": {
     "volume": 0.5040000000000001,
-    "duration": 0.15,
+    "duration": 0.067208,
     "gap": 0.4,
     "priority": 3
   },
   "boss-yuanshao-3": {
     "volume": 0.5040000000000001,
-    "duration": 0.11,
+    "duration": 0.105,
     "gap": 0.4,
     "priority": 3
   },
   "boss-caocao-1": {
     "volume": 0.5040000000000001,
-    "duration": 0.12,
+    "duration": 0.102417,
     "gap": 0.4,
     "priority": 3
   },
@@ -398,25 +398,25 @@ export const AUDIO_CUES = {
   },
   "boss-menghuo-3": {
     "volume": 0.5040000000000001,
-    "duration": 0.16,
+    "duration": 0.14,
     "gap": 0.4,
     "priority": 3
   },
   "boss-simayi-1": {
     "volume": 0.5040000000000001,
-    "duration": 0.16,
+    "duration": 0.14,
     "gap": 0.4,
     "priority": 3
   },
   "boss-simayi-2": {
     "volume": 0.5040000000000001,
-    "duration": 0.45,
+    "duration": 0.18,
     "gap": 0.4,
     "priority": 3
   },
   "boss-simayi-3": {
     "volume": 0.5040000000000001,
-    "duration": 0.3,
+    "duration": 0.23,
     "gap": 0.4,
     "priority": 3
   },

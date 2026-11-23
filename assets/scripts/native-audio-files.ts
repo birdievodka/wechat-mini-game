@@ -10,6 +10,7 @@ export class NativeAudioFiles {
   private downloads=new Set<{abort():void}>();
   constructor(private host:NativeFileHost|undefined){}
   get count():number{return this.paths.size;}
+  invalidate(bundleName:string,path:string):void {this.paths.delete(bundleName+'/'+path);}
   load(bundleName:string,path:string,done:(error:Error|null,url?:string)=>void,ms=18000,local?:AssetManager.Bundle):()=>void {
     const key=bundleName+'/'+path,cached=this.paths.get(key);if(cached&&!this.scope.disposed){done(null,cached);return ()=>{};}
     let task:{abort():void}|undefined,active=true;

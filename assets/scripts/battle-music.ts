@@ -7,7 +7,9 @@ export interface MusicSource {
 
 export const MUSIC_SECONDS = 60;
 export const MUSIC_VOLUME = .26;
-export const MUSIC_SCENES={menu:{seconds:40,volume:.65},battle:{seconds:60,volume:.60},boss:{seconds:30,volume:.60}};
+const menu = {id:'brass-oath', title:'桃园举旗', seconds:32, volume:.65};
+const battle = {id:'brass-rally', title:'全军出击', seconds:3840/152, volume:.60};
+export const MUSIC_SCENES = {menu, battle, boss:battle};
 
 export class BattleMusic {
   private source?: MusicSource;

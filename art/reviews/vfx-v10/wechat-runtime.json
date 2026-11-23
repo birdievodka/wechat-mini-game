@@ -1,0 +1,20 @@
+{
+  "version": "stage-v10.0-material-vfx",
+  "appid": "wxbddcb8f0462f58cc",
+  "ready": true,
+  "phase": "menu",
+  "materialFrames": 16,
+  "consoleErrorFilterMatches": 0,
+  "totalPackageMiB": 10.06,
+  "presentationMiB": 2.35,
+  "cdnVersion": "v95-5eb9f0730a24a17b",
+  "scope": "Built WeChat release, refreshed runtime queried through wechatide. Visual engineering review uses isolated real Cocos/WebGL; no iPhone FPS/long-session crash claim.",
+  "sourceFingerprints": {
+    "assets/scripts/GameBootstrap.ts": "65f89cd810b9c770d42086f8cda49533cc64542edd756c1ae9626d03a81b6f49",
+    "assets/scripts/weapon-vfx.ts": "4ca3e37d81392c107f0a5f7a7a57b0e21691eaaf4e3402a6480c2c85a91dc6e3",
+    "assets/scripts/skill-vfx-v10.ts": "e4c1a85bbe172c0d434dc71156777dfda2ae8943b100318dd69367ab5470997e",
+    "assets/scripts/enemy-vfx-v10.ts": "b31ccd9121dad70e04e16c00fd29494cea2f556046b368681cccfc2d091cf05a",
+    "assets/scripts/vfx-brush.ts": "fa5cebd57da58fecbf4cf86c9e8ac7d1db4caf719fe6abef07ef674e3a70d6a7",
+    "assets/scripts/vfx-materials.ts": "118e3ca4a8e143e07807a117f646f79b0676972eb5cbfdc9fbedaa54fd3493c5"
+  }
+}

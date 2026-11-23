@@ -1,4 +1,8 @@
 import {GENERIC_SKILLS,GenericSkill} from './chronicles-data';
+export const SKY_VOLLEY_SIZE=3;
+export const THUNDER_COUNT=12;
+export const METEOR_COUNT=27;
+export interface SkyPoint {x:number;y:number;}
 export const DEFAULT_SKILL='G01';
 export const COMMON_SKILLS=[...GENERIC_SKILLS].sort((a,b)=>a.powerRank-b.powerRank);
 export function commonSkillFor(id:string):GenericSkill{return GENERIC_SKILLS.find(s=>s.id===id)||GENERIC_SKILLS[0];}

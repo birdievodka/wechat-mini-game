@@ -34,7 +34,7 @@ const auto=new BattleMusic(),native=source();native.playing=false;let permit=fal
 auto.attach(native);auto.begin();auto.tryAutoplay();assert.equal(native.plays,1);assert.equal(native.playing,false);permit=true;auto.unlock();assert.equal(native.plays,2);assert.equal(native.playing,true);auto.unlock();assert.equal(native.plays,2,'gestures never restart an audible track');
 const denied=new BattleMusic(),throws=source();let blocked=true;throws.play=function(){this.plays++;if(blocked)throw Error('autoplay denied');};denied.attach(throws);denied.begin();assert.doesNotThrow(()=>denied.tryAutoplay());blocked=false;denied.unlock();assert.equal(throws.plays,2);
 const mutedAuto=new BattleMusic(),mutedSource=source();mutedAuto.setEnabled(false);mutedAuto.begin();mutedAuto.tryAutoplay();mutedAuto.attach(mutedSource);assert.equal(mutedSource.plays,0);mutedAuto.setEnabled(true);assert.equal(mutedSource.plays,1);
-for(const id of ['menu','battle','boss']){
+for(const id of ['brass-oath','brass-rally']){
  const file=fs.readFileSync('assets/music/'+id+'.m4a');assert.equal(file.toString('ascii',4,8),'ftyp');assert.ok(file.length>100000&&file.length<650000,'compact AAC scene loop');
 }
 assert.ok(!fs.existsSync('assets/music/taoyuan-kaida.wav'),'old multi-megabyte runtime WAV replaced');

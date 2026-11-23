@@ -19,6 +19,12 @@ function clock(){let serial=0,now=0;const jobs=new Map();return {jobs,setTimeout
   files.load('sfx','cancelled',e=>{assert.ok(e);completions++});const pending=downloads.at(-1);files.destroy();assert.equal(pending.aborts,1);pending.options.success({statusCode:200,tempFilePath:'late'});assert.equal(files.count,0);assert.equal(completions,2);
   // 100 raw-download failures never allocate a native audio player; only playback does.
   const fail=new NativeAudioFiles({downloadFile(options){options.fail({errMsg:'network'});return {abort(){}}}});for(let i=0;i<100;i++)fail.load('sfx','failed',e=>assert.ok(e));assert.equal(fail.count,0);assert.equal(clipLoads,0);fail.destroy();
+  const packaged=new NativeAudioFiles({downloadFile(){throw Error('packaged music must not call downloadFile')}});
+  cc.assetManager.utils={getUrlWithUuid:(uuid,options)=>'subpackages/'+uuid+options.nativeExt};
+  for(const id of ['brass-oath','brass-rally']){
+    let url;packaged.load('music',id,(e,path)=>{assert.equal(e,null);url=path});assert.equal(url,'subpackages/music/'+id+'.m4a');
+  }
+  packaged.destroy();
   let creates=0,writes=0,errors=0;const callbacks=new Map(),c={src:'',autoplay:false,loop:false,plays:0,destroys:0,seek(t){this.seekTime=t},play(){this.plays++;callbacks.get('Play')?.()},pause(){callbacks.get('Pause')?.()},stop(){callbacks.get('Stop')?.()},destroy(){this.destroys++}};
   Object.defineProperty(c,'volume',{get(){return this.gain},set(v){writes++;this.gain=v}});
   for(const n of ['Play','Pause','Stop','Canplay','Error']){c['on'+n]=fn=>callbacks.set(n,fn);c['off'+n]=fn=>{assert.equal(callbacks.get(n),fn);callbacks.delete(n)}}

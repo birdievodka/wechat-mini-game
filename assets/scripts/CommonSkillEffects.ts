@@ -1,10 +1,11 @@
 import {Graphics} from 'cc';
+import {METEOR_COUNT,SKY_VOLLEY_SIZE,SkyPoint} from './common-skills';
 import {CombatParticles} from './combat-particles';
 import {drawGoldenSweep,drawSweepContact} from './sweep-effects';
-import * as art from './skill-vfx-art';
+import * as art from './skill-vfx-v10';
 interface Visual {
  id:string;kind:string;x:number;y:number;angle:number;radius:number;age:number;life:number;tx:number;ty:number;
- count:number;active:boolean;priority:number;token:number;
+ sky?:readonly SkyPoint[];count:number;active:boolean;priority:number;token:number;
 }
 export const SKILL_VISUAL_LIMIT=32;
 const TAU=Math.PI*2;
@@ -16,13 +17,27 @@ export class CommonSkillEffects {
  private visuals:Visual[]=[];
  private targets:readonly {e:{x:number;y:number;hp:number;kind?:string};life:number}[]=[];
  private clock=0;
+ trainingRecasts=false;
+ get activeCount():number{return this.visuals.length;}
  markTargets(targets:readonly {e:{x:number;y:number;hp:number};life:number}[]):void{this.targets=targets;}
  constructor(private particles:CombatParticles){}
- play(id:string,kind:string,x:number,y:number,angle:number,radius:number,life=.6,tx=x,ty=y):Visual|undefined {
+ playSky(id:string,kind:string,points:readonly SkyPoint[],beat:number,radius:number,life:number):void{
+  const {x,y}=points[0];
+  this.play(id,kind,x,y,beat,radius,life,x,y,points);
+ }
+ play(id:string,kind:string,x:number,y:number,angle:number,radius:number,life=.6,tx=x,ty=y,sky?:readonly SkyPoint[]):Visual|undefined {
+  // Fast repeated taps can issue several identical full-area meshes for the same moment.
+  // Reuse only the image. Each cast's targeting, tasks, hit feedback and sound stay independent.
+  if(this.trainingRecasts&&(kind==='sweep'||kind==='stun'||kind==='lightning'||kind==='lightning-pre'||kind==='meteor'||kind==='meteor-fall')){
+   for(const v of this.visuals){
+    if(v.kind===kind&&v.age<.10&&v.angle===angle&&v.radius===radius&&Math.abs(v.x-x)<1&&Math.abs(v.y-y)<1&&
+       (!sky||v.sky&&sky.every((p,i)=>Math.abs(p.x-v.sky![i].x)<1&&Math.abs(p.y-v.sky![i].y)<1)))return v;
+   }
+  }
   const priority=PERSISTENT.has(kind)?2:kind.endsWith('-hit')||kind==='contact'||kind==='haste-strike'?0:1;
   let v=this.pool.find(p=>!p.active);
   if(!v){v=this.visuals.find(p=>p.priority<=priority);if(!v)return;this.remove(v);}
-  Object.assign(v,{id,kind,x,y,angle,radius,life,age:0,tx,ty,count:0,active:true,priority,token:0});this.visuals.push(v);
+  Object.assign(v,{id,kind,x,y,angle,radius,life,sky,age:0,tx,ty,count:0,active:true,priority,token:0});this.visuals.push(v);
   if(kind==='sweep'||kind==='sweep-hit'){
    // G03: exact accepted A-version emission sequence and original draw functions.
    const contact=kind==='sweep-hit',count=contact?6:14;
@@ -32,7 +47,7 @@ export class CommonSkillEffects {
    }return v;
   }
   if(kind==='contact'||kind==='guard-hit'||kind==='lock-hit')this.emit(x,y,angle,kind==='contact'?4:6,id==='G19'||id==='G20'?10:id==='G12'||id==='G25'?9:1,'spark');
-  else if(kind==='meteor')this.emit(x,y,angle,14,8,'dust');
+  else if(kind==='meteor')this.emit(x,y,angle,5,1,'chip');
   else if(kind==='lightning')this.emit(x,y,angle,7,10,'spark');
   return v;
  }
@@ -69,6 +84,16 @@ export class CommonSkillEffects {
    if(v.age>=v.life)continue;
    const f=PERSISTENT.has(v.kind)?Math.min(1,(v.life-v.age)/.22):Math.max(0,1-v.age/v.life);
    const x=FOLLOW.has(v.kind)?px:v.x,y=FOLLOW.has(v.kind)?py:v.y,r=v.radius;
+   if(v.sky){
+    const meteor=v.kind==='meteor'||v.kind==='meteor-fall',pre=v.kind==='meteor-fall'||v.kind==='lightning-pre';
+    for(let part=0;part<v.sky.length;part++){
+     const point=v.sky[part],index=v.angle*SKY_VOLLEY_SIZE+part;
+     if(Math.abs(point.x-cx)>hw+r+400||Math.abs(point.y-cy)>hh+r+400)continue;
+     if(meteor)art.drawMeteor(ground,air,point.x,point.y,r,v.age,v.life,pre,index,part!==0&&index!==METEOR_COUNT-1);
+     else art.drawLightning(ground,air,point.x,point.y,r,v.age,v.life,pre,index,part!==0);
+    }
+    continue;
+   }
    if(Math.abs(x-cx)>hw+r+400||Math.abs(y-cy)>hh+r+400)continue;
    if(v.kind==='sweep')drawGoldenSweep(ground,air,x,y,v.angle,r,v.age,v.life);
    else if(v.kind==='sweep-hit')drawSweepContact(ground,air,x,y,v.angle,r,v.age,v.life);
@@ -82,8 +107,8 @@ export class CommonSkillEffects {
    else if(v.kind==='fire-line')art.drawFireLine(ground,air,x,y,r,v.age,v.life);
    else if(v.kind==='water')art.drawWave(ground,air,x,y,r,v.age,v.life);
    else if(v.kind==='gates')art.drawGates(ground,air,x,y,r,v.age,f);
-   else if(v.kind==='lightning'||v.kind==='lightning-pre')art.drawLightning(ground,air,x,y,r,v.age,v.life,v.kind==='lightning-pre');
-   else if(v.kind==='meteor'||v.kind==='meteor-fall')art.drawMeteor(ground,air,x,y,r,v.age,v.life,v.kind==='meteor-fall');
+   else if(v.kind==='lightning'||v.kind==='lightning-pre')art.drawLightning(ground,air,x,y,r,v.age,v.life,v.kind==='lightning-pre',v.angle);
+   else if(v.kind==='meteor'||v.kind==='meteor-fall')art.drawMeteor(ground,air,x,y,r,v.age,v.life,v.kind==='meteor-fall',v.angle);
    else if(v.kind==='rain')art.drawRain(ground,air,x,y,r,v.age,v.life);
    else if(v.kind==='sword-guard')art.drawGuard(ground,air,x,y,r,v.angle,v.age,f,v.count);
    else if(v.kind==='stun')art.drawStun(ground,air,x,y,r,v.age,v.life);

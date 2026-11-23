@@ -1,5 +1,11 @@
 # 工程、构建与验证
 
+v9.21设置页新增“运行诊断”→“复制运行诊断”，可导出本机上一战斗会话及当前状态，供真机退出排查；微信模拟器存储不是手机存储。日志保留18条趋势/8类事件/单层previous，无自动上传；未收到对应时刻Jetsam/WeChat终止日志前，不把工程指标当确诊。实现见runtime-health.ts与render-diagnostics.ts。
+
+v9.21.1诊断页直接显示分页摘要，可截图；复制完整报告失败须显示原始原因，不能再合并为boolean“重试”。当前采集异常通过safeSnapshot保留previous仍可导出，renderDiagnostics可选字段/逐模型隔离。runtime-report.ts负责剪贴板写入与摘要，短独立故障验证为node scripts/test-runtime-report.cjs，不接游戏长测或真实手机剪贴板。
+
+v9.22 BattleNumber接enemy.text结构端口，string标dirty，由GameBootstrap.lateUpdate每帧刷新，数字同BattleSpriteAtlas空余第88格。短回归node scripts/test-battle-text.cjs；scripts/fixtures/wechat-battle-text-review.js仅在v9.22空闲菜单展示原Label/共享数字对照，不入敌池/不模拟/不改HP或profile，25秒自动恢复，手动还原后核对profile/Run/敌池守卫。核对最终buildVersion与13字就绪；原生音乐菜单起播只是模拟器观察，不称手机根因已确认。
+
 ## 文件职责
 
 | 文件 | 当前职责 |
@@ -248,3 +254,22 @@ capture-training-forms-review仅连独立8793/9393，真实Cocos节点触摸事�
 
 
 2026-11-18分配热点收尾：无尽筛选改一次计数＋复用40项候选，演武形态页改活动内增量更新；没有数值/素材/原生音频或池容量变化。按用户要求本轮不跑npm test、专项/长测或重采集；只做代码审查、typecheck/check/skill同步、微信构建及CDN清单一致性检查，不宣称已做运行回归。
+
+
+v9.19运行版本stage-v9.19-music-recovery：NativeMusic补首次canplay重试和错误回传，NativeAudioFiles.invalidate只删当前音乐位置，GameBootstrap.recoverNativeMusic保持时钟/单源、5秒退避重载。源图/音源与CDN版本不变。用户要求不测试，按静态检查和构建交付，不能宣称手机问题已复现或完全根治。
+
+
+v9.20(stage-v9.20-endless-memory)：BattleSpriteAtlas增加商店共享UI帧，CampaignView卡/条/面板/遮罩走Sprite，无尽resumeEndless先hide再prepareBosses。RuntimeHealth快照覆盖前台商店，记录mode/tier/Boss图集。capture-shop-memory-review只连隔离8793/9393、两张静态四卡、60秒恢复守卫，分别before/after，恢复独立档，不能在用户运行时注入或宣称iPhone长测；详见docs/stability-v920.md。本轮用户不需长测，保留短帧UI核查与编译/类型/skill检查，不跑整套测试。
+
+v9.20最终收尾还限制同曲音乐失败恢复为两次（5/30秒）且只多下载一次路径，超额暂停到真实切曲/重开/手动开启，避免同场景无尽补给重置额度；编译与静态检查通过，不宣称已验证iOS解码器泄漏。
+
+
+## v10全量特效
+
+v10运行stage-v10.0-material-vfx：新增vfx-brush/vfx-materials/weapon-vfx/skill-vfx-v10/enemy-vfx-v10，入口仍GameBootstrap。test-vfx-upgrade在npm test内；Cocos与微信构建通过，16材质关键就绪。scripts/capture-vfx-upgrade.mjs/profile-vfx-upgrade.mjs只连独立8766/9336工程浏览器，menu守卫/watchdog/恢复，不写进度。132帧与加速资源记录见art/reviews/vfx-v10，不是手机长局验收。
+
+v10.1诊断截图新增峰值/绘图大户/末段18趋势；存储失败可见、同会话最近战斗在菜单仍保留，未保存时间不显示1970。用户剪贴板已明确返回微信后台隐私用途未声明，必须保留原错误，不在代码中假装授权成功。短故障验证test-runtime-report覆盖返回菜单后的战斗留存及存储失败。480秒加速受控负载仅资源计数，不等于无尽轮转/原iPhone复现，见docs/stability-v101.md。
+
+### v10.13.4 微信发布入口
+
+微信只有 getAccountInfoSync().miniProgram.envVersion 为 develop 时开放演武场、演武配置、运行诊断/复制、铜管音乐试听、清空进度。trial、release、未知值、缺 API 或异常都只显示正式设置（背景音乐、音效和游戏进度）。普通关卡与按英雄解锁的无尽模式为正式玩法。音乐试听门禁只影响手动试听；正常游戏继续播放铜管主题。用户请求的是界面和操作隔离，共享包仍含开发版代码，本机运行采样继续。内部高血量模式在 restart 入口校验，演武同时校验启动和配置，进入演武后才创建战斗配置按钮。布景参数只供本地 DEBUG 浏览器。scripts/test-endless-settings.cjs 检查各环境的菜单节点、实际按钮和操作入口。

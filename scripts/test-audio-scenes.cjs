@@ -15,11 +15,11 @@ const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-camp
  g.playSound('blade-hit',1,2,undefined,'hit');
  g.playSound('gun-hit',1,2,undefined,'hit');
  assert.equal(g.soundSources[0].volume,1);
- assert.equal(g.soundSources[1].volume,.45);
+ assert.equal(g.soundSources[1].volume,.32);
  g.playSound('danger');
  assert.equal(g.soundSources[0].volume,.4);
  g.playSound('wood-attack',1,1,undefined,'attack');
- assert.equal(g.soundSources[3].volume,.71*.4);
+ assert.equal(g.soundSources[3].volume,.68*.4);
  g.soundGate.update(.5);
  g.playSound('blade-hit',1,2,undefined,'hit');
  assert.equal(g.soundSources[0].volume,1);
@@ -30,17 +30,21 @@ const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-camp
  const {forgetGameBundle}=load('game-resources');forgetGameBundle('music');
  cc.assetManager.releaseAsset=x=>released.push(x);cc.assetManager.loadBundle=(name,cb)=>name==='music'?cb(null,{load:(id,type,done)=>pending.push({id,done})}):old(name,cb);
  try{
-  g.selectMusic('battle',true);g.selectMusic('boss');assert.equal(pending.length,2,'switch cancels the hung old generation immediately');
-  const stale={name:'battle-stale'};pending.shift().done(null,stale);assert.ok(released.includes(stale));assert.equal(pending[0].id,'boss');
+  g.selectMusic('menu',true);g.selectMusic('battle');g.selectMusic('boss');assert.equal(pending.length,2,'switch cancels the hung old generation immediately');
+  const stale={name:'battle-stale'};pending.shift().done(null,stale);assert.ok(released.includes(stale));assert.equal(pending[0].id,'brass-rally');
   g.onBackground();const boss={name:'boss-current'};pending.shift().done(null,boss);assert.equal(g.musicSource.clip,boss);assert.equal(g.musicSource.playing,false,'late download cannot play in background');
   g.onForeground();assert.ok(g.musicSource.playing);g.showMainMenu();assert.ok(released.includes(boss),'scene switch releases prior decoded music');
  }finally{g.onDestroy();cc.assetManager.loadBundle=old;cc.assetManager.releaseAsset=release;forgetGameBundle('music');}
  // Real skill tasks emit each release, rather than a prerecorded future montage.
- for(const [id,count] of [['G08',8],['G19',4],['G20',5],['G22',4]]){
+ for(const [id,count] of [['G08',8],['G19',1],['G20',9],['G22',4]]){
   const s=await newGame();s.spawnClock=999;s.commonSkill.reset();const e=s.spawnNext('soldier');Object.assign(e,{x:180,y:0,born:0,hp:1e7,maxHp:1e7,speed:0});
-  const events=[],old=s.skillAudio.bind(s);s.skillAudio=(skill,event)=>{events.push([skill,event]);old(skill,event)};
-  assert.equal(s.commonSkill.cast(id,100),true);for(let i=0;i<300;i++){s.age+=1/120;s.soundGate.update(1/120);s.updateSkill(1/120)}
+  const events=[],old=s.skillAudio.bind(s);s.skillAudio=(skill,event)=>{events.push([skill,event,s.age]);old(skill,event)};
+  assert.equal(s.commonSkill.cast(id,100),true);for(let i=0;i<400;i++){s.age+=1/120;s.soundGate.update(1/120);s.updateSkill(1/120)}
   assert.equal(events.filter(e=>e[0]===id&&e[1]==='release').length,count,id+' actual timed releases');
+  if(id==='G20'){
+   const strikes=events.filter(e=>e[1]==='release');
+   for(let i=1;i<strikes.length;i++)assert.ok(Math.abs(strikes[i][2]-strikes[i-1][2]-.14)<.01,'one landing sound for each of nine triple-meteor volleys');
+  }
   s.commonSkill.reset();const n=events.length;for(let i=0;i<120;i++)s.updateSkill(1/120);assert.equal(events.length,n,'cancelled skill produces no future audio');
  }
  const {SoundGate}=load('weapon-sound'),gate=new SoundGate(2);gate.acquire('gun-attack');gate.acquire('blade-hit');assert.notEqual(gate.acquire('player-hurt'),undefined);assert.equal(gate.acquire('wood-attack'),undefined,'low-priority movement cannot displace important feedback');

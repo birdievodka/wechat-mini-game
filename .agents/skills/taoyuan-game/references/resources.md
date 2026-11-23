@@ -100,3 +100,12 @@ v9.15原生音频按需直接解析Bundle公开UUID索引/assetManager.utils版�
 ## 已实施：灵宠与个人武器奖励 v9.17
 
 新增pets第16远程静态Bundle，512²动作图292298字节/1MiB解码，取得宠物才预取/正式准备；首屏无请求。art/runtime-pets保存image_gen源/提示/manifest，scripts/pack-pet-art.cjs确定性导出15帧。不把概念板打包；改资源后必须build:wechat→cdn:publish逐文件校验→cdn:check才可给新二维码。 细则见[pets](pets.md)与[实现说明](../../../../docs/pets-and-unlocks-v917.md)。
+
+
+## v10全量特效
+
+v10公共vfx-materials.png新增到现有本地presentation加载组：1024²、1,337,597 bytes、解码4MiB、16px透明边；源图/内置image_gen提示/哈希留art/runtime-vfx-v10，pack-vfx-art只切格/等比缩放、不量化alpha。所有概念板仍非运行资源。当前总包10.06MiB/presentation2.35MiB；原远程release/published相同，无新远程资源需上传。
+
+v10.12.1 音乐通过 battle-subpackage 配置导出为单独的本地 music 分包。微信不再为音乐取外部 CDN 配置或逐曲 downloadFile；试听切换复用分包与单播放器。其余十五个远程包仍按不可变发布清单校验，旧客户端的已发布音乐保留。
+
+铜管版音乐分包仅含《桃园举旗》《全军出击》。构建时如果剩余远程包的完整文件列表、大小和 SHA256 均与已校验的不可变发布相同，可沿用其地址。旧版目录中的音乐不再由当前客户端请求。

@@ -1,0 +1,21 @@
+{
+  "scope": "same four-card static Cocos WebGL engineering shop scene; no enemies, no iPhone RSS/FPS or crash reproduction",
+  "version": "stage-v9.20-endless-memory",
+  "base": {
+    "buffers": 30686256,
+    "textures": 75085268,
+    "uiGraphics": 0,
+    "atlasCells": 87
+  },
+  "shop": {
+    "buffers": 30704916,
+    "textures": 76137076,
+    "uiGraphics": 0,
+    "atlasCells": 87
+  },
+  "restored": {
+    "phase": "menu",
+    "storage": true
+  },
+  "errors": []
+}

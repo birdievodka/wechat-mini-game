@@ -1,12 +1,14 @@
 import { Color, Graphics } from 'cc';
+import * as brush from './vfx-brush';
+import {material} from './vfx-materials';
 
 export const LIGHTNING_AFTERGLOW = .55;
 interface LightningVisual { x: number; y: number; radius: number; age: number; delay: number; fired: boolean; }
 type Point = [number, number];
 const TAU = Math.PI * 2;
-const gold = (alpha: number): Color => new Color(255, 194, 65, Math.round(alpha));
-const cream = (alpha: number): Color => new Color(255, 248, 207, Math.round(alpha));
-const red = (alpha: number): Color => new Color(174, 63, 32, Math.round(alpha));
+const PALETTE=['#ffc241','#fff8cf','#ae3f20'].map(hex=>Array.from({length:33},(_,i)=>{const c=new Color(hex);c.a=Math.round(i*255/32);return c;}));
+const cached=(i:number,a:number)=>PALETTE[i][Math.max(0,Math.min(32,Math.round(a*32/255)))];
+const gold=(a:number)=>cached(0,a),cream=(a:number)=>cached(1,a),red=(a:number)=>cached(2,a);
 
 function line(g: Graphics, points: Point[], color: Color, width: number): void {
   g.strokeColor = color; g.lineWidth = width;
@@ -51,8 +53,9 @@ export function drawLightningSpell(ground: Graphics, air: Graphics, z: Lightning
   const { x, y, radius: r } = z;
   if (!z.fired) {
     const p = Math.min(1, z.age / z.delay), rotation = z.age * .7;
+    material(air,'lightning',x,y+35,38,80,0,p*.35,1);
     const pulse = .5 + .5 * Math.sin(p * Math.PI * 6);
-    ground.fillColor = new Color(189, 66, 24, Math.round(22 + p * 30)); ground.circle(x, y, r); ground.fill();
+    ground.fillColor = red(22+p*30); ground.circle(x, y, r); ground.fill();
     // The outside edge never expands or rotates: this is the actual damage radius.
     ring(ground, x, y, r, red(230), 3.5);
     ring(ground, x, y, r - 5, gold(130 + p * 100), 2);
@@ -98,44 +101,7 @@ export function drawLightningSpell(ground: Graphics, air: Graphics, z: Lightning
     return;
   }
 
-  const t = Math.max(0, z.age - z.delay), progress = Math.min(1, t / LIGHTNING_AFTERGLOW), fade = 1 - progress;
-  const flash = Math.max(0, 1 - t / .2), boltAlpha = Math.max(0, 1 - t / .36);
-  ground.fillColor = gold(flash * 105); ground.circle(x, y, r); ground.fill();
-  ring(ground, x, y, r, red(fade * 170), 2);
-  ring(ground, x, y, r * (.35 + .65 * Math.min(1, t / .24)), gold(fade * 230), 3 + flash * 3);
-  polygon(ground, x, y, r * .73, z.delay * .7, gold(fade * 180), 2);
-  // Short branching ground arcs break up the impact, all inside the original circle.
-  for (let i = 0; i < 7; i++) {
-    const a = i * TAU / 7 + .2, c = Math.cos(a), s = Math.sin(a), d = r * (.6 + (i % 3) * .1);
-    const points: Point[] = [[x + c * 10, y + s * 10], [x + c * d * .4 - s * 9, y + s * d * .4 + c * 9], [x + c * d * .65 + s * 5, y + s * d * .65 - c * 5], [x + c * d, y + s * d]];
-    line(ground, points, gold(fade * 200), 3); line(ground, points, cream(fade * 220), 1);
-  }
-  if (boltAlpha > 0) {
-    const height = 245, sway = Math.sin((z.x + z.y) * .13) * 9;
-    const bolt: Point[] = [[x - 19 + sway, y + height], [x + 17, y + height * .76], [x - 10, y + height * .77], [x + 13, y + height * .53], [x - 16, y + height * .4], [x + 6, y + height * .41], [x, y + 4]];
-    line(air, bolt, gold(boltAlpha * 36), 24);
-    line(air, bolt, new Color(255, 153, 36, Math.round(boltAlpha * 130)), 12);
-    line(air, bolt, gold(boltAlpha * 250), 7);
-    line(air, bolt, cream(boltAlpha * 255), 3);
-    for (const side of [-1, 1]) {
-      const branch: Point[] = [[x + side * 58, y + height * .74], [x + side * 30, y + height * .58], [x + side * 43, y + height * .59], [x + side * 8, y + height * .32], [x, y + 4]];
-      line(air, branch, gold(boltAlpha * 80), 9); line(air, branch, cream(boltAlpha * 220), 2);
-    }
-    // A small white-hot star anchors the bolt at the point of impact.
-    const size = 12 + flash * 16;
-    air.fillColor = cream(boltAlpha * 230);
-    air.moveTo(x, y + size); air.lineTo(x + 5, y + 5); air.lineTo(x + size, y);
-    air.lineTo(x + 5, y - 5); air.lineTo(x, y - size); air.lineTo(x - 5, y - 5);
-    air.lineTo(x - size, y); air.lineTo(x - 5, y + 5); air.close(); air.fill();
-  }
-  // Fixed, small particle count; deterministic motion also freezes correctly on pause.
-  for (let i = 0; i < 10; i++) {
-    const a = i * TAU / 10 + .14, d = 14 + progress * r * (.45 + (i % 3) * .12);
-    const px = x + Math.cos(a) * d, py = y + Math.sin(a) * d + Math.sin(progress * Math.PI) * (17 + i % 4 * 6);
-    if (i % 3 === 0) talisman(air, px, py, a + progress * 3, .6 * fade + .2, fade * 220);
-    else {
-      line(air, [[px, py], [px - Math.cos(a) * (5 + flash * 5), py - Math.sin(a) * (5 + flash * 5)]], gold(fade * 240), 2.5);
-      air.fillColor = cream(fade * 240); air.circle(px, py, 1.8 * fade); air.fill();
-    }
-  }
+  const t=Math.max(0,z.age-z.delay),progress=Math.min(1,t/LIGHTNING_AFTERGLOW),fade=1-progress;
+  brush.bolt(ground,air,x,y,r,progress,'gold');
+  for(let i=0;i<4;i++){const a=i*TAU/4+.14,d=14+progress*r*.7;talisman(air,x+Math.cos(a)*d,y+Math.sin(a)*d+Math.sin(progress*Math.PI)*18,a+progress*3,.6*fade+.2,fade*220);}
 }

@@ -1,0 +1,25 @@
+{
+  "selectedImages": 133,
+  "uniqueImages": 133,
+  "pixels": [
+    1536,
+    1024
+  ],
+  "totalBytes": 322620171,
+  "retiredDrafts": 43,
+  "latestRevisions": [
+    "W12-twin-swords",
+    "B03-2",
+    "B03-3",
+    "W09-sword",
+    "B01-3",
+    "B04-1",
+    "B07-1",
+    "B04-2",
+    "M03",
+    "M02",
+    "X04"
+  ],
+  "runtimeAssetsChanged": 0,
+  "missingSources": 0
+}

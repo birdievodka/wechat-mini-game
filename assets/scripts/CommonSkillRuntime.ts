@@ -1,7 +1,7 @@
 import type {Enemy} from './GameBootstrap';
 import {bossBeastCharging} from './boss-battle';
 import {sweepEllipseTime} from './combat-math';
-import {commonSkillFor} from './common-skills';
+import {commonSkillFor,METEOR_COUNT,THUNDER_COUNT,SKY_VOLLEY_SIZE,SkyPoint} from './common-skills';
 import {CommonSkillEffects} from './CommonSkillEffects';
 import {WeaponId} from './weapons';
 interface Host {
@@ -11,9 +11,10 @@ interface Host {
  canHeal():boolean;heal():void;sound(style:WeaponId):void;impact?():void;audio?(id:string,event:'cast'|'release'|'pre'|'hit'|'block'):void;
 }
 interface Group {hits:Map<Enemy,number>;maxTargets:number;maxHits:number;}
-interface Task {id:string;kind:string;x:number;y:number;angle:number;delay:number;life:number;age:number;power:number;group:Group;index:number;token:number;}
+interface Task {id:string;kind:string;x:number;y:number;angle:number;delay:number;life:number;age:number;power:number;group:Group;index:number;token:number;sky?:SkyPoint[];}
 export const SKILL_BODY_SIZE=80;
 export const SKILL_TASK_LIMIT=36;
+const THUNDER_WINDUP=.20, STAR_FALL=.35, STAR_INTERVAL=.14;
 /** Simulation owns every impact. Visual eviction and offscreen culling never alter combat. */
 export class CommonSkillRuntime {
  private tasks:Task[]=[];private serial=0;
@@ -50,9 +51,9 @@ export class CommonSkillRuntime {
   }
   return true;
  }
- private queue(id:string,kind:string,x:number,y:number,angle:number,delay:number,life:number,power:number,group:Group,index=0):void{
+ private queue(id:string,kind:string,x:number,y:number,angle:number,delay:number,life:number,power:number,group:Group,index=0,sky?:SkyPoint[]):void{
   if(this.tasks.length>=SKILL_TASK_LIMIT)return;
-  this.tasks.push({id,kind,x,y,angle,delay,life,age:0,power,group,index,token:++this.serial});
+  this.tasks.push({id,kind,x,y,angle,delay,life,age:0,power,group,index,sky,token:++this.serial});
  }
  private nearest(group?:Group,range=Infinity,x=this.h.x,y=this.h.y):Enemy|undefined{
   let nearest:Enemy|undefined,distance=range*range;
@@ -64,6 +65,8 @@ export class CommonSkillRuntime {
  cast(id:string,power:number):boolean {
   const d=commonSkillFor(id),h=this.h,kind=d.kind,x=h.x,y=h.y,angle=h.angle;
   if(d.id!==id||!d.unlocked||kind==='precision'&&!this.nearest(undefined,d.radius))return false;
+  const skyCount=kind==='lightning'?THUNDER_COUNT:kind==='meteor'?METEOR_COUNT:0;
+  if(skyCount && this.tasks.length+skyCount/SKY_VOLLEY_SIZE>SKILL_TASK_LIMIT)return false;
   const group=this.group(id);
   // Persistent fields replace their prior cast, including in the no-cooldown training mode.
   // This bounds fire/rain geometry independently of how fast the player taps the button.
@@ -97,12 +100,18 @@ export class CommonSkillRuntime {
     const mark=this.marks.find(m=>m.e===e);if(mark){mark.until=e.stunUntil;mark.life=d.seconds;}else if(this.marks.length<80)this.marks.push({e,until:e.stunUntil,life:d.seconds});
    }
    this.effects.markTargets(this.marks);this.effects.play(id,kind,x,y,0,d.radius,.55);
-  }else if(kind==='lightning'||kind==='meteor'){
-   const count=kind==='lightning'?4:5,targets=this.h.enemies().filter(e=>this.eligible(e)).sort((a,b)=>(a.x-x)**2+(a.y-y)**2-((b.x-x)**2+(b.y-y)**2));
-   for(let i=0;i<count;i++){
-    const e=targets[i%Math.max(1,targets.length)],a=angle+(i-(count-1)/2)*.45,r=170+i*18,tx=e?e.x:x+Math.cos(a)*r,ty=e?e.y:y+Math.sin(a)*r;
-    const delay=i*(kind==='meteor'?.28:.3),pre=kind==='meteor'?.35:.12;
-    this.queue(id,'pre',tx,ty,0,delay,.01,power,group,i);this.queue(id,'area',tx,ty,0,delay+pre,.01,power,group,i);
+  }else if(skyCount){
+   const stars=kind==='meteor',windup=stars?STAR_FALL:THUNDER_WINDUP;
+   const targets=h.enemies().filter(e=>this.eligible(e)).sort((a,b)=>(a.x-x)**2+(a.y-y)**2-((b.x-x)**2+(b.y-y)**2));
+   const volleys=skyCount/SKY_VOLLEY_SIZE;
+   for(let beat=0;beat<volleys;beat++){
+    const points:SkyPoint[]=[];
+    for(let part=0;part<SKY_VOLLEY_SIZE;part++){
+     const index=beat*SKY_VOLLEY_SIZE+part,target=targets.length?targets[index%targets.length]:undefined;
+     const direction=angle+(beat-(volleys-1)/2)*.45,dist=170+beat*18;
+     points.push({x:target?target.x:x+Math.cos(direction)*dist,y:target?target.y:y+Math.sin(direction)*dist});
+    }
+    this.queue(id,'sky-warning',x,y,beat,stars?beat*STAR_INTERVAL:0,windup,power,group,beat,points);
    }
   }
   if(h.audio)h.audio(id,'cast');else h.sound(kind==='fire-line'?'firecracker':kind==='lightning'||kind==='meteor'?'thunder':kind==='stun'?'pole':'silver-spear');return true;
@@ -118,10 +127,10 @@ export class CommonSkillRuntime {
   return t!==null&&this.block(x+(tx-x)*t,y+(ty-y)*t);
  }
  enemyUpdated(_e:Enemy,_previousAttack:number):void{}
- private area(task:Task,range:number):void{
+ private area(task:Task,range:number,x=task.x,y=task.y):void{
   const d=commonSkillFor(task.id);
   for(const e of this.h.enemies()){
-   if(!this.eligible(e))continue;const dx=e.x-task.x,dy=e.y-task.y;
+   if(!this.eligible(e))continue;const dx=e.x-x,dy=e.y-y;
    if(dx*dx+dy*dy>range*range)continue;
    if(this.hit(e,task.id,task.power,task.group,Math.atan2(dy,dx),task.kind==='sweep'?300:d.kind==='water'?150:100)&&['water','gates'].indexOf(d.kind)>=0){
     e.slowUntil=this.h.age+2;e.slowFactor=e.kind==='chief'?.1:d.kind==='water'?.3:.25;
@@ -176,7 +185,29 @@ export class CommonSkillRuntime {
     this.effects.aimBow(task.angle);task.kind='flight';task.life=d.radius;this.flight(task,activeDt);continue;
    }
    if(task.kind==='flight'){this.flight(task,activeDt);continue;}
-   if(task.kind==='pre'){this.h.audio?.(task.id,'pre');this.effects.play(task.id,d.kind==='meteor'?'meteor-fall':'lightning-pre',task.x,task.y,0,d.radius,d.kind==='meteor'?.35:.12);task.life=-1;continue;}
+   if(task.kind==='sky-warning'||task.kind==='sky-impact'){
+    const star=d.kind==='meteor',audible=star||task.index===0;
+    if(task.kind==='sky-warning'){
+     // A later star can pick up a moving formation, then commits to its visible landing mark.
+     const points=task.sky!;
+     for(let part=0;part<points.length;part++){
+      const p=points[part],index=task.index*SKY_VOLLEY_SIZE+part;
+      const target=star&&task.index>0?this.nearest(task.group,d.radius*2,p.x,p.y):undefined;
+      // Spread even a single-target volley into distinct, locked impact marks within hit range.
+      const angle=index*2.399963,spread=d.radius*(.37+.23*(index%2));
+      p.x=(target?target.x:p.x)+Math.cos(angle)*spread;
+      p.y=(target?target.y:p.y)+Math.sin(angle)*spread;
+     }
+     if(audible)this.h.audio?.(task.id,'pre');
+     this.effects.playSky(task.id,star?'meteor-fall':'lightning-pre',points,task.index,d.radius,task.life);
+     task.kind='sky-impact';
+    }
+    if(task.age+1e-9<task.life)continue;
+    if(audible)this.h.audio?.(task.id,'release');
+    for(const point of task.sky!)this.area(task,d.radius,point.x,point.y);
+    this.effects.playSky(task.id,d.kind,task.sky!,task.index,d.radius,star?.75:d.seconds-THUNDER_WINDUP);
+    task.life=-1;continue;
+   }
    if(task.kind==='fire-line'){
     while(task.index<4&&task.age>=.15+task.index*.75){for(const e of this.h.enemies())if(this.eligible(e)&&Math.abs(e.x-task.x)<=d.radius&&Math.abs(e.y-task.y)<=40)this.hit(e,task.id,task.power,task.group,e.y>=task.y?Math.PI/2:-Math.PI/2,30);task.index++;}
     if(task.age<task.life)continue;

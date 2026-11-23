@@ -1,11 +1,19 @@
-import {Graphics,Color} from 'cc';
-const COLORS=['#d28a35','#f6c85e','#fff5d4','#72c599','#b54b34','#ee9860'].map(c=>Array.from({length:33},(_,i)=>{const v=new Color(c);v.a=Math.round(255*i/32);return v;}));
-const ink=(i:number,a:number)=>COLORS[i][Math.max(0,Math.min(32,Math.round(a*32)))];
-function slash(g:Graphics,x:number,y:number,a:number,r:number,width:number,span:number,tone:number,alpha:number){const c=Math.cos(a),s=Math.sin(a);for(let layer=0;layer<3;layer++){g.fillColor=ink(layer===2?2:tone,alpha*(layer===0?.45:1));const rr=r*(1-layer*.015),w=width*(layer===2?.30:layer===1?.82:1);for(let i=0;i<=16;i++){const t=i/16,b=(t-.5)*span,dx=Math.cos(b)*rr,dy=Math.sin(b)*rr;const xx=x+dx*c-dy*s,yy=y+dx*s+dy*c;if(!i)g.moveTo(xx,yy);else g.lineTo(xx,yy);}for(let i=16;i>=0;i--){const t=i/16,b=(t-.5)*span,ir=rr-w*Math.pow(Math.sin(t*Math.PI),.7),dx=Math.cos(b)*ir,dy=Math.sin(b)*ir;g.lineTo(x+dx*c-dy*s,y+dx*s+dy*c);}g.close();g.fill();}}
-/** Existing per-weapon trail only; no clocks, nodes, random values or damage. */
-export function drawGrowthAttack(g:Graphics,id:string,phase:number,t:number,a:number,r:number,lift:number):void {if(t<.15||t>.94)return;const p=(t-.15)/.79,alpha=Math.sin(p*Math.PI),x=0,y=20+lift*.25;
- if(id==='liubei'){if(phase===2){const cx=x+Math.cos(a)*r*.65,cy=y+Math.sin(a)*r*.65,len=r*.95;for(const side of [-1,1]){const aa=a+side*.65,c=Math.cos(aa),ss=Math.sin(aa),sx=cx-c*len*.5,sy=cy-ss*len*.5,ex=cx+c*len*.5,ey=cy+ss*len*.5;g.fillColor=ink(1,alpha);g.moveTo(sx,sy);g.lineTo(cx-ss*10,cy+c*10);g.lineTo(ex,ey);g.lineTo(cx+ss*10,cy-c*10);g.close();g.fill();g.strokeColor=ink(2,alpha);g.lineWidth=3;g.moveTo(sx,sy);g.lineTo(ex,ey);g.stroke();}}else slash(g,x,y,a+(phase?-.4:.4),r*.85,r*.18,1.25,1,alpha);}
- else if(id==='guanyu'){slash(g,x,y,a+(phase===1?-.3:.3),r*.9,r*(phase===2?.3:.18),phase===2?2.3:1.6,1,alpha);if(phase===2){const xx=Math.cos(a)*r*.85,yy=y+Math.sin(a)*r*.85;g.fillColor=ink(3,alpha);g.moveTo(xx,yy);g.lineTo(xx-22,yy+25);g.lineTo(xx-12,yy+9);g.lineTo(xx-36,yy+7);g.lineTo(xx-18,yy-7);g.lineTo(xx-30,yy-19);g.lineTo(xx+15,yy-3);g.close();g.fill();g.fillColor=ink(2,alpha);g.circle(xx+1,yy+3,2);g.fill();}}
- else if(phase===2){const xx=Math.cos(a)*60,yy=Math.sin(a)*60+16;for(let i=0;i<9;i++){const b=i*Math.PI*2/9;g.fillColor=ink(i%2?2:5,alpha);g.moveTo(xx+Math.cos(b)*20,yy+Math.sin(b)*13);g.lineTo(xx+Math.cos(b+.12)*100,yy+Math.sin(b+.12)*65);g.lineTo(xx+Math.cos(b+.3)*25,yy+Math.sin(b+.3)*17);g.close();g.fill();}g.strokeColor=ink(4,alpha*.7);g.lineWidth=3;for(let i=0;i<3;i++){const b=a+(i-1)*1.7;g.moveTo(xx,yy);g.lineTo(xx+Math.cos(b+.1)*46,yy+Math.sin(b+.1)*35);g.lineTo(xx+Math.cos(b)*80,yy+Math.sin(b)*55);}g.stroke();}
- else if(phase===1)slash(g,x,y,a,r*.8,r*.2,1.4,5,alpha);else {g.fillColor=ink(2,alpha);g.moveTo(Math.cos(a)*18-Math.sin(a)*7,y+Math.sin(a)*18+Math.cos(a)*7);g.lineTo(Math.cos(a)*r,y+Math.sin(a)*r);g.lineTo(Math.cos(a)*18+Math.sin(a)*7,y+Math.sin(a)*18-Math.cos(a)*7);g.close();g.fill();}}
-export function drawMountDash(g:Graphics,id:string,x:number,y:number,a:number,remaining:number):void{if(remaining<=0)return;const c=Math.cos(a),s=Math.sin(a);g.strokeColor=ink(id==='zhangfei'?5:1,.7);g.lineWidth=id==='zhangfei'?5:3;for(let i=0;i<3;i++){const d=(i-1)*12;g.moveTo(x-c*20-s*d,y+20-s*20+c*d);g.lineTo(x-c*(100+i*18)-s*d,y+20-s*(100+i*18)+c*d);}g.stroke();}
+import {Graphics} from 'cc';
+import * as b from './vfx-brush';
+/** One signature slot. Three release phases still resolve in GameBootstrap, never in the renderer. */
+export function drawGrowthAttack(g:Graphics,id:string,phase:number,t:number,a:number,r:number,lift:number,offsetX=0,offsetY=0):void {
+ if(t<.15||t>.94)return;const p=(t-.15)/.79,f=Math.sin(p*Math.PI),x=offsetX,y=offsetY+20+lift*.25,c=Math.cos(a),s=Math.sin(a);
+ if(id==='liubei'&&phase===2){
+  const xx=x+c*r*.65,yy=y+s*r*.65,len=r*.95;
+  for(let i=-1;i<=1;i+=2)b.stream(g,xx+Math.cos(a+i*.65)*len*.5,yy+Math.sin(a+i*.65)*len*.5,a+i*.65,len,12,'gold',f);
+  b.nib(g,xx,yy,a+.72,45,7,'gold',f);
+ }else if(id==='guanyu'){
+  b.sweepEdge(g,g,x,y,a+(phase===1?-.25:.25),r*(phase===2?1.15:1),Math.min(220,phase===2?190:140)*Math.PI/180,p,'jade',phase===2?1.3:.8,f);
+  if(phase===2)b.nib(g,x+c*r*.85,y+s*r*.85,a,57,14,'jade',f);
+ }else if(id==='zhangfei'){
+  if(phase===2){b.groundStrike(g,g,x+c*45,y+s*45,125,p,'crimson',a);}
+  else if(phase===0)b.stream(g,x+c*r,y+s*r,a,r,12,'silver',f);
+  else b.sweepEdge(g,g,x,y,a,r,120*Math.PI/180,p,'silver',1,f);
+ }else b.sweepEdge(g,g,x,y,a+(phase?-.3:.3),r,1.6,p,'gold',.8,f);
+}
+export function drawMountDash(g:Graphics,id:string,x:number,y:number,a:number,remaining:number):void {if(remaining>0)b.mount(g,id,x,y,a,remaining,1);}

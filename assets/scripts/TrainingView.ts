@@ -1,4 +1,5 @@
 import {stageBossHp,stageEnemyHp} from './stage-data';
+import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {addPanelClose} from './panel-ui';
 import {Color,Graphics,Label,Layers,Node,Sprite,SpriteFrame,UITransform} from 'cc';
 import {CHAPTERS,CHRONICLE_ENEMIES} from './chronicles';
@@ -38,7 +39,7 @@ export class TrainingView {
   private formHero:HeroId='liubei';private showcase?:HeroShowcase;
   private formSurface?:FormSurface;
   private count=1;private tier:Tier=1;private slot=0;private message='选择目标后加入战场，收起面板开始演武';
-  constructor(parent:Node,private frames:Record<string,SpriteFrame>,private host:TrainingHost){
+  constructor(parent:Node,private frames:Record<string,SpriteFrame>,private host:TrainingHost,private atlas?:BattleSpriteAtlas){
     this.root=this.node(parent,'TrainingPanel');this.root.active=false;
   }
   resize(w:number,h:number):void {const s=Math.min(1,(w-80)/1140,(h-70)/650);this.root.setScale(s,s,1);}
@@ -51,16 +52,28 @@ export class TrainingView {
     const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;
   }
   private box(p:Node,name:string,x:number,y:number,w:number,h:number,selected=false):Node {
-    const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);n.addComponent(Graphics);this.paintBox(n,w,h,selected);return n;
+    const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);this.paintBox(n,w,h,selected);return n;
+  }
+  // Re-skin an existing slice on the form page; shrinking the touch target would break small buttons.
+  private skin(n:Node,key:string,w:number,h:number,padding:number):boolean {
+    const existing=n.getChildByName('TrainingSkin')?.getComponent(Sprite);
+    if(existing&&this.atlas?.set(existing,key)){
+      existing.node.getComponent(UITransform)!.setContentSize(w+padding,h+padding);return true;
+    }
+    const sprite=this.atlas?.addSliced(n,key,w,h,padding);
+    if(!sprite)return false;
+    sprite.node.name='TrainingSkin';sprite.node.setSiblingIndex(0);return true;
   }
   private paintBox(n:Node,w:number,h:number,selected:boolean):void {
-    const g=n.getComponent(Graphics)!;g.clear();g.fillColor=new Color(selected?'#526b43':'#2b4938');g.strokeColor=new Color(selected?'#ffdc8b':'#7c8c6c');g.lineWidth=selected?3:1;g.roundRect(-w/2,-h/2,w,h,15);g.fill();g.stroke();
+    if(this.skin(n,selected?'ui-shop-card-5':'ui-slot-0',w,h,8))return;
+    const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=new Color(selected?'#526b43':'#2b4938');g.strokeColor=new Color(selected?'#ffdc8b':'#7c8c6c');g.lineWidth=selected?3:1;g.roundRect(-w/2,-h/2,w,h,15);g.fill();g.stroke();
   }
   private paintButton(n:Node,w:number,h:number,enabled:boolean,primary:boolean):void {
-    const g=n.getComponent(Graphics)!;g.clear();g.fillColor=new Color(enabled?(primary?'#c94d2e':'#fff0d2'):'#5b6856');g.strokeColor=new Color(enabled?'#c7b57e':'#6f7b65');g.lineWidth=1.5;g.roundRect(-w/2,-h/2,w,h,12);g.fill();g.stroke();
+    if(this.skin(n,'ui-pill-'+(enabled?(primary?'#c94d2e':'#fff0d2'):'#d3c9b2'),w,h,12))return;
+    const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=new Color(enabled?(primary?'#c94d2e':'#fff0d2'):'#5b6856');g.strokeColor=new Color(enabled?'#c7b57e':'#6f7b65');g.lineWidth=1.5;g.roundRect(-w/2,-h/2,w,h,12);g.fill();g.stroke();
   }
   private button(p:Node,name:string,t:string,x:number,y:number,w:number,f:()=>void,enabled=true,primary=false,h=46):Node {
-    const n=this.box(p,name,x,y,w,h);this.paintButton(n,w,h,enabled,primary);this.text(n,t,0,0,w<80?19:22,w-10,h-4,enabled?(primary?'#fff0d2':'#432d1d'):'#b6bca8');
+    const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);this.paintButton(n,w,h,enabled,primary);this.text(n,t,0,0,w<80?19:22,w-10,h-4,enabled?(primary?'#fff0d2':'#432d1d'):'#b6bca8');
     n.on(Node.EventType.TOUCH_END,(e?:{propagationStopped:boolean})=>{if(e)e.propagationStopped=true;if(enabled)f();});return n;
   }
   private picture(p:Node,key:string,x:number,y:number,size:number):Sprite|undefined {
@@ -83,7 +96,7 @@ export class TrainingView {
     if(this.tab===4&&this.formSurface){this.refreshForm();return;}
     this.showcase=undefined;this.formSurface=undefined;
     for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}
-    const shade=this.node(this.root,'TrainingDimmer');shade.addComponent(UITransform).setContentSize(5000,3000);const sg=shade.addComponent(Graphics);sg.fillColor=new Color(10,24,17,150);sg.rect(-2500,-1500,5000,3000);sg.fill();shade.on(Node.EventType.TOUCH_START,()=>{});shade.on(Node.EventType.TOUCH_END,()=>{});
+    const shade=this.node(this.root,'TrainingDimmer');shade.addComponent(UITransform).setContentSize(5000,3000);const dim=this.atlas?.addSliced(shade,'ui-solid',5000,3000,0);if(dim)dim.color=new Color(10,24,17,150);else{const sg=shade.addComponent(Graphics);sg.fillColor=new Color(10,24,17,150);sg.rect(-2500,-1500,5000,3000);sg.fill();}shade.on(Node.EventType.TOUCH_START,()=>{});shade.on(Node.EventType.TOUCH_END,()=>{});
     const p=this.box(this.root,'TrainingSurface',0,0,1140,650),state=this.host.snapshot();
     p.on(Node.EventType.TOUCH_END,(e?:{propagationStopped:boolean})=>{if(e)e.propagationStopped=true;});
     this.text(p,'演武场',-418,278,36,240,52);const status=this.text(p,`生命 ∞  ·  在场 ${state.alive}/80`,-25,286,21,440,32,'#dcd3a8');
@@ -121,8 +134,9 @@ export class TrainingView {
       this.button(detail,'TrainingSpawn',`加入战场 ×${this.count}`,0,-189,310,()=>this.act(()=>this.host.spawn(selected.id,this.count,boss)),state.alive<80,true,48);
     }else if(this.tab===2){
       [1,2,3,4].forEach((v,i)=>{
-        const n=this.button(detail,'TrainingTier-'+v,['I','II','III','IV'][i],-111+i*74,36,66,()=>{this.tier=v as Tier;this.render();},true,false,36),g=n.getComponent(Graphics)!;
-        g.clear();g.fillColor=new Color(TIER_COLORS[i]);g.strokeColor=new Color(this.tier===v?'#ffe6ac':'#61735d');g.lineWidth=this.tier===v?3:1;g.roundRect(-33,-18,66,36,10);g.fill();g.stroke();
+        const n=this.button(detail,'TrainingTier-'+v,['I','II','III','IV'][i],-111+i*74,36,66,()=>{this.tier=v as Tier;this.render();},true,false,36);
+        if(this.skin(n,'ui-tier-'+v,66,36,16)){const bg=n.getChildByName('TrainingSkin')!.getComponent(Sprite)!;bg.color=new Color(this.tier===v?'#ffffff':'#c6c6c6');}else{const g=n.getComponent(Graphics)!;
+        g.clear();g.fillColor=new Color(TIER_COLORS[i]);g.strokeColor=new Color(this.tier===v?'#ffe6ac':'#61735d');g.lineWidth=this.tier===v?3:1;g.roundRect(-33,-18,66,36,10);g.fill();g.stroke();}
         const label=n.children.find(c=>!!c.getComponent(Label))?.getComponent(Label);if(label)label.color=new Color(v===1?'#432d1d':'#ffffff');
       });
       const stats=calculateWeapon({id:selected.id as EquippedWeapon['id'],tier:this.tier},{power:0,melee:0,ranged:0,magic:0,damage:0,haste:0,range:0,area:0,crit:0},'');

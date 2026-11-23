@@ -1,3 +1,4 @@
+import {MUSIC_SCENES} from './battle-music';
 import {petName,petFrameKey} from './pets';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {HeroShowcase} from './HeroShowcase';
@@ -11,6 +12,7 @@ import {commonSkillFor} from './common-skills';
 import {addWeaponIcon} from './presentation-art';
 import {clockText} from './survival';
 import {addPanelClose} from './panel-ui';
+import {CopyResult,runtimeReportPages} from './runtime-report';
 const C={jade:'#294e3c',paper:'#fff0d2',gold:'#efd08a',ink:'#48351e',red:'#cf512f',muted:'#b3c1a4'};
 class StageSurface {
  readonly root:Node;readonly panel:Node;
@@ -170,13 +172,49 @@ export class SettingsView extends StageSurface {
   this.text(p,title,0,150,30,580,55);
   this.text(p,detail,0,20,23,620,100);
  }
- settings(music:()=>boolean,sound:()=>boolean,toggleMusic:()=>void,toggleSound:()=>void,progress:()=>void):void {
+ settings(music:()=>boolean,sound:()=>boolean,toggleMusic:()=>void,toggleSound:()=>void,progress:()=>void,diagnostics?:()=>void,audition?:()=>void):void {
   const p=this.body();
   this.text(p,'设置',0,210,34);
-  const refresh=()=>this.settings(music,sound,toggleMusic,toggleSound,progress);
-  this.button(p,'MusicSetting','背景音乐 · '+(music()?'开启':'关闭'),0,100,400,()=>{toggleMusic();refresh();});
-  this.button(p,'SoundSetting','音效 · '+(sound()?'开启':'关闭'),0,0,400,()=>{toggleSound();refresh();});
-  this.button(p,'ProgressSetting','游戏进度',0,-120,400,progress);
+  const refresh=()=>this.settings(music,sound,toggleMusic,toggleSound,progress,diagnostics,audition);
+  this.button(p,'MusicSetting','背景音乐 · '+(music()?'开启':'关闭'),-155,113,280,()=>{toggleMusic();refresh();});
+  this.button(p,'SoundSetting','音效 · '+(sound()?'开启':'关闭'),155,113,280,()=>{toggleSound();refresh();});
+  if(audition)this.button(p,'MusicAuditions','音乐试听',0,20,590,audition);
+  this.button(p,'ProgressSetting','游戏进度',0,audition?-100:-15,400,progress);
+  if(diagnostics)this.button(p,'DiagnosticsSetting','运行诊断',0,-190,400,diagnostics);
+ }
+ musicRoom(preview:(scene:'menu'|'battle',status:(message:string,failed?:boolean)=>void)=>void,stop:()=>void,back:()=>void):void {
+  const p=this.body();
+  this.text(p,'铜管主题试听',0,185,32);
+  const status=this.text(p,'点曲名试听',0,-85,18,600,32,C.gold);
+  let selected:Label|undefined;
+  for(const scene of ['menu','battle'] as const){
+   const track=MUSIC_SCENES[scene];
+   const row=this.button(p,'Listen-'+track.id,'',0,scene==='menu'?78:-4,560,()=>{
+    if(selected)selected.string='▶';
+    if(selected===indicator){stop();selected=undefined;status.string='已停止试听';return;}
+    selected=indicator;indicator.string='■';status.string='正在载入 · '+track.title;
+    preview(scene,(message,failed)=>{
+     if(!p.isValid||selected!==indicator)return;
+     status.string=message;
+     if(failed){indicator.string='↻';selected=undefined;}
+    });
+   });
+   this.text(row,track.title,-130,0,25,220,43);
+   this.text(row,scene==='menu'?'选人':'战斗 · 首领',90,0,19,170,42,C.gold);
+   const indicator=this.text(row,'▶',221,0,20,48,38);
+  }
+  this.button(p,'MusicRoomBack','返回设置',0,-175,248,back);
+ }
+ diagnostics(data:string,copy:(done:(result:CopyResult)=>void)=>void,back:()=>void):void {
+  const p=this.body();this.text(p,'运行诊断',0,210,34);
+  const pages=runtimeReportPages(data);let page=0,busy=false;
+  const title=this.text(p,'',0,159,23,610,40,C.gold),body=this.text(p,'',0,13,21,650,250);
+  body.horizontalAlign=Label.HorizontalAlign.LEFT;body.verticalAlign=Label.VerticalAlign.TOP;body.isBold=false;
+  const show=()=>{title.string=pages[page].title+'  '+(page+1)+' / '+pages.length;body.string=pages[page].body;};show();
+  const status=this.text(p,'可直接截图摘要；复制失败会显示具体原因',0,-139,17,650,55,C.gold);
+  this.button(p,'CopyDiagnostics','复制完整诊断',-232,-215,220,()=>{if(busy)return;busy=true;status.string='正在复制…';copy(result=>{busy=false;if(p.isValid)status.string=result.ok?'已复制，可返回会话粘贴发送':'复制失败：'+(result.error||'未知错误')+'\n可截图上方摘要发送';});});
+  this.button(p,'DiagnosticsPage','下一页',0,-215,200,()=>{page=(page+1)%pages.length;show();},pages.length>1);
+  this.button(p,'DiagnosticsBack','返回设置',232,-215,220,back);
  }
  progress(profile:StageProfile,reset:(()=>boolean)|undefined,back:()=>void):void {
   const p=this.body();

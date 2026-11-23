@@ -1,5 +1,6 @@
 import {Color,Graphics} from 'cc';
 import {LvbuState,LVBU_ACTIONS} from './lvbu-boss';
+import * as brush from './vfx-brush';
 
 // Cached ink and shared ribbon buffers; no per-Boss Graphics or frame allocations.
 const palette=['#89421e','#d65b13','#ff9519','#ffca32','#fff4cf','#ad8450','#dfc08b','#586b39'];
@@ -63,6 +64,14 @@ export function drawLvbuEffects(ground:Graphics,air:Graphics,x:number,y:number,a
   }
  }
  if(s.phase==='dash'){
+  // Later legs split the red slipstream into angled fins, following the locked direction.
+  const lanes=s.index===2?s.leg+1:1;
+  // Actual distance bounds the wake on a short charge against the arena edge.
+  brush.chargeWake(ground,x,y+18,a,Math.min(s.travel,135+lanes*17),31+lanes*4,'crimson',.94);
+  for(let i=0;i<lanes;i++){
+   const side=(i-(lanes-1)/2)*13;
+   brush.nib(air,x+Math.cos(a)*47-Math.sin(a)*side,y+45+Math.sin(a)*47+Math.cos(a)*side,a,86,8,'crimson',.84);
+  }
   const c=Math.cos(a),d=Math.sin(a),pulse=.9+.1*Math.sin(s.time*40),px=x+c*78,py=y+42+d*78;
   wedge(air,px,py,a,62,25,0,.96);wedge(air,px+3*c,py+3*d,a,57,20,1,1);
   wedge(air,px+7*c,py+7*d,a,49,14,3,pulse);wedge(air,px+12*c,py+12*d,a,40,7,4,pulse);
@@ -79,14 +88,18 @@ export function drawLvbuEffects(ground:Graphics,air:Graphics,x:number,y:number,a
   const duration=LVBU_ACTIONS[1].duration!,t=s.phase==='sweep'?s.time/duration:1,fade=s.phase==='sweep'?1:1-s.time/.2;
   const arc=LVBU_ACTIONS[1].arc!*Math.PI/180,head=a-arc/2+arc*t,start=a-arc/2,radius=LVBU_ACTIONS[1].range!;
   if(head-start>.05){
+   const at=head-.18,layer=Math.sin(at)>0?ground:air;
+   brush.nib(layer,x+Math.cos(at)*radius*.97,y+42+Math.sin(at)*radius*.97,at+Math.PI/2,46,9,'gold',fade);
    const trailStart=Math.max(start,head-2.3);
    if(head-start>.18)blade(ground,air,x,y+42,head-.18,Math.max(start,trailStart-.18),radius*.88,radius*.14,1,fade*.22);
    if(head-start>.08)blade(ground,air,x,y+42,head-.08,Math.max(start,trailStart-.08),radius*.94,radius*.2,2,fade*.4);
-   blade(ground,air,x,y+42,head,start,radius,radius*.35,0,fade*.95);
-   blade(ground,air,x,y+42,head-.014,start,radius-2,radius*.325,1,fade);
-   blade(ground,air,x,y+42,head-.025,start,radius-3,radius*.27,2,fade);
-   blade(ground,air,x,y+42,head-.038,start,radius-4,radius*.16,3,fade);
-   blade(ground,air,x,y+42,head-.045,start,radius-4,radius*.025,4,fade);
+   // Leave a narrow afterimage over the entire swept arc, with the heavy blade at its leading end.
+   blade(ground,air,x,y+42,head,start,radius,radius*.07,2,fade*.53);
+   blade(ground,air,x,y+42,head,trailStart,radius,radius*.25,0,fade*.95);
+   blade(ground,air,x,y+42,head-.014,trailStart,radius-2,radius*.22,1,fade);
+   blade(ground,air,x,y+42,head-.025,trailStart,radius-3,radius*.18,2,fade);
+   blade(ground,air,x,y+42,head-.038,trailStart,radius-4,radius*.10,3,fade);
+   blade(ground,air,x,y+42,head-.045,trailStart,radius-4,radius*.025,4,fade);
    // At the forward pass, a narrow flare joins the physical halberd to its released blade.
    // It is decoration inside the sweep and cannot add a second damage segment.
    const forward=Math.abs(Math.atan2(Math.sin(head-a),Math.cos(head-a)));
@@ -99,12 +112,14 @@ export function drawLvbuEffects(ground:Graphics,air:Graphics,x:number,y:number,a
  }
  if(s.brakeLife>0&&s.index!==1){
   const t=1-s.brakeLife/.6,alpha=(1-t),power=s.index===2&&s.leg===2?1.3:1,b=s.brakeAngle;
+  for(let i=-1;i<=1;i++)brush.crescent(ground,s.brakeX,s.brakeY,(26+58*t)*power,b+i*.87,.77,8*alpha,'earth',alpha);
   hoofDust(ground,s.brakeX,s.brakeY,b,t*.25,power,alpha);
   ground.strokeColor=color(0,alpha*.35);ground.lineWidth=2;
   for(let i=0;i<3;i++){const side=(i-1)*16,px=s.brakeX-Math.sin(b)*side,py=s.brakeY+Math.cos(b)*side-8;ground.moveTo(px-Math.cos(b)*35,py-Math.sin(b)*35);ground.lineTo(px+Math.cos(b)*20,py+Math.sin(b)*20);ground.stroke();}
   for(let i=0;i<5;i++){const angle=b+(i-2)*.45,travel=(18+t*35)*power;clod(ground,s.brakeX+Math.cos(angle)*travel,s.brakeY+Math.sin(angle)*travel+Math.sin(t*Math.PI)*18,4+i%3,alpha);}
  }
  if(s.contactLife>0){
+  brush.contact(air,s.contactX,s.contactY,s.contactAngle,36,1-s.contactLife/.22,'crimson');
   const t=1-s.contactLife/.22,fade=1-t;
   for(let i=0;i<7;i++){const b=s.contactAngle+(i-3)*.61;wedge(air,s.contactX,s.contactY,b,(i===3?39:22)*(1+.3*t),i===3?7:4,2,fade);wedge(air,s.contactX,s.contactY,b,(i===3?31:15)*(1+.3*t),i===3?3:2,4,fade);}
  }

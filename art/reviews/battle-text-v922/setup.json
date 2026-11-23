@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "version": "stage-v9.22-battle-text",
+      "glyphs": 13,
+      "texture": {
+        "width": 1024,
+        "height": 1408
+      },
+      "scope": "UI only; no battle, HP or profile edits; 25s restore watchdog"
+    }
+  }
+}

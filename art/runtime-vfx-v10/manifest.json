@@ -1,0 +1,18 @@
+{
+  "source": "materials-source.png",
+  "sourceSha256": "b1e64faa517e5d3c741c36a0ec761a6aba03922eced20612f58d81a8f7367970",
+  "runtime": "assets/presentation/vfx-materials.png",
+  "runtimeSha256": "e1a7b44e92179b975db53d8b2b368d11ced12a3e0fdbdef4d2b1c749f4ffad41",
+  "size": [
+    1024,
+    1024
+  ],
+  "grid": [
+    4,
+    4
+  ],
+  "gutter": 16,
+  "decodedBytes": 4194304,
+  "bytes": 1337597,
+  "processing": "Equal 4x4 cells; Lanczos fit 224x224; transparent 16px gutters. Original RGBA source retained."
+}

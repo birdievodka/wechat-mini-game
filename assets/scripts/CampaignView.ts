@@ -278,7 +278,8 @@ export class CampaignView {
     this.resultView=undefined;this.heroShowcase=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.heroMenu=false;this.campMode=true;this.campBackground=undefined;
-    const scrim=this.node(this.root,'SupplyScrim');scrim.addComponent(UITransform).setContentSize(6000,4000);const shade=scrim.addComponent(Graphics);shade.fillColor=new Color(12,26,19,95);shade.rect(-3000,-2000,6000,4000);shade.fill();
+    const scrim=this.node(this.root,'SupplyScrim');scrim.addComponent(UITransform).setContentSize(6000,4000);
+    if(!this.solid(scrim,6000,4000,new Color(12,26,19,95))){const shade=scrim.addComponent(Graphics);shade.fillColor=new Color(12,26,19,95);shade.rect(-3000,-2000,6000,4000);shade.fill();}
     scrim.on(Node.EventType.TOUCH_END,()=>{});
     this.content=this.node(this.root,'SupplyContent');this.resize(this.width,this.height);const p=this.content;
     const major=!run.challenge&&run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
@@ -292,9 +293,12 @@ export class CampaignView {
     if(major)this.campButton(p,'SupplyNormal','普通补给 ›',40,271,180,normal,'secondary');
     run.offers.forEach((id,i)=>{
       const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-(run.offers.length-1)/2)*(run.challenge?270:360),27);n.addComponent(UITransform).setContentSize(run.challenge?254:336,360);
-      const g=n.addComponent(Graphics),color=card.major?'#e8bb65':card.weapon?TIER_COLORS[card.weapon.tier-1]:'#b8afdc';
-      g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=card.weapon?2+card.weapon.tier*.65:2;g.roundRect(run.challenge?-127:-168,-180,run.challenge?254:336,360,19);g.fill();g.stroke();
-      if(card.weapon){const wash=new Color(color);wash.a=card.weapon.tier===1?10:22;g.fillColor=wash;g.roundRect(run.challenge?-121:-162,-174,run.challenge?242:324,348,15);g.fill();this.tierBand(n,card.weapon.tier,0,149,run.challenge?232:310,card.from);}
+      const width=run.challenge?254:336,color=card.major?'#e8bb65':card.weapon?TIER_COLORS[card.weapon.tier-1]:'#b8afdc';
+      if(!this.battleAtlas?.addSliced(n,'ui-shop-card-'+(card.weapon?.tier||(card.major?5:0)),width,360,12)){
+        const g=n.addComponent(Graphics);g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=card.weapon?2+card.weapon.tier*.65:2;g.roundRect(-width/2,-180,width,360,19);g.fill();g.stroke();
+        if(card.weapon){const wash=new Color(color);wash.a=card.weapon.tier===1?10:22;g.fillColor=wash;g.roundRect(-width/2+6,-174,width-12,348,15);g.fill();}
+      }
+      if(card.weapon)this.tierBand(n,card.weapon.tier,0,149,run.challenge?232:310,card.from);
       else this.text(n,card.tag,0,149,17,'#e8dca4',run.challenge?232:300,32);
       if(card.weapon)this.weaponIcon(n,card.weapon.id,card.weapon.tier,0,67,1.25);
       else this.itemIcon(n,id,0,67,.95);
@@ -334,10 +338,12 @@ export class CampaignView {
         else{g.circle(0,0,index===13?13:24);g.stroke();g.circle(0,0,5);g.fillColor=new Color('#eea478');g.fill();for(let i=0;i<4;i++){const a=i*Math.PI/2;g.moveTo(Math.cos(a)*18,Math.sin(a)*18);g.lineTo(Math.cos(a)*34,Math.sin(a)*34);}g.stroke();}
       }return;
     }
-    if(id==='bun'){const g=n.addComponent(Graphics);g.fillColor=new Color('#f5dba1');g.strokeColor=new Color('#9a7144');g.lineWidth=3;g.ellipse(0,0,32,25);g.fill();g.stroke();g.moveTo(-10,19);g.lineTo(0,9);g.lineTo(10,19);g.stroke();return;}
+    if(id==='bun'){if(this.battleAtlas?.add(n,'shop-bun'))return;const g=n.addComponent(Graphics);g.fillColor=new Color('#f5dba1');g.strokeColor=new Color('#9a7144');g.lineWidth=3;g.ellipse(0,0,32,25);g.fill();g.stroke();g.moveTo(-10,19);g.lineTo(0,9);g.lineTo(10,19);g.stroke();return;}
     const mapped=['power','speed','coin','range','area','haste'][category]||'power',frame=this.frames['ui-'+mapped];
     this.sprite(n,frame,0,0,80,80);
-    const tag=this.node(n,'PassiveBadge').addComponent(Graphics);tag.fillColor=new Color(['#e5a768','#88bf82','#ead06f','#86c7cc','#c69bcd','#c5a16e'][category]||'#dbc68a');tag.circle(29,-24,12);tag.fill();
+    const color=new Color(['#e5a768','#88bf82','#ead06f','#86c7cc','#c69bcd','#c5a16e'][category]||'#dbc68a'),badge=this.battleAtlas?.add(n,'passive-badge');
+    if(badge){badge.node.setPosition(badge.node.position.x+29,badge.node.position.y-24);badge.color=color;}
+    else{const tag=this.node(n,'PassiveBadge').addComponent(Graphics);tag.fillColor=color;tag.circle(29,-24,12);tag.fill();}
 
   }
 
@@ -474,7 +480,7 @@ export class CampaignView {
     const content=this.content!; // Dialog actions belong to the currently visible screen.
     const old = content.children.find(n => n.name === 'CampDialog'); if (old) { old.removeFromParent(); old.destroy(); }
     const overlay = this.node(content, 'CampDialog'); overlay.addComponent(UITransform).setContentSize(3000, 2000);
-    const shade = overlay.addComponent(Graphics); shade.fillColor = new Color(35, 45, 34, 170); shade.rect(-1500, -1000, 3000, 2000); shade.fill();
+    if(!this.solid(overlay,3000,2000,new Color(35,45,34,170))){const shade = overlay.addComponent(Graphics); shade.fillColor = new Color(35, 45, 34, 170); shade.rect(-1500, -1000, 3000, 2000); shade.fill();}
     const close = (): void => { overlay.removeFromParent(); overlay.destroy(); };
     overlay.on(Node.EventType.TOUCH_END, (event?: { propagationStopped: boolean }) => { if(event)event.propagationStopped=true; });
     const box = this.node(overlay, 'DialogPaper'); box.addComponent(UITransform).setContentSize(width, height); if(content.name==='SupplyContent')this.jadePanel(box,width,height);else this.paper(box, width, height);
@@ -484,7 +490,12 @@ export class CampaignView {
     return box;
   }
 
+  private solid(parent:Node,width:number,height:number,color:Color):boolean {
+    const sprite=this.battleAtlas?.add(parent,'ui-solid');if(!sprite)return false;
+    sprite.node.getComponent(UITransform)!.setContentSize(width,height);sprite.color=color;return true;
+  }
   private jadePanel(parent:Node,width:number,height:number,raised=true):void {
+    if(this.battleAtlas?.addSliced(parent,raised?'ui-jade-raised':'ui-jade-flat',width,height,28))return;
     const g=this.node(parent,'JadePanel').addComponent(Graphics);
     if(raised){g.fillColor=new Color(14,26,20,130);g.roundRect(-width/2,-height/2-6,width,height,25);g.fill();}
     g.fillColor=new Color(30,55,42,raised?237:145);g.strokeColor=new Color(210,199,140,raised?210:95);g.lineWidth=raised?2:1;
@@ -510,9 +521,13 @@ export class CampaignView {
   /** 品级色带：底色、描边厚度、金色菱形数量三重区分白/蓝/紫/红；升阶卡并列显示旧→新两段。 */
   private tierBand(parent: Node, tier: Tier, x: number, y: number, width: number, from?: Tier): void {
     const n = this.node(parent, 'TierBand-' + tier + (from ? '-from-' + from : '')); n.setPosition(x, y);
-    const g = n.addComponent(Graphics), rim = new Color('#2f2418'), pip = new Color('#ffe3a1');
+    let graphics:Graphics|undefined;const rim = new Color('#2f2418'), pip = new Color('#ffe3a1');
     const chip = (cx: number, w: number, t: Tier): void => {
       const small = w < 180, step = small ? 9 : 11, r = small ? 4 : 5;
+      const cached=this.battleAtlas?.addSliced(n,'ui-tier-'+t,w,52,12);
+      if(cached){cached.node.setPosition(cx,0);const start=cx-w/2+(small?14:17);for(let i=0;i<t;i++){const mark=this.battleAtlas?.add(n,small?'tier-pip-small':'tier-pip');if(mark)mark.node.setPosition(mark.node.position.x+start+i*step,mark.node.position.y+2);}}
+      else{
+      const g=graphics||(graphics=n.addComponent(Graphics));
       g.fillColor = rim; g.roundRect(cx - w / 2, -21, w, 42, 12); g.fill();
       g.fillColor = new Color(TIER_COLORS[t - 1]); g.strokeColor = new Color(C.ink); g.lineWidth = 2;
       g.roundRect(cx - w / 2, -18, w, 42, 12); g.fill(); g.stroke();
@@ -521,6 +536,7 @@ export class CampaignView {
       const start = cx - w / 2 + (small ? 14 : 17);
       for (let i = 0; i < t; i++) { const px = start + i * step; g.moveTo(px, 2 + r + 1); g.lineTo(px + r, 2); g.lineTo(px, 2 - r - 1); g.lineTo(px - r, 2); g.close(); }
       g.fill(); g.stroke();
+      }
       this.bold(n, TIER_NAMES[t - 1], cx + (small ? 9 : 24), 2, small ? 14 : 18, t === 1 ? C.ink : '#ffffff', w - (small ? 50 : 70), 34);
     };
     if (from) { const w = width / 2 - 22; chip(-w / 2 - 8, w, from); chip(w / 2 + 8, w, tier); this.bold(n, '›', 0, 2, 22, '#ffe6a8', 18, 32); }

@@ -2,7 +2,9 @@ import {sectorHitsCircle,sweepEllipseTime} from './combat-math';
 export const PET_HEROES=['liubei','guanyu','zhangfei'] as const;
 export const petName=(id:string)=>id==='guanyu'?'小青蛟':id==='zhangfei'?'橘虎崽':'桃桃兔';
 export const petAvailable=(id:string,growth:number)=>PET_HEROES.some(h=>h===id)&&growth>=5;
-export const petFrameKey=(id:string,pose=0)=>'pet-'+id+'-'+pose;
+const petKeys:Record<string,string[]>={};
+for(const id of PET_HEROES)petKeys[id]=Array.from({length:5},(_,i)=>'pet-'+id+'-'+i);
+export const petFrameKey=(id:string,pose=0)=>petKeys[id]?.[pose]||'';
 export const PET_RULES={liubei:{interval:1.2,damage:42,range:400},guanyu:{interval:1.5,damage:54,range:165},zhangfei:{interval:1.8,damage:60,range:220}};
 export const petDamageScale=(stage:number)=>[.4,.5,.65,.8,.9,1][Math.max(0,Math.min(5,stage-1))];
 export interface PetTarget {x:number;y:number;hp:number;born?:number;animal?:string;kind?:string;archetype?:string;miniBoss?:boolean;elite?:boolean;object?:string;}

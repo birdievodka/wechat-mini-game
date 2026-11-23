@@ -9,6 +9,7 @@ class Transform { setContentSize(w, h) { this.width = w; this.height = h; } setA
 class Node {
   static EventType = { TOUCH_END: 'end', TOUCH_START: 'start', TOUCH_CANCEL: 'cancel' };
   constructor(name = '') { this.name = name; this.children = []; this.position = { x: 0, y: 0, z: 0 }; this.active = true; this.components = new Map(); this.events = {}; }
+  getChildByName(name) { return this.children.find(child => child.name === name) || null; }
   addChild(n) { n.parent = this; this.children.push(n); }
   addComponent(Type) { const c = new Type(); c.node = this; this.components.set(Type, c); if ((Type === Sprite || Type === Label) && !this.components.has(Transform)) this.addComponent(Transform); if(Type===Mask&&!this.components.has(Graphics))this.addComponent(Graphics);return c; }
   getComponent(Type) { return this.components.get(Type); }
@@ -37,10 +38,11 @@ const cc = {
   _decorator: { ccclass: () => c => c }, Component: class { constructor() { this.node = new Node('Scene'); this.isValid = true; } },
   Node, Graphics, Mask, Label, Sprite, SpriteFrame: Frame, UITransform: Transform, Camera, Canvas: class {}, Color: class { constructor(value) { this.value=value; } }, Rect: class {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}, Vec3: class { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } },
   ImageAsset: class {constructor(image){this.width=image?.width||1334;this.height=image?.height||750;}destroy(){}}, BufferAsset:BinaryAsset, AudioClip: class {}, AudioSource: class {
+    static EventType = { STARTED: 'started' };
     constructor() { this.plays = 0; this.playing = false; this.currentTime = 0; }
     stop() { this.playing = false; this.currentTime = 0; }
     pause() { this.playing = false; }
-    play() { this.playing = true; this.plays++; }
+    play() { this.playing = true; this.plays++; this.node?.events.started?.(); }
   }, Texture2D: class {reset(size){Object.assign(this,size);}uploadData(data){this.uploadBytes=data.byteLength;if(this.width<=1024)this.data=data;}set image(value){this.width=value.width;this.height=value.height;}destroy(){this.destroyed=true;}}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
   dynamicAtlasManager:{enabled:true},macro:{CLEANUP_IMAGE_CACHE:false},
   assetManager: {utils:{getUrlWithUuid:(uuid,options)=>'packaged/'+uuid+options.nativeExt},loadRemote:(_url,_options,done)=>done(null,{width:1334,height:750,destroy(){}}),releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { getInfoWithPath:path=>({uuid:_name+'/'+path}),load: (_url, _type, callback) => callback(null, _type===BinaryAsset?new BinaryAsset(fs.readFileSync('assets/battle/'+_url+'.bin')):{ width: 768, height: 576 }) }) },
@@ -71,7 +73,10 @@ async function newGame(id = 'liubei', weapon) { storage.delete('taoyuan-chronicl
 
 
 const survival = load("survival");
-module.exports={newGame,GameBootstrap,finishStartup,click,load,cc,Node,Graphics,Sprite,Label,r,storage};
+function useDevelopmentHost(){
+  cc.wechatHost={...cc.wechatHost,getAccountInfoSync:()=>({miniProgram:{envVersion:'develop'}})};
+}
+module.exports={useDevelopmentHost,newGame,GameBootstrap,finishStartup,click,load,cc,Node,Graphics,Sprite,Label,r,storage};
 if(require.main===module)(async () => {
   // Actual asynchronous boot: current youth body must arrive before the menu.
   const bootLoad=cc.assetManager.loadBundle;let releaseBody;
@@ -546,7 +551,7 @@ if(require.main===module)(async () => {
     const effectGame=await newGame('liubei',def.id);effectGame.clearBattle();effectGame.spawnClock=999;
     const w=effectGame.weapons[0],target=makeTarget(effectGame,80,0);target.hp=99999;w.angle=0;w.damage=w.stats.damage;
     if(def.category==='melee')effectGame.meleeStrike(w);
-    else if(def.id==='sword'){let strokes=0;w.trail.stroke=()=>strokes++;effectGame.updateWeapon(w,.016);assert.ok(strokes>0,'实际剑阵绘制切割弧');}
+    else if(def.id==='sword'){let paths=0;w.trail.fill=w.trail.stroke=()=>paths++;effectGame.updateWeapon(w,.016);assert.ok(paths>0,'实际剑阵绘制有实体切割弧');}
     else effectGame.releaseWeapon(0,20,0,w);
     if(def.id!=='sword')assert.ok(effectGame.combatFx.stamps.some(s=>s.age<s.duration&&s.id===def.id),def.id+' 实际攻击连接新特效');
     effectGame.updateEffects(0);
@@ -649,8 +654,8 @@ if(require.main===module)(async () => {
   click(musicGame.screens.root,'SupplySkip');advance(musicGame,1.3);assert.ok(source.playing);assert.ok(shopPlays>0);
   const frozenTime=musicGame.run.survivalSeconds;musicGame.onBackground();advance(musicGame,60);assert.equal(musicGame.run.survivalSeconds,frozenTime);assert.equal(source.playing,false);
   click(musicGame.menu,'返回选人');assert.equal(musicGame.phase,'menu');assert.equal(musicGame.world.active,false);
-  const test=new GameBootstrap();await test.start();finishStartup(test);test.restart(true);assert.equal(test.playerHp,10000);assert.equal(test.testMode,true);advance(test,65);assert.equal(test.phase,'battle');assert.equal(test.run.survivalSeconds,0);
-  const testAge=test.age;test.onBackground();advance(test,20);assert.equal(test.age,testAge);test.onDestroy();assert.equal(test.musicSource.playing,false);
+  const test=new GameBootstrap();await test.start();finishStartup(test);const savedTestHost=cc.wechatHost;useDevelopmentHost();test.restart(true);assert.equal(test.playerHp,10000);assert.equal(test.testMode,true);advance(test,65);assert.equal(test.phase,'battle');assert.equal(test.run.survivalSeconds,0);
+  const testAge=test.age;test.onBackground();advance(test,20);assert.equal(test.age,testAge);test.onDestroy();cc.wechatHost=savedTestHost;assert.equal(test.musicSource.playing,false);
   console.log('通过：音乐开始/暂停/补给续播/后台恢复/独立静音、后台不计时、选人页隔离、内部测试10000生命与正式入口隔离');
 
   const allNodes=root=>{const out=[];const visit=n=>{out.push(n);n.children.forEach(visit);};visit(root);return out;};

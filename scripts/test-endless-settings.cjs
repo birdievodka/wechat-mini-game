@@ -27,13 +27,30 @@ const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolea
  g.endRun(false);assert.equal(g.phase,'defeat');click(g.screens.root,'ResultRetry');assert.equal(g.run.endless,true);assert.equal(g.run.endlessTier,0);assert.equal(g.run.weapons.length,1);
  g.showMainMenu();
  const originalHost=cc.wechatHost;
- for(const version of ['release','trial',undefined]){
-  cc.wechatHost={getAccountInfoSync:()=>({miniProgram:{envVersion:version}})};
-  g.showMainMenu();assert.equal(find(g.screens.root,'演武场'),undefined);click(g.screens.root,'设置');click(g.screens.root,'ProgressSetting');assert.equal(find(g.screens.root,'ResetProgress'),undefined);click(g.screens.root,'SettingsClose');
+ for(const info of [
+   ()=>({miniProgram:{envVersion:'release'}}),()=>({miniProgram:{envVersion:'trial'}}),
+   ()=>({miniProgram:{envVersion:'unknown'}}),()=>({}),undefined,()=>{throw Error('unavailable')}
+ ]){
+  cc.wechatHost={getAccountInfoSync:info};
+  assert.equal(g.developmentToolsEnabled(),false);
+  g.showMainMenu();
+  assert.equal(find(g.screens.root,'演武场'),undefined);
+  g.startTraining('liubei','G01');g.restart(true);g.openCampReview();g.openEnemyReview('impact');
+  assert.equal(g.phase,'menu');assert.equal(g.testMode,false);assert.equal(g.trainingMode,false);assert.equal(g.trainingButton,undefined);
+  click(g.screens.root,'设置');
+  for(const name of ['MusicSetting','SoundSetting','ProgressSetting'])assert.ok(find(g.screens.root,name));
+  for(const name of ['DiagnosticsSetting','CopyDiagnostics','MusicAuditions','ResetProgress'])assert.equal(find(g.screens.root,name),undefined);
+  click(g.screens.root,'ProgressSetting');assert.equal(find(g.screens.root,'ResetProgress'),undefined);click(g.screens.root,'SettingsClose');
  }
- cc.wechatHost={getAccountInfoSync:()=>{throw Error('unavailable')}};assert.equal(g.developmentToolsEnabled(),false);
  for(const version of ['develop']){cc.wechatHost={getAccountInfoSync:()=>({miniProgram:{envVersion:version}})};assert.equal(g.developmentToolsEnabled(),true);}
  g.showMainMenu();click(g.screens.root,'演武场');assert.equal(g.trainingMode,true);assert.ok(g.trainingPanel.root.active);g.showMainMenu();click(g.screens.root,'设置');click(g.screens.root,'MusicSetting');assert.equal(g.musicMuted,true);assert.equal(storage.get('taoyuan-music-muted'),'true');
+ click(g.screens.root,'DiagnosticsSetting');assert.ok(find(g.screens.root,'CopyDiagnostics'));click(g.screens.root,'DiagnosticsBack');
+ click(g.screens.root,'MusicAuditions');click(g.screens.root,'Listen-brass-oath');
+ assert.equal(g.musicPath,'brass-oath');assert.ok(g.musicSource.playing);assert.equal(g.musicMuted,true);
+ click(g.screens.root,'Listen-brass-oath');assert.equal(g.musicSource.playing,false);
+ click(g.screens.root,'Listen-brass-rally');assert.equal(g.musicPath,'brass-rally');
+ click(g.screens.root,'MusicRoomBack');assert.equal(g.musicPath,'brass-oath');assert.equal(g.musicSource.playing,false);
+ g.selectMusic('battle');const bossPlays=g.musicSource.plays;g.selectMusic('boss');assert.equal(g.musicPath,'brass-rally');assert.equal(g.musicSource.plays,bossPlays);g.selectMusic('menu');
  click(g.screens.root,'SoundSetting');assert.equal(g.muted,true);click(g.screens.root,'ProgressSetting');click(g.screens.root,'ResetProgress');assert.equal(JSON.stringify(g.profile.heroes),before);
  click(g.screens.root,'CancelReset');assert.equal(JSON.stringify(g.profile.heroes),before);
  click(g.screens.root,'ResetProgress');

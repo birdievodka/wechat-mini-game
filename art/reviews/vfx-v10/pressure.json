@@ -1,0 +1,325 @@
+{
+  "version": "stage-v10.0-material-vfx",
+  "scope": "Two 60-second accelerated real Cocos simulations, 80 starting enemies, render submitted every 30 frames. Retained allocation/GPU counters only, not WeChat/iPhone FPS or crash proof.",
+  "records": [
+    {
+      "scenario": "six-red-ranged-weapons",
+      "initial": {
+        "version": "stage-v10.0-material-vfx",
+        "quads": 0,
+        "allocated": 41,
+        "enemies": 80,
+        "bufferBytes": 118016476,
+        "textureBytes": 78586200
+      },
+      "samples": [
+        {
+          "seconds": 5.000000000000038,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 64,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 24,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252312,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 10.000000000000073,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 120,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 27,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252312,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 14.999999999999789,
+          "shots": 0,
+          "enemyShots": 5,
+          "particles": 36,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 11,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252312,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 19.999999999999506,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 107,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 26,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252312,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 24.999999999999222,
+          "shots": 0,
+          "enemyShots": 7,
+          "particles": 146,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 34,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252336,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 29.999999999998938,
+          "shots": 0,
+          "enemyShots": 8,
+          "particles": 105,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 20,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252336,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 34.99999999999866,
+          "shots": 0,
+          "enemyShots": 7,
+          "particles": 46,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 8,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252336,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 39.99999999999837,
+          "shots": 1,
+          "enemyShots": 2,
+          "particles": 56,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 8,
+          "allocated": 57,
+          "enemies": 79,
+          "bufferBytes": 66252336,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 44.99999999999809,
+          "shots": 5,
+          "enemyShots": 3,
+          "particles": 124,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 29,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 66252336,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 49.999999999997804,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 78,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 11,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 66252480,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 54.99999999999752,
+          "shots": 0,
+          "enemyShots": 3,
+          "particles": 119,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 33,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 66252480,
+          "textureBytes": 78326452
+        },
+        {
+          "seconds": 59.999999999997236,
+          "shots": 1,
+          "enemyShots": 0,
+          "particles": 53,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 10,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 66252480,
+          "textureBytes": 78326452
+        }
+      ]
+    },
+    {
+      "scenario": "six-sword-arrays",
+      "initial": {
+        "version": "stage-v10.0-material-vfx",
+        "quads": 0,
+        "allocated": 57,
+        "enemies": 80,
+        "bufferBytes": 66252480,
+        "textureBytes": 78326508
+      },
+      "samples": [
+        {
+          "seconds": 5.000000000000038,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 127,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 23,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 10.000000000000073,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 120,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 34,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 14.999999999999789,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 118,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 36,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 19.999999999999506,
+          "shots": 0,
+          "enemyShots": 3,
+          "particles": 116,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 22,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 24.999999999999222,
+          "shots": 0,
+          "enemyShots": 5,
+          "particles": 114,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 32,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 29.999999999998938,
+          "shots": 0,
+          "enemyShots": 2,
+          "particles": 113,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 34,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 34.99999999999866,
+          "shots": 0,
+          "enemyShots": 3,
+          "particles": 121,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 36,
+          "allocated": 57,
+          "enemies": 80,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 39.99999999999837,
+          "shots": 0,
+          "enemyShots": 4,
+          "particles": 116,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 29,
+          "allocated": 57,
+          "enemies": 81,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 44.99999999999809,
+          "shots": 0,
+          "enemyShots": 3,
+          "particles": 114,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 33,
+          "allocated": 57,
+          "enemies": 81,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 49.999999999997804,
+          "shots": 0,
+          "enemyShots": 3,
+          "particles": 126,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 31,
+          "allocated": 57,
+          "enemies": 81,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 54.99999999999752,
+          "shots": 0,
+          "enemyShots": 3,
+          "particles": 122,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 30,
+          "allocated": 57,
+          "enemies": 81,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        },
+        {
+          "seconds": 59.999999999997236,
+          "shots": 0,
+          "enemyShots": 6,
+          "particles": 117,
+          "version": "stage-v10.0-material-vfx",
+          "quads": 29,
+          "allocated": 57,
+          "enemies": 81,
+          "bufferBytes": 78063044,
+          "textureBytes": 78331912
+        }
+      ]
+    }
+  ],
+  "restored": {
+    "phase": "menu",
+    "profileUnchanged": true,
+    "storageUnchanged": true
+  }
+}

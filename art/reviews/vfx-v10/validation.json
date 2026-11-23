@@ -1,0 +1,2244 @@
+{
+  "version": "stage-v10.0-material-vfx",
+  "scope": "Actual isolated Cocos/WebGL engineering frames, no iPhone/WeChat FPS claim",
+  "records": [
+    {
+      "name": "skill-G08",
+      "id": "G08",
+      "time": 0.12,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 2,
+      "visuals": 3,
+      "particles": 16,
+      "shield": 0,
+      "stunned": 0,
+      "pose": -2.3569836841299803
+    },
+    {
+      "name": "skill-G01",
+      "id": "G01",
+      "time": 0.16,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 3,
+      "visuals": 4,
+      "particles": 24,
+      "shield": 0,
+      "stunned": 0,
+      "pose": -9.659258262890692
+    },
+    {
+      "name": "skill-G03",
+      "id": "G03",
+      "time": 0.12,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 10,
+      "visuals": 11,
+      "particles": 114,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 0
+    },
+    {
+      "name": "skill-G18",
+      "id": "G18",
+      "time": 0.28,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 12,
+      "visuals": 1,
+      "particles": 52,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 1.4090001916849288
+    },
+    {
+      "name": "skill-G10",
+      "id": "G10",
+      "time": 0.4,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 4,
+      "visuals": 1,
+      "particles": 19,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 0
+    },
+    {
+      "name": "skill-G12",
+      "id": "G12",
+      "time": 0.42,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 12,
+      "visuals": 11,
+      "particles": 84,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 0
+    },
+    {
+      "name": "skill-G20",
+      "id": "G20",
+      "time": 0.48,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 1,
+      "visuals": 3,
+      "particles": 22,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 0
+    },
+    {
+      "name": "skill-G07",
+      "id": "G07",
+      "time": 0.18,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 0,
+      "visuals": 1,
+      "particles": 0,
+      "shield": 0,
+      "stunned": 0,
+      "pose": -5.843261875664
+    },
+    {
+      "name": "skill-G25",
+      "id": "G25",
+      "time": 0.4,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 6,
+      "visuals": 3,
+      "particles": 20,
+      "shield": 3,
+      "stunned": 0,
+      "pose": 0
+    },
+    {
+      "name": "skill-G26",
+      "id": "G26",
+      "time": 0.12,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 0,
+      "visuals": 1,
+      "particles": 0,
+      "shield": 0,
+      "stunned": 18,
+      "pose": -6.59080845628115
+    },
+    {
+      "name": "skill-G19",
+      "id": "G19",
+      "time": 0.24,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 1,
+      "visuals": 2,
+      "particles": 15,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 2.7817705400384427
+    },
+    {
+      "name": "skill-G22",
+      "id": "G22",
+      "time": 0.2,
+      "hero": "liubei",
+      "mode": "peak",
+      "version": "stage-v10.0-material-vfx",
+      "damageTargets": 0,
+      "visuals": 1,
+      "particles": 0,
+      "shield": 0,
+      "stunned": 0,
+      "pose": 3.6955181300451443
+    },
+    {
+      "name": "weapon-sandal",
+      "id": "sandal",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 92061800,
+      "textureBytes": 75585688
+    },
+    {
+      "name": "weapon-pole",
+      "id": "pole",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 40152448,
+      "textureBytes": 75131860
+    },
+    {
+      "name": "weapon-peach",
+      "id": "peach",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75129132
+    },
+    {
+      "name": "weapon-cleaver",
+      "id": "cleaver",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-firecracker",
+      "id": "firecracker",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-smg",
+      "id": "smg",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75129132
+    },
+    {
+      "name": "weapon-shotgun",
+      "id": "shotgun",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 6,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-rocket",
+      "id": "rocket",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 8,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-sword",
+      "id": "sword",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 42511964,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-thunder",
+      "id": "thunder",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 10,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-gourd",
+      "id": "gourd",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-twin-swords",
+      "id": "twin-swords",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-guandao",
+      "id": "guandao",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 6,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-serpent-spear",
+      "id": "serpent-spear",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75132408
+    },
+    {
+      "name": "weapon-halberd",
+      "id": "halberd",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-silver-spear",
+      "id": "silver-spear",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 4,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-qinggang",
+      "id": "qinggang",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 4,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-yitian",
+      "id": "yitian",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 4,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-seven-saber",
+      "id": "seven-saber",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-ancient-saber",
+      "id": "ancient-saber",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 4,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-twin-halberds",
+      "id": "twin-halberds",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-trident",
+      "id": "trident",
+      "tier": 4,
+      "time": 0.15,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 4,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-caltrops",
+      "id": "caltrops",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-repeater",
+      "id": "repeater",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-phoenix-bow",
+      "id": "phoenix-bow",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-heavy-crossbow",
+      "id": "heavy-crossbow",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-hand-halberd",
+      "id": "hand-halberd",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-chain-hook",
+      "id": "chain-hook",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75129132
+    },
+    {
+      "name": "weapon-oil-jar",
+      "id": "oil-jar",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-thunder-bomb",
+      "id": "thunder-bomb",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-feather-fan",
+      "id": "feather-fan",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-taiping-book",
+      "id": "taiping-book",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-star-lamps",
+      "id": "star-lamps",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 7,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "weapon-bagua",
+      "id": "bagua",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-wood-ox",
+      "id": "wood-ox",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75130224
+    },
+    {
+      "name": "weapon-wood-kite",
+      "id": "wood-kite",
+      "tier": 4,
+      "time": 0.3,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 31,
+      "enemies": 5,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131316
+    },
+    {
+      "name": "npc-E01",
+      "id": "E01",
+      "releaseClock": 0.483333333333334,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 51950028,
+      "textureBytes": 75131308
+    },
+    {
+      "name": "npc-E02",
+      "id": "E02",
+      "releaseClock": 0.4416666666666672,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E03",
+      "id": "E03",
+      "releaseClock": 0.483333333333334,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E04",
+      "id": "E04",
+      "releaseClock": 0.5000000000000007,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E05",
+      "id": "E05",
+      "releaseClock": 0.4416666666666672,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E06",
+      "id": "E06",
+      "releaseClock": 0.7583333333333331,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E07",
+      "id": "E07",
+      "releaseClock": 0.9083333333333325,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E08",
+      "id": "E08",
+      "releaseClock": 0.8083333333333329,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E09",
+      "id": "E09",
+      "releaseClock": 0.7,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E10",
+      "id": "E10",
+      "releaseClock": 0.6000000000000003,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E11",
+      "id": "E11",
+      "releaseClock": 0.2833333333333334,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E12",
+      "id": "E12",
+      "releaseClock": 0.5000000000000007,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E13",
+      "id": "E13",
+      "releaseClock": 0.6500000000000001,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E14",
+      "id": "E14",
+      "releaseClock": 0.9083333333333325,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E15",
+      "id": "E15",
+      "releaseClock": 0.45000000000000057,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E16",
+      "id": "E16",
+      "releaseClock": 0.6000000000000003,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E17",
+      "id": "E17",
+      "releaseClock": 0.4000000000000004,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E18",
+      "id": "E18",
+      "releaseClock": 0.6500000000000001,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E19",
+      "id": "E19",
+      "releaseClock": 0.5333333333333339,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E20",
+      "id": "E20",
+      "releaseClock": 0.7416666666666665,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E21",
+      "id": "E21",
+      "releaseClock": 0.7249999999999999,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E22",
+      "id": "E22",
+      "releaseClock": 0.45000000000000057,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E23",
+      "id": "E23",
+      "releaseClock": 0.6500000000000001,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E24",
+      "id": "E24",
+      "releaseClock": 0.7666666666666664,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E25",
+      "id": "E25",
+      "releaseClock": 1.0499999999999987,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E26",
+      "id": "E26",
+      "releaseClock": 0.6000000000000003,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E27",
+      "id": "E27",
+      "releaseClock": 0.5000000000000007,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E28",
+      "id": "E28",
+      "releaseClock": 0.5000000000000007,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E29",
+      "id": "E29",
+      "releaseClock": 0.8083333333333329,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E30",
+      "id": "E30",
+      "releaseClock": 0.6000000000000003,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E31",
+      "id": "E31",
+      "releaseClock": 0.7,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E32",
+      "id": "E32",
+      "releaseClock": 0.8083333333333329,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E33",
+      "id": "E33",
+      "releaseClock": 0.8083333333333329,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E34",
+      "id": "E34",
+      "releaseClock": 0.9083333333333325,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E35",
+      "id": "E35",
+      "releaseClock": 0.7583333333333331,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E36",
+      "id": "E36",
+      "releaseClock": 0.9583333333333324,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E37",
+      "id": "E37",
+      "releaseClock": 0.9583333333333324,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E38",
+      "id": "E38",
+      "releaseClock": 0.9583333333333324,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E39",
+      "id": "E39",
+      "releaseClock": 0.9083333333333325,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "npc-E40",
+      "id": "E40",
+      "releaseClock": 1.0083333333333322,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131892
+    },
+    {
+      "name": "growth-liubei",
+      "id": "liubei",
+      "phase": 2,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 54309544,
+      "textureBytes": 75131900
+    },
+    {
+      "name": "mount-liubei",
+      "id": "liubei",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 56669060,
+      "textureBytes": 75133488
+    },
+    {
+      "name": "growth-guanyu",
+      "id": "guanyu",
+      "phase": 2,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 2,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 59028576,
+      "textureBytes": 75136888
+    },
+    {
+      "name": "mount-guanyu",
+      "id": "guanyu",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 59028576,
+      "textureBytes": 75140660
+    },
+    {
+      "name": "growth-zhangfei",
+      "id": "zhangfei",
+      "phase": 2,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 59028576,
+      "textureBytes": 75138552
+    },
+    {
+      "name": "mount-zhangfei",
+      "id": "zhangfei",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 59028576,
+      "textureBytes": 75141232
+    },
+    {
+      "name": "feedback-hurt",
+      "kind": "hurt",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 59028576,
+      "textureBytes": 75138544
+    },
+    {
+      "name": "feedback-heal",
+      "kind": "heal",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 59028576,
+      "textureBytes": 75138544
+    },
+    {
+      "name": "feedback-bounce",
+      "kind": "bounce",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 59028576,
+      "textureBytes": 75138544
+    },
+    {
+      "name": "feedback-death",
+      "kind": "death",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 0,
+      "bufferBytes": 59028576,
+      "textureBytes": 75138544
+    },
+    {
+      "name": "mini-yellow",
+      "stage": 1,
+      "time": 0.85,
+      "phase": 0,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 32,
+      "enemies": 3,
+      "bufferBytes": 59028576,
+      "textureBytes": 75138544
+    },
+    {
+      "name": "mini-hebei",
+      "stage": 3,
+      "time": 0.93,
+      "phase": 0,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 2,
+      "bufferBytes": 61388092,
+      "textureBytes": 75177644
+    },
+    {
+      "name": "mini-tiger",
+      "stage": 4,
+      "time": 1,
+      "phase": 0,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 1,
+      "bufferBytes": 63747608,
+      "textureBytes": 75168712
+    },
+    {
+      "name": "mini-elephant-charge",
+      "stage": 5,
+      "time": 1.05,
+      "phase": 0,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 32,
+      "enemies": 3,
+      "bufferBytes": 63747608,
+      "textureBytes": 75168712
+    },
+    {
+      "name": "mini-elephant-quake",
+      "stage": 5,
+      "time": 1,
+      "phase": 1,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 33,
+      "enemies": 3,
+      "bufferBytes": 63747608,
+      "textureBytes": 75177064
+    },
+    {
+      "name": "mini-chess-follow",
+      "stage": 6,
+      "time": 1.7,
+      "phase": 0,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 34,
+      "enemies": 1,
+      "bufferBytes": 63747608,
+      "textureBytes": 75177064
+    },
+    {
+      "name": "mini-chess-cross",
+      "stage": 6,
+      "time": 1.2,
+      "phase": 1,
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 36,
+      "enemies": 1,
+      "bufferBytes": 63747608,
+      "textureBytes": 75171880
+    },
+    {
+      "name": "feedback-birth",
+      "kind": "birth",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 1,
+      "allocated": 36,
+      "enemies": 1,
+      "bufferBytes": 63747608,
+      "textureBytes": 75171880
+    },
+    {
+      "name": "feedback-guard",
+      "kind": "guard",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 8,
+      "allocated": 36,
+      "enemies": 0,
+      "bufferBytes": 63747608,
+      "textureBytes": 75157912
+    },
+    {
+      "name": "feedback-peach",
+      "kind": "peach-chain",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 5,
+      "allocated": 36,
+      "enemies": 2,
+      "bufferBytes": 63747608,
+      "textureBytes": 75157912
+    },
+    {
+      "name": "boss-1-0",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "黄符定雷",
+      "index": 0,
+      "time": 1.2,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 1.1999999999999982,
+          "delay": 0.85,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-1-1",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "三才雷阵",
+      "index": 1,
+      "time": 1.4,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "lightning",
+          "age": 1.3999999999999975,
+          "delay": 0.85,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "lightning",
+          "age": 1.3999999999999975,
+          "delay": 1.3,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "lightning",
+          "age": 1.3999999999999975,
+          "delay": 1.75,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-1-2",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 1,
+      "id": "zhangjiao",
+      "skill": "太平雷狱",
+      "index": 2,
+      "time": 2.1,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "chain",
+          "age": 2.099999999999995,
+          "delay": 1.9,
+          "x": 190.52558883257652,
+          "y": 109.99999999999999
+        },
+        {
+          "kind": "chain",
+          "age": 2.099999999999995,
+          "delay": 3.4,
+          "x": -190.52558883257646,
+          "y": 110.00000000000007
+        },
+        {
+          "kind": "chain",
+          "age": 2.099999999999995,
+          "delay": 4.9,
+          "x": -4.0413344371862656e-14,
+          "y": -205
+        }
+      ],
+      "units": [
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": 190.52558883257652,
+          "y": 109.99999999999999,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -190.52558883257646,
+          "y": 110.00000000000007,
+          "hp": 84
+        },
+        {
+          "kind": "sigil",
+          "phase": "ready",
+          "x": -4.0413344371862656e-14,
+          "y": -205,
+          "hp": 84
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-3-0",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "金印镇地",
+      "index": 0,
+      "time": 1.2,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "seal",
+          "age": 1.1999999999999982,
+          "delay": 1.1,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-3-1",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "赤铜横财",
+      "index": 1,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "coin",
+          "age": 1.799999999999996,
+          "delay": 0.95,
+          "x": -64.50000000000111,
+          "y": -180
+        },
+        {
+          "kind": "coin",
+          "age": 1.799999999999996,
+          "delay": 1.15,
+          "x": -110.50000000000102,
+          "y": -90
+        },
+        {
+          "kind": "coin",
+          "age": 1.799999999999996,
+          "delay": 1.35,
+          "x": -156.50000000000102,
+          "y": 150
+        },
+        {
+          "kind": "coin",
+          "age": 1.799999999999996,
+          "delay": 1.55,
+          "x": -202.50000000000094,
+          "y": 240
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-3-2",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 3,
+      "id": "dongzhuo",
+      "skill": "酒池焚阵",
+      "index": 2,
+      "time": 2.2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "wine",
+          "age": 2.199999999999995,
+          "delay": 1.5,
+          "x": -45,
+          "y": -210
+        },
+        {
+          "kind": "wine",
+          "age": 2.199999999999995,
+          "delay": 1.95,
+          "x": 90,
+          "y": 0
+        },
+        {
+          "kind": "wine",
+          "age": 2.199999999999995,
+          "delay": 2.4000000000000004,
+          "x": -45,
+          "y": 210
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-4-0",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "四世箭阵",
+      "index": 0,
+      "time": 1.8,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "arrow",
+          "age": 1.799999999999996,
+          "delay": 1,
+          "x": 46.20392915975043,
+          "y": -34.655114388180195
+        },
+        {
+          "kind": "arrow",
+          "age": 1.799999999999996,
+          "delay": 1.12,
+          "x": 13.199999999998397,
+          "y": 30
+        },
+        {
+          "kind": "arrow",
+          "age": 1.799999999999996,
+          "delay": 1.18,
+          "x": -8.715939562006469,
+          "y": 55.235333296504024
+        },
+        {
+          "kind": "arrow",
+          "age": 1.799999999999996,
+          "delay": 1.24,
+          "x": -33.057249588174955,
+          "y": 75.25858007172607
+        },
+        {
+          "kind": "arrow",
+          "age": 0.09999999999999999,
+          "delay": 0,
+          "x": -184.8409635523586,
+          "y": -127.39161108604902
+        },
+        {
+          "kind": "arrow",
+          "age": 0.09999999999999999,
+          "delay": 0,
+          "x": -202.29933339882817,
+          "y": -49.3198151396006
+        },
+        {
+          "kind": "arrow",
+          "age": 0.09999999999999999,
+          "delay": 0,
+          "x": -241.58066555338465,
+          "y": 126.3417257399084
+        },
+        {
+          "kind": "arrow",
+          "age": 0.09999999999999999,
+          "delay": 0,
+          "x": -259.03903539985424,
+          "y": 204.41352168635686
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -242.41891306286433,
+          "y": -170.26715884782033,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -259.87728290933387,
+          "y": -92.1953629013719,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -299.15861506389035,
+          "y": 83.46617797813711,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -316.6169849103599,
+          "y": 161.53797392458557,
+          "hp": 423
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-4-1",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "官渡弩阵",
+      "index": 1,
+      "time": 2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "cart",
+          "phase": "windup",
+          "x": -260,
+          "y": -160,
+          "hp": 1950
+        },
+        {
+          "kind": "cart",
+          "phase": "windup",
+          "x": -260,
+          "y": 160,
+          "hp": 1950
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-4-2",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 4,
+      "id": "yuanshao",
+      "skill": "万军齐射",
+      "index": 2,
+      "time": 2,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "rain",
+          "age": 1.9999999999999953,
+          "delay": 1.8,
+          "x": 0,
+          "y": -155
+        },
+        {
+          "kind": "rain",
+          "age": 1.9999999999999953,
+          "delay": 2.35,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "rain",
+          "age": 1.9999999999999953,
+          "delay": 2.9000000000000004,
+          "x": 0,
+          "y": 155
+        },
+        {
+          "kind": "arrow",
+          "age": 0.19999999999999998,
+          "delay": 0,
+          "x": -151.660450275118,
+          "y": -119.97180390129947
+        },
+        {
+          "kind": "arrow",
+          "age": 0.19999999999999998,
+          "delay": 0,
+          "x": -169.11882012158756,
+          "y": -41.90000795485104
+        },
+        {
+          "kind": "arrow",
+          "age": 0.19999999999999998,
+          "delay": 0,
+          "x": -208.40015227614404,
+          "y": 133.76153292465796
+        },
+        {
+          "kind": "arrow",
+          "age": 0.19999999999999998,
+          "delay": 0,
+          "x": -225.8585221226136,
+          "y": 211.83332887110643
+        }
+      ],
+      "units": [
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -242.41891306286433,
+          "y": -170.26715884782033,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -259.87728290933387,
+          "y": -92.1953629013719,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -299.15861506389035,
+          "y": 83.46617797813711,
+          "hp": 423
+        },
+        {
+          "kind": "bowman",
+          "phase": "attack",
+          "x": -316.6169849103599,
+          "y": 161.53797392458557,
+          "hp": 423
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-5-0",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "倚天连刃",
+      "index": 0,
+      "time": 1.3,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 1.2999999999999978,
+          "delay": 0.9,
+          "x": -74.00000000000068,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.2999999999999978,
+          "delay": 1.4,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.2999999999999978,
+          "delay": 1.4,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.2999999999999978,
+          "delay": 1.9,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.2999999999999978,
+          "delay": 1.9,
+          "x": -210,
+          "y": 30
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-5-1",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "疑兵换影",
+      "index": 1,
+      "time": 1.5,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "sword-field",
+          "age": 1.4999999999999971,
+          "delay": 1.75,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [
+        {
+          "kind": "decoy",
+          "phase": "windup",
+          "x": -260,
+          "y": -130,
+          "hp": 630
+        },
+        {
+          "kind": "decoy",
+          "phase": "windup",
+          "x": -260,
+          "y": 130,
+          "hp": 630
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-5-2",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 5,
+      "id": "caocao",
+      "skill": "虎豹合围",
+      "index": 2,
+      "time": 1.8,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 1.8,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 2.7,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "blade",
+          "age": 1.799999999999996,
+          "delay": 3.6,
+          "x": -210,
+          "y": 30
+        },
+        {
+          "kind": "sword-field",
+          "age": 1.799999999999996,
+          "delay": 3.4,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "units": [
+        {
+          "kind": "rider",
+          "phase": "attack",
+          "x": -95.5203998666916,
+          "y": -9.584007998095416,
+          "hp": 1440
+        },
+        {
+          "kind": "rider",
+          "phase": "ready",
+          "x": 460,
+          "y": -5.633375276077825e-14,
+          "hp": 1440
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-6-0",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "猪突猛进",
+      "index": 0,
+      "time": 1.6,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -404.0000000000001,
+          "y": -157.5,
+          "hp": 1500
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -404.0000000000001,
+          "y": -52.5,
+          "hp": 1500
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -404.0000000000001,
+          "y": 52.5,
+          "hp": 1500
+        },
+        {
+          "kind": "boar",
+          "phase": "attack",
+          "x": -404.0000000000001,
+          "y": 157.5,
+          "hp": 1500
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-6-1",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "群狼围猎",
+      "index": 1,
+      "time": 2.2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "wolf",
+          "phase": "windup",
+          "x": -320.00000000000057,
+          "y": -150.00000000000102,
+          "hp": 1188
+        },
+        {
+          "kind": "wolf",
+          "phase": "windup",
+          "x": -320.00000000000057,
+          "y": 1.0198712792530268e-12,
+          "hp": 1188
+        },
+        {
+          "kind": "wolf",
+          "phase": "windup",
+          "x": -320.00000000000057,
+          "y": 150.00000000000102,
+          "hp": 1188
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-6-2",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 6,
+      "id": "menghuo",
+      "skill": "万象开道",
+      "index": 2,
+      "time": 2,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [],
+      "units": [
+        {
+          "kind": "elephant",
+          "phase": "windup",
+          "x": -280.5658139895032,
+          "y": -334.3767695585438,
+          "hp": 3000
+        },
+        {
+          "kind": "elephant",
+          "phase": "ready",
+          "x": -280.5658139895032,
+          "y": 334.3767695585438,
+          "hp": 3000
+        }
+      ],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-7-0",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "落子成灾",
+      "index": 0,
+      "time": 1.4,
+      "phase": "cast",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "stone",
+          "age": 1.3999999999999975,
+          "delay": 1.08,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "stone",
+          "age": 1.3999999999999975,
+          "delay": 1.36,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-7-1",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "阴阳双龙",
+      "index": 1,
+      "time": 1.6,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 5,
+      "hazards": [
+        {
+          "kind": "dragon",
+          "age": 1.5999999999999968,
+          "delay": 0.85,
+          "x": -255.00000000000097,
+          "y": -165.65071944268868
+        },
+        {
+          "kind": "dragon",
+          "age": 1.5999999999999968,
+          "delay": 0.85,
+          "x": -255.00000000000097,
+          "y": 225.65071944268868
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "boss-7-2",
+      "version": "stage-v10.0-material-vfx",
+      "chapter": 7,
+      "id": "simayi",
+      "skill": "五丈星劫",
+      "index": 2,
+      "time": 1.6,
+      "phase": "recover",
+      "displaySize": [
+        260,
+        260
+      ],
+      "hearts": 4,
+      "hazards": [
+        {
+          "kind": "meteor",
+          "age": 1.5999999999999968,
+          "delay": 0.9,
+          "x": 0,
+          "y": -180
+        },
+        {
+          "kind": "meteor",
+          "age": 1.5999999999999968,
+          "delay": 1.25,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "kind": "meteor",
+          "age": 1.5999999999999968,
+          "delay": 1.6,
+          "x": 0,
+          "y": 180
+        }
+      ],
+      "units": [],
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "lvbu-0",
+      "version": "stage-v10.0-material-vfx",
+      "index": 0,
+      "time": 1.1,
+      "phase": "dash",
+      "leg": 1,
+      "gait": 0,
+      "moveSpeed": 0,
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "displaySize": [
+        300,
+        300
+      ],
+      "position": [
+        -162.85714285714266,
+        0
+      ],
+      "angle": 0,
+      "playerHearts": 5,
+      "ghosts": 0,
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "lvbu-1",
+      "version": "stage-v10.0-material-vfx",
+      "index": 1,
+      "time": 1.26,
+      "phase": "sweep",
+      "leg": 1,
+      "gait": 0,
+      "moveSpeed": 0,
+      "frame": {
+        "x": 192,
+        "y": 192,
+        "width": 192,
+        "height": 192
+      },
+      "displaySize": [
+        300,
+        300
+      ],
+      "position": [
+        -155,
+        0
+      ],
+      "angle": 0,
+      "playerHearts": 4,
+      "ghosts": 0,
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "lvbu-2",
+      "version": "stage-v10.0-material-vfx",
+      "index": 2,
+      "time": 1.1,
+      "phase": "dash",
+      "leg": 1,
+      "gait": 0,
+      "moveSpeed": 0,
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "displaySize": [
+        300,
+        300
+      ],
+      "position": [
+        -164.51612903225802,
+        0
+      ],
+      "angle": 0,
+      "playerHearts": 5,
+      "ghosts": 2,
+      "scope": "actual Cocos engineering frame; not normal gameplay"
+    },
+    {
+      "name": "pet-liubei",
+      "id": "liubei",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 0,
+      "allocated": 41,
+      "enemies": 1,
+      "bufferBytes": 118016476,
+      "textureBytes": 79692680
+    },
+    {
+      "name": "pet-guanyu",
+      "id": "guanyu",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 41,
+      "enemies": 1,
+      "bufferBytes": 63747608,
+      "textureBytes": 79347536
+    },
+    {
+      "name": "pet-zhangfei",
+      "id": "zhangfei",
+      "version": "stage-v10.0-material-vfx",
+      "quads": 3,
+      "allocated": 41,
+      "enemies": 1,
+      "bufferBytes": 63747608,
+      "textureBytes": 79349200
+    }
+  ],
+  "motion": "water-keyframes.gif is reconstructed keyframes, not continuous gameplay recording",
+  "restored": {
+    "phase": "menu",
+    "storageUnchanged": true,
+    "materials": 41,
+    "textureBytes": 79349220,
+    "bufferBytes": 63747608
+  },
+  "errors": []
+}

@@ -2,6 +2,9 @@ import { Color, Graphics } from 'cc';
 import { CombatParticles, FX_LIMITS, ParticleShape } from './combat-particles';
 import { WeaponId, weaponFor } from './weapons';
 import { HeroId } from './campaign';
+import * as brush from './vfx-brush';
+import {drawWeaponHit,drawWeaponSlash,drawWeaponMuzzle,drawWeaponFlight,drawWeaponBurst} from './weapon-vfx';
+import {material} from './vfx-materials';
 
 // Warm paper highlights, jade wood, peach ink, fire and cyan steel. No fullscreen flash.
 const RGB = [[255,247,213],[247,194,83],[179,126,60],[74,187,102],[222,250,159],
@@ -14,8 +17,8 @@ const TAU = Math.PI * 2;
 const PALETTE: Record<string, number> = { sandal:1, pole:2, peach:5, cleaver:0,
   firecracker:7, smg:1, shotgun:1, rocket:7, sword:9, thunder:10, gourd:10,'twin-swords':0,guandao:3,'serpent-spear':9,halberd:15,'silver-spear':9,qinggang:9,yitian:1,'seven-saber':10,'ancient-saber':2,'twin-halberds':0,trident:1,caltrops:8,repeater:2,'phoenix-bow':1,'heavy-crossbow':0,'hand-halberd':1,'chain-hook':8,'oil-jar':7,'thunder-bomb':7,'feather-fan':4,'taiping-book':1,'star-lamps':1,bagua:3,'wood-ox':2,'wood-kite':2 };
 type Point = [number, number];
-type Kind = 'burst' | 'slash' | 'muzzle' | 'bolt' | 'suction' | 'vortex' | 'hero' | 'hit';
-interface Stamp { kind: Kind; id: WeaponId | HeroId; x:number; y:number; tx:number; ty:number; angle:number; radius:number; arc:number; age:number; duration:number; priority:number; seed:number; }
+type Kind = 'burst' | 'slash' | 'muzzle' | 'bolt' | 'suction' | 'vortex' | 'hero' | 'hit' | 'feedback';
+interface Stamp { kind: Kind; id: WeaponId | HeroId; x:number; y:number; tx:number; ty:number; angle:number; radius:number; arc:number; age:number; duration:number; priority:number; seed:number; tier:number; }
 function line(g:Graphics,points:Point[],tone:number,alpha:number,width:number):void {
   g.strokeColor=ink(tone,alpha);g.lineWidth=width;g.moveTo(points[0][0],points[0][1]);
   for(let i=1;i<points.length;i++)g.lineTo(points[i][0],points[i][1]);g.stroke();
@@ -41,23 +44,21 @@ function shoe(g:Graphics,x:number,y:number,a:number,scale:number,alpha:number):v
 /** Rigid blade follows a short tapered crescent, never a full glowing hoop. Hero-local coordinates. */
 const SWORD_LAYERS=[[11,.13,.5,9],[5,.55,.3,9],[1.8,.95,.19,0]].map(([width,alpha,extent,tone])=>({width,alpha,tone,points:Array.from({length:10},(_,i)=>{const a=-extent+i*extent/9;return [Math.cos(a),Math.sin(a)];})}));
 export function drawSwordTrail(g:Graphics,angle:number,radius:number,tier:number):void {
-  const c=Math.cos(angle),s=Math.sin(angle);
-  for(const layer of SWORD_LAYERS){g.lineWidth=layer.width;g.strokeColor=ink(layer.tone,layer.alpha);
-    for(let i=0;i<layer.points.length;i++){const p=layer.points[i],x=(c*p[0]-s*p[1])*radius,y=35+(s*p[0]+c*p[1])*radius;if(!i)g.moveTo(x,y);else g.lineTo(x,y);}g.stroke();
-  }
-  star(g,c*radius,35+s*radius,5+tier,angle,0,.9);
-  for(let i=0;i<2;i++){const a=angle-.19-i*.13;star(g,Math.cos(a)*(radius-7),35+Math.sin(a)*(radius-7),3-i,angle,9,.55-i*.15);}
+  const edge=angle-.56,c=Math.cos(edge),s=Math.sin(edge),tip=angle-.08;
+  brush.current(g,c*radius*.84,35+s*radius*.84,Math.cos(tip)*radius,35+Math.sin(tip)*radius,-8,4+tier,'silver',.8,0);
+  brush.crescent(g,0,35,radius,angle-.29,.58,5+tier,'silver',.93);
+  brush.crescent(g,0,35,radius-1,angle-.21,.40,1.9,'silver',.95,2);
 }
 /** Bounded world-space physics; complex stamps use shared Graphics, particles can use retained sprite quads. */
 export class CombatEffects {
   readonly particles = new CombatParticles();
-  readonly stamps: Stamp[] = Array.from({length:FX_LIMITS.stamps},()=>({kind:'hit',id:'sandal',x:0,y:0,tx:0,ty:0,angle:0,radius:0,arc:0,age:1,duration:0,priority:0,seed:0}));
-  private stamp(kind:Kind,id:Stamp['id'],x:number,y:number,angle:number,radius:number,duration:number,priority=1,tx=0,ty=0,arc=0):void {
+  readonly stamps: Stamp[] = Array.from({length:FX_LIMITS.stamps},()=>({kind:'hit',id:'sandal',x:0,y:0,tx:0,ty:0,angle:0,radius:0,arc:0,age:1,duration:0,priority:0,seed:0,tier:1}));
+  private stamp(kind:Kind,id:Stamp['id'],x:number,y:number,angle:number,radius:number,duration:number,priority=1,tx=0,ty=0,arc=0,tier=1):void {
     const limit=priority>=2?FX_LIMITS.stamps:FX_LIMITS.normalStamps;
     let slot:Stamp|undefined,oldest=-1;
     for(let i=0;i<limit;i++){const candidate=this.stamps[i];if(candidate.age>=candidate.duration){slot=candidate;break;}
       if(candidate.priority<=priority&&candidate.age/candidate.duration>oldest){oldest=candidate.age/candidate.duration;slot=candidate;}}
-    if(slot)Object.assign(slot,{kind,id,x,y,angle,radius,duration,priority,tx,ty,arc,age:0,seed:this.particles.random()*TAU});
+    if(slot)Object.assign(slot,{kind,id,x,y,angle,radius,duration,priority,tx,ty,arc,tier,age:0,seed:this.particles.random()*TAU});
   }
   private spray(x:number,y:number,count:number,tone:number,shape:ParticleShape,angle:number,spread:number,speed:number,size:number,priority=1):void {
     for(let i=0;i<count;i++){const a=angle+(this.particles.random()-.5)*spread;
@@ -65,7 +66,9 @@ export class CombatEffects {
   }
   update(dt:number):void {this.particles.update(dt);for(const s of this.stamps)s.age=Math.min(s.duration,s.age+dt);}
   clear():void {this.particles.clear();for(const s of this.stamps)s.age=s.duration;}
+  feedback(kind:'hurt'|'heal'|'bounce'|'death',x:number,y:number,angle=0):void {this.stamp('feedback','sandal',x,y,angle,kind==='death'?36:28,.4,kind==='hurt'?2:0,['hurt','heal','bounce','death'].indexOf(kind));}
   hit(id:WeaponId,x:number,y:number,angle:number,kill:boolean):void {
+    if(kill)this.feedback('death',x,y,angle);
     const tone=PALETTE[id]??(weaponFor(id).category==='melee'?9:weaponFor(id).category==='magic'?10:1);
     this.stamp('hit',id,x,y,angle,kill?25:17,.17);
     this.spray(x,y,kill?7:id==='smg'||id==='gourd'?2:4,tone,id==='peach'?'petal':id==='pole'?'chip':'spark',angle,2.5,kill?160:115,3.5);
@@ -76,8 +79,8 @@ export class CombatEffects {
     if(id==='smg'||id==='shotgun')this.spray(x,y,id==='shotgun'?3:1,1,'chip',angle-Math.PI/2,.6,85,3);
     else if(id==='peach'||id==='firecracker')this.spray(x,y,3,(PALETTE[id]??9),id==='peach'?'petal':'spark',angle,1.4,80,3);
   }
-  slash(id:WeaponId,x:number,y:number,angle:number,radius:number,arc:number):void {
-    this.stamp('slash',id,x,y,angle,radius,.23,1,0,0,arc*Math.PI/180);
+  slash(id:WeaponId,x:number,y:number,angle:number,radius:number,arc:number,tier=1):void {
+    this.stamp('slash',id,x,y,angle,radius,.23,1,0,0,arc*Math.PI/180,tier);
     const tip=angle+.2;this.spray(x+Math.cos(tip)*radius*.8,y+Math.sin(tip)*radius*.8,5,(PALETTE[id]??9),id==='pole'?'dust':'spark',tip,1.4,100,4);
   }
   burst(id:WeaponId,x:number,y:number,radius:number,skill=false):void {
@@ -124,64 +127,40 @@ export class CombatEffects {
       else {star(air,p.x,p.y,size,p.angle,p.tone,fade);}
     }
   }
-  flight(g:Graphics,id:WeaponId,x:number,y:number,angle:number):void {
-    const c=Math.cos(angle),s=Math.sin(angle),tone=PALETTE[id]??9;
-    const length=id==='smg'?38:id==='shotgun'?23:id==='rocket'?38:24;
-    line(g,[[x-c*length,y-s*length],[x,y]],tone,.25,id==='rocket'?13:id==='peach'?9:6);
-    line(g,[[x-c*length*.7,y-s*length*.7],[x,y]],id==='peach'?6:0,.8,id==='smg'?2:id==='rocket'?5:2.5);
-    if(id==='rocket')star(g,x-c*16,y-s*16,8,angle,1,.95);
-    if(id==='peach')star(g,x,y,10,angle,6,.8);
+  flight(g:Graphics,id:WeaponId,x:number,y:number,angle:number,tier=1):void {
+    drawWeaponFlight(g,id,x,y,angle,tier);
   }
   private drawStamp(ground:Graphics,g:Graphics,s:Stamp):void {
-    const t=s.age/s.duration,fade=1-t,ease=1-(1-t)**3,tone=PALETTE[s.id as WeaponId]??1;
-    const {x,y,radius:r}=s;
-    if(s.kind==='hero'){this.drawHero(ground,g,s,t,fade,ease);return;}
-    if(s.kind==='hit'){
-      star(g,x,y,r*(.55+.55*ease),s.angle,tone,fade*.8);star(g,x,y,r*.48,s.angle,0,fade);
-    }else if(s.kind==='muzzle'){
-      const c=Math.cos(s.angle),d=Math.sin(s.angle),size=r*(1-t*.6);
-      const cone:Point[]=[[x,y],[x+c*size-d*size*.18,y+d*size+c*size*.18],[x+c*size*.7,y+d*size*.7],[x+c*size+d*size*.24,y+d*size-c*size*.24],[x,y]];
-      line(g,cone,tone,fade*.8,5);star(g,x+c*12,y+d*12,size*.4,s.angle,0,fade);
-    }else if(s.kind==='slash'){
-      const width=s.id==='pole'?17:12,start=s.angle-s.arc*.5,end=start+s.arc;
-      // A tapered filled crescent instead of a thin soft line.
-      g.fillColor=ink(s.id==='pole'?1:tone,fade*.45);
-      for(let i=0;i<=20;i++){const a=start+(end-start)*i/20,px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;if(!i)g.moveTo(px,py);else g.lineTo(px,py);}
-      for(let i=20;i>=0;i--){const a=start+(end-start)*i/20,inner=r-width*Math.sin(i/20*Math.PI),px=x+Math.cos(a)*inner,py=y+Math.sin(a)*inner;g.lineTo(px,py);}g.close();g.fill();
-      const points:Point[]=[];for(let i=0;i<=16;i++){const a=start+s.arc*i/16;points.push([x+Math.cos(a)*r,y+Math.sin(a)*r]);}line(g,points,0,fade,3);
-      star(g,x+Math.cos(s.angle)*r,y+Math.sin(s.angle)*r,12*fade,s.angle,0,fade);
-    }else if(s.kind==='burst'){
-      const rr=r*(.3+.7*ease);
-      ground.fillColor=ink(tone,fade*.13);ground.circle(x,y,rr);ground.fill();
-      ring(ground,x,y,rr,tone,fade*.8,3+fade*3);ring(ground,x,y,rr*.8,0,fade*.5,2);
-      if(s.id==='star-lamps'){for(let i=0;i<7;i++){const a=i*TAU/7+s.age;star(ground,x+Math.cos(a)*r*.8,y+Math.sin(a)*r*.8,8,s.age,1,fade);}}
-      else if(s.id==='peach')for(let i=0;i<5;i++){const a=i*TAU/5;petal(ground,x+Math.cos(a)*rr*.48,y+Math.sin(a)*rr*.48,rr*.27,a,5,fade*.34);}
-      else {
-        // A brief jagged fire silhouette breaks into sparks, rather than looking like a target reticle.
-        const flame=Math.max(0,1-t*2.3),size=r*(.35+ease*.3);
-        if(flame>0){g.fillColor=ink(7,flame*.65);g.moveTo(x+size,y);
-          for(let i=1;i<24;i++){const a=i*TAU/24,at=size*(i%2?.48:1);g.lineTo(x+Math.cos(a)*at,y+Math.sin(a)*at);}g.close();g.fill();
-          star(g,x,y,size*.7,s.seed,1,flame*.9);}
-        for(let i=0;i<7;i++){const a=i*TAU/7+s.seed,at=r*(.25+ease*.48);star(g,x+Math.cos(a)*at,y+Math.sin(a)*at,(12+i%3*4)*fade,a,7,fade*.7);}
+    const t=s.age/s.duration,f=1-t,{x,y,radius:r}=s;
+    if(s.kind==='hero'){this.drawHero(ground,g,s,t,f,1-(1-t)**3);return;}
+    const id=s.id as WeaponId;
+    if(s.kind==='hit')drawWeaponHit(g,id,x,y,s.angle,r,t);
+    else if(s.kind==='slash')drawWeaponSlash(ground,g,id,x,y,s.angle,r,s.arc,t,f,s.tier);
+    else if(s.kind==='muzzle')drawWeaponMuzzle(g,id,x,y,s.angle,t);
+    else if(s.kind==='burst')drawWeaponBurst(ground,g,id,x,y,r,t);
+    else if(s.kind==='bolt'){
+      const dx=s.tx-x,dy=s.ty-y,length=Math.hypot(dx,dy)||1;
+      for(let layer=0;layer<3;layer++){g.strokeColor=ink(layer===2?11:10,f*(layer===0?.28:1));g.lineWidth=layer===0?14:layer===1?5:1.8;
+        for(let i=0;i<=9;i++){const offset=i===0||i===9?0:Math.sin(i*7.13+s.seed)*11,xx=x+dx*i/9-dy/length*offset,yy=y+dy*i/9+dx/length*offset;if(!i)g.moveTo(xx,yy);else g.lineTo(xx,yy);}g.stroke();}
+      // Forks leave the same live arc simultaneously, staying between its two real endpoints.
+      for(let side=-1;side<=1;side+=2){
+        const u=side<0?.34:.62,xx=x+dx*u,yy=y+dy*u;
+        brush.current(g,xx,yy,xx+dx*.15-dy/length*side*18,yy+dy*.15+dx/length*side*18,side*4,5*f,'violet',f);
       }
-      star(g,x,y,Math.min(40,r*.42)*Math.max(0,1-t*2.6),s.seed,0,Math.max(0,1-t*2.6));
-    }else if(s.kind==='bolt'){
-      const dx=s.tx-x,dy=s.ty-y,length=Math.hypot(dx,dy)||1,points:Point[]=[];
-      for(let i=0;i<=9;i++){const offset=i===0||i===9?0:Math.sin(i*7.13+s.seed)*13;points.push([x+dx*i/9-dy/length*offset,y+dy*i/9+dx/length*offset]);}
-      line(g,points,10,fade*.2,14);line(g,points,10,fade,5);line(g,points,11,fade,2);
-      const mid=points[5];line(g,[mid,[mid[0]+18,mid[1]+23],[mid[0]+8,mid[1]+24]],10,fade*.7,2);
-    }else if(s.kind==='vortex'){
-      for(let j=0;j<3;j++){
-        const points:Point[]=[];for(let i=0;i<=24;i++){const p=i/24,a=p*TAU*1.4+t*9+j*TAU/3,dist=r*(.18+p*.82);points.push([x+Math.cos(a)*dist,y+Math.sin(a)*dist*.65]);}
-        line(g,points,10,fade*.22,7);line(g,points,j===0?11:10,fade*.85,2.5);
-        const tip=points[24];star(g,tip[0],tip[1],5,0,11,fade);
-      }
-    }else if(s.kind==='suction'){
-      const dx=s.tx-x,dy=s.ty-y,points:Point[]=[];
-      for(let i=0;i<=12;i++){const p=i/12,a=s.seed+p*TAU+t*5,envelope=Math.sin(p*Math.PI)*12;points.push([x+dx*p+Math.cos(a)*envelope,y+dy*p+Math.sin(a)*envelope]);}
-      line(g,points,10,fade*.6,3);const p=points[Math.min(12,Math.floor(t*12))];star(g,p[0],p[1],5,0,11,fade);
+      brush.nib(g,s.tx,s.ty,Math.atan2(dy,dx)+.65,31*f,6*f,'violet',f);
+    }else if(s.kind==='vortex'||s.kind==='suction'){
+      if(s.kind==='vortex'){for(let i=0;i<4;i++){const a=i*TAU/4+t*6;const outer=r*(1-.52*t),end=a+1.54;
+        brush.current(g,x+Math.cos(a)*outer,y+Math.sin(a)*outer,x+Math.cos(end)*outer*.27,y+Math.sin(end)*outer*.27,-outer*.59,outer*.21,'violet',f);
+        brush.crescent(g,x,y,outer,a,1.2,5*f,'violet',f);brush.crescent(g,x,y,r*(.62-.4*t),a+.7,1,3*f,'violet',f,2);}}
+      else {const a=Math.atan2(s.ty-y,s.tx-x),length=Math.hypot(s.tx-x,s.ty-y);brush.nib(g,x+(s.tx-x)*t,y+(s.ty-y)*t,a,Math.min(45,length*.3),7*f,'violet',f);}
+    }else if(s.kind==='feedback'){
+      if(s.tx===0)brush.contact(g,x,y,s.angle,r,t,'crimson');
+      else if(s.tx===1){material(g,'heal',x,y+22*t,65,65,0,f,1);for(let i=0;i<3;i++)brush.stream(g,x+(i-1)*17,y+10+t*35,Math.PI/2,14,3,'jade',f);}
+      else if(s.tx===2){brush.contact(g,x,y,s.angle,17,t,'silver',.75);}
+      else {brush.dust(ground,x,y,r,t,.8);for(let i=0;i<3;i++)brush.stream(g,x,y,s.angle+(i-1)*.9,18,3,'gold',f*.6);}
     }
   }
+
   private drawHero(ground:Graphics,g:Graphics,s:Stamp,t:number,fade:number,ease:number):void {
     const {x,y,radius:r}=s,alpha=Math.min(1,fade*1.5),rr=r*(.25+.75*ease);
     if(s.id==='zhaoyun'){

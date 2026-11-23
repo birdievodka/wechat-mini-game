@@ -64,6 +64,8 @@ node /path/to/cocos-game-vfx/scripts/inspect-taoyuan.cjs --project /path/to/wech
 
 ## 工程闭环
 
+v9.22命中数字由BattleNumber接在GameBootstrap.hitEnemy的enemy.text结构端口，数字占BattleSpriteAtlas空余第88格而非额外纹理/逐命中Label测字。不要为修改命中飘字重新引入逐敌Graphics或破坏原node/string、根位置/弹跳/清场时序。此为JSC字符串栈后的针对性规避，不是已确认原机根因；验证见test-battle-text与docs/stability-v922.md。
+
 ```bash
 npm run typecheck
 node scripts/test-common-skills.cjs
@@ -94,3 +96,37 @@ v6.4小跑修复案例：移动速度提高后不能沿用按travel/12再floor(w
 ## v9.16首领强化案例
 
 袁绍rain与曹操sword-field必须进BossBattle共享6危险区，start先预留完整数量、add池化重置lockAt/locationLocked，渲染不推进时钟。E40未来棋子锁定前隐藏，锁定后完整.85秒预告。孟获护体金弧直接消费bossBeastCharging，与hitEnemy/技能候选/拉扯入口同源；收招撤盾，不能靠画面颜色当免伤状态。复用原2 Graphics与86Sprite。真实WebGL定帧art/reviews/balance-v916，capture-balance-review带隔离/恢复，不当手机性能证明。
+
+## 待确认：v10全量材质与运动升级
+
+2026-11-20用户视频仅2.80秒，提取有序样本用于观察实体刃身、收尖流动尾迹与重招主体，不据此推定对方技术或稳定性。设计源见[全量升级方案](../../../../docs/vfx-upgrade-v10/方案.md)，视频截帧是参考，不是本作概念图或实现验收。
+
+提议从纯图形为主转为透明手绘主体/局部序列帧＋连续轨迹＋共享Sprite材质，原Graphics保留精确边界和少量连接。现有瞬发伤害与后续装饰尾迹分离，实际扫角判伤的Boss刀锋则与扫角同源。先用六个真实动态样板校准主形体、材质、运动、接触和生命周期，再铺开36武器/12主动/21Boss招式。
+
+该方案仅待确认，当前G03 A版与v9.22代码未改。约20MiB新增纹理、固定渲染片和合批预算均未实测，不能当作批准后的常驻配额或原机稳定性结论。实施时复用已有池并逐项迁移，禁止整套旧新效果双播、逐命中Canvas/文字纹理生成及全量Boss/技能图集常驻。
+
+首批三张image_gen概念关键帧已归档[concepts](../../../../docs/vfx-upgrade-v10/concepts/README.md)，分别为青龙刀、水淹七军、赤兔破军；均待审，不是实际引擎或动画验收。吕布板底部跑姿仅为意向，实施仍需驻马起势/真实刹停；概念击飞不能擅自改控制。不得直接将整张概念板打入运行包。
+
+三张先导方向后获用户认可，全量设计扩为[133项独立图册](../../../../docs/vfx-upgrade-v10/full/完整设计方案.md)，包括各武器四档机制、12主动、21Boss招式、40兵、成长骑宠与精英变体/共通反馈；manifest保留完整提示、原图SHA与参考。新稿仍待审，本轮仅设计。实际源码优先于历史文案：普通军师两雷圈、精英军师三子/十字分列，重斧/巨锤按真实85/95半径。不得将概念生成器/HTML/PDF脚本当成运行时实现、将完整稿误称Cocos动态样板。
+
+全量图册采用逐项身份/敌我关系/数量与空间核对：普通兵用“身份表→已纠正的单兵对主角样板→少年身份”减少整景串角色；三宠只由宠物攻击，旗手/军医仅作用友兵。骑乘小关必须绿帽青龙刀、小张必须红头带紫衣黑猪，不能借吕布参考把小刘或吕布混入；象兵统领仍是绿金E25。常驻飞剑/普通双剑与本命三连分列；张角三符三角、董卓四钱双侧通道/三独立酒池、袁绍四弓手/两弩车三连射、司马懿三子及双龙中间通道都要按实际机制构图。方案和原图、提示/来源同步，废弃初稿不进运行资源。
+
+## v10全量实现
+
+133项已获准实施，当前v10.0与逐项对应见docs/vfx-upgrade-v10/实现说明.md和implementation/coverage.json。真实入口CombatEffects→weapon-vfx、CommonSkillEffects→skill-vfx-v10、BossEffects/lvbu-effects、enemy-vfx-v10、growth/PetView；保留所有判定源。vfx-brush连续几何＋vfx-materials四共享层/96总64普通Sprite，16材质同一1024²4MiB；凹多边形原生对角楔形用12/24凸条处理。成长移到世界层避免新私有绘图模型，清场和析构解除Sprite引用。
+
+132真实引擎帧（控制反馈共用G26）、两组各60秒加速资源检查、微信实际v10/16帧就绪，见art/reviews/vfx-v10；不是手机FPS/崩溃修复证明。回归中只更新授权的boss-effects/lvbu-effects/enemy-spell-effects表现哈希，逻辑/PNG保护仍在；剑阵接受实体fill，诊断夹具必须给真实战斗seconds，不能降低检查。
+
+v10.4 横扫六合以已采用的 A 稿「金锋回旋」为表现基准，沿用原始月牙刃面、暖白锋边与真实命中的金色碎屑。设计原图见 art/concepts/sweep-v5.1/01-golden-cleave.png。v10.2 金线与 v10.3 游龙均已撤下；其他技能继续使用 v10 特效。
+
+v10.5 三少年共享的其余 11 招主动技能接入 skill-vfx-v10 的双侧收尖笔触，各自沿用真实弹道、火线、扩圈、剑轨与落点。主体用共享 Graphics 的实体色面与局部亮锋，复用箭形、受击碎锋和眩晕星；G03 继续使用独立 A 版与基线校验。武器及敌方特效仍按各自入口。
+
+v10.6 大范围表现覆盖火烧连营、水淹七军、八门金锁、震军号令、星落五丈原、万箭齐发与雷霆万钧。以地面底色、移动主体和局部收尾形成前后层，仍由同一场景时钟和伤害节拍驱动。同层共享 Graphics，无额外纹理或逐弹新节点。详见战斗特效参考。
+
+v10.7 雷霆万钧聚云0.20秒后四雷同帧判定，共用一次预声和雷鸣；独立入射方向在单目标重叠时仍可辨，同敌最多2雷、总18目标。v10.7.1 星落五丈原改为九颗陨石在0.35–1.47秒依次落地，间隔0.14秒，末颗触发终击星阵，每颗在下落开始时锁定落点。火烧连营改为横向点火、连续卷焰与随四次灼烧传递的亮锋，沿用480×80判定。
+
+v10.8 覆盖36把武器和7位首领共21招。weapon-vfx 用于挥击、飞行、枪口、命中和场地；combat-effects 与 GameBootstrap 传入实际事件。吕布取 lvbu-effects，另六位取 boss-effects，阶段冲锋精英取 yellow-charge-effects。复用 vfx-brush 的 nib、crescent、sweepEdge、groundStrike。对照项目 skill 的 combat-effects 与 weapon-evolution 两份参考。实景夹具分别走 vfxUpgradeReview.weapon、bossesReview.show 与 lvbuReview.show；每次恢复菜单会释放远程首领图集，下一组须重新 prepareBosses。按表核对36/21项和箭雨、落印等连续动作，再用混装六武器与六剑阵压测；记录采样时长、对象池与纹理，真机帧率和系统闪退需在原机另行验证。
+
+v10.9 的参考范围是全部十二招英雄主动技。映射表见项目 skill 的 combat-effects「以整套主动技为武器和首领的美术参照」。火烧连营、酒池和火油共用 vfx-brush.firePlume 的曲线；袁绍箭雨与万箭齐发共用 drawSkillArrow。武器法阵、各兵器挥击和首领冲锋直接读取自身时钟或位移。三组样本分别对照武器、首领与原英雄技能，避免只用最后一项落体改动概括整轮方向。
+
+v10.10 雷霆万钧与星落五丈原。雷霆聚云0.20秒后同时轰击12处，每处半径65；星落分9轮、每轮3颗（共27颗），每颗下落0.35秒，从0.35秒起每0.14秒落一轮，第九轮在1.47秒落地。 每组三个独立落点共用一个调度任务与视觉槽，绘制和伤害读取同一批锁定坐标。落雷按次、陨石按轮发声。单敌命中上限分别为2和3，目标上限分别为18和20。

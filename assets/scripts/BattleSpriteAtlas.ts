@@ -5,7 +5,11 @@ import {drawWeaponArt} from './weapon-art';
 import {drawSkillIcon} from './skill-vfx-art';
 
 const CELL=128,COLUMNS=8;
+export const NUMBER_CHARACTERS='0123456789-+/';
+const NUMBER_FONT=39,NUMBER_SCALE=21/NUMBER_FONT,NUMBER_WIDTH=25,NUMBER_HEIGHT=42;
+export interface NumberGlyph {frame:SpriteFrame;advance:number;width:number;height:number;left:number;}
 const UI_PILLS=['#fff0d2','#355e40','#c94d2e','#d3c9b2'];
+const SHOP_SKINS=['ui-solid','ui-jade-raised','ui-jade-flat',...Array.from({length:6},(_,i)=>'ui-shop-card-'+i),...Array.from({length:4},(_,i)=>'ui-tier-'+(i+1)),'tier-pip-small','tier-pip','passive-badge','shop-bun'];
 interface Cell {frame:SpriteFrame;x:number;y:number;width:number;height:number;}
 /** Canvas adapter for the existing procedural drawings. Bake once, keep identical grip coordinates. */
 export class CanvasDrawing {
@@ -31,12 +35,14 @@ export class CanvasDrawing {
 export class BattleSpriteAtlas {
   private texture?:Texture2D;
   private cells:Record<string,Cell>={};
+  readonly numberGlyphs:NumberGlyph[]=[];
   get ready():boolean{return !!this.texture;}
   constructor(){try{this.bake();}catch(error){this.destroy();console.warn('战斗图形缓存不可用，回退矢量绘制',error);}}
   private bake():void {
     // Cocos' browser/WeChat document adapter creates an offscreen 2D canvas here.
     if(typeof document==='undefined')return;
-    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close',...WORLD_PROPS.map(id=>'prop-'+id)]);
+    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close',...WORLD_PROPS.map(id=>'prop-'+id)],SHOP_SKINS,['damage-digits']);
+    const numberAdvances:number[]=[];
     const canvas=document.createElement('canvas');canvas.width=CELL*COLUMNS;canvas.height=CELL*Math.ceil(keys.length/COLUMNS);
     const ctx=canvas.getContext('2d');if(!ctx)return;
     for(let i=0;i<keys.length;i++){
@@ -48,6 +54,34 @@ export class BattleSpriteAtlas {
         if(key==='weapon-sandal'){ctx.scale(2,2);ctx.translate(0,-4);}
         drawWeaponArt(g as unknown as Graphics,WEAPONS[i].id,1,true);
       }
+      else if(key==='damage-digits'){
+        // 13 glyphs in the formerly empty 88th cell. Same texture dimensions;
+        // rasterized at 39px for crisp 21px feedback, no per-hit canvas/Label cache.
+        ctx.scale(1,-1);
+        try{ctx.font=NUMBER_FONT+'px Arial';ctx.fillStyle='#ffffff';ctx.textAlign='left';ctx.textBaseline='alphabetic';
+          for(let n=0;n<NUMBER_CHARACTERS.length;n++){const char=NUMBER_CHARACTERS[n],advance=ctx.measureText(char).width*NUMBER_SCALE;if(!Number.isFinite(advance)||advance<=0)throw new Error('数字字宽不可用');ctx.fillText(char,-63+n%5*NUMBER_WIDTH,-46+Math.floor(n/5)*NUMBER_HEIGHT);numberAdvances.push(advance);}
+        }catch(_){numberAdvances.length=0;ctx.clearRect(-64,-80,CELL,CELL);console.warn('数字缓存不可用，伤害文字保留Label；原战斗图集继续可用');}
+      }
+      else if(key==='ui-solid'){g.fillColor=new Color('#ffffff');g.rect(-32,-32,64,64);g.fill();}
+      else if(key.indexOf('ui-jade-')===0){
+        const raised=key==='ui-jade-raised';if(raised){g.fillColor=new Color(14,26,20,130);g.roundRect(-26,-32,52,52,25);g.fill();}
+        g.fillColor=new Color(30,55,42,raised?237:145);g.strokeColor=new Color(210,199,140,raised?210:95);g.lineWidth=raised?2:1;g.roundRect(-26,-26,52,52,raised?24:14);g.fill();g.stroke();
+        if(raised){g.strokeColor=new Color(198,210,168,50);g.lineWidth=1;g.roundRect(-20,-20,40,40,19);g.stroke();}
+      }
+      else if(key.indexOf('ui-shop-card-')===0){
+        const tier=Number(key.slice(13)),weapon=tier>=1&&tier<=4,color=weapon?TIER_COLORS[tier-1]:tier===5?'#e8bb65':'#b8afdc';
+        g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=weapon?2+tier*.65:2;g.roundRect(-26,-26,52,52,19);g.fill();g.stroke();
+        if(weapon){const wash=new Color(color);wash.a=tier===1?10:22;g.fillColor=wash;g.roundRect(-20,-20,40,40,15);g.fill();}
+      }
+      else if(key.indexOf('ui-tier-')===0){
+        const tier=Number(key.slice(8));g.fillColor=new Color('#2f2418');g.roundRect(-26,-21,52,42,12);g.fill();g.fillColor=new Color(TIER_COLORS[tier-1]);g.strokeColor=new Color('#432d1d');g.lineWidth=2;g.roundRect(-26,-18,52,42,12);g.fill();g.stroke();
+        if(tier>=3){g.strokeColor=new Color('#ffe6a8');g.lineWidth=1.5;g.roundRect(-22,-14,44,34,9);g.stroke();}
+      }
+      else if(key==='tier-pip'||key==='tier-pip-small'){
+        const r=key==='tier-pip-small'?4:5;g.fillColor=new Color('#ffe3a1');g.strokeColor=new Color('#2f2418');g.lineWidth=1.2;g.moveTo(0,r+1);g.lineTo(r,0);g.lineTo(0,-r-1);g.lineTo(-r,0);g.close();g.fill();g.stroke();
+      }
+      else if(key==='passive-badge'){g.fillColor=new Color('#ffffff');g.circle(0,0,12);g.fill();}
+      else if(key==='shop-bun'){g.fillColor=new Color('#f5dba1');g.strokeColor=new Color('#9a7144');g.lineWidth=3;g.ellipse(0,0,32,25);g.fill();g.stroke();g.moveTo(-10,19);g.lineTo(0,9);g.lineTo(10,19);g.stroke();}
       else if(key.indexOf('prop-')===0)drawWorldProp(g as unknown as Graphics,key.slice(5) as WorldProp);
       else if(key.indexOf('skill-')===0)drawSkillIcon(g as unknown as Graphics,Number(key.slice(6)));
       else if(key.indexOf('hud-slot-')===0){
@@ -82,7 +116,11 @@ export class BattleSpriteAtlas {
     this.texture=new Texture2D();this.texture.reset({width:canvas.width,height:canvas.height});this.texture.uploadData(pixels);
     for(let i=0;i<keys.length;i++){
       const tx=i%COLUMNS*CELL,ty=Math.floor(i/COLUMNS)*CELL;
-      if(keys[i].indexOf('ui-')===0){const frame=new SpriteFrame();frame.texture=this.texture;frame.rect=new Rect(tx+32,ty+48,64,64);const inset=keys[i].indexOf('ui-pill-')===0?24:14;frame.insetLeft=frame.insetRight=frame.insetTop=frame.insetBottom=inset;this.cells[keys[i]]={frame,width:64,height:64,x:0,y:0};continue;}
+      if(keys[i]==='damage-digits'){
+        if(numberAdvances.length!==NUMBER_CHARACTERS.length)continue;
+        for(let n=0;n<NUMBER_CHARACTERS.length;n++){const frame=new SpriteFrame();frame.texture=this.texture;frame.rect=new Rect(tx+n%5*NUMBER_WIDTH,ty+Math.floor(n/5)*NUMBER_HEIGHT,NUMBER_WIDTH,NUMBER_HEIGHT);this.numberGlyphs.push({frame,advance:numberAdvances[n],width:NUMBER_WIDTH*NUMBER_SCALE,height:NUMBER_HEIGHT*NUMBER_SCALE,left:NUMBER_SCALE});}continue;
+      }
+      if(keys[i].indexOf('ui-')===0){const frame=new SpriteFrame(),key=keys[i],jade=key.indexOf('ui-jade-')===0,size=jade?80:64;frame.texture=this.texture;frame.rect=new Rect(tx+(CELL-size)/2,ty+80-size/2,size,size);const inset=jade?(key==='ui-jade-raised'?39:32):key.indexOf('ui-shop-card-')===0?28:key.indexOf('ui-tier-')===0?22:key.indexOf('ui-pill-')===0?24:14;frame.insetLeft=frame.insetRight=frame.insetTop=frame.insetBottom=inset;this.cells[key]={frame,width:size,height:size,x:0,y:0};continue;}
       let left=CELL,top=CELL,right=-1,bottom=-1;
       for(let y=0;y<CELL;y++)for(let x=0;x<CELL;x++)if(pixels[((ty+y)*canvas.width+tx+x)*4+3]){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
       if(right<left)continue;left=Math.max(0,left-2);top=Math.max(0,top-2);right=Math.min(CELL-1,right+2);bottom=Math.min(CELL-1,bottom+2);
@@ -106,5 +144,5 @@ export class BattleSpriteAtlas {
   set(sprite:Sprite,key:string):boolean {
     const cell=this.cells[key];if(!cell)return false;sprite.spriteFrame=cell.frame;sprite.node.getComponent(UITransform)!.setContentSize(cell.width,cell.height);sprite.node.setPosition(cell.x,cell.y);return true;
   }
-  destroy():void{for(const key of Object.keys(this.cells))this.cells[key].frame.destroy();this.texture?.destroy();this.texture=undefined;this.cells={};}
+  destroy():void{for(const key of Object.keys(this.cells))this.cells[key].frame.destroy();for(const glyph of this.numberGlyphs)glyph.frame.destroy();this.numberGlyphs.length=0;this.texture?.destroy();this.texture=undefined;this.cells={};}
 }

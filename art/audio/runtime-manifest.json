@@ -1,5 +1,6 @@
 {
   "source": "review-v1/manifest.json",
+  "combatScoreAndFoley": "scripts/battle_score.py",
   "status": "adopted",
   "sfx": [
     "wood-attack",
@@ -90,131 +91,130 @@
     "unlock"
   ],
   "music": [
-    "menu",
-    "battle",
-    "boss"
+    "brass-oath",
+    "brass-rally"
   ],
   "musicFormat": "AAC mono 24kHz 64kbps",
   "physicalSounds": [
     {
       "bundle": "sfx-core",
       "name": "wood-attack",
-      "sha256": "2cd899326d1a84e5c79eb1c37e71148cacaab0215cff03decc4109de92b4b3ca",
-      "bytes": 5804
+      "sha256": "52642a81312e2d13a765bcc685130da1ab3ec33f1d50034ce9386e98cc2d89d4",
+      "bytes": 4344
     },
     {
       "bundle": "sfx-core",
       "name": "wood-hit",
-      "sha256": "bea7e9a0217bfc3ba22b888fe89535826ad10677ea93f7d245f777ca6afafab3",
-      "bytes": 7724
+      "sha256": "b086264149390b7e9899416c2f92e426c2682cee751acb9da63e98489d39d30d",
+      "bytes": 6764
     },
     {
       "bundle": "sfx-core",
       "name": "blade-attack",
-      "sha256": "3e6048d418094c175b9225e1945a5cfdb7be06b7b2b13bf904688b73e80b0f13",
-      "bytes": 5804
+      "sha256": "46a6f812b73cac2711354288621dc56ee1cc99dabfb083dcd75dbfa7d8f92f33",
+      "bytes": 4960
     },
     {
       "bundle": "sfx-core",
       "name": "blade-hit",
-      "sha256": "35a109cca6956bc019dc5ea01dfc97b3e918752b7a41a85fcbc521954734b423",
+      "sha256": "f3eca186135e8e162e51ba416625ca9336c98ee78aab98cecbff23885efa52e6",
       "bytes": 7724
     },
     {
       "bundle": "sfx-core",
       "name": "heavy-attack",
-      "sha256": "4b874bc631af27d5beff78b3251f9eb72a356d249ec4ba76c50af8377c661d85",
-      "bytes": 5804
+      "sha256": "709987d0125cad13689e7181bfb86b5bb62fbd9879c9f7d934842bb0c4afbba8",
+      "bytes": 5880
     },
     {
       "bundle": "sfx-core",
       "name": "heavy-hit",
-      "sha256": "3daa1154889cc222b7e6e0f33043a3272d92b1d3fcc7f021bf17a654d6d09f3c",
-      "bytes": 14444
+      "sha256": "00275d99218ad6b20b780d6bb9fc55df3324498235989727e1ec45a5a4391b59",
+      "bytes": 9164
     },
     {
       "bundle": "sfx-core",
       "name": "bow-attack",
-      "sha256": "29cef709a2e90dc0883f5d6fede612a380d1eea1c07eadb969e478b0e63fa26d",
-      "bytes": 7244
+      "sha256": "8402e86b35d90a760976072a7a5837b6450bba416bd42bcd083ae836b5fcf7e8",
+      "bytes": 3270
     },
     {
       "bundle": "sfx-core",
       "name": "bow-hit",
-      "sha256": "338e4159ceae7a5295e1d862f50caa81e8929ee2d6b38262506214659fc2bc4c",
-      "bytes": 5324
+      "sha256": "9d523af4af111c854cb2a74f03235937c71fb7f16eb7bb16c26ae0177ab3f9c3",
+      "bytes": 5084
     },
     {
       "bundle": "sfx-core",
       "name": "gun-attack",
-      "sha256": "12077d9c7f414c8893c5e2e016b6bbd7a3ae88bab0133926e93e3232320f84cc",
-      "bytes": 4844
+      "sha256": "f6b7a29d60c1272e04776500e6723aea75d0459c88dd2da7a57219c02dfcf532",
+      "bytes": 2808
     },
     {
       "bundle": "sfx-core",
       "name": "gun-hit",
-      "sha256": "eda034f5472e57ab1309f0671b9e669d70b5a05f7cab5521567bf37ca90a5fd7",
-      "bytes": 7724
+      "sha256": "74fa4976172f4305a6940baf0d0bbe6a08ce83e4034b5c3cfeae7c32a01c25a3",
+      "bytes": 4364
     },
     {
       "bundle": "sfx-core",
       "name": "blast-attack",
-      "sha256": "360a36e33c717993aa42f2b5911d824195527049657f1673019186d32e8f0334",
-      "bytes": 8684
+      "sha256": "c334cd526617abc60618a30c80d08bc83cd749bf718259b8f311dea22e2836b9",
+      "bytes": 7110
     },
     {
       "bundle": "sfx-core",
       "name": "blast-hit",
-      "sha256": "5845b2615279d26841a1b602934a16e7733266fc68744fa111070176e41a6023",
-      "bytes": 14444
-    },
-    {
-      "bundle": "sfx-core",
-      "name": "petal-attack",
-      "sha256": "28d63cc149a64e6953f9ae53e47697729222570c08873766229e708fcc268972",
-      "bytes": 13484
-    },
-    {
-      "bundle": "sfx-core",
-      "name": "petal-hit",
-      "sha256": "f5aaad69db0e86a885fb0316581d0c53041d04318ef3dfa92928a853728fe9f3",
-      "bytes": 17324
-    },
-    {
-      "bundle": "sfx-core",
-      "name": "spirit-attack",
-      "sha256": "202fbfe59406b38c003650b966271b49190f44322da0023123659b749b383ccf",
-      "bytes": 10604
-    },
-    {
-      "bundle": "sfx-core",
-      "name": "spirit-hit",
-      "sha256": "4969d07266457f9835514a533e37aa861cd83fb6d5aafdc9e040bffc8d32c88d",
-      "bytes": 12044
-    },
-    {
-      "bundle": "sfx-core",
-      "name": "thunder-attack",
-      "sha256": "c292721c2829f296cfc400097e09836261ea11cef4f5205342cb36f82ecbec9e",
+      "sha256": "2c42cb767e99e0c0ab050a5d4c2786c31eafc840eeef30044140b88e63639abf",
       "bytes": 11084
     },
     {
       "bundle": "sfx-core",
+      "name": "petal-attack",
+      "sha256": "eb2c62c3c3be337bdd5f2c75ce1046c46dcedf7dc9dfad1c95e305fb1d57f125",
+      "bytes": 4038
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "petal-hit",
+      "sha256": "06cd11f373b325ef8bf2d41a39cb850baaafe336e5118c3be77e90bf6331e60b",
+      "bytes": 6284
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "spirit-attack",
+      "sha256": "40e49a918a6b35b054d4b00da6cc2936b7af332a112f2f8bc826a1af052a6d88",
+      "bytes": 5574
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "spirit-hit",
+      "sha256": "0bc96c670944ef2f262a75cf4afbc2e79c8e984e910ab544b1fb97971ad9d1cc",
+      "bytes": 8684
+    },
+    {
+      "bundle": "sfx-core",
+      "name": "thunder-attack",
+      "sha256": "974a9147be4350b4a0f948309c40e257a70af919050154d27957a8b1771934e1",
+      "bytes": 6802
+    },
+    {
+      "bundle": "sfx-core",
       "name": "thunder-hit",
-      "sha256": "e9b99e9c6d8d5c6be7d2bb326b9c1dea58c9f21012f8f28d59488c4e25d1b78c",
-      "bytes": 29804
+      "sha256": "81b987f9794a33246a1b3a12529faaef673ce428dce2f06ab108ec9c9e504429",
+      "bytes": 10604
     },
     {
       "bundle": "sfx-core",
       "name": "ritual-attack",
-      "sha256": "8598071410566cf38b79bab8fc3195cd18de56057f4c04560cf4580ba886c4a9",
-      "bytes": 13484
+      "sha256": "a105803b6f87218d2c7c5dd960e8dbc62babc2f6a6ff608d694b0d43e0aeb377",
+      "bytes": 5574
     },
     {
       "bundle": "sfx-core",
       "name": "ritual-hit",
-      "sha256": "1fd76fbb3a284c728f154201e2d25f21a9c7ef3dbaf5efaca2abcd432cce17ff",
-      "bytes": 21644
+      "sha256": "f7e10ea7591f7297502d1305cff02e13b344aaa7994c7bb40101fa4593ba5f7f",
+      "bytes": 8684
     },
     {
       "bundle": "sfx-core",
@@ -841,8 +841,8 @@
   },
   "skillSegmentation": [
     "G08 per arrow",
-    "G19 per lightning",
-    "G20 per meteor",
+    "G19 one thunderclap per volley",
+    "G20 one impact accent per three meteors",
     "G22 per volley"
   ],
   "bossCueMaxSeconds": 0.6

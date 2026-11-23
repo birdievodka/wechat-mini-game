@@ -13,6 +13,7 @@ function walk(dir) {
     if (item.isDirectory()) walk(file);
     else {
       const relative = path.relative(root, file).split(path.sep).join('/');
+      assert.ok(!relative.endsWith('.map') && !/^(scripts|tmp|output|art\/reviews)\//.test(relative), '微信包夹带工程测试文件 '+relative);
       const owner = roots.find(r => relative.startsWith(r));
       const bytes = fs.statSync(file).size;
       if (owner) sizes[owner] += bytes; else main += bytes;
@@ -24,13 +25,27 @@ console.log(`主包 ${(main / 1024 / 1024).toFixed(2)} MiB`);
 for (const [name, bytes] of Object.entries(sizes)) console.log(`分包 ${name}: ${(bytes / 1024 / 1024).toFixed(2)} MiB`);
 for (const [name, bytes] of Object.entries(sizes)) assert.ok(bytes < 4 * 1024 * 1024, `${name} 超过4MiB`);
 assert.ok(main < 4 * 1024 * 1024, '微信主包超过4MiB，禁止继续预览');
-for(const name of ['battle','campaign','chronicle-ui','chronicle-units','hero-menu','presentation','sfx-core']){
+for(const name of ['battle','campaign','chronicle-ui','chronicle-units','hero-menu','presentation','sfx-core','music']){
   assert.ok(bundles.some(b=>b.name===name),'缺少必需本地分包 '+name);
   assert.ok(fs.existsSync(path.join(root,'subpackages',name,'game.js')),'缺少本地分包入口 '+name);
+}
+// Validate every audition and scene track against the native file shipped to WeChat.
+const musicSource=path.resolve(__dirname,'../assets/music');
+const packagedMusic=fs.readdirSync(path.join(root,'subpackages/music/native'),{recursive:true})
+  .filter(f=>f.endsWith('.m4a'));
+const tracks=['brass-oath.m4a','brass-rally.m4a'];
+assert.deepEqual(fs.readdirSync(musicSource).filter(f=>f.endsWith('.m4a')).sort(),tracks);
+assert.equal(packagedMusic.length,tracks.length,'音乐分包仅应包含两首铜管主题');
+for(const src of tracks){
+  const uuid=JSON.parse(fs.readFileSync(path.join(musicSource,src+'.meta'))).uuid;
+  const dest=packagedMusic.find(f=>path.basename(f).startsWith(uuid+'.'));
+  assert.ok(dest&&fs.readFileSync(path.join(root,'subpackages/music/native',dest)).equals(fs.readFileSync(path.join(musicSource,src))),'音乐分包缺失或内容不一致 '+src);
 }
 const cdn=JSON.parse(fs.readFileSync(path.join(__dirname,'../config/cdn.json')));
 const release=JSON.parse(fs.readFileSync(path.join(__dirname,'../cdn-assets/release.json')));
 const settings=JSON.parse(fs.readFileSync(path.join(root,'src/settings.json')));
+assert.equal(settings.engine.debug,false,'微信发布包必须使用非调试引擎设置');
+assert.notEqual(config.debug,true,'微信游戏配置不得开启调试');
 assert.equal(settings.assets.server,release.baseUrl+'/','构建必须固定到当前不可变CDN版本');
 assert.equal(settings.assets.downloadMaxConcurrency,4,'限制下载并发');
 assert.ok(!fs.existsSync(path.join(root,'remote')),'远程资源不能重复装入微信包');

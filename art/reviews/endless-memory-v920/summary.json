@@ -1,0 +1,12 @@
+{
+  "scope": "static four-card Cocos WebGL shop, no combat, iOS RSS/FPS or crash reproduction",
+  "beforeVersion": "stage-v9.18-endless-settings",
+  "afterVersion": "stage-v9.20-endless-memory",
+  "beforeUiGraphics": 11,
+  "afterUiGraphics": 0,
+  "buffersSavedBytes": 25947956,
+  "textureIncreaseBytes": 1048576,
+  "netGraphicsSavedBytes": 24899380,
+  "restored": true,
+  "errors": 0
+}

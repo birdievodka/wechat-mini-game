@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v9.18-endless-settings",
+    "version": "stage-v10.13.4-release-ui",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "458d2fcbf17cc62d00041acdc0dda4c1c8c605df50ca9f302a40a0909739c7ee",
+    "fingerprint": "b9fde165008bc63cf65f72c3f72a1331a1410dcf4b6776ac38010fc0797cc507",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -15,18 +15,18 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/design.md",
-        "bytes": 4867,
-        "sha256": "a69d0ddd96b59390e804c7ee48f42b8d59bef0507026481cf4821bd380a28fe5"
+        "bytes": 5745,
+        "sha256": "83c6d09f512d3d13d6e14f47a65996ddf1a1918d4d3e97c3c0c3df5e4ad2f1d2"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/implementation.md",
-        "bytes": 8373,
-        "sha256": "769cb2ac0bc6ca1b94b3722dfda26b3bc70df3108fd14213e25559cc6a917331"
+        "bytes": 9960,
+        "sha256": "c9a9de1daea2eddb5af97066a1eeec890c40843c72bbb7442f06f3b075e50e4f"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/taoyuan-adapter.md",
-        "bytes": 8142,
-        "sha256": "965d1109060e91c435abbb7b778977c0d248c0a379aadac727ea889ec847f063"
+        "bytes": 15248,
+        "sha256": "6d54b3d6a40350440efb7b24551878deb7ab3f3247f3614436164b9dfb16576f"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/verification.md",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 37356,
-        "sha256": "8cca995c95e015b9c972c7aa35eb507625cf31717bbeb61824f99e84b4ff8e96"
+        "bytes": 41601,
+        "sha256": "452408229dd4e1c9aeff1ecefb162981b428faa36181335327905d20cf98de9e"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -60,13 +60,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/combat-effects.md",
-        "bytes": 12879,
-        "sha256": "6d87b975ba8a951c246c87c49e98c1d8d1dfbe1f5edf0b11416579cc8899a1e1"
+        "bytes": 24813,
+        "sha256": "57a7054d217a07143137a6cc96edae5d806c2efb9f22097082af044329d1c925"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 5686,
-        "sha256": "d65f84d76bb2a50be912f06d396db5337de056d62d457cf7c60a696a2d789f3a"
+        "bytes": 6138,
+        "sha256": "61e43e6e1f84eed4c2eaff53027fef56d8eeefc73e90be6fb78dd7284890e967"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/enemy-actions.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 30941,
-        "sha256": "c086e5518aec7690787daaf1e9c835ce114ef17eb596a9a75b2b8fe9eb586a9d"
+        "bytes": 35234,
+        "sha256": "8e89ea5c0b5983bee0ba30549036831195812908af9c6085a136406d6ed90717"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -115,8 +115,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 30831,
-        "sha256": "c14629347a78df06c95e47b2f2aa965d3548766076676298cc4c97ef3294865a"
+        "bytes": 43512,
+        "sha256": "03bbc9fe4315d8f27665e9d16e8595116735ad0a3901f8551c283ecc2e1c877d"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/pets.md",
@@ -130,8 +130,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
-        "bytes": 13838,
-        "sha256": "f88bd0ca440753fe39821728c90c4deae5b9c002808de2ebc3052967a36cf563"
+        "bytes": 14800,
+        "sha256": "cca00265ce6d6221f24358a85f634459505b95cdbc2abdcd77c74eac3b329e11"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
@@ -155,13 +155,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/training.md",
-        "bytes": 7472,
-        "sha256": "74e4bde8785bba5a610661119e81eece77aa4d32bc84f2be548a870958e6b723"
+        "bytes": 8768,
+        "sha256": "dd03332245729e0b05c30bb44f8e8d96e614b8c68ebe18c37986e310613a6c02"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapon-evolution.md",
-        "bytes": 5726,
-        "sha256": "f5eb7a0139a94c0f362aa43358fa00600192b9567500c060a9d65148369b497c"
+        "bytes": 6648,
+        "sha256": "3c3071906927c8e0ec495b37f18ba87fa7a10810dcb67ab67176821c46ee0e15"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapons-items.md",
@@ -180,8 +180,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 19178,
-        "sha256": "79f4e3a9a37b9f1be3b8dc14692bea74fbcacd1fe2e3229938d2c68a62165ec3"
+        "bytes": 23723,
+        "sha256": "90ce186809a0f31796b833ec16eb4d3222062779d420f87906c687ca8a84f1d9"
       },
       {
         "path": ".gitignore",
@@ -190,8 +190,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 14856,
-        "sha256": "6c57906caff793843d82d9436c687596f2e1c39469ec5c5361ed4fcc25c497c1"
+        "bytes": 21488,
+        "sha256": "5db3c84c25fe90da0c7571cab25a76f060cd407d67d919c93798eb89217a0ac7"
       },
       {
         "path": "art/audio/review-v1/browser-validation.json",
@@ -690,8 +690,8 @@
       },
       {
         "path": "art/audio/runtime-manifest.json",
-        "bytes": 20040,
-        "sha256": "5b7b03785b3277b0c02ed03092594d40a3a16a121f3b7ac88265fc665fae3c08"
+        "bytes": 20121,
+        "sha256": "8faed2cb1761b509100a321ad6eaa5446d7c9c25541427cfad2deccda676ca70"
       },
       {
         "path": "art/branding/avatar-source.png",
@@ -1254,6 +1254,21 @@
         "sha256": "45e404ea035419c3e5ecd535381ee34f55ffede0fca9bb09e9bd2cb814c91ced"
       },
       {
+        "path": "art/reviews/battle-text-v922/comparison.jpg",
+        "bytes": 38698,
+        "sha256": "140bda3400b341e60041a11dafd99dfa2a8c0b00bd2fb9b88ed25cdc70a8a317"
+      },
+      {
+        "path": "art/reviews/battle-text-v922/restore.json",
+        "bytes": 245,
+        "sha256": "60dd9172ca6649cfa3bcd5c2b14a60024b22345328c733daf601ffca34233c4c"
+      },
+      {
+        "path": "art/reviews/battle-text-v922/setup.json",
+        "bytes": 354,
+        "sha256": "6c7abacb94c4334e872059c99f26224d1272e03589f4a0ac9ef735f82e826c07"
+      },
+      {
         "path": "art/reviews/bosses/caocao.gif",
         "bytes": 1296248,
         "sha256": "5db7fa0ef0343c94f48f11d37719983a39dedca31e7a8c4f3b110a68aea7e04f"
@@ -1352,6 +1367,31 @@
         "path": "art/reviews/codex/weapons.png",
         "bytes": 182598,
         "sha256": "e6f30ae8e0084801aeb2cf6ca224663efc18da772cacb8344c7cf4c47297a725"
+      },
+      {
+        "path": "art/reviews/endless-memory-v920/after.json",
+        "bytes": 468,
+        "sha256": "ed0dd7fd46b347292d99bd830fd8933251a33c1abd902bb4e5d24ae43d60de30"
+      },
+      {
+        "path": "art/reviews/endless-memory-v920/after.png",
+        "bytes": 396398,
+        "sha256": "b0c098dd0a0ecc4e07404c7d5830c39cebac13c1b16192671cf455345243983f"
+      },
+      {
+        "path": "art/reviews/endless-memory-v920/before.json",
+        "bytes": 471,
+        "sha256": "e02793da8138191ef95651b74ab5ce544e412fafd0f55235ffcc9d1d28120cca"
+      },
+      {
+        "path": "art/reviews/endless-memory-v920/before.png",
+        "bytes": 390134,
+        "sha256": "8ce19da74c35df0eca0146e76cd6cbe56f4de36d9a2aa441dc0ca9ee359a712b"
+      },
+      {
+        "path": "art/reviews/endless-memory-v920/summary.json",
+        "bytes": 386,
+        "sha256": "61fff4f50681d9cb98e03897ee904cecbb01effff660972336920ca95eb92b38"
       },
       {
         "path": "art/reviews/endless-settings/boss.png",
@@ -2404,6 +2444,11 @@
         "sha256": "5b4ce2a740ed938f703a90876f8dfcb02a3ae818e540b77e7abacb0129378d9c"
       },
       {
+        "path": "art/reviews/runtime-v101/pressure.json",
+        "bytes": 5126,
+        "sha256": "cecf15d0ae2a58180fa042c92651ef9860dc17fef382792057520714c2a4fec2"
+      },
+      {
         "path": "art/reviews/sandal-grip/ground-1.png",
         "bytes": 841392,
         "sha256": "2f507cff0147cc769fae786f92261adab686b4e5f34a939835dc132c79333bb2"
@@ -2969,6 +3014,691 @@
         "sha256": "38094e993d2c5d44068565c67636a2cb048336334f2811dd42c3976d2856c666"
       },
       {
+        "path": "art/reviews/vfx-v10/boss-1-0.png",
+        "bytes": 1559112,
+        "sha256": "78f148eb057928375c8fd5702ca3e2a9b54bcf141b3eddd265db1178d3b8f9fe"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-1-1.png",
+        "bytes": 1585951,
+        "sha256": "83703338c25ab7352fc7540500345dce071fff4cdb1a8e7712279aaead2178ad"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-1-2.png",
+        "bytes": 1584632,
+        "sha256": "2db2a703b31775da421162a1d7c2f17c83b786b16f61a2ca01f6c5966a07666a"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-3-0.png",
+        "bytes": 1602802,
+        "sha256": "0d3c5aec28ca10dd7e75f03e0ca66e3515fea4a88648a2e58d05dc99fafb841e"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-3-1.png",
+        "bytes": 1584867,
+        "sha256": "db1948e8785e620a528c87fbdd6cd8deb7fa58e17c46becad6e6b7924a5362e2"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-3-2.png",
+        "bytes": 1606362,
+        "sha256": "7b411e37e0d6dc122ada670954d9c10f591f689c48047bbcd75767e3f5052c68"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-4-0.png",
+        "bytes": 1597557,
+        "sha256": "586ecd3eb1d01168bb6e6b2f6d6c5a7fcba58b74d2d6449ff263d61341d52ed7"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-4-1.png",
+        "bytes": 1595468,
+        "sha256": "f01b980569b326edbb1070481699647275283cc5ec09c6462b8bdbba0287599f"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-4-2.png",
+        "bytes": 1619571,
+        "sha256": "9ef01b29ab86e474b80f8335e46302659962632cadbbcf4610e4dc9ef97e05f3"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-5-0.png",
+        "bytes": 1557755,
+        "sha256": "c683f0fa72399734bba392063a30189222710d9612d8d5f4b2e31bb768543acb"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-5-1.png",
+        "bytes": 1576933,
+        "sha256": "74f88a3a9577e651069d8949a50fd9d6a20666e026b80c1c5a59bd445ef4b676"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-5-2.png",
+        "bytes": 1606105,
+        "sha256": "ef057745c06c96d2f86da48a20b06294167d16d634f53b2788650c0756770713"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-6-0.png",
+        "bytes": 1625491,
+        "sha256": "ef1a125fc0e05a0679c0a500926edfbafd9ea7575b1451686a97d8213320a26d"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-6-1.png",
+        "bytes": 1587481,
+        "sha256": "3c9b2e297dfab751278ce2efc3e4de110191c4465d2c41988871582d9f99266c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-6-2.png",
+        "bytes": 1602432,
+        "sha256": "ad80628b55ae81777734c04d642bf970bf05cdd6ab5e43776a8f43512b9bdc41"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-7-0.png",
+        "bytes": 1562654,
+        "sha256": "53698cdc2a2675206f9636693d0e6f57cdc0609668c7f4b0ecc7681fb44ecfa4"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-7-1.png",
+        "bytes": 1634793,
+        "sha256": "f57620b0c2d85fbcf3052d9400c44c44dc65b4d2d4ee5f3d1fdec4b4c4185cdb"
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-7-2.png",
+        "bytes": 1571849,
+        "sha256": "806cb30756f4ba50bd8cf5dfd948a7ff5673e625b0d6457caefebe11232a437c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-birth.png",
+        "bytes": 1505461,
+        "sha256": "448c17324040a4c115b045905f45835f7d1ba2e7f4154d1fde014dbb24b7854a"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-bounce.png",
+        "bytes": 1498300,
+        "sha256": "bbc08497c5262c8345d6344ab9d18f6b3816d1e91de3a65f0dd0fae26ffe6572"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-death.png",
+        "bytes": 1497354,
+        "sha256": "fd6a6e5da163e8b60878ae7c4e3ba2964906fdfd2c36ae994ec9a966afe84f3f"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-guard.png",
+        "bytes": 1524646,
+        "sha256": "a5db20ea0570504d82f855e544f14e1cab9abd1d8345b1af094a8710eea9927f"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-heal.png",
+        "bytes": 1499192,
+        "sha256": "bb58fb36866ff059076e97290a765ed5228f854b40758880c5ea653902290143"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-hurt.png",
+        "bytes": 1498505,
+        "sha256": "508dd7b1a2f4063958669f57a40842e3797a02ddffcd8ebcf101d49783f6f9b7"
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-peach.png",
+        "bytes": 1525832,
+        "sha256": "0dea507f14bfdd771e1eb9e0f268545ee1b3b28144d23542e4324ed45be513c2"
+      },
+      {
+        "path": "art/reviews/vfx-v10/growth-guanyu.png",
+        "bytes": 1614023,
+        "sha256": "87b9e747b1def05aa0dad774bb2533995b26fbd17d4df90b1cdfe7d8cd6e714d"
+      },
+      {
+        "path": "art/reviews/vfx-v10/growth-liubei.png",
+        "bytes": 1525302,
+        "sha256": "0f84b69fd14cf599b45fde68f80342a66dfd572e90f6b41f540af0aa312eb152"
+      },
+      {
+        "path": "art/reviews/vfx-v10/growth-zhangfei.png",
+        "bytes": 1525399,
+        "sha256": "2f0807877cee18c783aa657c212b8a6c48bd3ff6262d183e9b52026af29b7e5c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/lvbu-0.png",
+        "bytes": 1564341,
+        "sha256": "00fba6e5c9131c59ee9d38285613d040d0a3990d9848e4646d40f1223ec2a2e0"
+      },
+      {
+        "path": "art/reviews/vfx-v10/lvbu-1.png",
+        "bytes": 1532447,
+        "sha256": "38dd486ad12bd7256cf66f0ba63185d760b0dd9472cb006930a27e35bc55f50c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/lvbu-2.png",
+        "bytes": 1581985,
+        "sha256": "4704be91e658afc33850e5fac4980e7f5a3a9af48eec7c239fd4ed98d74e9d31"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-chess-cross.png",
+        "bytes": 1527569,
+        "sha256": "dace3054c14a0c123fc5eed3c025f7643530ed2ea111a48f7e0c650ce79da8fe"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-chess-follow.png",
+        "bytes": 1514491,
+        "sha256": "e0039fa5479a2daeccc48e94ba42e7f8e9de9dc0e22a60b981e4f4a4b1175866"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-elephant-charge.png",
+        "bytes": 1535200,
+        "sha256": "f35fd1a320724421f1e0531c596228aa0c458e7ddc4693f845630e54e9ab51aa"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-elephant-quake.png",
+        "bytes": 1538354,
+        "sha256": "1b041fb7ec24546bcfce6f22fdb4a212654004cfe90a972b6402a5c52fec295a"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-hebei.png",
+        "bytes": 1516632,
+        "sha256": "e6e38b1d8442fe6189095bef5c2a2d6282dea65d617554c65ea5dea31da1e1d7"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-tiger.png",
+        "bytes": 1521583,
+        "sha256": "c77eccc83d0ce34d43e4441454afb62aa6f6c9eaa748191c1a48e0ff8438aeb5"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-yellow.png",
+        "bytes": 1522580,
+        "sha256": "9a5424403726effdcb4ae14441362d3a317b4c19557963ae48bb94d531c55dad"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mount-guanyu.png",
+        "bytes": 1517143,
+        "sha256": "bbe44f0155a715df3cbe89edf2198d04f352019a7309356d47edf78a0c5943af"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mount-liubei.png",
+        "bytes": 1521835,
+        "sha256": "2c9f9ad74be1ac83776574821c56bf4787da8eebab403ded517cef0be4d7d800"
+      },
+      {
+        "path": "art/reviews/vfx-v10/mount-zhangfei.png",
+        "bytes": 1520630,
+        "sha256": "119b68d4b0313c00e69692e03ea2fb32872bf0e99e4a546219a2a58bd3d70119"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E01.png",
+        "bytes": 1509731,
+        "sha256": "6200b2c733b3af13df1bf755f176daf415b97a8efec8de7922b2e90c88d1ec9c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E02.png",
+        "bytes": 1507988,
+        "sha256": "014fa8349b8799bc49aee8009c979d81c893d4fc683af6e31bce2ee98183f8f5"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E03.png",
+        "bytes": 1508803,
+        "sha256": "220045a36180e66501620c93cde37a301735984cea675af33e0a160321e6c22e"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E04.png",
+        "bytes": 1508105,
+        "sha256": "3cc9e06886a3c2dc6a4f20fc7efe8de381d8d28603782823918fa448f186dfbd"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E05.png",
+        "bytes": 1509890,
+        "sha256": "1b833e0cab49a7637737e9b3cfbc09ae5472413bd43cac384682550b7a972275"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E06.png",
+        "bytes": 1503153,
+        "sha256": "aacea904553f76a3fd75adda5380ce076c413d79c91b3541009cf3f015e646aa"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E07.png",
+        "bytes": 1503393,
+        "sha256": "b43925d00fb2e5514ba270edac0e86c7d536653d65faec87cf2f5d9fb9682084"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E08.png",
+        "bytes": 1513867,
+        "sha256": "b0dc1206b488f551a36197a13a0ad2ef87b10eb362da1cc3e383206ca9f0d002"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E09.png",
+        "bytes": 1504906,
+        "sha256": "77fa7afe34c5f06ce5f5079f96b3e9f407fe9e63c9681826d72267fc9fcaf43c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E10.png",
+        "bytes": 1504799,
+        "sha256": "0a1f5f4272374067d3b14a22c9455e7cc7f1f2de07c0bc38df9ceff64b372e5e"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E11.png",
+        "bytes": 1504436,
+        "sha256": "a36809f89412f75ff8da39d6da17edefe4f90aa13915487c73d41d2f3d8baf68"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E12.png",
+        "bytes": 1503887,
+        "sha256": "ef1eafdc98354d1e994fd4b38409b23385dd941649f180e84c800045b8aa0389"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E13.png",
+        "bytes": 1503914,
+        "sha256": "22856cfc67f17af16c02c981d8e8469102d5aaa7cfb19171d0d14df926ea7150"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E14.png",
+        "bytes": 1503177,
+        "sha256": "8f26f7b25759c4fafe6a6701c8e7de34945b1d63c8d11007f8676b8d40998611"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E15.png",
+        "bytes": 1505720,
+        "sha256": "133c680f72bdef45d66442d8a4e737767afc6b75be424d6cd2f92b938932409f"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E16.png",
+        "bytes": 1503666,
+        "sha256": "3db57f67f054434ba9ed2174008d396c335d558d18b1d4f19b8d7c7279cde25b"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E17.png",
+        "bytes": 1504855,
+        "sha256": "67a3fa92b38cefa1a1e2eef6f49048f135d3e81e4c3dac7eda2d1e5e4fc3ec25"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E18.png",
+        "bytes": 1503525,
+        "sha256": "04691536be82afffd042e6120c60183587526647ba6e20b5e43dadc03e8bdac9"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E19.png",
+        "bytes": 1512646,
+        "sha256": "826d9a26c7032bf9bb27ce66fe814863a63ecdf23665dd197deb3587cf87d94a"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E20.png",
+        "bytes": 1512277,
+        "sha256": "7cfdffc2ec83cc67bd36fff758eafb82df9096b885c3c298702cdf438e0cdc06"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E21.png",
+        "bytes": 1509695,
+        "sha256": "ca80d4350cd73daa1bd3c32eb0486c7e7f31a872012a6b24efd3de016fe9dda1"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E22.png",
+        "bytes": 1511544,
+        "sha256": "15f2fcac441622fde537057b1ac995d267f292569a709a8ee9b33f3775c384da"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E23.png",
+        "bytes": 1513740,
+        "sha256": "a04a03e59ec525d3336e3da7636fc8072df8988aadb3208326b25d1d28980182"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E24.png",
+        "bytes": 1512193,
+        "sha256": "8f262d29dc7ce32cccafe6031411562885597d8962f369594f117aa5dedc38db"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E25.png",
+        "bytes": 1511304,
+        "sha256": "0658517694a4e0c98d7f2c939b0016a10b4ec34129d9ac66c065f85a3e1bdaf5"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E26.png",
+        "bytes": 1506698,
+        "sha256": "018028a9e50e14ae44f4d42373cb8bd85b59c36971a6e09ee6ad17e66c9a45a5"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E27.png",
+        "bytes": 1510563,
+        "sha256": "342a60b77c372c166747357913d9e174406c0bafcf2c0b100cbe2cf2bba92228"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E28.png",
+        "bytes": 1505869,
+        "sha256": "5cfc167bdf4c853533f8812ee98d38ae3eebe25ce5ce85f87a04f1ad1e3337f2"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E29.png",
+        "bytes": 1504523,
+        "sha256": "5d1336fa0ce68b8eb2b67d2661fa0c5e73e311be1305deff9ca1782a3f4cc259"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E30.png",
+        "bytes": 1504168,
+        "sha256": "eb0dfd9eae0a16daeb9af12f83537e27d20d5b9cd51c45a26e0818de1f4e03c1"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E31.png",
+        "bytes": 1503762,
+        "sha256": "74e6ed2acba948842bd45d36bdb4164ddc6c570d1fcd566a0a4d07f4fb667d35"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E32.png",
+        "bytes": 1505282,
+        "sha256": "a9773e10c9a20eb04ee5be459d6a1068be3d1f2f6568d782c94341993906a908"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E33.png",
+        "bytes": 1505367,
+        "sha256": "b5ab423f38e0bb5243f26c72774fe9c254ca46941bf8a0af6389b90c4ce5caff"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E34.png",
+        "bytes": 1517196,
+        "sha256": "9a5d6a13bd81e1c064aab9cadce8b38f415ee1278dfaca7b188a4d91875e33b3"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E35.png",
+        "bytes": 1510808,
+        "sha256": "cb2ad10c31e79557cb9a01b2604c3e41be7d1bacc9876688fb5a0356caae0bfc"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E36.png",
+        "bytes": 1507976,
+        "sha256": "17ad1b08c3f731181dcf54557f8c95b9c0892d85403ab36a2bff67246358674b"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E37.png",
+        "bytes": 1508825,
+        "sha256": "f45c2e3db1e461904ef30b888d2a654b23165d76200cc8cf1575fa2292e04c5e"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E38.png",
+        "bytes": 1508364,
+        "sha256": "3a275ac682db8c531ca7086b95b86048deac6eb745aea3ec66869a18b1ac34eb"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E39.png",
+        "bytes": 1503579,
+        "sha256": "ee0d2c544e238a3f44b1198e37ef9c59b1f6e3061fad687aa16d86773528f93b"
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E40.png",
+        "bytes": 1505607,
+        "sha256": "124d44eefb189cff7a34f09d443f0bb0eab3ea37394087bc43db939317b886fa"
+      },
+      {
+        "path": "art/reviews/vfx-v10/pet-guanyu.png",
+        "bytes": 1540481,
+        "sha256": "990f62671ab45a9a86eaf2d8b6b81fa7151e27817d60fde1118c0d28783459bf"
+      },
+      {
+        "path": "art/reviews/vfx-v10/pet-liubei.png",
+        "bytes": 1523912,
+        "sha256": "c7c05726d76f519c1bf02d6ce87e34e5e54ffe16a3e293464b1a3d51a2717275"
+      },
+      {
+        "path": "art/reviews/vfx-v10/pet-zhangfei.png",
+        "bytes": 1519751,
+        "sha256": "dbd044c04e575927bdd3c6a223c7c4d155b14eae8dd7479cc4a223017606ddeb"
+      },
+      {
+        "path": "art/reviews/vfx-v10/pressure.json",
+        "bytes": 8913,
+        "sha256": "831694f8410b26bba71fcd73f7cdd16b0862c1e21375f4753882fe0707bf7219"
+      },
+      {
+        "path": "art/reviews/vfx-v10/README.md",
+        "bytes": 804,
+        "sha256": "0e2c7aa8cb3ae97459fd2d26976f4f02968f7a276fa8270b9df7cc0faa8f8d6d"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G01.png",
+        "bytes": 246784,
+        "sha256": "89556d6f6b5d0e9c2357129983d17759a61b1d16006d6b71ae015159d094f4f4"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G03.png",
+        "bytes": 321329,
+        "sha256": "92ecc21c4485ec5c32db8c497bb537ef567382a4d25b6bb861b6a02ec87b6d20"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G07.png",
+        "bytes": 247728,
+        "sha256": "4cd20d68da8fe8c5e0c70c90b2ad254729b7833c1f3463d2bf2b18f373dc30cd"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G08.png",
+        "bytes": 258721,
+        "sha256": "4445240d784e99c147186f8d84a487f23bad369c02ad65c1b3ab86ea43c38ab0"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G10.png",
+        "bytes": 308617,
+        "sha256": "82d395a8b7b2096328b0ea9d0b29d35300f2f8bfae3f873cbe563ebb6969ad25"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G12.png",
+        "bytes": 591721,
+        "sha256": "68420919c8ff93bd83e97ed0daf4e2a47a19440d9f152b2c8c2a8c4505606a2c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G18.png",
+        "bytes": 289257,
+        "sha256": "4ba05c269d026b43e1f5a87a9cdf44649a9bedf81938838ce9cc80b2a8f28c37"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G19.png",
+        "bytes": 266586,
+        "sha256": "b5a125c8e653196d7fcd821541ff58e862f8b4783744797781aff90c63db275c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G20.png",
+        "bytes": 291054,
+        "sha256": "f234b30b3045801b7fe10221da83ce70fcbfb5963f52aea39fd24aba41173589"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G22.png",
+        "bytes": 262007,
+        "sha256": "27e42294b2b9038d20b097edf10b5e9968aadb30c9378c24071df5d13ff93fbd"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G25.png",
+        "bytes": 287723,
+        "sha256": "d06f06029146669b293cd041ecb6888dacaa7760b6ef634645fa3d659946cf7d"
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G26.png",
+        "bytes": 191454,
+        "sha256": "d361bf4f3be23d232c0b4ba27c4c399cffcfc6fa927c37e65c3dd2ba6a1532db"
+      },
+      {
+        "path": "art/reviews/vfx-v10/validation.json",
+        "bytes": 51110,
+        "sha256": "bc5f74294be8f5ed8d93e35d92c234e8f182c31fba3bf9e55bf9df22ae04998e"
+      },
+      {
+        "path": "art/reviews/vfx-v10/water-keyframes.gif",
+        "bytes": 1080695,
+        "sha256": "f7d42400d30dd84c8e8a6899c8c2d264b588a35164df637b9287ffb8ecd64ce6"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-ancient-saber.png",
+        "bytes": 1557118,
+        "sha256": "c8a98abf01c56c7df56fba95983199b802e3af59d595484b75a26f26019df9ea"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-bagua.png",
+        "bytes": 1535850,
+        "sha256": "86c7fdc17dd68108b4981af009186f9904fdd747e5ee19a8f143cf59cbc8dd5b"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-caltrops.png",
+        "bytes": 1529308,
+        "sha256": "b932ba338e3e4a61a6ffbd619ebe7591c8ad925a2eda640399bf2d233bb08957"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-chain-hook.png",
+        "bytes": 1529754,
+        "sha256": "64553e7b96c7c92175677cd98fc46083a0abcbb3094a86e7bcda7396e86bde55"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-cleaver.png",
+        "bytes": 1548062,
+        "sha256": "7913962e63fdfafe2e0d0ecd0e70dc815dcc31ff54ca6f96fd62f62b36beb9b5"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-feather-fan.png",
+        "bytes": 1530147,
+        "sha256": "a4391f09094d690ca26adb7d6be5d06e47ebc174667bfee1ff95487ef66054c7"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-firecracker.png",
+        "bytes": 1518295,
+        "sha256": "7197f0510636ba388e70a255ebe5f70677af956fd79a3b39cd1511b4e2326017"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-gourd.png",
+        "bytes": 1535243,
+        "sha256": "34d576c98d9f73f3a42a232388049ba617c0cc0282c2199ec11d60f83ad50191"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-guandao.png",
+        "bytes": 1589211,
+        "sha256": "0025cdf0561177687929dd861f5ae52acc7a4fc1fa4148dcae4626d6e8590bfe"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-halberd.png",
+        "bytes": 1582769,
+        "sha256": "81b6c551af3e4e7ae9f377b4ee8ad993d4e7f121521e651fc1f1535beb2cba79"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-hand-halberd.png",
+        "bytes": 1524252,
+        "sha256": "da195b2edfaa1dfff2d40ac7a2581b41c4db5598213f7e7382fcb37c872aa422"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-heavy-crossbow.png",
+        "bytes": 1530523,
+        "sha256": "eb113b2acb816bec525bfe8130c71ca02a6034d5f50e3cd7bc4bead4400fdafb"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-oil-jar.png",
+        "bytes": 1529085,
+        "sha256": "1d98890804a40191931e266ff2336ada377344b14784ebe5df223e0092c5d2e9"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-peach.png",
+        "bytes": 1528125,
+        "sha256": "80d744435b1b49bb501ca4da7506e3430fed345ef596221880fc776e6d3eabe8"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-phoenix-bow.png",
+        "bytes": 1532279,
+        "sha256": "c98dfe1995492446dac5320e05b441a3f946437702bc7c2393804c4d0c55549f"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-pole.png",
+        "bytes": 1530350,
+        "sha256": "5566ec908f368bcde179647716d79465ff652c6099d7777f173ceb51292fb7d5"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-qinggang.png",
+        "bytes": 1553093,
+        "sha256": "77b1ea4a6b5e9ea5af9e67c9f8a77164b9e2f6948dd7e221112e769ee086277b"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-repeater.png",
+        "bytes": 1527721,
+        "sha256": "5f34dcebb314d7cac12972593f977d2b7809579f7bed1e93db136226d2ee634c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-rocket.png",
+        "bytes": 1565121,
+        "sha256": "f7ffc1f011bb4e6f0b1dde780b6cf142ebc3be9bce88e22c140717d147469ca7"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-sandal.png",
+        "bytes": 1517506,
+        "sha256": "843231526bc8b0e79053ccdad3883337d6f846beb46f5484a99ef474b3804505"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-serpent-spear.png",
+        "bytes": 1539657,
+        "sha256": "58daf280f6784d7712185dbc99dbb72775b2d544d76a4506a8d2bf755b6fbff7"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-seven-saber.png",
+        "bytes": 1534816,
+        "sha256": "11bab5d17b0e3a78af465e3d90fd15cf30bd161f7ef0ab22734401697cbc5824"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-shotgun.png",
+        "bytes": 1530119,
+        "sha256": "e24b3388cc3c7d1bf6fe4949744e2084dda23a30bd864a59b04cb1a22329851d"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-silver-spear.png",
+        "bytes": 1531198,
+        "sha256": "547277b7b1a98bb3d3afc373a5d8c2f6b0f71ab203fb28c52fc7d1d5f706a91a"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-smg.png",
+        "bytes": 1528271,
+        "sha256": "a7546e68c1dac9695bdf2db9d10a55fe95e69b3bb6c33a2ec771edfdc2f23b64"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-star-lamps.png",
+        "bytes": 1545370,
+        "sha256": "eabb27ab8197c183e39596c98fa9df333f49a3a233443933b9cbb1c99b7d2fb2"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-sword.png",
+        "bytes": 1549208,
+        "sha256": "8c1d1c82782483f68104cd1f1ae3213680c74432ba5ca413e4fed725722c1443"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-taiping-book.png",
+        "bytes": 1530440,
+        "sha256": "ec2833a7c74542885cc5cf95a3f2e0230be74d2b3e70a3db42249c39c1b03345"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-thunder-bomb.png",
+        "bytes": 1529616,
+        "sha256": "a110b6b8c8da7928a4780a28482c823f9fe5891e7e66c59d10fa780554397ef9"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-thunder.png",
+        "bytes": 1539953,
+        "sha256": "b447dee8efcc54faf2728b525589545b085f517f3ad9469a32f3430ae9029450"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-trident.png",
+        "bytes": 1544154,
+        "sha256": "3d85062e7cbb5afa8b32d2775eb10cdac830f528eb1b51fea9107641b7a5f3a1"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-twin-halberds.png",
+        "bytes": 1563123,
+        "sha256": "9a71589fc74c3a03be56a26c749774c2957a46f0f3d349723a96e3675cf8d57c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-twin-swords.png",
+        "bytes": 1551109,
+        "sha256": "82df2c8d824ce0884c9ed37736c4b49b50ae4be8ebcb1a359e2b0dbe9e9c1027"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-wood-kite.png",
+        "bytes": 1530016,
+        "sha256": "bc7327d0d53d47c1ae547a010ed25b62188b8491143b2b6ac601ce9f98e3dad0"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-wood-ox.png",
+        "bytes": 1536055,
+        "sha256": "754a97f4f04e25aec506628f1f11b2a912fafc35bd0647aa7d436e6e9128078c"
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-yitian.png",
+        "bytes": 1550691,
+        "sha256": "78dfb057efb25437c56510bace4268a9ae433106ef745c8157453d2a503a62bb"
+      },
+      {
+        "path": "art/reviews/vfx-v10/wechat-runtime.json",
+        "bytes": 1110,
+        "sha256": "44f661521c7ac5d32c4e8a3f5c121c04a9322e6f4516ada4c0e3a5285f5b271b"
+      },
+      {
         "path": "art/runtime-bosses/alpha-edits.json",
         "bytes": 1933,
         "sha256": "749fa4155c8a7f8569530c2d467f0915968310d95d9c5db57f3267dde81dcea7"
@@ -3484,6 +4214,21 @@
         "sha256": "81fb8cf7e0780bef1c85096ce618d91616a5a69eadbadfa1b38793a3244be05b"
       },
       {
+        "path": "art/runtime-vfx-v10/manifest.json",
+        "bytes": 509,
+        "sha256": "8d62bb9bc1da0b42b3e6d4d576faa6ec3e369d3cc00cba6264a6a999d13f73e2"
+      },
+      {
+        "path": "art/runtime-vfx-v10/materials-source.png",
+        "bytes": 2718870,
+        "sha256": "b1e64faa517e5d3c741c36a0ec761a6aba03922eced20612f58d81a8f7367970"
+      },
+      {
+        "path": "art/runtime-vfx-v10/prompts.json",
+        "bytes": 2190,
+        "sha256": "84c401c001d19a4d34c13ebb9452cdf8a8fa37e14fe36aeaa8224448d8b94103"
+      },
+      {
         "path": "art/runtime-youth/deferred-manifest.json",
         "bytes": 733,
         "sha256": "53ee7d7fe43212dc6d57f59abf9e86dc797fe24274113348f002e4372ecea926"
@@ -3510,8 +4255,8 @@
       },
       {
         "path": "art/runtime-youth/protected.json",
-        "bytes": 6470,
-        "sha256": "cc5030134db4067898a2dd322def485752580d4c92a6695206cc13aae438ad50"
+        "bytes": 6453,
+        "sha256": "2f8b733bed02094463ab9d2c8d1011665c98633ad925327c64017d53a5ea7613"
       },
       {
         "path": "art/runtime-youth/README.md",
@@ -3875,38 +4620,28 @@
       },
       {
         "path": "assets/music.meta",
-        "bytes": 275,
-        "sha256": "e10cd8907f6fbffe97f214cc19f643ff64e06249f2af3bc5c38b5fd23f5da5a0"
+        "bytes": 282,
+        "sha256": "e2ab4f500a490f760f5f346b19f3d467ab14a6712d2f8d494cb9e117126ddf80"
       },
       {
-        "path": "assets/music/battle.m4a",
-        "bytes": 481978,
-        "sha256": "280310490e7e455666c119bb1f4a176fcebcf930938eabe787829aa7deaa95c1"
+        "path": "assets/music/brass-oath.m4a",
+        "bytes": 270150,
+        "sha256": "2ed727ec189cd639c28d72e74018266795688b032d9c3c3f3f1797528501a9b6"
       },
       {
-        "path": "assets/music/battle.m4a.meta",
+        "path": "assets/music/brass-oath.m4a.meta",
         "bytes": 222,
-        "sha256": "95064c44f543d9ff9e431afd84edd281463ad100c32367f25f866b4baffbdc5f"
+        "sha256": "e8adc2d1c8aa5956225af9a252c6e167d0fdfb43af61cba6f9c546110234102b"
       },
       {
-        "path": "assets/music/boss.m4a",
-        "bytes": 245759,
-        "sha256": "9133932ca61dc1256ba387565ec8e5909baa9eb8de91735383c43f2c41f2f7cb"
+        "path": "assets/music/brass-rally.m4a",
+        "bytes": 215095,
+        "sha256": "31ddf700e8d455cee3e690a70600cc84e96dcaa219fddecb77452746c8513592"
       },
       {
-        "path": "assets/music/boss.m4a.meta",
+        "path": "assets/music/brass-rally.m4a.meta",
         "bytes": 222,
-        "sha256": "aa19a2938c5fbbb39b3b406566840b1f9eb7b85e4343cda0db1331e034b183b3"
-      },
-      {
-        "path": "assets/music/menu.m4a",
-        "bytes": 325987,
-        "sha256": "294daf304272d5dd33d66530d068acfaa03375a7c7c56a9b6a5d5200cf106aa0"
-      },
-      {
-        "path": "assets/music/menu.m4a.meta",
-        "bytes": 222,
-        "sha256": "8a2bebe123f3e4842da1a61c3310d55ae9f6779fa0068ddd36f353c33087408c"
+        "sha256": "2353e30659f424ec8452e3ef3049711829a80c8ab3d9da9e32e421bf1b9258e1"
       },
       {
         "path": "assets/orchard.meta",
@@ -3977,6 +4712,16 @@
         "path": "assets/presentation/icons.png.meta",
         "bytes": 989,
         "sha256": "5117f7c1a99ab0dfe078f3537d16f8ebd52250910a6af97cd94ebffcba397da2"
+      },
+      {
+        "path": "assets/presentation/vfx-materials.png",
+        "bytes": 1337597,
+        "sha256": "e1a7b44e92179b975db53d8b2b368d11ced12a3e0fdbdef4d2b1c749f4ffad41"
+      },
+      {
+        "path": "assets/presentation/vfx-materials.png.meta",
+        "bytes": 997,
+        "sha256": "c94e5ae75670efa87875d4858e9494bafcf21b050f1ad24df66ae5059ed6a6f2"
       },
       {
         "path": "assets/presentation/weapon-revision.png",
@@ -4180,8 +4925,8 @@
       },
       {
         "path": "assets/scripts/audio-catalog.ts",
-        "bytes": 16498,
-        "sha256": "e9f4f8b5c0f433d3a89475d2a90fff8df434c096d319f4d909f7d6434e1d9285"
+        "bytes": 16559,
+        "sha256": "84bd7462ad4c150cd04e1b2601ccabc366673237ef9685e3f2868032bc0c5926"
       },
       {
         "path": "assets/scripts/audio-catalog.ts.meta",
@@ -4190,8 +4935,8 @@
       },
       {
         "path": "assets/scripts/battle-music.ts",
-        "bytes": 3545,
-        "sha256": "1ee8171de5ec189065efff0c4d9840ca05615652b28cb200fd2033df7eab8981"
+        "bytes": 3649,
+        "sha256": "17662e59f4089f1970c429051224d638bdc5ca5341bba54dda4fc87f5754081e"
       },
       {
         "path": "assets/scripts/battle-music.ts.meta",
@@ -4199,9 +4944,19 @@
         "sha256": "aa4f12d81451bdf76add4e652f7e763befc0cbeda09abf53069f1698100ee2b8"
       },
       {
+        "path": "assets/scripts/BattleNumber.ts",
+        "bytes": 1974,
+        "sha256": "53fff4ed5d90927fa972317e1f88213a8fc57fb7d08cd727b355fa9cc110dfd6"
+      },
+      {
+        "path": "assets/scripts/BattleNumber.ts.meta",
+        "bytes": 142,
+        "sha256": "f068052c62c92a0ba644fe154a15975c2b3a396c19a71e29ef1c17065b2bac6e"
+      },
+      {
         "path": "assets/scripts/BattleSpriteAtlas.ts",
-        "bytes": 9787,
-        "sha256": "af07c08f0d3e95685f0019acedfd2f38becc91f2c44378c93135b2f441191aca"
+        "bytes": 14021,
+        "sha256": "e6c3da0b154fb7819846c0c6b500d0a2b3641f3b4d1a9601de890a0010b32e51"
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts.meta",
@@ -4220,8 +4975,8 @@
       },
       {
         "path": "assets/scripts/boss-effects.ts",
-        "bytes": 14310,
-        "sha256": "3e5a51779131a1649f76c26bbe3cd978e0db239ad59c1157f8d3890af3031c7f"
+        "bytes": 18719,
+        "sha256": "655c17ffe63a9c21098a3942cbb0a881566f80acfcb823b260517f39d61b6d4f"
       },
       {
         "path": "assets/scripts/boss-effects.ts.meta",
@@ -4260,8 +5015,8 @@
       },
       {
         "path": "assets/scripts/CampaignView.ts",
-        "bytes": 52152,
-        "sha256": "9fd716be291ddc76d1b583d8f95900302c8562576e42183ed10b35e101009c59"
+        "bytes": 53417,
+        "sha256": "5236ece9163008bc63a4e018866844afab2f00f38be76c72c3877a5f68d09cc1"
       },
       {
         "path": "assets/scripts/CampaignView.ts.meta",
@@ -4270,8 +5025,8 @@
       },
       {
         "path": "assets/scripts/chronicle-art.ts",
-        "bytes": 5726,
-        "sha256": "21e6250870c8cae7e41b3bc01d100f961c78af626770117284f93695db4ff57e"
+        "bytes": 5967,
+        "sha256": "bfd7731951a60fcad3797fc66b16f970eaf7bcfd3333245df5cceed849ed4774"
       },
       {
         "path": "assets/scripts/chronicle-art.ts.meta",
@@ -4290,8 +5045,8 @@
       },
       {
         "path": "assets/scripts/chronicles-data.ts",
-        "bytes": 26511,
-        "sha256": "c3d28f9fb21d1edc868ce59e3581d03d3c95912fffe1225a437961e211d78dc5"
+        "bytes": 26592,
+        "sha256": "bfa7d5fab8d96d960a2bf29a3d5a57aad8a356305f3c6acd631af01575d7da69"
       },
       {
         "path": "assets/scripts/chronicles-data.ts.meta",
@@ -4320,8 +5075,8 @@
       },
       {
         "path": "assets/scripts/combat-effects.ts",
-        "bytes": 19390,
-        "sha256": "9b33425a72d43625e125150f51105c0882bb4c2c39de0fc78c617f8cf6e7ec1e"
+        "bytes": 17815,
+        "sha256": "47d2091acc98d959e96a105314b0bb3a25f0fb220b4b468d940b271ad905cb1a"
       },
       {
         "path": "assets/scripts/combat-effects.ts.meta",
@@ -4350,8 +5105,8 @@
       },
       {
         "path": "assets/scripts/common-skills.ts",
-        "bytes": 725,
-        "sha256": "eced54043b6525a548e960200533431d662ea0a0c6c2ee012a93f253914a4200"
+        "bytes": 865,
+        "sha256": "3d696603d7e6e2c79074c2f511ff3c74f38168609e2be3b230f8a4fb29398e85"
       },
       {
         "path": "assets/scripts/common-skills.ts.meta",
@@ -4360,8 +5115,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillEffects.ts",
-        "bytes": 6589,
-        "sha256": "ef496d975476c499278bf2bb6e40884ad7c2d8af6b4c6c98cd74f2e7db36e472"
+        "bytes": 8132,
+        "sha256": "ae07cbaeb5212b6708434044b1b424561f13703a4c2eb839bf7eb60a84a9dd95"
       },
       {
         "path": "assets/scripts/CommonSkillEffects.ts.meta",
@@ -4370,8 +5125,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 13868,
-        "sha256": "e5a7f91c4dd0982a26072787b05ba754507ca45ca69599a035841d2b7157fa0d"
+        "bytes": 15471,
+        "sha256": "e79234f5bbf979f8bf0af149de643b2baf6685800ae62c75fae098c98a795eb0"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -4410,8 +5165,8 @@
       },
       {
         "path": "assets/scripts/enemy-action-effects.ts",
-        "bytes": 1597,
-        "sha256": "abccf4a530b624c6481e625eb12248e2a2eadd6d25ef593700f933599d7936fc"
+        "bytes": 322,
+        "sha256": "2954d359a721633d1ef4a541de81e669b4458a71496698a8087a56dcd909f6bd"
       },
       {
         "path": "assets/scripts/enemy-action-effects.ts.meta",
@@ -4420,8 +5175,8 @@
       },
       {
         "path": "assets/scripts/enemy-actions.ts",
-        "bytes": 5055,
-        "sha256": "f5c424b13ac2cfefa3637fd93faa0e69b4071a92185f7e475bcb3b6c5a1f2986"
+        "bytes": 5189,
+        "sha256": "f710d070072bc79707f69c41397a84724c7252dc60c7eeb5586fd05ffd8c1938"
       },
       {
         "path": "assets/scripts/enemy-actions.ts.meta",
@@ -4440,13 +5195,23 @@
       },
       {
         "path": "assets/scripts/enemy-spell-effects.ts",
-        "bytes": 8173,
-        "sha256": "3c94ad156c591ea7d79001349d2af74255980069639267f647537ab47112686c"
+        "bytes": 5842,
+        "sha256": "3b3bd5e58f584a585d4b5dd58b9d872b541a15d6357fb0ce3303a2adf1067083"
       },
       {
         "path": "assets/scripts/enemy-spell-effects.ts.meta",
         "bytes": 171,
         "sha256": "a3ad5548cf67f10764f385a304f4e5a58073217d475e9a057f2fc26eebd811e6"
+      },
+      {
+        "path": "assets/scripts/enemy-vfx-v10.ts",
+        "bytes": 5299,
+        "sha256": "4715baa0592dc0e0676d1dc7c6d8627e21b59594c963ace99b25520d95abb55e"
+      },
+      {
+        "path": "assets/scripts/enemy-vfx-v10.ts.meta",
+        "bytes": 171,
+        "sha256": "91984e43a34596f071de5d7a6fcc471fedcfa03610e42535fdfa21418a78af17"
       },
       {
         "path": "assets/scripts/extra-weapons.ts",
@@ -4480,8 +5245,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 247480,
-        "sha256": "971fcb3d5972f1c42280e873ced3d67b81dc5ea4bc470a99b453b106f21541dd"
+        "bytes": 257732,
+        "sha256": "90cf659f8a7e030da25b546dd2ec0330539bcd2d5af5c783b49889c9399803e1"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -4490,8 +5255,8 @@
       },
       {
         "path": "assets/scripts/graphics-content.ts",
-        "bytes": 778,
-        "sha256": "3ab5d037181480b6b54a9802f0eb862f44088c3cb188ebe54460c806e85a5829"
+        "bytes": 1277,
+        "sha256": "136c07c84a7bc7b8705fa42fb95a7134fc77381875f625d44619f33de3510ded"
       },
       {
         "path": "assets/scripts/graphics-content.ts.meta",
@@ -4500,8 +5265,8 @@
       },
       {
         "path": "assets/scripts/growth-effects.ts",
-        "bytes": 3347,
-        "sha256": "d93a2d82cb6bfe3581ff9c046b5d2119344f9e31bed1a98073ae9b076262ac2e"
+        "bytes": 1331,
+        "sha256": "c5a51e4b779305bdd68ef3e11bfe8cf3b197191e1e74f2b07007cf420e2f8072"
       },
       {
         "path": "assets/scripts/growth-effects.ts.meta",
@@ -4510,8 +5275,8 @@
       },
       {
         "path": "assets/scripts/grunt-melee-effects.ts",
-        "bytes": 1083,
-        "sha256": "8d31282fe210c831f852fcdd5ef22382fd90f9631fdd8f25094e4491307843f4"
+        "bytes": 294,
+        "sha256": "7b1686ca676e280cc3b9695c837d5bc06967847a3669f44a1003d89b26d11ef0"
       },
       {
         "path": "assets/scripts/grunt-melee-effects.ts.meta",
@@ -4560,8 +5325,8 @@
       },
       {
         "path": "assets/scripts/HeroMount.ts",
-        "bytes": 1083,
-        "sha256": "8ae5b28f36eef38af51f97e1dca0a4e290c4910a84cf03255e352fe0b7174b63"
+        "bytes": 1242,
+        "sha256": "b3db68e09e6044ae38872b0f6a6060e8174d8274a910a526c80e14970c0d7cd1"
       },
       {
         "path": "assets/scripts/HeroMount.ts.meta",
@@ -4630,8 +5395,8 @@
       },
       {
         "path": "assets/scripts/lvbu-effects.ts",
-        "bytes": 7324,
-        "sha256": "e30da9ce0baa4a9a8b3cc717bb93210103372c241ef60b8d2841ca6e59f13e53"
+        "bytes": 8401,
+        "sha256": "cfd7e269b695af1c197e2d7c03ca81f12f6fec67e9fdbd4ca8dcf9c8189a93df"
       },
       {
         "path": "assets/scripts/lvbu-effects.ts.meta",
@@ -4640,8 +5405,8 @@
       },
       {
         "path": "assets/scripts/native-audio-files.ts",
-        "bytes": 2827,
-        "sha256": "7c45e868f51b4efb4c0089f99ca1a64736aa030ff441364bff351607e6cb1693"
+        "bytes": 2918,
+        "sha256": "ab53423e60ca0ae573693ab074159ef4b1eda919bee2f07198e6831afa7c1f37"
       },
       {
         "path": "assets/scripts/native-audio-files.ts.meta",
@@ -4650,8 +5415,8 @@
       },
       {
         "path": "assets/scripts/native-music.ts",
-        "bytes": 3630,
-        "sha256": "d1550fa5300f3b5eca693495778421c1196d50e32c8838ad79b16e39f635134b"
+        "bytes": 5028,
+        "sha256": "1362cfe2965a5509a4cd9d37f998529d1e4024e94800873a695e17e8b364c17c"
       },
       {
         "path": "assets/scripts/native-music.ts.meta",
@@ -4690,8 +5455,8 @@
       },
       {
         "path": "assets/scripts/NpcActionRig.ts",
-        "bytes": 5125,
-        "sha256": "5c15541a92d233795cdac9583a727df0371202418df6d52fe0092ab7b56bbc9a"
+        "bytes": 5393,
+        "sha256": "20e299e46b154344eda8b3974659e2e3870c1746d9594b8595cefbe5a5af3549"
       },
       {
         "path": "assets/scripts/NpcActionRig.ts.meta",
@@ -4740,8 +5505,8 @@
       },
       {
         "path": "assets/scripts/pets.ts",
-        "bytes": 7323,
-        "sha256": "58448aa8538f06aa2db9a71e5ebc5f3908690618aed28282b7bf08e39070aadd"
+        "bytes": 7456,
+        "sha256": "56d0a5b8063de30f92388accb247d8b13eda2b38f8524fc6822deba1d2ea0284"
       },
       {
         "path": "assets/scripts/pets.ts.meta",
@@ -4750,8 +5515,8 @@
       },
       {
         "path": "assets/scripts/PetView.ts",
-        "bytes": 4027,
-        "sha256": "8019bf682393bb9c734cb256fc69bb2ec77131832cc7dc37d69dddbac4a1d4ae"
+        "bytes": 3328,
+        "sha256": "eb6fce074f5990c938af5fe06f18b94e81cb50016fa81479e8614a76204789ab"
       },
       {
         "path": "assets/scripts/PetView.ts.meta",
@@ -4767,6 +5532,16 @@
         "path": "assets/scripts/presentation-art.ts.meta",
         "bytes": 171,
         "sha256": "183b96324a4808f27c6b6ff87ea2726c6bbcbfbebd1582d2ef33e5f4f5fd4a3e"
+      },
+      {
+        "path": "assets/scripts/render-diagnostics.ts",
+        "bytes": 1444,
+        "sha256": "e4ca550260d870afe36f21d03f7786aec792e316e8bed9729b65ab0117323cf8"
+      },
+      {
+        "path": "assets/scripts/render-diagnostics.ts.meta",
+        "bytes": 142,
+        "sha256": "8c6a1be2af19e38a2d1935007494f24599efa0f810c31f245013a554eb720fc2"
       },
       {
         "path": "assets/scripts/resource-gate.ts",
@@ -4800,13 +5575,23 @@
       },
       {
         "path": "assets/scripts/runtime-health.ts",
-        "bytes": 4375,
-        "sha256": "849f154796d74e0ab8feb730cfff0bc11c870d46ee34bc51210c18ef46b6a71e"
+        "bytes": 7268,
+        "sha256": "ae37a69d708c9724039f68bfd13b89d7746be8a7ff05560b923c7de12ac0fa6f"
       },
       {
         "path": "assets/scripts/runtime-health.ts.meta",
         "bytes": 171,
         "sha256": "253ad3b66d2a6e4908fe22e18d478f19584bbd4c90fc5c0597f83d0d48bcee39"
+      },
+      {
+        "path": "assets/scripts/runtime-report.ts",
+        "bytes": 6111,
+        "sha256": "fcd0dcb12aed053a44258f2b32e3935b054cc1b10f2db93b289ab98a972b7b15"
+      },
+      {
+        "path": "assets/scripts/runtime-report.ts.meta",
+        "bytes": 142,
+        "sha256": "26fd817a01abe30e63bb862c0d27ba0dd61a7b8f237df97566f0e67d9c385093"
       },
       {
         "path": "assets/scripts/skill-vfx-art.ts",
@@ -4817,6 +5602,16 @@
         "path": "assets/scripts/skill-vfx-art.ts.meta",
         "bytes": 171,
         "sha256": "2530d1fe82910f1034384b9df32497cbaaf0fc78608026a6d49488b652f930b4"
+      },
+      {
+        "path": "assets/scripts/skill-vfx-v10.ts",
+        "bytes": 25429,
+        "sha256": "3a7992fa58ecf58977155be97bd92f4cbaa0bb4c40e434c65ff1060184a8f71b"
+      },
+      {
+        "path": "assets/scripts/skill-vfx-v10.ts.meta",
+        "bytes": 171,
+        "sha256": "5da3ebf2bef01f3ccdc5248b52a35d1cef93d7db033c2fd8be628881711e63b8"
       },
       {
         "path": "assets/scripts/SkillSelectView.ts",
@@ -4860,8 +5655,8 @@
       },
       {
         "path": "assets/scripts/StageViews.ts",
-        "bytes": 21631,
-        "sha256": "7d37e05b1f34cb9770647b5c1868afc3ca245ddbab864edd4a94dcf2a3b06411"
+        "bytes": 24301,
+        "sha256": "658144230849d2bee475cabd314cb410678a06f8d72c893a9292302e3bad123b"
       },
       {
         "path": "assets/scripts/StageViews.ts.meta",
@@ -4880,8 +5675,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 17737,
-        "sha256": "ecd269f48dd2fd9cbc0c20ca173a103ddc03cb673cb2c48760fd0265ff4e6552"
+        "bytes": 17734,
+        "sha256": "997a1938f09d8aab1d11a7d54b82f9c0705758d3797ef9f007b3fcf8656e5e05"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -4900,8 +5695,8 @@
       },
       {
         "path": "assets/scripts/TrainingView.ts",
-        "bytes": 15583,
-        "sha256": "56a093784cc0da9637422fb245fe9526a1c1b7d1920831cb12d423923e56e19a"
+        "bytes": 16796,
+        "sha256": "16c72da1f1880bb2fe8b60b9e13b750ae3d32f2fd44e31b1b908bb3a5161fec4"
       },
       {
         "path": "assets/scripts/TrainingView.ts.meta",
@@ -4924,6 +5719,26 @@
         "sha256": "89e63745d450614f848141e8de94241590b4e441a89a0296952aaaa9fa52ca89"
       },
       {
+        "path": "assets/scripts/vfx-brush.ts",
+        "bytes": 16108,
+        "sha256": "43fb0ccaafef87c1daefe02bf8d5f06d1339a85d755470091971510f65f693b6"
+      },
+      {
+        "path": "assets/scripts/vfx-brush.ts.meta",
+        "bytes": 171,
+        "sha256": "d06ce035d04e139d9b7a6a0869528bab48295b79050a7ba2bc92d7b65dab7c02"
+      },
+      {
+        "path": "assets/scripts/vfx-materials.ts",
+        "bytes": 3401,
+        "sha256": "54bbb5abcba06caf3aff831662e8368246ee61a1efd1cca0571417181987d8c3"
+      },
+      {
+        "path": "assets/scripts/vfx-materials.ts.meta",
+        "bytes": 171,
+        "sha256": "65ad61dbd416895b06e9c08e47d80e9c5dcb6d4fe209f59c33a8bef0505d95aa"
+      },
+      {
         "path": "assets/scripts/weapon-art.ts",
         "bytes": 7444,
         "sha256": "b11789c254a1bb9e2b63a5003b67a5def80ec66d71ac38c313db3a6d08ff7436"
@@ -4935,13 +5750,23 @@
       },
       {
         "path": "assets/scripts/weapon-sound.ts",
-        "bytes": 2522,
-        "sha256": "be07df23bd78def25e070ce2829c493eb77246071fb3503256c93b129a267705"
+        "bytes": 3157,
+        "sha256": "23cc5331f6979a7f5435b5adbf25b491dc4b25d3bed6e4860da6fd9b706f2e8e"
       },
       {
         "path": "assets/scripts/weapon-sound.ts.meta",
         "bytes": 171,
         "sha256": "98177c1394afd861f8a3f47dc5b07f8f7ddf94ccd4383e6db3a93220a60faf88"
+      },
+      {
+        "path": "assets/scripts/weapon-vfx.ts",
+        "bytes": 11711,
+        "sha256": "678e3ce9c3302522babb0d2246eefd9ca902683cff6ccfea4a772c1b7b88b80c"
+      },
+      {
+        "path": "assets/scripts/weapon-vfx.ts.meta",
+        "bytes": 171,
+        "sha256": "5fe4a95e14117deb3114c4b8ae22277c378cd947293fbfec4b3244a0dacd3d63"
       },
       {
         "path": "assets/scripts/weapons.ts",
@@ -4975,8 +5800,8 @@
       },
       {
         "path": "assets/scripts/yellow-charge-effects.ts",
-        "bytes": 1367,
-        "sha256": "75055e79db6a172caf6b11c7b5c14bf05cc4aabe0fd4f633b27be14dd52d93c3"
+        "bytes": 1541,
+        "sha256": "9a2036ba90b4b62019b7b3f9e693ce6592e6ead5da74115b72ccd1c7d1395d81"
       },
       {
         "path": "assets/scripts/yellow-charge-effects.ts.meta",
@@ -5000,8 +5825,8 @@
       },
       {
         "path": "assets/sfx-core/blade-attack.wav",
-        "bytes": 5804,
-        "sha256": "3e6048d418094c175b9225e1945a5cfdb7be06b7b2b13bf904688b73e80b0f13"
+        "bytes": 4960,
+        "sha256": "46a6f812b73cac2711354288621dc56ee1cc99dabfb083dcd75dbfa7d8f92f33"
       },
       {
         "path": "assets/sfx-core/blade-attack.wav.meta",
@@ -5011,7 +5836,7 @@
       {
         "path": "assets/sfx-core/blade-hit.wav",
         "bytes": 7724,
-        "sha256": "35a109cca6956bc019dc5ea01dfc97b3e918752b7a41a85fcbc521954734b423"
+        "sha256": "f3eca186135e8e162e51ba416625ca9336c98ee78aab98cecbff23885efa52e6"
       },
       {
         "path": "assets/sfx-core/blade-hit.wav.meta",
@@ -5020,8 +5845,8 @@
       },
       {
         "path": "assets/sfx-core/blast-attack.wav",
-        "bytes": 8684,
-        "sha256": "360a36e33c717993aa42f2b5911d824195527049657f1673019186d32e8f0334"
+        "bytes": 7110,
+        "sha256": "c334cd526617abc60618a30c80d08bc83cd749bf718259b8f311dea22e2836b9"
       },
       {
         "path": "assets/sfx-core/blast-attack.wav.meta",
@@ -5030,8 +5855,8 @@
       },
       {
         "path": "assets/sfx-core/blast-hit.wav",
-        "bytes": 14444,
-        "sha256": "5845b2615279d26841a1b602934a16e7733266fc68744fa111070176e41a6023"
+        "bytes": 11084,
+        "sha256": "2c42cb767e99e0c0ab050a5d4c2786c31eafc840eeef30044140b88e63639abf"
       },
       {
         "path": "assets/sfx-core/blast-hit.wav.meta",
@@ -5050,8 +5875,8 @@
       },
       {
         "path": "assets/sfx-core/bow-attack.wav",
-        "bytes": 7244,
-        "sha256": "29cef709a2e90dc0883f5d6fede612a380d1eea1c07eadb969e478b0e63fa26d"
+        "bytes": 3270,
+        "sha256": "8402e86b35d90a760976072a7a5837b6450bba416bd42bcd083ae836b5fcf7e8"
       },
       {
         "path": "assets/sfx-core/bow-attack.wav.meta",
@@ -5060,8 +5885,8 @@
       },
       {
         "path": "assets/sfx-core/bow-hit.wav",
-        "bytes": 5324,
-        "sha256": "338e4159ceae7a5295e1d862f50caa81e8929ee2d6b38262506214659fc2bc4c"
+        "bytes": 5084,
+        "sha256": "9d523af4af111c854cb2a74f03235937c71fb7f16eb7bb16c26ae0177ab3f9c3"
       },
       {
         "path": "assets/sfx-core/bow-hit.wav.meta",
@@ -5140,8 +5965,8 @@
       },
       {
         "path": "assets/sfx-core/gun-attack.wav",
-        "bytes": 4844,
-        "sha256": "12077d9c7f414c8893c5e2e016b6bbd7a3ae88bab0133926e93e3232320f84cc"
+        "bytes": 2808,
+        "sha256": "f6b7a29d60c1272e04776500e6723aea75d0459c88dd2da7a57219c02dfcf532"
       },
       {
         "path": "assets/sfx-core/gun-attack.wav.meta",
@@ -5150,8 +5975,8 @@
       },
       {
         "path": "assets/sfx-core/gun-hit.wav",
-        "bytes": 7724,
-        "sha256": "eda034f5472e57ab1309f0671b9e669d70b5a05f7cab5521567bf37ca90a5fd7"
+        "bytes": 4364,
+        "sha256": "74fa4976172f4305a6940baf0d0bbe6a08ce83e4034b5c3cfeae7c32a01c25a3"
       },
       {
         "path": "assets/sfx-core/gun-hit.wav.meta",
@@ -5170,8 +5995,8 @@
       },
       {
         "path": "assets/sfx-core/heavy-attack.wav",
-        "bytes": 5804,
-        "sha256": "4b874bc631af27d5beff78b3251f9eb72a356d249ec4ba76c50af8377c661d85"
+        "bytes": 5880,
+        "sha256": "709987d0125cad13689e7181bfb86b5bb62fbd9879c9f7d934842bb0c4afbba8"
       },
       {
         "path": "assets/sfx-core/heavy-attack.wav.meta",
@@ -5180,8 +6005,8 @@
       },
       {
         "path": "assets/sfx-core/heavy-hit.wav",
-        "bytes": 14444,
-        "sha256": "3daa1154889cc222b7e6e0f33043a3272d92b1d3fcc7f021bf17a654d6d09f3c"
+        "bytes": 9164,
+        "sha256": "00275d99218ad6b20b780d6bb9fc55df3324498235989727e1ec45a5a4391b59"
       },
       {
         "path": "assets/sfx-core/heavy-hit.wav.meta",
@@ -5210,8 +6035,8 @@
       },
       {
         "path": "assets/sfx-core/petal-attack.wav",
-        "bytes": 13484,
-        "sha256": "28d63cc149a64e6953f9ae53e47697729222570c08873766229e708fcc268972"
+        "bytes": 4038,
+        "sha256": "eb2c62c3c3be337bdd5f2c75ce1046c46dcedf7dc9dfad1c95e305fb1d57f125"
       },
       {
         "path": "assets/sfx-core/petal-attack.wav.meta",
@@ -5220,8 +6045,8 @@
       },
       {
         "path": "assets/sfx-core/petal-hit.wav",
-        "bytes": 17324,
-        "sha256": "f5aaad69db0e86a885fb0316581d0c53041d04318ef3dfa92928a853728fe9f3"
+        "bytes": 6284,
+        "sha256": "06cd11f373b325ef8bf2d41a39cb850baaafe336e5118c3be77e90bf6331e60b"
       },
       {
         "path": "assets/sfx-core/petal-hit.wav.meta",
@@ -5240,8 +6065,8 @@
       },
       {
         "path": "assets/sfx-core/ritual-attack.wav",
-        "bytes": 13484,
-        "sha256": "8598071410566cf38b79bab8fc3195cd18de56057f4c04560cf4580ba886c4a9"
+        "bytes": 5574,
+        "sha256": "a105803b6f87218d2c7c5dd960e8dbc62babc2f6a6ff608d694b0d43e0aeb377"
       },
       {
         "path": "assets/sfx-core/ritual-attack.wav.meta",
@@ -5250,8 +6075,8 @@
       },
       {
         "path": "assets/sfx-core/ritual-hit.wav",
-        "bytes": 21644,
-        "sha256": "1fd76fbb3a284c728f154201e2d25f21a9c7ef3dbaf5efaca2abcd432cce17ff"
+        "bytes": 8684,
+        "sha256": "f7e10ea7591f7297502d1305cff02e13b344aaa7994c7bb40101fa4593ba5f7f"
       },
       {
         "path": "assets/sfx-core/ritual-hit.wav.meta",
@@ -5310,8 +6135,8 @@
       },
       {
         "path": "assets/sfx-core/spirit-attack.wav",
-        "bytes": 10604,
-        "sha256": "202fbfe59406b38c003650b966271b49190f44322da0023123659b749b383ccf"
+        "bytes": 5574,
+        "sha256": "40e49a918a6b35b054d4b00da6cc2936b7af332a112f2f8bc826a1af052a6d88"
       },
       {
         "path": "assets/sfx-core/spirit-attack.wav.meta",
@@ -5320,8 +6145,8 @@
       },
       {
         "path": "assets/sfx-core/spirit-hit.wav",
-        "bytes": 12044,
-        "sha256": "4969d07266457f9835514a533e37aa861cd83fb6d5aafdc9e040bffc8d32c88d"
+        "bytes": 8684,
+        "sha256": "0bc96c670944ef2f262a75cf4afbc2e79c8e984e910ab544b1fb97971ad9d1cc"
       },
       {
         "path": "assets/sfx-core/spirit-hit.wav.meta",
@@ -5330,8 +6155,8 @@
       },
       {
         "path": "assets/sfx-core/thunder-attack.wav",
-        "bytes": 11084,
-        "sha256": "c292721c2829f296cfc400097e09836261ea11cef4f5205342cb36f82ecbec9e"
+        "bytes": 6802,
+        "sha256": "974a9147be4350b4a0f948309c40e257a70af919050154d27957a8b1771934e1"
       },
       {
         "path": "assets/sfx-core/thunder-attack.wav.meta",
@@ -5340,8 +6165,8 @@
       },
       {
         "path": "assets/sfx-core/thunder-hit.wav",
-        "bytes": 29804,
-        "sha256": "e9b99e9c6d8d5c6be7d2bb326b9c1dea58c9f21012f8f28d59488c4e25d1b78c"
+        "bytes": 10604,
+        "sha256": "81b987f9794a33246a1b3a12529faaef673ce428dce2f06ab108ec9c9e504429"
       },
       {
         "path": "assets/sfx-core/thunder-hit.wav.meta",
@@ -5400,8 +6225,8 @@
       },
       {
         "path": "assets/sfx-core/wood-attack.wav",
-        "bytes": 5804,
-        "sha256": "2cd899326d1a84e5c79eb1c37e71148cacaab0215cff03decc4109de92b4b3ca"
+        "bytes": 4344,
+        "sha256": "52642a81312e2d13a765bcc685130da1ab3ec33f1d50034ce9386e98cc2d89d4"
       },
       {
         "path": "assets/sfx-core/wood-attack.wav.meta",
@@ -5410,8 +6235,8 @@
       },
       {
         "path": "assets/sfx-core/wood-hit.wav",
-        "bytes": 7724,
-        "sha256": "bea7e9a0217bfc3ba22b888fe89535826ad10677ea93f7d245f777ca6afafab3"
+        "bytes": 6764,
+        "sha256": "b086264149390b7e9899416c2f92e426c2682cee751acb9da63e98489d39d30d"
       },
       {
         "path": "assets/sfx-core/wood-hit.wav.meta",
@@ -5710,8 +6535,8 @@
       },
       {
         "path": "config/cdn.json",
-        "bytes": 617,
-        "sha256": "4eb1ceb150f179c4b287b0e0c6120bc8ae0b14250f8243fc9ee57bd425e67478"
+        "bytes": 604,
+        "sha256": "866f5d159e989f2b796b40a0889cadd07a5703f3994884309e9ae68d77eb3f75"
       },
       {
         "path": "docs/audio-integration-v93.md",
@@ -5894,6 +6719,11 @@
         "sha256": "e19fd458311241d85dcdae7abe85244783b61fbdc119105f67f67cd5d152414e"
       },
       {
+        "path": "docs/stability-v101.md",
+        "bytes": 3654,
+        "sha256": "34edd8c620ea7ebe9485a6911cc88293e70f6d63f4d9a589f8c774296a5e325a"
+      },
+      {
         "path": "docs/stability-v912.md",
         "bytes": 3467,
         "sha256": "239808f97f80d49eb11423bb87977a28bf691069c2af9648247cad84cf9643c8"
@@ -5902,6 +6732,21 @@
         "path": "docs/stability-v915.md",
         "bytes": 4836,
         "sha256": "ade941c3f900197fc30392e23d9598625e39f481de0a6a5ae047bbbe571631c9"
+      },
+      {
+        "path": "docs/stability-v920.md",
+        "bytes": 2347,
+        "sha256": "8bd0b1ce13df6cc17e5c2a24dca9e0d57eaad1432985dc283555e4ac470ed62d"
+      },
+      {
+        "path": "docs/stability-v921.md",
+        "bytes": 4223,
+        "sha256": "2267249057a399e36f470a9c3662bbf7da0e161504acb91c333a5af2e3744160"
+      },
+      {
+        "path": "docs/stability-v922.md",
+        "bytes": 4561,
+        "sha256": "3d3d2ac24c08dcdeade95c913ecf13c51d507f8cda01a74e76cbe2c7375b2f27"
       },
       {
         "path": "docs/stage-challenge-v8/README.md",
@@ -5954,6 +6799,761 @@
         "sha256": "2dc04abb54f4e268139723bb0ae5c16fe177105a067696ebfce1de00e85eee70"
       },
       {
+        "path": "docs/vfx-upgrade-v10/concepts/01-guandao.png",
+        "bytes": 2460440,
+        "sha256": "db916976ac335fc8c7e20df9ccaac41aa6656daccc2fe4ef27a29be1a6a18ec3"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/02-flood.png",
+        "bytes": 2924275,
+        "sha256": "6b9850f4a61eb72f6ead292d220e60c099f4057e01b067d7ffbfd9ac8eadd6e4"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/03-lvbu.png",
+        "bytes": 2427740,
+        "sha256": "7307f82cd82b6421a99ccadfbe19273135d32c9dc0f5a66a2338c3ae73d0ea9c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/prompts.json",
+        "bytes": 9151,
+        "sha256": "d22bd563772dd71433f2efc3be7a6370e5d32eaff840f07feb99e8a12625ca79"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/README.md",
+        "bytes": 2189,
+        "sha256": "4d9fc0b07da76f3a26112ec9100bbe4c73a0baa0d1ba262a0d4d1169193a3a27"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/build-book.py",
+        "bytes": 19799,
+        "sha256": "775df30108b7e64f985b2b4c73654284c2d892f8dcbd6148d7fec67f3ff6bc67"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/build-pdf.py",
+        "bytes": 7052,
+        "sha256": "cdf5f31a8ce7fb46773ef2bf5c70a11292ff2681999eeba1e3d04706c7397fc5"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B01-1.png",
+        "bytes": 2443430,
+        "sha256": "8318746a06d20748d783386c8c06423cf2bfdceed2a24c24ff827ca3ebf52451"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B01-2.png",
+        "bytes": 2474187,
+        "sha256": "94ca31fe2b5af622e6422eefff3b9d59c213424acf93ce8c9bcc0801f5c27871"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B01-3-r2.png",
+        "bytes": 2428429,
+        "sha256": "17bc40b51152c465ade8a50f8c972886f88f0c22f9092c921e319171d784b698"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B02-1.png",
+        "bytes": 2427740,
+        "sha256": "7307f82cd82b6421a99ccadfbe19273135d32c9dc0f5a66a2338c3ae73d0ea9c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B02-2.png",
+        "bytes": 2378063,
+        "sha256": "c96cdee3694cc3c4b5d42d2f84cd7679bfcbb6e4117b758786a10ef71c5f7234"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B02-3.png",
+        "bytes": 2357943,
+        "sha256": "9657f1d75423f1ebff416e5f9c884ad2a1e2977e0cba5964133f3463834c3561"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B03-1.png",
+        "bytes": 2518470,
+        "sha256": "7cb22ca2702dcefe8b7a5651362eaf599130adf149811cacd74a442a8649f068"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B03-2-r2.png",
+        "bytes": 2554041,
+        "sha256": "7bb499dadebb8189094f3a2281bbf824e9f6b59e1856389a2f67870b598da541"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B03-3-r2.png",
+        "bytes": 2528281,
+        "sha256": "f01c7dca85204b914cee81768061d19c282a4838ab0de597cf9a52acb7335a11"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B04-1-r2.png",
+        "bytes": 2657066,
+        "sha256": "89ca52082dbdfa62fa433ff5731ecfc49599c227e2d8afea4209f47b7cbb7016"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B04-2-r2.png",
+        "bytes": 2670469,
+        "sha256": "755140bc682022eb23a622e73e0a6b2794f7d10230587de5f78191de2539b1af"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B04-3.png",
+        "bytes": 2580596,
+        "sha256": "24bf96be70bed9666e985eb7a20cf1ca5acccb423bbe03e512a5b6c32669d0c4"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B05-1.png",
+        "bytes": 2448794,
+        "sha256": "2df9f410177554a0cc916c6998b7881d1e388c91f59e92c99e4eaf9b00487e1f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B05-2.png",
+        "bytes": 2517615,
+        "sha256": "05277b490f634bcc007534aa96dd4432436612a3a4e2150b19c88d354fdcc3ac"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B05-3.png",
+        "bytes": 2560925,
+        "sha256": "098420588aa3048693ae9c290b36682328b90d44eaaf107d70577354cdfc0a50"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B06-1-r2.png",
+        "bytes": 2486788,
+        "sha256": "63dfd08d8de5691bf349f049687ea7643d1932a6a4207b4e173562c9b7297b7d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B06-2-r2.png",
+        "bytes": 2504875,
+        "sha256": "bd01658bf24e22232c0398481f353c4e5204d5c2f3532c2a7f5ce6db5205fe42"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B06-3-r2.png",
+        "bytes": 2484674,
+        "sha256": "33827d698317eeb7605bccf8ad084839bb54eca205ab99300ded84ee6ab00bbb"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B07-1-r2.png",
+        "bytes": 2582137,
+        "sha256": "9408ca046d7626adfaf4d407a14ff53ed5b15c1120b412f6b450e43249013b01"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B07-2-r2.png",
+        "bytes": 2565241,
+        "sha256": "e3af648edc566922717253e01e79a94f7bed1a0633e087984f3bcd0778b3af7f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B07-3.png",
+        "bytes": 2506333,
+        "sha256": "a264e6eacf273a8f8cbbb360ae460836d48c2e3894a9c92fd98ae19fac459aae"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/C01.png",
+        "bytes": 2511396,
+        "sha256": "a5a17c60ce3841ba7cc7f29096a5c5c366890da8a9d3f6f1060f5f1aa971487d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/C02.png",
+        "bytes": 2432963,
+        "sha256": "dcaec855acfddc9b31ffd28ba3c9b4ea57aec7ae0def0717d21339e1b55d52a4"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/C03.png",
+        "bytes": 2532019,
+        "sha256": "3cabdea4ba35ae47c3e8e1cf6aba3d6b697d3a8686c0ec1a834d03e58ab194ee"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E01-r2.png",
+        "bytes": 2301946,
+        "sha256": "dfab57ed467d84bc0deffeca408b1abd83c850fd7183d59338bf55eb6d65b315"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E02-r2.png",
+        "bytes": 2224147,
+        "sha256": "c143a6c0f1761929e698079c3fda20e082f9bad538897b0e10ceafe1cb8e74da"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E03-r2.png",
+        "bytes": 2288923,
+        "sha256": "74d0ab1377486e2e8fa4db804fc28954345978d07d950d1973147248cd6b5636"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E04-r2.png",
+        "bytes": 2309476,
+        "sha256": "861e37088e62749817d717e5707833282bd9832c934b0729ce7d7fded2780ce2"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E05-r2.png",
+        "bytes": 2265139,
+        "sha256": "f156a177168acfb93cbcadad4a9e86567ac16578567c8c9521d3c6b938032cd2"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E06-r2.png",
+        "bytes": 2278363,
+        "sha256": "85e563919e97d70a42064d417383dbce10508c4598b617f4b413119f05f79100"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E07-r2.png",
+        "bytes": 2300138,
+        "sha256": "c13338c43b55ed7a7ce61bf768c7525c04e9138e5c147a2be0657de08b69ebd8"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E08-r2.png",
+        "bytes": 2226577,
+        "sha256": "1f3f6c4b6d45418a48d6b6f843a261dba2b2341c58898bd1c6885920ad56203f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E09-r2.png",
+        "bytes": 2338277,
+        "sha256": "617307b297ebe3b155a4487a8a6304c749a1d218df424c18287dcff866b756f2"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E10-r2.png",
+        "bytes": 2273615,
+        "sha256": "6aabe0e0b5248aeef653235d74af2d95943b24995743be99340c6a8f27e80539"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E11-r2.png",
+        "bytes": 2322679,
+        "sha256": "47a0c1dd859aa3ca404974c619fc659ffe94371a3a189db5c63b9673e82ac3f0"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E12-r2.png",
+        "bytes": 2225722,
+        "sha256": "0b36c1b0adbe42304d324c4e87a9151d5b1a14b10bffe00ad27d006e94b9800b"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E13-r2.png",
+        "bytes": 2249091,
+        "sha256": "0c3565110a3848673be2f52cebbb191e6dfa2955a9b8a070f7d4cde779c43de3"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E14-r2.png",
+        "bytes": 2225468,
+        "sha256": "6e348f3cd893c60bab241236474be348e240fa0cec6d9d8c6808e1844b75e9ee"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E15-r2.png",
+        "bytes": 2208046,
+        "sha256": "6528800d35e72a6260bd69f892e580a9228d92fa08482e7bc7d9bd6ccacd36f8"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E16-r2.png",
+        "bytes": 2204120,
+        "sha256": "a5a5f12d2e28ce3b878649fb75bef21f0423f5efec251bf4c3515e473677a9ed"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E17-r2.png",
+        "bytes": 2217061,
+        "sha256": "b204e484f397f9deb8f10b41d515b710e61a5e20dd0b06f4b35cb44d6e630f6d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E18-r2.png",
+        "bytes": 2224131,
+        "sha256": "3fb4450b3e7eee44d49372645944ec0d83f0627e7942f992a65dbeecd7bbd80e"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E19-r2.png",
+        "bytes": 2252028,
+        "sha256": "7e2a38ffbd400aa624de00a5180d9817f6f65f4ef06fb5f11acc22631407c50d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E20-r2.png",
+        "bytes": 2310236,
+        "sha256": "b9cecd84a281df9402af756f64149d1b6aa1e17fdcd2c4005f1f2640c380b792"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E21-r2.png",
+        "bytes": 2328291,
+        "sha256": "1ad1826f5d271c279bb760e99573a55de58b061089baee02d6ffb9e5ffb894f3"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E22-r2.png",
+        "bytes": 2269300,
+        "sha256": "41bec30a349f87e29eb8b1f771c9ed2716cf4632a6fba21ffa695f8f4141b634"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E23-r2.png",
+        "bytes": 2286764,
+        "sha256": "282865ca9b5edc8f0bc5dbabb4401958556508894433f39ef757fd2285bf218d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E24-r2.png",
+        "bytes": 2301997,
+        "sha256": "766232ddf51a06788ad4808079e1a311e02872b428b6ce7869e51a984e8a81dc"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E25-r2.png",
+        "bytes": 2276666,
+        "sha256": "9b5b5b5deaaf49ce92663a932be72db9bf8a53f8a449d49995d45bf40e27d3f1"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E26-r2.png",
+        "bytes": 2241155,
+        "sha256": "6c22d62d9479c54e2ee0c33adadd1b6eeca23a63ef4573ba9ca8d2bc8483fa8e"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E27-r2.png",
+        "bytes": 2272649,
+        "sha256": "29d24c0463179939338dd07a833a169a93831711fee0eb1c4a2e8a3fb0cfd0e6"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E28-r2.png",
+        "bytes": 2249941,
+        "sha256": "0cb9e741da482cfa50b43a35623c5bbb7ff4c211fb8f6775e70080e2e8ea755b"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E29-r2.png",
+        "bytes": 2238610,
+        "sha256": "e77f13a6ec32b5a7fc0bbfd8b6b36301a35d08ef27a9f2a640ec452591797267"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E30-r2.png",
+        "bytes": 2224960,
+        "sha256": "65a5cb8c3830dd37d257037189cf779d5d13dcea933945dc08526a391bc90b73"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E31-r2.png",
+        "bytes": 2218892,
+        "sha256": "60598dd805ad22a6efe68ed9133135014eae484f20509fbca6e0677c6009ec30"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E32-r2.png",
+        "bytes": 2206270,
+        "sha256": "f2a741d036c730ed0fad439713ac575b785707304235ea7325d769ee5854f3bc"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E33-r2.png",
+        "bytes": 2241940,
+        "sha256": "6f966f7758d3c46dbe9fcd1555d9e59f807ce0b2e347a74d93de651ea6f2f47c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E34-r2.png",
+        "bytes": 2229581,
+        "sha256": "c5969a6407cc3da98aa9e6ed041b6d4c0463344f5fdb22cb754cb0479d3c0910"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E35-r2.png",
+        "bytes": 2269846,
+        "sha256": "782ba742f15bdef10bd5f4e11e7331aa90afb0ff03b8e83896cf6a5ad155902f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E36-r2.png",
+        "bytes": 2252219,
+        "sha256": "6ec73ccedc82a86d186c8473d38295af649a727bb2b1c4bf891a4115537326dd"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E37-r2.png",
+        "bytes": 2306464,
+        "sha256": "5418f147334dd25cc445ea2f200804d23f72fdf282b3935354c2af60e88729d5"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E38-r2.png",
+        "bytes": 2321460,
+        "sha256": "8eb7e8881fe215b962fb04fc8bed3daae75b1ac53945b27e43222bf10ccd4837"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E39-r2.png",
+        "bytes": 2251955,
+        "sha256": "e34a7a067bce2afe0f29496b21df51402ee821e8a8f20696a9e07ccdc2173c55"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E40-r2.png",
+        "bytes": 2322675,
+        "sha256": "62fc0ee3c1e37b73f2a814348902ab059ad19135abe8ded00ffe0b63fcc0c7a0"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F01.png",
+        "bytes": 2368962,
+        "sha256": "c4a9b8922b111ee38772efe53c2a1911c7a78af046494274e22cbecd96a38e53"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F02.png",
+        "bytes": 2319102,
+        "sha256": "5e6bdbf766f5674b0f7fac36380f61c6d519afddf7e67dea14de3c730a0d2363"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F03.png",
+        "bytes": 2518569,
+        "sha256": "19b4a60c380a372aa068c18f8320079226d102101b66a22957d0ddbb76203fcd"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F04.png",
+        "bytes": 2436268,
+        "sha256": "a17a4f86944323a8c7352d409484f2d875503bf9d74793957367bcb396eebb6f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F05.png",
+        "bytes": 2350773,
+        "sha256": "f199352c7f4a69bae928429a3ec0a46694bd30dd3a9a62d2f1325f3f320fd5ee"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F06.png",
+        "bytes": 2574372,
+        "sha256": "f0ac19cf6f5c479b27c04359d07ff75b4471d87fd73ee763123d0d1f65becb4d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F07.png",
+        "bytes": 2432649,
+        "sha256": "cffac8aa2dd879c2be42f2d4b8b2c0ad2bf8c06455afb40434d856fd29a07d98"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F08.png",
+        "bytes": 2281712,
+        "sha256": "5c9d01f36c6fb40b31875c499bfb74baeba7e69aefb13de5b0535fb06c85b767"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G01.png",
+        "bytes": 2504542,
+        "sha256": "3b9e90ea1975f550551c71aa56f294536d5f1f6cf625299536c0eec4cdd1a283"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G03.png",
+        "bytes": 2499651,
+        "sha256": "e477cd1ae473bd8c362a80623bdc2a75523560f60451c3553d11598bf9aa840d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G07.png",
+        "bytes": 2456909,
+        "sha256": "a13bbedaa202e6c096c90c8c339f5516955e90cc58ed0aa5337dab061a9fc3e9"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G08.png",
+        "bytes": 2564647,
+        "sha256": "920eaf0d80faa0973273143a5a4725c0bb337d308747bc78489af0bd64e74dc4"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G10-r2.png",
+        "bytes": 2618739,
+        "sha256": "89ea3f82ce648eddd0e4b80ef39668a4c8267010e211e4af1cc724a3039ccacf"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G12.png",
+        "bytes": 2924275,
+        "sha256": "6b9850f4a61eb72f6ead292d220e60c099f4057e01b067d7ffbfd9ac8eadd6e4"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G18-r2.png",
+        "bytes": 2526593,
+        "sha256": "1ef62e1fc8c7a36538f8a9883183bea7f1346bea2f2231b7204a3fa0baa784b2"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G19.png",
+        "bytes": 2478357,
+        "sha256": "d5eaa0860e0028d7a558f5bf2bef79c1f1ed6a5adb48f5487acb59ce53ff1f09"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G20.png",
+        "bytes": 2619753,
+        "sha256": "55c91308cbc6efd6b5d6ea7fc365041a27bbab815cd234a51f40de21c47f0896"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G22-r2.png",
+        "bytes": 2715217,
+        "sha256": "dfb4a68c6e326315206a628db71800e7173beb483e6be83020979d6a09ca9b4b"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G25.png",
+        "bytes": 2554725,
+        "sha256": "f16654e5c1fb929fbe34a14faaed36f5dd6e23f9212cc16e0c7a125606a7fc4c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G26.png",
+        "bytes": 2416567,
+        "sha256": "4bc52e4ef1c5af4e7b8096c8bd264bb42680eba95cb96457115076ab54c67e73"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/M01.png",
+        "bytes": 2389955,
+        "sha256": "62130279328311eeec1b0c197dbc5da4ffb5536030b8f6569dae2021f26d8d97"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/M02-r2.png",
+        "bytes": 2473334,
+        "sha256": "9a4eeafb1e65d93c2306a0f96d9a3f2a2568569bfa286901c5cac9dc3fd7ef89"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/M03-r2.png",
+        "bytes": 2263390,
+        "sha256": "325089b2a9b2c4f730a4a4963bc0fe8dec9a5779a6c0e8467f5fa49eaa1c31ea"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/P01.png",
+        "bytes": 2532961,
+        "sha256": "911a498a910e045f2506b61b60d2fa50087add978669f4b2956748d5d270cfad"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/P02.png",
+        "bytes": 2527096,
+        "sha256": "5b5e1f77b0098b713fdddba8561ce9da5c289bd0fc24783dfa46fd242f24c75e"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/P03.png",
+        "bytes": 2502648,
+        "sha256": "509bf452ecb845c3c7f57252795d961b82e8ea8fc1df691e106e46d09a814b00"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W01-sandal.png",
+        "bytes": 2560925,
+        "sha256": "0485c5b48557d715d4c74b039d113fc973de9c4e75c73be22625a9f245b48295"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W02-pole.png",
+        "bytes": 2548170,
+        "sha256": "c3712e744acaa7871b649c38bf8d3aff2c518245b7147c13cb626c228bdb71db"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W03-peach.png",
+        "bytes": 2478809,
+        "sha256": "95cbc1ae8e154534e2ae15fc5cd61ee90a05635863b40c5fb0265d856a4bb63c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W04-cleaver.png",
+        "bytes": 2441161,
+        "sha256": "f40359943eb82d9ad6f1c1e0233b673f985b7264ee2a6f907eeb7d2eb65bc3dd"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W05-firecracker.png",
+        "bytes": 2511384,
+        "sha256": "6954caba29cd60830b6bb9c492e4e97a405b2c43a848a8a981996bc5df87da2a"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W06-smg.png",
+        "bytes": 2528268,
+        "sha256": "4982ad666c3951a89ce2fe0839dddcbd0dbd17a791e74194ae348b3ff5a708be"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W07-shotgun.png",
+        "bytes": 2391797,
+        "sha256": "1a1697cd018821f55ae70066267bdd5fbde3a88bc00b700a5f6e594ede697c93"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W08-rocket.png",
+        "bytes": 2408246,
+        "sha256": "c0a19566f577e4db23982e658485aecd5d3f584ca8431d0b689685a7f379a6db"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W09-sword-r2.png",
+        "bytes": 2542864,
+        "sha256": "6cef917722e366930ebc9b95e9d41575b66c6c69317923f0b3a48e801142b9ee"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W10-thunder.png",
+        "bytes": 2503137,
+        "sha256": "d481b5412fa88dcab51243a3918222d3d77ccfb269ba5f64f83b73423c7a8066"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W11-gourd.png",
+        "bytes": 2481183,
+        "sha256": "01d2d9429c849be8d628e202466f26faa93dcb10d3a5f97db43240d0ac4753ac"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W12-twin-swords-r2.png",
+        "bytes": 2396308,
+        "sha256": "e4cac08e2b3082f01f0db6efe0b7eeea150f1f718336fba09f9706c9bdec287d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W13-guandao.png",
+        "bytes": 2460440,
+        "sha256": "db916976ac335fc8c7e20df9ccaac41aa6656daccc2fe4ef27a29be1a6a18ec3"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W14-serpent-spear.png",
+        "bytes": 2413134,
+        "sha256": "3c04dd48bf738e4e8dfe2a315d8602e1d2798cfbb2b1c615fb8f06fcec4802d0"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W15-halberd.png",
+        "bytes": 2646740,
+        "sha256": "9c220ee1436a2fdf6c721483789e92288a34a743584729e362d5501f1eab3537"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W16-silver-spear.png",
+        "bytes": 2494831,
+        "sha256": "2af4d2e2216b684daa78db7d64f1e35da567c80f51f555d020d7ea42a40165c7"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W17-qinggang.png",
+        "bytes": 2545208,
+        "sha256": "ed84de8961f383ddfe197e250dcd16f7b0c009f5719fad772227ff5b1a173984"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W18-yitian.png",
+        "bytes": 2512870,
+        "sha256": "2aa6a8a8c1e886272be322ddc8ff60a5cf293985fbd6b435ff62749fd7200c8c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W19-seven-saber.png",
+        "bytes": 2509409,
+        "sha256": "9c4b939d808119b4adbe58a1705dfa91b5fde13eb2db648d56cade5e871c9e7c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W20-ancient-saber.png",
+        "bytes": 2460296,
+        "sha256": "7570bc3d8bf5e8c32fe18849b9ce30c2a7ac069975280f612ac34b47ec00e13a"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W21-twin-halberds.png",
+        "bytes": 2411534,
+        "sha256": "ef0c671f96fef97d9ea07c33b52d22d806f246b2925e42cfa441c82dd6e2015e"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W22-trident.png",
+        "bytes": 2528741,
+        "sha256": "6625211b2fc297b8fe4003daae98b8619742d78195e805380470c2fd0009a45f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W23-caltrops.png",
+        "bytes": 2488943,
+        "sha256": "e4bf19b5d3408d60656911748165c4b0726f3899533677e64a7cebe6cbb02504"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W24-repeater.png",
+        "bytes": 2421838,
+        "sha256": "34f583a2fd83bbc6eb759d220506f556a4417dc8ff39090272eca7d356563d58"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W25-phoenix-bow.png",
+        "bytes": 2578517,
+        "sha256": "f55eb3948105156f8922ff8cbc5b0a79e383a9e6acba3a18f6a5e40b8f65b02e"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W26-heavy-crossbow.png",
+        "bytes": 2601990,
+        "sha256": "44fb2f365a7f4cbb5fe25db6b02e9ea6f8217d47ba36e30c11324fd0a53a352b"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W27-hand-halberd.png",
+        "bytes": 2512407,
+        "sha256": "05967597b4313cc0ba0d8a0c36299ff0264b27c1eac26cd91bd08f3f413d0619"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W28-chain-hook.png",
+        "bytes": 2538702,
+        "sha256": "50c34200d9d54feef42bf8a7bd214c38df14e5c9784406aae55aa21be9e3e5a2"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W29-oil-jar.png",
+        "bytes": 2481341,
+        "sha256": "f7f17f86690e4f65c8b67a8186ca3b5cc423ca2555660569b47561564649d543"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W30-thunder-bomb.png",
+        "bytes": 2578765,
+        "sha256": "9e8994d8ff0235a2d8d52f1241d17d298b1b15cce88c3300ec6d37d9376b877e"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W31-feather-fan.png",
+        "bytes": 2408633,
+        "sha256": "53885ee79ce5787c6e2a3bd9fdb21700d39c7714f8333c751e46ce0c4422492d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W32-taiping-book.png",
+        "bytes": 2526831,
+        "sha256": "421ebdf91767b5c846344d6fc8ba7c60df418a7affc15d929a118d24a791610d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W33-star-lamps.png",
+        "bytes": 2584065,
+        "sha256": "9f0206bbbba6ed49485dbe16f97e76803827a64f133e3e70ce6a1c3d436c8393"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W34-bagua.png",
+        "bytes": 2493046,
+        "sha256": "17fc7019b53af185bfd50d851248098b0c0b6db49a6e3bc53e034bfef1b8a8bb"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W35-wood-ox.png",
+        "bytes": 2561537,
+        "sha256": "a9e994d8f31dc6210f5f3a89efca8fff36589885ab60fc2f5253ca9cfb03069c"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W36-wood-kite.png",
+        "bytes": 2429156,
+        "sha256": "92f372a3ed55d08d5f624058c710cb7e34b6bc8dccd8146a355ce26cc1adafa0"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X01.png",
+        "bytes": 2457830,
+        "sha256": "0ee3415ada0fea3c3296e4d2ca2479c7a4f009d3ad79636686a7122b0deefa19"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X02.png",
+        "bytes": 2372617,
+        "sha256": "d09da3e46e72cf0aa0d5303022d9fb8cd524179fb65989ccc74d34bf285899d8"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X03.png",
+        "bytes": 2387210,
+        "sha256": "1b0b74d59d4396e1ea7cc55e4606f048e0e7fb54187665ca32e6fba14d573940"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X04-r2.png",
+        "bytes": 2478495,
+        "sha256": "d67495092db29421333a6fba2d00ab42af7964bded9097ba64bfff1e10426d23"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X05.png",
+        "bytes": 2417299,
+        "sha256": "28d9487823586d0c5fa804ee69523cdc258d45d8714799b6012cea36f08e36ab"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X06.png",
+        "bytes": 2458616,
+        "sha256": "58e7f13245a2349a450dfe12ff03c37ca27c1b916828a9e31fc252e7df4ab2f9"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X07.png",
+        "bytes": 2505819,
+        "sha256": "74d9a88c4a34262095b8d31d63a63468128d3fa8c773a9c1b16f8c0e9227b998"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/manifest.json",
+        "bytes": 605391,
+        "sha256": "f89c31863b1375c4f15b62f7abab6f92c9fa1a58dbb43d61f8930244279d3c9f"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/README.md",
+        "bytes": 4454,
+        "sha256": "2138d077c0e853c94ffb1413ec9efa1ef30618a9cb0c963def1af95d54e1f1b8"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/图册.html",
+        "bytes": 162172,
+        "sha256": "27b57bce8a6c1a56721e4e34346730ca54ef8d5b9d3ca14f65eab081080d0420"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/完整设计方案.md",
+        "bytes": 202072,
+        "sha256": "ed251a133dfd226d70763a7b5f6565206fb6128431cad17dffa25706af82d48a"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/文件完整性.json",
+        "bytes": 369,
+        "sha256": "77e8f03601bbd8cf706b79ec23ea376ff1bdab648ff09287f68d3dacdc9cf291"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/文档检查.json",
+        "bytes": 295,
+        "sha256": "cccd762fe038197db9ac042bb26f9d524c11587c49e3d35556ecb31ce0bccb9a"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/implementation/coverage.json",
+        "bytes": 105608,
+        "sha256": "a844c0544bfae8be4ba7a0dc1b1505b9b7a7a5035995324d190b5ee6cece28b3"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/reference/source.json",
+        "bytes": 599,
+        "sha256": "49497aeb585a01541e92509b2a0abe1b1ed412cc493d269def1bc216c5aaea0d"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/reference/video-reference.jpg",
+        "bytes": 257522,
+        "sha256": "0da450a6e5d21d290c87b0b22563559672e7eaf596d3abde30117771fa788dde"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/实现说明.md",
+        "bytes": 5746,
+        "sha256": "7eaab6c121452411d47d9238ed94ededd18838bac0d31ada7a8cc6c0ee43d5c3"
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/方案.md",
+        "bytes": 29907,
+        "sha256": "f06128671794ecca6e35c855e768a298a11668c03feed61cab5e8acfb1c587a4"
+      },
+      {
         "path": "docs/weapon-sounds.md",
         "bytes": 843,
         "sha256": "e33aa76ae60b68a6ba416da3e8726a361671514fd60bc9ee4616b98caf1243b1"
@@ -5965,8 +7565,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 2341,
-        "sha256": "1efbe293c0e2e43eaf575dc0ae6f2731f141c49f70cb1d328f85c60d57498e2a"
+        "bytes": 2455,
+        "sha256": "6a5b13901efa646122ccb6bbea8a8f9d6459a11e8ff36b7ed3789be0686b8367"
       },
       {
         "path": "project.config.json",
@@ -5982,6 +7582,11 @@
         "path": "scripts/bake-enemy-atlases.mjs",
         "bytes": 6650,
         "sha256": "f91508bfd5bdb52c40ab9350fc2f4b9ddead6f95a2b7c45c36c18bec57d3443c"
+      },
+      {
+        "path": "scripts/battle_score.py",
+        "bytes": 6902,
+        "sha256": "e173c4a555e18e1dce9e2ba3b751f707b8f379c7314df291d18e50c09f4b0726"
       },
       {
         "path": "scripts/build-review.cjs",
@@ -6079,6 +7684,11 @@
         "sha256": "a4e26af5ba58f9e77062d1c6f197d04d8fb4381933afe09e09a97fb4cc873687"
       },
       {
+        "path": "scripts/capture-shop-memory-review.mjs",
+        "bytes": 4825,
+        "sha256": "39224c7274523af62f44a9750104f7d4be26c649174c281334584fe1be65080f"
+      },
+      {
         "path": "scripts/capture-skill-review.mjs",
         "bytes": 6005,
         "sha256": "a7b315eac3c6199903decd23e60e31787269155feebf48e84883f3cfa0acb157"
@@ -6109,6 +7719,11 @@
         "sha256": "66b3b47059dedc838fdf5847f76468ae70ebd6d1925b6361d9d4a4ccfdc9d8f4"
       },
       {
+        "path": "scripts/capture-vfx-upgrade.mjs",
+        "bytes": 7418,
+        "sha256": "41c775f3d36fae4857d823d6b2f867cbe1f3e45ae5362a24029bdda3b9dbada5"
+      },
+      {
         "path": "scripts/capture-youth-review.mjs",
         "bytes": 7766,
         "sha256": "7c4324697a93552b11c9bd4314970b3e795d47162e42b735fb4e80415c8534c7"
@@ -6125,8 +7740,8 @@
       },
       {
         "path": "scripts/check-package-size.cjs",
-        "bytes": 3203,
-        "sha256": "1f853cfec4e1f969aa5c7a85dc800efdd6de64d839a0bded6e070d856a93eb08"
+        "bytes": 4411,
+        "sha256": "432044d37ed16e92ed27bde6551035f3431ee2b86be6378a44eba47da1e18ed1"
       },
       {
         "path": "scripts/check.cjs",
@@ -6184,6 +7799,16 @@
         "sha256": "fa2c5f703480eaff54d6c7374cb6fd5db1ccc2898948f9eb912a711ba565c80d"
       },
       {
+        "path": "scripts/fixtures/vfx-upgrade-review.js",
+        "bytes": 6215,
+        "sha256": "f03a8b7bdb31a5b69cdf223757cd75afbdc5c2ebba8b60a6c3279920b1b8d229"
+      },
+      {
+        "path": "scripts/fixtures/wechat-battle-text-review.js",
+        "bytes": 2312,
+        "sha256": "e29b01f5472f810a1785ede70cc89da88b4fa5a46aed5d956b1295a4774bbde5"
+      },
+      {
         "path": "scripts/fixtures/wechat-cached-art-review.js",
         "bytes": 3728,
         "sha256": "66ee5ff7d6270fcdc3e885079c48a00c11307dbfd2e8667ba247af006d88e9c2"
@@ -6214,6 +7839,11 @@
         "sha256": "552d2da6c4488841b975cedb4477ec78ea6be9d1638604ff430038664fe93440"
       },
       {
+        "path": "scripts/music_auditions.py",
+        "bytes": 4589,
+        "sha256": "5fa9704cf458d8b5abb1ade88231ada78ae1bb221ff267938aecda8b39410c29"
+      },
+      {
         "path": "scripts/optimize-textures.cjs",
         "bytes": 4115,
         "sha256": "0830cad4643f50d6b672c852a13afc56ab0729f66718a40e4cd573a8d2eba42a"
@@ -6240,8 +7870,8 @@
       },
       {
         "path": "scripts/pack-game-audio.py",
-        "bytes": 6808,
-        "sha256": "25c4ce6cd9c7e4be7613c25b17f3e71331571d99571ebf4b056a219a66c2c322"
+        "bytes": 6861,
+        "sha256": "578156cea354ef1f785c3b7fd1d27a2b09e6dd514685c1f4bc43f1fd5bcd6fab"
       },
       {
         "path": "scripts/pack-growth-art.cjs",
@@ -6269,6 +7899,11 @@
         "sha256": "3ef89cb81ac73f448858fdce154970dd5c5290388f9d2ddaec95e48f4f52cf33"
       },
       {
+        "path": "scripts/pack-vfx-art.cjs",
+        "bytes": 1615,
+        "sha256": "71fe2454563addff2f890803f3a0fbb68727f8601267d810ab855e0eaac431ad"
+      },
+      {
         "path": "scripts/pack-youth-heroes.cjs",
         "bytes": 5941,
         "sha256": "0a826b091b49d19718d86752aaf6e12d5f1b51cfdf22969bf21726bbb2c644ff"
@@ -6277,6 +7912,16 @@
         "path": "scripts/profile-battle.cjs",
         "bytes": 2636,
         "sha256": "5c82d5f6513edad32d2b0f2a6096e9bd401636f0298ced88f780a8ac88ba24d3"
+      },
+      {
+        "path": "scripts/profile-runtime-v101.mjs",
+        "bytes": 2787,
+        "sha256": "9fa6f70b84c260a425e37d056b88411adfa2e440d2cd9d253a91e67cb9fb72d0"
+      },
+      {
+        "path": "scripts/profile-vfx-upgrade.mjs",
+        "bytes": 2227,
+        "sha256": "f3cc7903df62d42bdc105fa176a27cd72b8dfef6b68778ab8130cb07ff9940f6"
       },
       {
         "path": "scripts/publish-cdn-assets.cjs",
@@ -6305,18 +7950,23 @@
       },
       {
         "path": "scripts/stage-cdn-assets.cjs",
-        "bytes": 2790,
-        "sha256": "411eb429749ad56a805386d14fa8a71f4f3213a83bb4c01143f3094a27f1ae66"
+        "bytes": 3441,
+        "sha256": "01e1b2617aa1d9cad4c7cff68c1fbe8beaf2dd88782ff6566039fd275d5b0693"
       },
       {
         "path": "scripts/test-audio-scenes.cjs",
-        "bytes": 4944,
-        "sha256": "4d624b33fba2490f64747ddeff31a552e6ffc0d6edd7da6c4c5865f728a5df43"
+        "bytes": 5209,
+        "sha256": "ee4a3a0689592e2e7dbdc2e12246c09824d34069dd4c7d7ab618d6005546782d"
       },
       {
         "path": "scripts/test-battle-balance.cjs",
         "bytes": 8381,
         "sha256": "395d2f19a8f4dc0c69f81a1b2d7a1221bb5b3262d3a7ce91806aa5e5f54c80b8"
+      },
+      {
+        "path": "scripts/test-battle-text.cjs",
+        "bytes": 6080,
+        "sha256": "96fe7d4f0e7025716004bff017a52514fc8d22689785e5b877e5e0981f844ff0"
       },
       {
         "path": "scripts/test-bosses.cjs",
@@ -6325,8 +7975,8 @@
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 89974,
-        "sha256": "48da78db3323feacd1100d6b3fa33c482322223e0c61c27e9547ed5cc10a5bec"
+        "bytes": 90393,
+        "sha256": "7f0d3749914a06218820aeb533f644cf1305d99fd735af17a91e5b894196d517"
       },
       {
         "path": "scripts/test-chronicles.cjs",
@@ -6345,18 +7995,18 @@
       },
       {
         "path": "scripts/test-common-skills.cjs",
-        "bytes": 10811,
-        "sha256": "66a6b7250dadece41257cd494d6a6af2679c3e07e69381755ea5ea01d2551d55"
+        "bytes": 12654,
+        "sha256": "6215817893accaf0b4cf3da90236831c3bc67ad0f230169ace26efcf2bc19dd3"
       },
       {
         "path": "scripts/test-endless-settings.cjs",
-        "bytes": 4864,
-        "sha256": "eecca7226ce1aa7d501ba4b5b8f1f728c64d4fdfb797c9724182eb6cb455caf3"
+        "bytes": 6224,
+        "sha256": "92ced794fa52adb994125fb042dc5dba409a429e9784350d1f8368b8ca7a7239"
       },
       {
         "path": "scripts/test-enemy-actions.cjs",
-        "bytes": 6062,
-        "sha256": "baaa95eecf280fab1d3422d11e0de58b5f47de118e657c6f22b9ea87c116dd5b"
+        "bytes": 6319,
+        "sha256": "06103b85b84306957d421732f460017f49a0c401746bbe56e91bffc46d3a63de"
       },
       {
         "path": "scripts/test-enemy-birth.cjs",
@@ -6370,8 +8020,8 @@
       },
       {
         "path": "scripts/test-hero-growth.cjs",
-        "bytes": 8318,
-        "sha256": "68112fc973384277ac6eb14fb221b6c15dea0887a8a7c45d392c77dc8715ac77"
+        "bytes": 8358,
+        "sha256": "ebe65b54658a67d7a8e6bc44768f609e648d566097909b3db8ec7171966c09a2"
       },
       {
         "path": "scripts/test-kiting-results.cjs",
@@ -6385,18 +8035,18 @@
       },
       {
         "path": "scripts/test-lvbu.cjs",
-        "bytes": 12666,
-        "sha256": "ecc617ff2564ae2a744ef341fcbe1fea8040cccf194beac03a5977750cf0faeb"
+        "bytes": 12706,
+        "sha256": "8d33c4af038d1800b959ec539f3e5c926bb4019bb552d7f8fd138ef473bdeb0b"
       },
       {
         "path": "scripts/test-music.cjs",
-        "bytes": 4551,
-        "sha256": "78bf95534964d225820689b2b62669cd64f15f29d3137717fa85ff6a5d477480"
+        "bytes": 4555,
+        "sha256": "cb81c181ea887dd1656798af5d9156d2b8cb738b8d8fb928cce8711b8a3d7e2e"
       },
       {
         "path": "scripts/test-native-audio-files.cjs",
-        "bytes": 4574,
-        "sha256": "1c7bfc0ea3e917cef7571b5f0e4f863482a5397ae36ef005acab600409d5f800"
+        "bytes": 4990,
+        "sha256": "6199629b5cf2fca4d13afbb0a64bd53c849c38a804e76c580526ab13cb0ee527"
       },
       {
         "path": "scripts/test-native-sfx.cjs",
@@ -6405,13 +8055,13 @@
       },
       {
         "path": "scripts/test-performance.cjs",
-        "bytes": 15669,
-        "sha256": "11f6a51b4e92c52eb89c535fe4bbe8a5f461799ab0b4ae62d93f80bba0097587"
+        "bytes": 16744,
+        "sha256": "850e1f3f22da78b205203c308b926ec3902e69c02ef60ce4af936fda8709c60c"
       },
       {
         "path": "scripts/test-pets-unlocks.cjs",
-        "bytes": 9024,
-        "sha256": "89ee0c23f341b8e6f5029855573cce8ba8094c0f59bb2635a422db8a315808ea"
+        "bytes": 9064,
+        "sha256": "ea33ad3a31242cd676ff985f7f0286baf5885fe61788d92a7c0396e9a1dc406b"
       },
       {
         "path": "scripts/test-presentation-art.cjs",
@@ -6430,8 +8080,13 @@
       },
       {
         "path": "scripts/test-review-stability.cjs",
-        "bytes": 14077,
-        "sha256": "5d29f50631cfba5414013ddf5fdd6df185b47fbb2e2b2a79242ce4417f4b76d7"
+        "bytes": 14867,
+        "sha256": "8d935796a3b56c045bdc9b50b86f47828e19ea124252e367bf50e0961f781ad0"
+      },
+      {
+        "path": "scripts/test-runtime-report.cjs",
+        "bytes": 6119,
+        "sha256": "6e8558cde3b5fd8ba26585ba5c7fdd210cdd1eb93d313d3f34f7bd55f408fba1"
       },
       {
         "path": "scripts/test-skill-recast.cjs",
@@ -6455,8 +8110,8 @@
       },
       {
         "path": "scripts/test-training.cjs",
-        "bytes": 13440,
-        "sha256": "4e82404ac84c290537f0e72ad22beef8dd5ebfa00a8de72ff1febafe2d934833"
+        "bytes": 13986,
+        "sha256": "8c51edc529cc70396342faa33f843fd3c1c7069605eeb12343d42798131ff8b8"
       },
       {
         "path": "scripts/test-ui-layout.cjs",
@@ -6464,9 +8119,14 @@
         "sha256": "bcb0b03e11ad2dccc7c081a8c64c34fe2b3200416876cd7a960a834dbde523cf"
       },
       {
+        "path": "scripts/test-vfx-upgrade.cjs",
+        "bytes": 3527,
+        "sha256": "0f7f0d7127f3d72fe4f7e5f26cc6bee9bb41c441788d1ac1fe777a1316df82e9"
+      },
+      {
         "path": "scripts/test-weapon-sound.cjs",
-        "bytes": 2669,
-        "sha256": "5976d79ee7a5afd8eb1aca0c6a4550847d2bf4b561bd1de7efa246510de5457e"
+        "bytes": 3244,
+        "sha256": "72f194d1b4ac584b9e483da2ec2315936a9a72d5542341381c227ecbd0ef4255"
       },
       {
         "path": "scripts/test-weapons.cjs",
@@ -6480,8 +8140,8 @@
       },
       {
         "path": "scripts/test-youth-heroes.cjs",
-        "bytes": 5025,
-        "sha256": "44e6dce808cf60c458dfee167dfc209bba163ac1bc0096df93fd95a472c8ffa3"
+        "bytes": 5015,
+        "sha256": "85b3790fbe84b1d5ade8983afd3eacd850310b4932324b71cc4537dc95774b26"
       },
       {
         "path": "scripts/vendor-inflate.cjs",
@@ -24098,9 +25758,9 @@
         "name": "星落五丈原",
         "category": "奇术",
         "damage": "每星0.55S",
-        "range": "5点，各半径90",
+        "range": "27颗，各半径90",
         "duration": "1.6秒",
-        "effect": "五颗流星依次坠落；同一敌最多3次，整次最多20个不同目标。",
+        "effect": "九轮陨石密集坠落，每轮三颗，共27颗，每颗落地前锁定位置；同一敌最多3次，整次最多20个不同目标。",
         "icon": 19,
         "powerRank": 7,
         "powerTier": 4,
@@ -24186,9 +25846,9 @@
         "name": "雷霆万钧",
         "category": "奇术",
         "damage": "每雷0.70S",
-        "range": "4圈，各半径65",
-        "duration": "1.4秒",
-        "effect": "4处依次落雷，间隔0.3秒；同一敌最多2雷，整次最多18个不同目标。",
+        "range": "12处，各半径65",
+        "duration": "0.8秒",
+        "effect": "聚云0.2秒，十二道落雷同时轰击锁定位置；同一敌最多2雷，整次最多18个不同目标。",
         "icon": 18,
         "powerRank": 11,
         "powerTier": 6,
@@ -24198,7 +25858,7 @@
         "kind": "lightning",
         "factor": 0.7,
         "radius": 65,
-        "seconds": 1.4,
+        "seconds": 0.8,
         "maxTargets": 18,
         "maxHits": 2,
         "color": "#8fcfdb"
@@ -25845,19 +27505,19 @@
     "cues": {
       "wood-attack": {
         "volume": 0.198,
-        "duration": 0.12,
+        "duration": 0.089583,
         "gap": 0.14,
         "priority": 0
       },
       "wood-hit": {
         "volume": 0.432,
-        "duration": 0.16,
+        "duration": 0.14,
         "gap": 0.11,
         "priority": 2
       },
       "blade-attack": {
         "volume": 0.198,
-        "duration": 0.12,
+        "duration": 0.102417,
         "gap": 0.14,
         "priority": 0
       },
@@ -25869,97 +27529,97 @@
       },
       "heavy-attack": {
         "volume": 0.198,
-        "duration": 0.12,
+        "duration": 0.121583,
         "gap": 0.14,
         "priority": 0
       },
       "heavy-hit": {
         "volume": 0.432,
-        "duration": 0.3,
+        "duration": 0.19,
         "gap": 0.11,
         "priority": 2
       },
       "bow-attack": {
         "volume": 0.198,
-        "duration": 0.15,
+        "duration": 0.067208,
         "gap": 0.14,
         "priority": 0
       },
       "bow-hit": {
         "volume": 0.432,
-        "duration": 0.11,
+        "duration": 0.105,
         "gap": 0.11,
         "priority": 2
       },
       "gun-attack": {
         "volume": 0.198,
-        "duration": 0.1,
+        "duration": 0.057583,
         "gap": 0.14,
         "priority": 0
       },
       "gun-hit": {
         "volume": 0.432,
-        "duration": 0.16,
+        "duration": 0.09,
         "gap": 0.11,
         "priority": 2
       },
       "blast-attack": {
         "volume": 0.198,
-        "duration": 0.18,
+        "duration": 0.147208,
         "gap": 0.14,
         "priority": 0
       },
       "blast-hit": {
         "volume": 0.432,
-        "duration": 0.3,
+        "duration": 0.23,
         "gap": 0.11,
         "priority": 2
       },
       "petal-attack": {
         "volume": 0.198,
-        "duration": 0.28,
+        "duration": 0.083208,
         "gap": 0.14,
         "priority": 0
       },
       "petal-hit": {
         "volume": 0.432,
-        "duration": 0.36,
+        "duration": 0.13,
         "gap": 0.11,
         "priority": 2
       },
       "spirit-attack": {
         "volume": 0.198,
-        "duration": 0.22,
+        "duration": 0.115208,
         "gap": 0.14,
         "priority": 0
       },
       "spirit-hit": {
         "volume": 0.432,
-        "duration": 0.25,
+        "duration": 0.18,
         "gap": 0.11,
         "priority": 2
       },
       "thunder-attack": {
         "volume": 0.198,
-        "duration": 0.23,
+        "duration": 0.140792,
         "gap": 0.14,
         "priority": 0
       },
       "thunder-hit": {
         "volume": 0.432,
-        "duration": 0.62,
+        "duration": 0.22,
         "gap": 0.11,
         "priority": 2
       },
       "ritual-attack": {
         "volume": 0.198,
-        "duration": 0.28,
+        "duration": 0.115208,
         "gap": 0.14,
         "priority": 0
       },
       "ritual-hit": {
         "volume": 0.432,
-        "duration": 0.45,
+        "duration": 0.18,
         "gap": 0.11,
         "priority": 2
       },
@@ -26127,7 +27787,7 @@
       },
       "skill-G19": {
         "volume": 0.558,
-        "duration": 0.62,
+        "duration": 0.22,
         "gap": 0.2,
         "priority": 3
       },
@@ -26151,7 +27811,7 @@
       },
       "boss-zhangjiao-3": {
         "volume": 0.504,
-        "duration": 0.28,
+        "duration": 0.115208,
         "gap": 0.4,
         "priority": 3
       },
@@ -26169,13 +27829,13 @@
       },
       "boss-lvbu-3": {
         "volume": 0.504,
-        "duration": 0.3,
+        "duration": 0.19,
         "gap": 0.4,
         "priority": 3
       },
       "boss-dongzhuo-1": {
         "volume": 0.504,
-        "duration": 0.3,
+        "duration": 0.19,
         "gap": 0.4,
         "priority": 3
       },
@@ -26187,7 +27847,7 @@
       },
       "boss-dongzhuo-3": {
         "volume": 0.504,
-        "duration": 0.3,
+        "duration": 0.23,
         "gap": 0.4,
         "priority": 3
       },
@@ -26199,19 +27859,19 @@
       },
       "boss-yuanshao-2": {
         "volume": 0.504,
-        "duration": 0.15,
+        "duration": 0.067208,
         "gap": 0.4,
         "priority": 3
       },
       "boss-yuanshao-3": {
         "volume": 0.504,
-        "duration": 0.11,
+        "duration": 0.105,
         "gap": 0.4,
         "priority": 3
       },
       "boss-caocao-1": {
         "volume": 0.504,
-        "duration": 0.12,
+        "duration": 0.102417,
         "gap": 0.4,
         "priority": 3
       },
@@ -26241,25 +27901,25 @@
       },
       "boss-menghuo-3": {
         "volume": 0.504,
-        "duration": 0.16,
+        "duration": 0.14,
         "gap": 0.4,
         "priority": 3
       },
       "boss-simayi-1": {
         "volume": 0.504,
-        "duration": 0.16,
+        "duration": 0.14,
         "gap": 0.4,
         "priority": 3
       },
       "boss-simayi-2": {
         "volume": 0.504,
-        "duration": 0.45,
+        "duration": 0.18,
         "gap": 0.4,
         "priority": 3
       },
       "boss-simayi-3": {
         "volume": 0.504,
-        "duration": 0.3,
+        "duration": 0.23,
         "gap": 0.4,
         "priority": 3
       },
@@ -26371,15 +28031,21 @@
     "musicVolume": 0.26,
     "musicScenes": {
       "menu": {
-        "seconds": 40,
+        "id": "brass-oath",
+        "title": "桃园举旗",
+        "seconds": 32,
         "volume": 0.65
       },
       "battle": {
-        "seconds": 60,
+        "id": "brass-rally",
+        "title": "全军出击",
+        "seconds": 25.263158,
         "volume": 0.6
       },
       "boss": {
-        "seconds": 30,
+        "id": "brass-rally",
+        "title": "全军出击",
+        "seconds": 25.263158,
         "volume": 0.6
       }
     }
@@ -26453,10 +28119,10 @@
       {
         "path": "assets/music/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "music",
         "priority": 8,
-        "sourceBytes": 1054390
+        "sourceBytes": 485689
       },
       {
         "path": "assets/orchard/",
@@ -26472,7 +28138,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "presentation",
         "priority": 8,
-        "sourceBytes": 1132931
+        "sourceBytes": 2471525
       },
       {
         "path": "assets/remote-content/boss-caocao/",
@@ -26552,7 +28218,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "sfx-core",
         "priority": 8,
-        "sourceBytes": 581172
+        "sourceBytes": 484932
       },
       {
         "path": "assets/sfx/",
@@ -27425,6 +29091,20 @@
         "colorType": 6
       },
       {
+        "path": "art/reviews/endless-memory-v920/after.png",
+        "bytes": 396398,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/endless-memory-v920/before.png",
+        "bytes": 390134,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
         "path": "art/reviews/endless-settings/boss.png",
         "bytes": 902658,
         "width": 1440,
@@ -28253,6 +29933,930 @@
         "colorType": 2
       },
       {
+        "path": "art/reviews/vfx-v10/boss-1-0.png",
+        "bytes": 1559112,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-1-1.png",
+        "bytes": 1585951,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-1-2.png",
+        "bytes": 1584632,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-3-0.png",
+        "bytes": 1602802,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-3-1.png",
+        "bytes": 1584867,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-3-2.png",
+        "bytes": 1606362,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-4-0.png",
+        "bytes": 1597557,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-4-1.png",
+        "bytes": 1595468,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-4-2.png",
+        "bytes": 1619571,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-5-0.png",
+        "bytes": 1557755,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-5-1.png",
+        "bytes": 1576933,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-5-2.png",
+        "bytes": 1606105,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-6-0.png",
+        "bytes": 1625491,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-6-1.png",
+        "bytes": 1587481,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-6-2.png",
+        "bytes": 1602432,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-7-0.png",
+        "bytes": 1562654,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-7-1.png",
+        "bytes": 1634793,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/boss-7-2.png",
+        "bytes": 1571849,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-birth.png",
+        "bytes": 1505461,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-bounce.png",
+        "bytes": 1498300,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-death.png",
+        "bytes": 1497354,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-guard.png",
+        "bytes": 1524646,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-heal.png",
+        "bytes": 1499192,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-hurt.png",
+        "bytes": 1498505,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/feedback-peach.png",
+        "bytes": 1525832,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/growth-guanyu.png",
+        "bytes": 1614023,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/growth-liubei.png",
+        "bytes": 1525302,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/growth-zhangfei.png",
+        "bytes": 1525399,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/lvbu-0.png",
+        "bytes": 1564341,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/lvbu-1.png",
+        "bytes": 1532447,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/lvbu-2.png",
+        "bytes": 1581985,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-chess-cross.png",
+        "bytes": 1527569,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-chess-follow.png",
+        "bytes": 1514491,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-elephant-charge.png",
+        "bytes": 1535200,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-elephant-quake.png",
+        "bytes": 1538354,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-hebei.png",
+        "bytes": 1516632,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-tiger.png",
+        "bytes": 1521583,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mini-yellow.png",
+        "bytes": 1522580,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mount-guanyu.png",
+        "bytes": 1517143,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mount-liubei.png",
+        "bytes": 1521835,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/mount-zhangfei.png",
+        "bytes": 1520630,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E01.png",
+        "bytes": 1509731,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E02.png",
+        "bytes": 1507988,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E03.png",
+        "bytes": 1508803,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E04.png",
+        "bytes": 1508105,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E05.png",
+        "bytes": 1509890,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E06.png",
+        "bytes": 1503153,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E07.png",
+        "bytes": 1503393,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E08.png",
+        "bytes": 1513867,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E09.png",
+        "bytes": 1504906,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E10.png",
+        "bytes": 1504799,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E11.png",
+        "bytes": 1504436,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E12.png",
+        "bytes": 1503887,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E13.png",
+        "bytes": 1503914,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E14.png",
+        "bytes": 1503177,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E15.png",
+        "bytes": 1505720,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E16.png",
+        "bytes": 1503666,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E17.png",
+        "bytes": 1504855,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E18.png",
+        "bytes": 1503525,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E19.png",
+        "bytes": 1512646,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E20.png",
+        "bytes": 1512277,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E21.png",
+        "bytes": 1509695,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E22.png",
+        "bytes": 1511544,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E23.png",
+        "bytes": 1513740,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E24.png",
+        "bytes": 1512193,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E25.png",
+        "bytes": 1511304,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E26.png",
+        "bytes": 1506698,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E27.png",
+        "bytes": 1510563,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E28.png",
+        "bytes": 1505869,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E29.png",
+        "bytes": 1504523,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E30.png",
+        "bytes": 1504168,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E31.png",
+        "bytes": 1503762,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E32.png",
+        "bytes": 1505282,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E33.png",
+        "bytes": 1505367,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E34.png",
+        "bytes": 1517196,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E35.png",
+        "bytes": 1510808,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E36.png",
+        "bytes": 1507976,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E37.png",
+        "bytes": 1508825,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E38.png",
+        "bytes": 1508364,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E39.png",
+        "bytes": 1503579,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/npc-E40.png",
+        "bytes": 1505607,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/pet-guanyu.png",
+        "bytes": 1540481,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/pet-liubei.png",
+        "bytes": 1523912,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/pet-zhangfei.png",
+        "bytes": 1519751,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G01.png",
+        "bytes": 246784,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G03.png",
+        "bytes": 321329,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G07.png",
+        "bytes": 247728,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G08.png",
+        "bytes": 258721,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G10.png",
+        "bytes": 308617,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G12.png",
+        "bytes": 591721,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G18.png",
+        "bytes": 289257,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G19.png",
+        "bytes": 266586,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G20.png",
+        "bytes": 291054,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G22.png",
+        "bytes": 262007,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G25.png",
+        "bytes": 287723,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/skill-G26.png",
+        "bytes": 191454,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-ancient-saber.png",
+        "bytes": 1557118,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-bagua.png",
+        "bytes": 1535850,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-caltrops.png",
+        "bytes": 1529308,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-chain-hook.png",
+        "bytes": 1529754,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-cleaver.png",
+        "bytes": 1548062,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-feather-fan.png",
+        "bytes": 1530147,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-firecracker.png",
+        "bytes": 1518295,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-gourd.png",
+        "bytes": 1535243,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-guandao.png",
+        "bytes": 1589211,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-halberd.png",
+        "bytes": 1582769,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-hand-halberd.png",
+        "bytes": 1524252,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-heavy-crossbow.png",
+        "bytes": 1530523,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-oil-jar.png",
+        "bytes": 1529085,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-peach.png",
+        "bytes": 1528125,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-phoenix-bow.png",
+        "bytes": 1532279,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-pole.png",
+        "bytes": 1530350,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-qinggang.png",
+        "bytes": 1553093,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-repeater.png",
+        "bytes": 1527721,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-rocket.png",
+        "bytes": 1565121,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-sandal.png",
+        "bytes": 1517506,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-serpent-spear.png",
+        "bytes": 1539657,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-seven-saber.png",
+        "bytes": 1534816,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-shotgun.png",
+        "bytes": 1530119,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-silver-spear.png",
+        "bytes": 1531198,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-smg.png",
+        "bytes": 1528271,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-star-lamps.png",
+        "bytes": 1545370,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-sword.png",
+        "bytes": 1549208,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-taiping-book.png",
+        "bytes": 1530440,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-thunder-bomb.png",
+        "bytes": 1529616,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-thunder.png",
+        "bytes": 1539953,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-trident.png",
+        "bytes": 1544154,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-twin-halberds.png",
+        "bytes": 1563123,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-twin-swords.png",
+        "bytes": 1551109,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-wood-kite.png",
+        "bytes": 1530016,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-wood-ox.png",
+        "bytes": 1536055,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
+        "path": "art/reviews/vfx-v10/weapon-yitian.png",
+        "bytes": 1550691,
+        "width": 1500,
+        "height": 750,
+        "colorType": 6
+      },
+      {
         "path": "art/runtime-bosses/beasts-source.png",
         "bytes": 2352287,
         "width": 1536,
@@ -28771,6 +31375,13 @@
         "colorType": 6
       },
       {
+        "path": "art/runtime-vfx-v10/materials-source.png",
+        "bytes": 2718870,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
         "path": "art/runtime-youth/portraits.png",
         "bytes": 470883,
         "width": 1152,
@@ -29006,6 +31617,13 @@
         "colorType": 6
       },
       {
+        "path": "assets/presentation/vfx-materials.png",
+        "bytes": 1337597,
+        "width": 1024,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
         "path": "assets/presentation/weapon-revision.png",
         "bytes": 33581,
         "width": 512,
@@ -29091,7 +31709,7 @@
       },
       {
         "path": "assets/sfx-core/blade-attack.wav",
-        "bytes": 5804
+        "bytes": 4960
       },
       {
         "path": "assets/sfx-core/blade-hit.wav",
@@ -29099,11 +31717,11 @@
       },
       {
         "path": "assets/sfx-core/blast-attack.wav",
-        "bytes": 8684
+        "bytes": 7110
       },
       {
         "path": "assets/sfx-core/blast-hit.wav",
-        "bytes": 14444
+        "bytes": 11084
       },
       {
         "path": "assets/sfx-core/block.wav",
@@ -29111,11 +31729,11 @@
       },
       {
         "path": "assets/sfx-core/bow-attack.wav",
-        "bytes": 7244
+        "bytes": 3270
       },
       {
         "path": "assets/sfx-core/bow-hit.wav",
-        "bytes": 5324
+        "bytes": 5084
       },
       {
         "path": "assets/sfx-core/charge-warn.wav",
@@ -29147,11 +31765,11 @@
       },
       {
         "path": "assets/sfx-core/gun-attack.wav",
-        "bytes": 4844
+        "bytes": 2808
       },
       {
         "path": "assets/sfx-core/gun-hit.wav",
-        "bytes": 7724
+        "bytes": 4364
       },
       {
         "path": "assets/sfx-core/heal.wav",
@@ -29159,11 +31777,11 @@
       },
       {
         "path": "assets/sfx-core/heavy-attack.wav",
-        "bytes": 5804
+        "bytes": 5880
       },
       {
         "path": "assets/sfx-core/heavy-hit.wav",
-        "bytes": 14444
+        "bytes": 9164
       },
       {
         "path": "assets/sfx-core/hoof.wav",
@@ -29175,11 +31793,11 @@
       },
       {
         "path": "assets/sfx-core/petal-attack.wav",
-        "bytes": 13484
+        "bytes": 4038
       },
       {
         "path": "assets/sfx-core/petal-hit.wav",
-        "bytes": 17324
+        "bytes": 6284
       },
       {
         "path": "assets/sfx-core/player-hurt.wav",
@@ -29187,11 +31805,11 @@
       },
       {
         "path": "assets/sfx-core/ritual-attack.wav",
-        "bytes": 13484
+        "bytes": 5574
       },
       {
         "path": "assets/sfx-core/ritual-hit.wav",
-        "bytes": 21644
+        "bytes": 8684
       },
       {
         "path": "assets/sfx-core/skill-G01.wav",
@@ -29215,19 +31833,19 @@
       },
       {
         "path": "assets/sfx-core/spirit-attack.wav",
-        "bytes": 10604
+        "bytes": 5574
       },
       {
         "path": "assets/sfx-core/spirit-hit.wav",
-        "bytes": 12044
+        "bytes": 8684
       },
       {
         "path": "assets/sfx-core/thunder-attack.wav",
-        "bytes": 11084
+        "bytes": 6802
       },
       {
         "path": "assets/sfx-core/thunder-hit.wav",
-        "bytes": 29804
+        "bytes": 10604
       },
       {
         "path": "assets/sfx-core/ui-click.wav",
@@ -29251,11 +31869,11 @@
       },
       {
         "path": "assets/sfx-core/wood-attack.wav",
-        "bytes": 5804
+        "bytes": 4344
       },
       {
         "path": "assets/sfx-core/wood-hit.wav",
-        "bytes": 7724
+        "bytes": 6764
       },
       {
         "path": "assets/sfx/boss-arrive.wav",
@@ -29366,6 +31984,958 @@
         "width": 3004,
         "height": 1587,
         "colorType": 6
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/01-guandao.png",
+        "bytes": 2460440,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/02-flood.png",
+        "bytes": 2924275,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/concepts/03-lvbu.png",
+        "bytes": 2427740,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B01-1.png",
+        "bytes": 2443430,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B01-2.png",
+        "bytes": 2474187,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B01-3-r2.png",
+        "bytes": 2428429,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B02-1.png",
+        "bytes": 2427740,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B02-2.png",
+        "bytes": 2378063,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B02-3.png",
+        "bytes": 2357943,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B03-1.png",
+        "bytes": 2518470,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B03-2-r2.png",
+        "bytes": 2554041,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B03-3-r2.png",
+        "bytes": 2528281,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B04-1-r2.png",
+        "bytes": 2657066,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B04-2-r2.png",
+        "bytes": 2670469,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B04-3.png",
+        "bytes": 2580596,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B05-1.png",
+        "bytes": 2448794,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B05-2.png",
+        "bytes": 2517615,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B05-3.png",
+        "bytes": 2560925,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B06-1-r2.png",
+        "bytes": 2486788,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B06-2-r2.png",
+        "bytes": 2504875,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B06-3-r2.png",
+        "bytes": 2484674,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B07-1-r2.png",
+        "bytes": 2582137,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B07-2-r2.png",
+        "bytes": 2565241,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/B07-3.png",
+        "bytes": 2506333,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/C01.png",
+        "bytes": 2511396,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/C02.png",
+        "bytes": 2432963,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/C03.png",
+        "bytes": 2532019,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E01-r2.png",
+        "bytes": 2301946,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E02-r2.png",
+        "bytes": 2224147,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E03-r2.png",
+        "bytes": 2288923,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E04-r2.png",
+        "bytes": 2309476,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E05-r2.png",
+        "bytes": 2265139,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E06-r2.png",
+        "bytes": 2278363,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E07-r2.png",
+        "bytes": 2300138,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E08-r2.png",
+        "bytes": 2226577,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E09-r2.png",
+        "bytes": 2338277,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E10-r2.png",
+        "bytes": 2273615,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E11-r2.png",
+        "bytes": 2322679,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E12-r2.png",
+        "bytes": 2225722,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E13-r2.png",
+        "bytes": 2249091,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E14-r2.png",
+        "bytes": 2225468,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E15-r2.png",
+        "bytes": 2208046,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E16-r2.png",
+        "bytes": 2204120,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E17-r2.png",
+        "bytes": 2217061,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E18-r2.png",
+        "bytes": 2224131,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E19-r2.png",
+        "bytes": 2252028,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E20-r2.png",
+        "bytes": 2310236,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E21-r2.png",
+        "bytes": 2328291,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E22-r2.png",
+        "bytes": 2269300,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E23-r2.png",
+        "bytes": 2286764,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E24-r2.png",
+        "bytes": 2301997,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E25-r2.png",
+        "bytes": 2276666,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E26-r2.png",
+        "bytes": 2241155,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E27-r2.png",
+        "bytes": 2272649,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E28-r2.png",
+        "bytes": 2249941,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E29-r2.png",
+        "bytes": 2238610,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E30-r2.png",
+        "bytes": 2224960,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E31-r2.png",
+        "bytes": 2218892,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E32-r2.png",
+        "bytes": 2206270,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E33-r2.png",
+        "bytes": 2241940,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E34-r2.png",
+        "bytes": 2229581,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E35-r2.png",
+        "bytes": 2269846,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E36-r2.png",
+        "bytes": 2252219,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E37-r2.png",
+        "bytes": 2306464,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E38-r2.png",
+        "bytes": 2321460,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E39-r2.png",
+        "bytes": 2251955,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/E40-r2.png",
+        "bytes": 2322675,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F01.png",
+        "bytes": 2368962,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F02.png",
+        "bytes": 2319102,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F03.png",
+        "bytes": 2518569,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F04.png",
+        "bytes": 2436268,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F05.png",
+        "bytes": 2350773,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F06.png",
+        "bytes": 2574372,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F07.png",
+        "bytes": 2432649,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/F08.png",
+        "bytes": 2281712,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G01.png",
+        "bytes": 2504542,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G03.png",
+        "bytes": 2499651,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G07.png",
+        "bytes": 2456909,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G08.png",
+        "bytes": 2564647,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G10-r2.png",
+        "bytes": 2618739,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G12.png",
+        "bytes": 2924275,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G18-r2.png",
+        "bytes": 2526593,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G19.png",
+        "bytes": 2478357,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G20.png",
+        "bytes": 2619753,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G22-r2.png",
+        "bytes": 2715217,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G25.png",
+        "bytes": 2554725,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/G26.png",
+        "bytes": 2416567,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/M01.png",
+        "bytes": 2389955,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/M02-r2.png",
+        "bytes": 2473334,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/M03-r2.png",
+        "bytes": 2263390,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/P01.png",
+        "bytes": 2532961,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/P02.png",
+        "bytes": 2527096,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/P03.png",
+        "bytes": 2502648,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W01-sandal.png",
+        "bytes": 2560925,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W02-pole.png",
+        "bytes": 2548170,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W03-peach.png",
+        "bytes": 2478809,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W04-cleaver.png",
+        "bytes": 2441161,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W05-firecracker.png",
+        "bytes": 2511384,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W06-smg.png",
+        "bytes": 2528268,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W07-shotgun.png",
+        "bytes": 2391797,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W08-rocket.png",
+        "bytes": 2408246,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W09-sword-r2.png",
+        "bytes": 2542864,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W10-thunder.png",
+        "bytes": 2503137,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W11-gourd.png",
+        "bytes": 2481183,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W12-twin-swords-r2.png",
+        "bytes": 2396308,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W13-guandao.png",
+        "bytes": 2460440,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W14-serpent-spear.png",
+        "bytes": 2413134,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W15-halberd.png",
+        "bytes": 2646740,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W16-silver-spear.png",
+        "bytes": 2494831,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W17-qinggang.png",
+        "bytes": 2545208,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W18-yitian.png",
+        "bytes": 2512870,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W19-seven-saber.png",
+        "bytes": 2509409,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W20-ancient-saber.png",
+        "bytes": 2460296,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W21-twin-halberds.png",
+        "bytes": 2411534,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W22-trident.png",
+        "bytes": 2528741,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W23-caltrops.png",
+        "bytes": 2488943,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W24-repeater.png",
+        "bytes": 2421838,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W25-phoenix-bow.png",
+        "bytes": 2578517,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W26-heavy-crossbow.png",
+        "bytes": 2601990,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W27-hand-halberd.png",
+        "bytes": 2512407,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W28-chain-hook.png",
+        "bytes": 2538702,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W29-oil-jar.png",
+        "bytes": 2481341,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W30-thunder-bomb.png",
+        "bytes": 2578765,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W31-feather-fan.png",
+        "bytes": 2408633,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W32-taiping-book.png",
+        "bytes": 2526831,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W33-star-lamps.png",
+        "bytes": 2584065,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W34-bagua.png",
+        "bytes": 2493046,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W35-wood-ox.png",
+        "bytes": 2561537,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/W36-wood-kite.png",
+        "bytes": 2429156,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X01.png",
+        "bytes": 2457830,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X02.png",
+        "bytes": 2372617,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X03.png",
+        "bytes": 2387210,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X04-r2.png",
+        "bytes": 2478495,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X05.png",
+        "bytes": 2417299,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X06.png",
+        "bytes": 2458616,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "docs/vfx-upgrade-v10/full/images/X07.png",
+        "bytes": 2505819,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
       }
     ]
   }

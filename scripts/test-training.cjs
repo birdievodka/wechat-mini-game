@@ -1,14 +1,16 @@
 const assert=require('node:assert/strict');
-const {newGame,click,load,storage,cc}=require('./test-campaign.cjs');
+const {useDevelopmentHost,newGame,click,load,storage,cc}=require('./test-campaign.cjs');
 const {CHAPTERS,CHRONICLE_ENEMIES,BOSS_ACTIONS}=load('chronicles'),{WEAPONS}=load('weapons'),{COMMON_SKILLS}=load('common-skills');
 const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolean);
 const advance=(g,t)=>{for(let i=0;i<Math.ceil(t*60);i++)g.update(1/60);};
 const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtime-health').sort());
 (async()=>{
  const g=await newGame();g.run.gold=123;g.saveCheckpoint('battle');g.showMainMenu();let saved=progress();
- click(g.screens.root,'liubei');click(g.screens.root,'HeroSkillSelect');click(g.screens.root,'SkillChoice-G03');click(g.screens.root,'ConfirmSkill');saved=progress();assert.equal(find(g.screens.root,'演武场'),undefined,'首页隐藏演武入口，开发用演武功能保留');g.startTraining(g.screens.selection,g.screens.selectionSkill);
+ click(g.screens.root,'liubei');click(g.screens.root,'HeroSkillSelect');click(g.screens.root,'SkillChoice-G03');click(g.screens.root,'ConfirmSkill');saved=progress();assert.equal(find(g.screens.root,'演武场'),undefined,'首页隐藏演武入口，开发用演武功能保留');useDevelopmentHost();g.startTraining(g.screens.selection,g.screens.selectionSkill);
  assert.equal(g.trainingMode,true);assert.equal(g.testMode,true);assert.equal(g.phase,'battle');assert.equal(g.trainingPanel.root.active,true);assert.equal(g.run.heroId,'liubei');assert.equal(g.run.skillId,'G03');assert.equal(g.playerHp,5);assert.match(g.healthText.string,/∞/);assert.equal(g.trainingAlive(),0);assert.equal(progress(),saved,'进入演武场不覆盖正式存档');
  const panel=g.trainingPanel,at=[g.px,g.py,g.age];g.keys.add(cc.KeyCode.ARROW_RIGHT);advance(g,2);g.castSkill();assert.deepEqual([g.px,g.py,g.age],at,'配置面板冻结移动和模拟');assert.equal(g.skillCharge,g.skillRequirement());
+ const initial=JSON.parse(g.health.report());
+ assert.equal(initial.battleSnapshot.trainingView,'config');assert.equal(initial.battleSnapshot.seconds,0);
  g.onBackground();g.onForeground();assert.equal(g.paused,false);assert.equal(g.menu.active,false);assert.equal(panel.root.active,true);
  click(panel.root,'TrainingCount-5');click(panel.root,'TrainingSpawn');assert.equal(g.trainingAlive(),5);assert.ok(g.enemies.filter(e=>e.hp>0).every(e=>e.archetype==='E01'&&e.born>0));
  click(panel.root,'TrainingTab-1');click(panel.root,'TrainingChoice-1-2');click(panel.root,'TrainingCount-1');click(panel.root,'TrainingSpawn');click(panel.root,'TrainingChoice-1-7');click(panel.root,'TrainingSpawn');
@@ -24,6 +26,10 @@ const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtim
  click(panel.root,'TrainingResume');assert.equal(panel.root.children.length,0,'演武配置收起后释放节点');g.openTrainingPanel();assert.ok(panel.root.children.length>0,'保留配置值并按需重建');click(panel.root,'TrainingResume');const target=g.spawnNext('soldier','E01');target.born=0;target.hp=target.maxHp=1e9;
  const cast=g.commonSkill.cast;let accepted=0;g.commonSkill.cast=function(...args){const ok=cast.apply(this,args);if(ok)accepted++;return ok;};
  for(const skill of COMMON_SKILLS){host.skill(skill.id);target.x=g.px+80;target.y=g.py;target.node.setPosition(target.x,target.y);const before=accepted;g.skillCharge=0;g.castSkill();g.castSkill();assert.equal(accepted-before,2,skill.name+'无需充能可连放');assert.equal(g.skillCharge,g.skillRequirement());assert.match(g.skillLabel.string,/无冷却/);assert.ok(g.commonSkill.tasks.length<=36);assert.ok(g.commonEffects.visuals.length<=32);}
+ host.skill('G26');g.castSkill();g.castSkill();
+ assert.equal(g.commonEffects.visuals.filter(v=>v.kind==='stun').length,1,'coincident training pulses share geometry');
+ const castReport=JSON.parse(g.health.report()).snapshot;
+ assert.equal(castReport.trainingView,'field');assert.ok(castReport.trainingCasts>=24);assert.equal(g.run.survivalSeconds,0);
  g.openTrainingPanel();const blocked=accepted;g.castSkill();assert.equal(accepted,blocked,'面板仍禁止施法');
  host.skill('G03');click(panel.root,'TrainingResume');g.castSkill();assert.equal(g.skillCharge,g.skillRequirement(),'演武技能释放后仍就绪');assert.equal(g.playerHp,5);g.paused=true;g.menu.active=true;g.openTrainingPanel();assert.equal(g.paused,false,'从暂停进入配置后可正常继续');assert.equal(g.menu.active,false);click(panel.root,'TrainingRefill');assert.equal(g.skillCharge,g.skillRequirement());assert.equal(g.commonSkill.tasks.length,0,'重置按钮清除旧任务与效果');
  click(panel.root,'TrainingClear');assert.equal(g.trainingAlive(),0);assert.equal(g.enemyShots.filter(s=>s.remaining>0).length,0);assert.equal(g.enemyZones.length,0);assert.equal(g.run.weapons.length,6);click(panel.root,'TrainingResume');
