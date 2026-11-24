@@ -57,6 +57,14 @@ for(const name of cdn.remoteBundles){
   assert.ok(release.files.some(f=>f.path.startsWith('remote/'+name+'/native/')),'远程清单缺少原生资源 '+name);
 }
 assert.ok(release.files.every(f=>!f.path.endsWith('.js')),'CDN不发布可执行代码');
+// Check the actual native bytes, so a second copy under a local bundle UUID is caught.
+const pngHash=file=>require('node:crypto').createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const localPngs=new Set(fs.readdirSync(root,{recursive:true}).filter(file=>file.endsWith('.png')).map(file=>pngHash(path.join(root,file))));
+for(const [bundle,name] of [['boss-zhangjiao','boss-zhangjiao-actions'],['boss-props','boss-props']]){
+  const sha=pngHash(path.join(__dirname,'../assets/remote-content',bundle,name+'.png'));
+  assert.ok(!localPngs.has(sha),'高清图集重复进入微信包 '+name);
+  assert.equal(release.files.filter(f=>f.path.startsWith('remote/'+bundle+'/native/')&&f.sha256===sha).length,1,'CDN 必须包含一份原画质图集 '+name);
+}
 const total = main + Object.values(sizes).reduce((a, b) => a + b, 0);
 console.log(`总包 ${(total / 1024 / 1024).toFixed(2)} MiB`);
 // This project's actual DevTools preview rejects source packages above 20 MiB.

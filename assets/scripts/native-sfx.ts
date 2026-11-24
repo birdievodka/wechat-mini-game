@@ -10,6 +10,8 @@ export interface NativeSoundHost {createInnerAudioContext?:()=>NativeSoundContex
 export class NativeSfx {
   private closed=false;private reportedAt=-Infinity;private errorCount=0;
   private voices:NativeSoundContext[]=[];
+  private sourceWrites=0;
+  get sourceAssignments():number{return this.sourceWrites;}
   private paths:(string|undefined)[]=[];
   private errors:((event:unknown)=>void)[]=[];private starts:(()=>void)[]=[];private playedCount=0;
   static create(host:NativeSoundHost|undefined,count:number,report:(message:string)=>void):NativeSfx|undefined {
@@ -31,7 +33,7 @@ export class NativeSfx {
     const voice=this.voices[index];if(this.closed||!voice||!url)return;
     // Some hosts normalize src on read. Compare our assigned path, otherwise an
     // unchanged cue can unnecessarily reload its decoder on every hit.
-    try{voice.stop();if(this.paths[index]!==url){voice.src=url;this.paths[index]=url;}voice.volume=Math.max(0,Math.min(1,volume));voice.play();}
+    try{voice.stop();if(this.paths[index]!==url){voice.src=url;this.sourceWrites++;this.paths[index]=url;}voice.volume=Math.max(0,Math.min(1,volume));voice.play();}
     catch(_){this.paths[index]=undefined;this.report('native-sfx play failed');}
   }
   setVolume(index:number,volume:number):void {if(!this.closed&&this.voices[index])try{this.voices[index].volume=Math.max(0,Math.min(1,volume));}catch(_){/* optional audio */}}

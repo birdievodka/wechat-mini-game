@@ -312,10 +312,17 @@ export const isStageRanged=(id:string)=>STAGE_SHOOTERS.includes(id)||['E29','E30
 export function pickStageUnit(pool:string[],random:number,wave=1):string|undefined {const weight=1.5+.15*Math.max(0,Math.min(4,wave-1));let total=0;for(const id of pool)total+=STAGE_SHOOTERS.includes(id)?weight:1;let t=Math.max(0,Math.min(.999999,random))*total;for(const id of pool){t-=STAGE_SHOOTERS.includes(id)?weight:1;if(t<0)return id;}return pool[pool.length-1];}
 
 /** v9.17: shared eligibility, awarded by each hero's first clear. */
-export const HERO_WEAPON_REWARDS:Record<string,string[]>={liubei:['firecracker','qinggang','phoenix-bow','smg','taiping-book','wood-ox'],guanyu:['seven-saber','chain-hook','repeater','yitian','thunder','bagua'],zhangfei:['gourd','twin-halberds','hand-halberd','shotgun','thunder-bomb','rocket']};
+export const HERO_WEAPON_REWARDS:Record<string,string[]>={liubei:['firecracker','qinggang','phoenix-bow','wood-kite','taiping-book','wood-ox'],guanyu:['seven-saber','chain-hook','repeater','yitian','thunder','bagua'],zhangfei:['gourd','twin-halberds','hand-halberd','trident','thunder-bomb','caltrops']};
 export const LEGACY_WEAPON_REWARDS:string[][]=[["taiping-book","thunder","gourd","seven-saber","peach","firecracker"],["halberd","guandao","serpent-spear","chain-hook","sword","twin-swords","silver-spear"],["phoenix-bow","heavy-crossbow","repeater","trident","caltrops","hand-halberd","feather-fan"],["qinggang","yitian","ancient-saber","twin-halberds","smg","oil-jar"],["shotgun","rocket","thunder-bomb","wood-ox"],["star-lamps","bagua","wood-kite"]];
-export const RESERVED_WEAPONS=['sword','silver-spear','ancient-saber','trident','caltrops','wood-kite'];
+export const RESERVED_WEAPONS=['sword','silver-spear','ancient-saber'];
 export function stageRewardWeapons(stage:number,hero:string):string[]{return [...stageFor(stage).firstClear.weapons,...(HERO_WEAPON_REWARDS[hero]?.[stage-1]?[HERO_WEAPON_REWARDS[hero][stage-1]]:[])];}
 
 /** The arena uses the same encounter HP as the six-stage challenge. */
 export const stageBossHp=(id:string):number=>id==='lvbu'?stageFor(2).miniBossHp:(STAGES.find(s=>s.boss===id)||STAGES[0]).bossHp;
+
+// Summoned units inherit their summoner's encounter tuning even in a mixed arena.
+const BOSS_SUMMON_DPS = [150,190,235,280,330,390];
+export function bossSummonDps(id:string):number {
+  if(id==='lvbu')return 100;
+  return BOSS_SUMMON_DPS[Math.max(0,STAGES.findIndex(stage=>stage.boss===id))];
+}

@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "v95-5eb9f0730a24a17b",
-  "baseUrl": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources/v95-5eb9f0730a24a17b",
+  "version": "v95-2644aacde9ef0f11",
+  "baseUrl": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources/v95-2644aacde9ef0f11",
   "requiredDownloadDomain": "https://lf3-static.bytednsdoc.com",
   "bundles": [
     "arsenal",
@@ -9,19 +9,20 @@
     "boss-dongzhuo",
     "boss-lvbu",
     "boss-menghuo",
+    "boss-props",
     "boss-simayi",
     "boss-yuanshao",
+    "boss-zhangjiao",
     "enemies",
     "hidden-heroes",
     "meadow",
-    "music",
     "orchard",
     "pets",
     "results",
     "sfx",
     "talismans"
   ],
-  "totalBytes": 9371302,
+  "totalBytes": 28990948,
   "files": [
     {
       "path": "remote/arsenal/config.json",
@@ -60,8 +61,8 @@
     },
     {
       "path": "remote/boss-caocao/native/df/df567eef-f640-4e58-9184-1effad6db8a2.png",
-      "bytes": 92433,
-      "sha256": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc"
+      "bytes": 1841201,
+      "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e"
     },
     {
       "path": "remote/boss-dongzhuo/config.json",
@@ -80,8 +81,8 @@
     },
     {
       "path": "remote/boss-dongzhuo/native/9d/9d74daf0-0141-4484-8d25-499ed8e1c85e.png",
-      "bytes": 142650,
-      "sha256": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c"
+      "bytes": 2851108,
+      "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48"
     },
     {
       "path": "remote/boss-lvbu/config.json",
@@ -100,8 +101,8 @@
     },
     {
       "path": "remote/boss-lvbu/native/97/9764f958-daf5-490f-91df-0900e9a378a0.png",
-      "bytes": 210967,
-      "sha256": "114f6d1661c501fc3558193f9db78b86254a79786ed8e0658ebd38b9229f444c"
+      "bytes": 3787426,
+      "sha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3"
     },
     {
       "path": "remote/boss-menghuo/config.json",
@@ -125,13 +126,33 @@
     },
     {
       "path": "remote/boss-menghuo/native/04/04516484-d04c-4174-b0d2-63fc7cfccaec.png",
-      "bytes": 147272,
-      "sha256": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26"
+      "bytes": 1916865,
+      "sha256": "12e21f612086f56a5208dfe3d43511de63be5978e1ea9a9b6752b86ceb8125fa"
     },
     {
       "path": "remote/boss-menghuo/native/73/73ae8d18-921f-47de-9a39-9fb4cd302bde.png",
-      "bytes": 140643,
-      "sha256": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483"
+      "bytes": 2819145,
+      "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c"
+    },
+    {
+      "path": "remote/boss-props/config.json",
+      "bytes": 405,
+      "sha256": "5e5655eb2a647055e8c43f2f15b965958af6f2aee6478b7ccf7f356bef12f9b4"
+    },
+    {
+      "path": "remote/boss-props/import/a8/a893b1f6-27a7-462b-9614-194ce542b9f6.json",
+      "bytes": 72,
+      "sha256": "60928632edcd22b5694a8c22de01de0d2cbb6f374103242a99a4394cc767f44d"
+    },
+    {
+      "path": "remote/boss-props/import/a8/a893b1f6-27a7-462b-9614-194ce542b9f6@6c48a.json",
+      "bytes": 149,
+      "sha256": "dd45e63bf428cbda83a894f3613c40f59d3ed5a2429417b326196b33cb884e80"
+    },
+    {
+      "path": "remote/boss-props/native/a8/a893b1f6-27a7-462b-9614-194ce542b9f6.png",
+      "bytes": 1158590,
+      "sha256": "7f6467125802c14e45c1086405eae46384fb582451dca6aa58f20737088f06a3"
     },
     {
       "path": "remote/boss-simayi/config.json",
@@ -150,8 +171,8 @@
     },
     {
       "path": "remote/boss-simayi/native/76/7626ee39-4f7a-48f6-937a-8ef122a06030.png",
-      "bytes": 119818,
-      "sha256": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7"
+      "bytes": 2350171,
+      "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde"
     },
     {
       "path": "remote/boss-yuanshao/config.json",
@@ -170,8 +191,28 @@
     },
     {
       "path": "remote/boss-yuanshao/native/83/8350de87-36d3-4bf4-818d-fe5bed29ed08.png",
-      "bytes": 115411,
-      "sha256": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704"
+      "bytes": 2318412,
+      "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c"
+    },
+    {
+      "path": "remote/boss-zhangjiao/config.json",
+      "bytes": 433,
+      "sha256": "2e5a5e6ebf50f7b9372b30ffd8d3f257348dd889c3209684b22886fdec53bff6"
+    },
+    {
+      "path": "remote/boss-zhangjiao/import/ad/ad5b1126-ff6d-41e8-9511-60cd9fb9c97b.json",
+      "bytes": 72,
+      "sha256": "60928632edcd22b5694a8c22de01de0d2cbb6f374103242a99a4394cc767f44d"
+    },
+    {
+      "path": "remote/boss-zhangjiao/import/ad/ad5b1126-ff6d-41e8-9511-60cd9fb9c97b@6c48a.json",
+      "bytes": 149,
+      "sha256": "24fb6d5b7880c9863f8d77fe8d299e285421405cdfabee472b1b0236817d3472"
+    },
+    {
+      "path": "remote/boss-zhangjiao/native/ad/ad5b1126-ff6d-41e8-9511-60cd9fb9c97b.png",
+      "bytes": 2599133,
+      "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699"
     },
     {
       "path": "remote/enemies/config.json",
@@ -262,41 +303,6 @@
       "path": "remote/meadow/native/ae/ae994a84-9d6d-40e9-bbaa-71a82b6aa584.png",
       "bytes": 1536743,
       "sha256": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d"
-    },
-    {
-      "path": "remote/music/config.json",
-      "bytes": 402,
-      "sha256": "991043953e40333a1fc21e696e4ec6221e272868d3700a83e6ee84aec3a51efd"
-    },
-    {
-      "path": "remote/music/import/54/54a2ecae-d8f0-5b73-96be-b119ac58123d.json",
-      "bytes": 123,
-      "sha256": "9f6908ea29684ee511b34ceaa796e9f1561205893c531c2371a4e2516cac6851"
-    },
-    {
-      "path": "remote/music/import/94/9472c47e-33ee-528a-9c16-096ace00992d.json",
-      "bytes": 121,
-      "sha256": "8331dcc80f26e8ac4b32088926926c7edf6999d988b25f561e5144cf80bd7c47"
-    },
-    {
-      "path": "remote/music/import/e4/e4ada35a-4bc6-5ad3-8f88-50f815e506e4.json",
-      "bytes": 121,
-      "sha256": "75af6ec1d54021c85a74a295cd6569db727d647a363171ee927a0a6e55eaa1ec"
-    },
-    {
-      "path": "remote/music/native/54/54a2ecae-d8f0-5b73-96be-b119ac58123d.m4a",
-      "bytes": 481978,
-      "sha256": "280310490e7e455666c119bb1f4a176fcebcf930938eabe787829aa7deaa95c1"
-    },
-    {
-      "path": "remote/music/native/94/9472c47e-33ee-528a-9c16-096ace00992d.m4a",
-      "bytes": 325987,
-      "sha256": "294daf304272d5dd33d66530d068acfaa03375a7c7c56a9b6a5d5200cf106aa0"
-    },
-    {
-      "path": "remote/music/native/e4/e4ada35a-4bc6-5ad3-8f88-50f815e506e4.m4a",
-      "bytes": 245759,
-      "sha256": "9133932ca61dc1256ba387565ec8e5909baa9eb8de91735383c43f2c41f2f7cb"
     },
     {
       "path": "remote/orchard/config.json",

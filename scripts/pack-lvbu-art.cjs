@@ -1,6 +1,7 @@
 // Deterministic extraction and registration of approved artwork, no new drawing.
 const fs=require('node:fs'),crypto=require('node:crypto'),sharp=require('sharp');
-const sources=['art/runtime-lvbu/source.png','art/runtime-lvbu/trot-source.png'],dest='assets/remote-content/boss-lvbu/lvbu-actions.png',cell=192;
+const hd=require('./boss-density.cjs');
+const sources=['art/runtime-lvbu/source.png','art/runtime-lvbu/trot-source.png'],dest='assets/remote-content/boss-lvbu/lvbu-actions.png',cell=192,outputCell=hd.frameSize('lvbu-actions',0)[0],density=outputCell/cell;
 async function extract(source,rows){
  const {data,info}=await sharp(source).ensureAlpha().raw().toBuffer({resolveWithObject:true});
  const {width:w,height:h}=info,n=w*h,seen=new Uint8Array(n),queue=new Uint32Array(n),components=[];
@@ -39,15 +40,16 @@ async function extract(source,rows){
  }
  const layers=[],cells=[];
  for(let i=0;i<20;i++){
-  const a=sprites[i],p=placements[i],rw=Math.round(a.width*p.scale),rh=Math.round(a.height*p.scale),left=Math.round(p.left),top=Math.round(p.top);
-  if(left<4||top<4||left+rw>cell-4||top+rh>cell-4)throw Error('Lu Bu registration clips '+i);
-  const image=await sharp(a.buf,{raw:{width:a.width,height:a.height,channels:4}}).resize(rw,rh).png().toBuffer();
-  layers.push({input:image,left:i%4*cell+left,top:Math.floor(i/4)*cell+top});
-  cells.push({index:i,source:a.source,sourceRect:a.sourceRect,rect:[i%4*cell,Math.floor(i/4)*cell,cell,cell],content:[left,top,rw,rh],registration:i<12?'action foot baseline':'registered upper body',anchor:[left+a.anchor[0]*p.scale,top+a.anchor[1]*p.scale]});
+  const a=sprites[i],p=placements[i],rw=Math.round(a.width*p.scale*density),rh=Math.round(a.height*p.scale*density),left=Math.round(p.left*density),top=Math.round(p.top*density);
+  if(left<4||top<4||left+rw>outputCell-4||top+rh>outputCell-4)throw Error('Lu Bu registration clips '+i);
+  const image=await hd.sample(a,rw,rh);
+  layers.push({input:image});
+  cells.push({index:i,source:a.source,sourceRect:a.sourceRect,rect:[0,0,outputCell,outputCell],content:[left,top,rw,rh],registration:i<12?'action foot baseline':'registered upper body',anchor:[left+a.anchor[0]*p.scale*density,top+a.anchor[1]*p.scale*density]});
  }
- await sharp({create:{width:4*cell,height:5*cell,channels:4,background:{r:0,g:0,b:0,alpha:0}}}).composite(layers).png({compressionLevel:9,palette:true,colours:128,dither:0}).toFile(dest);
+ const {width,height}=await hd.writeAtlas(dest,cells,layers);
+ hd.writeLayout([{dest,cells}],'assets/scripts/lvbu-art-layout.ts','LVBU_LAYOUT');
  if(!fs.existsSync(dest+'.meta')){const meta=JSON.parse(fs.readFileSync('assets/presentation/icons.png.meta'));meta.uuid=crypto.randomUUID();meta.subMetas['6c48a'].uuid=meta.uuid+'@6c48a';meta.subMetas['6c48a'].displayName='lvbu-actions';meta.subMetas['6c48a'].userData.imageUuidOrDatabaseUri=meta.uuid;meta.userData.redirect=meta.uuid+'@6c48a';fs.writeFileSync(dest+'.meta',JSON.stringify(meta,null,2)+'\n');}
  const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
- fs.writeFileSync('art/runtime-lvbu/manifest.json',JSON.stringify({sources:sources.map(path=>({path,sha256:hash(path)})),dest,sha256:hash(dest),width:4*cell,height:5*cell,cell,cells,bytes:fs.statSync(dest).size},null,2)+'\n');
- console.log('吕布动作图集',4*cell,5*cell,fs.statSync(dest).size,'bytes');
+ fs.writeFileSync('art/runtime-lvbu/manifest.json',JSON.stringify({sources:sources.map(path=>({path,sha256:hash(path)})),dest,sha256:hash(dest),width,height,cell:outputCell,cells,bytes:fs.statSync(dest).size},null,2)+'\n');
+ console.log('吕布动作图集',width,height,fs.statSync(dest).size,'bytes');
 })().catch(e=>{console.error(e);process.exitCode=1;});

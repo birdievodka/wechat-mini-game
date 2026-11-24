@@ -25,7 +25,8 @@ const {CHRONICLE_ENEMIES,chapterFor}=load('chronicles');
   if(e.birthRig)e.birthRig.active=true;e.hp=0;e.dead=0;
  }
  // Boss summons finalize clone/eye identity after spawnNext returns.
- for(const [object,skin,key] of [['eye',undefined,'skill-19'],['clone','zhangjiao','boss-zhangjiao']]){
+ assert.notEqual(g.artFrames['boss-eye'],g.artFrames['skill-19']);
+ for(const [object,skin,key] of [['eye',undefined,'boss-eye'],['clone','zhangjiao','boss-zhangjiao']]){
   pooled.hp=0;pooled.dead=0;g.presentSubstep=false;const e=g.spawnNext('soldier','E09');e.object=object;e.bossSkin=skin;
   g.updateEnemy(e,e.bornTotal*.5);assert.equal(e.rigKey,key,'召唤物首次显形就使用最终身份');const visible=appearance(e);
   g.updateEnemy(e,e.bornTotal);assert.deepEqual(appearance(e),visible,'召唤物出生结束不变形');

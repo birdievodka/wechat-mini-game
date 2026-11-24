@@ -1,0 +1,37 @@
+{
+  "scope": "WeChat desktop simulator. Real menu StartHero callback; a controlled actor pose. No device measurement.",
+  "home": {
+    "version": "stage-v11.0.3-mobile-fonts",
+    "ready": true,
+    "phase": "menu",
+    "nativeAudio": true,
+    "redraw": true,
+    "startButton": true,
+    "fonts": true,
+    "fontMetricsDifferFromSystem": true,
+    "farmerFrames": [
+      12,
+      12
+    ],
+    "screenshot": {
+      "file": "wechat-home.png",
+      "width": 726,
+      "height": 336
+    }
+  },
+  "battle": {
+    "phase": "battle",
+    "wave": 1,
+    "menuNodes": 0,
+    "farmer": true,
+    "screenshot": {
+      "file": "wechat-battle.png",
+      "width": 726,
+      "height": 336
+    }
+  },
+  "restored": {
+    "phase": "menu",
+    "saveUnchanged": true
+  }
+}

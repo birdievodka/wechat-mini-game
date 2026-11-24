@@ -4,8 +4,9 @@ import {WeaponId} from './weapons';
 import {Color,Graphics,Node,Sprite,SpriteFrame,UITransform} from 'cc';
 import {HeroId,HEROES} from './campaign';
 import {heroIdlePose} from './hero-idle';
-import {drawHeroFist,drawHeroSleeve} from './hero-arms';
+import {HeroFist,drawHeroSleeve} from './hero-arms';
 import {drawWeaponArt} from './weapon-art';
+import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 
 /** Menu-only puppet. Owns its clock and props; never creates a Run, attacks or reads combat RNG. */
 export class HeroShowcase {
@@ -15,7 +16,7 @@ export class HeroShowcase {
   private headPivot:Node;
   private head:Sprite;
   private sleeves:Graphics;
-  private hands:Graphics[]=[];
+  private hands:HeroFist[]=[];
   private feet:Node[]=[];
   private props:Node[]=[];
   private sparkle:Graphics;
@@ -23,12 +24,19 @@ export class HeroShowcase {
   private time=0;
   private open?:SpriteFrame;
   private closed?:SpriteFrame;
-  constructor(parent:Node,private frames:Record<string,SpriteFrame>){
+  constructor(parent:Node,private frames:Record<string,SpriteFrame>,atlas?:BattleSpriteAtlas){
     this.root=this.node(parent,'HeroShowcase');this.pet=new PetView(this.root,this.frames);
-    const shadow=this.node(this.root,'ShowcaseShadow').addComponent(Graphics);
-    shadow.fillColor=new Color(74,49,24,35);shadow.ellipse(0,-21,31,6);shadow.fill();
+    const shadowNode=this.node(this.root,'ShowcaseShadow');
+    if(!atlas?.add(shadowNode,'showcase-shadow')){
+      const shadow=shadowNode.addComponent(Graphics);
+      shadow.fillColor=new Color(74,49,24,35);shadow.ellipse(0,-21,31,6);shadow.fill();
+    }
     this.rig=this.node(this.root,'ShowcaseRig');this.mount=new HeroMount(this.rig,this.frames);
-    for(const side of [-1,1]){const n=this.node(this.rig,side<0?'ShowcaseLeftFoot':'ShowcaseRightFoot'),g=n.addComponent(Graphics);g.fillColor=new Color('#66432b');g.strokeColor=new Color('#493522');g.lineWidth=1.8;g.ellipse(0,0,6.5,4.6);g.fill();g.stroke();this.feet.push(n);}
+    for(const side of [-1,1]){
+      const n=this.node(this.rig,side<0?'ShowcaseLeftFoot':'ShowcaseRightFoot');
+      if(!atlas?.add(n,'showcase-foot')){const g=n.addComponent(Graphics);g.fillColor=new Color('#66432b');g.strokeColor=new Color('#493522');g.lineWidth=1.8;g.ellipse(0,0,6.5,4.6);g.fill();g.stroke();}
+      this.feet.push(n);
+    }
     this.body=this.sprite(this.rig,'ShowcaseBody');
     this.sleeves=this.node(this.rig,'ShowcaseSleeves').addComponent(Graphics);
     this.headPivot=this.node(this.rig,'ShowcaseHeadPivot');
@@ -36,7 +44,7 @@ export class HeroShowcase {
     for(const side of [-1,1]){
       const n=this.node(this.rig,side<0?'ShowcaseLeftProp':'ShowcaseRightProp');this.props.push(n);
     }
-    for(const side of [-1,1]){const g=this.node(this.rig,side<0?'ShowcaseLeftHand':'ShowcaseRightHand').addComponent(Graphics);this.hands.push(g);}
+    for(const side of [-1,1])this.hands.push(new HeroFist(this.node(this.rig,side<0?'ShowcaseLeftHand':'ShowcaseRightHand'),atlas));
     this.sparkle=this.node(this.root,'ShowcaseAccent').addComponent(Graphics);
     this.setHero('liubei');
   }
@@ -106,7 +114,7 @@ export class HeroShowcase {
       const side=i?1:-1;drawHeroSleeve(this.sleeves,side,p,lift,color,this.id);
       this.hands[i].node.setPosition(p.x,p.y);const sandal=this.growth===0&&propHero==='liubei';
       this.hands[i].node.angle=sandal?(i?rightAngle:leftAngle):0;
-      drawHeroFist(this.hands[i],this.id,side,sandal||this.id==='liubei'||this.id==='guanyu'||i===1,sandal);
+      this.hands[i].update(this.id,side,sandal||this.id==='liubei'||this.id==='guanyu'||i===1,sandal);
       if(this.growth>0||propHero!=='guanyu'){this.props[i].setPosition(p.x,p.y);this.props[i].angle=i?rightAngle:leftAngle;}
       this.feet[i].setPosition(side*9,-19+Math.sin(t*1.6+side)*gesture*.8);this.feet[i].angle=side*gesture*3;
     }

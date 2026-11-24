@@ -1,0 +1,73 @@
+{
+  "model": "realesr-animevideov3-x2",
+  "release": "20220424",
+  "scale": 2,
+  "files": [
+    {
+      "source": "art/runtime-bosses/zhangjiao-source.png",
+      "sourceSha256": "274ee9ad5a2a28491d70e0352cdcf77b91a8fed8a1cb82ca48999c9b28968738",
+      "file": "art/runtime-boss-hd/runtime-bosses-zhangjiao-source.webp",
+      "sha256": "87de3fcf9a50ff854478ed738b6eef071e8c2edb274fc39e80aa2b3923ad0672"
+    },
+    {
+      "source": "art/runtime-bosses/dongzhuo-source.png",
+      "sourceSha256": "307db56ae8b10b6ea4d98f0728558e82068770985f8317d22bcd284b73ab0929",
+      "file": "art/runtime-boss-hd/runtime-bosses-dongzhuo-source.webp",
+      "sha256": "5e29f101eb89ccd0b4f9405b70c7371ee17b00dbbcd598e8039a70e329d8d87a"
+    },
+    {
+      "source": "art/runtime-bosses/yuanshao-source.png",
+      "sourceSha256": "e6d93426cd6f1254c7d1aeca392ccd52b4f2f1d8a6b4d85d94650cdadbe97e47",
+      "file": "art/runtime-boss-hd/runtime-bosses-yuanshao-source.webp",
+      "sha256": "277c73d98456bf09946dadd6e91cf3c8f4315ef670dc332b03f6c3ee701f5ae4"
+    },
+    {
+      "source": "art/runtime-bosses/caocao-source.png",
+      "sourceSha256": "2cb953e627a6734d967a15a13a64e0f30a44cb468e7f82983fab9d72e3f6bb63",
+      "file": "art/runtime-boss-hd/runtime-bosses-caocao-source.webp",
+      "sha256": "49fb6f6483a9af844f4d1f3f66f0c35a4e66a693b40dcb7bfd527e7f40fceb1c"
+    },
+    {
+      "source": "art/runtime-bosses/menghuo-source.png",
+      "sourceSha256": "f66b417c44ea9bddbb5b416cfad5b6c9fd23a3a6ed3611ea4b86e9ca0cfc5e07",
+      "file": "art/runtime-boss-hd/runtime-bosses-menghuo-source.webp",
+      "sha256": "407e0b7753d94f673ee12e67af1612dee7132de3234aa569d0117c1ca7677b00"
+    },
+    {
+      "source": "art/runtime-bosses/simayi-source.png",
+      "sourceSha256": "59a2e92474656ae8d07a10f2df596314009b8ebed2b81d8d304c8d1ad26c86c2",
+      "file": "art/runtime-boss-hd/runtime-bosses-simayi-source.webp",
+      "sha256": "86a6dd11b1265f42b7261d3b52e85e9dd7289744dd977d566fb41df72d1719bb"
+    },
+    {
+      "source": "art/runtime-bosses/beasts-source.png",
+      "sourceSha256": "6b4a5ca73abf1ee43fa06337f7a4aa3f9a76f3ca1591deff2dd3ed42e7e21119",
+      "file": "art/runtime-boss-hd/runtime-bosses-beasts-source.webp",
+      "sha256": "0e9a63f726202dba3a5129883a338f0be2b08f9e8c8b4f86d35ed0f11497d0be"
+    },
+    {
+      "source": "art/runtime-bosses/rider-source.png",
+      "sourceSha256": "4cf9dd5f2f501298dfe097455306a45c8ec6b65689d3866b0bd7d609dbd5e28b",
+      "file": "art/runtime-boss-hd/runtime-bosses-rider-source.webp",
+      "sha256": "80dba19ef6499cdc3e352160b82a271324f4b08134a7b924732207522fe2e64c"
+    },
+    {
+      "source": "art/runtime-bosses/props-source.png",
+      "sourceSha256": "07c5687549f249c7cd6eec35d74278c4807fff07baafea7c64ed991c6669ea71",
+      "file": "art/runtime-boss-hd/runtime-bosses-props-source.webp",
+      "sha256": "eddf71772899718341fa1839f5157b6d0717fdf4f4f6d140c06d14c8683b3071"
+    },
+    {
+      "source": "art/runtime-lvbu/source.png",
+      "sourceSha256": "c64322fd93c86a88dc68c04a2df34e9c2ebb1ae2c3ff1b939e0bb464c77ab29c",
+      "file": "art/runtime-boss-hd/runtime-lvbu-source.webp",
+      "sha256": "2a50a51d76f6696513f740ad1f7a0e7d8769f59439bfbcc3cef98868d020ae58"
+    },
+    {
+      "source": "art/runtime-lvbu/trot-source.png",
+      "sourceSha256": "7f8d0b5af3ee8fff95d0498555166b0b54b92692f82801bd8a5f4b0ec220cad7",
+      "file": "art/runtime-boss-hd/runtime-lvbu-trot-source.webp",
+      "sha256": "110d90fcc1db7b80251d44d6dfffba6e44a58ecc4b0957c2c3ca03a25d1eea0d"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ function recorder(){const g=new Graphics();let calls=0;for(const name of ['moveT
 (async()=>{
  const {data,info}=await sharp('assets/presentation/vfx-materials.png').ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.equal(info.width,1024);assert.equal(info.height,1024);assert.equal(info.channels,4);
  for(let i=0;i<16;i++){let opaque=0;for(let y=0;y<256;y++)for(let x=0;x<256;x++){const a=data[((Math.floor(i/4)*256+y)*1024+i%4*256+x)*4+3];if(x<16||x>=240||y<16||y>=240)assert.equal(a,0,'transparent gutter');else opaque+=Number(a>40);}assert.ok(opaque>500,'each runtime material exists');}
- assert.deepEqual(Object.keys(WEAPON_VFX).sort(),Array.from(WEAPONS,w=>w.id).sort());
+ assert.deepEqual(Object.keys(WEAPON_VFX).filter(id=>load('weapons').migratedWeaponId(id)===id).sort(),Array.from(WEAPONS,w=>w.id).sort());
  const g=await newGame();assert.ok(VFX_MATERIAL_KEYS.every(k=>g.artFrames['vfx-'+k]));
  const back=g.friendlyGroundFx,front=g.fx,v=g.vfxMaterials;assert.ok(v);
  for(let frame=0;frame<50;frame++){
@@ -28,5 +28,5 @@ function recorder(){const g=new Graphics();let calls=0;for(const name of ['moveT
  for(let i=0;i<20;i++)g.updateEffects(0);
  assert.equal(JSON.stringify({hp:enemy.hp,run:g.run,age:g.age,rng:g.combatFx.particles.seed}),snapshot,'real material draw is side-effect free for combat');
  assert.ok(v.count>0);g.clearBattle();assert.equal(v.count,0);assert.ok(v.layers.every(l=>l.slots.every(q=>!q.sprite.node.active)));
- g.onDestroy();assert.equal(v.allocated,0);console.log('通过：16材质真实alpha/透明边、36武器/40兵四向有限几何、96材质硬上限与跨层复用、真实组件绘制不改变判定/RNG、清场/销毁回收');
+ g.onDestroy();assert.equal(v.allocated,0);console.log('通过：16材质真实alpha/透明边、33武器/40兵四向有限几何、96材质硬上限与跨层复用、真实组件绘制不改变判定/RNG、清场/销毁回收');
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,3 +1,4 @@
+import {applyUiFont} from './ui-font';
 import {addPanelClose} from './panel-ui';
 import {StageProfile,isKnown} from './stage-progress';
 import {stageFor,STAGES} from './stage-data';
@@ -15,9 +16,9 @@ export class CodexView {
  constructor(parent:Node,private frames:Record<string,SpriteFrame>,private close:()=>void,private profile?:StageProfile){this.root=this.node(parent,'ThreeKingdomsCodex');this.render();}
  resize(w:number,h:number){this.root.setScale(Math.min((w-70)/1260,(h-60)/690),Math.min((w-70)/1260,(h-60)/690),1);}
  private node(p:Node,name:string){const n=new Node(name);n.layer=p.layer;p.addChild(n);return n;}
- private text(p:Node,t:string,x:number,y:number,size=23,w=240,h=44,color=C.ink){const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;}
+ private text(p:Node,t:string,x:number,y:number,size=23,w=240,h=44,color=C.ink,emphasized=size>=28){const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return applyUiFont(l, emphasized);}
  private box(p:Node,x:number,y:number,w:number,h:number,color:string,stroke=C.gold){const n=this.node(p,'Panel');n.setPosition(x,y);const g=n.addComponent(Graphics);g.fillColor=new Color(color);g.strokeColor=new Color(stroke);g.lineWidth=2;g.roundRect(-w/2,-h/2,w,h,17);g.fill();g.stroke();return n;}
- private button(p:Node,label:string,x:number,y:number,w:number,active:boolean,f:()=>void){const n=this.box(p,x,y,w,46,active?C.jade:'#ecd3a4');n.name='Codex-'+label;n.addComponent(UITransform).setContentSize(w,48);this.text(n,label,0,0,22,w-8,42,active?C.paper:C.ink);n.on(Node.EventType.TOUCH_END,f);}
+ private button(p:Node,label:string,x:number,y:number,w:number,active:boolean,f:()=>void){const n=this.box(p,x,y,w,46,active?C.jade:'#ecd3a4');n.name='Codex-'+label;n.addComponent(UITransform).setContentSize(w,48);this.text(n,label,0,0,22,w-8,42,active?C.paper:C.ink,active);n.on(Node.EventType.TOUCH_END,f);}
  private picture(p:Node,key:string,x:number,y:number,size:number,silhouette=false){const f=this.frames[key];if(!f)return;const n=this.node(p,silhouette?'CodexSilhouette':key);n.setPosition(x,y);const sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.spriteFrame=f;
   // Zero RGB removes all internal colour/detail, retaining the original alpha contour.
   // Translucent ink on warm paper needs no shader, copied texture or remote bundle.

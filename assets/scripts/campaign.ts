@@ -61,17 +61,17 @@ export const weaponStatsFor = (run: Run, weapon: Pick<EquippedWeapon, 'id' | 'ti
   if (weapon.id === 'sandal') { s.damage *= 1 + p.sandal; const extra=run.augments.indexOf('ricochet')>=0?2:0;const bounce=(s.bounce||0)+p.bounce+extra;s.bounce=Math.min(3,bounce);s.damage*=1+Math.max(0,bounce-3)*.1; }
   if (weapon.id === 'sandal') { s.damage*=1+p.sandalBoost;s.speed*=p.sandalSpeed; }
   if (weapon.id === 'peach') { s.damage *= 1 + p.peach; s.speed *= 1+amount(run.inventory,'F03',.1); }
-  if (weapon.id === 'smg') { s.speed *= 1+amount(run.inventory,'F05',.1); }
+  if (weapon.id === 'smg' || weapon.id === 'repeater') { s.speed *= 1+amount(run.inventory,'F05',.1); }
   if (weapon.id === 'sword') { s.damage *= 1 + p.sword; const blades=(s.shotCount||3)+p.split;s.shotCount=Math.min(6,blades);s.damage*=1+Math.max(0,blades-6)*.06; }
-  if (weapon.id === 'rocket') { s.damage*=1+p.rocketDamage;s.speed*=p.rocketSpeed; }
-  if (weapon.id === 'shotgun') { s.damage*=1+p.shotgunDamage;s.range*=p.shotgunRange; }
-  if (weapon.id === 'smg') { s.pierce+=p.smgPierce;s.damage*=1+p.smgPierceDamage; }
+  if (weapon.id === 'rocket' || weapon.id === 'thunder-bomb') { s.damage*=1+p.rocketDamage;s.speed*=p.rocketSpeed; }
+  if (weapon.id === 'shotgun' || weapon.id === 'trident') { s.damage*=1+p.shotgunDamage;s.range*=p.shotgunRange; }
+  if (weapon.id === 'smg' || weapon.id === 'heavy-crossbow') { s.pierce+=p.smgPierce;s.damage*=1+p.smgPierceDamage; }
   s.knockback *= p.knockback;
   if (category === 'melee') { s.range *= p.meleeRange; s.arc = Math.min(220, s.arc + p.arc); }
   else { s.range *= p.rangedRange; s.speed *= p.shotSpeed; s.pierce += s.area > 0 ? 0 : p.pierce; }
   s.critMultiplier += p.critDamage; s.bounceFactor = weapon.id==='sandal'?p.bounceFactor:Math.min(1,.6+Math.max(0,(run.inventory.D04||0)-3)*.05); s.split = weapon.id === 'sword' ? p.split : 0; s.splitFactor = p.splitFactor;
-  s.pierceFactor = Math.min(1,(.7+Math.max(0,(run.inventory.D03||0)-3)*.05+p.pierceDamage)+(category==='melee'?0:p.pierceRetention)); s.splashFactor = p.splash; s.spread = ['smg','shotgun'].indexOf(weapon.id)>=0?p.spread:1;
-  const extraHaste=(run.heroId==='zhaoyun'&&run.moving&&category==='melee'?.1:0)+(category==='ranged'?p.rangedHaste:0)+(weapon.id==='pole'?p.poleHaste:weapon.id==='smg'?p.smgHaste:0);
+  s.pierceFactor = Math.min(1,(.7+Math.max(0,(run.inventory.D03||0)-3)*.05+p.pierceDamage)+(category==='melee'?0:p.pierceRetention)); s.splashFactor = p.splash; s.spread = ['smg','shotgun','phoenix-bow','feather-fan'].indexOf(weapon.id)>=0?p.spread:1;
+  const extraHaste=(run.heroId==='zhaoyun'&&run.moving&&category==='melee'?.1:0)+(category==='ranged'?p.rangedHaste:0)+(weapon.id==='pole'?p.poleHaste:(weapon.id==='smg'||weapon.id==='repeater')?p.smgHaste:0);
   s.interval=weaponFor(weapon.id).interval*[1,.96,.92,.88][weapon.tier-1]/(1+Math.max(-.4,bonus.haste+extraHaste));
   s.interval=Math.max(weapon.id==='smg'?.06:.08,s.interval/heroAttackFrequency(run.heroId));
   if(weapon.id==='thunder')s.chainTargets=Math.min(8,(s.chainTargets||3)+p.thunderTargets);

@@ -1,3 +1,4 @@
+import {applyUiFont} from './ui-font';
 import {stageBossHp,stageEnemyHp} from './stage-data';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {addPanelClose} from './panel-ui';
@@ -13,7 +14,9 @@ import {petName} from './pets';
 
 const FORM_HEROES=[{id:'liubei',name:'小刘'},{id:'guanyu',name:'小关'},{id:'zhangfei',name:'小张'}] as const;
 const FORM_NAMES=['初始少年','本命进阶','获得坐骑','本命三连','骑乘冲刺','短甲与灵宠','桃园留名'];
-interface FormCard {node:Node;icon?:Sprite;selected:boolean;}
+const PAPER_INK='#432d1d', JADE_INK='#fff0d2', PAPER_NOTE='#6a4727', JADE_NOTE='#f5d68c';
+type ButtonStyle='secondary'|'primary'|'selected'|'unselected';
+interface FormCard {node:Node;icon?:Sprite;name:Label;stage:Label;selected:boolean;}
 interface FormHeroButton {node:Node;label:Label;selected:boolean;}
 interface FormSurface {
   status:Label;message:Label;title:Label;summary:Label;apply:Label;
@@ -48,8 +51,8 @@ export class TrainingView {
   update(dt:number):void {if(this.root.active)this.showcase?.update(dt);}
   hide():void {this.root.active=false;this.showcase=undefined;this.formSurface=undefined;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}}
   private node(p:Node,name:string):Node {const n=new Node(name);n.layer=Layers.Enum.UI_2D;p.addChild(n);return n;}
-  private text(p:Node,t:string,x:number,y:number,size=20,w=300,h=36,color='#fff0d2'):Label {
-    const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;
+  private text(p:Node,t:string,x:number,y:number,size=20,w=300,h=36,color='#fff0d2',emphasized=size>=26):Label {
+    const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return applyUiFont(l, emphasized);
   }
   private box(p:Node,name:string,x:number,y:number,w:number,h:number,selected=false):Node {
     const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);this.paintBox(n,w,h,selected);return n;
@@ -66,14 +69,18 @@ export class TrainingView {
   }
   private paintBox(n:Node,w:number,h:number,selected:boolean):void {
     if(this.skin(n,selected?'ui-shop-card-5':'ui-slot-0',w,h,8))return;
-    const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=new Color(selected?'#526b43':'#2b4938');g.strokeColor=new Color(selected?'#ffdc8b':'#7c8c6c');g.lineWidth=selected?3:1;g.roundRect(-w/2,-h/2,w,h,15);g.fill();g.stroke();
+    const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=new Color(selected?'#f8e7c5':'#2b4938');g.strokeColor=new Color(selected?'#e8bb65':'#7c8c6c');g.lineWidth=selected?3:1;g.roundRect(-w/2,-h/2,w,h,15);g.fill();g.stroke();
   }
   private paintButton(n:Node,w:number,h:number,enabled:boolean,primary:boolean):void {
     if(this.skin(n,'ui-pill-'+(enabled?(primary?'#c94d2e':'#fff0d2'):'#d3c9b2'),w,h,12))return;
-    const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=new Color(enabled?(primary?'#c94d2e':'#fff0d2'):'#5b6856');g.strokeColor=new Color(enabled?'#c7b57e':'#6f7b65');g.lineWidth=1.5;g.roundRect(-w/2,-h/2,w,h,12);g.fill();g.stroke();
+    const g=n.getComponent(Graphics)||n.addComponent(Graphics);g.clear();g.fillColor=new Color(enabled?(primary?'#c94d2e':'#fff0d2'):'#d3c9b2');g.strokeColor=new Color(enabled?'#c7b57e':'#9a907b');g.lineWidth=1.5;g.roundRect(-w/2,-h/2,w,h,12);g.fill();g.stroke();
   }
-  private button(p:Node,name:string,t:string,x:number,y:number,w:number,f:()=>void,enabled=true,primary=false,h=46):Node {
-    const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);this.paintButton(n,w,h,enabled,primary);this.text(n,t,0,0,w<80?19:22,w-10,h-4,enabled?(primary?'#fff0d2':'#432d1d'):'#b6bca8');
+  private button(p:Node,name:string,t:string,x:number,y:number,w:number,f:()=>void,enabled=true,style:ButtonStyle='secondary',h=46):Node {
+    const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);
+    if(style==='selected'||style==='unselected')this.paintBox(n,w,h,style==='selected');
+    else this.paintButton(n,w,h,enabled,style==='primary');
+    const color=enabled?(style==='primary'||style==='unselected'?JADE_INK:PAPER_INK):'#665b49';
+    this.text(n,t,0,0,w<80?19:22,w-10,h-4,color);
     n.on(Node.EventType.TOUCH_END,(e?:{propagationStopped:boolean})=>{if(e)e.propagationStopped=true;if(enabled)f();});return n;
   }
   private picture(p:Node,key:string,x:number,y:number,size:number):Sprite|undefined {
@@ -103,13 +110,16 @@ export class TrainingView {
     const message=this.text(p,this.message,0,-251,16,1080,20,'#f0d899');
     if(this.host.form)this.button(p,'TrainingGrowth','英雄形态',288,278,150,()=>{const current=this.host.snapshot();this.tab=4;this.formHero=current.heroId||'liubei';this.choices[4]=current.growth||0;this.message='';this.render();});
     addPanelClose(p,this.frames,'TrainingClose',514,278,()=>this.host.close());
-    ['小兵','Boss','武器','主动技能','英雄形态'].forEach((t,i)=>this.button(p,'TrainingTab-'+i,t,-438+i*122,214,112,()=>{this.tab=i;this.message='';this.render();},true,this.tab===i,44));
+    ['小兵','Boss','武器','主动技能','英雄形态'].forEach((t,i)=>this.button(p,'TrainingTab-'+i,t,-438+i*122,214,112,()=>{this.tab=i;this.message='';this.render();},true,this.tab===i?'selected':'unselected',44));
     const entries=this.entries(),pages=Math.ceil(entries.length/12),page=this.pages[this.tab],cards:FormCard[]=[];
     entries.slice(page*12,page*12+12).forEach((item,i)=>{
-      const n=this.box(p,'TrainingChoice-'+this.tab+'-'+item.id,-438+i%4*153,126-Math.floor(i/4)*128,140,120,this.choices[this.tab]===page*12+i);
-      const icon=this.picture(n,item.key,0,15,80);this.text(n,item.name,0,-41,18,130,30);
-      if(this.tab===4)cards.push({node:n,icon,selected:this.choices[4]===i});
-      if(this.tab===4)this.text(n,'阶段 '+item.id,-42,46,12,60,22,'#f5d68c');
+      const selected=this.choices[this.tab]===page*12+i;
+      const n=this.box(p,'TrainingChoice-'+this.tab+'-'+item.id,-438+i%4*153,126-Math.floor(i/4)*128,140,120,selected);
+      const icon=this.picture(n,item.key,0,15,80),name=this.text(n,item.name,0,-41,18,130,30,selected?PAPER_INK:JADE_INK);
+      if(this.tab===4){
+        const stage=this.text(n,'阶段 '+item.id,-42,46,12,60,22,selected?PAPER_NOTE:JADE_NOTE);
+        cards.push({node:n,icon,name,stage,selected});
+      }
       n.on(Node.EventType.TOUCH_END,()=>{this.choices[this.tab]=page*12+i;this.message='';this.render();});
     });
     this.button(p,'TrainingPrevious','‹',-438,-218,100,()=>{this.pages[this.tab]--;this.render();},page>0);
@@ -118,10 +128,10 @@ export class TrainingView {
     const detail=this.box(p,'TrainingDetails',344,0,350,480),selected=entries[this.choices[this.tab]];
     if(this.tab!==4){this.text(detail,selected.name,0,188,28,320,46);this.picture(detail,selected.key,0,108,110);}
     if(this.tab===4){
-      const heroes=FORM_HEROES.map((hero,i)=>{const selected=this.formHero===hero.id,node=this.button(detail,'TrainingHero-'+hero.id,hero.name,-108+i*108,197,98,()=>{this.formHero=hero.id;this.message='';this.render();},true,selected,40);return {node,label:node.children.find(n=>n.getComponent(Label))!.getComponent(Label)!,selected};});
-      this.showcase=new HeroShowcase(detail,this.frames);this.showcase.root.setPosition(0,20);this.showcase.root.setScale(1.05,1.05,1);
+      const heroes=FORM_HEROES.map((hero,i)=>{const selected=this.formHero===hero.id,node=this.button(detail,'TrainingHero-'+hero.id,hero.name,-108+i*108,197,98,()=>{this.formHero=hero.id;this.message='';this.render();},true,selected?'selected':'unselected',40);return {node,label:node.children.find(n=>n.getComponent(Label))!.getComponent(Label)!,selected};});
+      this.showcase=new HeroShowcase(detail,this.frames,this.atlas);this.showcase.root.setPosition(0,20);this.showcase.root.setScale(1.05,1.05,1);
       const title=this.text(detail,'',0,-58,26,320,40),summary=this.text(detail,'',0,-111,17,320,78);
-      const apply=this.button(detail,'TrainingApplyForm','',0,-189,310,()=>this.act(()=>this.host.form?.(this.formHero,this.choices[4])||'形态切换不可用'),true,true,48);
+      const apply=this.button(detail,'TrainingApplyForm','',0,-189,310,()=>this.act(()=>this.host.form?.(this.formHero,this.choices[4])||'形态切换不可用'),true,'primary',48);
       this.formSurface={status,message,title,summary,apply:apply.children.find(n=>n.getComponent(Label))!.getComponent(Label)!,cards,heroes};
     }else if(this.tab<2){
       const boss=this.tab===1,d=boss?undefined:CHRONICLE_ENEMIES[this.choices[0]],c=boss?CHAPTERS[this.choices[1]]:undefined;
@@ -130,49 +140,54 @@ export class TrainingView {
       const change=(v:number)=>{this.count=Math.max(1,Math.min(80,this.count+v));this.render();};
       this.button(detail,'TrainingCountMinus10','−10',-124,-91,48,()=>change(-10));this.button(detail,'TrainingCountMinus','−',-71,-91,42,()=>change(-1));this.text(detail,String(this.count),0,-91,28,80,44);
       this.button(detail,'TrainingCountPlus','+',71,-91,42,()=>change(1));this.button(detail,'TrainingCountPlus10','+10',124,-91,48,()=>change(10));
-      [1,5,10,20].forEach((v,i)=>this.button(detail,'TrainingCount-'+v,String(v),-111+i*74,-139,66,()=>{this.count=v;this.render();},true,this.count===v,34));
-      this.button(detail,'TrainingSpawn',`加入战场 ×${this.count}`,0,-189,310,()=>this.act(()=>this.host.spawn(selected.id,this.count,boss)),state.alive<80,true,48);
+      [1,5,10,20].forEach((v,i)=>this.button(detail,'TrainingCount-'+v,String(v),-111+i*74,-139,66,()=>{this.count=v;this.render();},true,this.count===v?'selected':'unselected',34));
+      this.button(detail,'TrainingSpawn',`加入战场 ×${this.count}`,0,-189,310,()=>this.act(()=>this.host.spawn(selected.id,this.count,boss)),state.alive<80,'primary',48);
     }else if(this.tab===2){
       [1,2,3,4].forEach((v,i)=>{
-        const n=this.button(detail,'TrainingTier-'+v,['I','II','III','IV'][i],-111+i*74,36,66,()=>{this.tier=v as Tier;this.render();},true,false,36);
-        if(this.skin(n,'ui-tier-'+v,66,36,16)){const bg=n.getChildByName('TrainingSkin')!.getComponent(Sprite)!;bg.color=new Color(this.tier===v?'#ffffff':'#c6c6c6');}else{const g=n.getComponent(Graphics)!;
+        const n=this.button(detail,'TrainingTier-'+v,['I','II','III','IV'][i],-111+i*74,36,66,()=>{this.tier=v as Tier;this.render();},true,'secondary',36);
+        if(this.skin(n,'ui-tier-'+v,66,36,16)){const bg=n.getChildByName('TrainingSkin')!.getComponent(Sprite)!;bg.color=new Color(this.tier===v?'#ffffff':'#eeeeee');}else{const g=n.getComponent(Graphics)!;
         g.clear();g.fillColor=new Color(TIER_COLORS[i]);g.strokeColor=new Color(this.tier===v?'#ffe6ac':'#61735d');g.lineWidth=this.tier===v?3:1;g.roundRect(-33,-18,66,36,10);g.fill();g.stroke();}
-        const label=n.children.find(c=>!!c.getComponent(Label))?.getComponent(Label);if(label)label.color=new Color(v===1?'#432d1d':'#ffffff');
+        const label=n.children.find(c=>!!c.getComponent(Label))?.getComponent(Label);if(label)label.color=new Color('#1b110a');
       });
       const stats=calculateWeapon({id:selected.id as EquippedWeapon['id'],tier:this.tier},{power:0,melee:0,ranged:0,magic:0,damage:0,haste:0,range:0,area:0,crit:0},'');
       this.text(detail,`${TIER_NAMES[this.tier-1]} · 伤害基数 ${Number(stats.damage.toFixed(1))}`,0,-5,18,320,32);
       this.text(detail,weaponEffectText(selected.id as EquippedWeapon['id'],stats),0,-44,17,320,48);
       this.text(detail,'选择装备槽 · 空位按顺序装入',0,-84,16,320,26,'#d4d0ad');
       for(let i=0;i<6;i++){
-        const w=state.weapons[i],n=this.box(detail,'TrainingSlot-'+i,-125+i*50,-119,45,52,this.slot===i);
-        if(w){this.weapon(n,w.id,0,0,37);this.text(n,['I','II','III','IV'][w.tier-1],15,-17,10,19,15,TIER_COLORS[w.tier-1]);}else this.text(n,'+',0,0,24,40,40,'#a9b99c');
+        const w=state.weapons[i],selected=this.slot===i,n=this.box(detail,'TrainingSlot-'+i,-125+i*50,-119,45,52,selected);
+        const ink=selected?PAPER_INK:JADE_INK;
+        if(w){this.weapon(n,w.id,0,0,37);this.text(n,['I','II','III','IV'][w.tier-1],15,-17,10,19,15,ink);}else this.text(n,'+',0,0,24,40,40,ink);
         n.on(Node.EventType.TOUCH_END,()=>{this.slot=Math.min(i,state.weapons.length);this.render();});
       }
-      this.button(detail,'TrainingEquip',state.weapons[this.slot]?'替换此槽武器':'装备到空位',0,-176,310,()=>this.act(()=>this.host.equip(selected.id,this.tier,this.slot)),true,true,44);
-      this.button(detail,'TrainingUnequip','卸下所选武器',0,-216,310,()=>this.act(()=>{const result=this.host.remove(this.slot);this.slot=Math.min(this.slot,this.host.snapshot().weapons.length);return result;}),!!state.weapons[this.slot]&&state.weapons.length>1,false,30);
+      this.button(detail,'TrainingEquip',state.weapons[this.slot]?'替换此槽武器':'装备到空位',0,-176,310,()=>this.act(()=>this.host.equip(selected.id,this.tier,this.slot)),true,'primary',44);
+      this.button(detail,'TrainingUnequip','卸下所选武器',0,-216,310,()=>this.act(()=>{const result=this.host.remove(this.slot);this.slot=Math.min(this.slot,this.host.snapshot().weapons.length);return result;}),!!state.weapons[this.slot]&&state.weapons.length>1,'secondary',30);
     }else{
       const skill=commonSkillFor(selected.id);
       this.text(detail,skillPowerText(skill.id)+' · '+skill.category,0,28,20,320,32,'#e1d7b1');
       this.text(detail,`演武场无冷却 · ${skill.duration}`,0,-10,18,320,34);
       this.text(detail,skill.effect,0,-88,19,310,115);
-      this.button(detail,'TrainingEquipSkill',state.skillId===skill.id?'已携带 · 重新装配':'携带此技能',0,-189,310,()=>this.act(()=>this.host.skill(skill.id)),true,true,48);
+      this.button(detail,'TrainingEquipSkill',state.skillId===skill.id?'已携带 · 重新装配':'携带此技能',0,-189,310,()=>this.act(()=>this.host.skill(skill.id)),true,'primary',48);
     }
     this.button(p,'TrainingClear','清空战场',-420,-285,200,()=>this.act(()=>this.host.clear()));
     this.button(p,'TrainingRefill','重置技能',-190,-285,200,()=>this.act(()=>this.host.refill()));
     this.button(p,'TrainingExit','返回首页',40,-285,200,()=>this.host.exit());
-    this.button(p,'TrainingResume','进入战场  →',350,-285,300,()=>this.host.close(),true,true,54);
+    this.button(p,'TrainingResume','进入战场  →',350,-285,300,()=>this.host.close(),true,'primary',54);
     if(this.formSurface)this.refreshForm();
   }
   private refreshForm():void {
     const ui=this.formSurface!,state=this.host.snapshot(),growth=this.choices[4],entries=this.entries();
     ui.status.string=`生命 ∞  ·  在场 ${state.alive}/80`;ui.message.string=this.message;
     for(let i=0;i<ui.cards.length;i++){
-      const card=ui.cards[i],selected=i===growth;if(card.selected!==selected){this.paintBox(card.node,140,120,selected);card.selected=selected;}
+      const card=ui.cards[i],selected=i===growth;
+      if(card.selected!==selected){
+        this.paintBox(card.node,140,120,selected);
+        card.name.color=new Color(selected?PAPER_INK:JADE_INK);card.stage.color=new Color(selected?PAPER_NOTE:JADE_NOTE);card.selected=selected;
+      }
       if(card.icon)this.setPicture(card.icon,entries[i].key,80);
     }
     for(let i=0;i<ui.heroes.length;i++){
       const hero=ui.heroes[i],selected=FORM_HEROES[i].id===this.formHero;
-      if(hero.selected!==selected){this.paintButton(hero.node,98,40,true,selected);hero.label.color=new Color(selected?'#fff0d2':'#432d1d');hero.selected=selected;}
+      if(hero.selected!==selected){this.paintBox(hero.node,98,40,selected);hero.label.color=new Color(selected?PAPER_INK:JADE_INK);hero.selected=selected;}
     }
     if(ui.hero!==this.formHero||ui.growth!==growth){this.showcase!.setHero(this.formHero,signatureId(this.formHero,growth) as EquippedWeapon['id'],growth);ui.hero=this.formHero;ui.growth=growth;}
     ui.title.string=growthTitle(this.formHero,growth);

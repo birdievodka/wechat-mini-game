@@ -1,3 +1,6 @@
+import type {SupplyStep,SupplyTrace} from './runtime-health';
+import {bossDisplayName} from './stage-data';
+
 export interface ClipboardHost {
  setClipboardData?:(options:{data:string;success:()=>void;fail:(error?:unknown)=>void})=>void;
 }
@@ -20,6 +23,20 @@ interface Session {version?:string;savedAt?:number;snapshot?:Record<string,unkno
 const text=(value:unknown)=>value===undefined||value===null?'—':String(value);
 const mib=(value:unknown)=>typeof value==='number'&&Number.isFinite(value)?(value/1048576).toFixed(1):'—';
 const count=(s:Session,type:string)=>(s.events||[]).filter(e=>e.type===type).reduce((n,e)=>n+(e.count||1),0);
+const SUPPLY_STEPS:Record<SupplyStep,string>={open:'进入补给',refresh:'刷新商品',buy:'购买或替换',manage:'合成或回收',normal:'切到普通补给',continue:'继续战斗',
+ 'shop-drawn':'补给首帧已绘制','battle-drawn':'战斗首帧已绘制',declined:'操作未成交'};
+function bossTimeline(s:Session):string[] {
+ const samples=(s.recent||[]).filter(sample=>sample.state.phase==='battle');
+ if(s.snapshot?.phase==='battle'&&s.savedAt!==samples[samples.length-1]?.at)samples.push({at:s.savedAt||0,state:s.snapshot});
+ return samples.filter(({state})=>Array.isArray(state.bossActions)&&state.bossActions.length).slice(-4).map(({at,state})=>{
+  const actions=(state.bossActions as {id:string;move?:number;phase?:string}[]).filter(action=>typeof action?.id==='string').slice(0,2).map(action=>{
+   const move=typeof action.move==='number'&&action.move>=0?` #${action.move+1}`:'';
+   return bossDisplayName(action.id)+move+' '+text(action.phase);
+  });
+  return [at>0?new Date(at).toLocaleTimeString():'—',text(state.seconds)+'s',actions.join(' / '),
+   '区 '+text(state.bossAreas)+' · 弹 '+text(state.bossShots)].join(' · ');
+ });
+}
 function sessionSummary(s:Session):string {
  const v=s.snapshot||{},render=v.render as {unavailable?:number}|undefined;
  const mode=v.mode==='endless'?'无尽':v.mode==='stage'?'闯关':v.mode==='training'?'演武':text(v.mode);
@@ -31,16 +48,27 @@ function sessionSummary(s:Session):string {
   '友弹 '+text(v.activeProjectiles)+' / 池 '+text(v.projectileNodes)+' · 敌弹 '+text(v.activeEnemyShots)+' / 池 '+text(v.enemyShotNodes),
   '缓冲 '+mib(v.gfxBuffers)+' MiB · 纹理 '+mib(v.gfxTextures)+' MiB',
   '内存告警 '+count(s,'memory-warning')+' · JS异常 '+(count(s,'error')+count(s,'unhandled-rejection'))+(render?.unavailable?' · 部分绘图指标不可用':''),
+  ...(typeof v.uiFontFaces==='string'&&v.uiFontFaces?['界面字体 '+v.uiFontFaces]:[]),
   '武器 '+weapons.slice(0,150)].join('\n');
 }
 /** Small pages can be photographed even when WeChat rejects clipboard access. */
 export function runtimeReportPages(data:string):{title:string;body:string}[] {
  try{
-  const report=JSON.parse(data) as Session&{previous?:Session;exportError?:string};
+  const report=JSON.parse(data) as Session&{previous?:Session;exportError?:string;supply?:SupplyTrace;previousSupply?:SupplyTrace};
   const pages:{title:string;body:string}[]=[];
-  if(report.previous)pages.push({title:'上一局摘要',body:sessionSummary(report.previous)});
+  if(report.previous){
+   pages.push({title:'上一局摘要',body:sessionSummary(report.previous)});
+   const rows=bossTimeline(report.previous);
+   if(rows.length)pages.push({title:'上一局首领动作',body:rows.join('\n')});
+  }
   pages.push({title:'当前会话',body:sessionSummary(report)});
   if(report.battleSnapshot&&report.snapshot?.phase!=='battle')pages.push({title:'本次最近战斗',body:sessionSummary({...report,snapshot:report.battleSnapshot,savedAt:report.battleSavedAt})});
+  for(const [label,trace] of [['上次',report.previousSupply],['本次',report.supply]] as const){
+   if(!Array.isArray(trace?.steps))continue;
+   const rows=trace.steps.slice(-8).filter(s=>s&&Number.isFinite(s.at)&&typeof s.step==='string');
+   for(let i=0;i<rows.length;i+=5)pages.push({title:label+'补给操作',body:[trace.version,...rows.slice(i,i+5).map(s=>
+    new Date(s.at).toLocaleTimeString()+' · '+(s.mode==='endless'?'无尽':'关卡')+' '+s.round+' · '+(SUPPLY_STEPS[s.step]||s.step))].join('\n')});
+  }
   for(const [label,s]of [['上局',report.previous],['本次',report]] as const){
    if(!s)continue;const peak=s.peak||{},v=s.snapshot||{},p=s.persistence;
    const render=v.render as {nodes?:number;graphics?:number;models?:number;bufferBytes?:number;top?:{name:string;bytes:number}[]}|undefined;

@@ -8,8 +8,24 @@ const profile=(id,n)=>{const p=P.newProfile();for(let i=1;i<=n;i++)P.recordClear
   if(n){const repeated=P.recordClear(p,id,1,300,80,run.hearts);assert.equal(repeated.growthBefore,repeated.growthAfter,'重复不叠加');assert.equal(G.growthClears(P.readProfile({getItem:()=>JSON.stringify(p)}),id),n,'高心数记录可以重新读取');}
  }
  const g=await newGame();g.spawnClock=g.cooldown=999;for(const id of ['liubei','guanyu','zhangfei'])for(const n of [0,1,2,3,4,5,6]){
-  g.clearBattle();g.profile=profile(id,n);g.run=C.createRun(id);g.selectedStage=Math.min(6,n+1);g.showMainMenu();const menuRig=g.screens.heroShowcase;assert.equal(menuRig.growth,n);assert.equal(menuRig.mount.sprite.node.active,n>=2);click(g.screens.root,'StartHero');assert.equal(g.run.growth,n);assert.equal(g.playerHp,C.heroMaxHearts(g.run));assert.equal(g.mount.sprite.node.active,n>=2);assert.equal(g.dashButton.active,n>=4);assert.equal(g.dashButton.position.y,g.skillButton.position.y);assert.equal(g.screens.root.children.length,0,'战斗不保留成长菜单模型');g.animateWalk(.016,2,0,1,0);assert.ok(g.feet.every(f=>f.active===(n<2)));if(n>=5)assert.equal(g.body.spriteFrame,g.artFrames['growth-torso-'+id]);if(n)assert.equal(g.weapons[0].offhand.active,true);
+  g.clearBattle();g.profile=profile(id,n);g.run=C.createRun(id);g.selectedStage=Math.min(6,n+1);g.showMainMenu();const menuRig=g.screens.heroShowcase;assert.equal(menuRig.growth,n);assert.equal(menuRig.mount.sprite.node.active,n>=2);click(g.screens.root,'StartHero');assert.equal(g.run.growth,n);assert.equal(g.playerHp,C.heroMaxHearts(g.run));assert.equal(g.mount.sprite.node.active,n>=2);assert.equal(g.hero.scale.x,.90);assert.equal(g.hero.scale.y,.90);assert.equal(g.mount.sprite.node.parent,g.hero);assert.equal(g.dashButton.active,n>=4);assert.equal(g.dashButton.position.y,g.skillButton.position.y);assert.equal(g.screens.root.children.length,0,'战斗不保留成长菜单模型');g.animateWalk(.016,2,0,1,0);assert.ok(g.feet.every(f=>f.active===(n<2)));if(n>=5)assert.equal(g.body.spriteFrame,g.artFrames['growth-torso-'+id]);if(n)assert.equal(g.weapons[0].offhand.active,true);
  }
+ // Verify the actual world renderer: starter markers and shop copies cannot draw a signature combo.
+ const growthFx=load('growth-effects'),drawAttack=growthFx.drawGrowthAttack;
+ let draws=0;growthFx.drawGrowthAttack=()=>{draws++;};
+ try {
+  for(const hero of ['liubei','guanyu','zhangfei']){
+   for(const starter of ['sandal','pole','cleaver']){
+    g.run=C.createStageRun(P.newProfile(),hero,1,starter,'G01');
+    g.syncWeapons();g.weapons[0].time=g.weapons[0].duration*.45;
+    draws=0;g.updateEffects(0);assert.equal(draws,0,hero+' '+starter);
+   }
+   g.run=C.createStageRun(profile(hero,1),hero,2,W.starterFor(hero),'G01');
+   g.run.weapons.push({...g.run.weapons[0],uid:2,signature:false});
+   g.syncWeapons();for(const w of g.weapons)w.time=w.duration*.45;
+   draws=0;g.updateEffects(0);assert.equal(draws,1,hero+' only the evolved signature renders');
+  }
+ }finally{growthFx.drawGrowthAttack=drawAttack;}
  // Sustained model counts one shared third strike, not old quality double-hit mechanics.
  for(const id of ['liubei','guanyu','zhangfei']){const r=C.createStageRun(profile(id,3),id,4,W.starterFor(id),'G01');r.weapons[0].tier=4;const w=r.weapons[0],s=C.weaponStatsFor(r,w),expected=s.damage/s.interval*(7/6)*(1+s.crit*(s.critMultiplier-1));assert.ok(Math.abs(C.weaponDps(r,w)-expected)<1e-8);const offer=S.upgradeOffer({...w,tier:3});r.offers=[offer];r.offerPrices={[offer]:10};assert.ok(S.supplyCard(r,offer).desc.includes('第三击1.5倍'),'商店本命不误报普通双刺或刃波');}
  // Body-local growth is fixed per run; six slots still attack independently.

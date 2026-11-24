@@ -1,0 +1,20 @@
+{
+  "scope": "Read-only check of the WeChat desktop simulator; no input injection.",
+  "version": "stage-v11.0.2-classic-art",
+  "phase": "menu",
+  "ready": true,
+  "farmerFrames": [
+    [
+      12,
+      362
+    ],
+    [
+      12,
+      362
+    ]
+  ],
+  "bossPortrait": 144,
+  "weaponArt": true,
+  "skillArt": true,
+  "error": ""
+}

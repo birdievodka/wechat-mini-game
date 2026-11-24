@@ -45,6 +45,42 @@ function fixture(id,index=0){
  const paperGame=await newGame();paperGame.clearBattle();const paperBoss=paperGame.spawnNext('chief',undefined,5);paperBoss.born=0;paperGame.bossBattle.start(paperBoss,1,0);for(const e of paperGame.enemies.filter(e=>e.bossUnit?.kind==='decoy')){paperGame.drawEnemy(e);assert.equal(e.art.color.value,240,'纸影首次显示必须应用纸色，不能继承复用前白色');}
  const base=await newGame();base.clearBattle();const b=base.spawnNext('chief',undefined,4);b.born=0;const machine=base.spawnNext('spearman','E35');machine.born=0;assert.equal(base.bossBattle.canStart(b,1),true);base.bossBattle.start(b,1,0);assert.equal(base.enemies.filter(e=>e.hp>0&&(e.bossUnit?.kind==='cart'||e.archetype==='E35')).length,2,'普通器械与Boss弩车共享2台预算');
  console.log('通过：真实组件接入/四向切帧/五秒眩晕与暂停/绘制只读/击杀清理/无额外充能金币/80混合Boss1200帧及全局池上限');
- const manifest=JSON.parse(fs.readFileSync('art/runtime-bosses/manifest.json'));assert.equal(manifest.atlases.length,8);assert.ok(manifest.rgbaMiB<=13.3);for(const atlas of manifest.atlases){assert.equal(crypto.createHash('sha256').update(fs.readFileSync(atlas.dest)).digest('hex'),atlas.sha256);const {data,info}=await sharp(atlas.dest).ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.equal(info.width,atlas.width);assert.equal(info.height,atlas.height);for(let i=0;i<atlas.cells.length;i++){const cols=atlas.width/160,hashes=[];let visible=0;for(let y=0;y<160;y++)for(let x=0;x<160;x++){const a=data[((Math.floor(i/cols)*160+y)*info.width+i%cols*160+x)*4+3];if(x<4||y<4||x>=156||y>=156)assert.equal(a,0,'透明留边 '+atlas.dest+':'+i);if(a>100)visible++;}assert.ok(visible>400,'运行素材非空 '+atlas.dest+':'+i);}if(atlas.cells.length===16&&atlas.dest.includes('-actions')){const cells=atlas.cells;assert.ok(Math.abs(cells[0].content[3]-cells[8].content[3])<=1,'转背不能缩小身体');for(const group of [[0,1,2,3,4],[8,9,10,11,12]])for(const i of group){assert.ok(Math.abs(cells[i].anchor[0]-cells[group[0]].anchor[0])<1.1);assert.ok(Math.abs(cells[i].anchor[1]-cells[group[0]].anchor[1])<1.1);}}}
- console.log('通过：96角色帧/24战兽帧/16实体素材、真实alpha/透明留边/正背等比例/头部注册、来源哈希与13.28MiB纹理预算');
+ const manifest=JSON.parse(fs.readFileSync('art/runtime-bosses/manifest.json'));
+ assert.equal(manifest.atlases.length,8);
+ assert.ok(manifest.rgbaMiB<=52,'全部图集总量，按关加载');
+ const {BOSS_LAYOUTS}=load('boss-prop-layout');
+ for(const atlas of manifest.atlases){
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(atlas.dest)).digest('hex'),atlas.sha256);
+  const {data,info}=await sharp(atlas.dest).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+  assert.equal(info.width,atlas.width);assert.equal(info.height,atlas.height);
+  assert.equal((await sharp(atlas.dest).metadata()).isPalette,false,'保留原色与轮廓半透明像素');
+  for(const cell of atlas.cells){
+   const [ox,oy,w,h]=cell.packed, [,,ow,oh]=cell.rect;
+   const name=atlas.dest.split('/').pop().slice(0,-4);
+   assert.deepEqual(Array.from(BOSS_LAYOUTS[name][cell.index]),[...cell.packed,ow,oh,cell.content[0]-2,cell.content[1]-2]);
+   assert.deepEqual([ow,oh],require('./boss-density.cjs').frameSize(name,cell.index));
+   assert.ok(info.width<=2048&&info.height<=2048);
+   for(const prev of atlas.cells.slice(0,cell.index)){
+    const [x,y,pw,ph]=prev.packed;
+    assert.ok(ox+w<=x||x+pw<=ox||oy+h<=y||y+ph<=oy,'独立采样边界');
+   }
+   assert.ok(ox>=0&&oy>=0&&ox+w<=info.width&&oy+h<=info.height);
+   let visible=0;
+   for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+    const alpha=data[((oy+y)*info.width+ox+x)*4+3];
+    if(x<2||y<2||x>=w-2||y>=h-2)assert.equal(alpha,0,'透明留边 '+atlas.dest+':'+cell.index);
+    if(alpha>100)visible++;
+   }
+   assert.ok(visible>400,'运行素材非空 '+atlas.dest+':'+cell.index);
+  }
+  if(atlas.dest.includes('-actions')){
+   const cells=atlas.cells;
+   assert.ok(Math.abs(cells[0].content[3]-cells[8].content[3])<=1,'转背不能缩小身体');
+   for(const group of [[0,1,2,3,4],[8,9,10,11,12]])for(const i of group){
+    assert.ok(Math.abs(cells[i].anchor[0]-cells[group[0]].anchor[0])<1.1);
+    assert.ok(Math.abs(cells[i].anchor[1]-cells[group[0]].anchor[1])<1.1);
+   }
+  }
+ }
+ console.log('通过：六首领96帧、24战兽帧、16技能帧的原色、透明留边、动作注册与纹理预算');
 })().catch(e=>{console.error(e);process.exitCode=1;});

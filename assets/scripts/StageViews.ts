@@ -1,9 +1,10 @@
+import {applyUiFont} from './ui-font';
 import {MUSIC_SCENES} from './battle-music';
 import {petName,petFrameKey} from './pets';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {HeroShowcase} from './HeroShowcase';
 import {growthClears,growthTitle,growthRewardText,signatureId,dashName} from './hero-growth';
-import {Color,Graphics,Label,Mask,Node,Sprite,SpriteFrame,Rect,UITransform} from 'cc';
+import {Color,Graphics,Label,Node,Sprite,SpriteFrame,Rect,UITransform} from 'cc';
 import {Run,heroFor,heroMaxHearts,ITEMS} from './campaign';
 import {STAGES,stageFor,bossDisplayName,STAGE_THEMES,STARTER_WEAPONS,stageRewardWeapons} from './stage-data';
 import {StageProfile,StageReward,highestStage,pendingStageWeapons} from './stage-progress';
@@ -18,7 +19,7 @@ class StageSurface {
  readonly root:Node;readonly panel:Node;
  constructor(parent:Node,protected frames:Record<string,SpriteFrame>,name:string,w=1180,h=650,modal=true){this.root=this.node(parent,name);this.root.addComponent(UITransform).setContentSize(w,h);if(modal){const shade=this.node(this.root,'Dimmer'),g=shade.addComponent(Graphics);shade.addComponent(UITransform).setContentSize(6000,4000);g.fillColor=new Color(12,26,19,170);g.rect(-3000,-2000,6000,4000);g.fill();shade.on(Node.EventType.TOUCH_START,()=>{});shade.on(Node.EventType.TOUCH_END,()=>{});}this.panel=this.box(this.root,'StagePanel',0,0,w,h,C.jade);}
  protected node(p:Node,name:string){const n=new Node(name);n.layer=p.layer;p.addChild(n);return n;}
- protected text(p:Node,t:string,x:number,y:number,size:number,w=300,h=45,color:string=C.paper){const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.isBold=true;l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;}
+ protected text(p:Node,t:string,x:number,y:number,size:number,w=300,h=45,color:string=C.paper,emphasized=size>=27){const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return applyUiFont(l, emphasized);}
  protected box(p:Node,name:string,x:number,y:number,w:number,h:number,color:string=C.jade){
   const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);
   const skin=this.frames['stage-panel'];
@@ -28,7 +29,7 @@ class StageSurface {
  protected button(p:Node,name:string,t:string,x:number,y:number,w:number,f:()=>void,enabled=true,primary=false){
   const n=this.box(p,name,x,y,w,primary?72:62,enabled?primary?C.red:'#486a4c':'#3b5045');
   if(primary&&enabled&&this.frames['hero-menu-start']){const skin=n.children.find(c=>c.name==='JadeSkin');if(skin)skin.active=false;const image=this.node(n,'RedButtonArt'),sp=image.addComponent(Sprite);sp.spriteFrame=this.frames['hero-menu-start'];sp.sizeMode=Sprite.SizeMode.CUSTOM;image.getComponent(UITransform)!.setContentSize(w+22,112);}
-  const l=this.text(n,t,0,0,primary?30:24,w-20,50,enabled?C.paper:C.muted);l.fontFamily='serif';n.on(Node.EventType.TOUCH_END,()=>{if(enabled)f();});return n;
+  this.text(n,t,0,0,primary?30:24,w-20,50,enabled?C.paper:C.muted,true);n.on(Node.EventType.TOUCH_END,()=>{if(enabled)f();});return n;
  }
  protected glow(p:Node,w:number,h:number):Node{const n=this.node(p,'SelectedStage'),g=n.addComponent(Graphics);for(const [line,alpha]of[[12,30],[7,65],[3,240]]){g.lineWidth=line;g.strokeColor=new Color(255,209,97,alpha);g.roundRect(-w/2,-h/2,w,h,18);g.stroke();}return n;}
  protected lock(p:Node,x:number,y:number):void{const g=this.node(p,'StageLock').addComponent(Graphics);g.fillColor=new Color('#bec6b2');g.strokeColor=new Color('#bec6b2');g.lineWidth=3;g.moveTo(x-7,y+3);g.lineTo(x-7,y+12);g.bezierCurveTo(x-7,y+23,x+7,y+23,x+7,y+12);g.lineTo(x+7,y+3);g.stroke();g.roundRect(x-12,y-10,24,22,4);g.fill();g.fillColor=new Color('#34503d');g.circle(x,y+2,3);g.fill();g.rect(x-1,y-4,2,6);g.fill();}
@@ -36,32 +37,29 @@ class StageSurface {
  protected picture(p:Node,key:string,x:number,y:number,size:number){const f=this.frames[key];if(!f)return;const n=this.node(p,key);n.setPosition(x,y);const s=n.addComponent(Sprite);s.spriteFrame=f;s.sizeMode=Sprite.SizeMode.CUSTOM;const r=f.rect;n.getComponent(UITransform)!.setContentSize(size*r.width/Math.max(r.width,r.height),size*r.height/Math.max(r.width,r.height));}
  close(){this.root.removeFromParent();this.root.destroy();}
 }
-/** A reusable parchment map skin; the scene, title and universal gate remain live layers. */
+/** The relief, stage title and universal gate are independent live layers. */
 export class StageBriefView extends StageSurface {
  private landscape:Sprite;
  constructor(parent:Node,frames:Record<string,SpriteFrame>){
-  super(parent,frames,'HeroStageSelect',640,400,false);
+  super(parent,frames,'HeroStageSelect',486,356,false);
   const skin=this.panel.children.find(n=>n.name==='JadeSkin');if(skin)skin.active=false;
-  // A small, menu-only stencil keeps the picture behind the irregular parchment
-  // and away from the red cord. It is destroyed together with the menu on battle entry.
-  const window=this.node(this.panel,'JourneyWindow');window.addComponent(UITransform).setContentSize(560,280);
-  const mask=window.addComponent(Mask);mask.type=Mask.Type.GRAPHICS_STENCIL;
-  const clip=window.getComponent(Graphics)!;clip.clear();clip.moveTo(-235,138);clip.lineTo(278,145);clip.lineTo(252,-132);clip.lineTo(-281,-130);clip.close();clip.fill();
-  const image=this.node(window,'CurrentStageLandscape');image.setPosition(0,8);this.landscape=image.addComponent(Sprite);this.landscape.sizeMode=Sprite.SizeMode.CUSTOM;
-  // The actual window is taller than the former 2.5:1 card; crop horizontally,
-  // not stretch the landscape. Fit cover the aperture with the same source frame.
-  image.getComponent(UITransform)!.setContentSize(550,550*128/264);
-  const paper=this.node(this.panel,'JourneyParchment');const sp=paper.addComponent(Sprite);sp.spriteFrame=frames['stage-journey'];sp.sizeMode=Sprite.SizeMode.CUSTOM;paper.getComponent(UITransform)!.setContentSize(600,400);
-  const switchButton=this.node(this.panel,'StageSwitchButton');switchButton.setPosition(190,-108);switchButton.addComponent(UITransform).setContentSize(100,100);
-  const icon=this.node(switchButton,'StageSwitchIcon'),gate=icon.addComponent(Sprite);gate.spriteFrame=frames['stage-switch'];gate.sizeMode=Sprite.SizeMode.CUSTOM;icon.getComponent(UITransform)!.setContentSize(94,94);
+  const base=this.panel.getComponent(Graphics);if(base)base.clear();
+  const shadow=this.node(this.panel,'StageReliefShadow').addComponent(Graphics);shadow.fillColor=new Color(55,42,32,72);shadow.ellipse(0,-94,209,24);shadow.fill();
+  const image=this.node(this.panel,'CurrentStageLandscape');image.setPosition(0,28);this.landscape=image.addComponent(Sprite);this.landscape.sizeMode=Sprite.SizeMode.CUSTOM;
+  image.addComponent(UITransform).setContentSize(460,356.5);
+  this.box(this.panel,'StageNameplate',-30,-121,250,54,'#294e3c');
+  const switchButton=this.box(this.panel,'StageSwitchButton',135,-121,76,66,'#294e3c');switchButton.getComponent(UITransform)!.setContentSize(100,100);
+  const icon=this.node(switchButton,'StageSwitchIcon'),gate=icon.addComponent(Sprite);gate.spriteFrame=frames['stage-switch'];gate.sizeMode=Sprite.SizeMode.CUSTOM;icon.getComponent(UITransform)!.setContentSize(67,67);
   switchButton.on(Node.EventType.TOUCH_START,()=>switchButton.setScale(.94,.94,1));switchButton.on(Node.EventType.TOUCH_CANCEL,()=>switchButton.setScale(1,1,1));switchButton.on(Node.EventType.TOUCH_END,()=>switchButton.setScale(1,1,1));
   // Touch end bubbles once to HeroStageSelect, retaining its lock/selection guard.
 
  }
  setSelection(profile:StageProfile,hero:string,stage:number):void {
   const p=this.panel,old=p.children.find(n=>n.name==='CurrentStageTitle');if(old){old.removeFromParent();old.destroy();}
-  this.landscape.spriteFrame=this.frames['stage-map-'+stage]||this.frames['stage-thumb-'+stage];
-  const title=this.text(p,String(stage).padStart(2,'0')+'  '+stageFor(stage).name,-130,-122,27,254,48,C.ink);title.fontFamily='serif';title.node.name='CurrentStageTitle';
+  const relief=this.frames['stage-relief-'+stage];
+  this.landscape.spriteFrame=relief||this.frames['stage-thumb-'+stage];
+  this.landscape.node.getComponent(UITransform)!.setContentSize(460,relief?356.5:184);
+  this.text(p,stageFor(stage).name,-30,-121,30,240,48,C.paper).node.name='CurrentStageTitle';
  }
 }
 export class StagePickerView extends StageSurface {
@@ -69,15 +67,15 @@ export class StagePickerView extends StageSurface {
  constructor(parent:Node,frames:Record<string,SpriteFrame>,profile:StageProfile,hero:string,selected:number,choose:(stage:number)=>void,close:()=>void){
   super(parent,frames,'StageSelection');this.selected=selected;
   this.picture(this.panel,'hero-'+hero+'-open',-205,270,74);
-  this.text(this.panel,heroFor({heroId:hero} as Run).name+'的征程',-33,270,40,490,62).fontFamily='serif';
-  const count=this.box(this.panel,'StageProgress',373,270,220,46);this.text(count,'已通关 '+Object.keys(profile.heroes[hero]||{}).length+'/6',0,0,22,200,40).fontFamily='serif';
+  this.text(this.panel,heroFor({heroId:hero} as Run).name+'的征程',-33,270,40,490,62);
+  const count=this.box(this.panel,'StageProgress',373,270,220,46);this.text(count,'已通关 '+Object.keys(profile.heroes[hero]||{}).length+'/6',0,0,22,200,40);
   addPanelClose(this.panel,frames,'StageCancel',538,273,()=>{this.close();close();});
   let refresh=()=>{};const marks:Node[]=[];
   STAGES.forEach((d,i)=>{
    const open=i+1<=highestStage(profile,hero),done=!!profile.heroes[hero]?.[d.id],n=this.box(this.panel,'StageChoice-'+(i+1),(i%3-1)*366,132-Math.floor(i/3)*215,346,204,open?C.jade:'#344c43');
-   const image=this.node(n,'ThemeThumbnail');image.setPosition(0,36);const sp=image.addComponent(Sprite);sp.spriteFrame=this.frames['stage-thumb-'+(i+1)];sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.color=new Color(open?'#ffffff':'#82968a');image.getComponent(UITransform)!.setContentSize(326,116);
-   this.text(n,String(i+1).padStart(2,'0')+' '+d.name,0,-48,27,320,43,open?C.paper:'#c5cbb9').fontFamily='serif';
-   if(open)this.text(n,done?'✓ 已通关':'可挑战',0,-84,19,290,30,C.gold).fontFamily='serif';else this.lock(n,0,-6); // Center the full silhouette, including the shackle.
+   const image=this.node(n,'ThemeThumbnail');image.setPosition(0,36);const sp=image.addComponent(Sprite);sp.spriteFrame=this.frames['stage-ui-thumb-'+(i+1)]||this.frames['stage-thumb-'+(i+1)];sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.color=new Color(open?'#ffffff':'#82968a');image.getComponent(UITransform)!.setContentSize(326,116);
+   this.text(n,String(i+1).padStart(2,'0')+' '+d.name,0,-48,27,320,43,open?C.paper:'#c5cbb9');
+   if(open)this.text(n,done?'✓ 已通关':'可挑战',0,-84,19,290,30,C.gold);else this.lock(n,0,-6); // Center the full silhouette, including the shackle.
    const m=this.glow(n,342,200);m.active=this.selected===i+1;marks.push(m);
    n.on(Node.EventType.TOUCH_END,()=>{this.selected=i+1;marks.forEach((mark,j)=>mark.active=j===i);refresh();});
   });
@@ -85,7 +83,7 @@ export class StagePickerView extends StageSurface {
   refresh=()=>{
    for(const n of [...footer.children]){n.removeFromParent();n.destroy();}const old=this.panel.children.find(n=>n.name==='ConfirmStage');if(old){old.removeFromParent();old.destroy();}
    const d=stageFor(this.selected),open=this.selected<=highestStage(profile,hero);
-   this.text(footer,open?(profile.heroes[hero]?.[d.id]?'奖励已领取':'首通解锁'):'尚未解锁',-467,-248,23,170,46,C.gold).fontFamily='serif';
+   this.text(footer,open?(profile.heroes[hero]?.[d.id]?'奖励已领取':'首通解锁'):'尚未解锁',-467,-248,23,170,46,C.gold);
    [['武器',pendingStageWeapons(profile,hero,this.selected).length],['道具',d.firstClear.passives.length],['技能',d.firstClear.skills.length]].forEach(([label,count],i)=>{const badge=this.box(footer,'RewardCategory-'+i,-282+i*159,-248,145,47);this.text(badge,label+' +'+count,0,0,20,130,39,C.gold);});
    this.button(this.panel,'ConfirmStage',open?'选择此关':'尚未解锁',373,-248,300,()=>{if(open){choose(this.selected);this.close();}},open,true);
    this.text(footer,open?'通关当前关卡后解锁下一关':'本英雄通关上一关后解锁',0,-304,17,1050,24,'#d4d3b1');
@@ -98,15 +96,15 @@ export class StarterSelectView extends StageSurface {
 }
 export class StageClearView extends StageSurface {
  private showcase:HeroShowcase;private background?:Sprite;
- constructor(parent:Node,frames:Record<string,SpriteFrame>,run:Run,kills:number,reward:StageReward,next:()=>void,menu:()=>void,saved:boolean,atlas?:BattleSpriteAtlas){
+ constructor(parent:Node,frames:Record<string,SpriteFrame>,run:Run,kills:number,reward:StageReward,next:()=>void,menu:()=>void,saved:boolean,atlas?:BattleSpriteAtlas,retrySave?:()=>void){
   super(parent,frames,'StageClear',1240,690,false);const p=this.panel,s=stageFor(run.chapter),growth=reward.growthAfter||0;
   // An open celebration scene, without the former full-screen green frame.
   const old=p.children.find(n=>n.name==='JadeSkin');if(old)old.active=false;
   const bg=this.node(this.root,'ClearLandscape');bg.setSiblingIndex(0);this.background=bg.addComponent(Sprite);this.background.spriteFrame=frames['hero-menu-background']||frames['camp-background'];this.background.sizeMode=Sprite.SizeMode.CUSTOM;this.background.color=new Color('#a0ac8e');
   const wash=this.node(this.root,'ClearShade');wash.setSiblingIndex(1);const tint=wash.addComponent(Graphics);tint.fillColor=new Color(23,42,30,150);tint.rect(-3000,-2000,6000,4000);tint.fill();
-  this.text(p,'挑 战 成 功',-420,285,44,360,66,C.gold).fontFamily='serif';
+  this.text(p,'挑战成功',-420,285,44,360,66,C.gold);
   this.text(p,`${String(run.chapter).padStart(2,'0')}  ${s.name} · ${bossDisplayName(s.boss)}已败`,185,286,29,800,54,C.paper).node.name='ClearStageName';
-  this.showcase=new HeroShowcase(p,frames);this.showcase.setHero(run.heroId,signatureId(run.heroId,growth) as WeaponId,growth);
+  this.showcase=new HeroShowcase(p,frames,atlas);this.showcase.setHero(run.heroId,signatureId(run.heroId,growth) as WeaponId,growth);
   const size=growth>=2?2.2:2.8;this.showcase.root.setPosition(-420,-140+(growth>=2?30:19)*size);this.showcase.root.setScale(size,size,1);
   this.text(p,heroFor(run).name+' · '+growthTitle(run.heroId,growth),-420,-185,27,360,46,C.paper).node.name='ClearHeroTitle';
   const base=heroFor(run).hp,before=base+Math.min(2,reward.growthBefore||0),after=base+Math.min(2,growth);
@@ -144,9 +142,11 @@ export class StageClearView extends StageSurface {
   const cta=(name:string,title:string,x:number,w:number,action:()=>void,primary:boolean,enabled=true)=>{
    const n=this.node(p,name);n.setPosition(x,-306);n.addComponent(UITransform).setContentSize(w,64);const color=enabled?primary?'#c94d2e':'#fff0d2':'#d3c9b2';
    if(!atlas?.addSliced(n,'ui-pill-'+color,w,64,12)){const g=n.addComponent(Graphics);g.fillColor=new Color(color);g.strokeColor=new Color('#432d1d');g.lineWidth=2;g.roundRect(-w/2,-32,w,64,18);g.fill();g.stroke();}
-   this.text(n,title,0,0,27,w-24,52,primary?C.paper:C.ink).fontFamily='serif';n.on(Node.EventType.TOUCH_END,()=>{if(enabled)once(action);});
+   this.text(n,title,0,0,27,w-24,52,primary?C.paper:C.ink);n.on(Node.EventType.TOUCH_END,()=>{if(enabled)once(action);});
   };
-  cta('StageClearMenu','返回备战',-420,308,menu,false);cta('StageClearNext',run.chapter<6?'下一关  →':'返回备战',290,420,next,true,saved);
+  cta('StageClearMenu','返回备战',-420,308,menu,false);
+  if(!saved&&retrySave)cta('StageClearRetrySave','重试保存',290,420,retrySave,true);
+  else cta('StageClearNext',run.chapter<6?'下一关  →':'返回备战',290,420,next,true,saved);
  }
  resize(w:number,h:number){const scale=Math.min((w-80)/1240,(h-60)/690,1.05);this.root.setScale(scale,scale,1);if(this.background){const r=this.background.spriteFrame?.rect,aspect=r?r.width/r.height:2;this.background.node.getComponent(UITransform)!.setContentSize(Math.max(w/scale,h/scale*aspect),Math.max(h/scale,w/scale/aspect));}}
  update(dt:number){this.showcase.update(dt);}
@@ -196,7 +196,7 @@ export class SettingsView extends StageSurface {
     preview(scene,(message,failed)=>{
      if(!p.isValid||selected!==indicator)return;
      status.string=message;
-     if(failed){indicator.string='↻';selected=undefined;}
+     if(failed){indicator.string='重试';selected=undefined;}
     });
    });
    this.text(row,track.title,-130,0,25,220,43);
@@ -209,7 +209,7 @@ export class SettingsView extends StageSurface {
   const p=this.body();this.text(p,'运行诊断',0,210,34);
   const pages=runtimeReportPages(data);let page=0,busy=false;
   const title=this.text(p,'',0,159,23,610,40,C.gold),body=this.text(p,'',0,13,21,650,250);
-  body.horizontalAlign=Label.HorizontalAlign.LEFT;body.verticalAlign=Label.VerticalAlign.TOP;body.isBold=false;
+  body.horizontalAlign=Label.HorizontalAlign.LEFT;body.verticalAlign=Label.VerticalAlign.TOP;
   const show=()=>{title.string=pages[page].title+'  '+(page+1)+' / '+pages.length;body.string=pages[page].body;};show();
   const status=this.text(p,'可直接截图摘要；复制失败会显示具体原因',0,-139,17,650,55,C.gold);
   this.button(p,'CopyDiagnostics','复制完整诊断',-232,-215,220,()=>{if(busy)return;busy=true;status.string='正在复制…';copy(result=>{busy=false;if(p.isValid)status.string=result.ok?'已复制，可返回会话粘贴发送':'复制失败：'+(result.error||'未知错误')+'\n可截图上方摘要发送';});});

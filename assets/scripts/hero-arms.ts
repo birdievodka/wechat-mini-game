@@ -1,6 +1,8 @@
-import { Color, Graphics } from 'cc';
+import { Color, Graphics, Node, Sprite } from 'cc';
+import type { BattleSpriteAtlas } from './BattleSpriteAtlas';
 export interface ArmPoint { x:number; y:number; }
 export const HERO_ARMS={shoulderX:17,shoulderY:4,heldX:35,heldY:-4,relaxedX:32,relaxedY:-7,meleeReach:18,rangedReach:10};
+export const HERO_FIST_KEYS=['hero-fist-open','hero-fist-grip-left','hero-fist-grip-right','hero-fist-exposed-left','hero-fist-exposed-right'];
 const INK='#493522';
 const fistCache=new WeakMap<Graphics,string>();
 // All five approved teenage faces use warm peach skin, including Guan Yu.
@@ -48,5 +50,25 @@ export function drawHeroFist(g:Graphics,hero:string,side:number,gripping:boolean
     for(const x of [-2.5,.5,3.5]){g.moveTo(x,-3);g.lineTo(x,-.7);}g.stroke();
   }else{
     g.strokeColor=new Color('#b77a57');g.lineWidth=1.1;g.moveTo(-2,-2);g.bezierCurveTo(-1,-.5,1,-.5,2,-2);g.stroke();
+  }
+}
+
+export class HeroFist {
+  private readonly sprite?:Sprite;
+  private vector?:Graphics;
+  private key=HERO_FIST_KEYS[0];
+
+  constructor(readonly node:Node,private atlas?:BattleSpriteAtlas) {
+    this.sprite=atlas?.add(node,this.key);
+  }
+
+  update(hero:string,side:number,gripping:boolean,exposed=false):void {
+    if(this.sprite){
+      const key=HERO_FIST_KEYS[gripping?(exposed?3:1)+Number(side>0):0];
+      if(key!==this.key&&this.atlas!.set(this.sprite,key))this.key=key;
+    }else{
+      this.vector??=this.node.addComponent(Graphics);
+      drawHeroFist(this.vector,hero,side,gripping,exposed);
+    }
   }
 }

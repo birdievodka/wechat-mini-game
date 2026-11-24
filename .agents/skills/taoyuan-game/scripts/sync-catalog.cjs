@@ -49,7 +49,7 @@ function generate(root) {
   const ts = createRequire(path.join(root, 'package.json'))('typescript');
   const cache = new Map();
   // An allowlist prevents accidentally executing engine/UI modules during sync.
-  const allowed = new Set(['pets','endless','audio-catalog','hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons']);
+  const allowed = new Set(['pets','endless','audio-catalog','hero-growth','enemy-actions','grunt-melee','yellow-chargers','stage-data','stage-progress','game-brand','common-skills','campaign', 'weapons', 'passive-items', 'survival', 'world-rules', 'enemy-behavior', 'weapon-sound', 'battle-music', 'combat-particles', 'joystick-input', 'combat-math', 'startup-progress', 'chronicles', 'chronicles-data', 'lvbu-boss', 'boss-roster', 'extra-weapons', 'armory-redesign']);
   function load(name) {
     if (!allowed.has(name)) throw Error(`禁止加载非纯规则模块：${name}`);
     if (cache.has(name)) return cache.get(name);
@@ -72,7 +72,7 @@ function generate(root) {
     }, { filename, timeout: 1000 });
     return exports;
   }
-  const c = load('campaign'), w = load('weapons'), p = load('passive-items'), s = load('survival');
+  const c = load('campaign'), w = load('weapons'), p = load('passive-items'), s = load('survival'), armory=load('armory-redesign');
   const world = load('world-rules'), behavior = load('enemy-behavior'), sound = load('weapon-sound'), music = load('battle-music');
   const effects = load('combat-particles'), controls = load('joystick-input');
   const startup=load('startup-progress'),chronicles=load('chronicles'),extra=load('extra-weapons');
@@ -91,7 +91,7 @@ function generate(root) {
   const weaponRows = w.WEAPONS.map(def => {
     const run = c.createRun(hero, def.id);run.challenge=true;
     return { ...def,
-      qualityStatsWithoutHeroOrItems: w.TIER_NAMES.map((name, i) => {const stats=w.calculateWeapon({ id:def.id,tier:i+1 },c.emptyBonus(),hero);return {tier:i+1,name,color:w.TIER_COLORS[i],...stats,effectText:w.weaponEffectText(def.id,stats),mechanics:extra.isExtraWeapon(def.id)?extra.extraMechanics(def.id,i+1):w.weaponEffectText(def.id,stats)};}),
+      qualityStatsWithoutHeroOrItems: w.TIER_NAMES.map((name, i) => {const stats=w.calculateWeapon({ id:def.id,tier:i+1 },c.emptyBonus(),hero);return {tier:i+1,name,color:w.TIER_COLORS[i],...stats,effectText:w.weaponEffectText(def.id,stats),mechanics:armory.armoryDescription(def.id,i+1)||(extra.isExtraWeapon(def.id)?extra.extraMechanics(def.id,i+1):w.weaponEffectText(def.id,stats))};}),
       openingStatsByHero: c.HEROES.map(h => {
         const opening = c.createRun(h.id, def.id);
         return { hero: h.id, ...c.weaponStatsFor(opening, opening.weapons[0]), singleTargetDpsCeiling: c.weaponDps(opening, opening.weapons[0]) };
@@ -231,7 +231,7 @@ function generate(root) {
 
     '## 40类敌兵标准数值\n',table(['ID / 名称','首登','标准HP','首登关第1波HP','基速','攻击周期 / 前摇','射程','成本 / 金币','机制'],catalog.chronicles.enemies.map(e=>[e.id+' / '+e.name,e.firstStage,e.hp,e.firstChapterValues.hp,e.speed,e.cycle+' / '+e.windup,e.range,e.cost+' / '+e.coins,e.mechanic])),
     '\n无隐藏等级成长、无经验换币。旧enemyKind/enemyStats曲线仅兼容测试；正式出兵使用chronicles.ts。首领技能与当前可携带通用技能完整字段见catalog.json和expansion-v4.md。购物路径模型见docs/chronicle-balance.json，不等于真人存活率。\n',
-    '## 商店价格与刷新\n', table(['章节', '基础价', '草鞋 I/II/III/IV', '突突枪 I/II/III/IV'], catalog.economy.prices.map(row => [row.chapter, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.smg.join(' / ')])),
+    '## 商店价格与刷新\n', table(['章节', '基础价', '草鞋 I/II/III/IV', '诸葛连弩 I/II/III/IV'], catalog.economy.prices.map(row => [row.chapter, row.basePrice, row.weaponPrices.sandal.join(' / '), row.weaponPrices.repeater.join(' / ')])),
     '\n无折扣样本，按固定章节指数 `min(5,1.07^(章−1))` 调用现行商店价格函数，不使用旧八关商店价格。\n',
     table(['已刷新次数', '无C05', 'C05×1', 'C05×2', 'C05×3', 'C05×10'], catalog.economy.refresh.map(row => [row.rerolls, ...row.costsByC05Copies.map(v => v.cost)])),
     '\nC05只降低每次进店的第一次刷新；收益递减后取整，第二份不一定立即降价。\n',

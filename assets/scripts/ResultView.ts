@@ -1,3 +1,4 @@
+import {applyUiFont} from './ui-font';
 import {PetView} from './PetView';
 import { Color, Graphics, Label, Layers, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { heroFor, Run, WAVE_SECONDS } from './campaign';
@@ -25,7 +26,7 @@ export class ResultView {
     tint.fillColor=new Color(23,38,29,222);tint.rect(-4000,-2000,8000,4000);tint.fill();
     this.content=this.node(parent,'ResultContent');const p=this.content;
     this.text(p,'桃 园 战 报',-385,292,17,P.gold,430,32);
-    const title=this.text(p,testing?'测 试 结 束':won?'通关啦！':'这把，先撤了！',-385,245,43,P.paper,460,68,true);title.fontFamily='serif';title.node.name='ResultTitle';
+    const title=this.text(p,testing?'测 试 结 束':won?'通关啦！':'这把，先撤了！',-385,245,43,P.paper,460,68,true);title.node.name='ResultTitle';
     const flourish=this.node(p,'TitleInk').addComponent(Graphics);flourish.strokeColor=new Color('#a68c56');flourish.lineWidth=2;
     flourish.moveTo(-555,211);flourish.bezierCurveTo(-450,204,-330,204,-216,213);flourish.stroke();
 
@@ -53,7 +54,7 @@ export class ResultView {
     this.text(paper,clockText(elapsed),-51,98,92,P.ink,474,118,true).node.name='ResultTime';
     const stamp=this.node(paper,won?'VictorySeal':'DefeatSeal');stamp.setPosition(246,86);stamp.angle=-10;
     const ink=stamp.addComponent(Graphics);ink.strokeColor=new Color(178,75,48,175);ink.lineWidth=3;ink.roundRect(-34,-34,68,68,7);ink.stroke();
-    ink.lineWidth=1;ink.roundRect(-28,-28,56,56,3);ink.stroke();this.text(stamp,won?'胜':'败',0,0,43,'#b55d40',62,62,true).fontFamily='serif';
+    ink.lineWidth=1;ink.roundRect(-28,-28,56,56,3);ink.stroke();this.text(stamp,won?'胜':'败',0,0,43,'#b55d40',62,62,true);
     const rules=this.node(paper,'ResultDividers').addComponent(Graphics);rules.strokeColor=new Color('#dcc9a5');rules.lineWidth=1.5;
     for(const y of [30,-64]){rules.moveTo(-282,y);rules.lineTo(282,y);}rules.stroke();
     const stats=[['击败敌兵',String(kills)],[run.endless?'难度等级':won?'最快通关':run.challenge?'到达关卡':'到达章节',run.endless?String(1+(run.endlessTier||0)):won?clockText(best||elapsed):`${run.chapter}/${run.challenge?6:CHAPTERS.length}`],['剩余铜钱',String(run.gold)]];
@@ -91,7 +92,7 @@ export class ResultView {
   private node(parent:Node,name:string):Node {const n=new Node(name);n.layer=Layers.Enum.UI_2D;parent.addChild(n);return n;}
   private text(parent:Node,value:string,x:number,y:number,size:number,color:string,w:number,h:number,bold=false):Label {
     const n=this.node(parent,value);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);
-    l.string=value;l.fontSize=size;l.lineHeight=size*1.3;l.isBold=bold;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;
+    l.string=value;l.fontSize=size;l.lineHeight=size*1.3;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return applyUiFont(l, bold);
   }
   private sprite(parent:Node,frame:SpriteFrame|undefined,x:number,y:number,w:number,h:number,name:string):Sprite|undefined {
     if(!frame)return;const n=this.node(parent,name);n.setPosition(x,y);const s=n.addComponent(Sprite);s.spriteFrame=frame;s.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(w,h);return s;

@@ -3,13 +3,15 @@ import {Color,Graphics,Node,Rect,Sprite,SpriteFrame,Texture2D,UITransform} from 
 import {WEAPONS,TIER_COLORS} from './weapons';
 import {drawWeaponArt} from './weapon-art';
 import {drawSkillIcon} from './skill-vfx-art';
+import {drawHeroFist,HERO_FIST_KEYS} from './hero-arms';
 
 const CELL=128,COLUMNS=8;
 export const NUMBER_CHARACTERS='0123456789-+/';
 const NUMBER_FONT=39,NUMBER_SCALE=21/NUMBER_FONT,NUMBER_WIDTH=25,NUMBER_HEIGHT=42;
 export interface NumberGlyph {frame:SpriteFrame;advance:number;width:number;height:number;left:number;}
-const UI_PILLS=['#fff0d2','#355e40','#c94d2e','#d3c9b2'];
+const UI_PILLS=['#fff0d2','#355e40','#c94d2e','#d3c9b2','#efb75d'];
 const SHOP_SKINS=['ui-solid','ui-jade-raised','ui-jade-flat',...Array.from({length:6},(_,i)=>'ui-shop-card-'+i),...Array.from({length:4},(_,i)=>'ui-tier-'+(i+1)),'tier-pip-small','tier-pip','passive-badge','shop-bun'];
+const HERO_DETAILS=[...HERO_FIST_KEYS,'hero-foot','showcase-foot','hero-offhand','showcase-shadow'];
 interface Cell {frame:SpriteFrame;x:number;y:number;width:number;height:number;}
 /** Canvas adapter for the existing procedural drawings. Bake once, keep identical grip coordinates. */
 export class CanvasDrawing {
@@ -41,21 +43,35 @@ export class BattleSpriteAtlas {
   private bake():void {
     // Cocos' browser/WeChat document adapter creates an offscreen 2D canvas here.
     if(typeof document==='undefined')return;
-    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close',...WORLD_PROPS.map(id=>'prop-'+id)],SHOP_SKINS,['damage-digits']);
+    const keys=WEAPONS.map(w=>'weapon-'+w.id).concat(['coin','coin-shadow','birth-ring','birth-dot','enemy-arrow','enemy-bullet','enemy-poison','enemy-knife','enemy-axe','enemy-coin','skill-24','skill-25',...Array.from({length:5},(_,i)=>'hud-slot-'+i),...UI_PILLS.map(c=>'ui-pill-'+c),...Array.from({length:5},(_,i)=>'ui-slot-'+i),'ui-close',...WORLD_PROPS.map(id=>'prop-'+id)],SHOP_SKINS,['damage-digits'],HERO_DETAILS);
     const numberAdvances:number[]=[];
     const canvas=document.createElement('canvas');canvas.width=CELL*COLUMNS;canvas.height=CELL*Math.ceil(keys.length/COLUMNS);
     const ctx=canvas.getContext('2d');if(!ctx)return;
     for(let i=0;i<keys.length;i++){
       ctx.save();ctx.beginPath();ctx.rect(i%COLUMNS*CELL,Math.floor(i/COLUMNS)*CELL,CELL,CELL);ctx.clip();ctx.translate(i%COLUMNS*CELL+64,Math.floor(i/COLUMNS)*CELL+80);ctx.scale(1,-1);
-      const g=new CanvasDrawing(ctx),key=keys[i];
+      const g=new CanvasDrawing(ctx),key=keys[i],fist=HERO_FIST_KEYS.indexOf(key);
       if(i<WEAPONS.length){
         // Use the same cell at 2x density for the small shoe's red straps/braid.
         // Logical grip/size are restored below; no extra atlas or draw per projectile.
         if(key==='weapon-sandal'){ctx.scale(2,2);ctx.translate(0,-4);}
         drawWeaponArt(g as unknown as Graphics,WEAPONS[i].id,1,true);
       }
+      else if(fist>=0){
+        ctx.scale(2,2);
+        drawHeroFist(g as unknown as Graphics,'liubei',fist%2===0?1:-1,fist>=1,fist>=3);
+      }
+      else if(key==='hero-foot'||key==='showcase-foot'){
+        ctx.scale(2,2);
+        const preview=key==='showcase-foot';
+        g.fillColor=new Color(preview?'#66432b':'#654231');g.strokeColor=new Color(preview?'#493522':'#42291d');
+        g.lineWidth=preview?1.8:2;g.ellipse(0,0,preview?6.5:7,preview?4.6:5);g.fill();g.stroke();
+      }
+      else if(key==='hero-offhand'){
+        ctx.scale(2,2);g.fillColor=new Color('#f2c69c');g.strokeColor=new Color('#493522');g.lineWidth=2;g.circle(0,0,7);g.fill();g.stroke();
+      }
+      else if(key==='showcase-shadow'){g.fillColor=new Color(74,49,24,35);g.ellipse(0,-21,31,6);g.fill();}
       else if(key==='damage-digits'){
-        // 13 glyphs in the formerly empty 88th cell. Same texture dimensions;
+        // 13 glyphs in a shared cell, with no per-hit canvas or Label cache.
         // rasterized at 39px for crisp 21px feedback, no per-hit canvas/Label cache.
         ctx.scale(1,-1);
         try{ctx.font=NUMBER_FONT+'px Arial';ctx.fillStyle='#ffffff';ctx.textAlign='left';ctx.textBaseline='alphabetic';
@@ -70,8 +86,8 @@ export class BattleSpriteAtlas {
       }
       else if(key.indexOf('ui-shop-card-')===0){
         const tier=Number(key.slice(13)),weapon=tier>=1&&tier<=4,color=weapon?TIER_COLORS[tier-1]:tier===5?'#e8bb65':'#b8afdc';
-        g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=weapon?2+tier*.65:2;g.roundRect(-26,-26,52,52,19);g.fill();g.stroke();
-        if(weapon){const wash=new Color(color);wash.a=tier===1?10:22;g.fillColor=wash;g.roundRect(-20,-20,40,40,15);g.fill();}
+        g.fillColor=new Color('#f8e7c5');g.strokeColor=new Color('#866440');g.lineWidth=3;g.roundRect(-26,-26,52,52,19);g.fill();g.stroke();
+        g.strokeColor=new Color(color);g.lineWidth=2;g.roundRect(-21,-21,42,42,15);g.stroke();
       }
       else if(key.indexOf('ui-tier-')===0){
         const tier=Number(key.slice(8));g.fillColor=new Color('#2f2418');g.roundRect(-26,-21,52,42,12);g.fill();g.fillColor=new Color(TIER_COLORS[tier-1]);g.strokeColor=new Color('#432d1d');g.lineWidth=2;g.roundRect(-26,-18,52,42,12);g.fill();g.stroke();
@@ -125,7 +141,7 @@ export class BattleSpriteAtlas {
       for(let y=0;y<CELL;y++)for(let x=0;x<CELL;x++)if(pixels[((ty+y)*canvas.width+tx+x)*4+3]){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
       if(right<left)continue;left=Math.max(0,left-2);top=Math.max(0,top-2);right=Math.min(CELL-1,right+2);bottom=Math.min(CELL-1,bottom+2);
       const width=right-left+1,height=bottom-top+1,frame=new SpriteFrame();frame.texture=this.texture;frame.rect=new Rect(tx+left,ty+top,width,height);
-      const shoe=keys[i]==='weapon-sandal',density=shoe?2:1;
+      const shoe=keys[i]==='weapon-sandal',detail=keys[i]!=='showcase-shadow'&&HERO_DETAILS.includes(keys[i]),density=shoe||detail?2:1;
       this.cells[keys[i]]={frame,width:width/density,height:height/density,x:(left+width/2-64)/density,y:(80-top-height/2)/density+(shoe?4:0)};
     }
     canvas.width=canvas.height=0;

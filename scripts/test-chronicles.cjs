@@ -4,7 +4,7 @@ const c=load('chronicles'),weapons=load('weapons'),save=load('chronicle-save');
 const target=(g,x=90,y=-18)=>{const e=g.spawnNext('soldier','E01');Object.assign(e,{x,y,hp:100000,maxHp:100000,born:0,attackCooldown:999,speed:0});e.node.setPosition(x,y);return e;};
 const nodes=root=>[root,...root.children.flatMap(nodes)];
 (async()=>{
- assert.equal(c.CHAPTERS.length,7);assert.equal(new Set(c.CHAPTERS.map(c=>c.bossId)).size,7);assert.equal(c.CHRONICLE_ENEMIES.length,40);assert.equal(weapons.WEAPONS.length,36);
+ assert.equal(c.CHAPTERS.length,7);assert.equal(new Set(c.CHAPTERS.map(c=>c.bossId)).size,7);assert.equal(c.CHRONICLE_ENEMIES.length,40);assert.equal(weapons.WEAPONS.length,33);
  const first={};for(let chapter=1;chapter<=7;chapter++)for(let stage=0;stage<=3;stage++)for(const id of c.chapterRoster(chapter,stage))first[id]??=chapter;
  for(const d of c.CHRONICLE_ENEMIES)assert.equal(first[d.id],d.first,d.id+' first appearance');
  for(const h of r.HEROES){const g=await newGame(h.id);assert.equal(g.run.starter,weapons.starterFor(h.id));assert.equal(g.playerHp,h.hp);g.run.wave=2;g.run.survivalSeconds=60;g.skillCharge=g.skillRequirement();target(g,100,0);g.castSkill();assert.equal(g.skillCharge,0,h.name+' generic skill consumes charge');g.updateSkill(.28);assert.ok(g.px>250);}
@@ -19,7 +19,7 @@ const nodes=root=>[root,...root.children.flatMap(nodes)];
  geometry.enemyZones=[];geometry.px=0;geometry.py=0;const bomber=geometry.spawnNext('spearman','E33');Object.assign(bomber,{born:0,x:-150,y:0,attackCooldown:0});geometry.updateChronicleEnemy(bomber,.01);assert.ok(geometry.enemyZones.length>0,'demolition soldier actually attacks');geometry.updateEnemyZones(.89);assert.equal(hurt,0,'warning is harmless');geometry.updateEnemyZones(.02);assert.equal(hurt,1,'telegraphed point applies one heart');
  geometry.enemyShots=[];geometry.pendingEnemyShots=[];geometry.fireChronicleVolley(bomber,13);assert.equal(geometry.enemyShots.filter(x=>x.remaining>0).length,1);assert.equal(geometry.pendingEnemyShots.length,2);geometry.updateEnemyShots(.14);assert.equal(geometry.pendingEnemyShots.length,1,'repeating crossbow fires over time');
  console.log('通过：爆破兵实际落点、预告期无伤、连弩逐箭锁角');
- for(const def of weapons.WEAPONS.slice(11))for(let tier=1;tier<=4;tier++){const g=await newGame('liubei',def.id);g.clearBattle();g.spawnClock=999;g.run.weapons[0].tier=tier;g.refreshStats();g.syncWeapons();const e=target(g),w=g.weapons[0];w.damage=100;w.angle=0;w.aimX=e.x;w.aimY=e.y+34;w.strikes=7;const before=e.hp;
+ for(const def of weapons.WEAPONS.filter(w=>load('extra-weapons').isExtraWeapon(w.id)))for(let tier=1;tier<=4;tier++){const g=await newGame('liubei',def.id);g.clearBattle();g.spawnClock=999;g.run.weapons[0].tier=tier;g.refreshStats();g.syncWeapons();const e=target(g),w=g.weapons[0];w.damage=100;w.angle=0;w.aimX=e.x;w.aimY=e.y+34;w.strikes=7;const before=e.hp;
   if(def.category==='melee'){w.time=0;w.duration=.38;g.updateWeapon(w,.38);}else if(['star-lamps','wood-ox'].includes(def.id)){g.updateExtraOrbit(w,.01);}else g.releaseWeapon(0,16,0,w);
   for(let i=0;i<180;i++){g.age+=1/60;g.updateExtraFields(1/60);g.updateProjectiles(1/60);}
   assert.ok(e.hp<before,def.id+' tier'+tier+' real hit');assert.ok(g.projectiles.length<=160&&g.pendingShots.length<=36);

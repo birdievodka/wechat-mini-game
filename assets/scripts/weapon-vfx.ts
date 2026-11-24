@@ -100,6 +100,7 @@ export function drawWeaponMuzzle(g:Graphics,id:WeaponId,x:number,y:number,a:numb
 }
 
 export function drawWeaponFlight(g:Graphics,id:WeaponId,x:number,y:number,a:number,tier=1):void {
+ if(id==='sandal')return; // The rotating shoe sprite is the projectile.
  const {family,style}=WEAPON_VFX[id],c=Math.cos(a),s=Math.sin(a),k=1+(tier-1)*.07;
  const px=x-c*8,py=y-s*8;
  if(id==='chain-hook'){
@@ -107,8 +108,8 @@ export function drawWeaponFlight(g:Graphics,id:WeaponId,x:number,y:number,a:numb
    const d=11*i,xx=x-c*d,yy=y-s*d,bulge=(i%2?4.8:2.4);
    for(let side=-1;side<=1;side+=2)brush.current(g,xx-c*6,yy-s*6,xx+c*6,yy+s*6,side*bulge,1.8,'silver',.95);
   }
- }else if(family==='cloth'||family==='petals'||family==='wind'){
-  const r=family==='wind'?30:family==='petals'?16:11;
+ }else if(family==='petals'||family==='wind'){
+  const r=family==='wind'?30:16;
   for(let side=-1;side<=1;side+=2){
    const tipX=x-c*r*1.7-s*side*r*.63,tipY=y-s*r*1.7+c*side*r*.63;
    brush.current(g,x,y,tipX,tipY,side*r*.75,r*.27,style,.86);

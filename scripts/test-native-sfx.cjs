@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict');
 const {load,newGame,cc}=require('./test-campaign.cjs');
 const {NativeSfx,AudioLoadQueue}=load('native-sfx');
-const {GENERATED_SOUNDS}=load('weapon-sound');
+const {GENERATED_SOUNDS,SoundGate}=load('weapon-sound');
 function context(){return {src:'',volume:0,loop:false,autoplay:false,plays:0,stops:0,destroys:0,onPlay(fn){this.started=fn},offPlay(fn){assert.equal(this.started,fn);this.started=undefined},onError(fn){this.error=fn},offError(fn){assert.equal(this.error,fn);this.error=undefined},play(){this.plays++;this.started?.()},stop(){this.stops++},destroy(){this.destroys++}};}
 (async()=>{
  const voices=[],errors=[],pool=NativeSfx.create({createInnerAudioContext(){const c=context();voices.push(c);return c}},6,s=>errors.push(s));
@@ -12,6 +12,14 @@ function context(){return {src:'',volume:0,loop:false,autoplay:false,plays:0,sto
  const partial=[];assert.equal(NativeSfx.create({createInnerAudioContext(){if(partial.length===2)throw Error('limit');const c=context();partial.push(c);return c}},6,()=>{}),undefined);assert.ok(partial.every(c=>c.destroys===1));assert.equal(NativeSfx.create(undefined,6,()=>{}),undefined);
  const broken=context(),brokenPool=NativeSfx.create({createInnerAudioContext:()=>broken},1,()=>{});broken.stop=()=>{throw Error('native stop failed')};brokenPool.destroy();assert.equal(broken.destroys,1,'teardown still destroys a player when stop throws');
  let writes=0;const normalized=context();Object.defineProperty(normalized,'src',{get(){throw Error('native src round trip must not be needed')},set(){writes++}});const cached=NativeSfx.create({createInnerAudioContext:()=>normalized},1,()=>{});for(let i=0;i<1000;i++)cached.play(0,'same.wav',.4);assert.equal(writes,1,'same cue reuses the decoded source despite a normalizing host');normalized.error({errMsg:'fixture'});cached.play(0,'same.wav',.4);assert.equal(writes,2,'playback failure permits a fresh source assignment');cached.destroy();
+ const affinity=new SoundGate(2),alternating=NativeSfx.create({createInnerAudioContext:context},2,()=>{});
+ for(let i=0;i<120;i++){
+   const cue=i%2?'blast-hit':'wood-hit',url=cue+'.wav';
+   affinity.update(.5);
+   alternating.play(affinity.acquire(cue,2,undefined,url),url,.4);
+ }
+ assert.equal(alternating.played,120);assert.equal(alternating.sourceAssignments,2,'alternating repeated cues keep both sources');
+ alternating.destroy();
  const q=new AudioLoadQueue(1),pending=[];let running=0,peak=0,completed=0;
  for(let i=0;i<100;i++)q.enqueue(done=>{peak=Math.max(peak,++running);pending.push(()=>{running--;completed++;done();done()})});
  assert.equal(pending.length,1);while(pending.length)pending.shift()();assert.equal(completed,100);assert.equal(peak,1);assert.equal(q.loading,0);assert.equal(q.waiting,0);

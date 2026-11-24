@@ -61,7 +61,7 @@ const run=(e,s,seconds,tx=0,ty=0)=>{let hits=0,releases=0;for(let t=0;t<seconds-
  for(const facing of [1,-1])for(const back of [false,true]){boss.lvbu.facing=facing;boss.lvbu.back=back;g.drawEnemy(boss);assert.equal(Math.sign(boss.art.node.scale.x),facing);assert.ok(boss.art.spriteFrame===g.artFrames['lvbu-action-'+lvbuFrame(boss.lvbu,boss.walk,boss.moving)]);}
  g.hitEnemy(boss,0,1e9,0,'sandal',false,true);assert.equal(boss.lvbu,undefined);assert.ok(boss.lvbuGhosts.every(sp=>!sp.node.active));boss.dead=0;
  const reused=g.spawnNext('soldier','E01');assert.equal(reused,boss);assert.equal(reused.lvbu,undefined);assert.ok(reused.lvbuGhosts.every(sp=>!sp.node.active));assert.equal(reused.art.enabled,true,'复用回E01完整农具动作');assert.equal(reused.art.spriteFrame,g.soldierFrames[reused.weaponKind][0]);assert.equal(reused.art.node.getComponent(cc.UITransform).width,78,'清掉吕布300px展示尺寸');
- for(let i=0;i<5;i++){g.clearBattle();const same=g.spawnNext('chief',undefined,2);assert.equal(same.art.node.getComponent(cc.UITransform).width,300,'连续复用吕布出生时不能退回145尺寸');assert.equal(same.lvbuGhosts.length,2);}
+ for(let i=0;i<5;i++){g.clearBattle();const same=g.spawnNext('chief',undefined,2);assert.equal(same.art.node.getComponent(cc.UITransform).width,282,'连续复用吕布出生时不能退回145尺寸');assert.equal(same.lvbuGhosts.length,2);}
  g.clearBattle();const big=g.spawnNext('chief',undefined,2);Object.assign(big,{x:0,y:0,born:0,previousHitX:0,previousHitY:88});big.art.node.setPosition(0,0);
  const before=big.hp;g.launchProjectile(-150,168,0,g.run.weapons[0],{...g.weapons[0].stats,speed:1000,range:400},50);g.updateProjectiles(.3);assert.ok(big.hp<before,'放大骑将头身区域仍能被飞鞋命中');
  const outside=big.hp;big.previousHitX=0;big.previousHitY=88;g.launchProjectile(-150,235,0,g.run.weapons[0],{...g.weapons[0].stats,speed:1000,range:400},50);g.updateProjectiles(.3);assert.equal(big.hp,outside,'头盔羽毛上方掠过不算命中');
@@ -74,16 +74,16 @@ const run=(e,s,seconds,tx=0,ty=0)=>{let hits=0,releases=0;for(let t=0;t<seconds-
  const m=JSON.parse(fs.readFileSync('art/runtime-lvbu/manifest.json'));
  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(m.dest)).digest('hex'),m.sha256);assert.equal(m.cells.length,20);
  for(const source of m.sources)assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source.path)).digest('hex'),source.sha256);
- const {data,info}=await sharp(m.dest).ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.equal(info.width,768);assert.equal(info.height,960);const hashes=new Set(),upper=[];
+ const {data,info}=await sharp(m.dest).ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.equal(m.cell,512);assert.equal(info.width,m.width);assert.equal(info.height,m.height);assert.ok(info.width<=2048&&info.height<=2048);assert.equal((await sharp(m.dest).metadata()).isPalette,false);const hashes=new Set(),upper=[];
  for(let i=0;i<20;i++){
-  const {data:p,info:f}=await sharp(m.dest).extract({left:i%4*192,top:Math.floor(i/4)*192,width:192,height:192}).ensureAlpha().raw().toBuffer({resolveWithObject:true});let visible=0;
-  let ax=0,ay=0,weight=0;for(let y=0;y<f.height;y++)for(let x=0;x<f.width;x++){const a=p[(y*f.width+x)*4+3];if(a>8)visible++;if(x===0||x===191||y===0||y===191)assert.ok(a<8,'动作不能跨格裁切');if(y<110){ax+=x*a;ay+=y*a;weight+=a;}}assert.ok(visible>3500);hashes.add(crypto.createHash('sha256').update(p).digest('hex'));if(i>=12)upper.push([ax/weight,ay/weight]);
+  const {data:p,info:f}=await sharp(await require('./boss-density.cjs').restoreFrame(m,i)).ensureAlpha().raw().toBuffer({resolveWithObject:true});let visible=0;
+  let ax=0,ay=0,weight=0;for(let y=0;y<f.height;y++)for(let x=0;x<f.width;x++){const a=p[(y*f.width+x)*4+3];if(a>8)visible++;if(x===0||x===m.cell-1||y===0||y===m.cell-1)assert.ok(a<8,'动作不能跨格裁切');if(y<m.cell*110/192){ax+=x*a;ay+=y*a;weight+=a;}}assert.ok(visible>3500);hashes.add(crypto.createHash('sha256').update(p).digest('hex'));if(i>=12)upper.push([ax/weight,ay/weight]);
  }
- for(let r=0;r<2;r++)for(let axis=0;axis<2;axis++){const v=upper.slice(r*4,r*4+4).map(p=>p[axis]);assert.ok(Math.max(...v)-Math.min(...v)<2,'四步循环头部/马鞍锚点稳定');}
+ for(let r=0;r<2;r++)for(let axis=0;axis<2;axis++){const v=upper.slice(r*4,r*4+4).map(p=>p[axis]);assert.ok(Math.max(...v)-Math.min(...v)<2*m.cell/192,'四步循环头部/马鞍锚点稳定');}
  // Approved scarlet has low grayscale luma; HSV value distinguishes it from black shading.
  let value=0,dark=0,saturation=0,scarlet=0,visible=0;for(let i=0;i<data.length;i+=4)if(data[i+3]>160){const r=data[i],g=data[i+1],b=data[i+2],max=Math.max(r,g,b),min=Math.min(r,g,b);value+=max;dark+=max<75?1:0;saturation+=max?(max-min)/max:0;scarlet+=r>180&&g<100&&b<100&&Math.abs(g-b)<35?1:0;visible++;}
  assert.ok(value/visible>160&&dark/visible<.16,'保留明亮色值，不回退为厚重黑块');
  assert.ok(saturation/visible>.72&&scarlet/visible>.1,'鲜红/亮金/赤橙高饱和配色已进入运行图集');
- assert.equal(hashes.size,20);assert.equal(data[3],0,'真实透明背景');assert.ok(m.bytes<240000);
- console.log('通过：20帧真实透明/正背小跑上身稳定/鲜红亮金高饱和配色/768×960图集/哈希与包成本');
+ assert.equal(hashes.size,20);assert.equal(data[3],0,'真实透明背景');assert.ok(m.bytes<4*1024*1024);
+ console.log('通过：20帧真实透明/正背小跑上身稳定/鲜红亮金高饱和配色/512逻辑格/紧凑原色图集/哈希与包成本');
 })().catch(e=>{console.error(e);process.exitCode=1;});

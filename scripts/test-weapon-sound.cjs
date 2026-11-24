@@ -5,7 +5,12 @@ const ts = require('typescript');
 const vm = require('node:vm');
 const out = {};
 Object.assign(out,require('./test-campaign.cjs').load('weapon-sound'));
-const { SOUND_CUES, GENERATED_SOUNDS, weaponSound, SoundGate, SFX_VOICES, soundAsset } = out;
+const { SOUND_CUES, GENERATED_SOUNDS, weaponSound, bossSound, SoundGate, SFX_VOICES, soundAsset } = out;
+for(const name of ['zhangjiao','lvbu','dongzhuo','yuanshao','caocao','menghuo','simayi']){
+  for(let i=0;i<3;i++)assert.equal(bossSound(name,i),`boss-${name}-${i+1}`);
+  assert.equal(bossSound(name,3),undefined);
+}
+assert.equal(bossSound('unknown',0),undefined);
 assert.equal(weaponSound('sandal', 'attack'), undefined, 'shoe never adds a whoosh');
 assert.equal(weaponSound('sandal', 'hit'), 'sandal-hit-pcm');
 assert.equal(new Set(['sandal','pole','peach','cleaver','firecracker'].map(w => weaponSound(w,'hit'))).size,5);
@@ -43,4 +48,4 @@ layered.update(.16);
 assert.notEqual(layered.acquire('bow-hit',2,'hit'),undefined);
 const crowded = new SoundGate();
 for (let i=0;i<100;i++) { const id=GENERATED_SOUNDS[i%GENERATED_SOUNDS.length]; const voice=crowded.acquire(id); assert.ok(voice===undefined || voice>=0 && voice<SFX_VOICES); crowded.update(.003); }
-console.log('通过：36武器分类音色、草鞋无风声、全部PCM无静音/削波/端点跳变、同帧混音/同声限频、命中优先与六声道上限');
+console.log('通过：33武器分类音色、草鞋无风声、全部PCM无静音/削波/端点跳变、同帧混音/同声限频、命中优先与六声道上限');

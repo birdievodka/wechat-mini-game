@@ -8,7 +8,8 @@ export const WEAPON_LIMIT = 6;
 export const TIER_NAMES = ['普通 I', '精良 II', '稀有 III', '传说 IV'];
 export const TIER_COLORS = ['#c5c5ad', '#519ec9', '#a46bc2', '#d45a48'];
 export const CLASS_NAMES = { melee: '近战', ranged: '远程', magic: '法术' };
-export const WEAPONS: WeaponDefinition[] = [
+// Old diagnostic runs can still describe these IDs. Player-facing lists use WEAPONS.
+const DEFINITIONS: WeaponDefinition[] = [
   { id: 'sandal', name: '草鞋', category: 'ranged', starter: true, damage: 16, interval: .6, range: 360, speed: 480, knockback: 290, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 12, desc: '飞鞋打脸 · 强力击退' },
   { id: 'pole', name: '扁担', category: 'melee', starter: true, damage: 32, interval: .9, range: 165, speed: 0, knockback: 300, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 140, price: 14, desc: '长担横扫 · 重击退敌' },
   { id: 'peach', name: '桃花枝', category: 'magic', starter: false, damage: 26, interval: 1, range: 360, speed: 380, knockback: 180, area: 55, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 16, desc: '桃枝施法 · 单瓣升阶三瓣扇射' },
@@ -21,8 +22,13 @@ export const WEAPONS: WeaponDefinition[] = [
   { id: 'thunder', name: '五雷符', category: 'magic', starter: false, damage: 23, interval: 1.25, range: 390, speed: 0, knockback: 130, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 42, desc: '连锁落雷 · 跳跃三人' },
   { id: 'gourd', name: '吞天葫芦', category: 'magic', starter: false, damage: 5, interval: 1.6, range: 240, speed: 0, knockback: 0, area: 0, pierce: 0, crit: .05, critMultiplier: 1.5, arc: 0, price: 42, desc: '六段吸风 · 轻聚怪' },
 ];
-WEAPONS.push(...EXTRA_WEAPONS);
-export const weaponFor = (id: WeaponId): WeaponDefinition => WEAPONS.find(w => w.id === id)!;
+const RETIRED_SUCCESSORS: Partial<Record<WeaponId, WeaponId>> = {
+  smg: 'wood-kite', shotgun: 'trident', rocket: 'caltrops',
+};
+export const migratedWeaponId = (id: string): string => Object.prototype.hasOwnProperty.call(RETIRED_SUCCESSORS, id) ? RETIRED_SUCCESSORS[id as WeaponId]! : id;
+DEFINITIONS.push(...EXTRA_WEAPONS);
+export const WEAPONS = DEFINITIONS.filter(w => migratedWeaponId(w.id) === w.id);
+export const weaponFor = (id: WeaponId): WeaponDefinition => DEFINITIONS.find(w => w.id === id)!;
 export const starterFor = (hero: string): WeaponId => hero === 'zhaoyun' ? 'silver-spear' : hero === 'kongming' ? 'feather-fan' : hero === 'guanyu' ? 'pole' : hero === 'zhangfei' ? 'cleaver' : 'sandal';
 export const weaponOffer = (id: WeaponId, tier: Tier): string => `w:${id}:${tier}`;
 export function parseWeaponOffer(value: string): { id: WeaponId; tier: Tier } | undefined {

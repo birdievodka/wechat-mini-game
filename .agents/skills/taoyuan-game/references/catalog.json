@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v10.13.4-release-ui",
+    "version": "stage-v11.0.9-battle-keys",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "b9fde165008bc63cf65f72c3f72a1331a1410dcf4b6776ac38010fc0797cc507",
+    "fingerprint": "732caca5e50f06fbc89704abc7c4f26a1985c6a47c43d0d581fe55d29af461de",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -25,8 +25,8 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/taoyuan-adapter.md",
-        "bytes": 15248,
-        "sha256": "6d54b3d6a40350440efb7b24551878deb7ab3f3247f3614436164b9dfb16576f"
+        "bytes": 16026,
+        "sha256": "1f0556391c0a6f17a105e30eff873f4d337d4456eed033fe6a139dbc57e4929b"
       },
       {
         "path": ".agents/skills/cocos-game-vfx/references/verification.md",
@@ -40,8 +40,8 @@
       },
       {
         "path": ".agents/skills/cocos-game-vfx/SKILL.md",
-        "bytes": 5147,
-        "sha256": "c34cd8615328e7e22234d441f9aec103543c9406bc2827f42d8c1bff7a792d4a"
+        "bytes": 5345,
+        "sha256": "399ba92c54d7628c73a6db0b4bbcb96065601498b54c302d584ab3bd0c8b8fc9"
       },
       {
         "path": ".agents/skills/taoyuan-game/agents/openai.yaml",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 41601,
-        "sha256": "452408229dd4e1c9aeff1ecefb162981b428faa36181335327905d20cf98de9e"
+        "bytes": 44022,
+        "sha256": "8578e7549163a40d380d82e240fbec464e15756d8c799a53e54a2668a6a9f12e"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -60,8 +60,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/combat-effects.md",
-        "bytes": 24813,
-        "sha256": "57a7054d217a07143137a6cc96edae5d806c2efb9f22097082af044329d1c925"
+        "bytes": 25878,
+        "sha256": "705894484dd95099f6fc61bf3aea1a722bf096d7d7d364c14803657102f990f6"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 35234,
-        "sha256": "8e89ea5c0b5983bee0ba30549036831195812908af9c6085a136406d6ed90717"
+        "bytes": 35692,
+        "sha256": "3d7e1af03cd4c6dde768f9ae1da061fbc980334d59f66ada849a4498f29a0f16"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -115,13 +115,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 43512,
-        "sha256": "03bbc9fe4315d8f27665e9d16e8595116735ad0a3901f8551c283ecc2e1c877d"
+        "bytes": 52197,
+        "sha256": "7d6d25f36c51d7990a20de23be94a808f87080bd4a9ece2879c7fae311ca708d"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/pets.md",
-        "bytes": 3858,
-        "sha256": "20c0711e127db71c90a6b7a8ba6889ae7108ce4588644c63877e55b827c6b898"
+        "bytes": 3899,
+        "sha256": "ba43a523129890d031c4f1ae554a9704f02b2365708a0fb4f47808b1d4b23b50"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
@@ -130,18 +130,18 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
-        "bytes": 14800,
-        "sha256": "cca00265ce6d6221f24358a85f634459505b95cdbc2abdcd77c74eac3b329e11"
+        "bytes": 15461,
+        "sha256": "b958da3e4efe9e52c98a6254ed51a24b04d766fbba549ab59e664f0a37b2c61b"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
-        "bytes": 2533,
-        "sha256": "3c7a91e4f0682ed9b5443f04309da7a208cac06d83e2eb8366df7ad1a45e8c37"
+        "bytes": 2716,
+        "sha256": "938699a7056f888c40aa2b45a6230b51b9be342032d6411933bf8c5748631bf6"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/seven-bosses.md",
-        "bytes": 4474,
-        "sha256": "6a941b7723d4c675b90c190fbf536c094e03ca9b9732210d4ccfe964da60574b"
+        "bytes": 7277,
+        "sha256": "259b6d5165ca1d4e97e68652af19aa2d9e24ad0b794af1d84e699e14298172e0"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/stage-challenge-proposal.md",
@@ -155,18 +155,18 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/training.md",
-        "bytes": 8768,
-        "sha256": "dd03332245729e0b05c30bb44f8e8d96e614b8c68ebe18c37986e310613a6c02"
+        "bytes": 10080,
+        "sha256": "9debe696d1ade5535af04788071113e1260dfb32c266e408ac720335bf6469fa"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapon-evolution.md",
-        "bytes": 6648,
-        "sha256": "3c3071906927c8e0ec495b37f18ba87fa7a10810dcb67ab67176821c46ee0e15"
+        "bytes": 7770,
+        "sha256": "9e7aea070766501ccd5d0b438e7c56c74c27aae212d49a38948ef978429d2411"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/weapons-items.md",
-        "bytes": 9844,
-        "sha256": "8fb52d52e779ee2d58025b68aeeacaaed27cbd15c51a2cd3eac9e59860480693"
+        "bytes": 10189,
+        "sha256": "f1b57384b090717cfea420c32bfa15b855176cfc38adc6a35a7901dac7d04a26"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/youth-heroes.md",
@@ -175,13 +175,18 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 24199,
-        "sha256": "1eb488f9d7d017b6d4c3b40b44530999c11e30add3e8899df47197c3388f94fe"
+        "bytes": 24298,
+        "sha256": "70b3de69063b91feaaad6a053743db4fad9e383ee338f1fc9af929875fd1e622"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 23723,
-        "sha256": "90ce186809a0f31796b833ec16eb4d3222062779d420f87906c687ca8a84f1d9"
+        "bytes": 25311,
+        "sha256": "6bbff7a35f20d52c620b1a022e233a0670783435555dc513e69aaa709e6e73b8"
+      },
+      {
+        "path": ".agents/skills/taoyuan-weapon-design/SKILL.md",
+        "bytes": 5061,
+        "sha256": "7119d2342995ce066873b75c9c4104d7696a5c7566983159e9dda30a9a43792d"
       },
       {
         "path": ".gitignore",
@@ -190,8 +195,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 21488,
-        "sha256": "5db3c84c25fe90da0c7571cab25a76f060cd407d67d919c93798eb89217a0ac7"
+        "bytes": 23002,
+        "sha256": "84434bd0b7f2d3047f59c71ec452fa8bf489a46fdc48e35ee043f8737a69f631"
       },
       {
         "path": "art/audio/review-v1/browser-validation.json",
@@ -1109,6 +1114,126 @@
         "sha256": "b360206226d48198a957188d36775f8a5743d6307db6e6c6ee17c93074b5a856"
       },
       {
+        "path": "art/concepts/taoyuan-redesign/boss-roster.png",
+        "bytes": 2373517,
+        "sha256": "60355d5267adf5f43b12f189d514d7061fe89e6013835ac8f302e7df445e81ef"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/enemy-families.png",
+        "bytes": 2028057,
+        "sha256": "4ff392db8b2edcd5a9daf68cd663c2e694a6b752cfc45d98258aeb2939ae18a7"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-growth.png",
+        "bytes": 1931084,
+        "sha256": "f9c539a6d46501692a75491f0a6af9a288df1241b6b8298217d104211e50e585"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-guan.png",
+        "bytes": 1685727,
+        "sha256": "fd0171753f76513241766c6b44026a62338c59ae5ab75da34137699cebab090e"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-liu.png",
+        "bytes": 1692989,
+        "sha256": "ce3f4b6d600477c597545b04296cf22443c3e75158e4119896a819c479ef95e5"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-zhang.png",
+        "bytes": 1716233,
+        "sha256": "21627a57a87c125b63e2d268e5db0b31f64150cb250c252d83d0908ff7d419ea"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/home.png",
+        "bytes": 2259309,
+        "sha256": "251fd77db252f03a6d452150d91cd8f9eeaad05a14b216300f80c48ae0db278c"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/README.md",
+        "bytes": 3632,
+        "sha256": "2cfcf20a3ad52e588c3337dda6b1501dda78315a390649d4d7560b1a556dc56f"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/skill-silhouettes.png",
+        "bytes": 2125491,
+        "sha256": "77d89daa49279db705275d31aa6dc6c8203a017929dc08394a783cf780ff8d9d"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/sources.json",
+        "bytes": 41092,
+        "sha256": "8b8a1d436cfb5f9623ed95a6913d3f53865b7577e95fed9cb97eefedc7d9be85"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/stage-dioramas.png",
+        "bytes": 1966995,
+        "sha256": "0fbff50f2f71307409996167949c44e8009b9e431118fdd0d70fc24804f7cf4f"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/ui-flow.png",
+        "bytes": 2094573,
+        "sha256": "851193e6d2f7b3f28ebc3445754fa81164918c1d97be2c54229e3375497c31b1"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e01-e08.png",
+        "bytes": 2071451,
+        "sha256": "e6a914035709f2f9d5de36eb7bad266629f4a27807c2d89ba64fae9b6344e70f"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e09-e16.png",
+        "bytes": 2044262,
+        "sha256": "bb635a9a0ce4727ce9d154f64f0d8b9ab4a5e11104828121a4e12adfa53d3eb2"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e17-e24.png",
+        "bytes": 2144085,
+        "sha256": "8f3061e60717ec7e5c7cedcb54a93730c1e48aa50829bc8930983b8351a02362"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e25-e32.png",
+        "bytes": 2100518,
+        "sha256": "7b4017d21c19b2787f15f833c496a6f938ae7a75159cd83edb0e873bacdad65b"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e33-e40.png",
+        "bytes": 1997299,
+        "sha256": "950b6eb66d83fd95b3cda017c905229de08e798f20948bdaba4bbc880fe11358"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapon-prototypes.png",
+        "bytes": 2373650,
+        "sha256": "ee8391766edfb8ce92d86026f868620eb35cf740ec4064f7510faebb203d58be"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapons-arcana.png",
+        "bytes": 1773053,
+        "sha256": "c75b268dcad4effe5e7f869edc6f07016ff3eb58a83a838ad7aed426804280fd"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapons-gear.png",
+        "bytes": 2250987,
+        "sha256": "255dddd6b027f2e0898cd1502a8eaa62f3df6304bf04c00b515a8b9ef8752a38"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapons-origin.png",
+        "bytes": 1845934,
+        "sha256": "667217eec11ba312653128a9ae281de3b67055c7689a4946c9a667f413b1f874"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/yellow-turban-farmer.png",
+        "bytes": 1758489,
+        "sha256": "8a9a599e3b7bc207cdc854cef8807be77edf3e9e6acf6260f840555a488ada11"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/zhangjiao-dark.png",
+        "bytes": 2161083,
+        "sha256": "beb1f3b0cc520d523f91c59fc95f5fe30b2c048599cb1549b1e0cf6d9573d636"
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/zhangjiao-encounter.png",
+        "bytes": 2123157,
+        "sha256": "4d10b0b63d2a22c1f1bc3c9ee91cc329ac44b974c6f52a78e8fa1e87f29749f1"
+      },
+      {
         "path": "art/concepts/ui-layout/battle-hud.png",
         "bytes": 1797884,
         "sha256": "c9195f7890621c4b4d0b8ad35ce04a3985c9e504db29427c82858e2806375e07"
@@ -1862,6 +1987,101 @@
         "path": "art/reviews/grunt-melee/validation.json",
         "bytes": 1620,
         "sha256": "89d876871a5ed3a913ea043e14c99825a64b712fdc98b46b95345e5146bb53eb"
+      },
+      {
+        "path": "art/reviews/handcrafted/battle-start.png",
+        "bytes": 871789,
+        "sha256": "a3352b3304e3216b42b54be0eaab2a44a3df05dcc40134da727a8c585fffb121"
+      },
+      {
+        "path": "art/reviews/handcrafted/battle-sweep.png",
+        "bytes": 909865,
+        "sha256": "bbf5df2dfcb029235023354b35661efa1da9d63d9fd5454d056ad7a581d84085"
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-cast.png",
+        "bytes": 966816,
+        "sha256": "61c0ac6e10eaf753d69963ead90dc9a58f60e48e0a3645820add2cbcce518796"
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-idle.png",
+        "bytes": 911169,
+        "sha256": "ed43be3b3f6532a7ca25cd0e5006604a9b41dd2d0fee5b426fb2902884cc2d7b"
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-recover.png",
+        "bytes": 933951,
+        "sha256": "cae63d53397b5f357e8d2c71ec1973041bbb64cf24f12665e8cb48931330f89a"
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-windup.png",
+        "bytes": 953995,
+        "sha256": "12513a67f246152c13b46fae27ad680fd41e6f5ca115fbe85f730b64e042c4c4"
+      },
+      {
+        "path": "art/reviews/handcrafted/clear.png",
+        "bytes": 935587,
+        "sha256": "e5c7469ff21fc6a826355eb8ccfbfa9c2688a8bd3427481490f79d86fd232679"
+      },
+      {
+        "path": "art/reviews/handcrafted/home.png",
+        "bytes": 1689615,
+        "sha256": "a8265882f02f2ff028ca9cea3adf413fdbaa2bfd0a7f6379fb93232cf6d62425"
+      },
+      {
+        "path": "art/reviews/handcrafted/settings.png",
+        "bytes": 1149116,
+        "sha256": "ef4f2d635b6e7439c6ed6a0f81333ce3b6b70e50f318a4ba1bb00032de37cc9f"
+      },
+      {
+        "path": "art/reviews/handcrafted/shop.png",
+        "bytes": 453137,
+        "sha256": "fdb80b11c87aaebfb116f6376e79184d211a6fa6adcf2bd05ecddb5aacab3b3f"
+      },
+      {
+        "path": "art/reviews/handcrafted/skill-select.png",
+        "bytes": 545629,
+        "sha256": "3ae764721f083f389d574d66cb37087ebc7e9899feffbdebf1d2cc8bb2c55b26"
+      },
+      {
+        "path": "art/reviews/handcrafted/stage-picker.png",
+        "bytes": 1160039,
+        "sha256": "130d77d934d4d9901482ae22b7e30e4219599407bb6af5c90431b00da9e2ea07"
+      },
+      {
+        "path": "art/reviews/handcrafted/training-heroes.png",
+        "bytes": 354012,
+        "sha256": "d2b97727fd769a52f91134500b164537c40dcbe790720b759afda3562b5dcaf6"
+      },
+      {
+        "path": "art/reviews/handcrafted/training-weapons.png",
+        "bytes": 373186,
+        "sha256": "1eafaf3fa04f6b4b7b32fce8b8f58dcb41daa982680fd33014f4b4213bcdd27a"
+      },
+      {
+        "path": "art/reviews/handcrafted/validation.json",
+        "bytes": 4735,
+        "sha256": "361a9d3b72dec1dae0b4bd515dba3273053222073467710cfe1c89232d3d0839"
+      },
+      {
+        "path": "art/reviews/handcrafted/wechat-battle.png",
+        "bytes": 282813,
+        "sha256": "e5913a5c012aa891b6079d1996271fedddd4a546b28b6cc3100d0f8d54d72e8a"
+      },
+      {
+        "path": "art/reviews/handcrafted/wechat-home.png",
+        "bytes": 436440,
+        "sha256": "d57c7a1f67bb0c8edc8bd7cc1f34ba4409f8ad9f95efcc907c76e2d3f69e9298"
+      },
+      {
+        "path": "art/reviews/handcrafted/wechat-runtime.json",
+        "bytes": 333,
+        "sha256": "347668e664f76f59174e49960454ead795790462f455053d845cbd6c4c9f1723"
+      },
+      {
+        "path": "art/reviews/handcrafted/wechat-validation.json",
+        "bytes": 766,
+        "sha256": "41aef34ac12e1afecfb72a7fd98cceb67ba0c63b070aa00790bb426b22051fc3"
       },
       {
         "path": "art/reviews/hero-growth/first-clear-growth-reward.jpg",
@@ -3699,6 +3919,71 @@
         "sha256": "44f661521c7ac5d32c4e8a3f5c121c04a9322e6f4516ada4c0e3a5285f5b271b"
       },
       {
+        "path": "art/runtime-boss-hd/README.md",
+        "bytes": 1036,
+        "sha256": "744ba53667f4e7c9a70b9d4b1f848182d8ff9afb10df366a2b36e73ffa7f3027"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-beasts-source.webp",
+        "bytes": 1658180,
+        "sha256": "0e9a63f726202dba3a5129883a338f0be2b08f9e8c8b4f86d35ed0f11497d0be"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-caocao-source.webp",
+        "bytes": 1606924,
+        "sha256": "49fb6f6483a9af844f4d1f3f66f0c35a4e66a693b40dcb7bfd527e7f40fceb1c"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-dongzhuo-source.webp",
+        "bytes": 1851726,
+        "sha256": "5e29f101eb89ccd0b4f9405b70c7371ee17b00dbbcd598e8039a70e329d8d87a"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-menghuo-source.webp",
+        "bytes": 1772960,
+        "sha256": "407e0b7753d94f673ee12e67af1612dee7132de3234aa569d0117c1ca7677b00"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-props-source.webp",
+        "bytes": 1280780,
+        "sha256": "eddf71772899718341fa1839f5157b6d0717fdf4f4f6d140c06d14c8683b3071"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-rider-source.webp",
+        "bytes": 1096058,
+        "sha256": "80dba19ef6499cdc3e352160b82a271324f4b08134a7b924732207522fe2e64c"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-simayi-source.webp",
+        "bytes": 1510260,
+        "sha256": "86a6dd11b1265f42b7261d3b52e85e9dd7289744dd977d566fb41df72d1719bb"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-yuanshao-source.webp",
+        "bytes": 1870562,
+        "sha256": "277c73d98456bf09946dadd6e91cf3c8f4315ef670dc332b03f6c3ee701f5ae4"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-bosses-zhangjiao-source.webp",
+        "bytes": 1933916,
+        "sha256": "87de3fcf9a50ff854478ed738b6eef071e8c2edb274fc39e80aa2b3923ad0672"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-lvbu-source.webp",
+        "bytes": 1608406,
+        "sha256": "2a50a51d76f6696513f740ad1f7a0e7d8769f59439bfbcc3cef98868d020ae58"
+      },
+      {
+        "path": "art/runtime-boss-hd/runtime-lvbu-trot-source.webp",
+        "bytes": 1423898,
+        "sha256": "110d90fcc1db7b80251d44d6dfffba6e44a58ecc4b0957c2c3ca03a25d1eea0d"
+      },
+      {
+        "path": "art/runtime-boss-hd/sources.json",
+        "bytes": 3526,
+        "sha256": "2c06daa37f2e5143e080b5b6e41621cce6e86268d65344cdf76033f21ee78432"
+      },
+      {
         "path": "art/runtime-bosses/alpha-edits.json",
         "bytes": 1933,
         "sha256": "749fa4155c8a7f8569530c2d467f0915968310d95d9c5db57f3267dde81dcea7"
@@ -3720,8 +4005,8 @@
       },
       {
         "path": "art/runtime-bosses/manifest.json",
-        "bytes": 58809,
-        "sha256": "01ae297404cbe9976e52fb66f6515267c8829df282b7ac9b2b7ceb91caf2c1a1"
+        "bytes": 86098,
+        "sha256": "d0843130976d2575ff2b006f8f6288a54194f24270217dcb05a8d8c3095a6bf2"
       },
       {
         "path": "art/runtime-bosses/menghuo-source.png",
@@ -3730,8 +4015,8 @@
       },
       {
         "path": "art/runtime-bosses/portraits-manifest.json",
-        "bytes": 1555,
-        "sha256": "c970fc5575ce84bdd6a49165d78ed029b0887e1ed881d62455fbbd6cd6b45586"
+        "bytes": 1569,
+        "sha256": "887cfa4197e895514ce4bf53db6c88f69c8e9f77956fae9f8dfc3f79408030f5"
       },
       {
         "path": "art/runtime-bosses/prompts.json",
@@ -3875,8 +4160,8 @@
       },
       {
         "path": "art/runtime-lvbu/manifest.json",
-        "bytes": 9319,
-        "sha256": "9037f5c247e1327ee740415cb84d16767c74f13b3225f74561bcd057dbb135be"
+        "bytes": 10854,
+        "sha256": "b21fd47d0a8ccff0f42f93985a44a92d20ebb6e3211cad2d0b9f744d283a9794"
       },
       {
         "path": "art/runtime-lvbu/prompt.json",
@@ -3912,6 +4197,56 @@
         "path": "art/runtime-pets/source.png",
         "bytes": 1696109,
         "sha256": "79853ef51992e3fcd9aab566ebd238a92424d8886b0c4e480e63a246ebcf03c9"
+      },
+      {
+        "path": "art/runtime-redesign/camp.png",
+        "bytes": 2600702,
+        "sha256": "7f5f847a879adb8e91d77545a188f5b21849c0f7d0fe14ec1ddcf40d0efff052"
+      },
+      {
+        "path": "art/runtime-redesign/farmer-actions.png",
+        "bytes": 1382600,
+        "sha256": "d9e2831e25e09d3570e9d0ba31abb29ba9e107bdbbcb147c940a786be8b3f291"
+      },
+      {
+        "path": "art/runtime-redesign/farmer-hoe.png",
+        "bytes": 1348891,
+        "sha256": "a953290418e83bcd2663230a3ceb62744ae31a7f82a0c76c5395f7bd6b4f3cd7"
+      },
+      {
+        "path": "art/runtime-redesign/hero-parts.png",
+        "bytes": 1351425,
+        "sha256": "eefbfbeee6024e3c5f797be8a3bf6748716182ace8ce18224a2de589c808a446"
+      },
+      {
+        "path": "art/runtime-redesign/manifest.json",
+        "bytes": 2097,
+        "sha256": "60d9ef9cd16861abe7ac25da356c436db386bc68c5ef36821400dccd5be05b28"
+      },
+      {
+        "path": "art/runtime-redesign/prompts.json",
+        "bytes": 9788,
+        "sha256": "657c2fa9e086d6ac868b6945fbdcccf43de376ec76764829587f7b3355b946fe"
+      },
+      {
+        "path": "art/runtime-redesign/showcase-closed.png",
+        "bytes": 2853374,
+        "sha256": "1d1756a078a0bf62671956ed8c2a0db0199aa216f50b558ee4c9be335926ac3a"
+      },
+      {
+        "path": "art/runtime-redesign/skill-icons.png",
+        "bytes": 1324125,
+        "sha256": "f94ef3c028080416ca230d597d946c926817848583b5ea6b0bb5880f3a75d9be"
+      },
+      {
+        "path": "art/runtime-redesign/terrain.png",
+        "bytes": 1731026,
+        "sha256": "bbdcd54826341e6d246d3e28ebf751ea4fa55d97da327ed7395f361b99d04a9c"
+      },
+      {
+        "path": "art/runtime-redesign/zhangjiao-actions.png",
+        "bytes": 2080349,
+        "sha256": "3e5ab604334a8ccdde19b610344fbcf9bab19d2b435fd92338ea84205528c104"
       },
       {
         "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
@@ -4255,8 +4590,8 @@
       },
       {
         "path": "art/runtime-youth/protected.json",
-        "bytes": 6453,
-        "sha256": "2f8b733bed02094463ab9d2c8d1011665c98633ad925327c64017d53a5ea7613"
+        "bytes": 7865,
+        "sha256": "bbaa9f9eeda0809b22cdd8a45487d30793044a3cd213f61fc6e51c45b301f63f"
       },
       {
         "path": "art/runtime-youth/README.md",
@@ -4400,13 +4735,53 @@
       },
       {
         "path": "assets/chronicle-ui/boss-portraits.png",
-        "bytes": 49052,
-        "sha256": "07d1da8866619af0b6c18f8eb891cf10ba2dfe8324c525ede41dffb6ef189875"
+        "bytes": 47930,
+        "sha256": "89f1c9b6afc2e068b5aa3f7a94bc80229b0d8ae6b39e2179c18e99f894bad16e"
       },
       {
         "path": "assets/chronicle-ui/boss-portraits.png.meta",
         "bytes": 998,
         "sha256": "d2f18b7bbea8a6023046539a054b304918374afa43684aa4167e9322bdba366b"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-arsenal.png",
+        "bytes": 160935,
+        "sha256": "d36b01791ff819007bca1b0a8f6ac37d96162c35194e992eb9bdf70d1079a302"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-arsenal.png.meta",
+        "bytes": 1000,
+        "sha256": "c5ed18948f219e6b8fb440ccad7dfc5e2ff66203eb4f2fa67c8810f9c625512e"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-relief.png",
+        "bytes": 182314,
+        "sha256": "8463a5ddfe725e13002bfd3336ffeadf240dc2569974526ec245caf8f5740382"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-relief.png.meta",
+        "bytes": 999,
+        "sha256": "154e774abbdc1129cea28bf81834bba421ebc045c691af61c424d0f1abfd6a7d"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-skills.png",
+        "bytes": 42380,
+        "sha256": "83b3684313de26a9d3ea787f4170181415d6f2631e657e697e80ba75b2908d99"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-skills.png.meta",
+        "bytes": 999,
+        "sha256": "537371838751ffb3921acd8dba44d0611312578ecc9ea692134fbbfde19310e6"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-stage-thumbs.png",
+        "bytes": 129558,
+        "sha256": "e2456c2d377e3d18c6dfb1d5f8b056c142e0753bd4da42b1571d7347fd89805e"
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-stage-thumbs.png.meta",
+        "bytes": 1006,
+        "sha256": "3f579333b080eb7085c2204ef3a3b88094278bf40dbc805eae208d671bb5fed9"
       },
       {
         "path": "assets/chronicle-ui/skills.png",
@@ -4472,26 +4847,6 @@
         "path": "assets/chronicle-units.meta",
         "bytes": 292,
         "sha256": "2e3a866eb7a10030197deec10c6b820a45e6624e70ef7b671af331939a59118d"
-      },
-      {
-        "path": "assets/chronicle-units/boss-props.png",
-        "bytes": 101833,
-        "sha256": "9ac52c9e729fc60c2db42056a8bc2f9366e39c94cfe8425f0db986fe8e7732ed"
-      },
-      {
-        "path": "assets/chronicle-units/boss-props.png.meta",
-        "bytes": 994,
-        "sha256": "d63973743d69ff81d0f0b347bc243939717311f510eb15da05f96aeab656b558"
-      },
-      {
-        "path": "assets/chronicle-units/boss-zhangjiao-actions.png",
-        "bytes": 137646,
-        "sha256": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12"
-      },
-      {
-        "path": "assets/chronicle-units/boss-zhangjiao-actions.png.meta",
-        "bytes": 1006,
-        "sha256": "97176c3fbe54d84e1f539817e2c3dce6854ab0bb5dd86a11ae18c241b548b0ca"
       },
       {
         "path": "assets/chronicle-units/troops-a-back.png",
@@ -4594,9 +4949,39 @@
         "sha256": "842b884ff9d8970595b135d85bfc2ac631f25dda6a971e7be54ba9f934b5322c"
       },
       {
+        "path": "assets/hero-menu/taoyuan-ui-medium.ttf",
+        "bytes": 487972,
+        "sha256": "1d111ec6d5c7138e7786c7135f6ead8b6a1b762b85df33faa1789cfad213ac1c"
+      },
+      {
+        "path": "assets/hero-menu/taoyuan-ui-medium.ttf.meta",
+        "bytes": 212,
+        "sha256": "a31b86394ccbdad491ce9e9f1ada07b9a37c1589f1383c22b5b0d343109924ee"
+      },
+      {
+        "path": "assets/hero-menu/taoyuan-ui-OFL.txt",
+        "bytes": 5178,
+        "sha256": "96b4e277f74412568e53ec799a1f3d1c839a23def5bba640af9243045756653e"
+      },
+      {
+        "path": "assets/hero-menu/taoyuan-ui-OFL.txt.meta",
+        "bytes": 179,
+        "sha256": "3fe8428b753a1be9319442564c1687f09ded22f124236d1a323315579d457536"
+      },
+      {
+        "path": "assets/hero-menu/taoyuan-ui-regular.ttf",
+        "bytes": 496792,
+        "sha256": "3ebee3e153045467be9fafa64adf1b651bfc48e92281ec343524730a86f95e06"
+      },
+      {
+        "path": "assets/hero-menu/taoyuan-ui-regular.ttf.meta",
+        "bytes": 213,
+        "sha256": "9a130780751d0213bb25f9aedfbda9a422177144100c43cc33ced06176372421"
+      },
+      {
         "path": "assets/hero-menu/training-ground.jpg",
-        "bytes": 169831,
-        "sha256": "e0db9202f3c9c029651d7f0fae3c1651862d94a2f7e06d58f731b1ead535f7c7"
+        "bytes": 321562,
+        "sha256": "c3486aea1f66f543bf9f5e2f892534a0f212afe5b81c38358a327d9171b9b9a5"
       },
       {
         "path": "assets/hero-menu/training-ground.jpg.meta",
@@ -4745,8 +5130,8 @@
       },
       {
         "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
-        "bytes": 92433,
-        "sha256": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc"
+        "bytes": 1841201,
+        "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e"
       },
       {
         "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png.meta",
@@ -4760,8 +5145,8 @@
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
-        "bytes": 142650,
-        "sha256": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c"
+        "bytes": 2851108,
+        "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48"
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png.meta",
@@ -4775,8 +5160,8 @@
       },
       {
         "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
-        "bytes": 210967,
-        "sha256": "114f6d1661c501fc3558193f9db78b86254a79786ed8e0658ebd38b9229f444c"
+        "bytes": 3787426,
+        "sha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3"
       },
       {
         "path": "assets/remote-content/boss-lvbu/lvbu-actions.png.meta",
@@ -4790,8 +5175,8 @@
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-beasts.png",
-        "bytes": 147272,
-        "sha256": "0b72af334ea20a0d8a2eb173e0e39eb1aa891b9077feb6138a6a32ffd8736b26"
+        "bytes": 1916865,
+        "sha256": "12e21f612086f56a5208dfe3d43511de63be5978e1ea9a9b6752b86ceb8125fa"
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-beasts.png.meta",
@@ -4800,13 +5185,28 @@
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
-        "bytes": 140643,
-        "sha256": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483"
+        "bytes": 2819145,
+        "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c"
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png.meta",
         "bytes": 1004,
         "sha256": "85c37a8c373e827072a282ff04673f7c1f292997c4fab422b557f2fa4bf47f46"
+      },
+      {
+        "path": "assets/remote-content/boss-props.meta",
+        "bytes": 280,
+        "sha256": "0ffa48228a2a7dd9214af5edb1133d9bf54bc806e74480c0352cf1df2fdbee81"
+      },
+      {
+        "path": "assets/remote-content/boss-props/boss-props.png",
+        "bytes": 1158590,
+        "sha256": "7f6467125802c14e45c1086405eae46384fb582451dca6aa58f20737088f06a3"
+      },
+      {
+        "path": "assets/remote-content/boss-props/boss-props.png.meta",
+        "bytes": 994,
+        "sha256": "d63973743d69ff81d0f0b347bc243939717311f510eb15da05f96aeab656b558"
       },
       {
         "path": "assets/remote-content/boss-simayi.meta",
@@ -4815,8 +5215,8 @@
       },
       {
         "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
-        "bytes": 119818,
-        "sha256": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7"
+        "bytes": 2350171,
+        "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde"
       },
       {
         "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png.meta",
@@ -4830,13 +5230,28 @@
       },
       {
         "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
-        "bytes": 115411,
-        "sha256": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704"
+        "bytes": 2318412,
+        "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c"
       },
       {
         "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png.meta",
         "bytes": 1005,
         "sha256": "b10b04c17d1448b79b184717a3ef534757be8a3b1ec028f4dfe9240fb2a098b4"
+      },
+      {
+        "path": "assets/remote-content/boss-zhangjiao.meta",
+        "bytes": 284,
+        "sha256": "13f4c401c67d49939c07601ec331114ed46c78ea1655e1d0d6e814c9c055b7b9"
+      },
+      {
+        "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
+        "bytes": 2599133,
+        "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699"
+      },
+      {
+        "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png.meta",
+        "bytes": 1006,
+        "sha256": "97176c3fbe54d84e1f539817e2c3dce6854ab0bb5dd86a11ae18c241b548b0ca"
       },
       {
         "path": "assets/remote-content/hidden-heroes.meta",
@@ -4914,6 +5329,16 @@
         "sha256": "de9c720c3a9514b85acd9c1f7a38c22017e54d117e013979af3942f2b13c6466"
       },
       {
+        "path": "assets/scripts/armory-redesign.ts",
+        "bytes": 1369,
+        "sha256": "656e08c9adf08fccc7548265502560b42df6dd962545f56da89e5becce4c70cd"
+      },
+      {
+        "path": "assets/scripts/armory-redesign.ts.meta",
+        "bytes": 171,
+        "sha256": "90c10342eace3099ac6d6aa9202c7cff17259c5096a2b8a939daa5195dbd7496"
+      },
+      {
         "path": "assets/scripts/asset-scope.ts",
         "bytes": 4245,
         "sha256": "f71e7b6d7d5202cc2f560923be4be590143d131fa73bf27c5a9c0db39b7b5fe4"
@@ -4955,8 +5380,8 @@
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts",
-        "bytes": 14021,
-        "sha256": "e6c3da0b154fb7819846c0c6b500d0a2b3641f3b4d1a9601de890a0010b32e51"
+        "bytes": 15044,
+        "sha256": "0524ca07df4a08d7d3f2bb6c47567e903499edd5826ad5eda8bfd639de1e3365"
       },
       {
         "path": "assets/scripts/BattleSpriteAtlas.ts.meta",
@@ -4975,13 +5400,23 @@
       },
       {
         "path": "assets/scripts/boss-effects.ts",
-        "bytes": 18719,
-        "sha256": "655c17ffe63a9c21098a3942cbb0a881566f80acfcb823b260517f39d61b6d4f"
+        "bytes": 18966,
+        "sha256": "9c00cbec7ea809d5a3532e20c1874bc9ef17112db33da54979fb35a3eddc2176"
       },
       {
         "path": "assets/scripts/boss-effects.ts.meta",
         "bytes": 171,
         "sha256": "0d9a3747255e211c21543bf0beea87d3ef1d8635f0ad78a60e14c96055d2ded3"
+      },
+      {
+        "path": "assets/scripts/boss-prop-layout.ts",
+        "bytes": 4728,
+        "sha256": "bcc6611a54c8a31a82b596d772e91e279ea9688a083e1118875c51e3875e812f"
+      },
+      {
+        "path": "assets/scripts/boss-prop-layout.ts.meta",
+        "bytes": 171,
+        "sha256": "eaaa7c795012d96b43c310fca658d44a967358f08328e8f700316dc811e0c8b4"
       },
       {
         "path": "assets/scripts/boss-roster.ts",
@@ -5005,8 +5440,8 @@
       },
       {
         "path": "assets/scripts/campaign.ts",
-        "bytes": 22279,
-        "sha256": "7bd79ab3ac0a8b37ff4bfa28ffa0c60b5ae0f62888e7cd17b8f8a782c9fcee3e"
+        "bytes": 22454,
+        "sha256": "150e2b56a954c4ba8093b70897dff559f0f110855e6494200fe383b8f4a692d9"
       },
       {
         "path": "assets/scripts/campaign.ts.meta",
@@ -5015,8 +5450,8 @@
       },
       {
         "path": "assets/scripts/CampaignView.ts",
-        "bytes": 53417,
-        "sha256": "5236ece9163008bc63a4e018866844afab2f00f38be76c72c3877a5f68d09cc1"
+        "bytes": 55249,
+        "sha256": "291879d28e000bba90a266471ffb9d44ed70ce4317b17cb4e2418ce58661ae0d"
       },
       {
         "path": "assets/scripts/CampaignView.ts.meta",
@@ -5025,8 +5460,8 @@
       },
       {
         "path": "assets/scripts/chronicle-art.ts",
-        "bytes": 5967,
-        "sha256": "bfd7731951a60fcad3797fc66b16f970eaf7bcfd3333245df5cceed849ed4774"
+        "bytes": 8119,
+        "sha256": "bdb3949fda962cbcbd98459087e009484275f393d5b979ebadb77979120fc576"
       },
       {
         "path": "assets/scripts/chronicle-art.ts.meta",
@@ -5065,8 +5500,8 @@
       },
       {
         "path": "assets/scripts/CodexView.ts",
-        "bytes": 11440,
-        "sha256": "59a48b1f4954167c03cddb5fc9ed375aa9e348661f705e89d77794bfc6db5249"
+        "bytes": 11531,
+        "sha256": "e08edb457253ae40c978b27f75e2e5516ca571314c8107fe103c9109f54ca86b"
       },
       {
         "path": "assets/scripts/CodexView.ts.meta",
@@ -5075,8 +5510,8 @@
       },
       {
         "path": "assets/scripts/combat-effects.ts",
-        "bytes": 17815,
-        "sha256": "47d2091acc98d959e96a105314b0bb3a25f0fb220b4b468d940b271ad905cb1a"
+        "bytes": 17749,
+        "sha256": "03101bcec21da8fd0ef63524f0c21b4609e46f736923cda5b568306d29f1ac7b"
       },
       {
         "path": "assets/scripts/combat-effects.ts.meta",
@@ -5135,8 +5570,8 @@
       },
       {
         "path": "assets/scripts/deferred-art.ts",
-        "bytes": 4442,
-        "sha256": "d026b0e78bddbd5335b79586d34b09b741abfd4fda080e8bb52a1ee037348c00"
+        "bytes": 4896,
+        "sha256": "173c02c5c94eef1bcc886ea1395eb79c0d441621b90a5775912159ce5dfac548"
       },
       {
         "path": "assets/scripts/deferred-art.ts.meta",
@@ -5155,8 +5590,8 @@
       },
       {
         "path": "assets/scripts/endless.ts",
-        "bytes": 845,
-        "sha256": "df89729031ef9b63493b0ac7e42aac1bc561d4a21c518be4748c0ea7e1c52b8c"
+        "bytes": 1039,
+        "sha256": "57d02ce4385351ef60e3a04a70c56c0b923b202cec710885220b8d4c24207977"
       },
       {
         "path": "assets/scripts/endless.ts.meta",
@@ -5245,8 +5680,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 257732,
-        "sha256": "90cf659f8a7e030da25b546dd2ec0330539bcd2d5af5c783b49889c9399803e1"
+        "bytes": 269224,
+        "sha256": "0886daa6cafbff30e2c91eec842eaab767b592034e250a8aa09a1928fb4f2f3d"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -5295,8 +5730,8 @@
       },
       {
         "path": "assets/scripts/hero-arms.ts",
-        "bytes": 3489,
-        "sha256": "8cc239f578bdcd77f758f48915ab5161482c37364f6cbd7c7069d603b12460bc"
+        "bytes": 4323,
+        "sha256": "cd5e4c046963d80fdb871aed8dadd4bc4b4d70d060a54acd6d9eff37e73332ae"
       },
       {
         "path": "assets/scripts/hero-arms.ts.meta",
@@ -5335,8 +5770,8 @@
       },
       {
         "path": "assets/scripts/HeroShowcase.ts",
-        "bytes": 8271,
-        "sha256": "c3dcd498e0a7308a137b27cfb0f15aa606cdcc439a9e974ad686f42f1f318614"
+        "bytes": 8493,
+        "sha256": "8b224c1f17653f262079e2d9b9af00b3aef8d85da34d58e4c9b4ef378cfb34e9"
       },
       {
         "path": "assets/scripts/HeroShowcase.ts.meta",
@@ -5375,13 +5810,23 @@
       },
       {
         "path": "assets/scripts/LoadingView.ts",
-        "bytes": 3843,
-        "sha256": "58e79ee5a84120700ce3f5761279718ed9c01a9a3080e8ef4b1a61296396f4b4"
+        "bytes": 3813,
+        "sha256": "cb302014bcf9d0a13759ce9886a263b12ad6ad164f82c28b0b6d74e4ffb09824"
       },
       {
         "path": "assets/scripts/LoadingView.ts.meta",
         "bytes": 171,
         "sha256": "811ab4ec7d7d40ac5e630be7fbf8c47fbffae73c8230ab9526115c3b6f2daf13"
+      },
+      {
+        "path": "assets/scripts/lvbu-art-layout.ts",
+        "bytes": 794,
+        "sha256": "821120915b93f13809b486c066f1df0afcc06057a65207f2e7f76b21e1dab544"
+      },
+      {
+        "path": "assets/scripts/lvbu-art-layout.ts.meta",
+        "bytes": 171,
+        "sha256": "dadaa758e125b1e9c1ac231ea8875cb4d773aa00128ff7dcf744bb7a8601d57d"
       },
       {
         "path": "assets/scripts/lvbu-boss.ts",
@@ -5425,8 +5870,8 @@
       },
       {
         "path": "assets/scripts/native-sfx.ts",
-        "bytes": 4552,
-        "sha256": "e81cad9f562543e2985aa24604f8fdf26bfd8dc1538ab1708cde25eed12a497e"
+        "bytes": 4658,
+        "sha256": "41599b7909f331b0207a74b5ca1a0b554bd83db8ca1caf5159f4a830629be7c2"
       },
       {
         "path": "assets/scripts/native-sfx.ts.meta",
@@ -5485,8 +5930,8 @@
       },
       {
         "path": "assets/scripts/passive-items.ts",
-        "bytes": 18162,
-        "sha256": "797136bb330f6160e1c5433dcd973d9e6c08807eb1bfbd54ade371bd73ea9a69"
+        "bytes": 18142,
+        "sha256": "53f8e43feee0f98912f0a066f86a95f075c18079945a44098ea273a385cc3e3f"
       },
       {
         "path": "assets/scripts/passive-items.ts.meta",
@@ -5555,8 +6000,8 @@
       },
       {
         "path": "assets/scripts/ResourcePrepareView.ts",
-        "bytes": 2299,
-        "sha256": "daf3c2d24b4355df4fac345e91c22780c1e9d9671a6491c7bcc24e65a05b3c63"
+        "bytes": 2355,
+        "sha256": "550979e8a9802e235629c39adb7318ab0e902169e25106c4c16c8a36e9c19543"
       },
       {
         "path": "assets/scripts/ResourcePrepareView.ts.meta",
@@ -5566,7 +6011,7 @@
       {
         "path": "assets/scripts/ResultView.ts",
         "bytes": 10443,
-        "sha256": "a9e26d12ef35fd21a157297f92c36becb23c5ca4e6c104194b5de7f1e94dde18"
+        "sha256": "f08cd7d4d67da916ce4bb016b419f8f1b1d79e83af9b64c2d9d2c8429cc068b8"
       },
       {
         "path": "assets/scripts/ResultView.ts.meta",
@@ -5575,8 +6020,8 @@
       },
       {
         "path": "assets/scripts/runtime-health.ts",
-        "bytes": 7268,
-        "sha256": "ae37a69d708c9724039f68bfd13b89d7746be8a7ff05560b923c7de12ac0fa6f"
+        "bytes": 9761,
+        "sha256": "430a7054d706409b5ee30cca0b247bb483bc699e405314ea59596813341d5b20"
       },
       {
         "path": "assets/scripts/runtime-health.ts.meta",
@@ -5585,8 +6030,8 @@
       },
       {
         "path": "assets/scripts/runtime-report.ts",
-        "bytes": 6111,
-        "sha256": "fcd0dcb12aed053a44258f2b32e3935b054cc1b10f2db93b289ab98a972b7b15"
+        "bytes": 8178,
+        "sha256": "d0cf141515085e32eb1a02878d9f18273424ad9b209ee74b1aadfe5f1e191428"
       },
       {
         "path": "assets/scripts/runtime-report.ts.meta",
@@ -5615,8 +6060,8 @@
       },
       {
         "path": "assets/scripts/SkillSelectView.ts",
-        "bytes": 5184,
-        "sha256": "1ea8221a054bc36a4a981c1cdc907c096e0836ca2991700ac91ac03a8d8e1dcd"
+        "bytes": 5276,
+        "sha256": "0d50d6fcaf565f6593b5b89d2374331d7499d020d2fbd35d3fec35f6d9373810"
       },
       {
         "path": "assets/scripts/SkillSelectView.ts.meta",
@@ -5625,8 +6070,8 @@
       },
       {
         "path": "assets/scripts/stage-data.ts",
-        "bytes": 10269,
-        "sha256": "2e81c1cbfb9cae153f081a32a7d67f075494fa208ab7ad7cb77f4fe590aedfc1"
+        "bytes": 10540,
+        "sha256": "e323d6324d6e87893a497421dc3212a221f7a24e921e720daccb3c0a1dc8c403"
       },
       {
         "path": "assets/scripts/stage-data.ts.meta",
@@ -5635,8 +6080,8 @@
       },
       {
         "path": "assets/scripts/stage-progress.ts",
-        "bytes": 7057,
-        "sha256": "a626a5da41673a45286ac78af9d37280406d6dbe9683b9d62f31f700513a183f"
+        "bytes": 8280,
+        "sha256": "f3830df58c49bfac7f08be05045c59a40d9b8cd6c2c8209a7bc89ff66893973d"
       },
       {
         "path": "assets/scripts/stage-progress.ts.meta",
@@ -5655,8 +6100,8 @@
       },
       {
         "path": "assets/scripts/StageViews.ts",
-        "bytes": 24301,
-        "sha256": "658144230849d2bee475cabd314cb410678a06f8d72c893a9292302e3bad123b"
+        "bytes": 23746,
+        "sha256": "874d69b9bc074b6470d286abfdd96f48a3b920f6f22cbdb90f0498b4bac7f6d8"
       },
       {
         "path": "assets/scripts/StageViews.ts.meta",
@@ -5675,8 +6120,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 17734,
-        "sha256": "997a1938f09d8aab1d11a7d54b82f9c0705758d3797ef9f007b3fcf8656e5e05"
+        "bytes": 18124,
+        "sha256": "e2b50052c9828edb0fd233ddcf4771d6144dbd0813bbda01051dd23fabe0a21e"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -5695,13 +6140,23 @@
       },
       {
         "path": "assets/scripts/TrainingView.ts",
-        "bytes": 16796,
-        "sha256": "16c72da1f1880bb2fe8b60b9e13b750ae3d32f2fd44e31b1b908bb3a5161fec4"
+        "bytes": 17613,
+        "sha256": "a3d87267f47264a44872b261c5b5f3260dea306ea98ebc9b660d49151c552f1c"
       },
       {
         "path": "assets/scripts/TrainingView.ts.meta",
         "bytes": 171,
         "sha256": "66ca4ed0f3d3daac1d7360b7b6c9f53196010477a41896c6710083a8cba2355d"
+      },
+      {
+        "path": "assets/scripts/ui-font.ts",
+        "bytes": 1230,
+        "sha256": "9d14b579dfe71e336c6f2f55492ad86d431c4c5878f8a3220fceb04cf0e2bce0"
+      },
+      {
+        "path": "assets/scripts/ui-font.ts.meta",
+        "bytes": 171,
+        "sha256": "9a31defbf0efc7f2b1a461ad1e22e32b71284262e958f7efa7a4d6ec961cf2a5"
       },
       {
         "path": "assets/scripts/vendor.meta",
@@ -5750,8 +6205,8 @@
       },
       {
         "path": "assets/scripts/weapon-sound.ts",
-        "bytes": 3157,
-        "sha256": "23cc5331f6979a7f5435b5adbf25b491dc4b25d3bed6e4860da6fd9b706f2e8e"
+        "bytes": 4132,
+        "sha256": "267da6fe3f2d382a0e7defc1ad1a4efd5104022fb6d1848bd4baf7e777f03d48"
       },
       {
         "path": "assets/scripts/weapon-sound.ts.meta",
@@ -5760,8 +6215,8 @@
       },
       {
         "path": "assets/scripts/weapon-vfx.ts",
-        "bytes": 11711,
-        "sha256": "678e3ce9c3302522babb0d2246eefd9ca902683cff6ccfea4a772c1b7b88b80c"
+        "bytes": 11745,
+        "sha256": "1d5aa7ec301fa5b76d808f3e6d876cde71127edeecbc6e35cb9980a4b156dc08"
       },
       {
         "path": "assets/scripts/weapon-vfx.ts.meta",
@@ -5770,8 +6225,8 @@
       },
       {
         "path": "assets/scripts/weapons.ts",
-        "bytes": 9533,
-        "sha256": "4e76043c199a739d88b3306810e61a2b90c5cdc352c7a4b66dce6cd3d0921645"
+        "bytes": 9995,
+        "sha256": "e02aba5c5e04fe55fea3cc0e57bf13654b1c69ad9f9e0b056b03a128915670ab"
       },
       {
         "path": "assets/scripts/weapons.ts.meta",
@@ -6510,8 +6965,8 @@
       },
       {
         "path": "cdn-assets/published.json",
-        "bytes": 251,
-        "sha256": "46dbba6d945213128604458194d5b5b3b75b1defc59e4290b0271493e70dd72c"
+        "bytes": 252,
+        "sha256": "bc4676d7f3d637b7424bc42bb916099232d91387cb60dee9244ddd94975d915c"
       },
       {
         "path": "cdn-assets/README.md",
@@ -6520,8 +6975,8 @@
       },
       {
         "path": "cdn-assets/release.json",
-        "bytes": 23905,
-        "sha256": "11e73ca9905f892d321deb571691a5b3641f66e59eefff50b57650113a0c1a7f"
+        "bytes": 24165,
+        "sha256": "e8c4fe14ad1decef761c533d7dc5280f2bf1eebaa623da0f995b963195d7c804"
       },
       {
         "path": "config/build-camp-review.json",
@@ -6535,8 +6990,8 @@
       },
       {
         "path": "config/cdn.json",
-        "bytes": 604,
-        "sha256": "866f5d159e989f2b796b40a0889cadd07a5703f3994884309e9ae68d77eb3f75"
+        "bytes": 644,
+        "sha256": "ab93bc9ef8fc199456c7a6a930ceb7036376381109ad3809473e22d9486d9dd0"
       },
       {
         "path": "docs/audio-integration-v93.md",
@@ -6660,8 +7115,33 @@
       },
       {
         "path": "docs/pets-and-unlocks-v917.md",
-        "bytes": 7085,
-        "sha256": "f9a4a96c143dda417c6663c6835f4245cf6b28fc8b693e132435a4a1202e4592"
+        "bytes": 7129,
+        "sha256": "74ca9590c78e6c921d99d449afea7bee6d03a34ba9c6fb993bc079d225920ae6"
+      },
+      {
+        "path": "docs/redesign/enemies.md",
+        "bytes": 9951,
+        "sha256": "18e199fb71d8fc3f882c9ca96db36eb59e2499d55a4f3b30ab1ded226903afeb"
+      },
+      {
+        "path": "docs/redesign/implementation.md",
+        "bytes": 5395,
+        "sha256": "8d3c918af3993ba9a2df6746e52ac89366e91512fe5b941c0c38a17580ca4484"
+      },
+      {
+        "path": "docs/redesign/README.md",
+        "bytes": 13474,
+        "sha256": "2b1660298bdbab7721f1c513a188c9bc38842862fcdc5ddcb93bf4342681aa34"
+      },
+      {
+        "path": "docs/redesign/skills-and-feedback.md",
+        "bytes": 6565,
+        "sha256": "ece14e5c0832fe05d02d20d371bd7294f659f65e75714bbd9522f4ba339ad90d"
+      },
+      {
+        "path": "docs/redesign/weapons.md",
+        "bytes": 18521,
+        "sha256": "8b305fd8355bf9beac60f13fbcd4fcad5e5cb6a0427e31a66d7b5a2cd92a6379"
       },
       {
         "path": "docs/resources-cdn-v94.md",
@@ -7559,14 +8039,19 @@
         "sha256": "e33aa76ae60b68a6ba416da3e8726a361671514fd60bc9ee4616b98caf1243b1"
       },
       {
+        "path": "docs/weapon-system-redesign.md",
+        "bytes": 11407,
+        "sha256": "8769f7e99ee100abc9b2d6f6f9f8e2bc021dcfe40f802acf6460743dc434eff3"
+      },
+      {
         "path": "package-lock.json",
         "bytes": 18186,
         "sha256": "7a2a1d52f0629929d6e6027b8ceb5ce08c4e547525a1febaa88c3089bb0987e6"
       },
       {
         "path": "package.json",
-        "bytes": 2455,
-        "sha256": "6a5b13901efa646122ccb6bbea8a8f9d6459a11e8ff36b7ed3789be0686b8367"
+        "bytes": 2578,
+        "sha256": "92163f568d33e869c4dbc1af2c99f6d98b3eb0eb79a8778b6ffa7edf99a01a7a"
       },
       {
         "path": "project.config.json",
@@ -7579,6 +8064,11 @@
         "sha256": "0a28027c7513840b8da9f25ad24616490724054a5d51d98ce3575490a7010f9e"
       },
       {
+        "path": "scripts/__pycache__/battle_score.cpython-313.pyc",
+        "bytes": 13850,
+        "sha256": "295bfe972291aac2349288ee295c94727f25909bdbf71f689e2140df9a01f169"
+      },
+      {
         "path": "scripts/bake-enemy-atlases.mjs",
         "bytes": 6650,
         "sha256": "f91508bfd5bdb52c40ab9350fc2f4b9ddead6f95a2b7c45c36c18bec57d3443c"
@@ -7589,14 +8079,19 @@
         "sha256": "e173c4a555e18e1dce9e2ba3b751f707b8f379c7314df291d18e50c09f4b0726"
       },
       {
+        "path": "scripts/boss-density.cjs",
+        "bytes": 4441,
+        "sha256": "7d7347ce4e8f99d2f4e265990d524433f7d6948c7d3ae8fa0705db06c21499d5"
+      },
+      {
         "path": "scripts/build-review.cjs",
         "bytes": 769,
         "sha256": "0295ff43859f36ea067332f67a9fa48872e34067781d174e75a9f208d030ab75"
       },
       {
         "path": "scripts/build-wechat.cjs",
-        "bytes": 2585,
-        "sha256": "ab2c3aea69b79047b1c01157ff4efa76f396b2c762708ad505bccf24ec5d8019"
+        "bytes": 2701,
+        "sha256": "d8adae88996d273415e641caf1b7da7e7924798d21de04784a139106ccebf5ef"
       },
       {
         "path": "scripts/capture-all-ground-review.mjs",
@@ -7679,6 +8174,16 @@
         "sha256": "9ee9df7b3000efcaea716bbb583dd67db47e14485094b24cefca5e356502879e"
       },
       {
+        "path": "scripts/capture-redesign-review.mjs",
+        "bytes": 15421,
+        "sha256": "b791b585c8145c404f68f9cc4756ff6a21dcb37ab1dbdb106677fdddba64b9f8"
+      },
+      {
+        "path": "scripts/capture-redesign-wechat.cjs",
+        "bytes": 5254,
+        "sha256": "6741e02c696279dd28a7af82c4a84dd42827bb6cf33a9b5cf7dae4bcead09429"
+      },
+      {
         "path": "scripts/capture-sandal-review.mjs",
         "bytes": 7425,
         "sha256": "a4e26af5ba58f9e77062d1c6f197d04d8fb4381933afe09e09a97fb4cc873687"
@@ -7740,8 +8245,8 @@
       },
       {
         "path": "scripts/check-package-size.cjs",
-        "bytes": 4411,
-        "sha256": "432044d37ed16e92ed27bde6551035f3431ee2b86be6378a44eba47da1e18ed1"
+        "bytes": 5179,
+        "sha256": "f77556ed732b1ebfe6ec9e19a326a0ea16f1aecc77e46a9751a12b18235e5a6e"
       },
       {
         "path": "scripts/check.cjs",
@@ -7845,18 +8350,18 @@
       },
       {
         "path": "scripts/optimize-textures.cjs",
-        "bytes": 4115,
-        "sha256": "0830cad4643f50d6b672c852a13afc56ab0729f66718a40e4cd573a8d2eba42a"
+        "bytes": 4424,
+        "sha256": "d590945d64cb6edc33487c66140b233fd2d318559558800462b29d2212f89626"
       },
       {
         "path": "scripts/pack-boss-art.cjs",
-        "bytes": 6332,
-        "sha256": "5a3b56763b378c7aa67064f89f040f7aecf5c4dbc22cabd974673a544614f5bf"
+        "bytes": 6361,
+        "sha256": "47c0932392ddfeaffd4dc335259b2187e34c4db58830a575c4caf8f3b68b849f"
       },
       {
         "path": "scripts/pack-boss-portraits.cjs",
-        "bytes": 1838,
-        "sha256": "34c7999adef4822a772af37d957a37ecfcb65c34a6a2f8d346446def86ee7a99"
+        "bytes": 1769,
+        "sha256": "e3f3408d86854ffb7a64b25f4bec23252ed3e8ad945bde468ba7d4e73f292c8b"
       },
       {
         "path": "scripts/pack-chronicle-art.cjs",
@@ -7885,8 +8390,8 @@
       },
       {
         "path": "scripts/pack-lvbu-art.cjs",
-        "bytes": 4723,
-        "sha256": "69d6a6100edafd77fe664f3210d52b52483c1a3b5d713cc2660b6be2f2f3e14d"
+        "bytes": 4709,
+        "sha256": "e7f9ce3423276c4cd119e32b4538740ba069e30495929cd70fcebe118f7b5569"
       },
       {
         "path": "scripts/pack-pet-art.cjs",
@@ -7894,9 +8399,19 @@
         "sha256": "c9b3afb065a87d49cab14553167438786fc0e9e132107cf8e46cac1467faff41"
       },
       {
+        "path": "scripts/pack-redesign-art.cjs",
+        "bytes": 9923,
+        "sha256": "fad87b84b236b6b94c0fcee7c46ca0d943addb9567fb2682fa38741534a4f9ce"
+      },
+      {
         "path": "scripts/pack-stage-art.cjs",
         "bytes": 4924,
         "sha256": "3ef89cb81ac73f448858fdce154970dd5c5290388f9d2ddaec95e48f4f52cf33"
+      },
+      {
+        "path": "scripts/pack-ui-fonts.py",
+        "bytes": 2431,
+        "sha256": "163ef724870dc636e3fda4536d31a400deba479d607f48abd16e4afd51a1ea7f"
       },
       {
         "path": "scripts/pack-vfx-art.cjs",
@@ -7907,6 +8422,11 @@
         "path": "scripts/pack-youth-heroes.cjs",
         "bytes": 5941,
         "sha256": "0a826b091b49d19718d86752aaf6e12d5f1b51cfdf22969bf21726bbb2c644ff"
+      },
+      {
+        "path": "scripts/patch-wechat-text-measure.cjs",
+        "bytes": 2259,
+        "sha256": "7b7870708f1d1fdfea4bcfe0eb1ab5ae56f98fa89391af454f85db16a8bc3d77"
       },
       {
         "path": "scripts/profile-battle.cjs",
@@ -7927,6 +8447,11 @@
         "path": "scripts/publish-cdn-assets.cjs",
         "bytes": 2303,
         "sha256": "33089772742b651459fba28717af5b0a7ad31259924397e3c1b8222fe45a6356"
+      },
+      {
+        "path": "scripts/remaster-boss-sources.cjs",
+        "bytes": 1736,
+        "sha256": "3ac4c989dc5504bc035b542612b76eb2748ab1dadce42941687e06143d4cb490"
       },
       {
         "path": "scripts/render-audio-review.py",
@@ -7954,6 +8479,11 @@
         "sha256": "01e1b2617aa1d9cad4c7cff68c1fbe8beaf2dd88782ff6566039fd275d5b0693"
       },
       {
+        "path": "scripts/test-armory-redesign.cjs",
+        "bytes": 3854,
+        "sha256": "58beb2aa91039d389297a3b1f34b7c996e158e4c6e50e3a5fe79ea059a40da65"
+      },
+      {
         "path": "scripts/test-audio-scenes.cjs",
         "bytes": 5209,
         "sha256": "ee4a3a0689592e2e7dbdc2e12246c09824d34069dd4c7d7ab618d6005546782d"
@@ -7970,28 +8500,28 @@
       },
       {
         "path": "scripts/test-bosses.cjs",
-        "bytes": 12564,
-        "sha256": "23470bc0fb2fc9891429c615a38ddc332b9bab0265fc1ba0003811c77ae4c021"
+        "bytes": 13340,
+        "sha256": "f503e34447bf78ddf818d15c9ecfc5ec1a24adaff173da254684c6c3116dd51c"
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 90393,
-        "sha256": "7f0d3749914a06218820aeb533f644cf1305d99fd735af17a91e5b894196d517"
+        "bytes": 91581,
+        "sha256": "1e5b9a25b69b519a525d898d89a3ef6af4772eab4d125c9feff944d6070d4103"
       },
       {
         "path": "scripts/test-chronicles.cjs",
-        "bytes": 12015,
-        "sha256": "faafc9c83b09a2063de790588397030f2d4aae3d506e55ea6e7fd893783c5308"
+        "bytes": 12058,
+        "sha256": "66363df8a34b2d1dab562f253b25c2c5f817fb8d222204590bfb7a39b5a6deca"
       },
       {
         "path": "scripts/test-combat-effects.cjs",
-        "bytes": 4452,
-        "sha256": "8de377c2be248e129cda7e95e819a727826c898b51ede0182f00782daf32f4cf"
+        "bytes": 4853,
+        "sha256": "73ef629efa721f1db594b93015fa3af57aad329e3191b7315fbc1c2afcb2ee10"
       },
       {
         "path": "scripts/test-combat.cjs",
-        "bytes": 16168,
-        "sha256": "f1165f6d72ad1aee8f0e342f4aa32050c1022efbdbe4bb22cc1b27a20c295800"
+        "bytes": 16248,
+        "sha256": "a7a7b67eaf0d065fdff95c20cef8af84a3fee3c5eba5ab39e97986710d159fed"
       },
       {
         "path": "scripts/test-common-skills.cjs",
@@ -8000,8 +8530,8 @@
       },
       {
         "path": "scripts/test-endless-settings.cjs",
-        "bytes": 6224,
-        "sha256": "92ced794fa52adb994125fb042dc5dba409a429e9784350d1f8368b8ca7a7239"
+        "bytes": 6546,
+        "sha256": "6cb008f0fe5c5bd9897a43ba7add58193520f7660a0ee9465e8d42e599987a32"
       },
       {
         "path": "scripts/test-enemy-actions.cjs",
@@ -8010,8 +8540,8 @@
       },
       {
         "path": "scripts/test-enemy-birth.cjs",
-        "bytes": 3238,
-        "sha256": "4d44206fc947f6cc521dae8c19ff7d1697b24d46055dbbeb75a86653a6238752"
+        "bytes": 3305,
+        "sha256": "7c04dbc0402025fd23ff5eb150f62f75c63af9f00383ade05dbbbd290d29f50b"
       },
       {
         "path": "scripts/test-grunt-melee.cjs",
@@ -8020,8 +8550,8 @@
       },
       {
         "path": "scripts/test-hero-growth.cjs",
-        "bytes": 8358,
-        "sha256": "ebe65b54658a67d7a8e6bc44768f609e648d566097909b3db8ec7171966c09a2"
+        "bytes": 9385,
+        "sha256": "22423ede93e350118678193fe240bbb3b6b9ce2b5747cdb0cbbc386a14ae390d"
       },
       {
         "path": "scripts/test-kiting-results.cjs",
@@ -8035,8 +8565,13 @@
       },
       {
         "path": "scripts/test-lvbu.cjs",
-        "bytes": 12706,
-        "sha256": "8d33c4af038d1800b959ec539f3e5c926bb4019bb552d7f8fd138ef473bdeb0b"
+        "bytes": 12882,
+        "sha256": "19d5cff984fc630832a992f8691b89222d4f470b18e1902f5f09cfd835096701"
+      },
+      {
+        "path": "scripts/test-mode-parity.cjs",
+        "bytes": 7986,
+        "sha256": "ffc10528f53e668c8eb982c786f0bdcc2f12c449674454a0d371dc533eed896a"
       },
       {
         "path": "scripts/test-music.cjs",
@@ -8050,18 +8585,18 @@
       },
       {
         "path": "scripts/test-native-sfx.cjs",
-        "bytes": 4801,
-        "sha256": "d46a2bdab62badb8fbf7ccdd315d0de4768b43d9c737e18780552250ca5e08ce"
+        "bytes": 5248,
+        "sha256": "fc4b2355192f39e0ee83ee97e943badbad95abd60faac29d55095611bba3000e"
       },
       {
         "path": "scripts/test-performance.cjs",
-        "bytes": 16744,
-        "sha256": "850e1f3f22da78b205203c308b926ec3902e69c02ef60ce4af936fda8709c60c"
+        "bytes": 17618,
+        "sha256": "a8b8ef393b0b39606fc865b02def9b6e33421b1213bb67304445dd26a00db4b6"
       },
       {
         "path": "scripts/test-pets-unlocks.cjs",
-        "bytes": 9064,
-        "sha256": "ea33ad3a31242cd676ff985f7f0286baf5885fe61788d92a7c0396e9a1dc406b"
+        "bytes": 9643,
+        "sha256": "a06aaf0dd667fe9270b6c57eb0ab98cfc186aaa8218a89e4acbea7e1f73f4800"
       },
       {
         "path": "scripts/test-presentation-art.cjs",
@@ -8070,8 +8605,8 @@
       },
       {
         "path": "scripts/test-resource-loading.cjs",
-        "bytes": 7277,
-        "sha256": "20809456dfdadcf467b5e105c161ed761e234670d3cb40378a78f802186f167d"
+        "bytes": 8778,
+        "sha256": "a86e2c239a443db9c6e0fb00ec0f701d954d489401dbea956abac92661f71206"
       },
       {
         "path": "scripts/test-result-art.cjs",
@@ -8085,8 +8620,8 @@
       },
       {
         "path": "scripts/test-runtime-report.cjs",
-        "bytes": 6119,
-        "sha256": "6e8558cde3b5fd8ba26585ba5c7fdd210cdd1eb93d313d3f34f7bd55f408fba1"
+        "bytes": 8333,
+        "sha256": "0fff5cd05c08618482b1f9d238e43ff601d0c6dd3e2f3cad421aca37487fde3b"
       },
       {
         "path": "scripts/test-skill-recast.cjs",
@@ -8100,8 +8635,8 @@
       },
       {
         "path": "scripts/test-stage-challenge.cjs",
-        "bytes": 14188,
-        "sha256": "92f841853e99ea0e5bbab70d527753f4d9da01afd88fb80c0bcb62253f54d94a"
+        "bytes": 14702,
+        "sha256": "b00d64b25ec92544a8866436bd734e8dfbc175cece57b696a360845d031b32a8"
       },
       {
         "path": "scripts/test-startup.cjs",
@@ -8110,8 +8645,8 @@
       },
       {
         "path": "scripts/test-training.cjs",
-        "bytes": 13986,
-        "sha256": "8c51edc529cc70396342faa33f843fd3c1c7069605eeb12343d42798131ff8b8"
+        "bytes": 15200,
+        "sha256": "39ca8a48a0c68aed5ec1fe05a445ab734f351e399c46346048cb47948e91fed8"
       },
       {
         "path": "scripts/test-ui-layout.cjs",
@@ -8120,23 +8655,28 @@
       },
       {
         "path": "scripts/test-vfx-upgrade.cjs",
-        "bytes": 3527,
-        "sha256": "0f7f0d7127f3d72fe4f7e5f26cc6bee9bb41c441788d1ac1fe777a1316df82e9"
+        "bytes": 3581,
+        "sha256": "2e38f83174af8de2ab669af89028df19998991297dcfa6f93bae9f8aa18dd269"
       },
       {
         "path": "scripts/test-weapon-sound.cjs",
-        "bytes": 3244,
-        "sha256": "72f194d1b4ac584b9e483da2ec2315936a9a72d5542341381c227ecbd0ef4255"
+        "bytes": 3518,
+        "sha256": "42331bb00a4993c304460c08cc05ed76cd33173affb6a961d51b5f80f3a64de6"
       },
       {
         "path": "scripts/test-weapons.cjs",
-        "bytes": 10572,
-        "sha256": "6ee7d1ad0fd493a95214b8309452b815134041bf35f8e5d43ffb819990cf06c3"
+        "bytes": 10586,
+        "sha256": "ff0dcc9ddfe89b733aad325503fdc7958c8c1131692d19a9238341ea6f4146a6"
+      },
+      {
+        "path": "scripts/test-wechat-text-measure.cjs",
+        "bytes": 1910,
+        "sha256": "b0ea7519f76280176fb473af5425f9102c0fbc33bcaa42b8fe61709dac875656"
       },
       {
         "path": "scripts/test-yellow-chargers.cjs",
-        "bytes": 4029,
-        "sha256": "943b5235d79ebadce19aa2805632d4c0d8f5f5b7465a48ff36ab8acd0581aec4"
+        "bytes": 4128,
+        "sha256": "2fb2c9a96ed8e451ee85d519e674647d94a416602d69f8c515aa0ff23d24de85"
       },
       {
         "path": "scripts/test-youth-heroes.cjs",
@@ -8188,7 +8728,7 @@
   "counts": {
     "heroes": 3,
     "stages": 6,
-    "weapons": 36,
+    "weapons": 33,
     "passives": 60,
     "augments": 9,
     "enemyArchetypes": 40,
@@ -9072,7 +9612,7 @@
         "firecracker",
         "qinggang",
         "phoenix-bow",
-        "smg",
+        "wood-kite",
         "taiping-book",
         "wood-ox"
       ],
@@ -9088,18 +9628,15 @@
         "gourd",
         "twin-halberds",
         "hand-halberd",
-        "shotgun",
+        "trident",
         "thunder-bomb",
-        "rocket"
+        "caltrops"
       ]
     },
     "reserved": [
       "sword",
       "silver-spear",
-      "ancient-saber",
-      "trident",
-      "caltrops",
-      "wood-kite"
+      "ancient-saber"
     ],
     "legacyGrantsPreserved": true
   },
@@ -9942,7 +10479,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "投掷1只草鞋 · 弹射0次",
-          "mechanics": "投掷1只草鞋 · 弹射0次"
+          "mechanics": "首击拍退前敌"
         },
         {
           "tier": 2,
@@ -9962,7 +10499,7 @@
           "shotCount": 1,
           "bounce": 1,
           "effectText": "投掷1只草鞋 · 弹射1次",
-          "mechanics": "投掷1只草鞋 · 弹射1次"
+          "mechanics": "增加一次侧向回弹"
         },
         {
           "tier": 3,
@@ -9982,7 +10519,7 @@
           "shotCount": 1,
           "bounce": 2,
           "effectText": "投掷1只草鞋 · 弹射2次",
-          "mechanics": "投掷1只草鞋 · 弹射2次"
+          "mechanics": "连续拍开两名追兵"
         },
         {
           "tier": 4,
@@ -10002,7 +10539,7 @@
           "shotCount": 1,
           "bounce": 3,
           "effectText": "投掷1只草鞋 · 弹射3次",
-          "mechanics": "投掷1只草鞋 · 弹射3次"
+          "mechanics": "第三跳额外击退末敌"
         }
       ],
       "openingStatsByHero": [
@@ -11035,687 +11572,6 @@
         34,
         58,
         92
-      ],
-      "sound": {
-        "attack": "blast-attack",
-        "hit": "blast-hit"
-      }
-    },
-    {
-      "id": "smg",
-      "name": "桃园突突枪",
-      "category": "ranged",
-      "starter": false,
-      "damage": 5,
-      "interval": 0.16,
-      "range": 400,
-      "speed": 1050,
-      "knockback": 12,
-      "area": 0,
-      "pierce": 0,
-      "crit": 0.05,
-      "critMultiplier": 1.5,
-      "arc": 0,
-      "price": 39,
-      "desc": "快速点射 · 轻击退",
-      "qualityStatsWithoutHeroOrItems": [
-        {
-          "tier": 1,
-          "name": "普通 I",
-          "color": "#c5c5ad",
-          "damage": 5,
-          "interval": 0.16,
-          "range": 400,
-          "quality": 1,
-          "speed": 1050,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "快速点射 · 穿透0人",
-          "mechanics": "快速点射 · 穿透0人"
-        },
-        {
-          "tier": 2,
-          "name": "精良 II",
-          "color": "#519ec9",
-          "damage": 6.75,
-          "interval": 0.1536,
-          "range": 410,
-          "quality": 2,
-          "speed": 1050,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 1,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "快速点射 · 穿透1人",
-          "mechanics": "快速点射 · 穿透1人"
-        },
-        {
-          "tier": 3,
-          "name": "稀有 III",
-          "color": "#a46bc2",
-          "damage": 9,
-          "interval": 0.1472,
-          "range": 420,
-          "quality": 3,
-          "speed": 1176,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 1,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "快速点射 · 穿透1人",
-          "mechanics": "快速点射 · 穿透1人"
-        },
-        {
-          "tier": 4,
-          "name": "传说 IV",
-          "color": "#d45a48",
-          "damage": 12,
-          "interval": 0.1408,
-          "range": 430,
-          "quality": 4,
-          "speed": 1260,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 2,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "快速点射 · 穿透2人",
-          "mechanics": "快速点射 · 穿透2人"
-        }
-      ],
-      "openingStatsByHero": [
-        {
-          "hero": "liubei",
-          "damage": 5,
-          "interval": 0.16,
-          "range": 400,
-          "quality": 1,
-          "speed": 1050,
-          "knockback": 14.4,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 32.03125
-        },
-        {
-          "hero": "guanyu",
-          "damage": 5,
-          "interval": 0.188235,
-          "range": 400,
-          "quality": 1,
-          "speed": 1050,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 27.226562
-        },
-        {
-          "hero": "zhangfei",
-          "damage": 5,
-          "interval": 0.13913,
-          "range": 400,
-          "quality": 1,
-          "speed": 1050,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 36.835938
-        },
-        {
-          "hero": "zhaoyun",
-          "damage": 5,
-          "interval": 0.16,
-          "range": 400,
-          "quality": 1,
-          "speed": 1050,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 32.03125
-        },
-        {
-          "hero": "kongming",
-          "damage": 5,
-          "interval": 0.16,
-          "range": 400,
-          "quality": 1,
-          "speed": 1050,
-          "knockback": 12,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 32.03125
-        }
-      ],
-      "firstShopPrices": [
-        39,
-        66,
-        113,
-        179
-      ],
-      "sound": {
-        "attack": "gun-attack",
-        "hit": "gun-hit"
-      }
-    },
-    {
-      "id": "shotgun",
-      "name": "村口霰弹枪",
-      "category": "ranged",
-      "starter": false,
-      "damage": 8,
-      "interval": 0.9,
-      "range": 300,
-      "speed": 820,
-      "knockback": 160,
-      "area": 0,
-      "pierce": 0,
-      "crit": 0.05,
-      "critMultiplier": 1.5,
-      "arc": 0,
-      "price": 39,
-      "desc": "五发散弹 · 近身破围",
-      "qualityStatsWithoutHeroOrItems": [
-        {
-          "tier": 1,
-          "name": "普通 I",
-          "color": "#c5c5ad",
-          "damage": 8,
-          "interval": 0.9,
-          "range": 300,
-          "quality": 1,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 5,
-          "bounce": 0,
-          "effectText": "5发扇形散弹\n同轮对同一敌人最多命中4颗",
-          "mechanics": "5发扇形散弹\n同轮对同一敌人最多命中4颗"
-        },
-        {
-          "tier": 2,
-          "name": "精良 II",
-          "color": "#519ec9",
-          "damage": 10.8,
-          "interval": 0.864,
-          "range": 310,
-          "quality": 2,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 6,
-          "bounce": 0,
-          "effectText": "6发扇形散弹\n同轮对同一敌人最多命中4颗",
-          "mechanics": "6发扇形散弹\n同轮对同一敌人最多命中4颗"
-        },
-        {
-          "tier": 3,
-          "name": "稀有 III",
-          "color": "#a46bc2",
-          "damage": 14.4,
-          "interval": 0.828,
-          "range": 320,
-          "quality": 3,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 7,
-          "bounce": 0,
-          "effectText": "7发扇形散弹\n同轮对同一敌人最多命中4颗",
-          "mechanics": "7发扇形散弹\n同轮对同一敌人最多命中4颗"
-        },
-        {
-          "tier": 4,
-          "name": "传说 IV",
-          "color": "#d45a48",
-          "damage": 19.2,
-          "interval": 0.792,
-          "range": 330,
-          "quality": 4,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 8,
-          "bounce": 0,
-          "effectText": "8发扇形散弹\n同轮对同一敌人最多命中4颗",
-          "mechanics": "8发扇形散弹\n同轮对同一敌人最多命中4颗"
-        }
-      ],
-      "openingStatsByHero": [
-        {
-          "hero": "liubei",
-          "damage": 8,
-          "interval": 0.9,
-          "range": 300,
-          "quality": 1,
-          "speed": 820,
-          "knockback": 192,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 5,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 36.444444
-        },
-        {
-          "hero": "guanyu",
-          "damage": 8,
-          "interval": 1.058824,
-          "range": 300,
-          "quality": 1,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 5,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 30.977778
-        },
-        {
-          "hero": "zhangfei",
-          "damage": 8,
-          "interval": 0.782609,
-          "range": 300,
-          "quality": 1,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 5,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 41.911111
-        },
-        {
-          "hero": "zhaoyun",
-          "damage": 8,
-          "interval": 0.9,
-          "range": 300,
-          "quality": 1,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 5,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 36.444444
-        },
-        {
-          "hero": "kongming",
-          "damage": 8,
-          "interval": 0.9,
-          "range": 300,
-          "quality": 1,
-          "speed": 820,
-          "knockback": 160,
-          "area": 0,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 5,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 36.444444
-        }
-      ],
-      "firstShopPrices": [
-        39,
-        66,
-        113,
-        179
-      ],
-      "sound": {
-        "attack": "gun-attack",
-        "hit": "gun-hit"
-      }
-    },
-    {
-      "id": "rocket",
-      "name": "二踢脚火箭筒",
-      "category": "ranged",
-      "starter": false,
-      "damage": 78,
-      "interval": 2,
-      "range": 500,
-      "speed": 420,
-      "knockback": 330,
-      "area": 125,
-      "pierce": 0,
-      "crit": 0.05,
-      "critMultiplier": 1.5,
-      "arc": 0,
-      "price": 45,
-      "desc": "大范围爆炸 · 慢速重击",
-      "qualityStatsWithoutHeroOrItems": [
-        {
-          "tier": 1,
-          "name": "普通 I",
-          "color": "#c5c5ad",
-          "damage": 78,
-          "interval": 2,
-          "range": 500,
-          "quality": 1,
-          "speed": 420,
-          "knockback": 330,
-          "area": 125,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "单发火箭 · 爆炸半径125",
-          "mechanics": "单发火箭 · 爆炸半径125"
-        },
-        {
-          "tier": 2,
-          "name": "精良 II",
-          "color": "#519ec9",
-          "damage": 105.3,
-          "interval": 1.92,
-          "range": 510,
-          "quality": 2,
-          "speed": 453.6,
-          "knockback": 330,
-          "area": 145,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "单发火箭 · 爆炸半径145",
-          "mechanics": "单发火箭 · 爆炸半径145"
-        },
-        {
-          "tier": 3,
-          "name": "稀有 III",
-          "color": "#a46bc2",
-          "damage": 140.4,
-          "interval": 1.84,
-          "range": 520,
-          "quality": 3,
-          "speed": 495.6,
-          "knockback": 330,
-          "area": 165,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "单发火箭 · 爆炸半径165",
-          "mechanics": "单发火箭 · 爆炸半径165"
-        },
-        {
-          "tier": 4,
-          "name": "传说 IV",
-          "color": "#d45a48",
-          "damage": 187.2,
-          "interval": 1.76,
-          "range": 530,
-          "quality": 4,
-          "speed": 546,
-          "knockback": 330,
-          "area": 185,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "effectText": "单发火箭 · 爆炸半径185",
-          "mechanics": "单发火箭 · 爆炸半径185"
-        }
-      ],
-      "openingStatsByHero": [
-        {
-          "hero": "liubei",
-          "damage": 78,
-          "interval": 2,
-          "range": 500,
-          "quality": 1,
-          "speed": 420,
-          "knockback": 396,
-          "area": 125,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 39.975
-        },
-        {
-          "hero": "guanyu",
-          "damage": 78,
-          "interval": 2.352941,
-          "range": 500,
-          "quality": 1,
-          "speed": 420,
-          "knockback": 330,
-          "area": 125,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 33.97875
-        },
-        {
-          "hero": "zhangfei",
-          "damage": 78,
-          "interval": 1.73913,
-          "range": 500,
-          "quality": 1,
-          "speed": 420,
-          "knockback": 330,
-          "area": 143.75,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 45.97125
-        },
-        {
-          "hero": "zhaoyun",
-          "damage": 78,
-          "interval": 2,
-          "range": 500,
-          "quality": 1,
-          "speed": 420,
-          "knockback": 330,
-          "area": 125,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 39.975
-        },
-        {
-          "hero": "kongming",
-          "damage": 78,
-          "interval": 2,
-          "range": 500,
-          "quality": 1,
-          "speed": 420,
-          "knockback": 330,
-          "area": 125,
-          "pierce": 0,
-          "crit": 0.05,
-          "critMultiplier": 1.5,
-          "arc": 0,
-          "shotCount": 1,
-          "bounce": 0,
-          "bounceFactor": 0.6,
-          "split": 0,
-          "splitFactor": 0.45,
-          "pierceFactor": 0.7,
-          "splashFactor": 0.55,
-          "spread": 1,
-          "singleTargetDpsCeiling": 39.975
-        }
-      ],
-      "firstShopPrices": [
-        45,
-        77,
-        131,
-        207
       ],
       "sound": {
         "attack": "blast-attack",
@@ -15669,7 +15525,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "直线贯穿 · 后续目标85%伤害\n射程 650",
-          "mechanics": "单矢最多穿过3名敌人；首敌1D，后续各0.85D。"
+          "mechanics": "重矢穿过三敌"
         },
         {
           "tier": 2,
@@ -15689,7 +15545,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "直线贯穿 · 后续目标85%伤害\n射程 660",
-          "mechanics": "单矢最多穿过4名敌人；首敌1D，后续各0.85D。"
+          "mechanics": "重矢穿过四敌"
         },
         {
           "tier": 3,
@@ -15709,7 +15565,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "直线贯穿 · 后续目标85%伤害\n射程 670",
-          "mechanics": "单矢最多穿过5名敌人；首敌1D，后续各0.85D。"
+          "mechanics": "重矢穿五敌，前三次铜箍亮起"
         },
         {
           "tier": 4,
@@ -15729,7 +15585,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "直线贯穿 · 后续目标85%伤害\n射程 680",
-          "mechanics": "单矢最多穿过6名敌人；首敌1D，后续各0.85D。"
+          "mechanics": "穿过三敌时卷起碎石"
         }
       ],
       "openingStatsByHero": [
@@ -15897,7 +15753,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "飞出与返回 · 每程各一次\n射程 340",
-          "mechanics": "飞出与回程各0.55D，同敌每程一次；回程沿真实路径。"
+          "mechanics": "循原出手点折返"
         },
         {
           "tier": 2,
@@ -15917,7 +15773,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "飞出与返回 · 每程各一次\n射程 350",
-          "mechanics": "飞出与回程各0.6D，同敌每程一次；回程沿真实路径。"
+          "mechanics": "回程提速，折点亮铜"
         },
         {
           "tier": 3,
@@ -15937,7 +15793,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "飞出与返回 · 每程各一次\n射程 360",
-          "mechanics": "飞出与回程各0.65D，同敌每程一次；回程沿真实路径。"
+          "mechanics": "回到你手中，横移切侧翼"
         },
         {
           "tier": 4,
@@ -15957,7 +15813,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "飞出与返回 · 每程各一次\n射程 370",
-          "mechanics": "飞出与回程各0.7D，同敌每程一次；回程沿真实路径。"
+          "mechanics": "回程切中三敌并接住后补掷"
         }
       ],
       "openingStatsByHero": [
@@ -16353,7 +16209,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "火油地面 · 同敌共享叠火上限\n范围 85",
-          "mechanics": "火场1.2秒，每0.5秒0.4D；全队同敌每0.5秒最多2次油火，六壶共享上限。"
+          "mechanics": "落点留下油洼"
         },
         {
           "tier": 2,
@@ -16373,7 +16229,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "火油地面 · 同敌共享叠火上限\n范围 95",
-          "mechanics": "火场1.2秒，每0.5秒0.4D；全队同敌每0.5秒最多2次油火，六壶共享上限。"
+          "mechanics": "油洼维持更久"
         },
         {
           "tier": 3,
@@ -16393,7 +16249,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "火油地面 · 同敌共享叠火上限\n范围 105",
-          "mechanics": "火场1.2秒，每0.5秒0.4D；全队同敌每0.5秒最多2次油火，六壶共享上限。"
+          "mechanics": "相近两洼接成火线"
         },
         {
           "tier": 4,
@@ -16413,7 +16269,7 @@
           "shotCount": 1,
           "bounce": 0,
           "effectText": "火油地面 · 同敌共享叠火上限\n范围 115",
-          "mechanics": "火场1.2秒，每0.5秒0.4D；全队同敌每0.5秒最多2次油火，六壶共享上限。"
+          "mechanics": "首个有效踏线目标卷起短焰"
         }
       ],
       "openingStatsByHero": [
@@ -18172,9 +18028,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18210,9 +18063,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18297,9 +18147,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18335,9 +18182,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18422,9 +18266,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18460,9 +18301,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18547,9 +18385,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18585,9 +18420,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18672,9 +18504,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18710,9 +18539,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18797,9 +18623,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18835,9 +18658,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18922,9 +18742,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -18960,9 +18777,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19047,9 +18861,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19085,9 +18896,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19172,9 +18980,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19210,9 +19015,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19299,9 +19101,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19337,9 +19136,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19430,9 +19226,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19468,9 +19261,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19557,9 +19347,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19595,9 +19382,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19686,9 +19470,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19724,9 +19505,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19811,9 +19589,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19849,9 +19624,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19938,9 +19710,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -19976,9 +19745,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20067,9 +19833,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20105,9 +19868,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20192,9 +19952,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20230,9 +19987,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20317,9 +20071,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20355,9 +20106,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20446,9 +20194,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20484,9 +20229,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20571,9 +20313,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20609,9 +20348,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20698,9 +20434,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20736,9 +20469,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20827,9 +20557,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20865,9 +20592,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20956,9 +20680,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -20994,9 +20715,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -21083,9 +20801,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -21121,9 +20836,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -21208,9 +20920,6 @@
         "sandal",
         "peach",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -21226,9 +20935,6 @@
         "sandal",
         "peach",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -21295,9 +21001,6 @@
         "sandal",
         "peach",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -21320,9 +21023,6 @@
         "sandal",
         "peach",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -21394,8 +21094,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -21407,8 +21105,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -21591,8 +21287,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -21604,8 +21298,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -21659,9 +21351,9 @@
     {
       "id": "D07",
       "name": "稳手红绳",
-      "desc": "枪械散布角降低10%",
+      "desc": "麒麟弓与白羽扇的散射夹角缩小10%",
       "price": 1,
-      "stack": "U：最低原始50%，后续转枪械伤害；霰弹仍保留扇形",
+      "stack": "U：最低原始50%",
       "bonus": {},
       "slot": "waist",
       "category": "远程弹道",
@@ -21672,12 +21364,12 @@
         "cell": 30
       },
       "eligibleWeapons": [
-        "smg",
-        "shotgun"
+        "phoenix-bow",
+        "feather-fan"
       ],
       "baselineEligibleWeapons": [
-        "smg",
-        "shotgun"
+        "phoenix-bow",
+        "feather-fan"
       ],
       "prerequisiteExamples": [],
       "singleItemBonusChanges": [
@@ -21954,9 +21646,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -21992,9 +21681,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -22078,7 +21764,6 @@
       "eligibleWeapons": [
         "peach",
         "firecracker",
-        "rocket",
         "caltrops",
         "oil-jar",
         "thunder-bomb",
@@ -22088,7 +21773,6 @@
       "baselineEligibleWeapons": [
         "peach",
         "firecracker",
-        "rocket",
         "caltrops",
         "oil-jar",
         "thunder-bomb",
@@ -22149,7 +21833,6 @@
       "eligibleWeapons": [
         "peach",
         "firecracker",
-        "rocket",
         "caltrops",
         "oil-jar",
         "thunder-bomb",
@@ -22159,7 +21842,6 @@
       "baselineEligibleWeapons": [
         "peach",
         "firecracker",
-        "rocket",
         "caltrops",
         "oil-jar",
         "thunder-bomb",
@@ -22598,10 +22280,10 @@
     },
     {
       "id": "F05",
-      "name": "加长弹匣",
-      "desc": "突突枪攻速+15%、子弹速度+10%",
+      "name": "连弩绞盘",
+      "desc": "诸葛连弩攻速+15%、箭速+10%",
       "price": 1.1,
-      "stack": "A/U，无换弹操作",
+      "stack": "A/U，重复收益递减",
       "bonus": {},
       "slot": "waist",
       "category": "武器与技能",
@@ -22612,10 +22294,10 @@
         "cell": 44
       },
       "eligibleWeapons": [
-        "smg"
+        "repeater"
       ],
       "baselineEligibleWeapons": [
-        "smg"
+        "repeater"
       ],
       "prerequisiteExamples": [],
       "singleItemBonusChanges": [
@@ -22727,9 +22409,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -22765,9 +22444,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -22852,9 +22528,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -22890,9 +22563,6 @@
         "peach",
         "cleaver",
         "firecracker",
-        "smg",
-        "shotgun",
-        "rocket",
         "sword",
         "thunder",
         "gourd",
@@ -22970,9 +22640,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -22984,9 +22651,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23044,9 +22708,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23058,9 +22719,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23118,9 +22776,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23132,9 +22787,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23192,9 +22844,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23206,9 +22855,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23257,7 +22903,7 @@
       "name": "精铁弹芯",
       "desc": "远程武器伤害基础值+2；按攻击频率折算",
       "price": 1,
-      "stack": "A：高频和霰弹武器按攻击系数折算",
+      "stack": "A：高频和多段武器按攻击系数折算",
       "bonus": {},
       "slot": "waist",
       "category": "远程弹道",
@@ -23266,9 +22912,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23280,9 +22923,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23340,8 +22980,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -23353,8 +22991,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
         "repeater",
         "phoenix-bow",
         "heavy-crossbow",
@@ -23474,9 +23110,6 @@
       },
       "eligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23488,9 +23121,6 @@
       ],
       "baselineEligibleWeapons": [
         "sandal",
-        "smg",
-        "shotgun",
-        "rocket",
         "caltrops",
         "repeater",
         "phoenix-bow",
@@ -23538,10 +23168,10 @@
     },
     {
       "id": "D17",
-      "name": "二踢脚推进器",
-      "desc": "火箭筒伤害+25%、弹速+20%",
+      "name": "雷丸药捻",
+      "desc": "震天雷伤害+25%、弹速+20%",
       "price": 1.3,
-      "stack": "A/U：持有火箭筒时出现，弹速最多增加100%，超出转火箭伤害",
+      "stack": "A/U：持有震天雷时出现，弹速最多增加100%，超出转震天雷伤害",
       "bonus": {},
       "slot": "waist",
       "category": "远程弹道",
@@ -23549,10 +23179,10 @@
         "renderer": "CampaignView vector icon"
       },
       "eligibleWeapons": [
-        "rocket"
+        "thunder-bomb"
       ],
       "baselineEligibleWeapons": [
-        "rocket"
+        "thunder-bomb"
       ],
       "prerequisiteExamples": [],
       "singleItemBonusChanges": [
@@ -23595,10 +23225,10 @@
     },
     {
       "id": "D18",
-      "name": "霰弹聚能环",
-      "desc": "霰弹枪伤害+20%、射程+15%",
+      "name": "三尖缠柄",
+      "desc": "三尖刀伤害+20%、射程+15%",
       "price": 1.2,
-      "stack": "A/U：持有霰弹枪时出现，射程最多增加60%，超出转霰弹伤害",
+      "stack": "A/U：持有三尖刀时出现，射程最多增加60%，超出转三尖刀伤害",
       "bonus": {},
       "slot": "waist",
       "category": "远程弹道",
@@ -23606,10 +23236,10 @@
         "renderer": "CampaignView vector icon"
       },
       "eligibleWeapons": [
-        "shotgun"
+        "trident"
       ],
       "baselineEligibleWeapons": [
-        "shotgun"
+        "trident"
       ],
       "prerequisiteExamples": [],
       "singleItemBonusChanges": [
@@ -23652,10 +23282,10 @@
     },
     {
       "id": "D19",
-      "name": "突突穿甲匣",
-      "desc": "突突枪额外穿透1人，后续伤害70%",
+      "name": "重弩透甲簇",
+      "desc": "重弩额外穿透1人",
       "price": 1.4,
-      "stack": "M：最多额外3次，之后提高突突枪伤害",
+      "stack": "M：最多额外3次，之后提高重弩伤害",
       "bonus": {},
       "slot": "waist",
       "category": "远程弹道",
@@ -23663,10 +23293,10 @@
         "renderer": "CampaignView vector icon"
       },
       "eligibleWeapons": [
-        "smg"
+        "heavy-crossbow"
       ],
       "baselineEligibleWeapons": [
-        "smg"
+        "heavy-crossbow"
       ],
       "prerequisiteExamples": [],
       "singleItemBonusChanges": [
@@ -26049,24 +25679,6 @@
             58,
             92
           ],
-          "smg": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "shotgun": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "rocket": [
-            45,
-            77,
-            131,
-            207
-          ],
           "sword": [
             42,
             71,
@@ -26270,24 +25882,6 @@
             34,
             58,
             92
-          ],
-          "smg": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "shotgun": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "rocket": [
-            45,
-            77,
-            131,
-            207
           ],
           "sword": [
             42,
@@ -26493,24 +26087,6 @@
             58,
             92
           ],
-          "smg": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "shotgun": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "rocket": [
-            45,
-            77,
-            131,
-            207
-          ],
           "sword": [
             42,
             71,
@@ -26714,24 +26290,6 @@
             34,
             58,
             92
-          ],
-          "smg": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "shotgun": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "rocket": [
-            45,
-            77,
-            131,
-            207
           ],
           "sword": [
             42,
@@ -26937,24 +26495,6 @@
             58,
             92
           ],
-          "smg": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "shotgun": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "rocket": [
-            45,
-            77,
-            131,
-            207
-          ],
           "sword": [
             42,
             71,
@@ -27158,24 +26698,6 @@
             34,
             58,
             92
-          ],
-          "smg": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "shotgun": [
-            39,
-            66,
-            113,
-            179
-          ],
-          "rocket": [
-            45,
-            77,
-            131,
-            207
           ],
           "sword": [
             42,
@@ -28082,7 +27604,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "chronicle-ui",
         "priority": 8,
-        "sourceBytes": 1162832
+        "sourceBytes": 1680901
       },
       {
         "path": "assets/chronicle-units/",
@@ -28090,7 +27612,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "chronicle-units",
         "priority": 8,
-        "sourceBytes": 1005156
+        "sourceBytes": 763677
       },
       {
         "path": "assets/enemies/",
@@ -28106,7 +27628,7 @@
         "bundleConfigID": "battle-subpackage",
         "bundleName": "hero-menu",
         "priority": 8,
-        "sourceBytes": 809966
+        "sourceBytes": 1952243
       },
       {
         "path": "assets/meadow/",
@@ -28146,7 +27668,7 @@
         "bundleConfigID": "cdn-assets",
         "bundleName": "boss-caocao",
         "priority": 8,
-        "sourceBytes": 93436
+        "sourceBytes": 1842204
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/",
@@ -28154,7 +27676,7 @@
         "bundleConfigID": "cdn-assets",
         "bundleName": "boss-dongzhuo",
         "priority": 8,
-        "sourceBytes": 143655
+        "sourceBytes": 2852113
       },
       {
         "path": "assets/remote-content/boss-lvbu/",
@@ -28162,7 +27684,7 @@
         "bundleConfigID": "cdn-assets",
         "bundleName": "boss-lvbu",
         "priority": 8,
-        "sourceBytes": 211963
+        "sourceBytes": 3788422
       },
       {
         "path": "assets/remote-content/boss-menghuo/",
@@ -28170,7 +27692,15 @@
         "bundleConfigID": "cdn-assets",
         "bundleName": "boss-menghuo",
         "priority": 8,
-        "sourceBytes": 289914
+        "sourceBytes": 4738009
+      },
+      {
+        "path": "assets/remote-content/boss-props/",
+        "isBundle": true,
+        "bundleConfigID": "cdn-assets",
+        "bundleName": "boss-props",
+        "priority": 8,
+        "sourceBytes": 1159584
       },
       {
         "path": "assets/remote-content/boss-simayi/",
@@ -28178,7 +27708,7 @@
         "bundleConfigID": "cdn-assets",
         "bundleName": "boss-simayi",
         "priority": 8,
-        "sourceBytes": 120821
+        "sourceBytes": 2351174
       },
       {
         "path": "assets/remote-content/boss-yuanshao/",
@@ -28186,7 +27716,15 @@
         "bundleConfigID": "cdn-assets",
         "bundleName": "boss-yuanshao",
         "priority": 8,
-        "sourceBytes": 116416
+        "sourceBytes": 2319417
+      },
+      {
+        "path": "assets/remote-content/boss-zhangjiao/",
+        "isBundle": true,
+        "bundleConfigID": "cdn-assets",
+        "bundleName": "boss-zhangjiao",
+        "priority": 8,
+        "sourceBytes": 2600139
       },
       {
         "path": "assets/remote-content/hidden-heroes/",
@@ -28881,6 +28419,160 @@
         "colorType": 2
       },
       {
+        "path": "art/concepts/taoyuan-redesign/boss-roster.png",
+        "bytes": 2373517,
+        "width": 1774,
+        "height": 887,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/enemy-families.png",
+        "bytes": 2028057,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-growth.png",
+        "bytes": 1931084,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-guan.png",
+        "bytes": 1685727,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-liu.png",
+        "bytes": 1692989,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/hero-zhang.png",
+        "bytes": 1716233,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/home.png",
+        "bytes": 2259309,
+        "width": 1671,
+        "height": 941,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/skill-silhouettes.png",
+        "bytes": 2125491,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/stage-dioramas.png",
+        "bytes": 1966995,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/ui-flow.png",
+        "bytes": 2094573,
+        "width": 2172,
+        "height": 724,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e01-e08.png",
+        "bytes": 2071451,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e09-e16.png",
+        "bytes": 2044262,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e17-e24.png",
+        "bytes": 2144085,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e25-e32.png",
+        "bytes": 2100518,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/units-e33-e40.png",
+        "bytes": 1997299,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapon-prototypes.png",
+        "bytes": 2373650,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapons-arcana.png",
+        "bytes": 1773053,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapons-gear.png",
+        "bytes": 2250987,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/weapons-origin.png",
+        "bytes": 1845934,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/yellow-turban-farmer.png",
+        "bytes": 1758489,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/zhangjiao-dark.png",
+        "bytes": 2161083,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 2
+      },
+      {
+        "path": "art/concepts/taoyuan-redesign/zhangjiao-encounter.png",
+        "bytes": 2123157,
+        "width": 1672,
+        "height": 941,
+        "colorType": 2
+      },
+      {
         "path": "art/concepts/ui-layout/battle-hud.png",
         "bytes": 1797884,
         "width": 1816,
@@ -29348,6 +29040,118 @@
         "width": 1500,
         "height": 750,
         "colorType": 6
+      },
+      {
+        "path": "art/reviews/handcrafted/battle-start.png",
+        "bytes": 871789,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/battle-sweep.png",
+        "bytes": 909865,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-cast.png",
+        "bytes": 966816,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-idle.png",
+        "bytes": 911169,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-recover.png",
+        "bytes": 933951,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/boss-windup.png",
+        "bytes": 953995,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/clear.png",
+        "bytes": 935587,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/home.png",
+        "bytes": 1689615,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/settings.png",
+        "bytes": 1149116,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/shop.png",
+        "bytes": 453137,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/skill-select.png",
+        "bytes": 545629,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/stage-picker.png",
+        "bytes": 1160039,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/training-heroes.png",
+        "bytes": 354012,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/training-weapons.png",
+        "bytes": 373186,
+        "width": 1440,
+        "height": 750,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/wechat-battle.png",
+        "bytes": 282813,
+        "width": 726,
+        "height": 336,
+        "colorType": 2
+      },
+      {
+        "path": "art/reviews/handcrafted/wechat-home.png",
+        "bytes": 436440,
+        "width": 726,
+        "height": 336,
+        "colorType": 2
       },
       {
         "path": "art/reviews/hero-growth/pressure.png",
@@ -31025,6 +30829,62 @@
         "colorType": 6
       },
       {
+        "path": "art/runtime-redesign/camp.png",
+        "bytes": 2600702,
+        "width": 1672,
+        "height": 941,
+        "colorType": 2
+      },
+      {
+        "path": "art/runtime-redesign/farmer-actions.png",
+        "bytes": 1382600,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-redesign/farmer-hoe.png",
+        "bytes": 1348891,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-redesign/hero-parts.png",
+        "bytes": 1351425,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-redesign/showcase-closed.png",
+        "bytes": 2853374,
+        "width": 2172,
+        "height": 724,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-redesign/skill-icons.png",
+        "bytes": 1324125,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-redesign/terrain.png",
+        "bytes": 1731026,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 2
+      },
+      {
+        "path": "art/runtime-redesign/zhangjiao-actions.png",
+        "bytes": 2080349,
+        "width": 1269,
+        "height": 1240,
+        "colorType": 6
+      },
+      {
         "path": "art/runtime-sources/png/0fe25a77dc4c6fb331c658a9593958c8f8df157fed18034a8207d7294820c195.png",
         "bytes": 137499,
         "width": 351,
@@ -31450,9 +31310,37 @@
       },
       {
         "path": "assets/chronicle-ui/boss-portraits.png",
-        "bytes": 49052,
+        "bytes": 47930,
         "width": 576,
         "height": 288,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-arsenal.png",
+        "bytes": 160935,
+        "width": 1024,
+        "height": 640,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-relief.png",
+        "bytes": 182314,
+        "width": 960,
+        "height": 496,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-skills.png",
+        "bytes": 42380,
+        "width": 448,
+        "height": 336,
+        "colorType": 3
+      },
+      {
+        "path": "assets/chronicle-ui/redesign-stage-thumbs.png",
+        "bytes": 129558,
+        "width": 960,
+        "height": 256,
         "colorType": 3
       },
       {
@@ -31489,20 +31377,6 @@
         "width": 640,
         "height": 640,
         "colorType": 6
-      },
-      {
-        "path": "assets/chronicle-units/boss-props.png",
-        "bytes": 101833,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
-      },
-      {
-        "path": "assets/chronicle-units/boss-zhangjiao-actions.png",
-        "bytes": 137646,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
       },
       {
         "path": "assets/chronicle-units/troops-a-back.png",
@@ -31632,52 +31506,66 @@
       },
       {
         "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
-        "bytes": 92433,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
+        "bytes": 1841201,
+        "width": 1627,
+        "height": 927,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
-        "bytes": 142650,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
+        "bytes": 2851108,
+        "width": 1493,
+        "height": 1410,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
-        "bytes": 210967,
-        "width": 768,
-        "height": 960,
-        "colorType": 3
+        "bytes": 3787426,
+        "width": 1839,
+        "height": 2013,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-beasts.png",
-        "bytes": 147272,
-        "width": 960,
-        "height": 640,
-        "colorType": 3
+        "bytes": 1916865,
+        "width": 914,
+        "height": 1523,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
-        "bytes": 140643,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
+        "bytes": 2819145,
+        "width": 1407,
+        "height": 1420,
+        "colorType": 6
+      },
+      {
+        "path": "assets/remote-content/boss-props/boss-props.png",
+        "bytes": 1158590,
+        "width": 804,
+        "height": 1077,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
-        "bytes": 119818,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
+        "bytes": 2350171,
+        "width": 1820,
+        "height": 1003,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
-        "bytes": 115411,
-        "width": 640,
-        "height": 640,
-        "colorType": 3
+        "bytes": 2318412,
+        "width": 1845,
+        "height": 1011,
+        "colorType": 6
+      },
+      {
+        "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
+        "bytes": 2599133,
+        "width": 1446,
+        "height": 1415,
+        "colorType": 6
       },
       {
         "path": "assets/remote-content/hidden-heroes/hero-parts.png",

@@ -1,3 +1,4 @@
+import {applyUiFont} from './ui-font';
 import {addPanelClose} from './panel-ui';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {growthClears,signatureId} from './hero-growth';
@@ -24,6 +25,7 @@ import { supplyCard, canBuySupply, clockText, basePrice, AUGMENTS, refreshPrice 
 
 import { PASSIVE_ITEMS, ITEM_CATEGORIES, passivePreview } from './passive-items';
 import { ResultView } from './ResultView';
+import {armoryDescription} from './armory-redesign';
 
 const C = { paper: '#fff0d2', ink: '#432d1d', green: '#355e40', red: '#c94d2e', sand: '#f1d7a4', muted: '#826442' };
 
@@ -91,12 +93,12 @@ export class CampaignView {
     const logo=this.sprite(p,logoFrame,-516,297,244,logoFrame?244*logoFrame.rect.height/logoFrame.rect.width:80);
     if(logo)logo.node.name='GameLogo';else this.bold(p,GAME_NAME,-516,297,34,'#fff0cb',245,70);
 
-    this.heroShowcase=new HeroShowcase(p,this.frames);this.heroShowcase.root.setPosition(options?-265:0,15);this.heroShowcase.root.setScale(options?2.65:2.2,options?2.65:2.2,1);
+    this.heroShowcase=new HeroShowcase(p,this.frames,this.battleAtlas);this.heroShowcase.root.setPosition(options?-112:0,23);this.heroShowcase.root.setScale(options?2.65:2.2,options?2.65:2.2,1);
     const nameplate=this.node(p,'HeroNameplate').addComponent(Graphics);
-    nameplate.fillColor=new Color(43,65,41,225);nameplate.roundRect((options?-265:0)-69,-112,138,43,18);nameplate.fill();
-    const heroName=this.bold(p,'',options?-265:0,-90,30,'#fff0d2',126,43);heroName.node.name='ShowcaseHeroName';heroName.fontFamily='serif';
+    nameplate.fillColor=new Color('#315a50');nameplate.strokeColor=new Color('#dfbb76');nameplate.lineWidth=2;nameplate.roundRect((options?-112:0)-69,-112,138,43,18);nameplate.fill();nameplate.stroke();
+    const heroName=this.bold(p,'',options?-112:0,-90,30,'#fff0d2',126,43);heroName.node.name='ShowcaseHeroName';
     const rail=this.node(p,'HeroPortraitRail').addComponent(Graphics);
-    rail.fillColor=new Color(16,34,25,145);rail.strokeColor=new Color(229,204,143,65);rail.lineWidth=1;rail.roundRect(-346,-229,692,111,24);rail.fill();rail.stroke();
+    rail.fillColor=new Color('#eed8b5');rail.strokeColor=new Color('#a78054');rail.lineWidth=3;rail.roundRect(-346,-229,692,111,24);rail.fill();rail.stroke();
     if(options){const divider=this.node(p,'HeroLoadoutDivider');divider.setPosition(94,-175);const d=divider.addComponent(Graphics);d.strokeColor=new Color('#d5b66d');d.lineWidth=1.5;d.moveTo(0,-27);d.lineTo(0,-7);d.moveTo(0,7);d.lineTo(0,27);d.stroke();d.fillColor=new Color('#eed08b');d.moveTo(0,4);d.lineTo(4,0);d.lineTo(0,-4);d.lineTo(-4,0);d.close();d.fill();}
     const portraits:HeroPortraitSlot[]=[];
     heroes.forEach((hero,i)=>{
@@ -136,14 +138,16 @@ export class CampaignView {
     onHeroChanged=updateSkill;
     skillCard.on(Node.EventType.TOUCH_START,()=>{if(!starting)skillCard.setScale(.94,.94,1);});skillCard.on(Node.EventType.TOUCH_CANCEL,()=>skillCard.setScale(1,1,1));
     let choosing=false;skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choosing=true;new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choosing=false;updateSkill();},()=>choosing=false,options?.profile);});
-    const button=this.node(p,'StartHero');button.setPosition(0,-289);button.addComponent(UITransform).setContentSize(330,88);
-    const plate=this.sprite(button,this.frames['hero-menu-start'],0,0,360,180);
-    if(!plate){const g=button.addComponent(Graphics);g.fillColor=new Color('#683723');g.roundRect(-165,-48,330,88,24);g.fill();g.fillColor=new Color('#cb4e2b');g.strokeColor=new Color('#f69b68');g.lineWidth=3;g.roundRect(-165,-41,330,82,24);g.fill();g.stroke();}
-    const text=this.bold(button,options?'开始挑战':'开始',0,0,44,'#fff0cc',290,65);text.fontFamily='serif';
-    button.on(Node.EventType.TOUCH_START,()=>{if(!starting)button.setScale(.97,.97,1);});button.on(Node.EventType.TOUCH_CANCEL,()=>button.setScale(1,1,1));
-    button.on(Node.EventType.TOUCH_END,()=>{if(starting)return;starting=true;persist();start(this.selection,this.selectionSkill,weapon,stage);});
+    const button=this.node(p,'StartHero');button.setPosition(0,-289);button.addComponent(UITransform).setContentSize(360,92);
+    const face=this.node(button,'StartHeroFace');
+    this.drawStartHeroFace(face.addComponent(Graphics));
+    this.bold(face,options?'开始挑战':'开始',0,2,40,'#492a18',270,58).isBold=true;
+    button.on(Node.EventType.TOUCH_START,()=>{if(!starting){face.setPosition(0,-3);face.setScale(.98,.98,1);}});
+    const release=()=>{face.setPosition(0,0);face.setScale(1,1,1);};
+    button.on(Node.EventType.TOUCH_CANCEL,release);
+    button.on(Node.EventType.TOUCH_END,()=>{release();if(starting)return;starting=true;persist();start(this.selection,this.selectionSkill,weapon,stage);});
     if(options){
-      stageBrief=new StageBriefView(p,this.frames);stageCard=stageBrief.root;stageCard.setPosition(290,85);
+      stageBrief=new StageBriefView(p,this.frames);stageCard=stageBrief.root;stageCard.setPosition(321,65);
       stageCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;new StagePickerView(p,this.frames,options.profile,this.selection,stage,n=>{stage=n;choosing=false;persist();updateLoadout();},()=>choosing=false);});
       weaponCard=this.node(p,'HeroWeaponSelect');weaponCard.setPosition(180,-175);weaponCard.addComponent(UITransform).setContentSize(84,84);const g=weaponCard.addComponent(Graphics);g.fillColor=new Color('#294632');g.strokeColor=new Color('#d4be81');g.lineWidth=2;g.roundRect(-39,-39,78,78,16);g.fill();g.stroke();
       weaponCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;if(growthClears(options.profile,this.selection)>0){new GrowthDetailView(p,this.frames,this.selection,growthClears(options.profile,this.selection),()=>choosing=false);return;}new StarterSelectView(p,this.frames,weapon,id=>{weapon=id;choosing=false;persist();updateLoadout();},()=>choosing=false);});
@@ -284,6 +288,7 @@ export class CampaignView {
     this.content=this.node(this.root,'SupplyContent');this.resize(this.width,this.height);const p=this.content;
     const major=!run.challenge&&run.supplyMode==='major',bossPrep=run.wavesCleared>=3;
     this.jadePanel(p,1140,650);
+    const cardTray=this.node(p,'SupplyCardTray');cardTray.setPosition(0,26);this.paper(cardTray,1090,393);
     const title=run.challenge?'桃园补给':bossPrep?chapterFor(run.chapter).boss+' · 战前补给':run.chapterShop?chapterFor(run.chapter).name+' · 补给':major?'天命强化':'桃园补给';
     const headerLeft=run.challenge?-532:-528;
     const heading=this.bold(p,title,headerLeft+230,278,34,'#ffedba',460,50);heading.horizontalAlign=Label.HorizontalAlign.LEFT;
@@ -295,15 +300,15 @@ export class CampaignView {
       const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-(run.offers.length-1)/2)*(run.challenge?270:360),27);n.addComponent(UITransform).setContentSize(run.challenge?254:336,360);
       const width=run.challenge?254:336,color=card.major?'#e8bb65':card.weapon?TIER_COLORS[card.weapon.tier-1]:'#b8afdc';
       if(!this.battleAtlas?.addSliced(n,'ui-shop-card-'+(card.weapon?.tier||(card.major?5:0)),width,360,12)){
-        const g=n.addComponent(Graphics);g.fillColor=new Color(48,84,62,230);g.strokeColor=new Color(color);g.lineWidth=card.weapon?2+card.weapon.tier*.65:2;g.roundRect(-width/2,-180,width,360,19);g.fill();g.stroke();
-        if(card.weapon){const wash=new Color(color);wash.a=card.weapon.tier===1?10:22;g.fillColor=wash;g.roundRect(-width/2+6,-174,width-12,348,15);g.fill();}
+        const g=n.addComponent(Graphics);g.fillColor=new Color('#f8e7c5');g.strokeColor=new Color('#866440');g.lineWidth=3;g.roundRect(-width/2,-180,width,360,19);g.fill();g.stroke();
+        g.strokeColor=new Color(color);g.lineWidth=2;g.roundRect(-width/2+5,-175,width-10,350,15);g.stroke();
       }
       if(card.weapon)this.tierBand(n,card.weapon.tier,0,149,run.challenge?232:310,card.from);
-      else this.text(n,card.tag,0,149,17,'#e8dca4',run.challenge?232:300,32);
+      else this.text(n,card.tag,0,149,17,'#725027',run.challenge?232:300,32);
       if(card.weapon)this.weaponIcon(n,card.weapon.id,card.weapon.tier,0,67,1.25);
       else this.itemIcon(n,id,0,67,.95);
-      this.bold(n,card.title,0,3,run.challenge?23:26,'#fff0c8',run.challenge?236:302,40);
-      const desc=this.text(n,card.desc.split('\n').slice(0,3).join('\n'),0,-59,18,'#e4eacb',run.challenge?234:300,80);if(run.challenge)desc.node.on(Node.EventType.TOUCH_END,()=>{const details=this.dialog(card.title,850,420,'SupplyDetailsClose');this.text(details,card.desc,0,35,24,'#fff0d2',770,220);});
+      this.bold(n,card.title,0,3,run.challenge?23:26,C.ink,run.challenge?236:302,40);
+      const desc=this.text(n,card.desc.split('\n').slice(0,3).join('\n'),0,-59,18,'#58412e',run.challenge?234:300,80);if(run.challenge)desc.node.on(Node.EventType.TOUCH_END,()=>{const details=this.dialog(card.title,850,420,'SupplyDetailsClose');this.text(details,card.desc,0,35,24,'#fff0d2',770,220);});
       const enabled=canBuySupply(run,id),sold=run.purchasedOffers.indexOf(id)>=0,full=card.weapon&&parseWeaponOffer(id)&&run.weapons.length===6;
       const title=sold?'已购入':!enabled?(run.gold<card.price?'铜钱不足':'暂不可购'):`${card.price} ${full?'替换':'购买'}`;
       this.campButton(n,'SupplyBuy-'+i,title,0,-137,run.challenge?230:296,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
@@ -319,18 +324,19 @@ export class CampaignView {
     this.campButton(rail,'OpenInventory',`道具 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)} ›`,424,0,178,()=>this.inventoryDialog(run),'secondary');
     const price=refreshPrice(run);
     this.campButton(p,'SupplyRefresh',`刷新 ${price}`,-420,-285,240,refresh,'secondary',run.gold>=price,true);
-    this.campButton(p,'SupplySkip','继续战斗',390,-285,300,skip,'primary');
+    this.campButton(p,'SupplySkip','继续战斗',390,-285,300,skip,'gold');
   }
 
   private itemIcon(parent:Node,id:string,x:number,y:number,scale:number):void {
     // The old D06 bean portrait is retired; use the existing penetration-arrow icon style.
     if(id==='D06'){this.itemIcon(parent,'D14',x,y,scale);return;}
     const item=PASSIVE_ITEMS.find(i=>i.id===id),category=item?id.charCodeAt(0)-65:0,n=this.node(parent,'ItemArt-'+id);n.setPosition(x,y);n.setScale(scale,scale,1);
-    if(id==='F02'){addWeaponIcon(n,this.frames,'pole',1,80);return;}
+    const itemWeapon=({F02:'pole',F05:'repeater',D07:'phoenix-bow',D17:'thunder-bomb',D18:'trident',D19:'heavy-crossbow'} as Record<string,WeaponId>)[id];
+    if(itemWeapon){addWeaponIcon(n,this.frames,itemWeapon,1,80);return;}
     const spriteFrame=this.frames['item-'+id];if(spriteFrame){this.sprite(n,spriteFrame,0,0,94,94);return;}
     if(item&&id[0]==='D'&&Number(id.slice(1))>=9){
       const g=n.addComponent(Graphics);g.fillColor=new Color('#365e50');g.strokeColor=new Color('#a1d7be');g.lineWidth=3;g.circle(0,0,43);g.fill();g.stroke();
-      const weapon=({D15:'sandal',D17:'rocket',D18:'shotgun',D19:'smg',D20:'sandal'} as Record<string,WeaponId>)[id];
+      const weapon=({D15:'sandal',D20:'sandal'} as Record<string,WeaponId>)[id];
       if(weapon){this.weaponIcon(n,weapon,1,0,0,.85);g.strokeColor=new Color('#ffe0a0');g.lineWidth=4;g.moveTo(25,-18);g.lineTo(25,-36);g.moveTo(16,-27);g.lineTo(34,-27);g.stroke();}
       else{
         g.strokeColor=new Color('#f7d797');g.lineWidth=4;const index=Number(id.slice(1));
@@ -376,16 +382,17 @@ export class CampaignView {
         this.weaponIcon(oldPreview,w.id,w.tier,-173,-2,1.15);
         this.bold(oldPreview,weaponFor(w.id).name,53,49,25,'#fff0d2',300,36);this.tierBand(oldPreview,w.tier,54,5,284);
         const refund=recycleValue(run,w.uid),left=run.gold+refund-card.price;
-        this.text(oldPreview,`出售返还 +${refund} 铜钱`,54,-48,20,'#d8e1c3',300,36);
+        const lost=armoryDescription(w.id,w.tier)||weaponEffectText(w.id,weaponStatsFor(run,w)).split('\n')[0];
+        this.text(oldPreview,`失去 ${lost}\n出售返还 +${refund} 铜钱`,54,-48,17,'#d8e1c3',310,48);
         ledger.string=`当前 ${run.gold}  ＋  回收 ${refund}  −  购买 ${card.price}  ＝  余额 ${left}`;ledger.color=new Color(left<0?'#f3a796':'#ead9ac');updateConfirm();
       });
     });
     updateConfirm();
   }
 
-  stageResult(run:Run,kills:number,reward:StageReward,next:()=>void,menu:()=>void,saved:boolean):void {
+  stageResult(run:Run,kills:number,reward:StageReward,next:()=>void,menu:()=>void,saved:boolean,retrySave?:()=>void):void {
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}this.root.active=true;this.heroMenu=false;this.campMode=false;this.campBackground=undefined;this.codexView=undefined;
-    this.resultView=new StageClearView(this.root,this.frames,run,kills,reward,next,menu,saved,this.battleAtlas);this.resultView.resize(this.width,this.height);
+    this.resultView=new StageClearView(this.root,this.frames,run,kills,reward,next,menu,saved,this.battleAtlas,retrySave);this.resultView.resize(this.width,this.height);
   }
   survivalResult(run: Run, kills: number, best: number, record: boolean, retry: () => void, menu: () => void, testing: boolean, warmupElapsed=0,won=false): void {
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
@@ -401,7 +408,7 @@ export class CampaignView {
     this.weaponIcon(p, w.id, w.tier, -280, 8, 2.8);
     this.bold(p, `${CLASS_NAMES[d.category]}   伤害 ${formatStat(current.damage)}   间隔 ${current.interval.toFixed(2)}s`, 100, 100, 24, '#dce4c1', 600, 42);
     this.text(p, `距离 ${current.range}   暴击 ${Math.round(current.crit * 100)}%   暴伤 ×${current.critMultiplier}`, 100, 53, 21, '#fff0d2', 600, 40);
-    this.text(p, weaponEffectText(w.id,current), 100, 7, 20, '#fff0d2', 600, 62);
+    this.text(p, armoryDescription(w.id,w.tier)||weaponEffectText(w.id,current), 100, 7, 20, '#fff0d2', 600, 62);
     if (pair) {
       const nextW = { ...w, tier: (w.tier + 1) as Tier }, nextRun = { ...run, weapons: run.weapons.filter(v => v.uid !== pair.uid).map(v => v.uid === w.uid ? nextW : v) }, future = weaponStatsFor(nextRun, nextW);
       this.text(p, `合成后  ${TIER_NAMES[w.tier]} · 伤害 ${formatStat(future.damage)} · ${future.interval.toFixed(2)}s\n装备 ${run.weapons.length} → ${run.weapons.length - 1} 件，同类加成随数量变化`, 95, -72, 20, '#dce4c1', 610, 90);
@@ -547,12 +554,40 @@ export class CampaignView {
     const g = n.addComponent(Graphics); g.fillColor = new Color(color); g.strokeColor = new Color(C.ink); g.lineWidth = 2.5;
     g.moveTo(-width / 2 + 5, -9); g.lineTo(width / 2 - 6, -9); g.lineTo(width / 2, 10); g.lineTo(-width / 2, 10); g.close(); g.fill(); g.stroke();
   }
-  private bold(parent: Node, title: string, x: number, y: number, size: number, color: string, w: number, h: number): Label {
-    const label = this.text(parent, title, x, y, size, color, w, h); label.isBold = true; return label;
+  private bold(parent: Node, title: string, x: number, y: number, size: number, color: string, w: number, h: number, bold = false): Label {
+    return this.text(parent, title, x, y, size, color, w, h, true);
   }
-  private campButton(parent: Node, name: string, title: string, x: number, y: number, w: number, action: () => void, kind: 'buy' | 'primary' | 'secondary', enabled = true, coin = false): Node {
-    const color = enabled ? kind === 'primary' ? C.red : kind === 'buy' ? C.green : C.paper : '#d3c9b2';
-    const foreground = enabled && kind !== 'secondary' ? C.paper : enabled ? C.ink : '#827b6b';
+  private drawStartHeroFace(g:Graphics):void {
+    const edge=(inset:number,y:number):void=>{
+      const w=178-inset,h=39-inset;
+      g.moveTo(-w+31,y+h);
+      g.lineTo(w-31,y+h);
+      g.bezierCurveTo(w-24,y+h,w-20,y+h-2,w-16,y+h-8);
+      g.lineTo(w-3,y+8);
+      g.bezierCurveTo(w+1,y+3,w+1,y-3,w-3,y-8);
+      g.lineTo(w-16,y-h+8);
+      g.bezierCurveTo(w-20,y-h+2,w-24,y-h,w-31,y-h);
+      g.lineTo(-w+31,y-h);
+      g.bezierCurveTo(-w+24,y-h,-w+20,y-h+2,-w+16,y-h+8);
+      g.lineTo(-w+3,y-8);
+      g.bezierCurveTo(-w-1,y-3,-w-1,y+3,-w+3,y+8);
+      g.lineTo(-w+16,y+h-8);
+      g.bezierCurveTo(-w+20,y+h-2,-w+24,y+h,-w+31,y+h);
+      g.close();
+    };
+    g.fillColor=new Color(62,38,20,60);g.ellipse(0,-38,164,12);g.fill();
+    g.fillColor=new Color('#975126');g.strokeColor=new Color('#593821');g.lineWidth=3;edge(0,-5);g.fill();g.stroke();
+    g.fillColor=new Color('#df8b32');g.strokeColor=new Color('#ffc363');g.lineWidth=2;edge(1,0);g.fill();g.stroke();
+    g.fillColor=new Color('#f8b94b');g.strokeColor=new Color('#ffe4a1');g.lineWidth=1.5;edge(6,0);g.fill();g.stroke();
+    // Broad bevel light tapers into the chamfered ends.
+    g.fillColor=new Color('#ffd473');
+    g.moveTo(-144,30);g.lineTo(144,30);g.bezierCurveTo(152,30,157,20,164,9);
+    g.bezierCurveTo(86,-2,-64,0,-164,9);g.bezierCurveTo(-157,20,-152,30,-144,30);g.close();g.fill();
+    g.strokeColor=new Color('#fff1bd');g.lineWidth=2;g.moveTo(-131,33);g.lineTo(111,33);g.stroke();
+  }
+  private campButton(parent: Node, name: string, title: string, x: number, y: number, w: number, action: () => void, kind: 'buy' | 'primary' | 'secondary' | 'gold', enabled = true, coin = false): Node {
+    const color = enabled ? kind === 'primary' ? C.red : kind === 'buy' ? C.green : kind === 'gold' ? '#efb75d' : C.paper : '#d3c9b2';
+    const foreground = enabled ? kind === 'primary' || kind === 'buy' ? C.paper : C.ink : '#827b6b';
     const n = this.plaque(parent, '', x, y, w, kind === 'buy' ? 56 : 62, color, foreground); n.name = name;
     if (coin) this.sprite(n, this.frames['ui-coin'], -w / 2 + 28, 0, 33, 33);
     this.bold(n, title, coin ? 14 : 0, 0, w < 100 ? 17 : 24, foreground, w - (coin ? 52 : 16), 48);
@@ -576,10 +611,10 @@ export class CampaignView {
     g.fillColor = new Color(selected ? '#394b35' : '#303c32'); g.strokeColor = new Color(selected ? '#ffda83' : '#79836a'); g.lineWidth = selected ? 4 : 2;
     g.roundRect(-w / 2, -h / 2, w, h, 18); g.fill(); g.stroke();
   }
-  private text(parent: Node, value: string, x: number, y: number, size: number, color: string, w: number, h: number): Label {
+  private text(parent: Node, value: string, x: number, y: number, size: number, color: string, w: number, h: number, bold = false): Label {
     const n = this.node(parent, value.slice(0, 20)); n.setPosition(x, y); n.addComponent(UITransform).setContentSize(w, h);
     const l = n.addComponent(Label); l.string = value; l.fontSize = size; l.lineHeight = size * 1.35; l.color = new Color(color);
-    l.horizontalAlign = Label.HorizontalAlign.CENTER; l.verticalAlign = Label.VerticalAlign.CENTER; l.overflow = Label.Overflow.SHRINK; return l;
+    l.horizontalAlign = Label.HorizontalAlign.CENTER; l.verticalAlign = Label.VerticalAlign.CENTER; l.overflow = Label.Overflow.SHRINK; return applyUiFont(l, bold);
   }
   private sprite(parent: Node, frame: SpriteFrame, x: number, y: number, w: number, h: number): Sprite | undefined {
     if (!frame) return;

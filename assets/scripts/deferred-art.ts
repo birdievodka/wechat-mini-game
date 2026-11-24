@@ -1,9 +1,22 @@
-import {Texture2D,SpriteFrame,Rect} from 'cc';
+import {Texture2D,SpriteFrame,Rect,Size,Vec2} from 'cc';
 import {loadGameBundle} from './game-resources';
 import {AssetScope,artScope,releaseArtTexture} from './asset-scope';
 import {boundedCall,notifySafely} from './load-lifetime';
 type Listener={alive:()=>boolean;done:(error?:Error)=>void};
-export type Sheet={name:string;columns:number;rows:number;keys:string[]};
+export type PackedFrame=readonly [number,number,number,number,number,number,number,number];
+export function makeSheetFrame(texture:Texture2D,index:number,cols:number,rows:number,packed?:PackedFrame):SpriteFrame {
+ const f=new SpriteFrame();f.texture=texture;
+ if(packed){
+  const [x,y,w,h,ow,oh,left,top]=packed;
+  f.rect=new Rect(x,y,w,h);f.originalSize=new Size(ow,oh);
+  f.offset=new Vec2(left+(w-ow)/2,(oh-h)/2-top);
+ }else{
+  const w=texture.width/cols,h=texture.height/rows;
+  f.rect=new Rect(index%cols*w,Math.floor(index/cols)*h,w,h);
+ }
+ return f;
+}
+export type Sheet={name:string;columns:number;rows:number;keys:string[];layout?:readonly PackedFrame[]};
 type Group={listeners:Listener[];cancel?:()=>void};
 const pending=new WeakMap<Record<string,SpriteFrame>,Map<string,Group>>();
 const isAlive=(l:Listener):boolean=>{try{return l.alive();}catch(error){console.warn('资源存活检查异常',error);return false;}};
@@ -29,7 +42,7 @@ export function ensureSheets(bundleName:string,sheets:Sheet[],frames:Record<stri
   if(!error&&!group.listeners.some(isAlive))error=new Error('已离开资源准备界面');
   const published:Record<string,SpriteFrame>={};
   try{if(!error){
-   for(const {sheet,texture} of loaded)sheet.keys.forEach((key,i)=>{const f=new SpriteFrame();f.texture=texture;f.rect=new Rect(i%sheet.columns*texture.width/sheet.columns,Math.floor(i/sheet.columns)*texture.height/sheet.rows,texture.width/sheet.columns,texture.height/sheet.rows);published[key]=f;});
+   for(const {sheet,texture} of loaded)sheet.keys.forEach((key,i)=>{published[key]=makeSheetFrame(texture,i,sheet.columns,sheet.rows,sheet.layout?.[i]);});
    for(const {texture} of loaded)artScope(frames).own(texture);
    for(const key of Object.keys(published))frames[key]=published[key];
   }}catch(cause){error=cause instanceof Error?cause:new Error(String(cause));for(const f of Object.values(published))f.destroy();}

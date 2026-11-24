@@ -1,3 +1,4 @@
+import {applyUiFont} from './ui-font';
 import {StageProfile,isKnown,unlocked} from './stage-progress';
 import {Color,Graphics,Label,Node,Sprite,SpriteFrame,UITransform} from 'cc';
 import {COMMON_SKILLS,commonSkillFor,skillPowerText} from './common-skills';
@@ -8,9 +9,9 @@ export class SkillSelectView {
   readonly root:Node;private page=0;private selected:string;
   constructor(parent:Node,private frames:Record<string,SpriteFrame>,selected:string,private choose:(id:string)=>void,private close:()=>void,private profile?:StageProfile){this.root=this.node(parent,'SkillSelection');this.selected=commonSkillFor(selected).id;this.page=Math.floor(Math.max(0,COMMON_SKILLS.findIndex(s=>s.id===this.selected))/12);this.render();}
   private node(p:Node,name:string):Node{const n=new Node(name);n.layer=p.layer;p.addChild(n);return n;}
-  private text(p:Node,t:string,x:number,y:number,size:number,w:number,h:number,color='#432d1d'):Label{const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.35;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return l;}
+  private text(p:Node,t:string,x:number,y:number,size:number,w:number,h:number,color='#432d1d',emphasized=size>=27):Label{const n=this.node(p,t);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const l=n.addComponent(Label);l.string=t;l.fontSize=size;l.lineHeight=size*1.35;l.color=new Color(color);l.horizontalAlign=Label.HorizontalAlign.CENTER;l.verticalAlign=Label.VerticalAlign.CENTER;l.overflow=Label.Overflow.SHRINK;return applyUiFont(l, emphasized);}
   private box(p:Node,name:string,x:number,y:number,w:number,h:number,fill:string,border='#d0b77e'):Node{const n=this.node(p,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(w,h);const g=n.addComponent(Graphics);g.fillColor=new Color(fill);g.strokeColor=new Color(border);g.lineWidth=2;g.roundRect(-w/2,-h/2,w,h,15);g.fill();g.stroke();return n;}
-  private button(p:Node,name:string,text:string,x:number,y:number,w:number,f:()=>void,primary=false):void{const n=this.box(p,name,x,y,w,52,primary?'#c94d2e':'#355e40');this.text(n,text,0,0,23,w-16,46,'#fff0d2');n.on(Node.EventType.TOUCH_END,f);}
+  private button(p:Node,name:string,text:string,x:number,y:number,w:number,f:()=>void,primary=false):void{const n=this.box(p,name,x,y,w,52,primary?'#c94d2e':'#355e40');this.text(n,text,0,0,23,w-16,46,'#fff0d2',primary);n.on(Node.EventType.TOUCH_END,f);}
   private icon(p:Node,id:string,x:number,y:number,size:number,silhouette=false):void{const s=commonSkillFor(id),f=this.frames['skill-'+s.icon];if(!f)return;const n=this.node(p,silhouette?'SkillSilhouette':'SkillIcon-'+id),sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;sp.spriteFrame=f;if(silhouette)sp.color=new Color(0,0,0,108);n.setPosition(x,y);const r=f.rect;n.getComponent(UITransform)!.setContentSize(size*r.width/Math.max(r.width,r.height),size*r.height/Math.max(r.width,r.height));}
   private render():void{
     const pages=Math.max(1,Math.ceil(COMMON_SKILLS.length/12));this.page=Math.min(this.page,pages-1);

@@ -4,8 +4,9 @@ import {EXTRA_WEAPONS} from './extra-weapons';
 import { PASSIVE_ITEMS, eligiblePassive, passivePreview, passiveBonuses } from './passive-items';
 import { Run, heroMaxHearts, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BUDGET } from './campaign';
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
+import {armoryDescription} from './armory-redesign';
 
-export const SURVIVAL_VERSION = 'stage-v10.13.4-release-ui';
+export const SURVIVAL_VERSION = 'stage-v11.0.9-battle-keys';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;
@@ -36,7 +37,10 @@ export function supplyCard(run: Run, id: string): SupplyCard {
     const weapon = w || { id: upgrade!.id, tier: Number(id.split(':')[2]) as Tier }, stats = weaponStatsFor(run, {...weapon,signature:upgrade?.signature}), d = weaponFor(weapon.id);
     // 升阶卡的 from 是本件当前品级，商店据此展示“旧 → 新”而不是只有目标品级。
     const next = Number(id.split(':')[2]), from = upgrade && next > 1 && next <= 4 ? (next - 1) as Tier : undefined;
-    return { id, title: upgrade ? `${d.name} · ${upgrade.signature?'本命':''}升阶` : d.name, desc: `伤害 ${Math.round(stats.damage * 10) / 10} · ${stats.interval.toFixed(2)}秒\n${upgrade?.signature&&(run.growth||0)>0?signatureEffectText(run.heroId,run.growth||0):weaponEffectText(weapon.id,stats)}`, price: run.offerPrices[id] ?? 28, tag: TIER_NAMES[weapon.tier - 1], icon: 'power', weapon, from, major: false };
+    const effect=armoryDescription(weapon.id,weapon.tier),previous=from&&armoryDescription(weapon.id,from);
+    const behavior=effect?(previous?previous+' → '+effect:effect):weaponEffectText(weapon.id,stats);
+    const signature=upgrade?.signature&&(run.growth||0)>0?'\n'+signatureEffectText(run.heroId,run.growth||0):'';
+    return { id, title: upgrade ? `${d.name} · ${upgrade.signature?'本命':''}升阶` : d.name, desc: `伤害 ${Math.round(stats.damage * 10) / 10} · ${stats.interval.toFixed(2)}秒 · 范围 ${Math.round(stats.range)}\n${behavior}${signature}`, price: run.offerPrices[id] ?? 28, tag: TIER_NAMES[weapon.tier - 1], icon: 'power', weapon, from, major: false };
   }
   if (id === 'r:power' || id === 'r:speed') return { id, title: id === 'r:power' ? '磨刀不误工' : '小步快跑', desc: id === 'r:power' ? '增加基础武器伤害\n可重复购买，收益递减' : '增加移动速度\n可重复购买，收益递减', price: run.offerPrices[id] ?? 12, tag: '基础修炼', icon: id === 'r:power' ? 'power' : 'speed', major: false };
   const aug = AUGMENTS.find(a => id === 'a:' + a.id), item = ITEMS.find(i => i.id === id);
@@ -108,7 +112,7 @@ export function rollSupply(run: Run, random = Math.random): void {
   run.offers = cards.slice(0, 3); run.offerPrices = prices; run.locked = []; run.purchasedOffers = [];
 }
 export function canBuySupply(run: Run, id: string): boolean {
-  if (run.purchasedOffers.indexOf(id) >= 0 || !(run.offers.indexOf(id) >= 0) || run.offerPrices[id] === undefined || run.gold < run.offerPrices[id] && !(parseWeaponOffer(id) && run.weapons.length === 6 && run.weapons.some(w=>run.gold+Math.floor((w.invested||15)*passiveBonuses(run.inventory).refund)>=run.offerPrices[id]))) return false;
+  if (run.purchasedOffers.indexOf(id) >= 0 || !(run.offers.indexOf(id) >= 0) || run.offerPrices[id] === undefined || run.gold < run.offerPrices[id] && !(parseWeaponOffer(id) && run.weapons.length === 6 && run.weapons.some(w=>run.gold+Math.floor((w.invested??15)*passiveBonuses(run.inventory).refund)>=run.offerPrices[id]))) return false;
   const w = parseWeaponOffer(id);
   if(w&&run.challenge&&!run.unlockedWeaponIds?.includes(w.id))return false;
   if (w) return run.weapons.length < WEAPON_LIMIT || run.weapons.length === WEAPON_LIMIT;
@@ -163,11 +167,11 @@ export function rollStageSupply(run:Run,random=Math.random):void {
  if(wave===0){add(weaponOffer(run.starter,1),run.rerolls===0?Math.min(28,supplyWeaponPrice(run,run.starter,1)):supplyWeaponPrice(run,run.starter,1));const pool=WEAPONS.filter(w=>['sandal','pole','cleaver'].includes(w.id)&&w.id!==run.starter);const w=pool[Math.floor(random()*pool.length)];add(weaponOffer(w.id,1),Math.min(28,supplyWeaponPrice(run,w.id,1)));}
  else {weapon(true);weapon(false,random()<STAGE_UPGRADE_CHANCE);}
  const eligible=ITEMS.filter(i=>i.id!=='bun'&&eligibleItem(run,i.id));
- if(wave===3){const pool=AUGMENTS.filter(a=>!run.augments.includes(a.id)&&(!a.needs||owns(run,a.needs))&&(a.id!=='all-in'||run.weapons.length>=4)&&(a.id!=='specialist'||run.weapons.some(w=>run.weapons.filter(v=>v.id===w.id).length>=2)));const a=pool[Math.floor(random()*pool.length)];if(a)add('a:'+a.id,Math.round(60*(1+.1*(run.chapter-1))*(1-passiveBonuses(run.inventory).discount)));}
- if(run.hearts<heroMaxHearts(run)&&(run.hearts<=2||(run.healMisses||0)>=2)&&eligibleItem(run,'bun'))add('bun',28);
+ if(run.supplyMode==='major'){const pool=AUGMENTS.filter(a=>!run.augments.includes(a.id)&&(!a.needs||owns(run,a.needs))&&(a.id!=='all-in'||run.weapons.length>=4)&&(a.id!=='specialist'||run.weapons.some(w=>run.weapons.filter(v=>v.id===w.id).length>=2)));const a=pool[Math.floor(random()*pool.length)];if(a)add('a:'+a.id,Math.round(60*(1+.1*(run.chapter-1))*(1-passiveBonuses(run.inventory).discount)));}
+ if(run.hearts<heroMaxHearts(run)&&(run.hearts<=2||(run.healMisses||0)>=2)&&eligibleItem(run,'bun'))add('bun',28*(1-passiveBonuses(run.inventory).healDiscount));
  for(const item of randomSample(eligible,eligible.length,random)){if(cards.length>=4)break;add(item.id,Math.max(12,Math.min(32,Math.round(item.price*16)))*(1+.18*Math.min(8,run.inventory[item.id]||0))*(1-passiveBonuses(run.inventory).discount));}
  // Initial pool always contains three affordable general passives; fallback never unlocks new content.
  for(const id of ['A01','A02','C01']){if(cards.length>=4)break;if(eligibleItem(run,id))add(id,12);}
- if(!cards.some(id=>prices[id]<=run.gold)&&run.gold>0){const slot=cards.length-1;cards[slot]='A01';prices.A01=Math.min(12,run.gold);}
+ if(!cards.some(id=>prices[id]<=run.gold)&&run.gold>0){if(!cards.includes('A01'))cards[cards.length-1]='A01';prices.A01=Math.min(12,run.gold);}
  run.offers=cards.slice(0,4);run.offerPrices=prices;run.locked=[];run.purchasedOffers=[];
 }

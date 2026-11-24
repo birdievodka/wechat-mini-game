@@ -5,15 +5,29 @@ export const SOUND_CUES = AUDIO_CUES;
 export type SoundId = keyof typeof SOUND_CUES;
 export type SoundEvent = 'attack' | 'hit';
 export const GENERATED_SOUNDS = (Object.keys(SOUND_CUES) as SoundId[]).filter((id):id is Exclude<SoundId,'sandal-hit-pcm'> => id !== 'sandal-hit-pcm');
-export function weaponSound(weapon: WeaponId, event: SoundEvent): SoundId | undefined {
-  if (weapon === 'sandal') return event === 'hit' ? 'sandal-hit-pcm' : undefined;
-  const family = WEAPON_AUDIO_FAMILIES[weapon], id = `${family}-${event}` as SoundId;
-  return SOUND_CUES[id] ? id : undefined;
+// Resolve catalog keys once, outside the attack and multi-target hit paths.
+const weaponCues: Record<string, Partial<Record<SoundEvent, SoundId>>> = Object.create(null);
+for (const [weapon, family] of Object.entries(WEAPON_AUDIO_FAMILIES)) {
+  const cues: Partial<Record<SoundEvent, SoundId>> = {};
+  for (const event of ['attack', 'hit'] as const) {
+    const id = `${family}-${event}` as SoundId;
+    if (SOUND_CUES[id]) cues[event] = id;
+  }
+  weaponCues[weapon] = cues;
 }
-export const bossSound = (boss:string,index:number):SoundId|undefined => {
-  const id = `boss-${boss}-${index+1}` as SoundId;
-  return SOUND_CUES[id] ? id : undefined;
-};
+weaponCues.sandal = { hit: 'sandal-hit-pcm' };
+export function weaponSound(weapon: WeaponId, event: SoundEvent): SoundId | undefined {
+  return weaponCues[weapon]?.[event];
+}
+const bossCues=new Map<string,SoundId[]>();
+for(const id of GENERATED_SOUNDS){
+  const match=/^boss-([a-z]+)-([1-3])$/.exec(id);
+  if(!match)continue;
+  let moves=bossCues.get(match[1]);
+  if(!moves){moves=[];bossCues.set(match[1],moves);}
+  moves[Number(match[2])-1]=id;
+}
+export const bossSound=(boss:string,index:number):SoundId|undefined=>bossCues.get(boss)?.[index];
 export function enemySound(id?:string):SoundId {
   const n=Number(id?.slice(1)||0);
   return n>=35&&n<=38?'siege':n>=39?'thunder-attack':n>=28&&n<=34?'gun-attack':n>=11&&n<=18||n===22||n===23?'enemy-bow':'melee-commit';
@@ -28,16 +42,24 @@ export class SoundGate {
   private nextImpact = 0;
   private nextSupport = 0;
   private next: Partial<Record<SoundId, number>> = {};
-  private voices: { until: number; priority: number; started: number }[];
+  private voices: { until: number; priority: number; started: number; source?:string }[];
   constructor(count = SFX_VOICES) { this.voices = Array.from({ length: count }, () => ({ until: 0, priority: -1, started: 0 })); }
   get elapsed(): number { return this.time; }
   update(delta: number): void { if(Number.isFinite(delta)&&delta>=0)this.time+=Math.min(delta,60); }
   reset(): void { this.time = 0; this.nextSwing = this.nextImpact = this.nextSupport = 0; this.next = {}; this.voices.forEach(v => { v.until = 0; v.priority = -1; }); }
-  acquire(id: SoundId, priority: number = SOUND_CUES[id].priority, weapon?: SoundEvent | 'finisher'): number | undefined {
+  acquire(id: SoundId, priority: number = SOUND_CUES[id].priority, weapon?: SoundEvent | 'finisher', source?:string): number | undefined {
     if ((this.next[id] || 0) > this.time) return;
     if (weapon === 'attack' && this.time < this.nextSwing) return;
     if (weapon === 'hit' && this.time < this.nextImpact && this.time < this.nextSupport) return;
-    let index = this.voices.findIndex(v => v.until <= this.time);
+    let index = -1, oldestIdle = Infinity;
+    for(let i=0;i<this.voices.length;i++){
+      const voice=this.voices[i];
+      if(voice.until>this.time)continue;
+      if(!source || voice.source===source){index=i;break;}
+      // Among idle players, keep recently used native decoders available for their next cue.
+      const lastUse=voice.source?voice.started:-Infinity;
+      if(lastUse<oldestIdle){index=i;oldestIdle=lastUse;}
+    }
     if (index < 0) {
       index = this.voices.reduce((best, v, i, all) => v.priority < all[best].priority || (v.priority === all[best].priority && v.started < all[best].started) ? i : best, 0);
       if (this.voices[index].priority > priority) return;
@@ -49,7 +71,7 @@ export class SoundGate {
       else this.nextSupport = this.nextImpact;
     }
     const voice=this.voices[index];
-    voice.until=this.time+cue.duration;voice.priority=priority;voice.started=this.time;
+    voice.until=this.time+cue.duration;voice.priority=priority;voice.started=this.time;voice.source=source;
     this.next[id] = this.time + cue.gap;
     return index;
   }

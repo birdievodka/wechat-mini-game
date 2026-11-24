@@ -72,6 +72,8 @@ npm run build:wechat
 
 实际构建还会把引擎相关发布依赖拆入战斗分包，`check-engine-imports.cjs` 验证所有运行时import都存在；不能只删大文件把启动页卡死。
 
+v11.0.5 起，Creator 3.8.8 输出后由 `scripts/patch-wechat-text-measure.cjs` 修补 `cocos-js/cc.js` 的 `safeMeasureText`。按原函数与 100 项容量精确匹配一次，布局变化时构建中止并要求复核。测试覆盖中文、字体键隔离、原分隔符碰撞、零宽和淘汰顺序。验收时校验微信产物确实含替换，再用微信开发者工具核对文楷字体、字宽与正常入口；Web 构建继续用原引擎。
+
 构建最后复制本地主包 `startup-poster.jpg`，校验自定义 `first-screen.js` 已覆盖默认模板，并确认引擎第二层 `splashScreen.totalTime=0`；详情见 `startup-loading.md`。只改 `build/wechatgame` 会在重建后丢失，模板与构建脚本才是源。
 
 素材由独立Bundle加载：battle、campaign、enemies、arsenal、talismans、meadow、orchard、hero-menu、results、presentation、music、sfx、chronicle-ui、chronicle-units。新增图片写正确 `.meta` 和Bundle配置，避免资源被重复打进主包。哭泣图在results包，图标/分层英雄在presentation包；新增素材必须按实际构建重新计量。

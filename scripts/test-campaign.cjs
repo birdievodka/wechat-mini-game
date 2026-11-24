@@ -13,6 +13,7 @@ class Node {
   addChild(n) { n.parent = this; this.children.push(n); }
   addComponent(Type) { const c = new Type(); c.node = this; this.components.set(Type, c); if ((Type === Sprite || Type === Label) && !this.components.has(Transform)) this.addComponent(Transform); if(Type===Mask&&!this.components.has(Graphics))this.addComponent(Graphics);return c; }
   getComponent(Type) { return this.components.get(Type); }
+  getComponentsInChildren(Type) { return [this.getComponent(Type), ...this.children.flatMap(child => child.getComponentsInChildren(Type))].filter(Boolean); }
   setPosition(x, y = 0, z = 0) { this.position = typeof x === 'object' ? { ...x } : { x, y, z }; }
   setScale(x, y, z) { this.scale = { x, y, z }; }
   setSiblingIndex(index) {if(!this.parent)return;const a=this.parent.children,old=a.indexOf(this);if(old<0)return;a.splice(old,1);a.splice(Math.max(0,Math.min(index,a.length)),0,this);}
@@ -27,6 +28,7 @@ class Mask {static Type={GRAPHICS_STENCIL:2};}
 for (const method of ['clear', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'circle', 'rect', 'roundRect', 'close', 'bezierCurveTo', 'arc']) Graphics.prototype[method] = () => {};
 class Sprite { static SizeMode = { CUSTOM: 1 }; static Type = { SLICED: 1 }; }
 class Label { static CacheMode={NONE:0,CHAR:2}; static HorizontalAlign = { CENTER: 0 }; static VerticalAlign = { CENTER: 0 }; static Overflow = { SHRINK: 0 }; }
+class TTFFont { constructor(family) { this._nativeAsset = family; } }
 class Frame { destroy() {} }
 class BinaryAsset { constructor(buffer){this.bytes=buffer;} buffer(){return this.bytes.buffer.slice(this.bytes.byteOffset,this.bytes.byteOffset+this.bytes.byteLength);} }
 class Camera { static ProjectionType = { ORTHO: 1 }; screenToWorld(p) { return p; } }
@@ -36,7 +38,7 @@ const seeded = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; ret
 const randomMath = Object.create(Math); randomMath.random = seeded;
 const cc = {
   _decorator: { ccclass: () => c => c }, Component: class { constructor() { this.node = new Node('Scene'); this.isValid = true; } },
-  Node, Graphics, Mask, Label, Sprite, SpriteFrame: Frame, UITransform: Transform, Camera, Canvas: class {}, Color: class { constructor(value) { this.value=value; } }, Rect: class {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}, Vec3: class { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } },
+  Node, Graphics, Mask, Label, TTFFont, Sprite, SpriteFrame: Frame, Size: class{constructor(width,height){Object.assign(this,{width,height})}}, Vec2: class{constructor(x,y){Object.assign(this,{x,y})}}, UITransform: Transform, Camera, Canvas: class {}, Color: class { constructor(value) { this.value=value; } }, Rect: class {constructor(x,y,width,height){Object.assign(this,{x,y,width,height});}}, Vec3: class { constructor(x = 0, y = 0, z = 0) { Object.assign(this, { x, y, z }); } },
   ImageAsset: class {constructor(image){this.width=image?.width||1334;this.height=image?.height||750;}destroy(){}}, BufferAsset:BinaryAsset, AudioClip: class {}, AudioSource: class {
     static EventType = { STARTED: 'started' };
     constructor() { this.plays = 0; this.playing = false; this.currentTime = 0; }
@@ -45,7 +47,10 @@ const cc = {
     play() { this.playing = true; this.plays++; this.node?.events.started?.(); }
   }, Texture2D: class {reset(size){Object.assign(this,size);}uploadData(data){this.uploadBytes=data.byteLength;if(this.width<=1024)this.data=data;}set image(value){this.width=value.width;this.height=value.height;}destroy(){this.destroyed=true;}}, Layers: { Enum: { UI_2D: 1 } }, ResolutionPolicy: { FIXED_HEIGHT: 1 },
   dynamicAtlasManager:{enabled:true},macro:{CLEANUP_IMAGE_CACHE:false},
-  assetManager: {utils:{getUrlWithUuid:(uuid,options)=>'packaged/'+uuid+options.nativeExt},loadRemote:(_url,_options,done)=>done(null,{width:1334,height:750,destroy(){}}),releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { getInfoWithPath:path=>({uuid:_name+'/'+path}),load: (_url, _type, callback) => callback(null, _type===BinaryAsset?new BinaryAsset(fs.readFileSync('assets/battle/'+_url+'.bin')):{ width: 768, height: 576 }) }) },
+  assetManager: {utils:{getUrlWithUuid:(uuid,options)=>'packaged/'+uuid+options.nativeExt},loadRemote:(_url,_options,done)=>done(null,{width:1334,height:750,destroy(){}}),releaseAsset() {}, loadBundle: (_name, cb) => cb(null, { getInfoWithPath:path=>({uuid:_name+'/'+path}),load: (_url, _type, callback) => {
+    if (_type === TTFFont) return callback(null, new TTFFont(_url));
+    callback(null, _type===BinaryAsset?new BinaryAsset(fs.readFileSync('assets/battle/'+_url+'.bin')):{ width: 768, height: 576 });
+  } }) },
   view: { setDesignResolutionSize() {}, getVisibleSize: () => ({ width: 1334, height: 750 }) },
   input: { on() {}, off() {} }, Input: { EventType: {} }, game: { on() {}, off() {} }, Game: {},
   KeyCode: { KEY_W: 87, KEY_A: 65, KEY_S: 83, KEY_D: 68, ARROW_UP: 38, ARROW_LEFT: 37, ARROW_DOWN: 40, ARROW_RIGHT: 39 },
@@ -76,7 +81,7 @@ const survival = load("survival");
 function useDevelopmentHost(){
   cc.wechatHost={...cc.wechatHost,getAccountInfoSync:()=>({miniProgram:{envVersion:'develop'}})};
 }
-module.exports={useDevelopmentHost,newGame,GameBootstrap,finishStartup,click,load,cc,Node,Graphics,Sprite,Label,r,storage};
+module.exports={setFixtureSeed(value){seed=value>>>0;},useDevelopmentHost,newGame,GameBootstrap,finishStartup,click,load,cc,Node,Graphics,Sprite,Label,r,storage};
 if(require.main===module)(async () => {
   // Actual asynchronous boot: current youth body must arrive before the menu.
   const bootLoad=cc.assetManager.loadBundle;let releaseBody;
@@ -89,6 +94,10 @@ if(require.main===module)(async () => {
   assert.equal(typeof releaseBody,'function');assert.equal(pendingBoot.phase,'loading');assert.equal(pendingBoot.ready,false);assert.equal(pendingBoot.world.active,false);assert.equal(pendingBoot.loadingScreen.active,true);
   const waiting=pendingBoot.startupProgress.value;for(let i=0;i<30;i++)pendingBoot.update(1/60);assert.equal(pendingBoot.startupProgress.value,waiting,'等待真实回调，不靠时间造进度');assert.ok(waiting<1);
   releaseBody();await bootTask;assert.equal(pendingBoot.phase,'loading');assert.equal(pendingBoot.startupProgress.value,1);pendingBoot.update(1/60);assert.equal(pendingBoot.loadingScreen.active,true,'完成帧提交后才进入菜单');pendingBoot.update(1/60);assert.equal(pendingBoot.phase,'menu');assert.equal(pendingBoot.loadingScreen.destroyed,true,'加载页一次性释放');assert.equal(pendingBoot.loadingView,undefined);
+  const startLabel = pendingBoot.screens.root.getComponentsInChildren(Label).find(label => label.string === '开始挑战');
+  assert.equal(startLabel.font._nativeAsset, 'taoyuan-ui-medium');
+  assert.equal(startLabel.isBold, true);
+  assert.equal(pendingBoot.hud.font._nativeAsset, 'taoyuan-ui-regular', '先创建的战斗 HUD 也使用新字体');
   cc.assetManager.loadBundle=bootLoad;
   const bootError=console.error;console.error=()=>{};
   try{
@@ -193,9 +202,9 @@ if(require.main===module)(async () => {
   sweep.updateWeapon(blade,.38*.4);const after=makeTarget(sweep,80,-18);sweep.updateWeapon(blade,.01);assert.equal(after.hp,100,'recovery frames do not deal hidden damage');
   console.log('通过：近战16敌全额横扫/躯体边缘判定/有效时间内新入范围敌兵命中/同挥不重复/出生与收招无伤害');
   // Exercise actual attacks for all 11×4 patterns, not just their config fields.
-  const weaponRules=load('weapons');assert.equal(weaponRules.WEAPONS.length,36);
+  const weaponRules=load('weapons');assert.equal(weaponRules.WEAPONS.length,33);
   assert.equal(weaponRules.parseWeaponOffer('w:beans:1'),undefined);assert.equal(weaponRules.parseWeaponOffer('w:rollingpin:1'),undefined);
-  for(const def of weaponRules.WEAPONS.slice(0,11))for(let tier=1;tier<=4;tier++){
+  for(const def of weaponRules.WEAPONS.filter(w=>!load('extra-weapons').isExtraWeapon(w.id)))for(let tier=1;tier<=4;tier++){
     const qa=await newGame('liubei',def.id);qa.clearBattle();qa.spawnClock=999;qa.run.weapons[0].tier=tier;qa.refreshStats();qa.syncWeapons();
     const weapon=qa.weapons[0],stats=weapon.stats;weapon.damage=10;weapon.angle=0;
     if(def.category==='melee'){
@@ -230,7 +239,7 @@ if(require.main===module)(async () => {
   }
   const flowerMerge=await newGame('liubei','peach');flowerMerge.clearBattle();flowerMerge.run.weapons.push({id:'peach',tier:1,uid:2});
   assert.ok(r.combineWeapon(flowerMerge.run,1));flowerMerge.refreshStats();flowerMerge.syncWeapons();flowerMerge.releaseWeapon(0,0,0,flowerMerge.weapons[0]);assert.equal(flowerMerge.projectiles.filter(p=>p.remaining>0).length,3,'real merge immediately enables three petals');
-  console.log('通过：11武器×4品级真实攻击、桃花单/三瓣与爆炸不重复伤害、霰弹同敌最多4颗、扁担/尖刀升级刀弧、弹射/穿透、剑数、雷链和吸风段数/目标上限、桃花合成即时生效');
+  console.log('通过：基础目录8武器×4品级真实攻击、桃花单/三瓣与爆炸不重复伤害、霰弹同敌最多4颗、扁担/尖刀升级刀弧、弹射/穿透、剑数、雷链和吸风段数/目标上限、桃花合成即时生效');
   for (const def of load('weapons').WEAPONS.slice(0,5)) {
     const audioGame = await newGame(); audioGame.clearBattle(); audioGame.spawnClock = 999;
     audioGame.run.weapons = [{ id: def.id, tier: 1, uid: 1 }]; audioGame.refreshStats(); audioGame.syncWeapons();
@@ -284,7 +293,7 @@ if(require.main===module)(async () => {
   assert.equal(freeHand.weapons[1].shoe.active, true, 'removing the second weapon restores the decorative spare sandal');
   assert.equal(freeHand.weapons[1].arm.node.active, true);
   const mixed = await newGame(); mixed.clearBattle(); mixed.spawnClock = 999;
-  mixed.run.weapons = load('weapons').WEAPONS.slice(0,6).map((w, i) => ({ id: w.id, tier: 2, uid: i + 1 })); mixed.run.nextWeaponUid = 7;
+  mixed.run.weapons = load('weapons').WEAPONS.filter(w=>['sandal','pole','peach','cleaver','firecracker','heavy-crossbow'].includes(w.id)).map((w, i) => ({ id: w.id, tier: 2, uid: i + 1 })); mixed.run.nextWeaponUid = 7;
   mixed.refreshStats(); mixed.syncWeapons(); const attacks = new Map();
   const launch = mixed.launchProjectile.bind(mixed), strike = mixed.meleeStrike.bind(mixed);
   mixed.launchProjectile = (...args) => { attacks.set(args[3].id, (attacks.get(args[3].id) || 0) + 1); launch(...args); };
@@ -508,7 +517,7 @@ if(require.main===module)(async () => {
   const large=await newGame();large.clearBattle();large.spawnClock=999;large.stick={x:1,y:0};const hudX=large.statusPanel.position.x;advance(large,5);
   assert.ok(large.px>large.halfWidth,'world movement crosses a screen boundary');assert.ok(large.cameraX>250);assert.equal(worldRules.WORLD.width,large.halfWidth*3);assert.equal(worldRules.WORLD.height,large.halfHeight*3);assert.equal(large.terrainNodes.length,0);assert.equal(large.statusPanel.position.x,hudX);assert.equal(large.xpBar.node.active,false);
   for(const kind of ['soldier','cavalry','chief'])for(let i=0;i<80;i++){const px=worldRules.WORLD.halfWidth-100,py=-worldRules.WORLD.halfHeight+100,point=worldRules.spawnPoint(px,py,kind,seeded);assert.ok(Math.abs(point.x)<worldRules.WORLD.halfWidth&&Math.abs(point.y)<worldRules.WORLD.halfHeight);assert.ok(Math.hypot(point.x-px,point.y-py)>=(kind==='chief'?550:kind==='cavalry'?420:260));}
-  const orbit=await newGame();orbit.clearBattle();orbit.run.weapons=load('weapons').WEAPONS.filter(w=>['smg','shotgun','rocket','sword','thunder','gourd'].includes(w.id)).map((w,i)=>({id:w.id,tier:2,uid:i+1,invested:50}));orbit.refreshStats();orbit.syncWeapons();
+  const orbit=await newGame();orbit.clearBattle();orbit.run.weapons=load('weapons').WEAPONS.filter(w=>['repeater','phoenix-bow','thunder-bomb','sword','thunder','gourd'].includes(w.id)).map((w,i)=>({id:w.id,tier:2,uid:i+1,invested:50}));orbit.refreshStats();orbit.syncWeapons();
   const points=orbit.weapons.map(w=>w.node.position);assert.equal(new Set(points.map(p=>Math.round(p.x)+','+Math.round(p.y))).size,6);assert.ok(points.some(p=>p.y>100)&&points.some(p=>p.y<0));
   assert.ok(points.some(p=>p.x>75)&&points.some(p=>p.x<-75));for(const w of orbit.weapons){assert.equal(w.arm.node.active,false);assert.equal(w.node.parent,orbit.hero,'orbit weapon has no inactive arm parent');assert.ok(w.node.active);if(w.equipped.id==='sword'){assert.equal(w.shoe.active,false);assert.equal(w.orbitBlades.length,w.stats.shotCount);}else assert.ok(w.shoe.active);}
   const birth=orbit.spawnNext('soldier');const beforeBorn=birth.hp;orbit.castSkill();assert.equal(birth.hp,beforeBorn,'materializing soldiers cannot take skill damage');assert.ok(birth.born>=.9);orbit.updateEnemy(birth,.4);assert.ok(birth.born>0);assert.equal(birth.attack,-1);
@@ -553,6 +562,7 @@ if(require.main===module)(async () => {
     if(def.category==='melee')effectGame.meleeStrike(w);
     else if(def.id==='sword'){let paths=0;w.trail.fill=w.trail.stroke=()=>paths++;effectGame.updateWeapon(w,.016);assert.ok(paths>0,'实际剑阵绘制有实体切割弧');}
     else effectGame.releaseWeapon(0,20,0,w);
+    if(def.id==='sandal'){assert.ok(!effectGame.combatFx.stamps.some(s=>s.age<s.duration&&s.kind==='muzzle'));effectGame.updateProjectiles(.2);}
     if(def.id!=='sword')assert.ok(effectGame.combatFx.stamps.some(s=>s.age<s.duration&&s.id===def.id),def.id+' 实际攻击连接新特效');
     effectGame.updateEffects(0);
     const frozen=JSON.stringify(effectGame.combatFx.particles.slots);effectGame.phase='shop';advance(effectGame,1);assert.equal(JSON.stringify(effectGame.combatFx.particles.slots),frozen);
@@ -565,7 +575,7 @@ if(require.main===module)(async () => {
   const repeat=r.createRun('liubei');repeat.gold=100000;repeat.supplyMode='normal';for(let n=0;n<12;n++){repeat.purchasedOffers=[];repeat.offers=['A01'];repeat.offerPrices={A01:28};assert.ok(survival.buySupply(repeat,'A01'));}assert.equal(repeat.inventory.A01,12);assert.ok(r.statsFor(repeat).damage>r.statsFor(r.createRun('liubei')).damage);
   console.log('通过：60种道具首购真实属性、100→101件仍有收益、超过三件可持续购买、武器/道具槽位分离');
 
-  const rangedChecks=[['D09','sandal','damage',1],['D10','smg','interval',-1],['D11','smg','crit',1],['D12','shotgun','critMultiplier',1],['D13','sandal','damage',1],['D14','smg','pierceFactor',1],['D15','sandal','bounceFactor',1],['D16','smg','knockback',1],['D17','rocket','damage',1],['D18','shotgun','range',1],['D19','smg','pierce',1],['D20','sandal','speed',1]];
+  const rangedChecks=[['D09','sandal','damage',1],['D10','smg','interval',-1],['D11','smg','crit',1],['D12','shotgun','critMultiplier',1],['D13','sandal','damage',1],['D14','smg','pierceFactor',1],['D15','sandal','bounceFactor',1],['D16','smg','knockback',1],['D17','thunder-bomb','damage',1],['D18','trident','range',1],['D19','heavy-crossbow','pierce',1],['D20','sandal','speed',1]];
   for(const [id,weapon,key,sign] of rangedChecks){const run=r.createRun('liubei',weapon),old=r.weaponStatsFor(run,run.weapons[0]);run.inventory[id]=1;const now=r.weaponStatsFor(run,run.weapons[0]);assert.ok((now[key]-old[key])*sign>0,id+' changes actual weapon stats');assert.ok(passive.passivePreview(run.inventory,id).includes('累计'),id+' repeat preview is valid');const melee=r.weaponStatsFor(run,{id:'cleaver',tier:1}),unmodified=r.weaponStatsFor(r.createRun('liubei'),{id:'cleaver',tier:1});assert.deepEqual(melee,unmodified,id+' does not buff melee');}
   const ricochet=r.createRun('liubei');assert.equal(survival.eligibleItem(ricochet,'D15'),false);ricochet.inventory.D04=1;assert.ok(survival.eligibleItem(ricochet,'D15'));
   for(const id of ['D09','D10','D11','D12','D13','D16','D17','D18','D19','D20'])assert.equal(passive.eligiblePassive(id,[{id:'cleaver'}]),false);
@@ -576,8 +586,8 @@ if(require.main===module)(async () => {
   uiShop.run.survivalSeconds=60;uiShop.openSupply();assert.equal(uiShop.run.rerolls,0);assert.equal(survival.refreshPrice(uiShop.run),5);
   console.log('通过：12种远程强化实际生效/不强化近战/适配筛选、补给界面多购与多刷保持冻结、装备同步即时生效、继续按钮恢复战斗/下次补给重置刷新费');
 
-  const trade=r.createRun('liubei');trade.supplyMode='normal';trade.gold=0;trade.weapons=load('weapons').WEAPONS.slice(0,6).map((w,i)=>({id:w.id,tier:1,uid:i+1,invested:100}));trade.offers=['w:smg:1'];trade.offerPrices={'w:smg:1':35};
-  assert.ok(survival.canBuySupply(trade,'w:smg:1'));let snapshot=JSON.stringify(trade);assert.equal(survival.buySupply(trade,'w:smg:1',999),false);assert.equal(JSON.stringify(trade),snapshot);assert.ok(survival.buySupply(trade,'w:smg:1',1));assert.equal(trade.weapons.length,6);assert.equal(trade.gold,5);assert.ok(trade.weapons.some(w=>w.id==='smg'));assert.equal(survival.buySupply(trade,'w:smg:1',2),false);
+  const trade=r.createRun('liubei');trade.supplyMode='normal';trade.gold=0;trade.weapons=load('weapons').WEAPONS.slice(0,6).map((w,i)=>({id:w.id,tier:1,uid:i+1,invested:100}));trade.offers=['w:repeater:1'];trade.offerPrices={'w:repeater:1':35};
+  assert.ok(survival.canBuySupply(trade,'w:repeater:1'));let snapshot=JSON.stringify(trade);assert.equal(survival.buySupply(trade,'w:repeater:1',999),false);assert.equal(JSON.stringify(trade),snapshot);assert.ok(survival.buySupply(trade,'w:repeater:1',1));assert.equal(trade.weapons.length,6);assert.equal(trade.gold,5);assert.ok(trade.weapons.some(w=>w.id==='repeater'));assert.equal(survival.buySupply(trade,'w:repeater:1',2),false);
   const sold=trade.weapons[1],refund=r.recycleValue(trade,sold.uid),balance=trade.gold;assert.ok(r.recycleWeapon(trade,sold.uid));assert.equal(trade.gold,balance+refund);assert.equal(r.recycleWeapon(trade,sold.uid),false);
   trade.purchasedOffers=[];trade.offers=['u:'+trade.weapons[0].uid+':2','A02','C01'];trade.offerPrices[trade.offers[0]]=40;trade.weapons[0].tier=2;survival.repairSupply(trade);assert.ok(!trade.offers.some(id=>id.startsWith('u:')));assert.equal(new Set(trade.offers).size,3);
   console.log('通过：满六槽净额替换、无效对象/不足不扣款、重复购买/出售幂等、旧升阶报价修复');

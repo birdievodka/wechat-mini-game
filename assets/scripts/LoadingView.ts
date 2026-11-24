@@ -19,7 +19,7 @@ export class LoadingView {
   constructor(readonly node:Node){
     this.background=node.addComponent(Graphics);
     this.poster=this.child('LoadingPoster').addComponent(Sprite);this.poster.sizeMode=Sprite.SizeMode.CUSTOM;
-    this.title=this.text(GAME_NAME,58,'#ffe3a0');this.title.fontFamily='serif';this.title.isBold=true;this.title.node.active=false;
+    this.title=this.text(GAME_NAME,58,'#ffe3a0');this.title.isBold=true;this.title.node.active=false;
     this.logo=this.child('LoadingLogo').addComponent(Sprite);this.logo.sizeMode=Sprite.SizeMode.CUSTOM;this.logo.node.active=false;
     this.bar=this.child('LoadingProgress').addComponent(Graphics);
     this.status=this.text('',19,'#fff0cf');this.resize(this.width,this.height);

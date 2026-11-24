@@ -1,0 +1,245 @@
+{
+  "version": "stage-v11.0.4-battle-scale",
+  "scope": "Actual Cocos WebGL. Touch input at home, stage selection and battle entry. Controlled fixture for skill, boss, shop and victory.",
+  "records": [
+    {
+      "name": "home",
+      "result": {
+        "classicHero": true,
+        "relief": true,
+        "newWeaponAndSkillArt": true,
+        "profile": 2,
+        "fonts": {
+          "regular": 0,
+          "medium": 7
+        }
+      }
+    },
+    {
+      "name": "home-stage-1",
+      "result": {
+        "stage": 1,
+        "label": "黄巾起义"
+      }
+    },
+    {
+      "name": "home-stage-2",
+      "result": {
+        "stage": 2,
+        "label": "虎牢讨董"
+      }
+    },
+    {
+      "name": "home-stage-3",
+      "result": {
+        "stage": 3,
+        "label": "官渡争锋"
+      }
+    },
+    {
+      "name": "home-stage-4",
+      "result": {
+        "stage": 4,
+        "label": "赤壁鏖兵"
+      }
+    },
+    {
+      "name": "home-stage-5",
+      "result": {
+        "stage": 5,
+        "label": "南中平蛮"
+      }
+    },
+    {
+      "name": "home-stage-6",
+      "result": {
+        "stage": 6,
+        "label": "五丈原决战"
+      }
+    },
+    {
+      "name": "skill-select",
+      "result": {
+        "fonts": {
+          "regular": 34,
+          "medium": 3
+        }
+      }
+    },
+    {
+      "name": "settings",
+      "result": {
+        "fonts": {
+          "regular": 0,
+          "medium": 6
+        }
+      }
+    },
+    {
+      "name": "training-weapons",
+      "result": {
+        "selected": "扁担",
+        "unselected": "草鞋",
+        "slot": "+",
+        "fonts": {
+          "regular": 41,
+          "medium": 2
+        }
+      }
+    },
+    {
+      "name": "training-heroes",
+      "result": {
+        "hero": "小关",
+        "unselected": "小刘",
+        "form": "获得坐骑",
+        "previousForm": "初始少年",
+        "fonts": {
+          "regular": 33,
+          "medium": 2
+        }
+      }
+    },
+    {
+      "name": "stage-picker",
+      "result": {
+        "realTouch": true,
+        "newThumbnail": true,
+        "fonts": {
+          "regular": 7,
+          "medium": 8
+        }
+      }
+    },
+    {
+      "name": "battle-start",
+      "result": {
+        "phase": "battle",
+        "wave": 1,
+        "menuNodes": 0,
+        "startButtonCancelRestored": true,
+        "fonts": {
+          "regular": 6,
+          "medium": 0
+        }
+      }
+    },
+    {
+      "name": "battle-sweep",
+      "result": {
+        "skill": "G03",
+        "actors": 5,
+        "classicFarmers": true,
+        "newSkillArt": true
+      }
+    },
+    {
+      "name": "boss-idle",
+      "result": {
+        "boss": "zhangjiao",
+        "pose": "idle",
+        "frame": 0,
+        "classicArt": true,
+        "zones": []
+      }
+    },
+    {
+      "name": "boss-windup",
+      "result": {
+        "boss": "zhangjiao",
+        "pose": "windup",
+        "frame": 5,
+        "classicArt": true,
+        "zones": [
+          {
+            "x": -7.82503561102601,
+            "y": -145.07501380835703,
+            "r": 70,
+            "hit": false
+          },
+          {
+            "x": 160,
+            "y": -80,
+            "r": 70,
+            "hit": false
+          },
+          {
+            "x": 327.825035611026,
+            "y": -14.924986191642986,
+            "r": 70,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "boss-cast",
+      "result": {
+        "boss": "zhangjiao",
+        "pose": "cast",
+        "frame": 7,
+        "classicArt": true,
+        "zones": [
+          {
+            "x": -7.82503561102601,
+            "y": -145.07501380835703,
+            "r": 70,
+            "hit": true
+          },
+          {
+            "x": 160,
+            "y": -80,
+            "r": 70,
+            "hit": false
+          },
+          {
+            "x": 327.825035611026,
+            "y": -14.924986191642986,
+            "r": 70,
+            "hit": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "boss-recover",
+      "result": {
+        "boss": "zhangjiao",
+        "pose": "recover",
+        "frame": 5,
+        "classicArt": true,
+        "zones": [
+          {
+            "x": 327.825035611026,
+            "y": -14.924986191642986,
+            "r": 70,
+            "hit": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "shop",
+      "result": {
+        "phase": "shop",
+        "cards": 4,
+        "fonts": {
+          "regular": 12,
+          "medium": 17
+        }
+      }
+    },
+    {
+      "name": "clear",
+      "result": {
+        "phase": "victory",
+        "fixture": true,
+        "fonts": {
+          "regular": 30,
+          "medium": 6
+        }
+      }
+    }
+  ],
+  "errors": []
+}

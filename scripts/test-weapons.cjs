@@ -26,17 +26,17 @@ const buy = (id, tier) => { const key = w.weaponOffer(id, tier); run.offers = [k
 assert.ok(buy('sandal', 1)); assert.equal(run.weapons.length, 2, 'buying a duplicate before full capacity does not force a merge');
 const goldBeforeMerge = run.gold; assert.ok(r.combineWeapon(run, 1)); assert.equal(run.gold, goldBeforeMerge); assert.equal(run.weapons.length, 1); assert.equal(run.weapons[0].tier, 2);
 assert.equal(r.combineWeapon(run, 1), false); assert.equal(r.recycleWeapon(run, 1), false, 'cannot recycle the last weapon');
-for (const id of ['pole', 'peach', 'cleaver', 'smg', 'firecracker']) assert.ok(buy(id, 1));
+for (const id of ['pole', 'peach', 'cleaver', 'repeater', 'firecracker']) assert.ok(buy(id, 1));
 assert.equal(run.weapons.length, 6);
 let before = JSON.stringify(run); run.offers = ['w:sandal:1']; run.offerPrices = {}; before = JSON.stringify(run);
 assert.equal(r.buyItem(run, 'w:sandal:1'), false); assert.equal(JSON.stringify(run), before, 'full mismatched tier is a no-op');
 assert.ok(buy('pole', 1)); assert.equal(run.weapons.length, 6); assert.equal(run.weapons.find(v => v.id === 'pole').tier, 2);
 assert.ok(buy('pole', 2)); assert.ok(buy('pole', 3)); assert.equal(run.weapons.find(v => v.id === 'pole').tier, 4);
 run.offers = ['w:pole:4']; before = JSON.stringify(run); assert.equal(r.buyItem(run, 'w:pole:4'), false); assert.equal(JSON.stringify(run), before);
-const recycled = run.weapons.find(v => v.id === 'smg'), refund = r.recycleValue(run, recycled.uid), gold = run.gold;
+const recycled = run.weapons.find(v => v.id === 'repeater'), refund = r.recycleValue(run, recycled.uid), gold = run.gold;
 assert.ok(r.recycleWeapon(run, recycled.uid)); assert.equal(run.gold, gold + refund); assert.equal(run.weapons.length, 5);
 assert.equal(r.recycleWeapon(run, recycled.uid), false, 'same transaction cannot refund twice');
-const duplicate = w.weaponOffer('smg', 1); run.offers = [duplicate]; assert.ok(r.buyItem(run, duplicate)); before = run.gold; assert.equal(r.buyItem(run, duplicate), false); assert.equal(run.gold, before);
+const duplicate = w.weaponOffer('repeater', 1); run.offers = [duplicate]; assert.ok(r.buyItem(run, duplicate)); before = run.gold; assert.equal(r.buyItem(run, duplicate), false); assert.equal(run.gold, before);
 console.log('通过：六槽上限、空位不强制合成、免费合成、满槽自动合成、不跨阶/不超红、回收退款/最后一件保护、重复购买不扣款');
 for (let wave = 1; wave <= 8; wave++) for (let iteration = 0; iteration < 120; iteration++) {
   const shop = r.createRun('liubei'); shop.wave = wave; r.rollShop(shop, random);
@@ -84,7 +84,7 @@ for(let i=0;i<500;i++){
  const run=r.createRun('guanyu');run.supplyMode='normal';run.survivalSeconds=i;run.supplyCount=Math.floor(i/30);load('survival').rollSupply(run,random);
  for(const id of run.offers)assert.ok(!/beans|rollingpin|bean-rain/.test(id),'retired weapons and augment never return to shop');
 }
-console.log('通过：11武器全部四品级持续伤害单调成长/弹数目标段数有界、三英雄默认武器和桃花商店定位、500轮货架排除绿豆/擀面杖/豆雨');
+console.log('通过：全目录四品级持续伤害单调成长/弹数目标段数有界、三英雄默认武器和桃花商店定位、500轮货架排除绿豆/擀面杖/豆雨');
 
 const survival=load('survival');let twoWeapons=0;
 for(let i=0;i<1000;i++){
@@ -93,9 +93,9 @@ for(let i=0;i<1000;i++){
 }
 assert.ok(twoWeapons>730&&twoWeapons<870,'second early weapon is offered about 80% of the time');
 for(let i=0;i<100;i++){const run=r.createRun('zhangfei');run.gold=40;survival.rollSupply(run,random);assert.equal(run.offers.filter(w.parseWeaponOffer).length,2);}
-assert.ok(!survival.unlockedWeapons(0).some(w=>w.id==='sword'||w.id==='rocket'));assert.ok(survival.unlockedWeapons(30).some(w=>w.id==='sword'));assert.equal(survival.unlockedWeapons(60).length,11);
+assert.ok(!survival.unlockedWeapons(0).some(w=>w.id==='sword'||w.id==='rocket'));assert.ok(survival.unlockedWeapons(30).some(w=>w.id==='sword'));assert.equal(survival.unlockedWeapons(60).length,8);
 assert.equal(survival.bossDue(2),false);assert.equal(survival.bossDue(3),true);assert.equal(survival.bossDue(6),true);
-console.log('通过：首个商店保证2武器、1000轮前期第二武器概率约80%、30/60秒解锁覆盖全11种、每3波首领节奏');
+console.log('通过：首个商店保证2武器、1000轮前期第二武器概率约80%、30/60秒解锁覆盖8种原武器、每3波首领节奏');
 
 for(const hero of r.HEROES)for(let i=0;i<200;i++){
  const run=r.createRun(hero.id);run.gold=i%13;run.gold+=r.stipendFor(run);assert.equal(run.gold,28);

@@ -1,0 +1,41 @@
+{
+  "sources": {
+    "art/runtime-redesign/camp.png": "7f5f847a879adb8e91d77545a188f5b21849c0f7d0fe14ec1ddcf40d0efff052",
+    "art/runtime-redesign/skill-icons.png": "f94ef3c028080416ca230d597d946c926817848583b5ea6b0bb5880f3a75d9be",
+    "art/runtime-redesign/prompts.json": "657c2fa9e086d6ac868b6945fbdcccf43de376ec76764829587f7b3355b946fe",
+    "art/concepts/taoyuan-redesign/stage-dioramas.png": "0fbff50f2f71307409996167949c44e8009b9e431118fdd0d70fc24804f7cf4f",
+    "art/concepts/taoyuan-redesign/sources.json": "8b8a1d436cfb5f9623ed95a6913d3f53865b7577e95fed9cb97eefedc7d9be85",
+    "art/concepts/taoyuan-redesign/weapons-origin.png": "667217eec11ba312653128a9ae281de3b67055c7689a4946c9a667f413b1f874",
+    "art/concepts/taoyuan-redesign/weapons-gear.png": "255dddd6b027f2e0898cd1502a8eaa62f3df6304bf04c00b515a8b9ef8752a38",
+    "art/concepts/taoyuan-redesign/weapons-arcana.png": "c75b268dcad4effe5e7f869edc6f07016ff3eb58a83a838ad7aed426804280fd",
+    "assets/presentation/icons.png": "d1bfcc9348da638fcb1bb3bd40d6d1d02e0bfae3caaf7e19233994f9398e302d",
+    "assets/chronicle-ui/weapons.png": "e01ac069708acccfc1451b3720d40ff94881d92eaf4d23e82b7a15a390ef9f2a"
+  },
+  "outputs": {
+    "assets/hero-menu/training-ground.jpg": {
+      "sha256": "c3486aea1f66f543bf9f5e2f892534a0f212afe5b81c38358a327d9171b9b9a5",
+      "width": 1440,
+      "height": 810
+    },
+    "assets/chronicle-ui/redesign-relief.png": {
+      "sha256": "8463a5ddfe725e13002bfd3336ffeadf240dc2569974526ec245caf8f5740382",
+      "width": 960,
+      "height": 496
+    },
+    "assets/chronicle-ui/redesign-stage-thumbs.png": {
+      "sha256": "e2456c2d377e3d18c6dfb1d5f8b056c142e0753bd4da42b1571d7347fd89805e",
+      "width": 960,
+      "height": 256
+    },
+    "assets/chronicle-ui/redesign-arsenal.png": {
+      "sha256": "d36b01791ff819007bca1b0a8f6ac37d96162c35194e992eb9bdf70d1079a302",
+      "width": 1024,
+      "height": 640
+    },
+    "assets/chronicle-ui/redesign-skills.png": {
+      "sha256": "83b3684313de26a9d3ea787f4170181415d6f2631e657e697e80ba75b2908d99",
+      "width": 448,
+      "height": 336
+    }
+  }
+}

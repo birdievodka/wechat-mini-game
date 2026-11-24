@@ -42,6 +42,14 @@ for(const weapon of WEAPONS){
   const off=drawing();fx.draw(drawing(),off,99999,99999,667,375);assert.equal(off.calls.length,0,'屏幕外粒子不绘制');
   fx.clear();assert.equal(fx.particles.active,0);assert.ok(fx.stamps.every(s=>s.age>=s.duration));
 }
+// A thrown sandal reads from its rotating sprite; only contact gets an impact.
+{
+ const fx=new CombatEffects(),air=drawing();
+ fx.muzzle('sandal',0,0,0);fx.trail('sandal',40,0,0);fx.flight(air,'sandal',40,0,0);
+ assert.equal(air.calls.length,0);assert.equal(fx.particles.active,0);
+ assert.ok(fx.stamps.every(s=>s.age>=s.duration));
+ fx.hit('sandal',70,0,0,false);assert.ok(fx.particles.active>0);
+}
 const signatures=[];
 for(const hero of ['liubei','guanyu','zhangfei']){
   const fx=new CombatEffects();fx.hero(hero,0,0,Math.PI/4,hero==='guanyu'?520:260);fx.update(.12);

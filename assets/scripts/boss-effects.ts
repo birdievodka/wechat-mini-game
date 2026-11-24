@@ -1,5 +1,6 @@
 import {Color,Graphics,Node,Sprite,SpriteFrame,UITransform,Layers} from 'cc';
 import {BossActor,BossHazard,bossBeastCharging} from './boss-battle';
+import {bossPropKeys} from './chronicle-art';
 import {drawLightningSpell} from './enemy-spell-effects';
 import {drawSkillArrow} from './skill-vfx-art';
 import * as brush from './vfx-brush';
@@ -77,7 +78,7 @@ export class BossEffects {
  constructor(private parent:Node,private frames:Record<string,SpriteFrame>){}
  private sprite(key:string,x:number,y:number,w:number,h:number,angle=0,alpha=1):void {
   const frame=this.frames[key];if(!frame||this.used>=86)return;let slot=this.slots[this.used++];
-  if(!slot){const n=new Node('BossMaterial');n.layer=Layers.Enum.UI_2D;this.parent.addChild(n);const sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;const transform=n.getComponent(UITransform)!;slot={sprite:sp,transform,key:'',width:0,height:0};this.slots.push(slot);}
+  if(!slot){const n=new Node('BossMaterial');n.layer=Layers.Enum.UI_2D;this.parent.addChild(n);const sp=n.addComponent(Sprite);sp.trim=false;sp.sizeMode=Sprite.SizeMode.CUSTOM;const transform=n.getComponent(UITransform)!;slot={sprite:sp,transform,key:'',width:0,height:0};this.slots.push(slot);}
   const sp=slot.sprite;sp.node.active=true;if(slot.key!==key||sp.spriteFrame!==frame){sp.spriteFrame=frame;slot.key=key;}if(slot.width!==w||slot.height!==h){slot.transform.setContentSize(w,h);slot.width=w;slot.height=h;}
   sp.node.setPosition(x,y);sp.node.angle=angle;
   sp.color=WHITE[Math.max(0,Math.min(32,Math.round(alpha*32)))];
@@ -151,11 +152,11 @@ export class BossEffects {
       }
       brush.stream(air,h.x,h.y+lift,Math.PI/-2,60+p*55,11,h.lane%2?'silver':'violet',p*.7);}
      if(h.kind==='wine'&&h.age>=h.delay-.45){ground.fillColor=ink(6,.7);ground.ellipse(h.x,h.y,h.radius*.8,h.radius*.5);ground.fill();for(let i=0;i<5;i++)diamond(ground,h.x+Math.cos(i*2.4)*45,h.y+Math.sin(i*2.4)*24,i,10,4,1,.8);}
-     else this.sprite('boss-prop-'+key,h.x,h.y+lift,size,size,h.kind==='wine'?p*190:0,.5+p*.5);
+     else this.sprite(bossPropKeys[key],h.x,h.y+lift,size,size,h.kind==='wine'?p*190:0,.5+p*.5);
      ground.fillColor=ink(0,.15+p*.2);ground.ellipse(h.x,h.y,size*.35*(.3+p*.7),size*.1);ground.fill();
      if(h.kind==='meteor')for(let i=0;i<3;i++)diamond(air,h.x-15+i*12,h.y+lift+30,Math.PI/2,30+p*30,7,i===1?3:7,.85);
     }else if(h.kind==='wine'){firePool(ground,air,h.x,h.y,h.radius,t,fade);if(t<.36)brush.groundStrike(ground,air,h.x,h.y,h.radius,t/.36,'crimson',h.lane);}
-    else {if(h.kind==='seal')this.sprite('boss-prop-0',h.x,h.y+58-8*Math.sin(Math.min(1,t/.12)*Math.PI),150,150,0,fade);else if(h.kind==='stone')this.sprite('boss-prop-'+(h.lane%2?5:4),h.x,h.y+21,66,66,Math.sin(t*18)*5,fade);else this.sprite('boss-prop-6',h.x,h.y+18,57,57,0,fade);const at=Math.min(1,t/h.duration);
+    else {if(h.kind==='seal')this.sprite('boss-prop-0',h.x,h.y+58-8*Math.sin(Math.min(1,t/.12)*Math.PI),150,150,0,fade);else if(h.kind==='stone')this.sprite(bossPropKeys[h.lane%2?5:4],h.x,h.y+21,66,66,Math.sin(t*18)*5,fade);else this.sprite('boss-prop-6',h.x,h.y+18,57,57,0,fade);const at=Math.min(1,t/h.duration);
      brush.groundStrike(ground,air,h.x,h.y,h.radius,at,violet?'violet':'gold',h.lane*.54);
      if(h.kind==='seal'){
       for(let i=0;i<4;i++){
@@ -181,7 +182,7 @@ export class BossEffects {
     else if(h.kind==='dragon'){
      const coil=Math.sin(h.distance/52),side=h.lane<0?-1:1;
      brush.current(ground,h.x-c*178,h.y-s*178,h.x-c*60-s*side*16,h.y-s*60+c*side*16,coil*27,13,h.lane<0?'violet':'silver',fade*.86);
-     brush.stream(air,h.x,h.y,h.angle,170,22,h.lane<0?'violet':'silver',fade*.8);for(let i=0;i<3;i++){const off=Math.sin(t*8+i)*12,d=40+i*46;brush.crescent(ground,h.x-c*d-s*off,h.y-s*d+c*off,26+i*3,a+1.2+i*.48,.96,5,h.lane<0?'violet':'silver',fade*.86);}const key=(h.lane<0?12:14)+Math.floor(h.age*7)%2;this.sprite('boss-prop-'+key,h.x-c*105,h.y-s*105,360,180,angle,fade);for(let i=0;i<4;i++){const back=145+i*28;diamond(air,h.x-c*back-s*Math.sin(t*8+i)*8,h.y-s*back+c*Math.sin(t*8+i)*8,a+Math.PI,30,4,h.lane<0?8:9,fade*.5);}}
+     brush.stream(air,h.x,h.y,h.angle,170,22,h.lane<0?'violet':'silver',fade*.8);for(let i=0;i<3;i++){const off=Math.sin(t*8+i)*12,d=40+i*46;brush.crescent(ground,h.x-c*d-s*off,h.y-s*d+c*off,26+i*3,a+1.2+i*.48,.96,5,h.lane<0?'violet':'silver',fade*.86);}const key=(h.lane<0?12:14)+Math.floor(h.age*7)%2;this.sprite(bossPropKeys[key],h.x-c*105,h.y-s*105,360,180,angle,fade);for(let i=0;i<4;i++){const back=145+i*28;diamond(air,h.x-c*back-s*Math.sin(t*8+i)*8,h.y-s*back+c*Math.sin(t*8+i)*8,a+Math.PI,30,4,h.lane<0?8:9,fade*.5);}}
     else if(h.kind==='blade'){
      const rad=h.radius+20;
      for(let side=-1;side<=1;side+=2){
@@ -231,6 +232,9 @@ export class BossEffects {
    }
   }
   for(let i=this.used;i<this.slots.length;i++)this.slots[i].sprite.node.active=false;
+ }
+ detach(removed:Set<SpriteFrame>):void {
+  for(const {sprite} of this.slots)if(sprite.spriteFrame&&removed.has(sprite.spriteFrame)){sprite.node.active=false;sprite.spriteFrame=null;}
  }
  clear():void {for(const s of this.slots)s.sprite.node.active=false;}
  appendDepth(nodes:Node[]):void {for(const s of this.slots)if(s.sprite.node.active)nodes.push(s.sprite.node);}

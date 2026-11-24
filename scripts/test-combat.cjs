@@ -89,7 +89,7 @@ for (const side of [-1, 1]) for (const angle of [0, Math.PI / 2, Math.PI, -Math.
   const grip = { getSiblingIndex(){return 0;}, setSiblingIndex() {}, x: 0, y: 0, setPosition(x, y) { this.x = x; this.y = y; }, setScale() {} };
   const arm = drawing(); arm.node = { setSiblingIndex() {} };
   const equipped = { id: 'cleaver', tier: 1, uid: 1 }, stats = campaignExports.weaponStatsFor(demo.run, equipped);
-  const w = { node: grip, arm, shoe: {}, offhand: {}, trail: drawing(), side, angle, time: 0, duration: .38, equipped, stats, hit: new Set(), lastX: 0, lastY: 0 };
+  const w = { node: grip, arm, shoe: {}, fist: { node: {}, update() {} }, offhand: {}, trail: drawing(), side, angle, time: 0, duration: .38, equipped, stats, hit: new Set(), lastX: 0, lastY: 0 };
   demo.weapons = [w]; let previous;
   for (let i = 0; i <= 120; i++) {
     w.time = i / 120 * .38; demo.updateWeapon(w, 0);
@@ -122,7 +122,7 @@ feedbackDemo.playSound = name => played.push(name);
 const enemy = { hp: 18, x: 30, y: 20, text: { string: '' }, node: { angle: 0 } };
 feedbackDemo.hitEnemy(enemy, 0);
 assert.equal(enemy.hp, 2); assert.equal(played[0], 'sandal-hit-pcm');
-assert.equal(feedbackDemo.weaponFreeze, 0.035);
+assert.ok(enemy.flash>0 && enemy.feedback>0, '真实命中触发敌人闪色与受击动作');
 assert.ok(feedbackDemo.combatFx.particles.active>0);
 feedbackDemo.hitEnemy(enemy, 0);
 assert.equal(enemy.hp, 0); assert.equal(played[1], 'sandal-hit-pcm');

@@ -1,0 +1,258 @@
+{
+  "generator": "Codex built-in ImageGen",
+  "date": "2026-11-24",
+  "status": "concept review",
+  "images": [
+    {
+      "file": "home.png",
+      "direction": "桃园营地横屏首页，正中一位手办小刘，右侧微缩关卡沙盘、城门入口，下方三头像与装备。",
+      "source": "本次对话较早确认的概念稿（方向摘要）",
+      "imageGenOriginal": "exec-dc99937f-0977-4321-a1c3-a3609178198b.png",
+      "width": 1671,
+      "height": 941,
+      "sha256": "251fd77db252f03a6d452150d91cd8f9eeaad05a14b216300f80c48ae0db278c"
+    },
+    {
+      "file": "hero-liu.png",
+      "direction": "栗发绿结、短绿袍红腰带，双草鞋一高一低。",
+      "source": "本次对话较早确认的概念稿（方向摘要）",
+      "imageGenOriginal": "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "ce3f4b6d600477c597545b04296cf22443c3e75158e4119896a819c479ef95e5"
+    },
+    {
+      "file": "hero-guan.png",
+      "direction": "玉帽红珠与深绿短袍，最终修订为微弯扁竹担。",
+      "source": "本次对话较早确认的概念稿（方向摘要）",
+      "imageGenOriginal": "exec-1f16d6cf-e011-469b-bc87-89a5985d89fe.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "fd0171753f76513241766c6b44026a62338c59ae5ab75da34137699cebab090e"
+    },
+    {
+      "file": "hero-zhang.png",
+      "direction": "红带炸毛和紫短袍，圆拳、小虎牙与窄尖杀猪刀。",
+      "source": "本次对话较早确认的概念稿（方向摘要）",
+      "imageGenOriginal": "exec-6a3718cf-3a5f-47e7-ac51-80b6b387404b.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "21627a57a87c125b63e2d268e5db0b31f64150cb250c252d83d0908ff7d419ea"
+    },
+    {
+      "file": "yellow-turban-farmer.png",
+      "direction": "大黄巾侧结、补丁衣和短钩镰刀。",
+      "source": "本次对话较早确认的概念稿（方向摘要）",
+      "imageGenOriginal": "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "8a9a599e3b7bc207cdc854cef8807be77edf3e9e6acf6260f840555a488ada11"
+    },
+    {
+      "file": "zhangjiao-dark.png",
+      "direction": "暗黑张角改稿，旧金道冠、墨紫法袍、焦边朱砂符及雷纹铜杖。",
+      "source": "本次对话较早确认的概念稿（方向摘要）",
+      "imageGenOriginal": "exec-14cd3efe-6da1-437c-ae68-734b4c0876df.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "beb1f3b0cc520d523f91c59fc95f5fe30b2c048599cb1549b1e0cf6d9573d636"
+    },
+    {
+      "file": "stage-dioramas.png",
+      "references": [
+        "exec-dc99937f-0977-4321-a1c3-a3609178198b.png"
+      ],
+      "prompt": "Create one landscape concept board for six environment themes of this exact Chinese Three Kingdoms casual game; reference image's tiny Huangjin diorama is the existing design to expand and generalize, and the matte block-painted art and deliberate component separation are the style. Exactly SIX equal vertically compact small rectangular slab dioramas, 3 columns x 2 rows in clean row-major ordering. Each centered separately on pale warm ivory, all same scale with generous gutters. No text or human figures. Each miniature has a broad playable apron/path in front; perimeter scenery only; solid painted cel-shaded masses. Each scene readable at thumbnail size and tightly organized. (1 top left) Yellow Turban spring green and pale peach, yellow pennant, timber lookout and two cream tents. (2 top center) Hulao Pass ochre brick walled gate, autumn red flag and dust. (3 top right) Guandu cool harvested gold and olive, reed-lined grain carts and small timber storehouses, desaturated plain. (4 bottom left) Red Cliffs charcoal red-brown shoreline, moored teal warboat and wood dock offset at back with warm orange ropes, dry playable strip. (5 bottom center) Nanzhong humid jungle emerald rock terraces, bamboo and a vine-draped stone gateway. (6 bottom right) Wuzhang Plains indigo dusk hills, pale stone watch platform, a few tiny war banners and low lanterns. Varied colored rock and paths with clear hierarchy, dramatic theatrical support only, no tiny random particles, no UI, no frame, no lettering, all six fully in frame.",
+      "imageGenOriginal": "exec-42b2ec48-6f4e-4e5d-b81f-2f42219ce03c.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "0fbff50f2f71307409996167949c44e8009b9e431118fdd0d70fc24804f7cf4f"
+    },
+    {
+      "file": "boss-roster.png",
+      "references": [
+        "exec-14cd3efe-6da1-437c-ae68-734b4c0876df.png",
+        "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png"
+      ],
+      "prompt": "One wide concept design board of EXACTLY seven original adult Chinese Three Kingdoms bosses in two rows, upper four and lower three, stand-alone whole bodies all the same 2-head-tall scale, all visible and separated on muted gray cream background. Reference 1 is our exact established shadowy Yellow Turban priest Zhang Jiao, adapt each human general to the same dark fantasy 2D hand-painted faceted figurine family, retain Zhang Jiao's exact identity as first entry; reference 2 is juvenile proportion and color contrast baseline, do not include him. From left to right top row: Zhang Jiao (old saffron crown with round taiji seal, large black beard and upright single brass lightning staff); Lü Bu (long vermilion double plumes two ends on a charcoal obsidian armored helmet, imposing single crescent ji halberd, black and burnished red, adult); Dong Zhuo (very broad heavy belly, short thick beard, dark oxblood costume with bronze lion emblem, carries one heavy seal); Yuan Shao (aristocratic layered smoky-blue lamellar silhouette with square crest and broad battle bow). Bottom row centered: Cao Cao (tall charcoal Han commander cap, sharp beard points, cool silver sword, plum ink robe); Meng Huo (wide woven hide mantle, medium deep warm skin, boar tusk trophy on belt, massive carved dark wooden club, deep forest teal); Sima Yi (thin tall deep violet ceremonial cap, sparse long beard, split black and ivory chess stone held in hand, sweeping ink cape). Each silhouette markedly distinct by headwear + mass distribution and tool; selective muted accents on shadowy materials, clear facial/prop shapes. No labels, no watermarks, no UI or casting effects; crisp closed contours, matte rich colors, empty gutters.",
+      "imageGenOriginal": "exec-3ea4be22-e486-480a-af88-9c1073e1876a.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "60355d5267adf5f43b12f189d514d7061fe89e6013835ac8f302e7df445e81ef"
+    },
+    {
+      "file": "enemy-families.png",
+      "references": [
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png",
+        "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png"
+      ],
+      "prompt": "Landscape clean internal art board of EIGHT toy-scale enemy families for an original Chinese Three Kingdoms action game, EXACTLY four columns by two rows. Input 1 is our existing Yellow Turban farmer art master, reuse round compact proportions with tiny dark wedge eyes, broad firm dark outline, matte painted graphic planes, foot nubs and round fists; input 2 is the colorful hero baseline for distinction (do not include hero). Offwhite same backgrounds and very subtle ellipse contact shadows, individual full body poses, generous gutters, no text. Row 1 left-to-right: (1) mustard farmer with big distinctive diagonal Yellow Turban wrap, patched tan robe and short sickle, exactly like style master; (2) red brown heavy infantry with huge vertical dark iron shield, visible edges and helmet; (3) pale desaturated olive shortbow soldier whose nocked bowshape is readable; (4) tall horse body, black mane, red brown helmeted lance rider and clear hooves. Row 2: (5) jungle green rattan shield soldier with large woven oval shield and dark brown light robe, less ornate and less bright than a hero; (6) burnt cinnabar fire-oil soldier with a low round clay jar and ochre rag; (7) one unattended wood and bronze wheeled crossbow siege cart with raised crossbow bowshape, distinctive square proportions, lower torso entirely machinery; (8) dark plum to charcoal military strategist ghastly tiny wedge eyes, short squared cap, black and white Go stone held in one hand, distinct from boss, no glow. Distinguish 8 threat silhouettes and materials, maintain same compact simple rounded graphic planes and clear dark interface readability, no FX, no fantasy guns/swords unless called for, premium consistent character visualization.",
+      "imageGenOriginal": "exec-7cd60b89-5d19-4610-b814-206fb844df14.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4ff392db8b2edcd5a9daf68cd663c2e694a6b752cfc45d98258aeb2939ae18a7"
+    },
+    {
+      "file": "ui-flow.png",
+      "references": [
+        "exec-dc99937f-0977-4321-a1c3-a3609178198b.png",
+        "exec-fff17928-9345-4363-8e13-1b6f4583cd07.png",
+        "exec-14cd3efe-6da1-437c-ae68-734b4c0876df.png"
+      ],
+      "prompt": "Create one horizontal product design board with exactly THREE equally sized landscape miniature UI scenes placed left-to-right in one row with wide ivory gutters: original game 桃园小英雄. Reference 1 is current home style, reference 2 gameplay HUD baseline, reference 3 the visual boss accent. Design three production-quality game screen concept thumbnails in the same 2D chunky hand-painted Chinese Three Kingdoms art system. LEFT gameplay: elevated battle grassland with tiny dark jade player and yellow scarf enemies and a single dark old-gold enemy attack warning outlined with clear pale coral only where dangerous, upper corner compact dark jade life and coin HUD, joystick and one skill bottom corners, six-slot dock. MIDDLE merchant: paused battle darkened softly, a compact warm paper-on-jade surface with exactly four aligned tall weapon/pickup offer cards arranged in one line: sandal, hand-ji, heavy crossbow, red pottery oil jar. Mini colored quality strips, small coin shapes, one gold next action at bottom, six tiny equipment tiles and separate minor refresh icon. RIGHT victorious end: calm peach courtyard background, left big little Liu on ground with green ribbon and sandal, right concise paper reward tiles with distinct item icons, one clear gold continue CTA and quieter secondary home icon. Cream jade UI, tactile edges and authentic icons, not a reproduction of any existing commercial game. Keep negligible wording at thumbnail scale; use symbols only and blanks rather than typographic gibberish; absolutely no caption or headings beyond screens. Make the hierarchy, negative spaces, and cross-screen consistency legible. Fine matte drawn geometry, no hypergloss, no camera frame/margins inside each screen. Separate each thumbnail with one plain subtle outline, no additional panels.",
+      "imageGenOriginal": "exec-5f16b1fd-0a90-4481-b61d-c0e4cb8e7e64.png",
+      "width": 2172,
+      "height": 724,
+      "sha256": "851193e6d2f7b3f28ebc3445754fa81164918c1d97be2c54229e3375497c31b1"
+    },
+    {
+      "file": "skill-silhouettes.png",
+      "references": [
+        "exec-c32e5c02-9d89-4344-8cac-02f164812375.png",
+        "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png"
+      ],
+      "basePrompt": "Reinterpret battle image 1 and home image 2 into a single landscape design board of TWELVE disambiguated material/shape sketches for different skills in our Chinese Three Kingdoms game. Exactly 4 columns by 3 rows, equal-cell clear 2D overhead sage grass patches with a subtle gutter, all using same world scale, no captions, no UI, one graphic per cell. Design order exact: row 1 (1) one low carved pale jadewhite POINTED charge head and dust trail; (2) one circular mostly open gold warmwhite thick crescent sweep with a gap, same as source; (3) offset moving thin long white/amber single-line strings of 8 red-feather arrows showing perspective; (4) small red rectangular flag over quiet ruby edge halo. Row 2 (5) thin horizontal strip of connected rolling copper orange flames; (6) semicircular solid turquoise wave front capped ivory foam expanding; (7) ordered ring of eight distinct upright blue-green seal blocks and thin ochre ground line; (8) four vertical short violet-white lighting bolts in separate well-spaced places with amber ground impact. Row 3 (9) descending warm orange rocks with purple trails directed from different angles and one small fading star ground stamp; (10) several clear parallel descending arrows hitting a bounded round patch in successive bands, quiet; (11) four individually readable ivory and jade swords hugging a tight ring; (12) one broken amber soundwave ring with sparse stylized stars. Each unmistakable in silhouette at thumbnail size and intensity controlled. No characters necessary; ideally one small matching jade toy character only in cells 2, 4, 11 for scale. No big whiteouts, keep quiet flat entire board 2D same mobile camera angle, no text, no new symbols or watermark.",
+      "prompt": "Precisely refine the same 4-column 3-row game VFX style board (input 1), same grass background and exactly same panel layout, same size. Input 2 is our approved small hand-painted Xiaoliu tiny-dark-eyes style. Make three visibly localized fixes. TOP LEFT: replace decorative dragon head with a clearly weapon-like low-angled matte pale mint and ivory split spearhead wedge with a few tiny muted dust streaks, one simpler geometric cut. TOP SECOND: retain golden thick open crescent but smooth out the flat horizontal brown seam in the left arc so gold and white planes flow continuously; redraw small Xiaoliu within this single panel exactly like the squashy portrait of input 2 with tiny dark eyes, green knot and two red strap oval sandals, with no large white anime eyes. TOP RIGHT existing small red flag: fade the harsh pink circular hazard border and replace with a subtle pair of small red flag-motion streaks around the standing flag, no damage circle. Preserve all remaining 9 panels and their genuine effects exactly, including all arrow, frost wave, eight pillars, four branches, stars, arrows, orbit sword and waveform panels. No labels or text. One full board.",
+      "imageGenOriginal": "exec-3b0b7ab6-5df0-44b6-8892-984b8c0d4d9a.png",
+      "width": 1448,
+      "height": 1086,
+      "sha256": "77d89daa49279db705275d31aa6dc6c8203a017929dc08394a783cf780ff8d9d"
+    },
+    {
+      "file": "weapon-prototypes.png",
+      "references": [
+        "exec-c50bd0f9-d4cc-498d-b6f0-bae7f28a355e.png",
+        "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png",
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png"
+      ],
+      "basePrompt": "One landscape visual design board with exactly four separate original Three Kingdoms weapon concept modules for this 2D game, 2x2 equal quadrants with airy margins on warm pale ivory paper. Input 1 defines warm dark outline and matte 2D collectible world objects. Input 2 establishes overhead game scale, lower contrast moss terrain and readable hit geometry. Each module contains one standalone large weapon laid out fully visible with lots of space, alongside one small adjacent sage ground demonstration vignette of exactly its real trajectory; no text anywhere. Upper left: a traditional oval tightly woven golden straw sandal with red crossed straps; vignette shows a silhouette of one shoe contacting the cheek of a tiny yellow-headband recruit and simple compressed impact at the touch point, no magic tail. Upper right: a single antique hand ji, slender wood handle, pointed narrow steel tip and small side crescent; vignette shows two slim offset trajectories, sent out in one direction and returning obliquely to the tiny leaf-green protagonist after his side-step, single clear boomerang-shaped return. Lower left: a brown-and-dark-iron Han-era heavy Chinese crossbow with a bronze brace, side cocking wheel and visible taut string; vignette shows one straight toned-white heavy arrow passing three distinctly placed Yellow Turban soldiers in one line and one short small break of stone beyond the third. Lower right: round squat pottery oil flask with dark stopper, hemp loop and warm red small band; vignette shows two small dark vermilion ground oil patches connected by one thin lateral low flame lick, very localized flames. Be true to Chinese historical fantasy silhouettes, no modern weapons. Crisp outlines, restrained colors, hand-painted game-ready clarity, no arrows as annotations, no decorative UI, no glows outside distinct trajectories, no labels.",
+      "prompt": "Local visual edit of input 1. Same 2x2 full game props design board, same blank cream background, preserve all four large objects themselves and the design of the upper right return trajectory and lower left arrow path. Input 2 and 3 are approved squashy miniature character and enemy references. Make two improvements: bottom-right small demo shows the same little hero throwing a single sealed clay flask in a visibly high short arc toward its landing place and two small already-connected local oil patches, one thread of fire only, instead of pouring an open jug. Keep large clay oil flask on the left of that quadrant untouched. In all four tiny gameplay vignettes the little hero and yellow turban faces should use the simple tiny solid black eyes and extremely squat proportions of input 2 and input 3 where facial details are visible. Ground, modules, other isolated icons and silhouettes must remain the same. No text.",
+      "imageGenOriginal": "exec-e4b56e09-3c9f-42f7-a794-dc5c4c9819c4.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "ee8391766edfb8ce92d86026f868620eb35cf740ec4064f7510faebb203d58be"
+    },
+    {
+      "file": "zhangjiao-encounter.png",
+      "references": [
+        "exec-fff17928-9345-4363-8e13-1b6f4583cd07.png",
+        "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png",
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png",
+        "exec-14cd3efe-6da1-437c-ae68-734b4c0876df.png"
+      ],
+      "prompt": "One original polished 16:9 mobile combat-screen concept of first-stage Boss Zhang Jiao fight in 桃园小英雄. The first reference is the existing actual-scale battle concept to redesign. Second is approved squashy new Xiaoliu with tiny wedge eyes and double red strap sandals, third is approved farmer with yellow band and dark tiny eyes, fourth is the dark Zhang Jiao boss source for adult face, ochre high crown with round yin yang disc, ink-purple plus aged dark ochre broad robes, brass bolt staff and talisman. Keep game-scale overhead view no sky, battlefield is open calm low contrast paths and painted spring-sage grass. Hero about 11% of image height and boss about 18–21%, hero off center-left below, adult boss slightly above and right. Three to five small Yellow Turban sickle and bow infantry advance at the perimeter. Choose one readable moment: Zhang Jiao holding out a talisman, upraised staff, telegraphing the three-position boss move. Show exactly THREE aligned low crimson-copper ground circles at locked locations with tiny ochre talisman each, one to right already about to receive a short thin warm-white downstroke and the others remain thin clear telegraphs. Entire boss move warning on grass, openings on both sides, no bright overlapping special from hero and no dark overlay on the battlefield. Hero stepping aside, playable camera. Keep palette restrained with bright readable thin warning borders and directional emphasis. A small dark jade top-left HUD shows five hearts in one row, four bright, coin and pause. Top center dark narrow smoked-jade Boss bar labeled exactly “张角” and full-health-ish bar. Bottom left round joystick, bottom center exactly six discrete compact equipment slots with first filled red-strap sandal, bottom right one circular gold crescent skill button. Exact labels needed only 张角, no pseudo writing, no fake UI, no cinematic effects that block view. Downlight on spring arena and somber Boss values create readable focal separation. Model the heroes with no white anime eyes.",
+      "imageGenOriginal": "exec-5db37a6b-74ad-41fd-a028-813f325938d9.png",
+      "width": 1672,
+      "height": 941,
+      "sha256": "4d10b0b63d2a22c1f1bc3c9ee91cc329ac44b974c6f52a78e8fa1e87f29749f1"
+    },
+    {
+      "file": "hero-growth.png",
+      "references": [
+        "exec-ddbc8a7c-5bec-49d8-8048-00d83ffd4309.png",
+        "exec-1f16d6cf-e011-469b-bc87-89a5985d89fe.png",
+        "exec-6a3718cf-3a5f-47e7-ac51-80b6b387404b.png"
+      ],
+      "prompt": "Standalone square-ish landscape illustration board for original Three Kingdoms mobile game with EXACTLY THREE pairs of tiny collectible sleepy-looking squashed riders and their tiny companion pets, left-to-right one pair per column. Input 1–3 are approved actual portraits of the EXACT three boys, same brush, toy matte planar forms, big hair shape, wide very low solid-dark eyes, no white anime eyes, warm peach skin, patterned headwear and identifiable silhouettes. Preserve their identity and very small stature, adds only correct historical fantasy growth gear. Pair 1 left young Liu with leaf green ribbon riding a white horse with pale jade saddle blanket, twin short silver swords as one paired set, green and ivory short layered armor, tiny peach-pink rabbit with distinct long ears standing by lower left; pair 2 middle young Guan with gold-and-red jade cap riding round chestnut/red horse, green-bladed guandao with jade bronze collar, warm skin and no facial hair, muted green short armor, little jade serpent dragon with two small horns and blue bead beside horse; pair 3 right young Zhang with spiky hair red headband riding squat black boar with flat tiny warm tusks and crimson saddle, long spear with dark S-like red tassel tip, purple and claret short armor, plush orange tiger cub with stripes and rounded ears. Same base ground and shadow, separate all three evenly with generous gaps. One mounted hero and one small pet per pair. No lettering, no effects, no plates or frames. Art must use new hand-painted bean-toy proportions for heroes, short leg and glove shape. Offwhite minimal studio environment. Completely readable silhouettes at mobile size.",
+      "imageGenOriginal": "exec-00400510-052b-4b99-b153-2fc4893fbd46.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "f9c539a6d46501692a75491f0a6af9a288df1241b6b8298217d104211e50e585"
+    },
+    {
+      "file": "units-e01-e08.png",
+      "references": [
+        "exec-7cd60b89-5d19-4610-b814-206fb844df14.png",
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png"
+      ],
+      "prompt": "One UI-free landscape asset concept sheet, exactly 8 unique whole-body 2D toy-figurine units in 4 columns × 2 rows, consistently arranged with same orthographic 3/4 front view and same scale, pale warm ivory background. Reference image 1 is our vetted 8 enemy family figures: match the warm dark-brown outlines, deep color painted planes, tiny solid dark wedge eyes never giant sclera, big round head, short round mitts, tiny feet, simple deliberately readable silhouettes and touch of painterly matte. Reference image 2 is the same game's Yellow Turban farmer master. Each hero-like toy is an actual Three Kingdoms enemy, equipment or mount at thumbnail scale is its key threat signature. No labels, typography or boxes. Placement strictly as stated, same horizontal baseline within a row, no joining/overlap. TOP ROW left-to-right: (E01) patched mustard Yellow Turban farmer with short silver sickle and wide diagonal gold scarf (same as ref 2); (E02) russet tunic cleaving broad curved long-handled dao saber and shoulder sash; (E03) grey-teal blunt helmet soldier with thin, distinct very long spear with narrow silver point; (E04) red-gray armored soldier holding giant vertical rectangular black iron shield with notch at top, no other large weapon. BOTTOM ROW: (E05) low redgray scout hat and two short light silver daggers each in one hand; (E06) iron gray heavy axe with one huge wide armored axe head and muted ochre waist cloth; (E07) square-faced hammer soldier with thick rectangular iron mallet on long dark wood handle and plated wide helmet; (E08) ash scale shoulder and tall dark polearm with pointed spear tip plus distinctive crescent ear and dangling red tassel.",
+      "imageGenOriginal": "exec-ed848a60-6f92-4876-84a1-58f7cae5e9f2.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e6a914035709f2f9d5de36eb7bad266629f4a27807c2d89ba64fae9b6344e70f"
+    },
+    {
+      "file": "units-e09-e16.png",
+      "references": [
+        "exec-7cd60b89-5d19-4610-b814-206fb844df14.png",
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png"
+      ],
+      "prompt": "One UI-free landscape asset concept sheet, exactly 8 unique whole-body 2D toy-figurine units in 4 columns × 2 rows, consistently arranged with same orthographic 3/4 front view and same scale, pale warm ivory background. Reference image 1 is our vetted 8 enemy family figures: match the warm dark-brown outlines, deep color painted planes, tiny solid dark wedge eyes never giant sclera, big round head, short round mitts, tiny feet, simple deliberately readable silhouettes and touch of painterly matte. Reference image 2 is the same game's Yellow Turban farmer master. Each hero-like toy is an actual Three Kingdoms enemy, equipment or mount at thumbnail scale is its key threat signature. No labels, typography or boxes. Placement strictly as stated, same horizontal baseline within a row, no joining/overlap. TOP ROW left-to-right: (E09) standard-bearer, long pole with red slender rectangular flag, no readable symbols; (E10) navy soft gauze cap medics and white sleeves operating compact pale jade first aid box; (E11) small olive bowman holding drawn rounded chestnut bow with a single nocked arrow; (E12) tan short horned-hat crossbowman aimed stout simple horizontal crossbow. BOTTOM ROW: (E13) dark gray short repeating crossbow with a clear box magazine on top, dark red dusty clothes; (E14) wide lens of iron and wood heavy crossbow on a broad hunched soldier, a visible copper winding wheel and thick bolt; (E15) bare-sleeved ochre soldier hefting ONE spear above his shoulder, a slim long spear bundle behind; (E16) slate olive short brow cloth, holds TWO short light javelins, one in each hand, diagonal opposing angles and no spear bundle.",
+      "imageGenOriginal": "exec-59fa44a3-f9a9-4fb6-9f5d-1dbd16983f65.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "bb635a9a0ce4727ce9d154f64f0d8b9ab4a5e11104828121a4e12adfa53d3eb2"
+    },
+    {
+      "file": "units-e17-e24.png",
+      "references": [
+        "exec-7cd60b89-5d19-4610-b814-206fb844df14.png",
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png"
+      ],
+      "prompt": "One UI-free landscape asset concept sheet, exactly 8 unique whole-body 2D toy-figurine units in 4 columns × 2 rows, consistently arranged with same orthographic 3/4 front view and same scale, pale warm ivory background. Reference image 1 is our vetted 8 enemy family figures: match the warm dark-brown outlines, deep color painted planes, tiny solid dark wedge eyes never giant sclera, big round head, short round mitts, tiny feet, simple deliberately readable silhouettes and touch of painterly matte. Reference image 2 is the same game's Yellow Turban farmer master. Each hero-like toy is an actual Three Kingdoms enemy, equipment or mount at thumbnail scale is its key threat signature. No labels, typography or boxes. Placement strictly as stated, same horizontal baseline within a row, no joining/overlap. TOP ROW left-to-right: (E17) low grey-brown hood and folds over belt knives, small silver throwing blade pinched in one hand; (E18) red-tan heavy tunic soldier holding one short flying axe with hooked blade and a slanted sash; (E19) forward-tilting light cavalry with narrow tan horse, thin lance and low saddle; (E20) heavy large dark gray armored horse and smoky blue rider wearing brow armor plates and holding lance. BOTTOM ROW: (E21) black tiger-leopard cavalry horse, red-iron beast head breastplate, blade held along horse; (E22) faded gray horse with jade saddle fabric and a rider with short curved bow nocked on side; (E23) pale sand-colored horse and blue-wrap cap, side rider with amber bow held low; (E24) low-limbed gray wolf mount with pointed muzzle, low dark umber cloth rider, no long pikes. Horses are tiny squat mounted silhouettes with hooves, wolf deliberately lower.",
+      "imageGenOriginal": "exec-0f70617c-88cc-4f2c-9867-97c91fb47024.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "8f3061e60717ec7e5c7cedcb54a93730c1e48aa50829bc8930983b8351a02362"
+    },
+    {
+      "file": "units-e25-e32.png",
+      "references": [
+        "exec-ebd0407d-87d2-4164-bde6-f5b3eed0ab63.png"
+      ],
+      "basePrompt": "One UI-free landscape asset concept sheet, exactly 8 unique whole-body 2D toy-figurine units in 4 columns × 2 rows, consistently arranged with same orthographic 3/4 front view and same scale, pale warm ivory background. Reference image 1 is our vetted 8 enemy family figures: match the warm dark-brown outlines, deep color painted planes, tiny solid dark wedge eyes never giant sclera, big round head, short round mitts, tiny feet, simple deliberately readable silhouettes and touch of painterly matte. Reference image 2 is the same game's Yellow Turban farmer master. Each hero-like toy is an actual Three Kingdoms enemy, equipment or mount at thumbnail scale is its key threat signature. No labels, typography or boxes. Placement strictly as stated, same horizontal baseline within a row, no joining/overlap. TOP ROW left-to-right: (E25) recognizable squat small Asian elephant, big ears, short ivory tusks, hanging trunk, tiny dark-hair rider on a cloth saddle, not a human-sized blob; (E26) Nanzhong footman with side braid, green cloth forearm and broad russet textured wood club; (E27) olive rattan armor and big oval braided wicker shield with leafy border; (E28) dark haired Nanzhong dart soldier with pale bamboo BLOWPIPE drawn to mouth and tiny quiver, not a flute. BOTTOM ROW: (E29) red oil thrower carrying a round red clay jar with lid; (E30) bronze short nozzle and heavy russet work apron, no weapon flames; (E31) a clearly fictional ancient blackpowder matchlock gunner, ONE single wood and copper tube, visible held red slow match and a short wood stock, no modern firearms; (E32) squat archaic three-eye gunner holding the distinctive THREE aligned copper tube mouth openings on a bamboo-wood grip, two-handed, no modern firearm appearance.",
+      "prompt": "Precise tiny cosmetic retouch of input 1, an existing 4x2 grid of cute painted historically inspired game toys. In the single bottom-right tile, erase the single protruding little fourth ring-ended stick below the three eye-like circles, so the rounded bronze decorative object reads as a triangular cluster of exactly three dark round decorative voids, with a broad wooden support under. Keep the other seven characters unchanged and all composition, colors, hat, miniature character's hands and background exactly the same. No new details or mechanical diagrams. This is an icon silhouette cleanup only.",
+      "imageGenOriginal": "exec-e7a71a78-e340-47da-a629-cc78c77b028b.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "7b4017d21c19b2787f15f833c496a6f938ae7a75159cd83edb0e873bacdad65b"
+    },
+    {
+      "file": "units-e33-e40.png",
+      "references": [
+        "exec-7cd60b89-5d19-4610-b814-206fb844df14.png",
+        "exec-581f2bc5-3358-4bf1-98c1-8c8e1e613020.png"
+      ],
+      "prompt": "One UI-free landscape asset concept sheet, exactly 8 unique whole-body 2D toy-figurine units in 4 columns × 2 rows, consistently arranged with same orthographic 3/4 front view and same scale, pale warm ivory background. Reference image 1 is our vetted 8 enemy family figures: match the warm dark-brown outlines, deep color painted planes, tiny solid dark wedge eyes never giant sclera, big round head, short round mitts, tiny feet, simple deliberately readable silhouettes and touch of painterly matte. Reference image 2 is the same game's Yellow Turban farmer master. Each hero-like toy is an actual Three Kingdoms enemy, equipment or mount at thumbnail scale is its key threat signature. No labels, typography or boxes. Placement strictly as stated, same horizontal baseline within a row, no joining/overlap. TOP ROW left-to-right: (E33) heavy tan gloves, hold one dark round terracotta explosive with curled visible fuse, warm sienna tunic; (E34) red paper firecracker porter with a big standing bundle of tied bamboo firecrackers on his back and a small unlit fuse in front; (E35) wooden winch crossbow wagon, bronze horizontal bow arms, wooden wheels and stout beams, NO driver; (E36) wooden catapult wagon with raised bent throwing arm, sling carrying one big gray stone, NO driver. BOTTOM ROW: (E37) squat ancient bronze short cannon tube bound to low wood cart with wide wheels and leather overhang, NO driver; (E38) unmistakable two clay oil pot baskets on the back of the low ochre wood cart, two intact round red jars clearly visible, no firing and no driver; (E39) adult-yellow-turban common small squashed Taoist with a flat mustard scarf and one yellow paper talisman, no crown or staff; (E40) dim plum and charcoal character with small squared strategist cap, holding a black and a pale round Go counter, modest scale and no fancy long beard.",
+      "imageGenOriginal": "exec-bb3d6a24-fb27-4498-9653-4f5ad31c7f7f.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "950b6eb66d83fd95b3cda017c905229de08e798f20948bdaba4bbc880fe11358"
+    },
+    {
+      "file": "weapons-origin.png",
+      "references": [
+        "exec-581524c4-6d64-41bc-b25a-46062aaec3d9.png",
+        "exec-1f16d6cf-e011-469b-bc87-89a5985d89fe.png"
+      ],
+      "basePrompt": "One landscape concept grid of 12 individual game-equipment icons for the Chinese Three Kingdoms game 桃园小英雄, 4 columns × 3 rows, exactly one item in each specified occupied cell. Center each object with even margins and no organic background, plain warm ivory individual swatches implied by space (no panels, no texts, titles, watermark, symbols or characters). Reference 1's isolated large sandal, hand ji, crossbow and ceramic jar only as our own master for sharp 2D hand-painted low-detail toy block materials with dark warm outlines, two or three matte shaded materials and bright small highlights at wood, iron or bronze edges. Ignore its gameplay cartoons. Equal square icon scale and readable silhouette from a small thumbnail. Arrange precisely per row, leave specified blank cells actually blank. Tilt long handheld items 35 degrees, draw every silhouette visible in frame, no uncropped long weapons, no additional objects. TOP LEFT-TO-RIGHT: (1) golden oval straw sandal with red cross straps and jade heel edge, (2) flattened bowed bamboo carrying pole with warm pale face and thin dark edge, (3) tapered little Chinese pig butcher’s pointed narrow silver knife with short dark wood grip and copper rivet, (4) pair of two compact Chinese short straight swords with pale gold guard, angled together. SECOND ROW LEFT-TO-RIGHT: (5) green and silver curved guandao broad blade on long dark pole with aged brass rib, (6) S-shaped serpent spear point and small red tassel on a brown pole, (7) Fangtian battle halberd with central spear point and TWO crescent side flanges in black iron, (8) silver straight narrow dragon spear point, ice-blue narrow binding. THIRD ROW LEFT-TO-RIGHT: (9) straight Qinggang narrow blue-steel blade and rectangular guard, (10) a longer slightly curving silver Yitian sword and dark irreducible spine, (11) old bronze broad Seven-star Dao with exactly seven tiny golden circular rivets on spine, (12) old rough broad short saber with broad front, narrow handle and no shiny filigree. Exact same scale, avoid ornate fantasy.",
+      "prompt": "Precise local retouch of input 1, the 4x3 inventory icon grid. Preserve framing, warm off-white background, order and all other ten icons identically. At top row, column 2 only redraw the carrying pole using the exact object from input 2: a narrow flattened solid warm bamboo shoulder carrying plank, slight long continuous curvature, softly rounded rectangle ends, pale broad top plane and narrow dark brown thickness edge, no ropes, no cylindrical round sections, no handles, no tassels. Same overall icon footprint. In row 3 column 3 only check and draw exactly SEVEN evenly spaced little circular brass star studs along the blade spine, no other marks, preserve shape. Do not move, blend, label, add or remove any icon. One whole square-ish landscape sheet, 12 items total.",
+      "imageGenOriginal": "exec-09a8bf48-acf5-4275-ab34-17fb33493f31.png",
+      "width": 1448,
+      "height": 1086,
+      "sha256": "667217eec11ba312653128a9ae281de3b67055c7689a4946c9a667f413b1f874"
+    },
+    {
+      "file": "weapons-gear.png",
+      "references": [
+        "exec-e4b56e09-3c9f-42f7-a794-dc5c4c9819c4.png"
+      ],
+      "prompt": "Create one polished 4-column by 3-row inventory ICON swatch board for a family-friendly Chinese historical-fantasy video game, as an extension of the reference's hand-painted matte outlines, compact oversized shapes, and warm plain ivory background. Exactly twelve small rounded toy-sign icons in even positions and scale, no words, characters, demonstration, functional mechanical details or realistic equipment. Render each as a simple decorative historical game silhouette. Row 1: TWO blunt rounded archaic halberd tokens as a pair, a 3-prong antique ceremonial blade emblem, a chunky miniature arbalest icon with a red upper box, and a tall curved toy wood bow with sage-green wrap. Row 2: heavy squat antique bow-on-base token in warm wood-and-gold colors, a toy handheld halberd with a single crescent ear and small round grip seal, a chunky curved chain and hook icon, a small three-point iron-shaped terrain tile. Row 3: a tied bundle of round red festival paper tassels, a small sealed red-brown ceramic jar with a red cord loop, a stylized dark copper round thunder-clap magic charm with one painted cloud swirl and pale rim, a flowering peach twig. These are friendly illustrated inventory emblems only, no cross-sections, realism, diagrams, instructions, fire, smoke, missiles or other effects. Everything evenly placed and fully visible, use simple painted light and shadow on each.",
+      "imageGenOriginal": "exec-4e05fda9-7f6f-4044-a1b0-5c68f5f71cdd.png",
+      "width": 1448,
+      "height": 1086,
+      "sha256": "255dddd6b027f2e0898cd1502a8eaa62f3df6304bf04c00b515a8b9ef8752a38"
+    },
+    {
+      "file": "weapons-arcana.png",
+      "references": [
+        "exec-c50bd0f9-d4cc-498d-b6f0-bae7f28a355e.png"
+      ],
+      "prompt": "One landscape concept grid of 12 individual game-equipment icons for the Chinese Three Kingdoms game 桃园小英雄, 4 columns × 3 rows, exactly one item in each specified occupied cell. Center each object with even margins and no organic background, plain warm ivory individual swatches implied by space (no panels, no texts, titles, watermark, symbols or characters). Reference 1's isolated large sandal, hand ji, crossbow and ceramic jar only as our own master for sharp 2D hand-painted low-detail toy block materials with dark warm outlines, two or three matte shaded materials and bright small highlights at wood, iron or bronze edges. Ignore its gameplay cartoons. Equal square icon scale and readable silhouette from a small thumbnail. Arrange precisely per row, leave specified blank cells actually blank. Tilt long handheld items 35 degrees, draw every silhouette visible in frame, no uncropped long weapons, no additional objects. TOP ROW: (1) folding white feather fan with small smoke-blue spine and round brown grip, (2) angular folded pale yellow paper talisman with simple dark vermilion lightning-shaped sigil, (3) half-open ivory Taiping scripture scroll with a pair of short vermilion paper seals on its paper edge, no readable letters, (4) round two-lobe old amber gourd with red stopper, hemp tie around neck. SECOND ROW: (5) layered dark mahogany flat octagonal battlefield plate with tiny small three jade shaped gate panels set into wood edge, (6) low ritual bronze lantern with one row of tiny 7 orange warm dots, restrained, (7) a narrow blue-jade lotus-pattern floating sword with tiny pale silver tail socket, smooth teal blade, (8) one compact wooden carved cow machine, stocky ox head with squat wheels and brass winch. THIRD ROW: (9) a mechanical winged wood kite glider, swept tan leading edge and mute ivory fabric wings, a clear small wooden body. Leave other three cells in third row empty. No illustrations behind, one centered isolated prop each.",
+      "imageGenOriginal": "exec-6e15d5f4-4ae0-4e34-91e4-c6cd18dcbfd8.png",
+      "width": 1448,
+      "height": 1086,
+      "sha256": "c75b268dcad4effe5e7f869edc6f07016ff3eb58a83a838ad7aed426804280fd"
+    }
+  ]
+}

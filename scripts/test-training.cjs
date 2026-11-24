@@ -1,7 +1,12 @@
 const assert=require('node:assert/strict');
-const {useDevelopmentHost,newGame,click,load,storage,cc}=require('./test-campaign.cjs');
+const {useDevelopmentHost,newGame,click,load,storage,cc,Label,Graphics}=require('./test-campaign.cjs');
 const {CHAPTERS,CHRONICLE_ENEMIES,BOSS_ACTIONS}=load('chronicles'),{WEAPONS}=load('weapons'),{COMMON_SKILLS}=load('common-skills');
 const find=(n,name)=>n.name===name?n:n.children.map(c=>find(c,name)).find(Boolean);
+function checkChoice(root,name,selected){
+ const choice=find(root,name);
+ assert.equal(choice.getComponent(Graphics).fillColor.value,selected?'#f8e7c5':'#2b4938');
+ assert.equal(choice.getComponentsInChildren(Label).at(0).color.value,selected?'#432d1d':'#fff0d2');
+}
 const advance=(g,t)=>{for(let i=0;i<Math.ceil(t*60);i++)g.update(1/60);};
 const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtime-health').sort());
 (async()=>{
@@ -16,8 +21,13 @@ const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtim
  click(panel.root,'TrainingTab-1');click(panel.root,'TrainingChoice-1-2');click(panel.root,'TrainingCount-1');click(panel.root,'TrainingSpawn');click(panel.root,'TrainingChoice-1-7');click(panel.root,'TrainingSpawn');
  const lvbu=g.enemies.find(e=>e.hp>0&&e.encounterChapter===2),simayi=g.enemies.find(e=>e.hp>0&&e.encounterChapter===7);assert.equal(lvbu.bossSkin,'lvbu');assert.equal(simayi.bossSkin,'simayi');assert.equal(lvbu.maxHp,load('stage-data').stageBossHp('lvbu'));assert.equal(simayi.maxHp,load('stage-data').stageBossHp('simayi'));assert.equal(g.run.chapter,1,'混合首领不改全局章节');
  for(const [e,index]of [[lvbu,1],[simayi,6]]){e.born=0;e.x=g.px-100;e.y=g.py;e.attack=-1;e.bossTimers=[0,0,0];g.updateChronicleBoss(e,1/60,100,0);assert.equal(e.bossMove,BOSS_ACTIONS[index][0],'每名首领使用自己的动作表');}
- click(panel.root,'TrainingTab-2');click(panel.root,'TrainingTier-4');click(panel.root,'TrainingChoice-2-sandal');click(panel.root,'TrainingEquip');assert.equal(g.run.weapons[0].id,'sandal');assert.equal(g.run.weapons[0].tier,4);assert.equal(g.weapons[0].equipped.id,'sandal');
- click(panel.root,'TrainingSlot-1');click(panel.root,'TrainingEquip');assert.equal(g.run.weapons.length,2);click(panel.root,'TrainingUnequip');assert.equal(g.run.weapons.length,1);assert.ok(find(panel.root,'TrainingUnequip'));
+ click(panel.root,'TrainingTab-2');click(panel.root,'TrainingTier-4');click(panel.root,'TrainingChoice-2-pole');
+ checkChoice(panel.root,'TrainingChoice-2-pole',true);checkChoice(panel.root,'TrainingChoice-2-sandal',false);
+ click(panel.root,'TrainingChoice-2-sandal');checkChoice(panel.root,'TrainingChoice-2-sandal',true);checkChoice(panel.root,'TrainingChoice-2-pole',false);
+ click(panel.root,'TrainingEquip');assert.equal(g.run.weapons[0].id,'sandal');assert.equal(g.run.weapons[0].tier,4);assert.equal(g.weapons[0].equipped.id,'sandal');
+ click(panel.root,'TrainingSlot-1');
+ assert.equal(find(panel.root,'TrainingUnequip').getComponentsInChildren(Label)[0].color.value,'#665b49');
+ click(panel.root,'TrainingEquip');assert.equal(g.run.weapons.length,2);click(panel.root,'TrainingUnequip');assert.equal(g.run.weapons.length,1);assert.ok(find(panel.root,'TrainingUnequip'));
  for(const w of WEAPONS)for(const tier of [1,2,3,4]){g.equipTrainingWeapon(w.id,tier,0);assert.equal(g.run.weapons[0].id,w.id);assert.equal(g.weapons[0].equipped.tier,tier);}
  for(let i=1;i<6;i++)g.equipTrainingWeapon('sword',4,i);assert.equal(g.run.weapons.length,6);assert.equal(new Set(g.run.weapons.map(w=>w.uid)).size,6);
  const weapons=JSON.stringify(g.run.weapons);for(const args of [['none',1,0],['sword',5,0],['sword',1,6],['sword',1,NaN]])g.equipTrainingWeapon(...args);assert.equal(JSON.stringify(g.run.weapons),weapons,'非法武器/品级/槽位无副作用');
@@ -53,8 +63,14 @@ const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtim
  g.run.skillId='G03';g.skillCharge=g.skillRequirement();g.castSkill();assert.equal(g.skillCharge,0,'正式技能仍消耗充能');const tasks=g.commonSkill.tasks.length;g.castSkill();assert.equal(g.commonSkill.tasks.length,tasks,'正式未充能不能连放');assert.ok(!g.skillLabel.string.includes('无冷却'),'切回正式HUD恢复充能提示');
  // Direct hero/form selection drives the real battle rig, never the permanent profile.
  g.showMainMenu();const formSaved=progress(),profileSaved=JSON.stringify(g.profile);g.startTraining('liubei','G03');
- const forms=g.trainingPanel;g.equipTrainingWeapon('smg',3,1);g.equipTrainingWeapon('peach',2,2);const extraWeapons=JSON.stringify(g.run.weapons.slice(1));
+ const forms=g.trainingPanel;g.equipTrainingWeapon('repeater',3,1);g.equipTrainingWeapon('peach',2,2);const extraWeapons=JSON.stringify(g.run.weapons.slice(1));
  g.addTrainingEnemies('E01',2,false);const enemyRefs=g.enemies.filter(e=>e.hp>0),enemyHp=enemyRefs.map(e=>e.hp);click(forms.root,'TrainingGrowth');assert.equal(forms.tab,4);
+ const firstForm=find(forms.root,'TrainingChoice-4-0');
+ click(forms.root,'TrainingHero-guanyu');click(forms.root,'TrainingChoice-4-2');
+ assert.equal(find(forms.root,'TrainingChoice-4-0'),firstForm,'形态筛选保留节点并同时更新底板与文字');
+ checkChoice(forms.root,'TrainingHero-guanyu',true);checkChoice(forms.root,'TrainingHero-liubei',false);
+ checkChoice(forms.root,'TrainingChoice-4-2',true);checkChoice(forms.root,'TrainingChoice-4-0',false);
+ assert.equal(find(forms.root,'阶段 2').getComponent(Label).color.value,'#6a4727');
  for(const id of ['liubei','guanyu','zhangfei'])for(let n=0;n<=6;n++){
   click(forms.root,'TrainingHero-'+id);click(forms.root,'TrainingChoice-4-'+n);
   assert.equal(forms.showcase.id,id);assert.equal(forms.showcase.growth,n);const previewTime=forms.showcase.time;g.update(.05);assert.ok(forms.showcase.time>previewTime,'配置中的预览继续小动作');
@@ -67,5 +83,5 @@ const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtim
  const unchanged=JSON.stringify(g.run);for(const args of [['zhaoyun',3],['kongming',5],['liubei',-1],['liubei',7],['guanyu',NaN],['zhangfei',2.5]])g.setTrainingForm(...args);assert.equal(JSON.stringify(g.run),unchanged,'拒绝隐藏英雄和非法成长');
  click(forms.root,'TrainingResume');assert.equal(forms.showcase,undefined,'收起销毁预览引用');assert.equal(forms.root.children.length,0);g.openTrainingPanel();assert.equal(forms.formHero,'zhangfei');assert.equal(forms.choices[4],6,'再次打开定位当前形态');click(forms.root,'TrainingExit');assert.equal(progress(),formSaved);assert.equal(JSON.stringify(g.profile),profileSaved);
  const menuRun=JSON.stringify(g.run);g.setTrainingForm('guanyu',6);assert.equal(JSON.stringify(g.run),menuRun,'非演武场禁止形态修改');g.onDestroy();
- console.log('通过：演武入口/配置冻结、40兵和7场Boss配置/混合独立技能、36武器四阶六槽/12技能、无限生命仍有闪烁击退音效/实际近战与毒箭/格挡无敌和退闪/12技能无冷却连放/效果重置/清场、80上限、3英雄×7形态直选/动态预览/六槽与敌军保留/头像坐骑冲刺宠物一致/非法参数拒绝/收起释放、正式档与偏好隔离');
+ console.log('通过：演武入口/配置冻结、40兵和7场Boss配置/混合独立技能、33武器四阶六槽/12技能、无限生命仍有闪烁击退音效/实际近战与毒箭/格挡无敌和退闪/12技能无冷却连放/效果重置/清场、80上限、3英雄×7形态直选/动态预览/六槽与敌军保留/头像坐骑冲刺宠物一致/非法参数拒绝/收起释放、正式档与偏好隔离');
 })().catch(e=>{console.error(e);process.exitCode=1;});

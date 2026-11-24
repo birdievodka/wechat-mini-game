@@ -2,43 +2,43 @@
   "sources": [
     {
       "id": "zhangjiao",
-      "path": "assets/chronicle-units/boss-zhangjiao-actions.png",
-      "sha256": "db3f67c720c71d06e122faa01f467817fa5f09bd0703104174226a6aeab82a12"
+      "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
+      "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699"
     },
     {
       "id": "lvbu",
       "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
-      "sha256": "114f6d1661c501fc3558193f9db78b86254a79786ed8e0658ebd38b9229f444c"
+      "sha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3"
     },
     {
       "id": "dongzhuo",
       "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
-      "sha256": "b74b4b7b84e0604e6c17e08954889b0a2c98bb73523297c9d55233854522389c"
+      "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48"
     },
     {
       "id": "yuanshao",
       "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
-      "sha256": "a010dfd34e4e43cf7edbdfa399146cdc0de484e202a486011d833398dfa89704"
+      "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c"
     },
     {
       "id": "caocao",
       "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
-      "sha256": "1c2cf9c418beee045c6391e81562caff0caf962c2bb9dbc5949130328fc97adc"
+      "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e"
     },
     {
       "id": "menghuo",
       "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
-      "sha256": "b56414c489e824c4cb621c0b507a54f9797b60dc06451696509be82694f4e483"
+      "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c"
     },
     {
       "id": "simayi",
       "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
-      "sha256": "ce88389e676f7a61078c305d9f083c6625f5b22729484208024107e23d7d88e7"
+      "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde"
     }
   ],
   "dest": "assets/chronicle-ui/boss-portraits.png",
   "width": 576,
   "height": 288,
-  "bytes": 49052,
-  "sha256": "07d1da8866619af0b6c18f8eb891cf10ba2dfe8324c525ede41dffb6ef189875"
+  "bytes": 47930,
+  "sha256": "89f1c9b6afc2e068b5aa3f7a94bc80229b0d8ae6b39e2179c18e99f894bad16e"
 }

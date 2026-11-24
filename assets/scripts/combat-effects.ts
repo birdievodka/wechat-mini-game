@@ -74,6 +74,7 @@ export class CombatEffects {
     this.spray(x,y,kill?7:id==='smg'||id==='gourd'?2:4,tone,id==='peach'?'petal':id==='pole'?'chip':'spark',angle,2.5,kill?160:115,3.5);
   }
   muzzle(id:WeaponId,x:number,y:number,angle:number):void {
+    if(id==='sandal')return;
     if(id==='gourd'){this.stamp('vortex',id,x,y,angle,38,.6);return;}
     this.stamp('muzzle',id,x,y,angle,id==='shotgun'?48:id==='rocket'?38:24,id==='shotgun'?.13:.1);
     if(id==='smg'||id==='shotgun')this.spray(x,y,id==='shotgun'?3:1,1,'chip',angle-Math.PI/2,.6,85,3);
@@ -97,7 +98,6 @@ export class CombatEffects {
     if(id==='rocket'){this.particles.emit(x,y,angle+Math.PI,75,.28,7,8,'dust',0,20,1);this.particles.emit(x,y,angle+Math.PI,65,.12,4,7,'spark',0,0,0);}
     else if(id==='peach')this.particles.emit(x,y,angle+Math.PI,35,.3,4,5,'petal',0,10,1);
     else if(id==='firecracker')this.particles.emit(x,y,angle+Math.PI,45,.2,3,1,'spark',0,-80,2);
-    else if(id==='sandal')this.particles.emit(x,y,angle+Math.PI,35,.16,2.5,1,'spark',0,-35,1);
   }
   hero(id:HeroId,x:number,y:number,angle:number,radius:number):void {
     this.stamp('hero',id,x,y,angle,radius,id==='guanyu'?.72:.8,3);

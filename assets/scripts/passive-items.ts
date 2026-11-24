@@ -214,9 +214,9 @@ const ROWS = [
   {
     "id": "D07",
     "name": "稳手红绳",
-    "desc": "枪械散布角降低10%",
+    "desc": "麒麟弓与白羽扇的散射夹角缩小10%",
     "price": 1.0,
-    "stack": "U：最低原始50%，后续转枪械伤害；霰弹仍保留扇形"
+    "stack": "U：最低原始50%"
   },
   {
     "id": "D08",
@@ -311,10 +311,10 @@ const ROWS = [
   },
   {
     "id": "F05",
-    "name": "加长弹匣",
-    "desc": "突突枪攻速+15%、子弹速度+10%",
+    "name": "连弩绞盘",
+    "desc": "诸葛连弩攻速+15%、箭速+10%",
     "price": 1.1,
-    "stack": "A/U，无换弹操作"
+    "stack": "A/U，重复收益递减"
   },
   {
     "id": "F06",
@@ -344,13 +344,13 @@ ROWS.push(
   { id:'D10',name:'快手指套',desc:'远程武器攻速+15%',price:1.1,stack:'A：仅远程武器，重复收益递减' },
   { id:'D11',name:'鹰眼镜片',desc:'远程武器暴击率+6个百分点',price:1.1,stack:'U：总暴击最高80%，超出转远程伤害' },
   { id:'D12',name:'会心红点',desc:'远程武器暴击伤害倍率+0.25',price:1.1,stack:'A：仅远程武器，重复收益递减' },
-  { id:'D13',name:'精铁弹芯',desc:'远程武器伤害基础值+2；按攻击频率折算',price:1,stack:'A：高频和霰弹武器按攻击系数折算' },
+  { id:'D13',name:'精铁弹芯',desc:'远程武器伤害基础值+2；按攻击频率折算',price:1,stack:'A：高频和多段武器按攻击系数折算' },
   { id:'D14',name:'破阵箭簇',desc:'直线弹体穿透后的伤害保留+10个百分点',price:1.1,stack:'U：最多保留100%，超出转远程伤害；不额外增加穿透次数' },
   { id:'D15',name:'回旋鞋钉',desc:'草鞋弹射伤害保留+15个百分点',price:1.1,stack:'U：持有弹射强化时出现，最多保留100%，超出转草鞋伤害' },
   { id:'D16',name:'推山弹簧',desc:'远程武器击退强度+25%',price:1,stack:'U：本项最高+100%，超出转远程伤害' },
-  { id:'D17',name:'二踢脚推进器',desc:'火箭筒伤害+25%、弹速+20%',price:1.3,stack:'A/U：持有火箭筒时出现，弹速最多增加100%，超出转火箭伤害' },
-  { id:'D18',name:'霰弹聚能环',desc:'霰弹枪伤害+20%、射程+15%',price:1.2,stack:'A/U：持有霰弹枪时出现，射程最多增加60%，超出转霰弹伤害' },
-  { id:'D19',name:'突突穿甲匣',desc:'突突枪额外穿透1人，后续伤害70%',price:1.4,stack:'M：最多额外3次，之后提高突突枪伤害' },
+  { id:'D17',name:'雷丸药捻',desc:'震天雷伤害+25%、弹速+20%',price:1.3,stack:'A/U：持有震天雷时出现，弹速最多增加100%，超出转震天雷伤害' },
+  { id:'D18',name:'三尖缠柄',desc:'三尖刀伤害+20%、射程+15%',price:1.2,stack:'A/U：持有三尖刀时出现，射程最多增加60%，超出转三尖刀伤害' },
+  { id:'D19',name:'重弩透甲簇',desc:'重弩额外穿透1人',price:1.4,stack:'M：最多额外3次，之后提高重弩伤害' },
   { id:'D20',name:'飞鞋助推带',desc:'草鞋弹速+30%、伤害+10%',price:1,stack:'A/U：持有草鞋时出现，弹速最多增加100%，超出转草鞋伤害' },
 );
 export const PASSIVE_ITEMS: PassiveItem[] = ROWS.map(r => ({ ...r, bonus: {}, slot: 'waist' }));
@@ -361,7 +361,7 @@ export function eligiblePassive(id: string, weapons: { id: WeaponId }[]): boolea
   const owned = (ids: string[]): boolean => weapons.some(w => ids.indexOf(w.id) >= 0);
   const straight=['sandal','smg','shotgun','repeater','phoenix-bow','heavy-crossbow','hand-halberd','chain-hook','feather-fan','wood-ox','wood-kite'];
   const projectiles=[...straight,'peach','firecracker','rocket','oil-jar','thunder-bomb'];
-  const needs: Record<string, string[]> = { D04:['sandal'],D05:['sword'],D06:straight,D07:['smg','shotgun'],D08:['sword'],D15:['sandal'],D17:['rocket'],D18:['shotgun'],D19:['smg'],D20:['sandal'],E06:['peach'],E07:['thunder'],E08:['gourd'],F01:['sandal'],F02:['pole'],F03:['peach'],F04:['cleaver'],F05:['smg'],F06:['sword'] };
+  const needs: Record<string, string[]> = { D04:['sandal'],D05:['sword'],D06:straight,D07:['phoenix-bow','feather-fan'],D08:['sword'],D15:['sandal'],D17:['thunder-bomb'],D18:['trident'],D19:['heavy-crossbow'],D20:['sandal'],E06:['peach'],E07:['thunder'],E08:['gourd'],F01:['sandal'],F02:['pole'],F03:['peach'],F04:['cleaver'],F05:['repeater'],F06:['sword'] };
   if (needs[id]) return owned(needs[id]);
   if (id==='D03') return owned(straight);
   if (['D09','D10','D11','D12','D13','D16'].indexOf(id)>=0) return weapons.some(w=>weaponFor(w.id).category==='ranged');

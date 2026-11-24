@@ -1,0 +1,14 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "0d097963-eaa1-4af2-9fa4-7104ad6d834d",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "cdn-assets",
+    "bundleName": "boss-zhangjiao",
+    "priority": 8
+  }
+}

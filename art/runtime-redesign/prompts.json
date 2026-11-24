@@ -1,0 +1,57 @@
+{
+  "camp": {
+    "references": [
+      "home.png"
+    ],
+    "prompt": "Precise production background edit of this owned 16:9 horizontal Cocos mobile game home illustration. Return a clean BACKGROUND PLATE of the exact game concept. Retain the look of the outdoor fun Chinese Three Kingdoms peach-tree courtyard, scenery, paving, atmosphere, dappled right light, perspective, buildings and flowers from the existing frame. Remove absolutely all foreground/varying UI: all logos, text, widgets, character, character shadow, miniature stage platform, stage shadow, stage label and gate, bottom navigation, portrait row, controls and gold main button. Reconstruct the natural background under the removed objects perfectly without seams, leave the exact open paving in central-left for a separate hero sprite and especially central-right for separately placed stage decor, and a simple quiet lower third. No characters, shop, miniature diorama, graphical labels, symbols, or extra focal objects. Render crisp high-quality full bleed sky and courtyard for use behind real interactive Cocos UI, 16:9. No output margin/border."
+  },
+  "terrain": {
+    "references": [
+      "stage-dioramas.png",
+      "zhangjiao-encounter.png"
+    ],
+    "prompt": "One game texture source atlas, full bleed landscape 3 columns 2 rows, EXACT equal rectangular cells and crisp cell boundaries with NO line, gutter, margins, labels or text. Each cell is a distinct uninterrupted top-down walkable ground, view straight overhead, no horizon, no trees, characters, buildings, foliage props, path edges, rocks larger than a pebble, arena limits, scroll, UI or perspective. Soft hand-painted flat matte cartoon 2D materials matching ground readability of reference 2 and color at front of six miniature dioramas reference 1. Broad quiet markmaking and no busy contrasts, made to tile by mirror. Perfectly disjoint six tiles edge-to-edge. Top row left-to-right: spring sage grass, hint of olive tiny leaf paper specks and sparse pink petal marks; dry ochre beaten courtyard with a few tiny warm gray fragments; muted light khaki grass-stubble / gray olive plain. Bottom row: cool gray slate stone and sparse warm brick dust; pale filtered jungle olive dirt and diffuse small emerald grass patches; subtly desaturated slate-violet dry ground and tiny sleepy soft neutral pebbles. Neither borders nor central objects. Styles differ clearly but all relatively low-contrast to play on. Source image atlas for mobile battle ground only."
+  },
+  "hero-parts": {
+    "references": [
+      "hero-liu.png",
+      "hero-guan.png",
+      "hero-zhang.png"
+    ],
+    "prompt": "Convert these three exact owned video game characters into ONE production sprite-part sheet PNG, transparent background and precisely aligned 3 columns x 3 rows equal empty cells with generous transparent gaps, on a SQUARE image. Row 1 three head-only parts in given column order (Liu Guan Zhang), starting at top bun/hat to bottom of jaw, silhouettes, exact new chunky low dot/wedge eyes, hair and proportions, full head with no neck or arms. Row 2 same three exact heads with same positions and same silhouette but simply eyes CLOSED (small dark curves) for a blink animation. Row 3 three isolated headless armless footless torso robe parts only, preserve the characteristic collar, colors, red waist or belt and outer silhouette. Body part cropped to rounded bell robe with flat top neck seam, no arms, boots, fists, cloth beyond torso, no weapons in all nine parts. Column 1 leaf ribbon and red knot, column 2 jade turban red gem and gold-green robe, column 3 red headband and violet red waist knot robe. Stable registration to enable a direct animation blink from row 1 to row 2. All nine fully inside its own cell with wide transparent gutter. Absolutely no labels, border, ground shadows, scenery, symbol columns or text. Transparent actual alpha."
+  },
+  "farmer-actions": {
+    "references": [
+      "yellow-turban-farmer.png"
+    ],
+    "prompt": "Sprite sheet for our existing Chinese fantasy cartoon miniature Yellow Turban farmer in reference. Exact four columns and three equal-height rows with spacious invisible cell margins, 12 isolated transparent cutout sprites, no text or shadows. Row 1 facing camera, row 2 in right-facing profile, row 3 facing away with back visible. Each row from left to right: short walk frame left foot forward, short walk frame right foot forward, raise single short hooked harvest sickle over shoulder, swing it down and out. Preserve same exact squashed big head, straight diagonal ochre Yellow Turban scarf, same mustard-brown repaired robe and tiny tiny dark eyes of the exact source art. Center hips consistently with identical apparent scale and ground level in each of 12 cells, full body including sickle wholly within its cell. Plain transparent only. No effects, motion streaks, backdrop, labels or extra objects. The tight action frame repeatability is important for Cocos game runtime."
+  },
+  "farmer-hoe": {
+    "references": [
+      "exec-418663db-33c8-41e8-9ade-53e104f8e2a1.png"
+    ],
+    "prompt": "Edit this exact production sprite sheet for the same toy game Yellow Turban farmer. Pixel-layout contract is strict: exact four columns and three equal rows, twelve full transparent isolated cells; row one front, row two right profile, row three back; columns are two alternate walk steps, raised tool by shoulder, swung lowered tool. Copy the proportions, heads, attitude, scarf, clothing, scale and spacing. Replace in all cells the crescent sickle with one small simple ancient garden hoe: slim wooden shaft and a stubby black iron rectangular flat blade at a right angle, clearly different silhouette from crescent sickle. Follow the hand in each pose, no effects. True transparent background, no shadows or text. Frame consistency more important than any embellishment. Do not repeat figures outside 12 cells."
+  },
+  "zhangjiao-actions": {
+    "references": [
+      "zhangjiao-dark.png",
+      "boss-roster.png"
+    ],
+    "prompt": "Create game animation cutouts on actual TRANSPARENT background as one precise 4-column × 4-row sheet, 16 equal cells. Subject only the first yellow-black-purple dark Taoist leader Zhang Jiao, exact existing 2D collectible figure. Preserve the old gold steep tier Taoist hat with yin-yang circle, twin yellow ribbons, broad brown-black beard, deep purple and weathered gold robe, true clear lightning shaped staff and paper talisman. No ground, shadow, text or effects. Each pose full body and entire lightning staff within its own cell with 10 pixels clear transparent margins and comparable size; same hips and feet baseline. Row1 four front three-quarter poses (idle, left step, right step, lean forward). Row2 four BACK facing camera poses (neutral, left step, right step, lean forward), face cannot be seen in row2; back of ponytail/robes clear. Row3 four front poses (staff lowered, staff gathered and raised, staff extended and paper forward, knees back in recovery). Row4 same four actual back angles (staff lowered, staff gathered and raised, staff extended, knees back in recovery) only back silhouette and staff positions. Render tight large graphic color planes for mobile scale. No overlays no gold rays. 16 exactly. Body look stays precisely on model across all frames."
+  },
+  "showcase-closed": {
+    "references": [
+      "hero-liu.png",
+      "hero-guan.png",
+      "hero-zhang.png"
+    ],
+    "prompt": "Create a horizontal THREE COLUMN sprite sheet of these exact three owned game's individual full-body figures, Liu, Guan, Zhang only, each one fully inside its own exact third with wide outer margin, transparent background. Preserve exact pose, scan composition, tilt, scale, arms, weapons, body shape, hair relief and clothing in each individual original. The ONLY local change per hero: their little wedge black eyes are both closed, as simple tiny curved closed lids. Preserve exact mouth. Purpose is a 0.1 second animation blink at the original stand pose, so do not change or reanimate poses or shift any shape. Preserve tiny 1.4 head-height silhouette. No labels or shadow, only isolated transparent characters."
+  },
+  "skill-icons": {
+    "references": [
+      "skill-silhouettes.png",
+      "weapons-arcana.png"
+    ],
+    "prompt": "One actual TRANSPARENT alpha image asset sheet for a Chinese fantasy mobile game, 4 equal columns × 3 equal rows exactly. Twelve isolated handpainted bold game glyphs with no border or background. Like the collectible equipment style in reference 2 and actual animation symbols in reference 1. Clean heavy silhouettes, selective dark brown outline, gold/green warm matte shadow planes readable at 40px. Each fully contained within exact grid cell, clear separation. Order top row left to right: ivory jade point dart rushing right with short wind strokes; single thick white-gold open sweeping crescent; chestnut bent bow with red feather arrow direction; simple ragged scarlet command flag with gold edge. Middle row: connected copper-orange rolling horizontal fire strips; blue-green breaking crest wave with pale foam; eight jade seal pillars evenly forming small round gate formation with negative space; one chunky lilac white lightning bolt with gold base. Bottom row: two orange purple-trailing falling slate stones; three diagonal cream shafts with red feather arrowheads raining; four isolated small ivory edged jade swords in circular orbit; ochre three quarter ring shaped like pronounced audio pulses and one single gold star. Every object centered in its own invisible cell with generous extra margins. No letters, text, card backgrounds, logos, hands, ground, picture frames or other objects. Real transparency everywhere. Same compact icon size in all cells."
+  }
+}

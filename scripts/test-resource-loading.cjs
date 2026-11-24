@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const {load,cc,newGame,GameBootstrap,finishStartup}=require('./test-campaign.cjs');
+const {load,cc,newGame,GameBootstrap,finishStartup,click}=require('./test-campaign.cjs');
 const {ResourceGate}=load('resource-gate');
 const pending=[];let calls=0;const gate=new ResourceGate((id,done)=>{calls++;pending.push(done);});
 const results=[];gate.get('same',(e,v)=>results.push([e,v]));gate.get('same',(e,v)=>results.push([e,v]));assert.equal(calls,1);
@@ -27,7 +27,16 @@ assert.deepEqual(Array.from(stageBosses(2)),['lvbu','dongzhuo']);
  const original=cc.assetManager.loadBundle,remote=require('../config/cdn.json').remoteBundles,requested=[];
  const warn=console.warn;console.warn=()=>{};
  cc.assetManager.loadBundle=(name,cb)=>{requested.push(name);remote.includes(name)?cb(Error('offline')):original(name,cb)};
- try{const g=new GameBootstrap();await g.start();finishStartup(g);assert.equal(g.phase,'menu');assert.ok(!requested.some(x=>x.startsWith('boss-')||['arsenal','talismans','orchard','enemies','results','hidden-heroes'].includes(x)));assert.ok(bossArtReady(g.artFrames,'zhangjiao'));g.prepareBosses(stageBosses(1),()=>g.restart(false));assert.equal(g.phase,'battle');assert.equal(g.resourceBusy,false);}finally{cc.assetManager.loadBundle=original;console.warn=warn;}
+ try{const g=new GameBootstrap();await g.start();finishStartup(g);assert.equal(g.phase,'menu');assert.ok(!requested.some(x=>x.startsWith('boss-')||['arsenal','talismans','orchard','enemies','results','hidden-heroes'].includes(x)));assert.equal(bossArtReady(g.artFrames,'zhangjiao'),false);
+  click(g.screens.root,'StartHero');assert.equal(g.phase,'battle');assert.equal(g.resourceBusy,false);
+  assert.ok(requested.includes('boss-zhangjiao')&&requested.includes('boss-props'));
+  g.run.stageWave=4;g.remaining=0;g.stageBoundary();click(g.screens.root,'SupplySkip');
+  assert.equal(g.phase,'shop');assert.equal(g.run.stageWave,4);assert.equal(g.resourceBusy,true);
+  cc.assetManager.loadBundle=original;g.retryResource();
+  assert.equal(g.phase,'battle');assert.equal(g.run.stageWave,5);assert.ok(bossArtReady(g.artFrames,'zhangjiao'));
+  assert.equal(g.enemies.filter(e=>e.hp>0&&e.bossSkin==='zhangjiao').length,1);
+  g.showMainMenu();assert.equal(g.artFrames['boss-prop-3'],undefined);assert.equal(bossArtReady(g.artFrames,'zhangjiao'),false);assert.ok(g.artFrames['boss-zhangjiao']);
+ }finally{cc.assetManager.loadBundle=original;console.warn=warn;}
  // Atomic multi-atlas loading, failed retries and cancellation cannot leak partial poses.
  forgetGameBundle('boss-menghuo');const jobs=[];cc.assetManager.loadBundle=(name,done)=>done(null,{load:(path,type,cb)=>jobs.push({path,cb})});
  const frames={};let error,completed=0,alive=true;
@@ -43,6 +52,23 @@ assert.deepEqual(Array.from(stageBosses(2)),['lvbu','dongzhuo']);
  const g=await newGame();g.showMainMenu();forgetGameBundle('boss-lvbu');let late;
  cc.assetManager.loadBundle=(name,cb)=>name==='boss-lvbu'?late=()=>original(name,cb):original(name,cb);
  try{let started=0;g.prepareBosses(['lvbu'],()=>started++);assert.equal(g.resourceBusy,true);const age=g.age;g.update(.1);assert.equal(g.age,age);g.showMainMenu();late();assert.equal(started,0);assert.equal(g.phase,'menu');assert.equal(bossArtReady(g.artFrames,'lvbu'),false);}finally{cc.assetManager.loadBundle=original;forgetGameBundle('boss-lvbu');}
+ // A preparation request for two bosses (e.g. an encounter preview) and a failed peer
+ // can be retried without paying twice or starting more than one battle.
+ {
+  const ids=Array.from(stageBosses(2));for(const id of ids)forgetGameBundle('boss-'+id);
+  let delayed,attempts=0,starts=0;
+  cc.assetManager.loadBundle=(name,cb)=>{
+   if(name==='boss-lvbu'&&!delayed){delayed=()=>original(name,cb);return;}
+   if(name==='boss-dongzhuo'&&attempts++===0){cb(Error('offline'));return;}
+   original(name,cb);
+  };
+  try{
+   g.prepareBosses(ids,()=>starts++);assert.ok(g.resourceBusy);assert.equal(starts,0);
+   delayed();g.retryResource();
+   assert.equal(starts,1);assert.ok(ids.every(id=>bossArtReady(g.artFrames,id)));
+   assert.equal(g.resourceBusy,false);
+  }finally{cc.assetManager.loadBundle=original;}
+ }
  // Local chapter ground must remain visible even when every optional meadow download is absent.
  const {WORLD}=load('world-rules'),rect=g.ground.rect;let opaqueFills=0;
  g.ground.rect=(x,y,w,h)=>{if(w===WORLD.width&&h===WORLD.height)opaqueFills++;return rect.call(g.ground,x,y,w,h);};
