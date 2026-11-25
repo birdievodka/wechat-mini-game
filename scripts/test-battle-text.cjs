@@ -20,6 +20,11 @@ const {BattleNumber}=load('BattleNumber');
    Object.defineProperty(label,'string',{configurable:true,get:()=>value,set:next=>{value=next;writes++;}});
    return ()=>writes;
  }
+ const goldWrites=watch(g.coinLabel),pickupWrites=watch(g.pickupText),gold=g.coinTotal;
+ g.dropCoin(g.px,g.py,1);g.dropCoin(g.px,g.py,2);
+ for(let i=0;i<120;i++)g.updateCoins(1/120);
+ assert.equal(g.coinTotal,gold+3);assert.equal(goldWrites(),1);
+ assert.equal(pickupWrites(),2,'one popup write for a simultaneous pickup and one for expiry');
  const hudWrites=watch(g.hud),titleWrites=watch(g.bossLabel);
  boss.hp=5234;boss.maxHp=6150;
  for(const mode of ['stage','endless','training','legacy','test']){

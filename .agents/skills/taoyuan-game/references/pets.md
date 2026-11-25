@@ -16,7 +16,7 @@ PetRuntime只模拟，不建引擎对象/读取战斗RNG/墙钟，索敌10Hz。�
 
 ## 表现与资源
 
-art/runtime-pets保留内置image_gen批准版来源、完整提示词和确定性pack-pet-art.cjs。pets/pets.png为512²/1MiB RGBA、15真实alpha帧：每物种常态/眨眼/小跑A/B/攻击；素材PNG约286KiB。通过pet-art.ensureSheets走远程pets Bundle，成长已得才预取菜单、进入战斗/初得结算有正式准备门槛；切到无宠英雄菜单先清Sprite引用再释放。没有首屏额外依赖或整图海报入包。
+art/runtime-pets保留内置image_gen批准版来源、完整提示词和确定性pack-pet-art.cjs。pets/pets.png为512²/1MiB RGBA、15真实alpha帧：每物种常态/眨眼/小跑A/B/攻击；素材PNG约286KiB。pet-art.ensureSheets从微信pets分包加载原图。成长已得才预取菜单，进入战斗和初得结算检查就绪；切到无宠英雄菜单先清Sprite引用再释放。没有首屏额外依赖或整图海报入包。
 
 PetView每处1个Sprite，战斗地面影子/桃核/青刃/肉掌落地均复用原friendlyGroundFx/fx，无逐宠Graphics、刚体或独立粒子系统。真实命中进入hitEnemy但带petSource，绕过武器增益，保留敌军盾/藤甲等防御。菜单/胜利用动态PetView，失败用闭眼姿态。菜单/胜利宠物摆在英雄左侧，避免被右侧地图/纸卡遮挡。
 

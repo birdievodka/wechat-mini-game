@@ -1,0 +1,149 @@
+{
+  "bossScale": 0.55,
+  "files": [
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-caocao/boss-caocao-actions.png",
+      "dest": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
+      "width": 895,
+      "height": 510,
+      "bytes": 183153,
+      "sourceSha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e",
+      "sha256": "ddb319526659f0a3bacd142321bd3778c98a226b7410125cfea153e0e7bbc4f8"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-dongzhuo/boss-dongzhuo-actions.png",
+      "dest": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
+      "width": 821,
+      "height": 776,
+      "bytes": 284423,
+      "sourceSha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48",
+      "sha256": "fa1fe1e1af88779a8a3c76a3d7774ac5a8dbb131ab23ebcce16947414ebd84f2"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-lvbu/lvbu-actions.png",
+      "dest": "assets/remote-content/boss-lvbu/lvbu-actions.png",
+      "width": 1011,
+      "height": 1107,
+      "bytes": 390208,
+      "sourceSha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3",
+      "sha256": "2fd80a72c269acd154c683932d13fb91d34b86af89f0fe5b0b7d318bd5214408"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-beasts.png",
+      "dest": "assets/remote-content/boss-menghuo/boss-beasts.png",
+      "width": 503,
+      "height": 838,
+      "bytes": 175612,
+      "sourceSha256": "12e21f612086f56a5208dfe3d43511de63be5978e1ea9a9b6752b86ceb8125fa",
+      "sha256": "ad2c30afefd92955f66acc9c38c0538c57a9ffd753b6fb65ec9462f6b6d25c2d"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-menghuo-actions.png",
+      "dest": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
+      "width": 774,
+      "height": 781,
+      "bytes": 282340,
+      "sourceSha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c",
+      "sha256": "cb83535c19117732187d4609bba808e0221136def367b737de8bec6c3527bd49"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-props/boss-props.png",
+      "dest": "assets/remote-content/boss-props/boss-props.png",
+      "width": 442,
+      "height": 592,
+      "bytes": 100151,
+      "sourceSha256": "7f6467125802c14e45c1086405eae46384fb582451dca6aa58f20737088f06a3",
+      "sha256": "f924f3fcd1267f5d365d277876377e1ff4f7a330726442e1c29d47280bfede5f"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-simayi/boss-simayi-actions.png",
+      "dest": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
+      "width": 1001,
+      "height": 552,
+      "bytes": 234405,
+      "sourceSha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde",
+      "sha256": "9e8f1aee5159b194129d52fdfe363e0274bb57f9a9f63d5c291550a2c30c77a9"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-yuanshao/boss-yuanshao-actions.png",
+      "dest": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
+      "width": 1015,
+      "height": 556,
+      "bytes": 233384,
+      "sourceSha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c",
+      "sha256": "e627ae7f1c115f54a854850a3ae34cce1c35b3fc5feedd61368ac0d653bd81f0"
+    },
+    {
+      "source": "art/runtime-bosses/hd-atlases/boss-zhangjiao/boss-zhangjiao-actions.png",
+      "dest": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
+      "width": 795,
+      "height": 778,
+      "bytes": 275839,
+      "sourceSha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699",
+      "sha256": "45cd47acace1e1d5a37ae024ea31b76f03fc449c44c17eb028a4dd572d3b8939"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/arsenal/weapons.png",
+      "dest": "assets/arsenal/weapons.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 325650,
+      "sourceSha256": "f2639553cbb4222433d7d1919c8cc60dfd10015930e6beaca92c806ed295ab7c",
+      "sha256": "fe79d83da72a977b737ac073e548e794066f93aba1b8b8b4609765728b9eea30"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/talismans/items.png",
+      "dest": "assets/talismans/items.png",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 487882,
+      "sourceSha256": "73492d5b1628b2e6bc03ad68db16c1f8307a64919fb96b2f3b041b266e93946c",
+      "sha256": "0ecebdc81e6499f626b7dc5844c39507c71652cc5946bdb0e72f724d7c4bf19a"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/meadow/ground.png",
+      "dest": "assets/meadow/ground.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1260800,
+      "sourceSha256": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d",
+      "sha256": "df4c4099c91ab6d1a04137fdb7f012a2f4e53946833519ebb1ebaccfa461290b"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/orchard/decor.png",
+      "dest": "assets/orchard/decor.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 364098,
+      "sourceSha256": "7a578779eaefc9e2c799cfbc61dd4fad0e35ec3b209095ff2172d3c447e37971",
+      "sha256": "3628b23a5ba3f5c61932df08da45c969b78b1ce6a525b4558e25313e5396cc42"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/enemies/archer-actions.png",
+      "dest": "assets/enemies/archer-actions.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 260986,
+      "sourceSha256": "91a34e954df4db395f838b877ee7c747cb95cf22ef2b705d772c95c095260412",
+      "sha256": "d307059f1bfc418adf00ac8758b835dda32c3aa65a004bc7d221fcfa999f31de"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/enemies/cavalry-actions.png",
+      "dest": "assets/enemies/cavalry-actions.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 250432,
+      "sourceSha256": "5b6bdb061fbfe21b64f912eb57af6bb33396623bdaeae5e6d3d918f138619929",
+      "sha256": "f60dcb6eb2542b22a68eb0b0a4f4a4b2203d331bb6d8ce7b0ac11f7264f5986f"
+    },
+    {
+      "source": "art/runtime-subpackages/sources/enemies/zhangjiao-actions.png",
+      "dest": "assets/enemies/zhangjiao-actions.png",
+      "width": 1024,
+      "height": 768,
+      "bytes": 286706,
+      "sourceSha256": "ed63e36e3ba8db7fdccd04422ac766ba2eb9f62b8e0e4d95bdd4d3d0272365d9",
+      "sha256": "6f25166739f03bcc58675d7726f6952fa52c563f9795e1bc5e65aea8067b5be8"
+    }
+  ]
+}

@@ -67,6 +67,13 @@ export class CommonSkillRuntime {
   if(d.id!==id||!d.unlocked||kind==='precision'&&!this.nearest(undefined,d.radius))return false;
   const skyCount=kind==='lightning'?THUNDER_COUNT:kind==='meteor'?METEOR_COUNT:0;
   if(skyCount && this.tasks.length+skyCount/SKY_VOLLEY_SIZE>SKILL_TASK_LIMIT)return false;
+  if(kind==='battle-haste'){
+   this.poseKind=kind;this.poseTime=this.poseDuration=.32;
+   this.hasteTime=d.seconds;this.hasteRate=1+d.factor;
+   this.effects.stop(kind);this.effects.play(id,kind,x,y,angle,d.radius,d.seconds);
+   if(h.audio)h.audio(id,'cast');else h.sound('silver-spear');
+   return true;
+  }
   const group=this.group(id);
   // Persistent fields replace their prior cast, including in the no-cooldown training mode.
   // This bounds fire/rain geometry independently of how fast the player taps the button.
@@ -79,8 +86,6 @@ export class CommonSkillRuntime {
    h.protect(.25);this.effects.play(id,'dash',x,y,angle,d.radius,d.seconds+.25);
   }else if(kind==='sweep'){
    this.sweepTime=.4;this.queue(id,'sweep',x,y,angle,0,.01,power,group);
-  }else if(kind==='battle-haste'){
-   this.hasteTime=d.seconds;this.hasteRate=1+d.factor;this.effects.stop(kind);this.effects.play(id,kind,x,y,angle,d.radius,d.seconds);
   }else if(kind==='precision'){
    this.effects.stop('bow');this.effects.play(id,'bow',x,y,angle,d.radius,.9);
    for(let i=0;i<8;i++)this.queue(id,'precision-shot',x,y,angle,i*.095,.01,power,group,i);

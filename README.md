@@ -75,7 +75,7 @@ npm test覆盖真实组件状态流转、交易/保存、所有武器品质真�
 英雄成长v9已接入：个人首通+1心，本命→坐骑+30%→三连→固定冲刺→最终短甲；演武“成长”可切换0–6，Q/Shift冲刺。详见[成长实现](docs/hero-growth-proposal.md)。
 
 
-远程资源采用v9.4按需分发，微信构建后执行 `npm run cdn:publish`，确认 `cdn-assets/release.json` 与 `published.json` 版本一致再预览；手机需配置downloadFile合法域名。完整流程见[资源分发](docs/resources-cdn-v94.md)及[CDN目录](cdn-assets/README.md)。
+微信构建的全部游戏资源由微信包和按需分包提供。执行 `npm run build:wechat` 后直接用微信开发者工具预览；构建检查会验证分包文件和 19.5 MiB 总包预算。更新迁移图集后运行 `node scripts/pack-subpackage-art.cjs`。旧线上版本的 CDN 清单保留在 [CDN 归档](cdn-assets/README.md)。
 
 
 v9.5隐藏英雄与哭泣图按需，海报单份、农兵24帧无损编码；WebGL评审请使用 `npm run build:review`，以同时复制唯一启动海报。无损重建与检查见[资源v9.5](docs/resources-lossless-v95.md)。

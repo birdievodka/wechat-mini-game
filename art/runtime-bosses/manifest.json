@@ -39,7 +39,7 @@
   ],
   "atlases": [
     {
-      "dest": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-zhangjiao/boss-zhangjiao-actions.png",
       "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699",
       "width": 1446,
       "height": 1415,
@@ -561,7 +561,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-dongzhuo/boss-dongzhuo-actions.png",
       "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48",
       "width": 1493,
       "height": 1410,
@@ -1083,7 +1083,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-yuanshao/boss-yuanshao-actions.png",
       "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c",
       "width": 1845,
       "height": 1011,
@@ -1605,7 +1605,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-caocao/boss-caocao-actions.png",
       "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e",
       "width": 1627,
       "height": 927,
@@ -2127,7 +2127,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-menghuo-actions.png",
       "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c",
       "width": 1407,
       "height": 1420,
@@ -2649,7 +2649,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-simayi/boss-simayi-actions.png",
       "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde",
       "width": 1820,
       "height": 1003,
@@ -3171,7 +3171,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-menghuo/boss-beasts.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-beasts.png",
       "sha256": "12e21f612086f56a5208dfe3d43511de63be5978e1ea9a9b6752b86ceb8125fa",
       "width": 914,
       "height": 1523,
@@ -3949,7 +3949,7 @@
       ]
     },
     {
-      "dest": "assets/remote-content/boss-props/boss-props.png",
+      "dest": "art/runtime-bosses/hd-atlases/boss-props/boss-props.png",
       "sha256": "7f6467125802c14e45c1086405eae46384fb582451dca6aa58f20737088f06a3",
       "width": 804,
       "height": 1077,

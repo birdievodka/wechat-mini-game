@@ -1,4 +1,4 @@
-const { existsSync, copyFileSync, readFileSync } = require('node:fs');
+const { existsSync, copyFileSync, readFileSync, writeFileSync } = require('node:fs');
 const { resolve } = require('node:path');
 const { spawnSync } = require('node:child_process');
 
@@ -33,9 +33,12 @@ const expectedAppId=JSON.parse(readFileSync(resolve(root,'project.config.json'),
 assert.equal(JSON.parse(readFileSync(resolve(root,'config/build-wechat.json'),'utf8')).packages.wechatgame.appid,expectedAppId,'Creator与仓库AppID不一致');
 assert.equal(JSON.parse(readFileSync(resolve(root,'build/wechatgame/project.config.json'),'utf8')).appid,expectedAppId,'微信构建仍绑定旧AppID');
 assert.equal(readFileSync(resolve(root,'build/wechatgame/first-screen.js'),'utf8'),readFileSync(resolve(root,'build-templates/wechatgame/first-screen.js'),'utf8'),'自定义启动海报模板未生效');
-assert.equal(JSON.parse(readFileSync(resolve(root,'build/wechatgame/src/settings.json'),'utf8')).splashScreen.totalTime,0,'引擎插屏必须关闭，避免海报前后再次显示引擎标识');
+const settingsPath=resolve(root,'build/wechatgame/src/settings.json');
+const settings=JSON.parse(readFileSync(settingsPath,'utf8'));
+assert.equal(settings.splashScreen.totalTime,0,'引擎插屏必须关闭，避免海报前后再次显示引擎标识');
+settings.assets.downloadMaxConcurrency=4;
+writeFileSync(settingsPath,JSON.stringify(settings));
 require('./patch-wechat-text-measure.cjs').patchWechatTextMeasure(resolve(root,'build/wechatgame/cocos-js/cc.js'));
-require('./stage-cdn-assets.cjs').stageCdnAssets();
 require('./check-package-size.cjs');
 require('./check-engine-imports.cjs');
 console.log('构建完成：请用微信开发者工具导入 build/wechatgame。');

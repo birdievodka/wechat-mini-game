@@ -274,4 +274,18 @@ v10.1诊断截图新增峰值/绘图大户/末段18趋势；存储失败可见�
 
 ### v10.13.4 微信发布入口
 
-微信只有 getAccountInfoSync().miniProgram.envVersion 为 develop 时开放演武场、演武配置、运行诊断/复制、铜管音乐试听、清空进度。trial、release、未知值、缺 API 或异常都只显示正式设置（背景音乐、音效和游戏进度）。普通关卡与按英雄解锁的无尽模式为正式玩法。音乐试听门禁只影响手动试听；正常游戏继续播放铜管主题。用户请求的是界面和操作隔离，共享包仍含开发版代码，本机运行采样继续。内部高血量模式在 restart 入口校验，演武同时校验启动和配置，进入演武后才创建战斗配置按钮。布景参数只供本地 DEBUG 浏览器。scripts/test-endless-settings.cjs 检查各环境的菜单节点、实际按钮和操作入口。
+微信只有 getAccountInfoSync().miniProgram.envVersion 为 develop 时开放演武场、演武配置、运行诊断/复制、铜管音乐试听、清空进度。trial、release、未知值、缺 API 或异常都只显示正式设置（背景音乐、音效和游戏进度）。普通关卡与按英雄解锁的无尽模式为正式玩法。音乐试听门禁只影响手动试听；正常游戏继续播放铜管主题。用户请求的是界面和操作隔离，共享包仍含开发版代码；自 v11.0.18 起微信全量采样仅在 develop 执行。内部高血量模式在 restart 入口校验，演武同时校验启动和配置，进入演武后才创建战斗配置按钮。布景参数只供本地 DEBUG 浏览器。scripts/test-endless-settings.cjs 检查各环境的菜单节点、实际按钮和操作入口。
+
+
+### v11.0.18 线上诊断
+
+微信 develop 创建 RuntimeHealth。trial、release 和无法识别版本的微信使用 ReleaseHealth，两者互斥并在销毁时解除监听。进入普通关/无尽及重试、进入下一波（含中首领和首领）、胜利/失败各覆盖 taoyuan-release-checkpoint，同时向微信实时日志写一条 info。普通波次是 1–5，无尽第一轮记 1。菜单不覆盖末次战斗。实时日志在管理后台「WE分析 → 性能质量 → 实时日志」查询；同构建用 version、时间和关卡对照。缺少实时日志能力或宿主抛错时，游戏仍可运行。平台端是否收到需以对应 AppID 后台核验。详见[微信小游戏实时日志](https://developers.weixin.qq.com/minigame/dev/guide/runtime/debug/realtimelog/)。
+
+### v11.0.19 微信转发给朋友
+
+GameBootstrap.start 在微信启动时调用 `wx.showShareMenu`，开发、体验和正式版均启用微信右上角的「转发给朋友」，卡片采用微信默认标题和封面。浏览器无微信接口可照常启动，宿主返回失败或抛错也不阻塞开局。test-startup 覆盖三个环境的调用及宿主故障。详见[微信小游戏转发指南](https://developers.weixin.qq.com/minigame/dev/guide/open-ability/share/share.html)。
+
+
+### v11.0.20 首页游戏圈
+
+微信首页在图鉴上方显示游戏圈。支持 PageManager 的基础库使用账号后台提供的首页 openlink，并在玩家点击时调用 show({openlink})。保留标识开头的连字符；分享用 H5 网址不作为 openlink。异步打开防连点，离开备战释放实例，后台切换不会打断已请求的微信页面。旧基础库使用 wx.createGameClubButton 默认主页，按逻辑窗口尺寸定位；弹窗、切后台、进战斗、退出时收起。无两种能力时隐藏入口。scripts/test-game-club.cjs 覆盖模拟宿主路径；openlink 对应版本资格与实机落地页面须在微信上核对。

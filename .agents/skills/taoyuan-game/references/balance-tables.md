@@ -2,7 +2,7 @@
 
 由 `npm run skill:sync` 从当前代码生成，请修改源码后重新生成。机制、实际调用和已知差异见人工参考；配置字段不代表已接入效果。
 
-版本：`stage-v11.0.9-battle-keys`。六关独立构筑、无热身，购物与暂停不计时。
+版本：`stage-v11.0.20-game-club`。六关独立构筑、无热身，购物与暂停不计时。
 
 ## 角色开局与技能
 
@@ -156,30 +156,30 @@ C05只降低每次进店的第一次刷新；收益递减后取整，第二份�
 
 | Bundle | 优先级 | 源码素材 MiB |
 | --- | --- | --- |
-| arsenal | 8 | 0.657026 |
+| arsenal | 8 | 0.311508 |
 | battle | 8 | 1.110738 |
 | campaign | 8 | 0.870584 |
 | chronicle-ui | 8 | 1.603032 |
 | chronicle-units | 8 | 0.728299 |
-| enemies | 8 | 1.359329 |
+| enemies | 8 | 0.764007 |
 | hero-menu | 8 | 1.861804 |
-| meadow | 8 | 1.466496 |
+| meadow | 8 | 1.203338 |
 | music | 8 | 0.463189 |
-| orchard | 8 | 0.667081 |
+| orchard | 8 | 0.348173 |
 | presentation | 8 | 2.35703 |
-| boss-caocao | 8 | 1.756863 |
-| boss-dongzhuo | 8 | 2.719987 |
-| boss-lvbu | 8 | 3.612921 |
-| boss-menghuo | 8 | 4.518517 |
-| boss-props | 8 | 1.105865 |
-| boss-simayi | 8 | 2.242254 |
-| boss-yuanshao | 8 | 2.211968 |
-| boss-zhangjiao | 8 | 2.479686 |
+| boss-caocao | 8 | 0.175625 |
+| boss-dongzhuo | 8 | 0.272205 |
+| boss-lvbu | 8 | 0.373081 |
+| boss-menghuo | 8 | 0.438643 |
+| boss-props | 8 | 0.096459 |
+| boss-simayi | 8 | 0.224503 |
+| boss-yuanshao | 8 | 0.223531 |
+| boss-zhangjiao | 8 | 0.26402 |
 | hidden-heroes | 8 | 0.546196 |
 | pets | 8 | 0.279699 |
 | results | 8 | 0.219935 |
 | sfx-core | 8 | 0.462467 |
 | sfx | 8 | 0.789093 |
-| talismans | 8 | 1.024598 |
+| talismans | 8 | 0.466223 |
 
 以上为源码目录字节，包含meta，并非发布包大小。PNG尺寸、资源路径、源码指纹见机器目录；微信包限制与验证见工程参考。

@@ -547,7 +547,13 @@ if(require.main===module)(async () => {
   const controls=await newGame(),jc=load('joystick-input').joystickCenter(controls.halfWidth,controls.halfHeight);
   const finger=(x,y,id=1)=>({getLocation:()=>({x,y}),getID:()=>id});
   assert.equal(controls.joystick.node.active,true,'静止时固定摇杆可见');
-  controls.touchStart(finger(jc.x,jc.y));controls.touchMove(finger(jc.x+60,jc.y));
+  controls.touchStart(finger(jc.x,jc.y));
+  controls.battlefield.activeInHierarchy=true;
+  const clearStick=controls.joystick.clear.bind(controls.joystick);
+  let redraws=0;controls.joystick.clear=()=>{redraws++;clearStick();};
+  for(let i=0;i<120;i++)controls.touchMove(finger(jc.x+1+i%60,jc.y));
+  assert.equal(controls.stick.x,1);assert.equal(redraws,0);
+  controls.lateUpdate();controls.lateUpdate();assert.equal(redraws,1,'touch burst draws only the latest thumb position');
   assert.equal(controls.stick.x,1);controls.castSkill();controls.touchEnd(finger(0,0,2));assert.equal(controls.touchId,1,'技能手指不打断移动');
   const beforeMoving=controls.px;advance(controls,.2);assert.ok(controls.px>beforeMoving,'固定摇杆真实驱动角色');
   controls.touchEnd(finger(jc.x,jc.y));assert.equal(controls.stick.x,0);assert.equal(controls.joystick.node.active,true,'松手归中但底座保留');

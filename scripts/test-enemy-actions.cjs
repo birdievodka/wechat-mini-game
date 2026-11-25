@@ -10,10 +10,28 @@ const A=load('enemy-actions'),{CHRONICLE_ENEMIES}=load('chronicles'),{bossFrame,
    const angle=[-Math.PI/2,0,Math.PI/2,Math.PI][dir];const state=[e.x,e.y,e.hp,e.attack,g.playerHp];A.sampleEnemyAction(p,spec,t,d.windup,angle,78,1,true);assert.ok(Object.values(p).every(Number.isFinite),d.id+'姿态有限');if(t>=0&&t<d.windup){assert.equal(p.release,0);assert.equal(p.phase,1);}
    Object.assign(e,{direction:dir,attack:t,attackAngle:angle,moving:true});g.drawEnemy(e);assert.equal(Math.sign(e.art.node.scale.x),dir===3?-1:1);assert.equal(e.attack,t);assert.deepEqual([e.x,e.y,e.hp,g.playerHp],[state[0],state[1],state[2],state[4]]);
   }
-  if(d.id!=='E01'){assert.ok(e.npcRig);const parts=e.npcRig.parts,count=e.art.node.children.length,pose=e.npcRig.pose;let frameReads=0;const originalFrames=e.npcRig.frames;e.npcRig.frames=new Proxy(originalFrames,{get(target,key){frameReads++;return target[key];}});for(let i=0;i<30;i++)g.drawEnemy(e);assert.equal(frameReads,0,'同兵种同前后方向不再拼贴图键查表');e.npcRig.frames=originalFrames;assert.equal(e.npcRig.parts,parts);assert.equal(e.npcRig.pose,pose);assert.equal(e.art.node.children.length,count);assert.ok(parts.every(s=>!s.node.getComponent(cc.Graphics)),'动作不新增逐兵Graphics');}
+  if(d.id!=='E01'){assert.ok(e.npcRig);const parts=e.npcRig.parts,count=e.art.node.children.length,pose=e.npcRig.pose;let frameReads=0;const atlas=e.npcRig.atlas,originalGet=atlas.get;atlas.get=function(...args){frameReads++;return originalGet.apply(this,args);};for(let i=0;i<30;i++)g.drawEnemy(e);assert.equal(frameReads,0,'同兵种同前后方向不再拼贴图键查表');atlas.get=originalGet;assert.equal(e.npcRig.parts,parts);assert.equal(e.npcRig.pose,pose);assert.equal(e.art.node.children.length,count);assert.ok(parts.every(s=>!s.node.getComponent(cc.Graphics)),'动作不新增逐兵Graphics');}
   // Freeze the actual attack clock through stun and pause.
   e.attack=.1;e.stunUntil=g.age+3;g.updateEnemy(e,.2);assert.equal(e.attack,.1);e.stunUntil=0;g.paused=true;g.update(.2);assert.equal(e.attack,.1);g.paused=false;
  }
+ // Wave four introduces E15 and E39. Exercise the same pooled rig across identities and directions.
+ g.clearBattle();
+ const actor=g.spawnNext(CHRONICLE_ENEMIES.find(d=>d.id==='E15').kind,'E15');
+ Object.assign(actor,{born:0,moving:true,attack:0});
+ const previousFrames=new Map(),ownedCuts=new Set();
+ for(let round=0;round<4;round++)for(const id of ['E15','E39'])for(const direction of [0,2]){
+  Object.assign(actor,{archetype:id,direction});g.drawEnemy(actor,true);
+  const parts=actor.npcRig.parts,key=id+(direction===2?'-back':'-front');
+  assert.equal(parts[7].spriteFrame,g.artFrames['npc-gear-'+key],key+' 切换武器图正确');
+  const cuts=parts.slice(0,3).map(part=>part.spriteFrame);
+  assert.ok(cuts.every(Boolean));cuts.forEach(frame=>ownedCuts.add(frame));
+  if(previousFrames.has(key))cuts.forEach((frame,i)=>assert.equal(frame,previousFrames.get(key)[i]));
+  previousFrames.set(key,cuts);
+ }
+ assert.equal(ownedCuts.size,12);
+ const peer=g.spawnNext(CHRONICLE_ENEMIES.find(d=>d.id==='E39').kind,'E39');
+ Object.assign(peer,{born:0,direction:2});g.drawEnemy(peer,true);
+ peer.npcRig.parts.slice(0,3).forEach((part,i)=>assert.equal(part.spriteFrame,previousFrames.get('E39-back')[i]));
  const ready=A.sampleEnemyAction(A.createActionPose(),A.enemyActionSpec('E02'),-1,.44,0,78,0,false),settled=A.sampleEnemyAction(A.createActionPose(),A.enemyActionSpec('E02'),.44+.3,.44,0,78,0,false);assert.ok(Math.abs(ready.weaponAngle-settled.weaponAngle)<.001,'收招连续回到握持角，不突然横刀变竖刀');
  // Actual melee hit: held windup, lock direction, one release, and sidestep escape.
  for(const id of ['E02','E03','E04','E05','E08','E26','E27'])for(const escape of [false,true]){
@@ -30,7 +48,9 @@ const A=load('enemy-actions'),{CHRONICLE_ENEMIES}=load('chronicles'),{bossFrame,
  for(const back of [false,true])for(const id of ['zhangjiao','dongzhuo','yuanshao','caocao','menghuo','simayi']){
   const s=createBossState();s.back=back;s.phase='windup';assert.equal(bossFrame(s,id),(back?8:0)+5);s.phase='recover';s.time=.7;assert.equal(bossFrame(s,id),back?8:0);
  }
- g.clearBattle();for(let i=0;i<80;i++){const d=CHRONICLE_ENEMIES[i%40],e=g.spawnNext(d.kind,d.id);Object.assign(e,{born:0,hp:1e6,attack:d.windup*.7});g.drawEnemy(e,true);}const counts=g.enemies.map(e=>e.node.children.length);for(let j=0;j<10;j++)g.enemies.forEach(e=>g.drawEnemy(e,true));assert.deepEqual(g.enemies.map(e=>e.node.children.length),counts);assert.equal(g.enemies.filter(e=>e.hp>0).length,80);g.onDestroy();
+ g.clearBattle();for(let i=0;i<80;i++){const d=CHRONICLE_ENEMIES[i%40],e=g.spawnNext(d.kind,d.id);Object.assign(e,{born:0,hp:1e6,attack:d.windup*.7});g.drawEnemy(e,true);}const counts=g.enemies.map(e=>e.node.children.length);for(let j=0;j<10;j++)g.enemies.forEach(e=>g.drawEnemy(e,true));assert.deepEqual(g.enemies.map(e=>e.node.children.length),counts);assert.equal(g.enemies.filter(e=>e.hp>0).length,80);
+ const released=[];for(const frame of ownedCuts){const destroy=frame.destroy;frame.destroy=function(){released.push(this);return destroy.call(this);};}
+ g.onDestroy();assert.equal(released.length,12);assert.equal(new Set(released).size,12);
  const m=JSON.parse(fs.readFileSync('art/runtime-enemy-actions/manifest.json'));let bytes=0,decoded=0;for(const a of Object.values(m.atlases)){assert.equal(crypto.createHash('sha256').update(fs.readFileSync(a.file)).digest('hex'),a.sha256);const {data,info}=await sharp(a.file).ensureAlpha().raw().toBuffer({resolveWithObject:true});assert.equal(info.width,480);assert.equal(info.height,1248);decoded+=info.width*info.height*4;bytes+=a.bytes;for(let i=0;i<60;i++){let visible=0;for(let y=0;y<96;y++)for(let x=0;x<96;x++)if(data[((Math.floor(i/5)*96+y)*480+i%5*96+x)*4+3]>32)visible++;assert.ok(visible>30,'身体/立绘/武器格非空 '+i);}}
  assert.ok(bytes<1024*1024);assert.ok(decoded<10*1024*1024);assert.equal(m.gearBounds.length,43);console.log('通过：40兵×4向×7阶段/动作只读与复用/近战抬手单次释放与绕背/14远程准时放弹/全兵无偷接触伤害/暂停眩晕/6Boss收招/80兵无新增Graphics/模块化图集<1MiB');
 })().catch(e=>{console.error(e);process.exitCode=1;});

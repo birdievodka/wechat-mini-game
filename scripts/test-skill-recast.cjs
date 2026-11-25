@@ -12,6 +12,20 @@ function cast(g,id){g.run.skillId=id;g.skillCharge=g.skillRequirement();g.castSk
  arrow.clearBattle();const moving=target(arrow,250,0);cast(arrow,'G08');step(arrow,.05);moving.y=200;step(arrow,.1);assert.equal(moving.hp,moving.maxHp,'old line cannot hurt a target that moved away');arrow.onDestroy();
  // Haste changes release cadence only, expires exactly after five simulated seconds.
  const haste=await newGame();haste.clearBattle();const original=haste.stats.damage;cast(haste,'G07');assert.equal(haste.commonSkill.hasteMultiplier,5);assert.equal(haste.commonSkill.damageMultiplier,1);assert.equal(haste.stats.damage,original);step(haste,4.9);assert.equal(haste.commonSkill.hasteMultiplier,5);step(haste,.2);assert.equal(haste.commonSkill.hasteMultiplier,1);haste.onDestroy();
+ // Recasting refreshes the timer while preserving a single flag and stable training HUD.
+ const recast=await newGame();recast.clearBattle();recast.trainingMode=true;cast(recast,'G07');
+ const clear=recast.skillGraphic.clear.bind(recast.skillGraphic);let hudClears=0;
+ recast.skillGraphic.clear=()=>{hudClears++;clear();};
+ for(let i=0;i<12;i++){
+  step(recast,3);cast(recast,'G07');
+  assert.equal(recast.commonSkill.hasteMultiplier,5);
+  assert.equal(recast.commonSkill.tasks.length,0);
+  assert.equal(recast.commonEffects.visuals.filter(v=>v.kind==='battle-haste').length,1);
+ }
+ assert.equal(hudClears,0);assert.equal(recast.skillLabel.string,'背水一战 · 无冷却');
+ assert.equal(recast.skillCasts,13);assert.ok(recast.lastSkillCastAt>0);
+ step(recast,5.1);assert.equal(recast.commonSkill.hasteMultiplier,1);assert.equal(recast.commonEffects.visuals.length,0);
+ recast.clearBattle();assert.equal(recast.skillCasts,0);assert.equal(recast.lastSkillCastAt,undefined);recast.onDestroy();
  // Verify actual release cadence for ranged, magic and melee through the live weapon loop.
  for(const id of ['sandal','pole','smg','peach']){
   const medians=[];

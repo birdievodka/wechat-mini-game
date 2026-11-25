@@ -1,7 +1,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const root = path.resolve(__dirname, '../build/wechatgame');
+const project = path.resolve(__dirname, '..');
+const root = path.join(project, 'build/wechatgame');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'game.json'), 'utf8'));
 const bundles = config.subpackages || config.subPackages || [];
 const roots = bundles.map(b => b.root.replace(/\/$/, '') + '/');
@@ -25,7 +26,9 @@ console.log(`主包 ${(main / 1024 / 1024).toFixed(2)} MiB`);
 for (const [name, bytes] of Object.entries(sizes)) console.log(`分包 ${name}: ${(bytes / 1024 / 1024).toFixed(2)} MiB`);
 for (const [name, bytes] of Object.entries(sizes)) assert.ok(bytes < 4 * 1024 * 1024, `${name} 超过4MiB`);
 assert.ok(main < 4 * 1024 * 1024, '微信主包超过4MiB，禁止继续预览');
-for(const name of ['battle','campaign','chronicle-ui','chronicle-units','hero-menu','presentation','sfx-core','music']){
+const migrated = ['arsenal','talismans','meadow','orchard','sfx','enemies','results','hidden-heroes','pets',
+  'boss-zhangjiao','boss-props','boss-lvbu','boss-dongzhuo','boss-yuanshao','boss-caocao','boss-menghuo','boss-simayi'];
+for(const name of ['battle','campaign','chronicle-ui','chronicle-units','hero-menu','presentation','sfx-core','music',...migrated]){
   assert.ok(bundles.some(b=>b.name===name),'缺少必需本地分包 '+name);
   assert.ok(fs.existsSync(path.join(root,'subpackages',name,'game.js')),'缺少本地分包入口 '+name);
 }
@@ -41,29 +44,33 @@ for(const src of tracks){
   const dest=packagedMusic.find(f=>path.basename(f).startsWith(uuid+'.'));
   assert.ok(dest&&fs.readFileSync(path.join(root,'subpackages/music/native',dest)).equals(fs.readFileSync(path.join(musicSource,src))),'音乐分包缺失或内容不一致 '+src);
 }
-const cdn=JSON.parse(fs.readFileSync(path.join(__dirname,'../config/cdn.json')));
-const release=JSON.parse(fs.readFileSync(path.join(__dirname,'../cdn-assets/release.json')));
 const settings=JSON.parse(fs.readFileSync(path.join(root,'src/settings.json')));
 assert.equal(settings.engine.debug,false,'微信发布包必须使用非调试引擎设置');
 assert.notEqual(config.debug,true,'微信游戏配置不得开启调试');
-assert.equal(settings.assets.server,release.baseUrl+'/','构建必须固定到当前不可变CDN版本');
 assert.equal(settings.assets.downloadMaxConcurrency,4,'限制下载并发');
-assert.ok(!fs.existsSync(path.join(root,'remote')),'远程资源不能重复装入微信包');
-for(const name of cdn.remoteBundles){
-  assert.ok(settings.assets.remoteBundles.includes(name),'缺少远程Bundle '+name);
-  assert.ok(!bundles.some(b=>b.name===name),'远程Bundle误入本地分包 '+name);
-  assert.ok(fs.existsSync(path.join(root,'src/bundle-scripts',name,'index.js')),'代码必须留在本地 '+name);
-  assert.ok(release.files.some(f=>f.path.startsWith('remote/'+name+'/config.')),'远程清单缺少Bundle配置 '+name);
-  assert.ok(release.files.some(f=>f.path.startsWith('remote/'+name+'/native/')),'远程清单缺少原生资源 '+name);
+assert.deepEqual(settings.assets.remoteBundles||[],[],'微信运行包不可依赖远程 Bundle');
+assert.ok(!settings.assets.server,'微信运行包不可配置资源 CDN');
+assert.ok(!fs.existsSync(path.join(root,'remote')),'构建不应导出远程资源');
+const sha=file=>require('node:crypto').createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const {files:encoded}=require('../art/runtime-subpackages/manifest.json');
+for(const file of encoded){
+  assert.equal(sha(path.join(project,file.source)),file.sourceSha256,'压缩源图变更，重新生成 '+file.source);
+  assert.equal(sha(path.join(project,file.dest)),file.sha256,'运行图与压缩清单不一致 '+file.dest);
 }
-assert.ok(release.files.every(f=>!f.path.endsWith('.js')),'CDN不发布可执行代码');
-// Check the actual native bytes, so a second copy under a local bundle UUID is caught.
-const pngHash=file=>require('node:crypto').createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const localPngs=new Set(fs.readdirSync(root,{recursive:true}).filter(file=>file.endsWith('.png')).map(file=>pngHash(path.join(root,file))));
-for(const [bundle,name] of [['boss-zhangjiao','boss-zhangjiao-actions'],['boss-props','boss-props']]){
-  const sha=pngHash(path.join(__dirname,'../assets/remote-content',bundle,name+'.png'));
-  assert.ok(!localPngs.has(sha),'高清图集重复进入微信包 '+name);
-  assert.equal(release.files.filter(f=>f.path.startsWith('remote/'+bundle+'/native/')&&f.sha256===sha).length,1,'CDN 必须包含一份原画质图集 '+name);
+for(const name of migrated){
+  const direct=path.join(project,'assets',name);
+  const source=fs.existsSync(direct)?direct:path.join(project,'assets/remote-content',name);
+  const packaged=path.join(root,'subpackages',name);
+  assert.ok(fs.readdirSync(packaged).some(file=>/^config(?:\.[^.]+)?\.json$/.test(file)), '微信分包缺少配置 '+name);
+  const imagesAndAudio=fs.readdirSync(source,{recursive:true}).filter(file=>/\.(png|wav)$/.test(file));
+  assert.ok(imagesAndAudio.length,'微信分包缺少来源文件 '+name);
+  for(const file of imagesAndAudio){
+    const input=path.join(source,file),ext=path.extname(file);
+    const {uuid}=JSON.parse(fs.readFileSync(input+'.meta'));
+    const native=path.join(packaged,'native',uuid.slice(0,2));
+    const match=fs.readdirSync(native).find(asset=>asset.startsWith(uuid+'.')&&asset.endsWith(ext));
+    assert.ok(match&&sha(path.join(native,match))===sha(input),'微信分包缺少资源或字节变更 '+name+'/'+file);
+  }
 }
 const total = main + Object.values(sizes).reduce((a, b) => a + b, 0);
 console.log(`总包 ${(total / 1024 / 1024).toFixed(2)} MiB`);

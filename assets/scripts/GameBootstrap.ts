@@ -12,14 +12,14 @@ import {AssetScope,artScope} from './asset-scope';
 import {notifySafely} from './load-lifetime';
 import {drawWorldProp} from './world-prop-art';
 import {NativeSfx,NativeSoundHost,AudioLoadQueue} from './native-sfx';
-import {NativeAudioFiles,NativeFileHost} from './native-audio-files';
+import {NativeAudioFiles} from './native-audio-files';
 import {NativeMusic} from './native-music';
 import {addPanelClose} from './panel-ui';
 import {HeroMount} from './HeroMount';
 import {drawGrowthAttack,drawMountDash} from './growth-effects';
 import {growthClears,growthTitle,signatureId,dashName,newMountDash,beginMountDash,stepMountDash} from './hero-growth';
 import {drawEnemyAction} from './enemy-action-effects';
-import {NpcActionRig} from './NpcActionRig';
+import {NpcActionRig,NpcRigAtlas} from './NpcActionRig';
 import {readableWindup} from './enemy-actions';
 import {YELLOW_CHARGERS,YellowChargeState,createYellowCharge,updateYellowCharge} from './yellow-chargers';
 import {drawYellowCharge} from './yellow-charge-effects';
@@ -55,11 +55,11 @@ import {
   UITransform, Vec3, view, sys,
 } from 'cc';
 import { DEBUG, PREVIEW } from 'cc/env';
-import { RuntimeHealth, HealthHost, SupplyStep } from './runtime-health';
+import { RuntimeHealth, ReleaseHealth, HealthHost, SupplyStep } from './runtime-health';
 import {renderDiagnostics} from './render-diagnostics';
 import {ClipboardHost,copyRuntimeReport} from './runtime-report';
 import { BattleMusic, MUSIC_SCENES, MusicSource } from './battle-music';
-import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound, bossSound, enemySound, soundAsset } from './weapon-sound';
+import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound, bossSound, skillSound, enemySound, soundAsset } from './weapon-sound';
 import { movement, sweepEllipseTime, sectorHitsCircle } from './combat-math';
 import { JOYSTICK, joystickCenter, joystickVector, joystickThumb } from './joystick-input';
 import {ParticleSprites} from './ParticleSprites';
@@ -79,7 +79,10 @@ import { weaponStatsFor, weaponDps, combineWeapon, recycleWeapon, toggleOfferLoc
 import {handHalberdCatchRadius,handHalberdReturnSeconds,handHalberdReturnSpeed,heavyCrossbowRelease,oilLinkContains,oilLinkReach,oilPuddleLife} from './armory-redesign';
 import { drawLightningSpell, drawTaoistCast, LIGHTNING_AFTERGLOW } from './enemy-spell-effects';
 import { attachDesktopKeyboard, KeyboardSurface, WeChatKeyboard } from './desktop-keyboard';
-declare const wx: (WeChatKeyboard & HealthHost & NativeSoundHost & NativeFileHost & ClipboardHost & {getAccountInfoSync?:()=>{miniProgram?:{envVersion?:string}}}) | undefined;
+declare const wx: (WeChatKeyboard & HealthHost & NativeSoundHost & ClipboardHost & {
+  getAccountInfoSync?:()=>{miniProgram?:{envVersion?:string}};
+  showShareMenu?:(options:{fail:(error:{errMsg?:string})=>void})=>void;
+}) | undefined;
 import { HeroId, EnemyKind, Phase, Run, Stats, Upgrade, ITEMS, WAVE_NAMES, WAVE_SECONDS,
   createRun, heroFor, statsFor, gainXp, xpNeeded, damageTaken, regenPerSecond, buyItem, rollShop, rerollShop,
   availableUpgrades, randomSample, chooseUpgrade, waveRule, enemyKind, enemyStats, stipendFor, waveOutcome } from './campaign';
@@ -88,6 +91,12 @@ import { WORLD, resizeWorld, spawnPoint, cameraTarget, orbitAnchor } from './wor
 import { SUPPLY_SECONDS, MAJOR_SECONDS, BOSS_EVERY_WAVES, bossDue, clockText, spawnBudget, enemyCost, rollSupply, buySupply, rerollSupply, supplyCard, SURVIVAL_VERSION, repairSupply } from './survival';
 const { ccclass } = _decorator;
 const ENEMY_COUNT = 8;
+const projectileArtKeys=new Map<WeaponId,string>(WEAPONS.map(w=>[w.id,'weapon-'+w.id] as [WeaponId,string]));
+// Stable lookup keys for the standing art used during birth and action-sheet fallback.
+const enemyStandingKeys=new Map<string,readonly [string,string]>();
+for(const {id} of CHRONICLE_ENEMIES)enemyStandingKeys.set(id,['enemy-'+id+'-front','enemy-'+id+'-back']);
+for(const {bossId} of CHAPTERS)enemyStandingKeys.set(bossId,['boss-'+bossId,'boss-'+bossId]);
+for(const id of ['lvbu','xiahoudun','machao'])enemyStandingKeys.set(id,['mount-'+id+'-front','mount-'+id+'-back']);
 const HERO_ART_SCALE = .90;
 // Orbit paths and their trails are in battlefield units, independent of rider size.
 const WORLD_UNITS_IN_HERO = 1 / HERO_ART_SCALE;
@@ -107,13 +116,21 @@ const BEAST_RUSH_TINT=new Color('#fff0b8');
 const LVBU_GHOST_TINTS=[new Color(244,188,112,77),new Color(214,137,86,40)];
 const DEPTH_ORDER=(a:Node,b:Node):number=>b.position.y-a.position.y;
 const MAX_COIN_NODES=128;
+const SKILL_HUD=new Map(COMMON_SKILLS.map(skill=>{
+  const need=skillKillRequirement(skill.id);
+  return [skill.id,{
+    icon:'skill-'+skill.icon,
+    training:[skill.name,'无冷却'].join(' · '),
+    charges:Array.from({length:need+1},(_,i)=>[skill.name,i===need?'就绪':[i,need].join('/')].join(' · ')),
+  }] as const;
+}));
 const TEST_ENEMIES: EnemyKind[] = ['soldier', 'spearman', 'cavalry', 'chief'];
 const TEST_SPAWN = { interval: 1.1, cap: 16 };
 export interface Enemy { npcRig?:NpcActionRig; gruntPose?:GruntPose;chargeGhosts?:Sprite[];miniCharge?:YellowChargeState; miniBoss?:boolean; discovered?:boolean; miniTime?:number; miniPhase?:number; miniOwner?:Enemy;eliteMark?:Node;
   bossState?:ReforgedState;bossUnit?:BossUnit;
   lvbu?:LvbuState;lvbuGhosts?:Sprite[];
   nextCycleUntil?:number;specialCooldown?:number;sidestepLeft?:number;
-  encounterChapter?:number;archetype?:string;bossSkin?:string;bossTimers?:number[];bossMove?:BossAction;bossAge?:number;bossNext?:number;fired?:boolean;object?:'flag'|'clone'|'eye'|'boss-unit';slowUntil?:number;slowFactor?:number;firstHits?:Map<number,number>;rigParts?:Sprite[];rigKey?:string;rigSize?:number;rigTint?:string;
+  encounterChapter?:number;archetype?:string;bossSkin?:string;bossTimers?:number[];bossMove?:BossAction;bossAge?:number;bossNext?:number;fired?:boolean;object?:'flag'|'clone'|'eye'|'boss-unit';slowUntil?:number;slowFactor?:number;firstHits?:Map<number,number>;rigParts?:Sprite[];rigKey?:string;rigSize?:number;rigTint?:number;
   stagger?:number; staggerCooldown?:number; stunUntil?:number; elite?:boolean;
   animal?: 'chicken' | 'rabbit' | 'pig' | 'tree'; animalArt?: Graphics;animalSprite?:Sprite; ttl?: number; bornTotal?: number; farAge?: number;
   birthRig?:Node;birthSprites?:Sprite[];warningDrawn?:boolean;visualHit?:boolean;visualCharge?:boolean;moving?: boolean; chargeHit?: boolean;
@@ -124,7 +141,7 @@ export interface Enemy { npcRig?:NpcActionRig; gruntPose?:GruntPose;chargeGhosts
   vx: number; vy: number; speed: number; feedback: number;
 }
 interface Coin { value?:number; node: Node; art: Node; x: number; y: number; age: number; active: boolean; attracted: boolean; }
-interface Projectile { atlasArt?:Sprite; returning?:boolean;returnLeg?:boolean;ownerUid?:number; artKey?:string; node: Node; x: number; y: number; angle: number; remaining: number; damage: number; weaponId: WeaponId; stats: WeaponStats; hit: Set<Enemy>; fxClock?:number; bounceLeft?: number; bounced?: boolean; secondary?: boolean; group?: {hits: Map<Enemy,number>; max: number};
+interface Projectile { atlasArt?:Sprite; returning?:boolean;returnLeg?:boolean;ownerUid?:number; artTier?:Tier; node: Node; x: number; y: number; angle: number; remaining: number; damage: number; weaponId: WeaponId; stats: WeaponStats; hit: Set<Enemy>; fxClock?:number; bounceLeft?: number; bounced?: boolean; secondary?: boolean; group?: {hits: Map<Enemy,number>; max: number};
   launchX?:number;launchY?:number;sandalBounces?:number;pierceBurst?:Set<Enemy>;
 }
 interface FriendlyField {id:WeaponId;uid:number;x:number;y:number;radius:number;life:number;next:number;damage:number;stats:WeaponStats;hit:Map<Enemy,number>;group?:{hits:Map<Enemy,number>;max:number};}
@@ -158,6 +175,7 @@ private playerSlowUntil=0;
   private readonly buildVersion = SURVIVAL_VERSION;
   private phase: Phase = 'loading';
   private health?:RuntimeHealth;
+  private releaseHealth?:ReleaseHealth;
   private supplyDrawPending?:'shop'|'battle';
   private profileDirty=false;private profileTimer:ReturnType<typeof setTimeout>|undefined;
   private pressureSeconds=0;
@@ -173,6 +191,7 @@ private playerSlowUntil=0;
   private run: Run = createRun('liubei');
   private stats: Stats = statsFor(this.run);
   private screens!: CampaignView;
+  private readonly npcAtlas=new NpcRigAtlas();
   private artFrames: Record<string, SpriteFrame> = {};
   private assets=artScope(this.artFrames);
   private nativeAudio=false;private nativeRetryAt=0;private badFrames=0;
@@ -296,7 +315,8 @@ private playerSlowUntil=0;
   private drawnSkillCharge=-1;
   private drawnSkillRequirement=-1;
   private drawnTrainingMode=false;
-  private skillFrameKey='';
+  private skillCasts=0;
+  private lastSkillCastAt?:number;
   private bossDrawState?:{hp:number;max:number;count:number;chapter:number;height:number;boss:boolean;mini:boolean;atlasHp:boolean};
   private lastPickupValue=1;
   private coins: Coin[] = [];
@@ -308,6 +328,7 @@ private playerSlowUntil=0;
   private enemies: Enemy[] = [];
   private hud!: Label;
   private joystick!: Graphics;
+  private stickDrawPending=false;
   private pauseLabel!: Label;
   private keys = new Set<KeyCode>();
   private detachKeyboard?: () => void;
@@ -380,6 +401,14 @@ private playerSlowUntil=0;
   private resourceBusy=false;
   private resourceSerial=0;
   private retryResource?:()=>void;
+  private resourceCompletion?:()=>void;
+  private stageArtPrefetch?:{id:string;attempts:number;pending:boolean;retryAt:number;retireLvbu:boolean};
+  private bossBarFill?:Node;
+  private bossBarTrack?:Node;
+  private observedCanvas?:HTMLCanvasElement;
+  private graphicsContextLost=false;
+  private optionalShopRefresh=false;
+  private optionalWeaponRefresh=false;
   private soundButton!: Label;
   private layoutReady = false;
   private halfWidth = 667;
@@ -404,25 +433,43 @@ private playerSlowUntil=0;
   private startupRemoteImage=false;
 
   async start(): Promise<void> {
+    if(typeof wx!=='undefined'){
+      try {
+        wx.showShareMenu?.({fail:error=>console.warn('微信转发菜单开启失败',error.errMsg)});
+      } catch(error) {
+        console.warn('微信转发菜单开启失败',error);
+      }
+    }
     // All production art already shares authored atlases. Avoid another 2048² copy
     // and release decoded source images after uploading their unchanged GPU pixels.
     dynamicAtlasManager.enabled=false;
     macro.CLEANUP_IMAGE_CACHE=true;
     this.profile=readProfile(sys.localStorage);
-    this.health=new RuntimeHealth(typeof wx==='undefined'?undefined:wx,sys.localStorage,this.buildVersion,
-      ()=>({frameScope:'foreground',phase:this.phase,mode:this.run.endless?'endless':this.trainingMode?'training':this.run.challenge?'stage':'legacy',endlessTier:this.run.endless?this.run.endlessTier:undefined,bossAtlases:BOSS_ART_IDS.filter(id=>bossArtReady(this.artFrames,id)),stage:this.run.chapter,wave:this.run.stageWave,hero:this.run.heroId,skill:this.run.skillId,seconds:Math.round(this.trainingMode?this.age-this.trainingStartAge:this.run.survivalSeconds),
-        trainingView:this.trainingMode?(this.trainingPanel?.root.active?'config':'field'):undefined,trainingCasts:this.trainingMode?this.trainingCasts:undefined,
-        skillVisuals:this.trainingMode?this.commonEffects.activeCount:undefined,enemyNodes:this.enemies.length,
-        alive:this.enemies.reduce((n,e)=>n+Number(e.hp>0),0),projectileNodes:this.projectiles.length,coinNodes:this.coins.length,
-        vfxQuads:this.vfxMaterials?.count||0,vfxAllocated:this.vfxMaterials?.allocated||0,particles:this.combatFx.particles.active,weapons:this.run.weapons.map(w=>w.id+':'+w.tier),growth:this.run.growth||0,os:sys.os,osVersion:sys.osVersion,
-        atlasReady:this.battleSprites?.ready,damageTextBackend:this.battleSprites?.numberGlyphs.length?'atlas':'label',enemyShotNodes:this.enemyShots.length,sessionSeconds:Math.round((Date.now()-this.sessionStarted)/1000),
-        activeProjectiles:this.projectiles.reduce((n,p)=>n+Number(p.remaining>0),0),activeEnemyShots:this.enemyShots.reduce((n,p)=>n+Number(p.remaining>0),0),
-        bosses:this.enemies.filter(e=>e.hp>0&&e.bossSkin).map(e=>e.bossSkin),bossActions:this.enemies.filter(e=>e.hp>0&&e.bossSkin).slice(0,4).map(e=>({id:e.bossSkin,move:e.lvbu?.index??e.bossState?.index,phase:e.lvbu?.phase??e.bossState?.phase})),bossAreas:this.bossBattle?.areaCount,bossShots:this.bossBattle?.shotCount,fields:this.friendlyFields.length,queuedShots:this.pendingShots.length,queuedEnemyShots:this.pendingEnemyShots.length,
-        drawCalls:director?.root?.device?.numDrawCalls,triangles:director?.root?.device?.numTris,render:renderDiagnostics(this.root),
-        nativeMusic:!!this.nativeMusic,nativeMusicState:this.nativeMusic?.diagnostic,musicMode:this.musicMode,nativeFiles:this.nativeFiles?.count||0,musicPlaybackRetries:this.musicPlaybackRetries,
-        sfxBackend:this.nativeSfx?'native-fixed':this.nativeAudio?'native-retry':'cocos',sfxPlayed:this.nativeSfx?.played,sfxSourceWrites:this.nativeSfx?.sourceAssignments,sfxErrors:this.nativeSfx?.failures||0,sfxVoices:this.nativeSfx?.size||this.soundSources.length,sfxUrls:Object.keys(this.soundUrls).length,sfxLoading:this.soundLoads.loading,sfxQueued:this.soundLoads.waiting,
-        gfxBuffers:director?.root?.device?.memoryStatus?.bufferSize,gfxTextures:director?.root?.device?.memoryStatus?.textureSize}),
-      ()=>{this.pressureSeconds=15;this.combatFx.particles.trimTrails();});
+    const onMemoryPressure=()=>{this.pressureSeconds=15;this.combatFx.particles.trimTrails();};
+    if(typeof wx!=='undefined'&&!this.developmentToolsEnabled()){
+      this.releaseHealth=new ReleaseHealth(wx,sys.localStorage,this.buildVersion,()=>{
+        const playing=this.run.challenge&&this.phase!=='loading'&&this.phase!=='menu';
+        return {mode:playing?(this.run.endless?'endless':'stage'):'menu',phase:this.phase,
+          stage:playing?this.run.chapter:0,wave:playing?(this.run.endless?(this.run.endlessTier||0)+1:this.run.stageWave||1):0};
+      },onMemoryPressure);
+    }else{
+      this.health=new RuntimeHealth(typeof wx==='undefined'?undefined:wx,sys.localStorage,this.buildVersion,
+        ()=>({frameScope:this.backgrounded?'background':'foreground',graphicsContextLost:this.graphicsContextLost||undefined,phase:this.phase,mode:this.run.endless?'endless':this.trainingMode?'training':this.run.challenge?'stage':'legacy',endlessTier:this.run.endless?this.run.endlessTier:undefined,bossAtlases:BOSS_ART_IDS.filter(id=>bossArtReady(this.artFrames,id)),stage:this.run.chapter,wave:this.run.stageWave,hero:this.run.heroId,skill:this.run.skillId,seconds:Math.round(this.trainingMode?this.age-this.trainingStartAge:this.run.survivalSeconds),
+          trainingView:this.trainingMode?(this.trainingPanel?.root.active?'config':'field'):undefined,trainingCasts:this.trainingMode?this.trainingCasts:undefined,
+          skillCasts:this.skillCasts||undefined,lastSkillCastAt:this.lastSkillCastAt,skillHaste:this.skillCasts?this.commonSkill.hasteMultiplier:undefined,
+          skillVisuals:this.trainingMode?this.commonEffects.activeCount:undefined,enemyNodes:this.enemies.length,
+          alive:this.enemies.reduce((n,e)=>n+Number(e.hp>0),0),projectileNodes:this.projectiles.length,coinNodes:this.coins.length,
+          vfxQuads:this.vfxMaterials?.count||0,vfxAllocated:this.vfxMaterials?.allocated||0,particles:this.combatFx.particles.active,weapons:this.run.weapons.map(w=>w.id+':'+w.tier),growth:this.run.growth||0,os:sys.os,osVersion:sys.osVersion,
+          atlasReady:this.battleSprites?.ready,damageTextBackend:this.battleSprites?.numberGlyphs.length?'atlas':'label',enemyShotNodes:this.enemyShots.length,sessionSeconds:Math.round((Date.now()-this.sessionStarted)/1000),
+          activeProjectiles:this.projectiles.reduce((n,p)=>n+Number(p.remaining>0),0),activeEnemyShots:this.enemyShots.reduce((n,p)=>n+Number(p.remaining>0),0),
+          bosses:this.enemies.filter(e=>e.hp>0&&e.bossSkin).map(e=>e.bossSkin),bossActions:this.enemies.filter(e=>e.hp>0&&e.bossSkin).slice(0,4).map(e=>({id:e.bossSkin,move:e.lvbu?.index??e.bossState?.index,phase:e.lvbu?.phase??e.bossState?.phase})),bossAreas:this.bossBattle?.areaCount,bossShots:this.bossBattle?.shotCount,fields:this.friendlyFields.length,queuedShots:this.pendingShots.length,queuedEnemyShots:this.pendingEnemyShots.length,
+          drawCalls:director?.root?.device?.numDrawCalls,triangles:director?.root?.device?.numTris,render:renderDiagnostics(this.root),
+          nativeMusic:!!this.nativeMusic,nativeMusicState:this.nativeMusic?.diagnostic,musicMode:this.musicMode,nativeFiles:this.nativeFiles?.count||0,musicPlaybackRetries:this.musicPlaybackRetries,
+          sfxBackend:this.nativeSfx?'native-fixed':this.nativeAudio?'native-retry':'cocos',sfxPlayed:this.nativeSfx?.played,sfxSourceWrites:this.nativeSfx?.sourceAssignments,sfxErrors:this.nativeSfx?.failures||0,sfxVoices:this.nativeSfx?.size||this.soundSources.length,sfxUrls:Object.keys(this.soundUrls).length,sfxLoading:this.soundLoads.loading,sfxQueued:this.soundLoads.waiting,
+          sfxVolumeWrites:this.nativeSfx?.volumeAssignments,sfxStops:this.nativeSfx?.stops,
+          gfxBuffers:director?.root?.device?.memoryStatus?.bufferSize,gfxTextures:director?.root?.device?.memoryStatus?.textureSize}),
+        onMemoryPressure,typeof wx!=='undefined');
+    }
     view.setDesignResolutionSize(1334, 750, ResolutionPolicy.FIXED_HEIGHT);
     this.root = this.node2D(this.node, 'Canvas');
     this.root.addComponent(UITransform).setContentSize(1334, 750);
@@ -496,6 +543,14 @@ private playerSlowUntil=0;
     this.pickupText = this.label(this.hero, '', 0, 91, 20, '#d89122');
     this.battleHeader=this.node2D(this.ui,'BattleHeader');
     this.bossBar=this.node2D(this.battleHeader,'BossHealth').addComponent(Graphics);
+    for(const [key,tint] of [['track','#63483a'],['fill','#d97745']] as const){
+      const sprite=this.battleSprites.add(this.bossBar.node,'ui-solid');
+      if(!sprite)break;
+      sprite.color=new Color(tint);sprite.node.setPosition(-180,-52);
+      const transform=sprite.node.getComponent(UITransform)!;transform.setAnchorPoint(0,.5);transform.setContentSize(360,6);
+      sprite.node.active=false;
+      if(key==='track')this.bossBarTrack=sprite.node;else this.bossBarFill=sprite.node;
+    }
     this.hud = this.label(this.battleHeader, '加载中…', 0, 0, 21, '#fff1cd');
     this.xpBar = this.node2D(this.statusPanel, 'Experience').addComponent(Graphics); this.xpBar.node.active = false;
     this.bossLabel = this.label(this.battleHeader, '', 0, -33, 18, '#ffdc94');
@@ -548,7 +603,7 @@ private playerSlowUntil=0;
     } catch (error) {
       this.failStartup('资源下载失败，请重新进入'); console.error(error); return;
     }
-    this.nativeAudio=typeof wx!=='undefined';if(this.nativeAudio)this.nativeFiles=new NativeAudioFiles(wx);this.ensureNativeAudio();
+    this.nativeAudio=typeof wx!=='undefined';if(this.nativeAudio)this.nativeFiles=new NativeAudioFiles();this.ensureNativeAudio();
     for (let i = 0; !this.nativeAudio && i < SFX_VOICES; i++) {
       const source = this.node2D(this.root, `Voice${i}`).addComponent(AudioSource);
       source.playOnAwake = false; this.soundSources.push(source);
@@ -577,6 +632,9 @@ private playerSlowUntil=0;
     );
     game.on(Game.EVENT_HIDE, this.onBackground, this);
     game.on(Game.EVENT_SHOW, this.onForeground, this);
+    this.observedCanvas=game.canvas??undefined;
+    notifySafely(()=>this.observedCanvas?.addEventListener?.('webglcontextlost',this.onGraphicsContextLost));
+    notifySafely(()=>this.observedCanvas?.addEventListener?.('webglcontextrestored',this.onGraphicsContextRestored));
     ['sickle','hoe'].forEach((kind,index)=>{
       this.assets.load(this.resources,`characters/soldier-${kind}-actions`,BufferAsset,async (error,asset)=>{
         if(error){this.failStartup('小兵资源加载失败，请重新进入');console.error(error);return;}
@@ -613,7 +671,9 @@ private playerSlowUntil=0;
           this.markStartup('campaign:'+name);
       }));
       if (!this.isValid||this.assets.disposed) return;
-      await loadChronicleArt(this.artFrames,()=>this.isValid&&!this.assets.disposed);this.markStartup('chronicles');
+      await loadChronicleArt(this.artFrames,()=>this.isValid&&!this.assets.disposed);if(!this.isValid||this.assets.disposed)return;
+      this.npcAtlas.bind(this.artFrames,CHRONICLE_ENEMIES.map(enemy=>enemy.id));
+      this.markStartup('chronicles');
       await Promise.all([
         posterArt,
         this.loadPresentationArt(),
@@ -750,7 +810,7 @@ private playerSlowUntil=0;
   }
   private markStartup(id:string):void {if(this.assets.disposed)return;this.startupProgress.mark(id);this.drawStartupProgress();}
   private failStartup(message:string):void {
-    if(this.audioDisposed||this.assets.disposed)return;this.startupProgress.fail(message);this.drawStartupProgress();}
+    if(this.audioDisposed||this.assets.disposed)return;this.releaseHealth?.record('resource-failed',message);this.startupProgress.fail(message);this.drawStartupProgress();}
 
   /** Local browser art review only; release WeChat builds remove this DEBUG branch. */
   private openCampReview(): void {
@@ -789,6 +849,7 @@ private playerSlowUntil=0;
   }
 
   update(delta: number): void {
+    if(this.backgrounded||this.graphicsContextLost)return;
     if(!Number.isFinite(delta)||delta<0){this.health?.record('invalid-frame','非有限或负delta');if(++this.badFrames>=3&&this.ready&&this.phase==='battle'){this.paused=true;this.clearInput();this.menu.active=true;}return;}this.badFrames=0;
     if(!Number.isFinite(this.px)||!Number.isFinite(this.py)){this.health?.record('invalid-position');this.paused=true;this.clearInput();this.px=Number.isFinite(this.px)?this.px:0;this.py=Number.isFinite(this.py)?this.py:0;this.hero?.setPosition(this.px,this.py);if(this.menu)this.menu.active=true;return;}
     this.ensureNativeAudio();this.layoutBattlefield();
@@ -807,7 +868,16 @@ private playerSlowUntil=0;
       return;
     }
     if(this.ready&&!this.backgrounded){if(!this.musicLoaded&&!this.musicLoading&&Date.now()>=this.musicRetryAt)this.loadMusic();const audioDt=Math.min(Math.max(delta,0),.08);this.soundGate.update(audioDt);if(!this.paused)this.music.update(audioDt);for(let i=0;i<this.voiceOwners.length;i++){const e=this.voiceOwners[i];if(e&&(e.hp<=0||(e.stunUntil||0)>this.age)){this.nativeSfx?.stopVoice(i);this.soundSources[i]?.stop();this.voiceOwners[i]=undefined;}}}
+    if(!this.backgrounded&&this.resourceCompletion){
+      const complete=this.resourceCompletion;this.resourceCompletion=undefined;complete();
+    }
     if(this.resourceBusy)return;
+    if(!this.backgrounded&&(this.optionalWeaponRefresh||this.optionalShopRefresh)){
+      const shop=this.optionalShopRefresh;
+      if(this.optionalWeaponRefresh)this.refreshWeaponArt();
+      this.optionalWeaponRefresh=this.optionalShopRefresh=false;
+      if(shop&&this.phase==='shop')this.showShop();
+    }
     if(this.ready&&this.phase==='menu'){if(!this.backgrounded)this.screens.update(Math.min(delta,.08));return;}
     if(this.ready&&this.phase==='battle'&&this.finishVictory())return;
     if(this.ready&&(this.phase==='defeat'||this.phase==='victory')){this.screens.update(Math.min(delta,.08));return;}
@@ -842,6 +912,7 @@ private playerSlowUntil=0;
     if (this.phase !== 'battle') return;
     if (!this.testMode && this.run.wave === 1 && this.remaining <= .000001) { this.finishWave(); return; }
     if (!this.testMode && !this.run.challenge && this.run.wave === 2 && this.run.survivalSeconds + .000001 >= this.nextSupply) { this.openSupply(); return; }
+    this.updateStageArtPrefetch();
     this.followCamera(elapsed); this.updateEffects(elapsed); this.drawProgress();
     const order=this.depthNodes;order.length=0;
     for(const e of this.enemies)if(e.node.active)order.push(e.node);
@@ -856,7 +927,8 @@ private playerSlowUntil=0;
   }
 
   lateUpdate():void {
-    if(!this.ready||!this.battlefield?.activeInHierarchy)return;
+    if(!this.ready||this.backgrounded||this.graphicsContextLost||!this.battlefield?.activeInHierarchy)return;
+    if(this.stickDrawPending)this.drawStick();
     for(const e of this.enemies)if(e.node.active&&e.text instanceof BattleNumber)e.text.flush();
   }
 
@@ -864,7 +936,10 @@ private playerSlowUntil=0;
     if(!Number.isFinite(dt)||dt<0)return;
     this.combatFx.update(dt);
     this.updateSkill(dt);this.updateExtraFields(dt);if(this.finishVictory())return;this.updateWildlife(dt);
-    this.difficultyNotice=Math.max(0,this.difficultyNotice-dt);if(this.difficultyLabel)this.difficultyLabel.string=this.difficultyNotice>0?(this.run.bossEncounter?(this.run.challenge?bossDisplayName(stageFor(this.run.chapter).boss):chapterFor(this.run.chapter).boss)+'来袭':'难度升级'):'';
+    if(this.difficultyNotice>0){
+      this.difficultyNotice=Math.max(0,this.difficultyNotice-dt);
+      if(this.difficultyNotice===0)this.difficultyLabel.string='';
+    }
     this.age += dt; this.peachBurstCooldown = Math.max(0, this.peachBurstCooldown - dt);
     const rule = this.testMode ? TEST_SPAWN : waveRule(this.run.wave);
     this.respite = Math.max(0, this.respite - dt);
@@ -886,7 +961,7 @@ private playerSlowUntil=0;
     this.protectionTime = Math.max(0, this.protectionTime - dt);
     const blink = this.hurtTime > 0 && Math.floor(this.hurtTime * 18) % 2 === 0;
     this.tintHero(blink ? '#ff8479' : '#ffffff');
-    this.hurtText.string = this.hurtTime > 0.45 ? `-${this.lastDamage}` : '';
+    if(this.hurtTime<=.45&&this.hurtText.string)this.hurtText.string='';
     this.hurtText.node.setPosition(0, 116 + (1.2 - this.hurtTime) * 40);
     let x = this.stick.x, y = this.stick.y;
     if (this.keys.size) {
@@ -999,7 +1074,7 @@ private playerSlowUntil=0;
     this.playerVy = (distance > 0.001 ? dy / distance : 0) * 230 * (1-this.perks.resist);
     this.tintHero('#ff8479');
     this.combatFx.feedback('hurt',this.px,this.py+28,Math.atan2(this.py-sourceY,this.px-sourceX));
-    this.hurtText.string = `-${this.lastDamage}`; this.drawPlayerHealth();
+    this.hurtText.string = String(-this.lastDamage); this.drawPlayerHealth();
     this.shake = Math.max(this.shake, 0.055);
     this.playSound('player-hurt');
     if (this.playerHp === 0) {
@@ -1321,7 +1396,16 @@ private playerSlowUntil=0;
       shot = { node, x, y, angle, remaining: 0, damage, weaponId: weapon.id, stats: { ...stats }, hit: new Set() }; this.projectiles.push(shot);
     }
     this.commonEffects.weaponStrike(x,y,angle);
-    const artKey=weapon.id+':'+weapon.tier;if(shot.artKey!==artKey){if(this.battleSprites.ready){if(shot.atlasArt)this.battleSprites.set(shot.atlasArt,'weapon-'+weapon.id);else shot.atlasArt=this.battleSprites.add(shot.node,'weapon-'+weapon.id);}else drawWeaponArt(shot.node.getComponent(Graphics)!,weapon.id,weapon.tier,true);shot.artKey=artKey;}
+    if(shot.weaponId!==weapon.id||shot.artTier!==weapon.tier){
+      if(this.battleSprites.ready){
+        const key=projectileArtKeys.get(weapon.id);
+        if(key){
+          if(shot.atlasArt)this.battleSprites.set(shot.atlasArt,key);
+          else shot.atlasArt=this.battleSprites.add(shot.node,key);
+        }
+      }else drawWeaponArt(shot.node.getComponent(Graphics)!,weapon.id,weapon.tier,true);
+      shot.artTier=weapon.tier;
+    }
     const scale = weapon.id === 'sandal' || weapon.id === 'firecracker' ? .7 : 1;
     shot.node.setScale(scale, scale, 1); shot.weaponId = weapon.id; shot.stats = { ...stats }; shot.hit.clear();
     shot.returning=weapon.id==='hand-halberd'&&!secondary;shot.returnLeg=false;shot.ownerUid=weapon.uid;shot.secondary=secondary;shot.group=group;
@@ -1590,7 +1674,7 @@ private playerSlowUntil=0;
     else if(!secondary) damage *= 1+(e.kind==='chief'||e.elite?this.perks.elite:0)+(e.hp<e.maxHp!*.3?this.perks.execute:0)+(Math.hypot(e.x-this.px,e.y-this.py)<180?this.perks.close:0);
     damage=this.chronicleDamage(e,angle,damage*(petSource?1:this.commonSkill.damageMultiplier),petSource?'pet':weaponId,quality,petSource);
     const mergeImpact=this.run.weapons.length>=4&&this.age<(e.nextImpactAt||0);
-    damage=Math.max(1,Math.round(damage)); e.hp = Math.max(0,e.hp-damage); e.flash = 0.1; e.feedback = 0.45; e.text.string = `-${damage}`; this.hits++;
+    damage=Math.max(1,Math.round(damage)); e.hp = Math.max(0,e.hp-damage); e.flash = 0.1; e.feedback = 0.45; e.text.string = String(-damage); this.hits++;
     const charging = e.kind === 'cavalry' && e.attack >= CAVALRY.windup && e.attack < CAVALRY.windup + CAVALRY.duration;
     if(!e.animal&&e.kind!=='chief'&&!charging&&(e.staggerCooldown||0)<=0){e.stagger=weaponId==='smg'?.018:e.kind==='cavalry'?.025:.07;e.staggerCooldown=e.kind==='cavalry'?.5:.28;}
     if(!petSource&&weaponId==='chain-hook'&&Math.hypot(e.x-this.px,e.y-this.py)>90)angle+=Math.PI;
@@ -1602,7 +1686,7 @@ private playerSlowUntil=0;
     if (audible) this.playWeaponSound(weaponId, 'hit');
     if (e.hp <= 0) {
       if(e.animal){e.dead=1.5; e.art.node.active=false; if(e.animalArt)e.animalArt.node.active=false; this.dropHeart(e.x,e.y,e.animal==='tree'?'peach':'heart'); return;}
-      if(!e.object){this.kills++;if(e.kind!=='chief'&&!e.miniBoss){const before=this.skillCharge;this.skillCharge=Math.min(this.skillRequirement(),this.skillCharge+1);if(before<this.skillRequirement()&&this.skillCharge>=this.skillRequirement()&&!this.trainingMode)this.playSound('skill-ready');}} this.playSound('enemy-fall',.12);e.dead = 1.5; e.text.string = `-${damage}`; e.warning?.clear();
+      if(!e.object){this.kills++;if(e.kind!=='chief'&&!e.miniBoss){const before=this.skillCharge;this.skillCharge=Math.min(this.skillRequirement(),this.skillCharge+1);if(before<this.skillRequirement()&&this.skillCharge>=this.skillRequirement()&&!this.trainingMode)this.playSound('skill-ready');}} this.playSound('enemy-fall',.12);e.dead = 1.5; e.warning?.clear();
       this.bossBattle.cancel(e);e.bossState=undefined;e.lvbu=undefined;e.lvbuGhosts?.forEach(sp=>sp.node.active=false);e.chargeGhosts?.forEach(sp=>sp.node.active=false);
       const reward = e.object||e.miniBoss&&this.run.challenge?{coins:0,xp:0}:e.kind==='chief'?{coins:Math.round(35*chapterInflation(this.run.chapter)),xp:0}:e.archetype?{coins:archetypeFor(e.archetype).coins,xp:0}:enemyStats(e.kind || 'soldier', this.run.wave, this.run.survivalSeconds);
       if (gainXp(this.run, reward.xp) > 0) this.refreshStats();
@@ -1645,6 +1729,7 @@ private playerSlowUntil=0;
   }
 
   private updateCoins(dt: number): void {
+    const beforeGold=this.coinTotal;
     this.coinPulse = Math.max(0, this.coinPulse - dt);
     for (const coin of this.coins) {
       if (!coin.active) continue;
@@ -1657,7 +1742,6 @@ private playerSlowUntil=0;
         if (distance > 0) { coin.x += dx / distance * step; coin.y += dy / distance * step; }
         if (distance - step <= 14) {
           coin.active = false; coin.node.active = false;this.lastPickupValue=coin.value||1;this.coinTotal+=this.lastPickupValue; this.coinPulse = 0.45;
-          this.coinLabel.string = `${this.coinTotal}`;
           continue;
         }
       }
@@ -1668,7 +1752,10 @@ private playerSlowUntil=0;
     }
     const scale = 1 + this.coinPulse / 0.45 * 0.12;
     this.coinLabel.node.setScale(scale, scale, 1);
-    this.pickupText.string = this.coinPulse > 0 ? '+'+this.lastPickupValue : '';
+    if(this.coinTotal!==beforeGold){
+      this.coinLabel.string=String(this.coinTotal);
+      this.pickupText.string=this.lastPickupValue===1?'+1':'+'+this.lastPickupValue;
+    }else if(this.coinPulse===0&&this.pickupText.string)this.pickupText.string='';
     this.pickupText.node.setPosition(0, 91 + (0.45 - this.coinPulse) * 30);
   }
 
@@ -1831,8 +1918,8 @@ private playerSlowUntil=0;
     shot.style=e.archetype||e.bossSkin||'';shot.originX=e.x;shot.originY=e.y;shot.returning=e.bossSkin==='zhurong';
     if(shot.styleKey!==shot.style){
       if(this.battleSprites.ready){
-        const n=Number(e.archetype?.slice(1)||0),key=e.bossSkin==='dongzhuo'?'coin':n===31||n===32?'bullet':n===28?'poison':n===17||e.bossSkin==='zhurong'?'knife':n===18?'axe':'arrow';
-        if(shot.atlasArt)this.battleSprites.set(shot.atlasArt,'enemy-'+key);else shot.atlasArt=this.battleSprites.add(shot.node,'enemy-'+key);
+        const n=Number(e.archetype?.slice(1)||0),key=e.bossSkin==='dongzhuo'?'enemy-coin':n===31||n===32?'enemy-bullet':n===28?'enemy-poison':n===17||e.bossSkin==='zhurong'?'enemy-knife':n===18?'enemy-axe':'enemy-arrow';
+        if(shot.atlasArt)this.battleSprites.set(shot.atlasArt,key);else shot.atlasArt=this.battleSprites.add(shot.node,key);
       }else {const g=shot.node.getComponent(Graphics)!;g.clear();g.lineWidth=2;g.strokeColor=new Color('#6f392b');g.fillColor=new Color('#ffe5af');
       const n=Number(e.archetype?.slice(1)||0);
       if(e.bossSkin==='dongzhuo'){g.fillColor=new Color('#f7c35b');g.circle(0,0,9);g.fill();g.stroke();g.strokeColor=new Color('#a8752e');g.rect(-3,-3,6,6);g.stroke();}
@@ -1871,7 +1958,7 @@ private playerSlowUntil=0;
   private recoverNativeMusic():void {
     if(this.audioDisposed||!this.musicLoaded)return;
     const retry=++this.musicPlaybackRetries;this.auditionStatus?.('播放失败，点曲名重试',true);
-    // Refresh a possibly invalid temporary file once; repeated decoder failures must not churn downloads.
+    // Re-resolve the bundled file once after a native decoder failure.
     if(retry===1)this.nativeFiles?.invalidate('music',this.musicPath);this.musicLoaded=false;this.musicRequest++;
     const cancel=this.musicCancel;this.musicCancel=undefined;
     this.music.detach();this.musicRetryAt=retry<=2?Date.now()+(retry===1?5000:30000):Infinity;cancel?.();
@@ -1932,7 +2019,7 @@ private playerSlowUntil=0;
 
   private prefetchSounds():void {
     for(const w of this.run.weapons)for(const event of ['attack','hit'] as const){const id=weaponSound(w.id,event);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
-    const skill=('skill-'+this.run.skillId) as SoundId;if(skill!=='sandal-hit-pcm'&&SOUND_CUES[skill])this.loadSound(skill);
+    const skill=skillSound(this.run.skillId);if(skill)this.loadSound(skill);
     for(const id of ['ui-buy','ui-refresh','ui-sell','ui-upgrade','victory','defeat','unlock','boss-arrive','wave-clear'] as const)this.loadSound(id);
     const bosses=this.trainingMode?[]:stageBosses(this.run.chapter);for(const boss of bosses)for(let i=0;i<3;i++){const id=bossSound(boss,i);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
   }
@@ -2023,14 +2110,35 @@ private playerSlowUntil=0;
     source.stop(); source.clip = clip!; source.volume = volume; source.play();
   }
   private stopSounds(): void { this.nativeSfx?.stopAll();for (const source of this.soundSources) source.stop(); this.soundGate.reset(); this.voiceOwners.length=0; this.weaponVoiceVolumes.length=0; this.nextLeadHit=0; this.dangerUntil=0; this.quieterSkillReleases.clear(); }
-  private onBackground(): void { this.health?.record('background');this.health?.flush();this.flushProfile();this.backgrounded = true; this.clearInput(); this.stopSounds(); this.music.pause(); if (this.phase === 'battle') { this.paused = true; this.drawStick(); this.menu.active = true; } }
+  private onBackground(): void {
+    this.backgrounded=true;this.screens?.setForeground(false);
+    if(this.phase==='battle'){this.paused=true;this.menu.active=true;}
+    this.clearInput();
+    if(this.phase==='battle')this.drawStick();
+    notifySafely(()=>this.stopSounds());
+    notifySafely(()=>this.music.pause());
+    this.health?.record('background');this.health?.flush();this.flushProfile();
+  }
   private onForeground(): void {
-    this.backgrounded = false;this.health?.record('foreground');
+    this.backgrounded = false;this.screens?.setForeground(true);this.health?.record('foreground');
+    if(!this.graphicsContextLost)this.resumeForegroundAudio();
+  }
+  private resumeForegroundAudio():void {
     if(this.trainingMode&&this.trainingPanel?.root.active){this.paused=false;this.menu.active=false;this.music.resume();}
     else if(this.phase==='menu'||this.phase==='victory'||this.phase==='defeat')this.music.resume();
     else if(this.phase==='shop'&&!this.paused)this.music.resume();
     else if (this.paused || this.phase !== 'battle') { this.music.pause(); this.stopSounds(); }
   }
+  private readonly onGraphicsContextLost=():void=>{
+    this.graphicsContextLost=true;
+    if(this.phase==='battle'){this.paused=true;this.menu.active=true;this.clearInput();}
+    notifySafely(()=>this.stopSounds());notifySafely(()=>this.music.pause());
+    this.health?.record('webgl-context-lost');this.releaseHealth?.record('webgl-context-lost');
+  };
+  private readonly onGraphicsContextRestored=():void=>{
+    this.graphicsContextLost=false;this.health?.record('webgl-context-restored');
+    if(!this.backgrounded)this.resumeForegroundAudio();
+  };
 
   private updateEffects(dt: number): void {
     this.vfxMaterials?.begin();
@@ -2101,7 +2209,13 @@ private playerSlowUntil=0;
     if (event.getID() !== this.touchId) return;
     const p = this.localPoint(event);
     if(!Number.isFinite(p.x)||!Number.isFinite(p.y))return;
-    this.stick=joystickVector(p.x-this.origin.x,p.y-this.origin.y);this.stickThumb=joystickThumb(p.x-this.origin.x,p.y-this.origin.y);this.drawStick();
+    const dx=p.x-this.origin.x,dy=p.y-this.origin.y;
+    this.stick=joystickVector(dx,dy);
+    const thumb=joystickThumb(dx,dy);
+    if(thumb.x!==this.stickThumb.x||thumb.y!==this.stickThumb.y){
+      this.stickThumb=thumb;
+      this.stickDrawPending=true;
+    }
   }
   private touchEnd(event: EventTouch): void { if (event.getID() === this.touchId) this.clearTouch(); }
   private keyDown(event: EventKeyboard): void {
@@ -2119,6 +2233,7 @@ private playerSlowUntil=0;
   private clearTouch(): void { this.touchId = null; this.stick = { x: 0, y: 0 }; this.stickThumb={x:0,y:0};if (this.joystick) this.drawStick(); }
   private clearInput(): void { this.keys.clear(); this.clearTouch(); }
   private drawStick(): void {
+    this.stickDrawPending=false;
     const g=this.joystick;g.clear();
     g.node.active=this.phase==='battle'&&!this.paused&&!this.trainingPanel?.root.active;
     if(!g.node.active)return;
@@ -2136,6 +2251,7 @@ private playerSlowUntil=0;
   }
   private layoutBattlefield(): void {
     const size = view.getVisibleSize();
+    if(!Number.isFinite(size.width)||!Number.isFinite(size.height)||size.width<=0||size.height<=0)return;
     const hw = size.width / 2, hh = size.height / 2;
     if (this.layoutReady && this.halfWidth === hw && this.halfHeight === hh) return;
     this.layoutReady = true;
@@ -2208,13 +2324,7 @@ private playerSlowUntil=0;
     const chapter=chapterFor(this.endlessBossChapter);
     const keep=this.enemies.filter(e=>e.hp>0&&e.bossSkin).map(e=>e.bossSkin!);
     if(spawnBoss)keep.push(chapter.bossId);
-    releaseBossArt(this.artFrames,removed=>{
-      this.bossEffects?.detach(removed);
-      for(const e of this.enemies){
-        if(e.art.spriteFrame&&removed.has(e.art.spriteFrame))e.art.spriteFrame=null;
-        for(const sp of [...(e.rigParts||[]),...(e.lvbuGhosts||[])])if(sp.spriteFrame&&removed.has(sp.spriteFrame))sp.spriteFrame=null;
-      }
-    },keep);
+    this.retainBossArt(keep);
     // The accepted shop state lives in Run; don't hold its meshes while decoding the next boss.
     this.screens.hide();
     this.prepareBosses(spawnBoss?[chapter.bossId]:[],()=>{
@@ -2231,8 +2341,18 @@ private playerSlowUntil=0;
       this.resumeCountdown=1.2;this.protectionTime=1.2;this.respite=2;
       this.pushNearbyEnemies();this.clearInput();this.drawProgress();
       this.selectMusic(this.run.bossEncounter?'boss':'battle');
+      this.releaseHealth?.checkpoint(spawnBoss?'boss':'wave');
       this.traceSupplyDraw('battle');
     });
+  }
+  private retainBossArt(keep:string[]):void {
+    releaseBossArt(this.artFrames,removed=>{
+      this.bossEffects?.detach(removed);
+      for(const e of this.enemies){
+        if(e.art.spriteFrame&&removed.has(e.art.spriteFrame))e.art.spriteFrame=null;
+        for(const sp of [...(e.rigParts||[]),...(e.lvbuGhosts||[]),...(e.chargeGhosts||[])])if(sp.spriteFrame&&removed.has(sp.spriteFrame))sp.spriteFrame=null;
+      }
+    },keep);
   }
   private endlessUnitCounts:Record<string,number>={};
   private endlessSpawnPool:(typeof CHRONICLE_ENEMIES)[number][]=[];
@@ -2270,20 +2390,22 @@ private playerSlowUntil=0;
   private resumeStage():void {
     if(this.resourceBusy)return;
     const wave=(this.run.stageWave||1)+(this.run.supplyMode==='departure'?0:1);
-    const boss=wave===5?stageFor(this.run.chapter).boss:wave===3&&this.run.chapter===2?'lvbu':undefined;
-    if(boss&&!bossArtReady(this.artFrames,boss)){this.prepareBosses([boss],()=>this.resumeStage());return;}
-    // The formation strategist casts stones from the shared props sheet.
-    if(wave===3&&this.run.chapter===6&&!this.artFrames[bossPropKeys[4]]){
-      this.prepareVisuals([(alive,done)=>ensureBossProps(this.artFrames,alive,done)],()=>this.resumeStage());return;
+    const art=this.stageEncounterArt(wave);
+    if(art&&!this.stageEncounterArtReady(art)){
+      if(art==='props')this.prepareVisuals([(alive,done)=>ensureBossProps(this.artFrames,alive,done)],()=>this.resumeStage());
+      else this.prepareBosses([art],()=>this.resumeStage());
+      return;
     }
     const shown=this.run.offers.map(id=>supplyCard(this.run,id).weapon?.id).filter(Boolean);this.profile.pendingWeapons=this.profile.pendingWeapons.filter(id=>shown.indexOf(id as WeaponId)<0);this.run.newWeaponIds=[...this.profile.pendingWeapons];saveProfile(sys.localStorage,this.profile);
     if(this.run.supplyMode!=='departure'){this.run.stageWave=Math.min(5,(this.run.stageWave||1)+1);this.run.waveTime=0;}
     this.remaining=waveSeconds(this.run.stageWave||1);this.run.supplyMode='normal';this.run.wave=2;
     this.refreshStats();this.syncWeapons();this.screens.hide();this.phase='battle';this.paused=false;this.setBattleVisible(true);this.powerNotice='继续战斗';this.resumeCountdown=1.2;this.protectionTime=1.2;this.respite=2;this.pushNearbyEnemies();this.clearInput();
+    this.releaseHealth?.checkpoint(this.run.stageWave===5?'boss':this.run.stageWave===3?'mini-boss':'wave');
     if(this.run.stageWave===3&&!this.run.miniSpawned){this.run.miniSpawned=true;this.spawnStageBoss(true);}
     if(this.run.stageWave===5&&!this.run.bossEncounter){this.run.bossEncounter=true;this.spawnStageBoss(false);}
     this.spawnClock=Math.max(.6,this.spawnClock);this.drawProgress();this.playSound('ui-start');
     this.traceSupplyDraw('battle');
+    this.beginStageArtPrefetch();
   }
   private spawnStageBoss(mini:boolean):void {
     if(!mini)this.selectMusic('boss');this.playSound('boss-arrive');
@@ -2322,7 +2444,7 @@ private playerSlowUntil=0;
     this.spawnClock=(id?archetypeFor(id).cost:1)/stageThreat(n,w,this.run.weapons.length)*(this.respite>0?1.3:1);
   }
   private endStage(won:boolean):void {
-    this.phase=won?'victory':'defeat';this.collectAllCoins();const reward=won&&!this.run.endless?recordClear(this.profile,this.run.heroId,this.run.chapter,this.run.elapsed,this.kills,this.playerHp):undefined;
+    this.phase=won?'victory':'defeat';this.releaseHealth?.checkpoint(this.phase);this.collectAllCoins();const reward=won&&!this.run.endless?recordClear(this.profile,this.run.heroId,this.run.chapter,this.run.elapsed,this.kills,this.playerHp):undefined;
     if(won)this.profileDirty=true;
     let saved=this.flushProfile(won);this.clearBattle();this.setBattleVisible(false);this.paused=false;
     this.playSound(won?'victory':'defeat');if(won&&reward&&(reward.weapons.length||reward.passives.length||reward.skills.length))this.playSound('unlock',.25);
@@ -2334,9 +2456,9 @@ private playerSlowUntil=0;
   private showMainMenu(): void {
     if (!this.ready) return;
     this.trainingPanel?.hide();if(this.trainingMode&&this.trainingReturnRun)this.run=this.trainingReturnRun;this.trainingReturnRun=undefined;this.trainingMode=false;this.commonEffects.trainingRecasts=false;
-    this.resourceSerial++;this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;
+    this.resourceSerial++;this.resourceBusy=false;this.retryResource=undefined;this.resourceCompletion=undefined;this.resourceView?.hide();this.resourceView=undefined;
     this.flushProfile();this.phase = 'menu'; this.testMode = false; this.paused = false; this.stopSounds(); this.clearBattle(); this.setBattleVisible(false);
-    releaseBossArt(this.artFrames,released=>{this.bossEffects?.detach(released);for(const e of this.enemies){if(e.art.spriteFrame&&released.has(e.art.spriteFrame))e.art.spriteFrame=null;for(const sp of [...(e.rigParts||[]),...(e.lvbuGhosts||[]),...(e.chargeGhosts||[])])if(sp.spriteFrame&&released.has(sp.spriteFrame))sp.spriteFrame=null;}});
+    this.retainBossArt([]);
     if(!visibleHero(this.run.heroId))this.run=createRun('liubei');
     this.selectMusic('menu',true);
     this.screens.menu(this.run.heroId,(id,skill,weapon,stage)=>{
@@ -2422,14 +2544,25 @@ private playerSlowUntil=0;
     if((this.run.growth||0)>=5&&!petArtReady(this.artFrames))tasks.push((alive,done)=>ensurePetArt(this.artFrames,alive,done));this.prepareVisuals(tasks,action);
   }
   private prepareVisuals(tasks:((alive:()=>boolean,done:(error?:Error)=>void)=>void)[],action:()=>void,message='正在准备战场资源…',title='整装待发'):void {
-    if(!tasks.length){action();return;}
     const serial=++this.resourceSerial,started=Date.now();this.resourceBusy=true;this.clearInput();let remaining=tasks.length,failed=false;
+    this.resourceCompletion=undefined;
+    const alive=()=>this.isValid&&!this.assets.disposed&&serial===this.resourceSerial;
+    const complete=(error?:Error)=>{
+      const commit=()=>{
+        if(!alive())return;
+        if(error){this.releaseHealth?.record('resource-failed',error);this.health?.record('resource-failed',title+' '+(Date.now()-started)+'ms '+error.message);this.resourceView?.show('资源加载失败，请重试',true);return;}
+        if(tasks.length)this.health?.record('resource-ready',title+' '+(Date.now()-started)+'ms');
+        this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;action();
+      };
+      if(this.backgrounded||this.graphicsContextLost)this.resourceCompletion=commit;else commit();
+    };
+    if(!tasks.length){complete();return;}
     this.retryResource=()=>this.prepareVisuals(tasks,action,message,title);this.resourceView?.hide();
     this.resourceView=new ResourcePrepareView(this.ui,()=>this.retryResource?.(),()=>this.showMainMenu(),title);this.resourceView.show(message);
-    for(const task of tasks)task(()=>this.isValid&&!this.assets.disposed&&serial===this.resourceSerial,error=>{
-      if(serial!==this.resourceSerial||!this.isValid||failed)return;
-      if(error){failed=true;this.health?.record('resource-failed',title+' '+(Date.now()-started)+'ms '+error.message);this.resourceView?.show('资源下载失败，请检查网络后重试',true);return;}
-      if(--remaining===0){this.health?.record('resource-ready',title+' '+(Date.now()-started)+'ms');this.resourceBusy=false;this.retryResource=undefined;this.resourceView?.hide();this.resourceView=undefined;action();}
+    for(const task of tasks)task(alive,error=>{
+      if(!alive()||failed)return;
+      if(error){failed=true;complete(error);return;}
+      if(--remaining===0)complete();
     });
   }
   private startTraining(id:HeroId,skill:string):void {
@@ -2519,16 +2652,54 @@ private playerSlowUntil=0;
     this.avatar.spriteFrame = this.artFrames['hero-select-'+id]||this.artFrames[id]; this.heroName.string = heroFor(this.run).name;
     this.syncWeapons();
     this.updateOrnaments();this.startWave();
+    if(this.run.challenge)this.releaseHealth?.checkpoint('start');
     this.chapterEntry=this.run.challenge?undefined:this.savePoint();this.saveCheckpoint('battle');
     if(this.run.challenge){this.run.supplyMode='normal';this.run.offers=[];this.run.purchasedOffers=[];}
-    if(this.run.challenge&&!this.run.endless){
-      const run=this.run;
-      for(const boss of stageBosses(run.chapter))ensureBossArt(boss,this.artFrames,
-        ()=>this.isValid&&!this.assets.disposed&&this.run===run&&(this.phase==='battle'||this.phase==='shop'),()=>{});
+    if(this.run.challenge&&!this.run.endless)this.retainBossArt([]);
+  }
+  private stageEncounterArt(wave:number):string|undefined {
+    if(wave===5)return stageFor(this.run.chapter).boss;
+    if(wave===3&&this.run.chapter===2)return 'lvbu';
+    if(wave===3&&this.run.chapter===6)return 'props'; // The formation strategist casts stones.
+    return undefined;
+  }
+  private stageEncounterArtReady(id:string):boolean {
+    return id==='props'?!!this.artFrames[bossPropKeys[4]]:bossArtReady(this.artFrames,id);
+  }
+  private beginStageArtPrefetch():void {
+    const id=this.stageEncounterArt((this.run.stageWave||1)+1);
+    const retireLvbu=id==='dongzhuo';
+    this.stageArtPrefetch=id&&(retireLvbu||!this.stageEncounterArtReady(id))
+      ?{id,attempts:0,pending:false,retryAt:0,retireLvbu}:undefined;
+    this.updateStageArtPrefetch();
+  }
+  private updateStageArtPrefetch():void {
+    const request=this.stageArtPrefetch;
+    if(!request||request.pending||request.attempts>=2||this.phase!=='battle')return;
+    if(request.retireLvbu){
+      if(this.enemies.some(e=>e.bossSkin==='lvbu'&&e.node.active))return;
+      this.retainBossArt([request.id]);request.retireLvbu=false;
+      return; // Give Cocos one frame to release the old atlas before loading the next one.
     }
+    if(this.stageEncounterArtReady(request.id)){this.stageArtPrefetch=undefined;return;}
+    if(request.retryAt>Date.now())return;
+
+    request.attempts++;request.pending=true;
+    const alive=()=>this.isValid&&!this.assets.disposed&&this.stageArtPrefetch===request&&(this.phase==='battle'||this.phase==='shop');
+    const complete=(error?:Error)=>{
+      if(!alive())return;
+      request.pending=false;
+      if(error){if(request.attempts>=2)this.releaseHealth?.record('resource-failed',error);request.retryAt=Date.now()+5000;return;}
+      this.stageArtPrefetch=undefined;
+      this.health?.record('boss-atlas-ready',request.id);
+    };
+    if(request.id==='props')ensureBossProps(this.artFrames,alive,complete);
+    else ensureBossArt(request.id,this.artFrames,alive,complete);
   }
 
   private clearBattle(keepMusic=false): void {
+    this.stageArtPrefetch=undefined;
+    this.skillCasts=0;this.lastSkillCastAt=undefined;
     this.pet.clear();this.petView?.clear();this.mountDash=newMountDash();this.dashDrawHero='';this.weapons.forEach(w=>{w.strikes=0;w.loadoutKey=undefined;});this.victoryPending=false;this.depthNodes.length=0;
     this.bossBattle.clear();this.bossEffects?.clear();
     this.coins.forEach(c => { c.active = false; c.node.active = false; });
@@ -2776,9 +2947,11 @@ private playerSlowUntil=0;
     const atlasHp=!!(boss&&this.battleSprites.numberGlyphs.length);
     if(prior&&prior.atlasHp===atlasHp&&prior.hp===barHp&&prior.max===barMax&&prior.count===miniCount&&prior.chapter===chapter&&prior.height===this.halfHeight&&prior.boss===!!boss&&prior.mini===!!boss?.miniBoss)return;
     this.bossDrawState={atlasHp,hp:barHp,max:barMax,count:miniCount,chapter,height:this.halfHeight,boss:!!boss,mini:!!boss?.miniBoss};
-    this.bossBar.clear();
-    this.bossBar.fillColor=new Color(35,49,34,206);
-    this.bossBar.roundRect(-215,boss?-64:-18,430,boss?83:37,15);this.bossBar.fill();
+    if(!this.bossBarFill||prior?.boss!==!!boss){
+      this.bossBar.clear();
+      this.bossBar.fillColor=new Color(35,49,34,206);
+      this.bossBar.roundRect(-215,boss?-64:-18,430,boss?83:37,15);this.bossBar.fill();
+    }
     const name=boss?(boss.miniBoss?stageFor(this.run.chapter).miniBoss:chapterFor(chapter).boss):'';
     if(atlasHp){
       const number=this.bossHealthNumber||(this.bossHealthNumber=new BattleNumber(this.bossLabel.node,this.battleSprites,this.bossLabel.color));
@@ -2796,7 +2969,10 @@ private playerSlowUntil=0;
       this.bossLabel.node.setPosition(0,-33);
       this.bossLabel.string=boss?`${name}  ${boss.miniCharge?miniCount+'/3 · ':''}${Math.ceil(barHp)}/${barMax}`:'';
     }
-    if (boss) {
+    if(this.bossBarFill&&this.bossBarTrack){
+      this.bossBarTrack.active=this.bossBarFill.active=!!boss;
+      if(boss)this.bossBarFill.setScale(Math.max(0,Math.min(1,barHp/barMax)),1,1);
+    }else if (boss) {
       this.bossBar.fillColor = new Color('#63483a'); this.bossBar.rect(-180, -55, 360, 6); this.bossBar.fill();
       this.bossBar.fillColor = new Color('#d97745'); this.bossBar.rect(-180, -55, 360 * barHp / barMax, 6); this.bossBar.fill();
     }
@@ -2847,10 +3023,10 @@ private playerSlowUntil=0;
     };
     if(this.trainingMode)load('meadow','ground',t=>{const f=new SpriteFrame();f.texture=t;this.artFrames['world-ground']=f;this.rebuildMeadow();});
     load('orchard','decor',t=>{const f=new SpriteFrame();f.texture=t;f.rect=new Rect(0,0,t.width/3,t.height/2);this.artFrames['peach-tree']=f;});
-    load('talismans','items',t=>{for(let i=0;i<48;i++){const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%8*t.width/8,Math.floor(i/8)*t.height/6,t.width/8,t.height/6);this.artFrames['item-'+PASSIVE_ITEMS[i].id]=f;}if(this.phase==='shop')this.showShop();});
+    load('talismans','items',t=>{for(let i=0;i<48;i++){const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%8*t.width/8,Math.floor(i/8)*t.height/6,t.width/8,t.height/6);this.artFrames['item-'+PASSIVE_ITEMS[i].id]=f;}if(this.phase==='shop')this.optionalShopRefresh=true;});
     load('arsenal','weapons',t=>{
       ['smg','shotgun','rocket','sword','thunder','gourd'].forEach((id,i)=>{if(this.artFrames['redesign-icon-'+id])return;const f=new SpriteFrame();f.texture=t;f.rect=new Rect(i%3*t.width/3,Math.floor(i/3)*t.height/2,t.width/3,t.height/2);this.artFrames['weapon-'+id]=f;});
-      if(this.ready){this.refreshWeaponArt();if(this.phase==='shop')this.showShop();}
+      if(this.ready){this.optionalWeaponRefresh=true;if(this.phase==='shop')this.optionalShopRefresh=true;}
     });
   }
 
@@ -2915,26 +3091,35 @@ private playerSlowUntil=0;
     const multi=['G08','G19','G20','G22'].indexOf(id)>=0;
     if (multi && event === 'cast') { this.quieterSkillReleases.delete(id); return; }
     if (!multi && event === 'release') return;
-    const cue=('skill-'+id) as SoundId;if (!SOUND_CUES[cue]) return;
+    const cue=skillSound(id);if (!cue) return;
     const gain = multi && this.quieterSkillReleases.has(id) ? .65 : 1;
     this.playSound(cue, SOUND_CUES[cue].volume * gain);
     if (multi) this.quieterSkillReleases.add(id);
   }
   private castSkill():void {
     if(this.resourceBusy||this.mountDash.remaining>0||this.phase!=='battle'||this.paused||this.trainingPanel?.root.active||this.backgrounded||this.resumeCountdown>0||this.playerHp<=0||(!this.trainingMode&&this.skillCharge<this.skillRequirement()))return;
-    this.unlockAudio();let power=0;for(const w of this.run.weapons)power+=weaponDps(this.run,w);power*=1+this.perks.skillDamage;
-    if(this.commonSkill.cast(this.run.skillId,power)){if(this.trainingMode){this.trainingCasts++;if(this.trainingCasts===1)this.health?.record('training-cast',this.run.skillId);}this.skillCharge=this.trainingMode?this.skillRequirement():0;this.drawnSkillId='';this.drawSkillButton();}
+    this.unlockAudio();
+    let power=0;
+    if(commonSkillFor(this.run.skillId).kind!=='battle-haste'){
+      for(const w of this.run.weapons)power+=weaponDps(this.run,w);
+      power*=1+this.perks.skillDamage;
+    }
+    if(this.commonSkill.cast(this.run.skillId,power)){
+      this.skillCasts++;this.lastSkillCastAt=Date.now();
+      if(this.trainingMode){this.trainingCasts++;if(this.trainingCasts===1)this.health?.record('training-cast',this.run.skillId);}
+      this.skillCharge=this.trainingMode?this.skillRequirement():0;this.drawSkillButton();
+    }
   }
   private updateSkill(dt:number):void {this.commonSkill.update(dt);this.updateGourds(dt);}
   private drawSkillButton():void {
     if(!this.skillGraphic)return;const def=commonSkillFor(this.run.skillId),need=this.skillRequirement(),charge=this.trainingMode?need:Math.min(need,this.skillCharge),ready=charge>=need;
-    if(this.drawnSkillId!==def.id)this.skillFrameKey='skill-'+def.icon;
-    if(this.skillIcon){const frame=this.artFrames[this.skillFrameKey];if(this.skillIcon.spriteFrame!==frame)this.skillIcon.spriteFrame=frame;const scale=ready?1+Math.sin(this.age*3)*.025:1;this.skillIcon.node.setScale(scale,scale,1);}
+    const hud=SKILL_HUD.get(def.id)!;
+    if(this.skillIcon){const frame=this.artFrames[hud.icon];if(this.skillIcon.spriteFrame!==frame)this.skillIcon.spriteFrame=frame;const scale=ready?1+Math.sin(this.age*3)*.025:1;this.skillIcon.node.setScale(scale,scale,1);}
     if(this.drawnSkillId===def.id&&this.drawnSkillCharge===charge&&this.drawnSkillRequirement===need&&this.drawnTrainingMode===this.trainingMode)return;
     this.drawnSkillId=def.id;this.drawnSkillCharge=charge;this.drawnSkillRequirement=need;this.drawnTrainingMode=this.trainingMode;
     const g=this.skillGraphic;g.clear();g.fillColor=new Color(40,66,48,235);g.strokeColor=new Color(ready?'#ffdc83':'#879375');g.lineWidth=3;g.circle(0,0,51);g.fill();g.stroke();
     g.strokeColor=new Color(ready?'#ffeabc':'#d8bd6e');g.lineWidth=4;if(charge>0){g.arc(0,0,46,Math.PI/2,Math.PI/2+Math.PI*2*charge/need,false);g.stroke();}
-    this.skillLabel.string=def.name+' · '+(this.trainingMode?'无冷却':ready?'就绪':charge+'/'+need);
+    this.skillLabel.string=this.trainingMode?hud.training:hud.charges[charge]??`${def.name} · ${charge}/${need}`;
   }
 
   private drawWeaponHud():void {
@@ -3003,21 +3188,26 @@ private playerSlowUntil=0;
       if(h.attracted){const step=Math.min(d,500*dt);if(d>0){h.x+=dx/d*step;h.y+=dy/d*step;}if(d-step<20){const previousHearts=this.playerHp;this.playerHp=Math.min(this.stats.maxHp,this.playerHp+1);if(this.playerHp>previousHearts)this.combatFx.feedback('heal',this.px,this.py+25);h.active=false;h.node.active=false;this.refreshStats();this.playSound('heal');continue;}}
       h.node.setPosition(h.x,h.y+Math.sin(h.age*4)*4);const s=1+Math.sin(h.age*5)*.08;h.node.setScale(s,s,1);
     }
-    const target=this.hearts.find(h=>h.active&&this.playerHp<heroMaxHearts(this.run))||this.enemies.find(e=>e.hp>0&&e.animal&&this.playerHp<heroMaxHearts(this.run));
-    this.hintText.string=target&&Math.hypot(target.x-this.px,target.y-this.py)>350?'回血目标 '+(target.x>this.px?'→':'←'):'';
+    const wounded=this.playerHp<heroMaxHearts(this.run);
+    const target=wounded&&(this.hearts.find(h=>h.active)||this.enemies.find(e=>e.hp>0&&e.animal));
+    const hint=target&&Math.hypot(target.x-this.px,target.y-this.py)>350?(target.x>this.px?'回血目标 →':'回血目标 ←'):'';
+    if(this.hintText.string!==hint)this.hintText.string=hint;
   }
 
   onDestroy(): void {
-    if(this.audioDisposed)return;this.audioDisposed=true;this.resourceSerial++;
+    this.screens?.closeGameClub();
+    if(this.audioDisposed)return;this.audioDisposed=true;this.resourceSerial++;this.resourceCompletion=undefined;
     const clean=(action:()=>void)=>notifySafely(action);
     if(this.supplyDrawPending){this.supplyDrawPending=undefined;clean(()=>director.off(Director.EVENT_AFTER_DRAW,this.afterSupplyDraw,this));}
     clean(()=>{this.resourceView?.hide();this.resourceView=undefined;});
-    clean(()=>this.flushProfile());clean(()=>this.health?.destroy());
+    clean(()=>this.flushProfile());clean(()=>this.health?.destroy());clean(()=>this.releaseHealth?.destroy());
     clean(()=>this.soundLoads.destroy());this.soundLoading.clear();this.soundRetryAfter.clear();this.soundUrls={};
     clean(()=>this.musicCancel?.());clean(()=>cancelArtGroups(this.artFrames));
     for(const [event,fn]of [[Node.EventType.TOUCH_START,this.touchStart],[Node.EventType.TOUCH_MOVE,this.touchMove],[Node.EventType.TOUCH_END,this.touchEnd],[Node.EventType.TOUCH_CANCEL,this.touchEnd],[Node.EventType.TOUCH_START,this.audioTouch]] as const)clean(()=>this.root?.off(event,fn,this,true));
     clean(()=>input.off(Input.EventType.KEY_DOWN,this.keyDown,this));clean(()=>input.off(Input.EventType.KEY_UP,this.keyUp,this));clean(()=>this.detachKeyboard?.());
     clean(()=>game.off(Game.EVENT_HIDE,this.onBackground,this));clean(()=>game.off(Game.EVENT_SHOW,this.onForeground,this));
+    clean(()=>this.observedCanvas?.removeEventListener?.('webglcontextlost',this.onGraphicsContextLost));
+    clean(()=>this.observedCanvas?.removeEventListener?.('webglcontextrestored',this.onGraphicsContextRestored));this.observedCanvas=undefined;
     clean(()=>this.stopSounds());clean(()=>this.nativeSfx?.destroy());this.nativeSfx=undefined;
     clean(()=>this.music.detach());clean(()=>this.nativeMusic?.destroy());this.nativeMusic=undefined;clean(()=>this.nativeFiles?.destroy());this.nativeFiles=undefined;
     for(const source of this.soundSources)clean(()=>{source.stop();source.clip=null;});
@@ -3026,6 +3216,7 @@ private playerSlowUntil=0;
     // Component-only destroy must also detach all descendant sprite references.
     const detach=(n:Node)=>{clean(()=>{const sp=n.getComponent(Sprite);if(sp)sp.spriteFrame=null;});for(const child of n.children)detach(child);};if(this.root)detach(this.root);
     const frames=new Set<SpriteFrame>();
+    this.npcAtlas.releaseInto(frames);
     this.soldierFrames.forEach(row=>row.forEach(f=>frames.add(f)));
     Object.keys(this.enemyFrames).forEach(kind=>this.enemyFrames[kind as EnemyKind]?.forEach(f=>frames.add(f)));
     Object.values(this.rigFrames).forEach(row=>row.forEach(f=>frames.add(f)));this.rigFrames={};
@@ -3123,7 +3314,7 @@ private playerSlowUntil=0;
     if(e.archetype==='E01'&&!e.bossSkin&&!e.object&&!e.miniBoss){
       const p=sampleGruntPose(e.gruntPose||(e.gruntPose={cell:0,x:0,y:0,angle:0,sx:1,sy:1}),e.direction,e.walk,!!e.moving,e.attack,e.attackAngle),frame=this.soldierFrames[e.weaponKind]?.[p.cell];
       if(frame){
-        e.rigParts?.forEach(sp=>sp.node.active=false);e.rigKey='enemy-E01-'+(e.direction===2?'back':'front');e.art.enabled=true;
+        e.rigParts?.forEach(sp=>sp.node.active=false);e.rigKey=e.direction===2?'enemy-E01-back':'enemy-E01-front';e.art.enabled=true;
         if(e.art.spriteFrame!==frame)e.art.spriteFrame=frame;if(e.rigSize!==78){e.art.node.getComponent(UITransform)!.setContentSize(78,78);e.rigSize=78;}
         e.art.node.setPosition(p.x,p.y);e.art.node.setScale(p.sx,p.sy,1);e.art.node.angle=p.angle;
         const hit=e.flash>0;if(e.visualHit!==hit){e.art.color=hit?ENEMY_HIT:ENEMY_NORMAL;e.visualHit=hit;}return;
@@ -3132,13 +3323,16 @@ private playerSlowUntil=0;
     if(e.bossUnit){this.drawBossUnit(e);return;}
     if(e.bossSkin==='lvbu'&&e.lvbu&&this.artFrames['lvbu-action-0']){this.drawLvbuEnemy(e);return;}
     if(e.bossState&&e.bossSkin&&this.artFrames[bossActionKeys[e.bossSkin][0]]){this.drawReforgedBoss(e);return;}
-    if(e.archetype&&!e.bossSkin&&(!e.object||e.object==='clone')){e.rigParts?.forEach(sp=>sp.node.active=false);if(!e.npcRig)e.npcRig=new NpcActionRig(e.art.node,this.artFrames);if(e.npcRig.draw(e,archetypeFor(e.archetype).windup,this.run.chapter||1,this.age)){e.art.enabled=false;if(e.miniCharge){const s=e.miniCharge,face=Math.cos(s.angle)<0?-1:1;if(!e.chargeGhosts){e.chargeGhosts=[];for(let i=0;i<2;i++){const n=this.node2D(e.node,'YellowDashEcho'+i),sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setAnchorPoint(.5,.06);n.getComponent(UITransform)!.setContentSize(78,78);sp.color=LVBU_GHOST_TINTS[i];n.setSiblingIndex(0);e.chargeGhosts.push(sp);}}for(let i=0;i<2;i++){const sp=e.chargeGhosts[i];sp.node.active=s.phase==='dash'&&(e.stunUntil||0)<=this.age;sp.spriteFrame=this.artFrames['enemy-'+e.archetype+'-'+(e.direction===2?'back':'front')];sp.node.setPosition((s.trailX[i]-e.x)/MINI_ART_SCALE,(s.trailY[i]-e.y)/MINI_ART_SCALE);sp.node.setScale(face*1.08,.9,1);sp.node.angle=face*11;}}return;}}
-    const back=e.direction===2,key=e.object==='eye'?'boss-eye':e.bossSkin?(['lvbu','xiahoudun','machao'].indexOf(e.bossSkin)>=0?'mount-'+e.bossSkin+'-'+(back?'back':'front'):'boss-'+e.bossSkin):'enemy-'+e.archetype+'-'+(back?'back':'front'),frame=this.artFrames[key];if(!frame)return;
+    if(e.archetype&&!e.bossSkin&&(!e.object||e.object==='clone')){e.rigParts?.forEach(sp=>sp.node.active=false);if(!e.npcRig)e.npcRig=new NpcActionRig(e.art.node,this.npcAtlas);if(e.npcRig.draw(e,archetypeFor(e.archetype).windup,this.run.chapter||1,this.age)){e.art.enabled=false;if(e.miniCharge){const s=e.miniCharge,face=Math.cos(s.angle)<0?-1:1;if(!e.chargeGhosts){e.chargeGhosts=[];for(let i=0;i<2;i++){const n=this.node2D(e.node,'YellowDashEcho'+i),sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setAnchorPoint(.5,.06);n.getComponent(UITransform)!.setContentSize(78,78);sp.color=LVBU_GHOST_TINTS[i];n.setSiblingIndex(0);e.chargeGhosts.push(sp);}}for(let i=0;i<2;i++){const sp=e.chargeGhosts[i];sp.node.active=s.phase==='dash'&&(e.stunUntil||0)<=this.age;sp.spriteFrame=this.artFrames[e.rigKey!];sp.node.setPosition((s.trailX[i]-e.x)/MINI_ART_SCALE,(s.trailY[i]-e.y)/MINI_ART_SCALE);sp.node.setScale(face*1.08,.9,1);sp.node.angle=face*11;}}return;}}
+    const back=e.direction===2;
+    const key=e.object==='eye'?'boss-eye':enemyStandingKeys.get(e.bossSkin||e.archetype||'')?.[Number(back)];
+    if(!key)return;
+    const frame=this.artFrames[key];if(!frame)return;
     if(!e.rigParts){e.rigParts=[];for(let i=0;i<4;i++){const n=this.node2D(e.art.node,'Rig'+i),sp=n.addComponent(Sprite);sp.sizeMode=Sprite.SizeMode.CUSTOM;e.rigParts.push(sp);}}
     if(e.rigKey!==key){let parts=this.rigFrames[key];if(!parts){const r=frame.rect;parts=[[0,0,1,.65],[0,.65,1,.2],[0,.85,.5,.15],[.5,.85,.5,.15]].map(([x,y,w,h])=>{const f=new SpriteFrame();f.texture=frame.texture;f.rect=new Rect(r.x+x*r.width,r.y+y*r.height,w*r.width,h*r.height);return f;});this.rigFrames[key]=parts;}e.rigKey=key;e.rigParts.forEach((sp,i)=>sp.spriteFrame=parts[i]);}
     e.art.enabled=false;const size=e.kind==='chief'?CHIEF_ART_SIZE:e.kind==='cavalry'||e.archetype&&archetypeFor(e.archetype).group.indexOf('器械')>=0?100:78;
     const step=e.moving?Math.sin(e.walk*Math.PI):0,resize=e.rigSize!==size;
-    const tint=(e.flash>0?'hit':e.object==='clone'?'clone':'normal')+':'+(e.encounterChapter||this.run.chapter)+':'+!!e.bossSkin,recolor=e.rigTint!==tint;
+    const tint=e.flash>0?-2:e.object==='clone'?-1:e.bossSkin?0:(e.encounterChapter||this.run.chapter),recolor=e.rigTint!==tint;
     for(let i=0;i<4;i++){const sp=e.rigParts[i];sp.node.active=true;
       if(resize){sp.node.getComponent(UITransform)!.setContentSize(size*(i<2?1:.5),size*(i===0?.65:i===1?.2:.15));}
       sp.node.setPosition(i<2?0:(i===2?-.25:.25)*size,(i===0?.615:i===1?.19:.015)*size+(i>=2?Math.max(0,step*(i===2?1:-1))*2.4:0));

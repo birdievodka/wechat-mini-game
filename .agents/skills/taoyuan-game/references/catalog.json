@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v11.0.9-battle-keys",
+    "version": "stage-v11.0.20-game-club",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "732caca5e50f06fbc89704abc7c4f26a1985c6a47c43d0d581fe55d29af461de",
+    "fingerprint": "a3fdfe1c4d7b727840fde0ca6ae0e9ea5d08cd3b153afbdc6b17d0e865a19a2c",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -65,8 +65,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 6138,
-        "sha256": "61e43e6e1f84eed4c2eaff53027fef56d8eeefc73e90be6fb78dd7284890e967"
+        "bytes": 6561,
+        "sha256": "2009aaecca9278090acc779ff807f298e749be23f2486ababe5fbb5de2e035aa"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/enemy-actions.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 35692,
-        "sha256": "3d7e1af03cd4c6dde768f9ae1da061fbc980334d59f66ada849a4498f29a0f16"
+        "bytes": 37691,
+        "sha256": "88b6d2cb624839133e125f5f0c415d236eb628f4ae7571fd19d3c3058b71527c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -115,13 +115,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 52197,
-        "sha256": "7d6d25f36c51d7990a20de23be94a808f87080bd4a9ece2879c7fae311ca708d"
+        "bytes": 61371,
+        "sha256": "0afdf305493d155781ad85aa7a1ee0eafe8f1b9ce968d1859547869fd32c45a9"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/pets.md",
-        "bytes": 3899,
-        "sha256": "ba43a523129890d031c4f1ae554a9704f02b2365708a0fb4f47808b1d4b23b50"
+        "bytes": 3897,
+        "sha256": "f8fb03f70299becc41445480ab24b52856bda79d2b60fedb225af6a4be5bcdf5"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/presentation-animation.md",
@@ -130,8 +130,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/resources.md",
-        "bytes": 15461,
-        "sha256": "b958da3e4efe9e52c98a6254ed51a24b04d766fbba549ab59e664f0a37b2c61b"
+        "bytes": 19014,
+        "sha256": "80d0f440cc54ceb0db942ee4f550b828a666c86c740fabe37bb92114c9fe7c1c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
@@ -180,8 +180,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 25311,
-        "sha256": "6bbff7a35f20d52c620b1a022e233a0670783435555dc513e69aaa709e6e73b8"
+        "bytes": 25219,
+        "sha256": "e352ed3b7d49056975c8154e8390c3e47d15da549d8b09fc88fe50d8b114665e"
       },
       {
         "path": ".agents/skills/taoyuan-weapon-design/SKILL.md",
@@ -4004,9 +4004,54 @@
         "sha256": "307db56ae8b10b6ea4d98f0728558e82068770985f8317d22bcd284b73ab0929"
       },
       {
+        "path": "art/runtime-bosses/hd-atlases/boss-caocao/boss-caocao-actions.png",
+        "bytes": 1841201,
+        "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-dongzhuo/boss-dongzhuo-actions.png",
+        "bytes": 2851108,
+        "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-lvbu/lvbu-actions.png",
+        "bytes": 3787426,
+        "sha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-beasts.png",
+        "bytes": 1916865,
+        "sha256": "12e21f612086f56a5208dfe3d43511de63be5978e1ea9a9b6752b86ceb8125fa"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-menghuo-actions.png",
+        "bytes": 2819145,
+        "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-props/boss-props.png",
+        "bytes": 1158590,
+        "sha256": "7f6467125802c14e45c1086405eae46384fb582451dca6aa58f20737088f06a3"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-simayi/boss-simayi-actions.png",
+        "bytes": 2350171,
+        "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-yuanshao/boss-yuanshao-actions.png",
+        "bytes": 2318412,
+        "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c"
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-zhangjiao/boss-zhangjiao-actions.png",
+        "bytes": 2599133,
+        "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699"
+      },
+      {
         "path": "art/runtime-bosses/manifest.json",
-        "bytes": 86098,
-        "sha256": "d0843130976d2575ff2b006f8f6288a54194f24270217dcb05a8d8c3095a6bf2"
+        "bytes": 86162,
+        "sha256": "972a28bd87430941b0a4f620da3613b3c27edf421598123b1709ea3b10dc2157"
       },
       {
         "path": "art/runtime-bosses/menghuo-source.png",
@@ -4015,8 +4060,8 @@
       },
       {
         "path": "art/runtime-bosses/portraits-manifest.json",
-        "bytes": 1569,
-        "sha256": "887cfa4197e895514ce4bf53db6c88f69c8e9f77956fae9f8dfc3f79408030f5"
+        "bytes": 1625,
+        "sha256": "df72df1252c2892af0ccece5b6a820949534860877d87bf60a1ff0309dc33f80"
       },
       {
         "path": "art/runtime-bosses/prompts.json",
@@ -4160,8 +4205,8 @@
       },
       {
         "path": "art/runtime-lvbu/manifest.json",
-        "bytes": 10854,
-        "sha256": "b21fd47d0a8ccff0f42f93985a44a92d20ebb6e3211cad2d0b9f744d283a9794"
+        "bytes": 10862,
+        "sha256": "deff05adf5838435d58f0903593415ff41908c50baf9dc916e9f4f394b46de4d"
       },
       {
         "path": "art/runtime-lvbu/prompt.json",
@@ -4489,6 +4534,46 @@
         "sha256": "0fefaa1d5560f54fbbd920739b6d3d064741e5be56f654389ee97c062079f69a"
       },
       {
+        "path": "art/runtime-subpackages/manifest.json",
+        "bytes": 6324,
+        "sha256": "f4bf35de92cc51ab6cd5d9f13ad6bd908ba414fbd32fe8de9c1e10b18c64c5cd"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/arsenal/weapons.png",
+        "bytes": 687952,
+        "sha256": "f2639553cbb4222433d7d1919c8cc60dfd10015930e6beaca92c806ed295ab7c"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/enemies/archer-actions.png",
+        "bytes": 473008,
+        "sha256": "91a34e954df4db395f838b877ee7c747cb95cf22ef2b705d772c95c095260412"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/enemies/cavalry-actions.png",
+        "bytes": 444389,
+        "sha256": "5b6bdb061fbfe21b64f912eb57af6bb33396623bdaeae5e6d3d918f138619929"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/enemies/zhangjiao-actions.png",
+        "bytes": 504968,
+        "sha256": "ed63e36e3ba8db7fdccd04422ac766ba2eb9f62b8e0e4d95bdd4d3d0272365d9"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/meadow/ground.png",
+        "bytes": 1536743,
+        "sha256": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/orchard/decor.png",
+        "bytes": 698497,
+        "sha256": "7a578779eaefc9e2c799cfbc61dd4fad0e35ec3b209095ff2172d3c447e37971"
+      },
+      {
+        "path": "art/runtime-subpackages/sources/talismans/items.png",
+        "bytes": 1073381,
+        "sha256": "73492d5b1628b2e6bc03ad68db16c1f8307a64919fb96b2f3b041b266e93946c"
+      },
+      {
         "path": "art/runtime-v4/manifest.json",
         "bytes": 33227,
         "sha256": "0e304a97be5172fdd1bbe95ac14c880ed95e41e8c6340b51d21b20b4d04634e5"
@@ -4615,13 +4700,13 @@
       },
       {
         "path": "assets/arsenal.meta",
-        "bytes": 277,
-        "sha256": "676a2b6cbf5c6576c9afd6ad2c9f3918cb62f36f0cf7beac1bb45db3a7ef66ec"
+        "bytes": 284,
+        "sha256": "8ee841cd2f7a6c76c6bf56a2718439e075fdeb5523f7948523d7e9cd6527c0df"
       },
       {
         "path": "assets/arsenal/weapons.png",
-        "bytes": 687952,
-        "sha256": "f2639553cbb4222433d7d1919c8cc60dfd10015930e6beaca92c806ed295ab7c"
+        "bytes": 325650,
+        "sha256": "fe79d83da72a977b737ac073e548e794066f93aba1b8b8b4609765728b9eea30"
       },
       {
         "path": "assets/arsenal/weapons.png.meta",
@@ -4890,13 +4975,13 @@
       },
       {
         "path": "assets/enemies.meta",
-        "bytes": 277,
-        "sha256": "3afa5313d77c34841ecc96f940a8a767a630e9446e8ee8acb2ba34fe42403060"
+        "bytes": 284,
+        "sha256": "4088d4a2275737befb4167182c838e69aab5ae1c282bbe3d4d0d658fdb1ec35c"
       },
       {
         "path": "assets/enemies/archer-actions.png",
-        "bytes": 473008,
-        "sha256": "91a34e954df4db395f838b877ee7c747cb95cf22ef2b705d772c95c095260412"
+        "bytes": 260986,
+        "sha256": "d307059f1bfc418adf00ac8758b835dda32c3aa65a004bc7d221fcfa999f31de"
       },
       {
         "path": "assets/enemies/archer-actions.png.meta",
@@ -4905,8 +4990,8 @@
       },
       {
         "path": "assets/enemies/cavalry-actions.png",
-        "bytes": 444389,
-        "sha256": "5b6bdb061fbfe21b64f912eb57af6bb33396623bdaeae5e6d3d918f138619929"
+        "bytes": 250432,
+        "sha256": "f60dcb6eb2542b22a68eb0b0a4f4a4b2203d331bb6d8ce7b0ac11f7264f5986f"
       },
       {
         "path": "assets/enemies/cavalry-actions.png.meta",
@@ -4915,8 +5000,8 @@
       },
       {
         "path": "assets/enemies/zhangjiao-actions.png",
-        "bytes": 504968,
-        "sha256": "ed63e36e3ba8db7fdccd04422ac766ba2eb9f62b8e0e4d95bdd4d3d0272365d9"
+        "bytes": 286706,
+        "sha256": "6f25166739f03bcc58675d7726f6952fa52c563f9795e1bc5e65aea8067b5be8"
       },
       {
         "path": "assets/enemies/zhangjiao-actions.png.meta",
@@ -4990,18 +5075,18 @@
       },
       {
         "path": "assets/meadow.meta",
-        "bytes": 276,
-        "sha256": "c741fc86bf18f3c2fdca6858da55a3dbd6cce31ca0c1b27b9f201a61cb11f0f4"
+        "bytes": 283,
+        "sha256": "bdcc3c686e2772604eae9fb45ecfbfbe15452a1489f750637c936d571553f7b6"
       },
       {
         "path": "assets/meadow/ground.png",
-        "bytes": 1536743,
-        "sha256": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d"
+        "bytes": 1260800,
+        "sha256": "df4c4099c91ab6d1a04137fdb7f012a2f4e53946833519ebb1ebaccfa461290b"
       },
       {
         "path": "assets/meadow/ground.png.meta",
-        "bytes": 990,
-        "sha256": "cac31095d05b38386a5f9ee392291adce5cb335bb82788e72163018aa1713fe4"
+        "bytes": 991,
+        "sha256": "8425e05b3fa0717147500aef947aba068fa3d498235a1fe0994e65fd6faf6569"
       },
       {
         "path": "assets/music.meta",
@@ -5030,13 +5115,13 @@
       },
       {
         "path": "assets/orchard.meta",
-        "bytes": 277,
-        "sha256": "697333f791882960c3bb9a6bb85c48b45e13cec1f7a7f9bf25b5e45bcb657f57"
+        "bytes": 284,
+        "sha256": "b9faad3a9be251f3703d1896e70cffa6780505e0f890a05ef442e6047347352d"
       },
       {
         "path": "assets/orchard/decor.png",
-        "bytes": 698497,
-        "sha256": "7a578779eaefc9e2c799cfbc61dd4fad0e35ec3b209095ff2172d3c447e37971"
+        "bytes": 364098,
+        "sha256": "3628b23a5ba3f5c61932df08da45c969b78b1ce6a525b4558e25313e5396cc42"
       },
       {
         "path": "assets/orchard/decor.png.meta",
@@ -5125,13 +5210,13 @@
       },
       {
         "path": "assets/remote-content/boss-caocao.meta",
-        "bytes": 281,
-        "sha256": "3b24a5e0b148cf1e2ad8364ca52b9745d9f63251681dd0e0ce153791bb7aeb9a"
+        "bytes": 288,
+        "sha256": "0dda24853996e75e0416f2ef5cacb977624996fdb91d3ebe692527aa553c1089"
       },
       {
         "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
-        "bytes": 1841201,
-        "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e"
+        "bytes": 183153,
+        "sha256": "ddb319526659f0a3bacd142321bd3778c98a226b7410125cfea153e0e7bbc4f8"
       },
       {
         "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png.meta",
@@ -5140,13 +5225,13 @@
       },
       {
         "path": "assets/remote-content/boss-dongzhuo.meta",
-        "bytes": 283,
-        "sha256": "d0b68bdc21ed9116b18ad1ec763b4d3ffa2b491063b89675e3a0fbee8240ebd8"
+        "bytes": 290,
+        "sha256": "9b9b10570059f98d823d53fa967348dd3e0077c6e1fe444f042db8b049398e9d"
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
-        "bytes": 2851108,
-        "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48"
+        "bytes": 284423,
+        "sha256": "fa1fe1e1af88779a8a3c76a3d7774ac5a8dbb131ab23ebcce16947414ebd84f2"
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png.meta",
@@ -5155,13 +5240,13 @@
       },
       {
         "path": "assets/remote-content/boss-lvbu.meta",
-        "bytes": 279,
-        "sha256": "a18cdcf0de22ffec01f41eee9102a47c45f478275a2ea50f28b7b795cc9e63a5"
+        "bytes": 286,
+        "sha256": "4b1a19b4b722d75b29c54d16edc81aa6fb46dab61ab7dbfbae9732cfc4806751"
       },
       {
         "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
-        "bytes": 3787426,
-        "sha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3"
+        "bytes": 390208,
+        "sha256": "2fd80a72c269acd154c683932d13fb91d34b86af89f0fe5b0b7d318bd5214408"
       },
       {
         "path": "assets/remote-content/boss-lvbu/lvbu-actions.png.meta",
@@ -5170,13 +5255,13 @@
       },
       {
         "path": "assets/remote-content/boss-menghuo.meta",
-        "bytes": 282,
-        "sha256": "ec8620a269d5fe64375413fbb6f094f3f158e0e69171a9a86686c01c4abfe1a5"
+        "bytes": 289,
+        "sha256": "ad861a2fcd348dff3dd7a330ff8d80ec46c17a58933f90312d591bbbbabe24b3"
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-beasts.png",
-        "bytes": 1916865,
-        "sha256": "12e21f612086f56a5208dfe3d43511de63be5978e1ea9a9b6752b86ceb8125fa"
+        "bytes": 175612,
+        "sha256": "ad2c30afefd92955f66acc9c38c0538c57a9ffd753b6fb65ec9462f6b6d25c2d"
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-beasts.png.meta",
@@ -5185,8 +5270,8 @@
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
-        "bytes": 2819145,
-        "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c"
+        "bytes": 282340,
+        "sha256": "cb83535c19117732187d4609bba808e0221136def367b737de8bec6c3527bd49"
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png.meta",
@@ -5195,13 +5280,13 @@
       },
       {
         "path": "assets/remote-content/boss-props.meta",
-        "bytes": 280,
-        "sha256": "0ffa48228a2a7dd9214af5edb1133d9bf54bc806e74480c0352cf1df2fdbee81"
+        "bytes": 287,
+        "sha256": "81f044fe91c85fccce19b4725492a7342ad28651c52bc112dafa9a27470a5cfb"
       },
       {
         "path": "assets/remote-content/boss-props/boss-props.png",
-        "bytes": 1158590,
-        "sha256": "7f6467125802c14e45c1086405eae46384fb582451dca6aa58f20737088f06a3"
+        "bytes": 100151,
+        "sha256": "f924f3fcd1267f5d365d277876377e1ff4f7a330726442e1c29d47280bfede5f"
       },
       {
         "path": "assets/remote-content/boss-props/boss-props.png.meta",
@@ -5210,13 +5295,13 @@
       },
       {
         "path": "assets/remote-content/boss-simayi.meta",
-        "bytes": 281,
-        "sha256": "fe24bb8082e1904fb23adc48a9e086e9237daf710623fcc8ab22c637ac20c0ae"
+        "bytes": 288,
+        "sha256": "b3532dbbd5850c48bb550d756193069b559df8363f5e544b757adedfe7e9d857"
       },
       {
         "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
-        "bytes": 2350171,
-        "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde"
+        "bytes": 234405,
+        "sha256": "9e8f1aee5159b194129d52fdfe363e0274bb57f9a9f63d5c291550a2c30c77a9"
       },
       {
         "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png.meta",
@@ -5225,13 +5310,13 @@
       },
       {
         "path": "assets/remote-content/boss-yuanshao.meta",
-        "bytes": 283,
-        "sha256": "454f535a11825c57e79a13dda8da10c59d70b90fd75b5b524a008d04d9b0ede0"
+        "bytes": 290,
+        "sha256": "4dd0142d9366fd853c8bf8c2dd2e5151b0a96bcacf2cba12c0e5395aa3656ced"
       },
       {
         "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
-        "bytes": 2318412,
-        "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c"
+        "bytes": 233384,
+        "sha256": "e627ae7f1c115f54a854850a3ae34cce1c35b3fc5feedd61368ac0d653bd81f0"
       },
       {
         "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png.meta",
@@ -5240,13 +5325,13 @@
       },
       {
         "path": "assets/remote-content/boss-zhangjiao.meta",
-        "bytes": 284,
-        "sha256": "13f4c401c67d49939c07601ec331114ed46c78ea1655e1d0d6e814c9c055b7b9"
+        "bytes": 291,
+        "sha256": "b4b74ad0cef06573f898adc5cd7d161d58432708d0271599ffff62d522a85bc4"
       },
       {
         "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
-        "bytes": 2599133,
-        "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699"
+        "bytes": 275839,
+        "sha256": "45cd47acace1e1d5a37ae024ea31b76f03fc449c44c17eb028a4dd572d3b8939"
       },
       {
         "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png.meta",
@@ -5255,8 +5340,8 @@
       },
       {
         "path": "assets/remote-content/hidden-heroes.meta",
-        "bytes": 283,
-        "sha256": "47d5c4a5e0c51b43115f5904658fde1fa28d0d718ebc88de7368909e5f825421"
+        "bytes": 290,
+        "sha256": "33e5472598258151a04cd6949bf6518ee29536bc9893502ff5c09fe42be6d2e4"
       },
       {
         "path": "assets/remote-content/hidden-heroes/hero-parts.png",
@@ -5280,8 +5365,8 @@
       },
       {
         "path": "assets/remote-content/pets.meta",
-        "bytes": 274,
-        "sha256": "b1d9d15d116522129486a4d9f40e05ae6a910b8fa9abfde5a4a5c52cc0c43e42"
+        "bytes": 281,
+        "sha256": "002e1848ef3ef405fbb0c4e6598a5953e3c19c9d16191ce074133b03f17866e9"
       },
       {
         "path": "assets/remote-content/pets/pets.png",
@@ -5295,8 +5380,8 @@
       },
       {
         "path": "assets/results.meta",
-        "bytes": 277,
-        "sha256": "08f3202fe825483f46dddd2fe240b63068b702f81f5c6f44686dc3140747a9dd"
+        "bytes": 284,
+        "sha256": "09182bef0ad6adfb41ed381fb6aa1e0fee9fd11a4521e44e256ee75baba777e6"
       },
       {
         "path": "assets/results/portraits.png",
@@ -5389,6 +5474,16 @@
         "sha256": "c6de681468aee589b2b8b69dffc4cade75d6e7acdd63a630dae640e1cb46a942"
       },
       {
+        "path": "assets/scripts/boss-atlas-scale.ts",
+        "bytes": 87,
+        "sha256": "a439f09a8f794fe60a33fee62855b43c2354e494757e96c17b736aac7ba3712b"
+      },
+      {
+        "path": "assets/scripts/boss-atlas-scale.ts.meta",
+        "bytes": 171,
+        "sha256": "4ffd51752d462bd53933a12a4db2ce3366111701e91e55726f5940bc32afa364"
+      },
+      {
         "path": "assets/scripts/boss-battle.ts",
         "bytes": 19592,
         "sha256": "a9ac6205c38c476d59a551f1090b6724bbf518df9fbb3f02b153a9a2f2aaacfe"
@@ -5450,8 +5545,8 @@
       },
       {
         "path": "assets/scripts/CampaignView.ts",
-        "bytes": 55249,
-        "sha256": "291879d28e000bba90a266471ffb9d44ed70ce4317b17cb4e2418ce58661ae0d"
+        "bytes": 59264,
+        "sha256": "df45c361d52eb2540248d042fcc1780ec59fa7ca23e8cb9c3b2b4c520be1cca4"
       },
       {
         "path": "assets/scripts/CampaignView.ts.meta",
@@ -5460,8 +5555,8 @@
       },
       {
         "path": "assets/scripts/chronicle-art.ts",
-        "bytes": 8119,
-        "sha256": "bdb3949fda962cbcbd98459087e009484275f393d5b979ebadb77979120fc576"
+        "bytes": 8173,
+        "sha256": "ca13607f8b8b7e02d05f3b3e27df501d45dde3eb68f2f3cfaa38b0079396775a"
       },
       {
         "path": "assets/scripts/chronicle-art.ts.meta",
@@ -5560,8 +5655,8 @@
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts",
-        "bytes": 15471,
-        "sha256": "e79234f5bbf979f8bf0af149de643b2baf6685800ae62c75fae098c98a795eb0"
+        "bytes": 15611,
+        "sha256": "8272f339a0364204d8e54694af0c846446da6315a2ece71a480ce2697e6426fc"
       },
       {
         "path": "assets/scripts/CommonSkillRuntime.ts.meta",
@@ -5570,8 +5665,8 @@
       },
       {
         "path": "assets/scripts/deferred-art.ts",
-        "bytes": 4896,
-        "sha256": "173c02c5c94eef1bcc886ea1395eb79c0d441621b90a5775912159ce5dfac548"
+        "bytes": 5858,
+        "sha256": "a276f9ba3b3ab5f76ff6e021b6b188a16725205ab5e75cbabd84d5639b7c667d"
       },
       {
         "path": "assets/scripts/deferred-art.ts.meta",
@@ -5680,8 +5775,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 269224,
-        "sha256": "0886daa6cafbff30e2c91eec842eaab767b592034e250a8aa09a1928fb4f2f3d"
+        "bytes": 277490,
+        "sha256": "cccaecc15ea1cb412bf282fbf48e7c61ff4780fec5fc558e69a2a67a1c185cd1"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -5850,8 +5945,8 @@
       },
       {
         "path": "assets/scripts/native-audio-files.ts",
-        "bytes": 2918,
-        "sha256": "ab53423e60ca0ae573693ab074159ef4b1eda919bee2f07198e6831afa7c1f37"
+        "bytes": 1925,
+        "sha256": "c562046ed49a734923d18ec3a1429b7038a9ffd7f63d4f361ffd1b471881392c"
       },
       {
         "path": "assets/scripts/native-audio-files.ts.meta",
@@ -5860,8 +5955,8 @@
       },
       {
         "path": "assets/scripts/native-music.ts",
-        "bytes": 5028,
-        "sha256": "1362cfe2965a5509a4cd9d37f998529d1e4024e94800873a695e17e8b364c17c"
+        "bytes": 5762,
+        "sha256": "c786f1a9fe45582ce032ba65d08bdfb86ac9104f2323275a1703e199f132bf58"
       },
       {
         "path": "assets/scripts/native-music.ts.meta",
@@ -5870,8 +5965,8 @@
       },
       {
         "path": "assets/scripts/native-sfx.ts",
-        "bytes": 4658,
-        "sha256": "41599b7909f331b0207a74b5ca1a0b554bd83db8ca1caf5159f4a830629be7c2"
+        "bytes": 5834,
+        "sha256": "442c9301387e6f8a7c37fceaa7b8e6dfaf4c6e68d67446ed448cd58d0fc86046"
       },
       {
         "path": "assets/scripts/native-sfx.ts.meta",
@@ -5900,8 +5995,8 @@
       },
       {
         "path": "assets/scripts/NpcActionRig.ts",
-        "bytes": 5393,
-        "sha256": "20e299e46b154344eda8b3974659e2e3870c1746d9594b8595cefbe5a5af3549"
+        "bytes": 6454,
+        "sha256": "d1b1619541c615bc06e8f73fb6e670184b7e178488804ed5b81f288a79ac29d1"
       },
       {
         "path": "assets/scripts/NpcActionRig.ts.meta",
@@ -6020,8 +6115,8 @@
       },
       {
         "path": "assets/scripts/runtime-health.ts",
-        "bytes": 9761,
-        "sha256": "430a7054d706409b5ee30cca0b247bb483bc699e405314ea59596813341d5b20"
+        "bytes": 13495,
+        "sha256": "b744ec83bd5c587837218e12f440773701c7a1a1578f9b1cbac9d4fe513906c5"
       },
       {
         "path": "assets/scripts/runtime-health.ts.meta",
@@ -6030,8 +6125,8 @@
       },
       {
         "path": "assets/scripts/runtime-report.ts",
-        "bytes": 8178,
-        "sha256": "d0cf141515085e32eb1a02878d9f18273424ad9b209ee74b1aadfe5f1e191428"
+        "bytes": 8306,
+        "sha256": "49356f66d356f959fb2fd1807f9a573488c3d160d1f442e24dd07ad359017f88"
       },
       {
         "path": "assets/scripts/runtime-report.ts.meta",
@@ -6120,8 +6215,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 18124,
-        "sha256": "e2b50052c9828edb0fd233ddcf4771d6144dbd0813bbda01051dd23fabe0a21e"
+        "bytes": 18123,
+        "sha256": "aa39a363db39b04e38d5ce611540ff6249aee18cf12e50c08532d96e3f4a20d5"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -6205,8 +6300,8 @@
       },
       {
         "path": "assets/scripts/weapon-sound.ts",
-        "bytes": 4132,
-        "sha256": "267da6fe3f2d382a0e7defc1ad1a4efd5104022fb6d1848bd4baf7e777f03d48"
+        "bytes": 4309,
+        "sha256": "a4784360c319d901387edceaad17135b1c6c632f287e51d2bd4df12c00d50cc0"
       },
       {
         "path": "assets/scripts/weapon-sound.ts.meta",
@@ -6700,8 +6795,8 @@
       },
       {
         "path": "assets/sfx.meta",
-        "bytes": 273,
-        "sha256": "06ddf6a35b273e65a056bfea1ef29bfc313e92636092e73e4aaca6e58a70ff77"
+        "bytes": 280,
+        "sha256": "1913354e5b9e79a4983f97d309f1f580eb426fcd8818a0ffd83dd3a42d93b18e"
       },
       {
         "path": "assets/sfx/boss-arrive.wav",
@@ -6945,13 +7040,13 @@
       },
       {
         "path": "assets/talismans.meta",
-        "bytes": 279,
-        "sha256": "200b08f1ac72275c646e5a13c57bba92405123d668675a84430071a148535986"
+        "bytes": 286,
+        "sha256": "e3429bce48f1e9a6d01f33b74130518254baf82a506c1401ab75bcbdaee2973a"
       },
       {
         "path": "assets/talismans/items.png",
-        "bytes": 1073381,
-        "sha256": "73492d5b1628b2e6bc03ad68db16c1f8307a64919fb96b2f3b041b266e93946c"
+        "bytes": 487882,
+        "sha256": "0ecebdc81e6499f626b7dc5844c39507c71652cc5946bdb0e72f724d7c4bf19a"
       },
       {
         "path": "assets/talismans/items.png.meta",
@@ -6970,8 +7065,8 @@
       },
       {
         "path": "cdn-assets/README.md",
-        "bytes": 1818,
-        "sha256": "f5f6293813031640ace11b25bdf68e708cb2e9aea5ee3475a629803c62358b53"
+        "bytes": 1314,
+        "sha256": "fbb46142eec4dee8e4615f2c310107dae8eb31be3f4e8b45b3938fc089e45052"
       },
       {
         "path": "cdn-assets/release.json",
@@ -6985,8 +7080,8 @@
       },
       {
         "path": "config/build-wechat.json",
-        "bytes": 781,
-        "sha256": "50228633b3853d0c4679c61d89eb4a73caa35540047b4414eaae7cc652f3ffb3"
+        "bytes": 631,
+        "sha256": "220b3deea4a63867fb65dc6326e48162fc2c8027017aa73ff69615a9e2c3c0a1"
       },
       {
         "path": "config/cdn.json",
@@ -8050,8 +8145,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 2578,
-        "sha256": "92163f568d33e869c4dbc1af2c99f6d98b3eb0eb79a8778b6ffa7edf99a01a7a"
+        "bytes": 2540,
+        "sha256": "60e125b3fdb494ab9ec82b0706dd648087efcf40bb27e2c3503c25388a9bbb1c"
       },
       {
         "path": "project.config.json",
@@ -8060,8 +8155,8 @@
       },
       {
         "path": "README.md",
-        "bytes": 7836,
-        "sha256": "0a28027c7513840b8da9f25ad24616490724054a5d51d98ce3575490a7010f9e"
+        "bytes": 7885,
+        "sha256": "4823267a3741532dfbe01b839c745952a13bb920bed2ec2cfa317491af287179"
       },
       {
         "path": "scripts/__pycache__/battle_score.cpython-313.pyc",
@@ -8090,8 +8185,8 @@
       },
       {
         "path": "scripts/build-wechat.cjs",
-        "bytes": 2701,
-        "sha256": "d8adae88996d273415e641caf1b7da7e7924798d21de04784a139106ccebf5ef"
+        "bytes": 2818,
+        "sha256": "1db57482f4aa841ff6fb3bb87ab6712ba7b4564cfe683ad01e7ce36378a3f510"
       },
       {
         "path": "scripts/capture-all-ground-review.mjs",
@@ -8245,8 +8340,8 @@
       },
       {
         "path": "scripts/check-package-size.cjs",
-        "bytes": 5179,
-        "sha256": "f77556ed732b1ebfe6ec9e19a326a0ea16f1aecc77e46a9751a12b18235e5a6e"
+        "bytes": 5339,
+        "sha256": "0ec77c3c416864378215392df6b4e07c0b37debc37409f357204193280970c61"
       },
       {
         "path": "scripts/check.cjs",
@@ -8350,18 +8445,18 @@
       },
       {
         "path": "scripts/optimize-textures.cjs",
-        "bytes": 4424,
-        "sha256": "d590945d64cb6edc33487c66140b233fd2d318559558800462b29d2212f89626"
+        "bytes": 4346,
+        "sha256": "15cd6dee2dd1c6c51995f4f8bfb7bad458452fe93458076755eacecf55992e57"
       },
       {
         "path": "scripts/pack-boss-art.cjs",
-        "bytes": 6361,
-        "sha256": "47c0932392ddfeaffd4dc335259b2187e34c4db58830a575c4caf8f3b68b849f"
+        "bytes": 6057,
+        "sha256": "87d6a57b84571425991bd33391fb335d5f88b5091afb65d0a8f701dde995a672"
       },
       {
         "path": "scripts/pack-boss-portraits.cjs",
-        "bytes": 1769,
-        "sha256": "e3f3408d86854ffb7a64b25f4bec23252ed3e8ad945bde468ba7d4e73f292c8b"
+        "bytes": 1777,
+        "sha256": "9a7b3b606df0e5c028eec448d017863b7b2a9fa6ef0f542a163cef8b0e95bee7"
       },
       {
         "path": "scripts/pack-chronicle-art.cjs",
@@ -8390,8 +8485,8 @@
       },
       {
         "path": "scripts/pack-lvbu-art.cjs",
-        "bytes": 4709,
-        "sha256": "e7f9ce3423276c4cd119e32b4538740ba069e30495929cd70fcebe118f7b5569"
+        "bytes": 4354,
+        "sha256": "08bb189753ba13ff17f5e1a4e34c10ce3f184899d1d74cd9c73dd63b9df5c6d5"
       },
       {
         "path": "scripts/pack-pet-art.cjs",
@@ -8407,6 +8502,11 @@
         "path": "scripts/pack-stage-art.cjs",
         "bytes": 4924,
         "sha256": "3ef89cb81ac73f448858fdce154970dd5c5290388f9d2ddaec95e48f4f52cf33"
+      },
+      {
+        "path": "scripts/pack-subpackage-art.cjs",
+        "bytes": 2472,
+        "sha256": "0e694a41a9ba490bab35df3404307fd6186204fbf808325ea56502cc036b12d9"
       },
       {
         "path": "scripts/pack-ui-fonts.py",
@@ -8495,8 +8595,8 @@
       },
       {
         "path": "scripts/test-battle-text.cjs",
-        "bytes": 6080,
-        "sha256": "96fe7d4f0e7025716004bff017a52514fc8d22689785e5b877e5e0981f844ff0"
+        "bytes": 6423,
+        "sha256": "a14f1becb4fcce943dea0714030cc9dab5e90fbfde284fe7a775930199f3eece"
       },
       {
         "path": "scripts/test-bosses.cjs",
@@ -8505,8 +8605,8 @@
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 91581,
-        "sha256": "1e5b9a25b69b519a525d898d89a3ef6af4772eab4d125c9feff944d6070d4103"
+        "bytes": 91978,
+        "sha256": "6139b0ec2267617045fbe0cdd2d3dd25d8c6295d887ee481a07ba17cec1549d9"
       },
       {
         "path": "scripts/test-chronicles.cjs",
@@ -8535,13 +8635,18 @@
       },
       {
         "path": "scripts/test-enemy-actions.cjs",
-        "bytes": 6319,
-        "sha256": "06103b85b84306957d421732f460017f49a0c401746bbe56e91bffc46d3a63de"
+        "bytes": 7738,
+        "sha256": "7e0d79db93e7de542854819572d810db5c4bc0148fcc5e562a7fe58a1591c410"
       },
       {
         "path": "scripts/test-enemy-birth.cjs",
         "bytes": 3305,
         "sha256": "7c04dbc0402025fd23ff5eb150f62f75c63af9f00383ade05dbbbd290d29f50b"
+      },
+      {
+        "path": "scripts/test-game-club.cjs",
+        "bytes": 2268,
+        "sha256": "8d171aeb78af6fa2226fe06d5453e06d5949c228eb4c6a18f08dae7c1483d461"
       },
       {
         "path": "scripts/test-grunt-melee.cjs",
@@ -8580,13 +8685,13 @@
       },
       {
         "path": "scripts/test-native-audio-files.cjs",
-        "bytes": 4990,
-        "sha256": "6199629b5cf2fca4d13afbb0a64bd53c849c38a804e76c580526ab13cb0ee527"
+        "bytes": 5343,
+        "sha256": "6d6deeae2d687fde8d16775d484d4989d796ad533be96a8a34997baad3e76977"
       },
       {
         "path": "scripts/test-native-sfx.cjs",
-        "bytes": 5248,
-        "sha256": "fc4b2355192f39e0ee83ee97e943badbad95abd60faac29d55095611bba3000e"
+        "bytes": 7068,
+        "sha256": "3858ec07f9951764b3b1baf4f97993147fadad6878e7ae6d1268c77827f60ee2"
       },
       {
         "path": "scripts/test-performance.cjs",
@@ -8604,9 +8709,14 @@
         "sha256": "7e57880ab3c88f60d77f7a4b582ccbc30d1f55ce32d007eddd7c2d1ebd36febd"
       },
       {
+        "path": "scripts/test-release-health.cjs",
+        "bytes": 4001,
+        "sha256": "c4db5ee4f73a3f0dcf3d1f7b0ac93523a192d7d7f9d94655f6286a9b234f0030"
+      },
+      {
         "path": "scripts/test-resource-loading.cjs",
-        "bytes": 8778,
-        "sha256": "a86e2c239a443db9c6e0fb00ec0f701d954d489401dbea956abac92661f71206"
+        "bytes": 16891,
+        "sha256": "f4460af91087551670f5581c66c0692417746c05532172e929a8133dba98f434"
       },
       {
         "path": "scripts/test-result-art.cjs",
@@ -8615,18 +8725,18 @@
       },
       {
         "path": "scripts/test-review-stability.cjs",
-        "bytes": 14867,
-        "sha256": "8d935796a3b56c045bdc9b50b86f47828e19ea124252e367bf50e0961f781ad0"
+        "bytes": 15581,
+        "sha256": "13961a2c91565b368559f697b53d4ccbf1f34ddb6a9e2f2acbcaef6cc00d2d4a"
       },
       {
         "path": "scripts/test-runtime-report.cjs",
-        "bytes": 8333,
-        "sha256": "0fff5cd05c08618482b1f9d238e43ff601d0c6dd3e2f3cad421aca37487fde3b"
+        "bytes": 8890,
+        "sha256": "cc0493ff7f356c87518bc16ae729e3dccea981b509bdc144bdefe962b1de7002"
       },
       {
         "path": "scripts/test-skill-recast.cjs",
-        "bytes": 8625,
-        "sha256": "e5955c3088dbe02d949a9c37e3c8be0449cfac0a8535d23d3a91ce513885fa48"
+        "bytes": 9620,
+        "sha256": "b6de134097c067f3f46470a03c49a69d7f9b74883f103ea18f2d1518a680ff23"
       },
       {
         "path": "scripts/test-skill-vfx.cjs",
@@ -8640,8 +8750,8 @@
       },
       {
         "path": "scripts/test-startup.cjs",
-        "bytes": 6441,
-        "sha256": "9ef7b75119019518ba449a1850bd1060310ede9dfbd417a6640d969b79dea51c"
+        "bytes": 7683,
+        "sha256": "07ab5f98cebe4aa5fb7fdc80efd22b454ffd28606484f05ce6ce9d87431223e3"
       },
       {
         "path": "scripts/test-training.cjs",
@@ -8680,8 +8790,8 @@
       },
       {
         "path": "scripts/test-youth-heroes.cjs",
-        "bytes": 5015,
-        "sha256": "85b3790fbe84b1d5ade8983afd3eacd850310b4932324b71cc4537dc95774b26"
+        "bytes": 5237,
+        "sha256": "3b53d53bd74b8b441fdaf27fabc07024544fc608381d6136e9d1166a559c906c"
       },
       {
         "path": "scripts/vendor-inflate.cjs",
@@ -8690,8 +8800,8 @@
       },
       {
         "path": "settings/v2/packages/builder.json",
-        "bytes": 1483,
-        "sha256": "a6223f1da8f1473f74932ee7a9ec1a6ad9e05ac23fc5d5d5de21840e3a7df11d"
+        "bytes": 782,
+        "sha256": "b8e771385365a3ccf1de13f2d9d8164c5bf588c787343142d9e749c1db66ea70"
       },
       {
         "path": "settings/v2/packages/device.json",
@@ -27577,10 +27687,10 @@
       {
         "path": "assets/arsenal/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "arsenal",
         "priority": 8,
-        "sourceBytes": 688942
+        "sourceBytes": 326640
       },
       {
         "path": "assets/battle/",
@@ -27617,10 +27727,10 @@
       {
         "path": "assets/enemies/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "enemies",
         "priority": 8,
-        "sourceBytes": 1425360
+        "sourceBytes": 801119
       },
       {
         "path": "assets/hero-menu/",
@@ -27633,10 +27743,10 @@
       {
         "path": "assets/meadow/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "meadow",
         "priority": 8,
-        "sourceBytes": 1537733
+        "sourceBytes": 1261791
       },
       {
         "path": "assets/music/",
@@ -27649,10 +27759,10 @@
       {
         "path": "assets/orchard/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "orchard",
         "priority": 8,
-        "sourceBytes": 699485
+        "sourceBytes": 365086
       },
       {
         "path": "assets/presentation/",
@@ -27665,71 +27775,71 @@
       {
         "path": "assets/remote-content/boss-caocao/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-caocao",
         "priority": 8,
-        "sourceBytes": 1842204
+        "sourceBytes": 184156
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-dongzhuo",
         "priority": 8,
-        "sourceBytes": 2852113
+        "sourceBytes": 285428
       },
       {
         "path": "assets/remote-content/boss-lvbu/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-lvbu",
         "priority": 8,
-        "sourceBytes": 3788422
+        "sourceBytes": 391204
       },
       {
         "path": "assets/remote-content/boss-menghuo/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-menghuo",
         "priority": 8,
-        "sourceBytes": 4738009
+        "sourceBytes": 459951
       },
       {
         "path": "assets/remote-content/boss-props/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-props",
         "priority": 8,
-        "sourceBytes": 1159584
+        "sourceBytes": 101145
       },
       {
         "path": "assets/remote-content/boss-simayi/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-simayi",
         "priority": 8,
-        "sourceBytes": 2351174
+        "sourceBytes": 235408
       },
       {
         "path": "assets/remote-content/boss-yuanshao/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-yuanshao",
         "priority": 8,
-        "sourceBytes": 2319417
+        "sourceBytes": 234389
       },
       {
         "path": "assets/remote-content/boss-zhangjiao/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "boss-zhangjiao",
         "priority": 8,
-        "sourceBytes": 2600139
+        "sourceBytes": 276845
       },
       {
         "path": "assets/remote-content/hidden-heroes/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "hidden-heroes",
         "priority": 8,
         "sourceBytes": 572728
@@ -27737,7 +27847,7 @@
       {
         "path": "assets/remote-content/pets/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "pets",
         "priority": 8,
         "sourceBytes": 293286
@@ -27745,7 +27855,7 @@
       {
         "path": "assets/results/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "results",
         "priority": 8,
         "sourceBytes": 230619
@@ -27761,7 +27871,7 @@
       {
         "path": "assets/sfx/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "sfx",
         "priority": 8,
         "sourceBytes": 827424
@@ -27769,10 +27879,10 @@
       {
         "path": "assets/talismans/",
         "isBundle": true,
-        "bundleConfigID": "cdn-assets",
+        "bundleConfigID": "battle-subpackage",
         "bundleName": "talismans",
         "priority": 8,
-        "sourceBytes": 1074369
+        "sourceBytes": 488870
       }
     ],
     "media": [
@@ -30682,6 +30792,69 @@
         "colorType": 6
       },
       {
+        "path": "art/runtime-bosses/hd-atlases/boss-caocao/boss-caocao-actions.png",
+        "bytes": 1841201,
+        "width": 1627,
+        "height": 927,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-dongzhuo/boss-dongzhuo-actions.png",
+        "bytes": 2851108,
+        "width": 1493,
+        "height": 1410,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-lvbu/lvbu-actions.png",
+        "bytes": 3787426,
+        "width": 1839,
+        "height": 2013,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-beasts.png",
+        "bytes": 1916865,
+        "width": 914,
+        "height": 1523,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-menghuo-actions.png",
+        "bytes": 2819145,
+        "width": 1407,
+        "height": 1420,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-props/boss-props.png",
+        "bytes": 1158590,
+        "width": 804,
+        "height": 1077,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-simayi/boss-simayi-actions.png",
+        "bytes": 2350171,
+        "width": 1820,
+        "height": 1003,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-yuanshao/boss-yuanshao-actions.png",
+        "bytes": 2318412,
+        "width": 1845,
+        "height": 1011,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-bosses/hd-atlases/boss-zhangjiao/boss-zhangjiao-actions.png",
+        "bytes": 2599133,
+        "width": 1446,
+        "height": 1415,
+        "colorType": 6
+      },
+      {
         "path": "art/runtime-bosses/menghuo-source.png",
         "bytes": 1735767,
         "width": 1254,
@@ -31165,6 +31338,55 @@
         "colorType": 6
       },
       {
+        "path": "art/runtime-subpackages/sources/arsenal/weapons.png",
+        "bytes": 687952,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-subpackages/sources/enemies/archer-actions.png",
+        "bytes": 473008,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-subpackages/sources/enemies/cavalry-actions.png",
+        "bytes": 444389,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-subpackages/sources/enemies/zhangjiao-actions.png",
+        "bytes": 504968,
+        "width": 1024,
+        "height": 768,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-subpackages/sources/meadow/ground.png",
+        "bytes": 1536743,
+        "width": 1254,
+        "height": 1254,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-subpackages/sources/orchard/decor.png",
+        "bytes": 698497,
+        "width": 1536,
+        "height": 1024,
+        "colorType": 6
+      },
+      {
+        "path": "art/runtime-subpackages/sources/talismans/items.png",
+        "bytes": 1073381,
+        "width": 1448,
+        "height": 1086,
+        "colorType": 6
+      },
+      {
         "path": "art/runtime-v4/sources/boss-mounts.png",
         "bytes": 2343899,
         "width": 1536,
@@ -31271,10 +31493,10 @@
       },
       {
         "path": "assets/arsenal/weapons.png",
-        "bytes": 687952,
+        "bytes": 325650,
         "width": 1536,
         "height": 1024,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "assets/battle/audio/sandal-hit-pcm.wav",
@@ -31408,24 +31630,24 @@
       },
       {
         "path": "assets/enemies/archer-actions.png",
-        "bytes": 473008,
+        "bytes": 260986,
         "width": 1024,
         "height": 768,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "assets/enemies/cavalry-actions.png",
-        "bytes": 444389,
+        "bytes": 250432,
         "width": 1024,
         "height": 768,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "assets/enemies/zhangjiao-actions.png",
-        "bytes": 504968,
+        "bytes": 286706,
         "width": 1024,
         "height": 768,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "assets/hero-menu/atlas.png",
@@ -31443,17 +31665,17 @@
       },
       {
         "path": "assets/meadow/ground.png",
-        "bytes": 1536743,
+        "bytes": 1260800,
         "width": 1254,
         "height": 1254,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "assets/orchard/decor.png",
-        "bytes": 698497,
+        "bytes": 364098,
         "width": 1536,
         "height": 1024,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "assets/presentation/butcher-knife.png",
@@ -31506,66 +31728,66 @@
       },
       {
         "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
-        "bytes": 1841201,
-        "width": 1627,
-        "height": 927,
-        "colorType": 6
+        "bytes": 183153,
+        "width": 895,
+        "height": 510,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
-        "bytes": 2851108,
-        "width": 1493,
-        "height": 1410,
-        "colorType": 6
+        "bytes": 284423,
+        "width": 821,
+        "height": 776,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
-        "bytes": 3787426,
-        "width": 1839,
-        "height": 2013,
-        "colorType": 6
+        "bytes": 390208,
+        "width": 1011,
+        "height": 1107,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-beasts.png",
-        "bytes": 1916865,
-        "width": 914,
-        "height": 1523,
-        "colorType": 6
+        "bytes": 175612,
+        "width": 503,
+        "height": 838,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
-        "bytes": 2819145,
-        "width": 1407,
-        "height": 1420,
-        "colorType": 6
+        "bytes": 282340,
+        "width": 774,
+        "height": 781,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-props/boss-props.png",
-        "bytes": 1158590,
-        "width": 804,
-        "height": 1077,
-        "colorType": 6
+        "bytes": 100151,
+        "width": 442,
+        "height": 592,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
-        "bytes": 2350171,
-        "width": 1820,
-        "height": 1003,
-        "colorType": 6
+        "bytes": 234405,
+        "width": 1001,
+        "height": 552,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
-        "bytes": 2318412,
-        "width": 1845,
-        "height": 1011,
-        "colorType": 6
+        "bytes": 233384,
+        "width": 1015,
+        "height": 556,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
-        "bytes": 2599133,
-        "width": 1446,
-        "height": 1415,
-        "colorType": 6
+        "bytes": 275839,
+        "width": 795,
+        "height": 778,
+        "colorType": 3
       },
       {
         "path": "assets/remote-content/hidden-heroes/hero-parts.png",
@@ -31861,10 +32083,10 @@
       },
       {
         "path": "assets/talismans/items.png",
-        "bytes": 1073381,
+        "bytes": 487882,
         "width": 1448,
         "height": 1086,
-        "colorType": 6
+        "colorType": 3
       },
       {
         "path": "docs/skill-review/技能总览.png",

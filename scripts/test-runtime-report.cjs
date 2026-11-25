@@ -18,12 +18,18 @@ function load(name,imports={}){const module={exports:{}};const code=ts.transpile
  reopened.destroy();
  // A process can disappear without destroy/background callbacks. The next menu must show its latest battle.
  let latest='';const journal={getItem:()=>latest,setItem:(_,v)=>latest=v};let seconds=0,phase='menu';
- const live=new RuntimeHealth(undefined,journal,'new-vfx',()=>({phase,mode:'endless',seconds,gfxBuffers:60*1048576,gfxTextures:90*1048576,alive:17,vfxAllocated:57}),()=>{});
+ const live=new RuntimeHealth(undefined,journal,'new-vfx',()=>({phase,mode:'endless',seconds,gfxBuffers:60*1048576,gfxTextures:90*1048576,alive:17,vfxAllocated:57,skill:'G07',skillCasts:8,lastSkillCastAt:12345,skillHaste:5}),()=>{});
  assert.ok(!runtimeReportPages(live.report()).some(p=>p.body.includes('1970')),'an unsaved session is not an epoch date');
- phase='battle';for(let i=0;i<60;i++){seconds+=5;live.frame(5);}phase='menu';seconds=0;live.frame(5);
+ phase='battle';for(let i=0;i<60;i++){seconds+=5;live.frame(5);}
+ assert.equal(JSON.parse(latest).battleSnapshot,undefined,'persist an identical battle snapshot once');
+ assert.equal(JSON.parse(live.report()).battleSnapshot.seconds,300,'export retains the dedicated last battle field');
+ phase='menu';seconds=0;live.frame(5);
  const restart=new RuntimeHealth(undefined,journal,'reopened',()=>({phase:'menu',seconds:0}),()=>{}),retained=JSON.parse(restart.report());
  assert.equal(retained.previous.version,'new-vfx');assert.equal(retained.previous.snapshot.phase,'battle');assert.equal(retained.previous.snapshot.seconds,300,'menu snapshots do not replace the last battle snapshot');assert.equal(retained.previous.recent.length,18);assert.equal(retained.previous.previous,undefined);assert.ok(latest.length<64000);
  assert.ok(runtimeReportPages(restart.report()).some(p=>p.title.includes('末段趋势')),'screenshots expose trends without clipboard permission');
+ assert.equal(retained.previous.snapshot.skillHaste,5);
+ assert.equal(retained.previous.recent[0].state.lastSkillCastAt,undefined,'skill timestamp stays in the latest snapshot');
+ assert.match(runtimeReportPages(restart.report())[0].body,/G07 · 施放 8 次 · 最近 /);
  restart.destroy();live.destroy();
  // The simulator freezes progression in training, including while a configuration panel is open.
  let prior=JSON.stringify({version:'old-stage',snapshot:{phase:'battle',mode:'stage',seconds:45}});

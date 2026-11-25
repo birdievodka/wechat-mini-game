@@ -5,6 +5,7 @@ import {NPC_GEAR_BOUNDS} from './npc-art-layout';
 import {EXTRA_WEAPONS} from './extra-weapons';
 import {artScope,releaseArtTexture} from './asset-scope';
 import {ensureSheets,cancelArtGroups,makeSheetFrame,PackedFrame,Sheet} from './deferred-art';
+import {BOSS_ATLAS_SCALE} from './boss-atlas-scale';
 import {VFX_MATERIAL_KEYS} from './vfx-materials';
 import type {WeaponId} from './weapons';
 export const REDESIGN_WEAPONS:WeaponId[]=[
@@ -24,7 +25,7 @@ for(const id of BOSS_ART_IDS){
 }
 const usesProps=(id:string)=>['zhangjiao','dongzhuo','yuanshao','simayi'].includes(id);
 export function ensureBossProps(frames:Record<string,SpriteFrame>,alive:()=>boolean,done:(error?:Error)=>void):void {
- ensureSheets('boss-props',[{name:'boss-props',columns:4,rows:4,keys:bossPropKeys,layout:BOSS_LAYOUTS['boss-props']}],frames,alive,done);
+ ensureSheets('boss-props',[{name:'boss-props',columns:4,rows:4,keys:bossPropKeys,layout:BOSS_LAYOUTS['boss-props']}],frames,alive,done,BOSS_ATLAS_SCALE);
 }
 export const bossArtReady=(frames:Record<string,SpriteFrame>,id:string):boolean=>{
  const first=bossActionKeys[id]?.[0];
@@ -68,15 +69,14 @@ export async function loadChronicleArt(frames:Record<string,SpriteFrame>,alive:(
  // Local compact boss portraits serve selectors/codex even before animation download.
 }
 
-/** Load only the encounter's atlas. No code is fetched remotely. */
+/** Load the encounter's atlas from its own game subpackage. */
 export function ensureBossArt(id:string,frames:Record<string,SpriteFrame>,alive:()=>boolean,done:(error?:Error)=>void):void {
- if(bossArtReady(frames,id)){done();return;}
  if(!BOSS_ART_IDS.includes(id)){done(new Error('未知首领：'+id));return;}
  const name=id==='lvbu'?'lvbu-actions':'boss-'+id+'-actions',cols=4,rows=id==='lvbu'?5:4;
  const layouts:Readonly<Record<string,readonly PackedFrame[]>>=bossLayouts;
  const sheets:Sheet[]=[{name,columns:cols,rows,keys:bossActionKeys[id],layout:layouts[name]}];
  if(id==='menghuo')sheets.push({name:'boss-beasts',columns:6,rows:4,keys:bossBeastKeys,layout:BOSS_LAYOUTS['boss-beasts']});
- if(!usesProps(id)){ensureSheets('boss-'+id,sheets,frames,alive,done);return;}
+ if(!usesProps(id)){ensureSheets('boss-'+id,sheets,frames,alive,done,BOSS_ATLAS_SCALE);return;}
  // Each bundle owns its texture independently, including when two bosses share props.
  let pending=2,failed=false;
  const finish=(error?:Error)=>{
@@ -84,7 +84,7 @@ export function ensureBossArt(id:string,frames:Record<string,SpriteFrame>,alive:
   if(error){failed=true;done(error);return;}
   if(--pending===0)done();
  };
- ensureSheets('boss-'+id,sheets,frames,alive,finish);
+ ensureSheets('boss-'+id,sheets,frames,alive,finish,BOSS_ATLAS_SCALE);
  ensureBossProps(frames,alive,finish);
 }
 

@@ -20,7 +20,9 @@ export function weaponSound(weapon: WeaponId, event: SoundEvent): SoundId | unde
   return weaponCues[weapon]?.[event];
 }
 const bossCues=new Map<string,SoundId[]>();
+const skillCues=new Map<string,SoundId>();
 for(const id of GENERATED_SOUNDS){
+  if(id.startsWith('skill-'))skillCues.set(id.slice(6),id);
   const match=/^boss-([a-z]+)-([1-3])$/.exec(id);
   if(!match)continue;
   let moves=bossCues.get(match[1]);
@@ -28,6 +30,7 @@ for(const id of GENERATED_SOUNDS){
   moves[Number(match[2])-1]=id;
 }
 export const bossSound=(boss:string,index:number):SoundId|undefined=>bossCues.get(boss)?.[index];
+export const skillSound=(id:string):SoundId|undefined=>skillCues.get(id);
 export function enemySound(id?:string):SoundId {
   const n=Number(id?.slice(1)||0);
   return n>=35&&n<=38?'siege':n>=39?'thunder-attack':n>=28&&n<=34?'gun-attack':n>=11&&n<=18||n===22||n===23?'enemy-bow':'melee-commit';

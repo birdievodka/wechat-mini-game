@@ -39,9 +39,10 @@ async function pack(name,sprites,cols,rows,groups=[],centered=false,actor=false)
    content:[left,top,w,h],anchor:[left+a.anchor[0]*p.scale*sx,top+a.anchor[1]*p.scale*sy]});
  }
  const bundle=name==='boss-props'?name:'boss-'+(name==='boss-beasts'?'menghuo':name.slice(5,-8));
- const dest='assets/remote-content/'+bundle+'/'+name+'.png';
+ const dir='art/runtime-bosses/hd-atlases/'+bundle;
+ fs.mkdirSync(dir,{recursive:true});
+ const dest=dir+'/'+name+'.png';
  const {width,height}=await density.writeAtlas(dest,cells,layers);
- if(!fs.existsSync(dest+'.meta')){const m=JSON.parse(fs.readFileSync('assets/remote-content/boss-lvbu/lvbu-actions.png.meta'));m.uuid=crypto.randomUUID();const sub=m.subMetas['6c48a'];sub.uuid=m.uuid+'@6c48a';sub.displayName=name;sub.userData.imageUuidOrDatabaseUri=m.uuid;m.userData.redirect=sub.uuid;fs.writeFileSync(dest+'.meta',JSON.stringify(m,null,2)+'\n');}
  return {dest,sha256:hash(dest),width,height,bytes:fs.statSync(dest).size,rgbaMiB:width*height*4/1048576,cells};
 }
 (async()=>{const atlases=[];for(const id of actors)atlases.push(await pack('boss-'+id+'-actions',await extract(root+id+'-source.png',4,4),4,4,[[0,1,2,3,4],[8,9,10,11,12]],false,true));

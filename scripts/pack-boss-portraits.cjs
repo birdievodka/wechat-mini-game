@@ -2,7 +2,7 @@
 const fs=require('node:fs'),crypto=require('node:crypto'),sharp=require('sharp');
 const ids=['zhangjiao','lvbu','dongzhuo','yuanshao','caocao','menghuo','simayi'];
 (async()=>{const layers=[],sources=[];for(let i=0;i<ids.length;i++){
- const id=ids[i],path=`assets/remote-content/boss-${id}/${id==='lvbu'?'lvbu':'boss-'+id}-actions.png`;
+ const id=ids[i],path=`art/runtime-bosses/hd-atlases/boss-${id}/${id==='lvbu'?'lvbu':'boss-'+id}-actions.png`;
  const atlas=id==='lvbu'?require('../art/runtime-lvbu/manifest.json'):require('../art/runtime-bosses/manifest.json').atlases.find(a=>a.dest===path);
  const frame=await require('./boss-density.cjs').restoreFrame(atlas,id==='lvbu'?12:0);
  layers.push({input:await sharp(frame).resize(144,144).png().toBuffer(),left:i%4*144,top:Math.floor(i/4)*144});

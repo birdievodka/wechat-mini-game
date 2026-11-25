@@ -2,37 +2,37 @@
   "sources": [
     {
       "id": "zhangjiao",
-      "path": "assets/remote-content/boss-zhangjiao/boss-zhangjiao-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-zhangjiao/boss-zhangjiao-actions.png",
       "sha256": "49e35555dde5b2a72b03887ceddaea5272f07035c94b4b88de99fc294b696699"
     },
     {
       "id": "lvbu",
-      "path": "assets/remote-content/boss-lvbu/lvbu-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-lvbu/lvbu-actions.png",
       "sha256": "22595bdf878eb67f5d5edcb69e07bb1610c294ac43c14a9e6742a75568c27fd3"
     },
     {
       "id": "dongzhuo",
-      "path": "assets/remote-content/boss-dongzhuo/boss-dongzhuo-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-dongzhuo/boss-dongzhuo-actions.png",
       "sha256": "fe77097e54a1a1afe48be9a795217136c4e9b3669ea76bd6725c2ca5c64d7a48"
     },
     {
       "id": "yuanshao",
-      "path": "assets/remote-content/boss-yuanshao/boss-yuanshao-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-yuanshao/boss-yuanshao-actions.png",
       "sha256": "c54fc3dc4b127c19626a6b85e45e18180d15dc86cd2afde984b95b61a05b0a7c"
     },
     {
       "id": "caocao",
-      "path": "assets/remote-content/boss-caocao/boss-caocao-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-caocao/boss-caocao-actions.png",
       "sha256": "ebc1a194f80805e58d82e3c8a98c91f17bd32c96f5f2bb27ecc40a958e6fcf8e"
     },
     {
       "id": "menghuo",
-      "path": "assets/remote-content/boss-menghuo/boss-menghuo-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-menghuo/boss-menghuo-actions.png",
       "sha256": "9fa5ab285acd4b070e1e1a56296af7418ad109bf35322227ad3da2daa6dd156c"
     },
     {
       "id": "simayi",
-      "path": "assets/remote-content/boss-simayi/boss-simayi-actions.png",
+      "path": "art/runtime-bosses/hd-atlases/boss-simayi/boss-simayi-actions.png",
       "sha256": "e3a13f44a2f125d708c42f84deb53a08ed56b6b1555562b8d83aeb21c026acde"
     }
   ],

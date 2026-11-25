@@ -20,10 +20,9 @@ async function main() {
   const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath)) : {};
   const lossless=new Set(JSON.parse(fs.readFileSync(path.join(root,'art/runtime-youth/deferred-manifest.json'))).outputs.map(x=>x.file));
   lossless.add('assets/chronicle-ui/stage-journey.png'); // adopted parchment alpha; rebuilt from its own generated source
-  // These are already packed from alpha masters; never requantize their outlines.
-  const bosses=JSON.parse(fs.readFileSync(path.join(root,'art/runtime-bosses/manifest.json')));
-  for(const atlas of bosses.atlases)lossless.add(atlas.dest);
-  lossless.add('assets/remote-content/boss-lvbu/lvbu-actions.png');
+  // These outputs have their own source and encoding step.
+  const subpackages=JSON.parse(fs.readFileSync(path.join(root,'art/runtime-subpackages/manifest.json')));
+  for(const image of subpackages.files)lossless.add(image.dest);
   let before = 0, after = 0;
   for (const file of pngs(path.join(root, 'assets')).sort()) {
     const name = path.relative(root, file).split(path.sep).join('/');

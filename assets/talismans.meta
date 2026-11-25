@@ -7,7 +7,7 @@
   "subMetas": {},
   "userData": {
     "isBundle": true,
-    "bundleConfigID": "cdn-assets",
+    "bundleConfigID": "battle-subpackage",
     "bundleName": "talismans",
     "priority": 8
   }

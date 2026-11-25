@@ -42,8 +42,9 @@ function sessionSummary(s:Session):string {
  const mode=v.mode==='endless'?'无尽':v.mode==='stage'?'闯关':v.mode==='training'?'演武':text(v.mode);
  const at=typeof s.savedAt==='number'&&s.savedAt>0?new Date(s.savedAt).toLocaleString():'时间未记录';
  const weapons=Array.isArray(v.weapons)?v.weapons.map(text).join(' / '):'未记录';
+ const casts=v.trainingCasts??v.skillCasts;
  return [at+'  '+text(s.version),mode+' · '+(v.trainingView==='config'?'配置':v.trainingView==='field'?'战场':text(v.phase))+' · 战斗 '+text(v.seconds)+'s · 轮次 '+text(v.endlessTier??v.wave),
-  '英雄 '+text(v.hero)+' · 技能 '+text(v.skill)+(typeof v.trainingCasts==='number'?' · 施放 '+v.trainingCasts+' 次':''),
+  '英雄 '+text(v.hero)+' · 技能 '+text(v.skill)+(typeof casts==='number'?' · 施放 '+casts+' 次':'')+(typeof v.lastSkillCastAt==='number'?' · 最近 '+new Date(v.lastSkillCastAt).toLocaleTimeString():''),
   '敌兵 '+text(v.alive)+' / 池 '+text(v.enemyNodes)+' · 粒子 '+text(v.particles),
   '友弹 '+text(v.activeProjectiles)+' / 池 '+text(v.projectileNodes)+' · 敌弹 '+text(v.activeEnemyShots)+' / 池 '+text(v.enemyShotNodes),
   '缓冲 '+mib(v.gfxBuffers)+' MiB · 纹理 '+mib(v.gfxTextures)+' MiB',

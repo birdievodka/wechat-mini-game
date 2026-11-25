@@ -28,7 +28,5 @@
     "audio",
     "affine-transform",
     "intersection-2d"
-  ],
-  "server": "https://lf3-static.bytednsdoc.com/obj/eden-cn/77eh7lpquldnuhf/taoyuan-mini-heroes/resources/pending/",
-  "moveRemoteBundleScript": true
+  ]
 }

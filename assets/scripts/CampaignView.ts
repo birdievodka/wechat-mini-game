@@ -29,6 +29,19 @@ import {armoryDescription} from './armory-redesign';
 
 const C = { paper: '#fff0d2', ink: '#432d1d', green: '#355e40', red: '#c94d2e', sand: '#f1d7a4', muted: '#826442' };
 
+// From the official account's game club settings. Preserve the leading hyphen.
+const GAME_CLUB_HOME='-SSEykJvFV3pORt5kTNpS7ydGSpLrRNIUOAMGXx7-Nk0JCqYllxx_Eb5XOSJHNK1L_S3eEUpK6xzetGpb1H_QDnhFlyGWDGJhwem8SC4ct6Dyuv1YouJVOtkyHxZmya0bZSCii_juwkWsY_TS-6RFM05dnuhkHq7DK8uCTqT7myVVggmdr3aW0v2cGJIcevWhBM4RO_2Y6RA5nioHyr_5Qd089mOSJpJq6QQmehROxIlweUIXMNMBec4gXcmAlb9maBnvqBy6zQcA12x28HVU4qiLbf-rm7nN7_BLVuq1WN1hzdBCbHCGWAQ9Ik41b4NDloRDvPyydlM9FY8AAXByA';
+interface ClubPage { show(options:{openlink:string}):Promise<unknown>; destroy():void; }
+interface WindowSize {windowWidth:number;windowHeight:number;}
+interface ClubButton {destroy():void;}
+declare const wx:{
+  createPageManager?:()=>ClubPage;
+  showToast?:(args:{title:string;icon:'none'})=>void;
+  getWindowInfo?:()=>WindowSize;
+  getSystemInfoSync?:()=>WindowSize;
+  createGameClubButton?:(args:{type:'text';text:string;style:Record<string,string|number>})=>ClubButton;
+}|undefined;
+
 interface HeroPortraitSlot {node:Node;selected:Node;}
 
 /** Screens own their input surfaces; combat never runs underneath an open screen. */
@@ -48,15 +61,70 @@ export class CampaignView {
   constructor(parent: Node, private frames: Record<string, SpriteFrame>, private icons: SpriteFrame[],private battleAtlas?:BattleSpriteAtlas) {
     this.root = this.node(parent, 'CampaignScreens'); this.root.active = false;
   }
+  private clubRow?:number;
+  private clubButton?:ClubButton;
+  private clubPage?:ClubPage;
+  private openingClub=false;
+  private foreground=true;
+
+  setForeground(value:boolean):void {
+    if(this.foreground===value)return;
+    this.foreground=value;this.layoutGameClub();
+  }
+  closeGameClub():void {
+    this.setClubRow();
+  }
+  private async openGameClub():Promise<void> {
+    if(this.clubRow===undefined||!this.foreground||this.openingClub||typeof wx==='undefined'||!wx.createPageManager)return;
+    let page:ClubPage|undefined;
+    this.openingClub=true;
+    try{
+      page=this.clubPage??(this.clubPage=wx.createPageManager());
+      await page.show({openlink:GAME_CLUB_HOME});
+    }catch(_){
+      if(this.clubPage===page&&this.clubRow!==undefined&&this.foreground){
+        try{wx.showToast?.({title:'游戏圈暂时无法打开，请稍后重试',icon:'none'});}catch(_){}
+      }
+    }finally{if(this.clubPage===page)this.openingClub=false;}
+  }
+  private setClubRow(row?:number):void {
+    if(row===undefined){
+      const page=this.clubPage;
+      this.clubPage=undefined;this.openingClub=false;
+      try{page?.destroy();}catch(_){/* native page may have already closed */}
+    }
+    this.clubRow=row;this.layoutGameClub();
+  }
+  private layoutGameClub():void {
+    try{this.clubButton?.destroy();}catch(_){/* host may already have removed it */}
+    this.clubButton=undefined;
+    if(this.clubRow===undefined||!this.foreground||typeof wx==='undefined'||wx.createPageManager||!wx.createGameClubButton)return;
+    try{
+      const window=wx.getWindowInfo?.()??wx.getSystemInfoSync?.();
+      if(!window||!(window.windowWidth>0&&window.windowHeight>0))return;
+      const scale=this.heroMenuScale(),sx=window.windowWidth/this.width,sy=window.windowHeight/this.height;
+      const height=Math.round(66*scale*sy);
+      this.clubButton=wx.createGameClubButton({type:'text',text:'游戏圈',style:{
+        left:Math.round((this.width/2-598*scale)*sx),top:Math.round((this.height/2-(this.clubRow+33)*scale)*sy),
+        width:Math.round(164*scale*sx),height,lineHeight:height,fontSize:Math.round(27*scale*sy),
+        borderWidth:1,borderRadius:Math.round(14*scale*sy),borderColor:'#ffda83',
+        backgroundColor:'#355e40',color:'#fff0d2',textAlign:'center',
+      }});
+    }catch(_){/* optional native entry; hero selection remains available */}
+  }
+  private heroMenuScale():number{return Math.min(1.05,(this.width-112)/1280,(this.height-70)/680);}
   resize(width: number, height: number): void {
+    const changed=width!==this.width||height!==this.height;
     this.width = width; this.height = height;
+    if(changed&&this.clubRow!==undefined)this.layoutGameClub();
     if(this.codexView){this.codexView.resize(width,height);return;}
     if(this.resultView){this.resultView.resize(width,height);return;}
-    const scale = this.heroMenu ? Math.min(1.05,(width-112)/1280,(height-70)/680) : this.campMode ? Math.min(1, (width - 64) / 1200, (height - 60) / 660) : Math.min(1, (width - 48) / 1200, (height - 30) / 720);
+    const scale = this.heroMenu ? this.heroMenuScale() : this.campMode ? Math.min(1, (width - 64) / 1200, (height - 60) / 660) : Math.min(1, (width - 48) / 1200, (height - 30) / 720);
     if (this.content) this.content.setScale(scale, scale, 1);
     if(this.campBackground){const frame=this.campBackground.spriteFrame;const aspect=this.heroMenu&&frame?frame.rect.width/frame.rect.height:16/9;this.campBackground.node.getComponent(UITransform)!.setContentSize(Math.max(width,height*aspect),Math.max(height,width/aspect));}
   }
   hide(): void {
+    this.setClubRow();
     this.root.active = false;
     // Hidden Graphics still own their GPU buffers. Screens are rebuilt on entry;
     // retain selections in the Run/profile, never a whole inactive screen tree.
@@ -77,6 +145,7 @@ export class CampaignView {
     return this.content;
   }
   menu(selected: HeroId, start: (hero: HeroId,skill:string,weapon?:WeaponId,stage?:number) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void,options?:{profile:StageProfile;stage:number;weapon:WeaponId;changed:()=>void;development?:boolean;endless?:(hero:HeroId,skill:string,weapon:WeaponId)=>void;settings?:(parent:Node,hero:HeroId)=>void}): void {
+    this.setClubRow();
     this.resultView=undefined;this.heroShowcase=undefined;this.codexView=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.campMode=false;this.heroMenu=true;this.selection=selected;this.selectionSkill=availableSkill(skill);
@@ -137,7 +206,10 @@ export class CampaignView {
     const updateSkill=()=>{persist();if(skillIcon)skillIcon.spriteFrame=this.frames['skill-'+commonSkillFor(this.selectionSkill).icon];};
     onHeroChanged=updateSkill;
     skillCard.on(Node.EventType.TOUCH_START,()=>{if(!starting)skillCard.setScale(.94,.94,1);});skillCard.on(Node.EventType.TOUCH_CANCEL,()=>skillCard.setScale(1,1,1));
-    let choosing=false;skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choosing=true;new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choosing=false;updateSkill();},()=>choosing=false,options?.profile);});
+    let choosing=false;
+    const clubRow=options?(options.development?39:-43):undefined;
+    const choose=(open:boolean)=>{choosing=open;this.setClubRow(open?undefined:clubRow);};
+    skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choose(true);new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choose(false);updateSkill();},()=>choose(false),options?.profile);});
     const button=this.node(p,'StartHero');button.setPosition(0,-289);button.addComponent(UITransform).setContentSize(360,92);
     const face=this.node(button,'StartHeroFace');
     this.drawStartHeroFace(face.addComponent(Graphics));
@@ -145,26 +217,30 @@ export class CampaignView {
     button.on(Node.EventType.TOUCH_START,()=>{if(!starting){face.setPosition(0,-3);face.setScale(.98,.98,1);}});
     const release=()=>{face.setPosition(0,0);face.setScale(1,1,1);};
     button.on(Node.EventType.TOUCH_CANCEL,release);
-    button.on(Node.EventType.TOUCH_END,()=>{release();if(starting)return;starting=true;persist();start(this.selection,this.selectionSkill,weapon,stage);});
+    button.on(Node.EventType.TOUCH_END,()=>{release();if(starting||choosing)return;starting=true;this.setClubRow();persist();start(this.selection,this.selectionSkill,weapon,stage);});
     if(options){
       stageBrief=new StageBriefView(p,this.frames);stageCard=stageBrief.root;stageCard.setPosition(321,65);
-      stageCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;new StagePickerView(p,this.frames,options.profile,this.selection,stage,n=>{stage=n;choosing=false;persist();updateLoadout();},()=>choosing=false);});
+      stageCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choose(true);new StagePickerView(p,this.frames,options.profile,this.selection,stage,n=>{stage=n;choose(false);persist();updateLoadout();},()=>choose(false));});
       weaponCard=this.node(p,'HeroWeaponSelect');weaponCard.setPosition(180,-175);weaponCard.addComponent(UITransform).setContentSize(84,84);const g=weaponCard.addComponent(Graphics);g.fillColor=new Color('#294632');g.strokeColor=new Color('#d4be81');g.lineWidth=2;g.roundRect(-39,-39,78,78,16);g.fill();g.stroke();
-      weaponCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choosing=true;if(growthClears(options.profile,this.selection)>0){new GrowthDetailView(p,this.frames,this.selection,growthClears(options.profile,this.selection),()=>choosing=false);return;}new StarterSelectView(p,this.frames,weapon,id=>{weapon=id;choosing=false;persist();updateLoadout();},()=>choosing=false);});
+      weaponCard.on(Node.EventType.TOUCH_END,()=>{if(starting||choosing)return;choose(true);if(growthClears(options.profile,this.selection)>0){new GrowthDetailView(p,this.frames,this.selection,growthClears(options.profile,this.selection),()=>choose(false));return;}new StarterSelectView(p,this.frames,weapon,id=>{weapon=id;choose(false);persist();updateLoadout();},()=>choose(false));});
       updateLoadout();updateSkill();
     }
-    if(codex)this.action(p,'图鉴',-516,options?.development?-43:-125,164,()=>{if(!choosing&&!starting)codex();});
+    if(codex)this.action(p,'图鉴',-516,options?.development?-43:-125,164,()=>{if(!choosing&&!starting){this.setClubRow();codex();}});
     if(options?.endless)this.action(p,'无尽模式',-516,options?.development?-125:-207,164,()=>{
       if(choosing||starting)return;
       if(!endlessUnlocked(options.profile,this.selection)){
-        choosing=true;
-        new SettingsView(p,this.frames,()=>choosing=false).message('无尽模式尚未解锁','使用当前英雄通关全部六关后解锁');
+        choose(true);
+        new SettingsView(p,this.frames,()=>choose(false)).message('无尽模式尚未解锁','使用当前英雄通关全部六关后解锁');
         return;
       }
-      starting=true;persist();options.endless!(this.selection,this.selectionSkill,weapon);
+      starting=true;this.setClubRow();persist();options.endless!(this.selection,this.selectionSkill,weapon);
     });
-    if(options?.settings)this.action(p,'设置',-516,-289,164,()=>{if(!choosing&&!starting)options.settings!(p,this.selection);});
-    if(options?.development&&training)this.action(p,'演武场',-516,-207,164,()=>{if(choosing||starting)return;starting=true;persist();training(this.selection,this.selectionSkill);});
+    if(options?.settings)this.action(p,'设置',-516,-289,164,()=>{if(!choosing&&!starting){this.setClubRow();options.settings!(p,this.selection);}});
+    if(options?.development&&training)this.action(p,'演武场',-516,-207,164,()=>{if(choosing||starting)return;starting=true;this.setClubRow();persist();training(this.selection,this.selectionSkill);});
+    if(clubRow!==undefined&&typeof wx!=='undefined'&&wx.createPageManager){
+      this.action(p,'游戏圈',-516,clubRow,164,()=>{if(!choosing&&!starting)void this.openGameClub();});
+    }
+    this.setClubRow(clubRow);
   }
 
   codex(close:()=>void,profile?:StageProfile):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close,profile);this.codexView.resize(this.width,this.height);}
