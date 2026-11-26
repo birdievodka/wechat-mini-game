@@ -47,7 +47,7 @@ const home=evaluate(`
   return {version:g.buildVersion,ready:g.ready,phase:g.phase,nativeAudio:g.nativeAudio,
     redraw:[frames['hero-liubei-open'],frames['stage-relief-1'],frames['redesign-skill-2']].every(Boolean),
     startButton:!!button?.getChildByName('StartHeroFace')&&start?.node._uiProps.uiTransformComp?.width===270&&start.isBold,
-    fonts:regular?._nativeAsset==='TaoyuanWenkaiR1'&&medium?._nativeAsset==='TaoyuanWenkaiM1'&&g.hud.font===regular&&start?.font===medium,
+    fonts:regular?._nativeAsset==='TaoyuanWenkaiR1'&&medium?._nativeAsset==='TaoyuanWenkaiM1'&&g.hud.node.getComponent(c.Label)?.font===regular&&start?.font===medium,
     fontMetricsDifferFromSystem:measured,
     farmerFrames:g.soldierFrames.map(row=>row.length)};
 `);

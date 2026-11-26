@@ -6,6 +6,7 @@ import { clockText } from './survival';
 import {CHAPTERS} from './chronicles';
 import { TIER_COLORS, WEAPON_LIMIT } from './weapons';
 import { addWeaponIcon } from './presentation-art';
+import type { AdAction } from './wechat-ads';
 
 const P={paper:'#fff0d2',ink:'#432d1d',muted:'#887053',green:'#355e40',red:'#c94d2e',gold:'#f1cd80'};
 const QUIPS={zhaoyun:'枪头还在，人先歇了',kongming:'这一局，算漏了一步',liubei:'鞋还在，面子没了。',guanyu:'挑不动了，先歇一担。',zhangfei:'俺这刀，先歇会儿。'};
@@ -19,7 +20,7 @@ export class ResultView {
   private portrait?:Node;private pet?:PetView;private petHero='liubei';private growth=0;
   private age=0;
   constructor(parent:Node,private frames:Record<string,SpriteFrame>,run:Run,kills:number,best:number,record:boolean,
-    retry:()=>void,menu:()=>void,testing:boolean,warmupElapsed=0,private won=false){
+    retry:()=>void,menu:()=>void,testing:boolean,warmupElapsed=0,private won=false,revive?:AdAction){
     const base=this.node(parent,'ResultBackdrop');this.shade=base.addComponent(Graphics);
     this.background=this.sprite(parent,frames['hero-menu-background']||frames['camp-background'],0,0,1,1,'ResultLandscape');
     const tint=this.node(parent,'ResultVignette').addComponent(Graphics);
@@ -74,8 +75,27 @@ export class ResultView {
       }else this.text(slot,'—',0,0,18,'#c3b393',65,40);
     }
     let committed=false;const commit=(action:()=>void):void=>{if(committed)return;committed=true;action();};
-    this.button(p,'ResultMenu','返回选人',67,-272,270,false,()=>commit(menu));
-    this.button(p,'ResultRetry',run.endless?'再战无尽':won?'再来一局':run.challenge?'再战本关':'重试本章',410,-272,330,true,()=>commit(retry));
+    const retryTitle=run.endless?'再战无尽':won?'再来一局':run.challenge?'再战本关':'重试本章';
+    if(revive){
+      const wave=run.stageWave||1;
+      const status=this.text(p,`满血重打第 ${wave} 波`,444,-327,18,P.paper,270,31);
+      status.node.name='ResultReviveStatus';
+      this.button(p,'ResultMenu','返回选人',8,-272,184,false,()=>commit(menu));
+      this.button(p,'ResultRetry',retryTitle,205,-272,190,true,()=>commit(retry));
+      let opening=false;
+      const current=()=>!committed&&!!p.parent&&p.isValid;
+      this.button(p,'ResultRevive','看广告 · 满血复活',444,-272,260,false,async()=>{
+        if(opening||!current())return;
+        opening=true;status.string='正在打开广告…';
+        const result=await revive(current);
+        if(!current())return;
+        opening=false;
+        status.string=result==='skipped'?'看完广告即可复活':result==='unavailable'?'广告暂不可用':`满血重打第 ${wave} 波`;
+      },true);
+    }else{
+      this.button(p,'ResultMenu','返回选人',67,-272,270,false,()=>commit(menu));
+      this.button(p,'ResultRetry',retryTitle,410,-272,330,true,()=>commit(retry));
+    }
     this.resize(1334,750);
   }
   resize(width:number,height:number):void {
@@ -97,12 +117,12 @@ export class ResultView {
   private sprite(parent:Node,frame:SpriteFrame|undefined,x:number,y:number,w:number,h:number,name:string):Sprite|undefined {
     if(!frame)return;const n=this.node(parent,name);n.setPosition(x,y);const s=n.addComponent(Sprite);s.spriteFrame=frame;s.sizeMode=Sprite.SizeMode.CUSTOM;n.getComponent(UITransform)!.setContentSize(w,h);return s;
   }
-  private button(parent:Node,name:string,label:string,x:number,y:number,width:number,primary:boolean,action:()=>void):void {
+  private button(parent:Node,name:string,label:string,x:number,y:number,width:number,primary:boolean,action:()=>void,gold=false):void {
     const n=this.node(parent,name);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(width,76);const g=n.addComponent(Graphics);
     g.fillColor=new Color(primary?'#693922':'#152d22');g.roundRect(-width/2,-43,width,76,18);g.fill();
-    g.fillColor=new Color(primary?P.red:'#e8dfc6');g.strokeColor=new Color(primary?'#f49a65':'#b9ba94');g.lineWidth=2.5;g.roundRect(-width/2,-36,width,72,17);g.fill();g.stroke();
+    g.fillColor=new Color(gold?'#efb75d':primary?P.red:'#e8dfc6');g.strokeColor=new Color(gold?'#ffe3ac':primary?'#f49a65':'#b9ba94');g.lineWidth=2.5;g.roundRect(-width/2,-36,width,72,17);g.fill();g.stroke();
     g.strokeColor=new Color(primary?'#e9754c':'#fff1d0');g.lineWidth=1;g.roundRect(-width/2+6,-30,width-12,60,13);g.stroke();
-    this.text(n,label,0,0,primary?29:25,primary?P.paper:P.green,width-30,58,true);
+    this.text(n,label,0,0,primary?29:25,gold?P.ink:primary?P.paper:P.green,width-30,58,true);
     n.on(Node.EventType.TOUCH_START,()=>n.setPosition(x,y-3));n.on(Node.EventType.TOUCH_CANCEL,()=>n.setPosition(x,y));
     n.on(Node.EventType.TOUCH_END,()=>{n.setPosition(x,y);action();});
   }

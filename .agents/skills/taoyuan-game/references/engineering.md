@@ -20,7 +20,8 @@ v9.22 BattleNumber接enemy.text结构端口，string标dirty，由GameBootstrap.
 | `enemy-behavior.ts`、`enemy-spell-effects.ts` | 敌兵攻击阶段/面向/帧索引与张角雷阵表现 |
 | `weapon-art.ts`、`weapon-sound.ts`、`battle-music.ts` | 绘制武器、声音路由与限频、独立BGM生命周期 |
 | `combat-particles.ts`、`combat-effects.ts` | 固定粒子/表现池、专属随机数、36武器与五英雄分层绘制；无伤害判定 |
-| `joystick-input.ts` | 左下固定摇杆布局、12%死区、模拟量限长 |
+| `joystick-input.ts` | 左下摇杆激活区、活动底座限位、触屏死区和模拟量响应 |
+| `wechat-ads.ts` | 微信广告位 ID、按需原生实例、三处播放互斥、展示与关闭回调校验 |
 | `LoadingView.ts`、`startup-progress.ts` | 海报/进度UI、关键启动资源完成计数、加载失败与就绪门槛 |
 | `ResultView.ts` | 通关/失败结算布局、哭泣角色与轻微抽泣动作、统计/六格武器和单次导航提交 |
 | `presentation-art.ts`、`hero-idle.ts` | 36武器UI插画/实测裁格、五英雄分层头袍裁格与纯表现待机节奏 |
@@ -81,6 +82,8 @@ v11.0.5 起，Creator 3.8.8 输出后由 `scripts/patch-wechat-text-measure.cjs`
 关键素材需等加载后再进入菜单；可选选人图加载失败会退回可操作基础布局。不要把“点击开始”接到素材加载完成之前，或让异步回调在组件销毁后继续改节点。
 
 ## 微信开发者工具
+
+微信后台已开通《桃园小英雄》的高性能模式。正式构建 `config/build-wechat.json` 默认启用 `packages.wechatgame.highPerformanceMode`，Creator 在 `build/wechatgame/game.json` 写入 `iOSHighPerformance: true`。构建会校验产物开关与配置一致。当前交付核对 AppID、模式和包体，实际手机运行模式以微信宿主为准。
 
 优先本机 `wechatide` purpose-built CLI；其技能入口为 `/Applications/wechatwebdevtools.app/Contents/Resources/app.asar.unpacked/wechatide-skill/SKILL.md`。按该技能检查登录/版本/所需授权，一次会话已通过的门禁不重复请求。小游戏不使用页面栈/WXML自动化工具。
 
@@ -289,3 +292,21 @@ GameBootstrap.start 在微信启动时调用 `wx.showShareMenu`，开发、体�
 ### v11.0.20 首页游戏圈
 
 微信首页在图鉴上方显示游戏圈。支持 PageManager 的基础库使用账号后台提供的首页 openlink，并在玩家点击时调用 show({openlink})。保留标识开头的连字符；分享用 H5 网址不作为 openlink。异步打开防连点，离开备战释放实例，后台切换不会打断已请求的微信页面。旧基础库使用 wx.createGameClubButton 默认主页，按逻辑窗口尺寸定位；弹窗、切后台、进战斗、退出时收起。无两种能力时隐藏入口。scripts/test-game-club.cjs 覆盖模拟宿主路径；openlink 对应版本资格与实机落地页面须在微信上核对。
+
+## 微信小游戏广告
+
+`wechat-ads.ts` 配置技能解锁、满血复活与 0 元购三个真实广告位。每次主动点击创建一个实例，两个激励位启用 `multiton` 并禁用兜底分享，`isEnded === true` 才完成任务；0 元购使用插屏，要求 `show()` 成功且收到该次 `onClose`。广告打开阶段有 18 秒超时，成功展示后等待用户关闭。单次回调销毁原生实例，失败或过期页面回调不发放权益。无广告库存或打开失败时允许重试。客户端代码和本机存储处理奖励；是否开通、审核和填充以正式 AppID 后台及手机微信体验为准。 [激励广告](https://developers.weixin.qq.com/minigame/dev/guide/open-ability/ad/rewarded-video-ad.html) · [插屏广告](https://developers.weixin.qq.com/minigame/dev/guide/open-ability/ad/interstitialAd-ad.html)
+
+`GameBootstrap` 只为支持复活广告的微信普通挑战保留波首快照。`survival` 的免费交易按显式权益计算成交价，原始 `offerPrices` 保持完整，只有成交才消费补给额度。技能解锁写入 `StageProfile.adSkills`，读取校验技能 ID，保留旧存档格式和已有进度。`test-wechat-ads.cjs` 以宿主桩验证关闭结果、错误、互斥与真实 UI 调用、第三/五波重打、原价恢复和技能存档。
+
+广告加载期间背景音乐照常播放。三个广告位共用 `WeChatAds` 的展示状态，调用 `show()` 前暂停 `BattleMusic` 并冻结音乐进度，关闭、打开超时或原生报错后解除该暂停。歌曲异步加载、微信回前台与用户音乐开关共用播放门禁。组件销毁直接清理播放器。`test-wechat-ads.cjs` 与 `test-music.cjs` 覆盖展示前暂停、前后台顺序、静音、失败和从原进度恢复。
+
+## 抖音小游戏构建与侧边栏复访
+
+`npm run build:douyin` 调用 Cocos Creator 3.8.8，构建横屏 `bytedance-mini-game`，输出 `build/bytedance-mini-game`。与其他 Creator 构建共用锁。默认使用模板的 `testappId`；正式预览、上传前用 `DOUYIN_APPID=<实际抖音 AppID> npm run build:douyin` 构建。抖音包使用平台本地分包，现有启动海报随主包交付，构建关闭引擎默认标识并校验模块导出。抖音音频使用 Cocos 的抖音宿主适配。用 `npm run check:douyin` 可复核本地包。检查按字节使用 4,000,000 主包、20,000,000 总包上限，并核对分包声明、入口、资源索引与调试文件。平台侧以对应 AppID 的 IDE 上传检查为准。[Cocos 构建](https://docs.cocos.com/creator/3.8/manual/zh/editor/publish/publish-bytedance-mini-game.html) · [抖音包体规则](https://developer.open-douyin.com/docs/resource/zh-CN/mini-game/develop/guide/basic-function/subpackages/introduction)
+
+`game.js` 首行加载 `douyin-startup.js`，同步注册 `tt.onShow` 并保留最新场景，冷启动也读取 `tt.getLaunchOptionsSync`。营地仅在 `tt.checkScene` 确认支持后显示「侧边栏有礼」。弹窗引导至侧边栏，支持 `tt.navigateToScene` 时提供快捷按钮，失败显示手动路径。游戏用 `021036` 或 `homepage/sidebar_card` 识别侧边栏来源。奖励本机保存，每日按北京时间领取一次，一份待用奖励可以跨天保留。下次由营地发起且准备完成的普通挑战开局增加 5 金币，重试、无尽和演武不消耗。存储写入失败时保留重试机会。无微信游戏圈调用参与该流程。[抖音侧边栏接入与测试](https://developer.open-douyin.com/docs/resource/zh-CN/mini-game/develop/guide/open-ability/Introduction-for-tech)
+
+`scripts/test-douyin-sidebar.cjs` 使用宿主桩验证启动、导航、热切换、持久化与正式营地开局。抖音端验收另用开发者工具模拟侧边栏或 021036 编译模式，并在有测试权限的抖音客户端验证冷/热启动、领奖与到账，同时核对首领分包、触控和音频。
+
+首个本地包有 25 个分包，主包约 2.37 MiB，总包约 18.81 MiB，按字节计算距普通整体包上限约 275 KB。开发者工具打开请求已返回成功，实际界面停在抖音登录。正式项目模拟器、上传校验和抖音真机体验仍需后台账号权限。

@@ -296,7 +296,11 @@ export const bossDisplayName=(id:string)=>({zhangjiao:'张角',lvbu:'吕布',don
 
 /** Gradual ranged pressure; mounted archers consume both the ranged and rider budgets. */
 export const STAGE_RANGED_COST_SHARE=[.24,.30,.38,.40,.38,.42];
-export const stageRangedShare=(n:number,wave:number)=>Math.min(.62,STAGE_RANGED_COST_SHARE[n-1]+[0,.06,.10,.15,.20][Math.max(0,Math.min(4,wave-1))]);
+export const BOSS_WAVE_RANGED={costShareMultiplier:1.1,weightMultiplier:1.2};
+export const stageRangedShare=(n:number,wave:number)=>{
+ const share=Math.min(.62,STAGE_RANGED_COST_SHARE[n-1]+[0,.06,.10,.15,.20][Math.max(0,Math.min(4,wave-1))]);
+ return wave===5?share*BOSS_WAVE_RANGED.costShareMultiplier:share;
+};
 export const stageRangedWindups=(wave:number)=>[4,4,5,5,6][Math.max(0,Math.min(4,wave-1))];
 export const ELEPHANT_ESCORTS={count:3,guardHpFactor:.55,stagger:1.1};
 export const STAGE_WAVE_ROSTERS:string[][][]=[
@@ -308,8 +312,24 @@ export const STAGE_WAVE_ROSTERS:string[][][]=[
  [['E08','E16','E20'],['E08','E32','E34','E40'],['E08','E16','E20'],['E08','E16','E37','E38','E14'],['E08','E16','E20','E32','E40']],
 ];
 export const STAGE_SHOOTERS=['E11','E12','E13','E14','E15','E16','E17','E18','E22','E23','E28','E31','E32','E35'];
-export const isStageRanged=(id:string)=>STAGE_SHOOTERS.includes(id)||['E29','E30','E33','E34','E36','E37','E38','E39','E40'].includes(id);
-export function pickStageUnit(pool:string[],random:number,wave=1):string|undefined {const weight=1.5+.15*Math.max(0,Math.min(4,wave-1));let total=0;for(const id of pool)total+=STAGE_SHOOTERS.includes(id)?weight:1;let t=Math.max(0,Math.min(.999999,random))*total;for(const id of pool){t-=STAGE_SHOOTERS.includes(id)?weight:1;if(t<0)return id;}return pool[pool.length-1];}
+const STAGE_OTHER_RANGED=['E29','E30','E33','E34','E36','E37','E38','E39','E40'];
+export const isStageRanged=(id:string)=>STAGE_SHOOTERS.includes(id)||STAGE_OTHER_RANGED.includes(id);
+function stageUnitWeight(id:string,shooterWeight:number,rangedMultiplier:number):number {
+ if(STAGE_SHOOTERS.includes(id))return shooterWeight*rangedMultiplier;
+ return rangedMultiplier!==1&&STAGE_OTHER_RANGED.includes(id)?rangedMultiplier:1;
+}
+export function pickStageUnit(pool:string[],random:number,wave=1):string|undefined {
+ const shooterWeight=1.5+.15*Math.max(0,Math.min(4,wave-1));
+ const rangedMultiplier=wave===5?BOSS_WAVE_RANGED.weightMultiplier:1;
+ let total=0;
+ for(const id of pool)total+=stageUnitWeight(id,shooterWeight,rangedMultiplier);
+ let ticket=Math.max(0,Math.min(.999999,random))*total;
+ for(const id of pool){
+  ticket-=stageUnitWeight(id,shooterWeight,rangedMultiplier);
+  if(ticket<0)return id;
+ }
+ return pool[pool.length-1];
+}
 
 /** v9.17: shared eligibility, awarded by each hero's first clear. */
 export const HERO_WEAPON_REWARDS:Record<string,string[]>={liubei:['firecracker','qinggang','phoenix-bow','wood-kite','taiping-book','wood-ox'],guanyu:['seven-saber','chain-hook','repeater','yitian','thunder','bagua'],zhangfei:['gourd','twin-halberds','hand-halberd','trident','thunder-bomb','caltrops']};

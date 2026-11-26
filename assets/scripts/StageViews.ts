@@ -14,6 +14,7 @@ import {addWeaponIcon} from './presentation-art';
 import {clockText} from './survival';
 import {addPanelClose} from './panel-ui';
 import {CopyResult,runtimeReportPages} from './runtime-report';
+import {DouyinSidebar,SIDEBAR_REWARD_GOLD,SidebarRewardStatus} from './douyin-sidebar';
 const C={jade:'#294e3c',paper:'#fff0d2',gold:'#efd08a',ink:'#48351e',red:'#cf512f',muted:'#b3c1a4'};
 class StageSurface {
  readonly root:Node;readonly panel:Node;
@@ -155,6 +156,55 @@ export class StageClearView extends StageSurface {
 /** Read-only permanent growth details, kept out of the combat HUD. */
 export class GrowthDetailView extends StageSurface {
  constructor(parent:Node,frames:Record<string,SpriteFrame>,id:Run['heroId'],count:number,close:()=>void){super(parent,frames,'HeroGrowthDetails',960,590);this.text(this.panel,'本命成长 · '+growthTitle(id,count),-35,238,34,720,60,C.gold);this.text(this.panel,'本命占一个武器位 · 仅前两关首通各增加1心',0,180,21,850,40);const names=['黄巾起义','虎牢讨董','官渡争锋','赤壁鏖兵','南中平蛮','五丈原决战'];for(let i=0;i<6;i++){const y=111-i*49;this.text(this.panel,(i<count?'✓ ':'○ ')+names[i],-297,y,22,220,40,i<count?C.gold:C.muted);this.text(this.panel,growthRewardText(id,i+1),120,y,21,590,40,i<count?C.paper:C.muted);}addPanelClose(this.panel,frames,'GrowthClose',428,243,()=>{this.close();close();});}
+}
+
+export class SidebarRewardView extends StageSurface {
+ private detail: Label;
+ private follow: Node;
+ private claim: Node;
+ private closed = false;
+ private navigationFailed = false;
+
+ constructor(parent: Node, frames: Record<string, SpriteFrame>, private sidebar: DouyinSidebar, private onClose: () => void) {
+  super(parent, frames, 'SidebarReward', 700, 440);
+  const p = this.panel;
+  this.text(p, '侧边栏复访奖励', 0, 151, 35, 548, 60, C.gold);
+  this.text(p, `下一场普通挑战开局 ＋${SIDEBAR_REWARD_GOLD} 金币 · 每日可领一次`, 0, 89, 23, 610, 46);
+  this.detail = this.text(p, '', 0, -7, 24, 608, 115);
+  this.detail.node.name = 'SidebarRewardStatus';
+  this.follow = this.button(p, 'SidebarNavigate', '去首页侧边栏', 0, -133, 300, () => {
+   this.sidebar.navigate(success => {
+    if (this.closed || !this.root.isValid) return;
+    if (success) this.close();
+    else { this.navigationFailed = true; this.refresh(); }
+   });
+  }, true, true);
+  this.claim = this.button(p, 'SidebarClaim', '领取奖励', 0, -133, 300, () => this.refresh(this.sidebar.claim()), true, true);
+  addPanelClose(p, frames, 'SidebarClose', 294, 164, () => this.close());
+  this.refresh();
+ }
+
+ refresh(status: SidebarRewardStatus = this.sidebar.status()): void {
+  const guide = this.navigationFailed
+   ? '暂时无法跳转，请手动打开抖音首页侧边栏，再点「桃园小英雄」。'
+   : '从抖音首页打开侧边栏，点击「桃园小英雄」返回游戏后领取。';
+  this.detail.string = {
+   guide,
+   claim: '已从侧边栏返回，可以领取奖励。',
+   pending: '已领取，下场从营地开始普通挑战时自动到账。',
+   claimed: '今日奖励已使用，明天可从侧边栏再次领取。',
+   'storage-error': '暂时无法保存奖励，请重新打开本面板后再试。',
+  }[status];
+  this.follow.active = status === 'guide' && this.sidebar.canNavigate;
+  this.claim.active = status === 'claim';
+ }
+
+ close(): void {
+  if (this.closed) return;
+  this.closed = true;
+  super.close();
+  this.onClose();
+ }
 }
 
 export class SettingsView extends StageSurface {

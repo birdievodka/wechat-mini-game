@@ -9,6 +9,7 @@ class Transform { setContentSize(w, h) { this.width = w; this.height = h; } setA
 class Node {
   static EventType = { TOUCH_END: 'end', TOUCH_START: 'start', TOUCH_CANCEL: 'cancel' };
   constructor(name = '') { this.name = name; this.children = []; this.position = { x: 0, y: 0, z: 0 }; this.active = true; this.components = new Map(); this.events = {}; }
+  get isValid() { return !this.destroyed; }
   getChildByName(name) { return this.children.find(child => child.name === name) || null; }
   addChild(n) { n.parent = this; this.children.push(n); }
   addComponent(Type) { const c = new Type(); c.node = this; this.components.set(Type, c); if ((Type === Sprite || Type === Label) && !this.components.has(Transform)) this.addComponent(Transform); if(Type===Mask&&!this.components.has(Graphics))this.addComponent(Graphics);return c; }
@@ -62,6 +63,8 @@ function load(name) {
   const out = cache[name] = {};
   const code = ts.transpileModule(fs.readFileSync(path.join('assets/scripts', name + '.ts'), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2017, experimentalDecorators: true } }).outputText;
   const context={ exports: out, require: id => id === 'cc' ? cc : id === 'cc/env' ? { DEBUG: false } : id.startsWith('./')?load(id.slice(2)):require(id), Math: randomMath, console };Object.defineProperty(context,'wx',{get:()=>cc.wechatHost});
+  Object.defineProperties(context, { tt: { get: () => cc.douyinHost }, GameGlobal: { get: () => cc.gameGlobal } });
+  Object.defineProperty(context,'document',{get:()=>cc.testDocument});
   for (const name of ['setTimeout', 'clearTimeout']) Object.defineProperty(context, name, { get: () => cc.testTimers?.[name] });
   vm.runInNewContext(code, context); return out;
 }
@@ -540,13 +543,13 @@ if(require.main===module)(async () => {
   const response=await newGame();response.clearBattle();response.spawnClock=999;response.cooldown=999;
   const rj=load('joystick-input').joystickCenter(response.halfWidth,response.halfHeight),rf=(x,y,id=1)=>({getLocation:()=>({x,y}),getID:()=>id});
   response.touchStart(rf(rj.x,rj.y));response.touchMove(rf(rj.x+18,rj.y));const responseStartX=response.px;
-  response.update(1/120);assert.ok(response.px>responseStartX,'轻推首个模拟步立即移动');assert.equal(response.stickThumb.x,.3,'视觉头位不被增强曲线放大');
-  response.touchMove(rf(rj.x-48,rj.y));const beforeReverse=response.px;response.update(1/120);assert.ok(response.px<beforeReverse,'反向首步即转向');assert.equal(response.stick.x,-1);
+  response.update(1/120);assert.ok(response.px>responseStartX,'轻推首个模拟步立即移动');assert.equal(response.stickThumb.x,18/74,'视觉头位不被增强曲线放大');
+  response.touchMove(rf(rj.x-44,rj.y));const beforeReverse=response.px;response.update(1/120);assert.ok(response.px<beforeReverse,'反向首步即转向');assert.equal(response.stick.x,-1);
   response.touchEnd(rf(rj.x,rj.y));const stopX=response.px;response.update(.04);assert.equal(response.px,stopX,'松手无惯性滑行');assert.equal(response.stickThumb.x,0);
-  console.log('通过：触屏6%死区/80%行程全速/指位与速度独立/轻推首步移动/反向首步转向/松手立停');
+  console.log('通过：触屏3像素死区/44像素全速/指位与速度独立/轻推首步移动/反向首步转向/松手立停');
   const controls=await newGame(),jc=load('joystick-input').joystickCenter(controls.halfWidth,controls.halfHeight);
   const finger=(x,y,id=1)=>({getLocation:()=>({x,y}),getID:()=>id});
-  assert.equal(controls.joystick.node.active,true,'静止时固定摇杆可见');
+  assert.equal(controls.joystick.node.active,true,'松手时有驻位底座');
   controls.touchStart(finger(jc.x,jc.y));
   controls.battlefield.activeInHierarchy=true;
   const clearStick=controls.joystick.clear.bind(controls.joystick);
@@ -555,12 +558,12 @@ if(require.main===module)(async () => {
   assert.equal(controls.stick.x,1);assert.equal(redraws,0);
   controls.lateUpdate();controls.lateUpdate();assert.equal(redraws,1,'touch burst draws only the latest thumb position');
   assert.equal(controls.stick.x,1);controls.castSkill();controls.touchEnd(finger(0,0,2));assert.equal(controls.touchId,1,'技能手指不打断移动');
-  const beforeMoving=controls.px;advance(controls,.2);assert.ok(controls.px>beforeMoving,'固定摇杆真实驱动角色');
+  const beforeMoving=controls.px;advance(controls,.2);assert.ok(controls.px>beforeMoving,'摇杆真实驱动角色');
   controls.touchEnd(finger(jc.x,jc.y));assert.equal(controls.stick.x,0);assert.equal(controls.joystick.node.active,true,'松手归中但底座保留');
   const particlesBefore=JSON.stringify(controls.combatFx.particles.slots),stampsBefore=JSON.stringify(controls.combatFx.stamps);
   controls.onBackground();advance(controls,2);assert.equal(controls.joystick.node.active,false);assert.equal(JSON.stringify(controls.combatFx.particles.slots),particlesBefore);assert.equal(JSON.stringify(controls.combatFx.stamps),stampsBefore);
   controls.onForeground();controls.paused=false;controls.finishWave();assert.equal(controls.joystick.node.active,false,'商店隐藏摇杆');controls.resumeSupply('');assert.equal(controls.joystick.node.active,true);controls.showMainMenu();assert.equal(controls.joystick.node.active,false);
-  controls.restart();controls.clearBattle();controls.spawnClock=999;controls.resumeCountdown=.3;controls.touchStart(finger(jc.x+60,jc.y));const waitingX=controls.px;
+  controls.restart();controls.clearBattle();controls.spawnClock=999;controls.resumeCountdown=.3;controls.touchStart(finger(jc.x,jc.y));controls.touchMove(finger(jc.x+44,jc.y));const waitingX=controls.px;
   advance(controls,.2);assert.equal(controls.px,waitingX,'倒数期间不提前移动');advance(controls,.3);assert.ok(controls.px>waitingX,'倒数结束响应已按住的摇杆');controls.touchEnd(finger(jc.x,jc.y));
   for(const def of load('weapons').WEAPONS){
     const effectGame=await newGame('liubei',def.id);effectGame.clearBattle();effectGame.spawnClock=999;
@@ -574,7 +577,7 @@ if(require.main===module)(async () => {
     const frozen=JSON.stringify(effectGame.combatFx.particles.slots);effectGame.phase='shop';advance(effectGame,1);assert.equal(JSON.stringify(effectGame.combatFx.particles.slots),frozen);
     effectGame.clearBattle();assert.equal(effectGame.combatFx.particles.active,0);assert.ok(effectGame.combatFx.stamps.every(s=>s.age>=s.duration));
   }
-  console.log('通过：固定左下摇杆真实移动/常驻/技能双指/后台商店隐藏、真实暂停冻结粒子、11武器攻击接入新表现、剑阵切割弧与清场回收');
+  console.log('通过：左下摇杆真实移动/松手复位/技能双指/后台商店隐藏、真实暂停冻结粒子、11武器攻击接入新表现、剑阵切割弧与清场回收');
 
   assert.equal(passive.PASSIVE_ITEMS.length,60);const itemRun=r.createRun('liubei');itemRun.weapons=load('weapons').WEAPONS.map((w,i)=>({id:w.id,tier:1,uid:i+1}));
   for(const item of passive.PASSIVE_ITEMS){assert.ok(passive.eligiblePassive(item.id,itemRun.weapons));const one=passive.passiveBonuses({[item.id]:1}),many=passive.passiveBonuses({[item.id]:100}),more=passive.passiveBonuses({[item.id]:101});assert.notEqual(JSON.stringify(one),JSON.stringify(passive.passiveBonuses({})),item.id+' first purchase has an effect');assert.notEqual(JSON.stringify(many),JSON.stringify(more),item.id+' unlimited repeats retain a benefit');}

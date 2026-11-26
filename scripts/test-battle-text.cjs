@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {load,Node,cc,newGame}=require('./test-campaign.cjs');
+const {load,Node,cc,newGame,useDevelopmentHost}=require('./test-campaign.cjs');
 const {BattleNumber}=load('BattleNumber');
 (async()=>{
  const glyphs=Array.from({length:13},(_,i)=>({frame:{id:i,destroy(){this.destroyed=true}},advance:i===10?7:12,width:14,height:23,left:.5}));
@@ -52,7 +52,59 @@ const {BattleNumber}=load('BattleNumber');
  assert.equal(g.bossHealthNumber.node.active,false);assert.ok(g.bossLabel.string.endsWith(boss.hp+'/6150'));
  g.battleSprites.numberGlyphs.push(...frames);g.drawProgress();assert.equal(g.bossHealthNumber.node.active,true);
  boss.hp=0;g.drawProgress();assert.equal(g.bossHealthNumber.node.active,false);assert.equal(g.bossLabel.string,'');
+ const {BattleHudText}=load('BattleHudText');
+ const originalHeader=g.hud, originalSkill=g.skillLabel;
+ let measures=0;
+ const canvas={
+   getContext(){return {measureText(text){measures++;return {width:text===' '?6:25};},fillText(){},
+     getImageData:()=>({data:new Uint8Array(canvas.width*canvas.height*4)})};},
+ };
+ cc.testDocument={createElement:()=>canvas};
+ try{g.installBattleHudGlyphs('Arial');}finally{delete cc.testDocument;}
+ assert.ok(g.hud instanceof BattleHudText);assert.equal(canvas.width,0,'bake releases the offscreen canvas');
+ assert.ok(measures>100&&measures<=192,'finite glyph inventory');
+ const baked=measures, oldHeaderText=originalHeader.string, oldSkillText=originalSkill.string;
+ for(let seconds=44;seconds>=0;seconds--){
+   g.remaining=seconds;
+   g.run.skillId='G07';g.skillCharge=seconds%16;g.drawProgress();
+   assert.match(g.hud.string,new RegExp(seconds+'s$'));
+   assert.equal(originalHeader.enabled,false);assert.equal(originalSkill.enabled,false);
+ }
+ assert.equal(measures,baked,'clock and charge change without any new Canvas text measurement');
+ assert.equal(originalHeader.string,oldHeaderText);assert.equal(originalSkill.string,oldSkillText);
+ assert.ok(g.hud.node.children.some(n=>n.active&&n.getComponent(cc.Sprite)?.spriteFrame));
+ const cachedChildren=g.hud.node.children.slice();
+ g.hud.string='新字形';assert.equal(originalHeader.enabled,true);assert.equal(originalHeader.string,'新字形');
+ assert.ok(cachedChildren.every(node=>!node.active));
+ g.hud.string='开打！';assert.equal(originalHeader.enabled,false);assert.deepEqual(g.hud.node.children,cachedChildren);
  g.onDestroy();assert.ok(glyphs.every(g=>g.frame.destroyed));
+ const previousHost=cc.wechatHost;
+ useDevelopmentHost();
+ const wechat=await newGame();
+ try{
+   assert.equal(wechat.hurtText,undefined);
+   assert.ok(wechat.enemies.every(enemy=>enemy.text===undefined));
+   const soldier=wechat.spawnNext('soldier','E01');
+   Object.assign(soldier,{hp:100,maxHp:100,born:0});
+   wechat.hitEnemy(soldier,0,10,40,'oil-jar',false,true);
+   assert.equal(soldier.hp,90);assert.ok(soldier.flash>0);assert.ok(soldier.vx>0);
+   assert.equal(soldier.text,undefined);
+   wechat.updateEnemy(soldier,.01);wechat.lateUpdate();
+   const hearts=wechat.playerHp;
+   wechat.protectionTime=0;
+   assert.equal(wechat.hurtPlayer(wechat.px-20,wechat.py),true);
+   assert.equal(wechat.playerHp,hearts-1);assert.equal(wechat.heroTint,'#ff8479');assert.ok(wechat.playerVx>0);
+   const boss=wechat.spawnNext('chief',undefined,2);
+   Object.assign(boss,{hp:500,maxHp:800});
+   assert.equal(boss.text,undefined);
+   wechat.battleSprites.numberGlyphs.push(...glyphs.map(glyph=>({...glyph,frame:{destroy(){}}})));
+   wechat.drawProgress();assert.equal(wechat.bossHealthNumber.string,'500/800');
+   const gold=wechat.coinTotal;
+   wechat.dropCoin(wechat.px,wechat.py,2);
+   for(let i=0;i<40;i++)wechat.updateCoins(1/120);
+   assert.equal(wechat.coinLabel.string,String(gold+2));assert.equal(wechat.pickupText.string,'+2');
+   assert.equal(JSON.parse(wechat.health.report()).snapshot.damageTextBackend,'off');
+ }finally{wechat.onDestroy();cc.wechatHost=previousHost;}
  const {NativeMusic}=load('native-music');const callbacks={},messages=[];let blankStops=0,blankPauses=0,plays=0,created=0;
  const context={src:'',volume:0,loop:false,autoplay:false,stop(){if(!this.src)blankStops++},pause(){if(!this.src)blankPauses++},play(){plays++},seek(){},destroy(){}};
  for(const name of ['Play','Pause','Stop','Error','Canplay']){context['on'+name]=fn=>callbacks[name]=fn;context['off'+name]=()=>delete callbacks[name];}

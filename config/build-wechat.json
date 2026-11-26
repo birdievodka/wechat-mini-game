@@ -14,7 +14,8 @@
   "packages": {
     "wechatgame": {
       "appid": "wxbddcb8f0462f58cc",
-      "orientation": "landscape"
+      "orientation": "landscape",
+      "highPerformanceMode": true
     }
   },
   "sourceMaps": false,

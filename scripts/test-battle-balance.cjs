@@ -4,6 +4,16 @@ const {load,newGame}=require('./test-campaign.cjs'),D=load('stage-data'),C=load(
 const rng=seed=>()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
 function arena(){const boss={x:-250,y:0,hp:10000,maxHp:10000,speed:80,attack:-1,attackAngle:0,bossSkin:'yuanshao',bossTimers:[999,999,999]},actors=[boss],s={time:0,x:0,y:0,hits:0,zones:0};const b=new B.BossBattle({now:()=>s.time,target:()=>({x:s.x,y:s.y}),bounds:()=>({halfWidth:1000,halfHeight:600}),actors:()=>actors,normalZones:()=>s.zones,normalShots:()=>0,otherBusy:()=>0,referenceDps:()=>235,spawn:(kind,owner,x,y,hp)=>{const e={x,y,hp,maxHp:hp,speed:0,attack:-1,attackAngle:0};actors.push(e);return e;},hit:()=>{s.hits++;return true;},intercept:()=>false,release:()=>{},impact:()=>{}});const step=t=>{for(let n=0;n<t-1e-8;n+=.01){s.time+=.01;b.update(.01);}};return {boss,actors,s,b,step};}
 (async()=>{
+ for(let stage=1;stage<=6;stage++){
+  const baseShare=D.STAGE_RANGED_COST_SHARE[stage-1];
+  for(const [i,offset] of [0,.06,.10,.15].entries())assert.equal(D.stageRangedShare(stage,i+1),baseShare+offset);
+  assert.ok(Math.abs(D.stageRangedShare(stage,5)-Math.min(.62,baseShare+.20)*1.1)<1e-9);
+ }
+ assert.equal(D.pickStageUnit(['E08','E12'],.3,4),'E08');
+ assert.equal(D.pickStageUnit(['E08','E12'],.3,5),'E12');
+ assert.equal(D.pickStageUnit(['E08','E39'],.48,4),'E08');
+ assert.equal(D.pickStageUnit(['E08','E39'],.48,5),'E39');
+ assert.equal(D.stageRangedWindups(5),6);
  for(let stage=1;stage<=6;stage++)for(let count=1;count<=6;count++){
   assert.equal(D.stageThreat(stage,1,count),D.stageFor(stage).spawnCostPerSecond*.75,'one-weapon opening rhythm stays unchanged');assert.equal(D.stageCoinMultiplier(1,count),1.25);
   assert.equal(D.stageLoadoutPressure(count),1+.1*Math.min(4,count-1));

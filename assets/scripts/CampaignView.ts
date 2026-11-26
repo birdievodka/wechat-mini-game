@@ -2,13 +2,15 @@ import {applyUiFont} from './ui-font';
 import {addPanelClose} from './panel-ui';
 import type {BattleSpriteAtlas} from './BattleSpriteAtlas';
 import {growthClears,signatureId} from './hero-growth';
-import {StagePickerView,StageBriefView,StarterSelectView,StageClearView,GrowthDetailView} from './StageViews';
+import {StagePickerView,StageBriefView,StarterSelectView,StageClearView,GrowthDetailView,SidebarRewardView} from './StageViews';
+import type {DouyinSidebar} from './douyin-sidebar';
 import {endlessUnlocked} from './endless';
 import {SettingsView} from './StageViews';
 import {StageProfile,StageReward,highestStage,unlocked,visibleHero} from './stage-progress';
 import {STAGES,stageFor,bossDisplayName,STARTER_WEAPONS} from './stage-data';
 import {GAME_NAME} from './game-brand';
 import {SkillSelectView} from './SkillSelectView';
+import type {AdAction,FreeSupplyStatus,SkillAdAction} from './wechat-ads';
 import {DEFAULT_SKILL,availableSkill,commonSkillFor} from './common-skills';
 import {HeroShowcase} from './HeroShowcase';
 import {CodexView} from './CodexView';
@@ -43,6 +45,7 @@ declare const wx:{
 }|undefined;
 
 interface HeroPortraitSlot {node:Node;selected:Node;}
+interface FreeSupplyControl {status:FreeSupplyStatus;open:()=>void;}
 
 /** Screens own their input surfaces; combat never runs underneath an open screen. */
 export class CampaignView {
@@ -66,6 +69,7 @@ export class CampaignView {
   private clubPage?:ClubPage;
   private openingClub=false;
   private foreground=true;
+  private unsubscribeSidebar?: () => void;
 
   setForeground(value:boolean):void {
     if(this.foreground===value)return;
@@ -124,6 +128,7 @@ export class CampaignView {
     if(this.campBackground){const frame=this.campBackground.spriteFrame;const aspect=this.heroMenu&&frame?frame.rect.width/frame.rect.height:16/9;this.campBackground.node.getComponent(UITransform)!.setContentSize(Math.max(width,height*aspect),Math.max(height,width/aspect));}
   }
   hide(): void {
+    this.unsubscribeSidebar?.();this.unsubscribeSidebar=undefined;
     this.setClubRow();
     this.root.active = false;
     // Hidden Graphics still own their GPU buffers. Screens are rebuilt on entry;
@@ -144,7 +149,8 @@ export class CampaignView {
     if (subtitle) this.text(this.content, subtitle, 0, 265, 20, '#e6d8bc', 1100, 36);
     return this.content;
   }
-  menu(selected: HeroId, start: (hero: HeroId,skill:string,weapon?:WeaponId,stage?:number) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void,options?:{profile:StageProfile;stage:number;weapon:WeaponId;changed:()=>void;development?:boolean;endless?:(hero:HeroId,skill:string,weapon:WeaponId)=>void;settings?:(parent:Node,hero:HeroId)=>void}): void {
+  menu(selected: HeroId, start: (hero: HeroId,skill:string,weapon?:WeaponId,stage?:number) => void, codex?:()=>void,skill=DEFAULT_SKILL,training?:(hero:HeroId,skill:string)=>void,options?:{profile:StageProfile;stage:number;weapon:WeaponId;changed:()=>void;development?:boolean;endless?:(hero:HeroId,skill:string,weapon:WeaponId)=>void;settings?:(parent:Node,hero:HeroId)=>void;sidebar?:DouyinSidebar;unlockSkillAd?:SkillAdAction}): void {
+    this.unsubscribeSidebar?.();this.unsubscribeSidebar=undefined;
     this.setClubRow();
     this.resultView=undefined;this.heroShowcase=undefined;this.codexView=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
@@ -209,7 +215,7 @@ export class CampaignView {
     let choosing=false;
     const clubRow=options?(options.development?39:-43):undefined;
     const choose=(open:boolean)=>{choosing=open;this.setClubRow(open?undefined:clubRow);};
-    skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choose(true);new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choose(false);updateSkill();},()=>choose(false),options?.profile);});
+    skillCard.on(Node.EventType.TOUCH_END,()=>{skillCard.setScale(1,1,1);if(starting||choosing)return;choose(true);new SkillSelectView(p,this.frames,this.selectionSkill,id=>{this.selectionSkill=id;choose(false);updateSkill();},()=>choose(false),options?.profile,options?.unlockSkillAd);});
     const button=this.node(p,'StartHero');button.setPosition(0,-289);button.addComponent(UITransform).setContentSize(360,92);
     const face=this.node(button,'StartHeroFace');
     this.drawStartHeroFace(face.addComponent(Graphics));
@@ -240,11 +246,27 @@ export class CampaignView {
     if(clubRow!==undefined&&typeof wx!=='undefined'&&wx.createPageManager){
       this.action(p,'游戏圈',-516,clubRow,164,()=>{if(!choosing&&!starting)void this.openGameClub();});
     }
+    const sidebar=options?.sidebar;
+    if(sidebar&&clubRow!==undefined){
+      let reward:SidebarRewardView|undefined;
+      const entry=this.action(p,'侧边栏有礼',-516,clubRow,164,()=>{
+        if(choosing||starting||!this.foreground||!sidebar.available)return;
+        choose(true);
+        reward=new SidebarRewardView(p,this.frames,sidebar,()=>{reward=undefined;choose(false);});
+      });
+      const refresh=()=>{
+        if(entry.isValid)entry.active=sidebar.available;
+        if(reward?.root.isValid)reward.refresh();
+      };
+      this.unsubscribeSidebar=sidebar.subscribe(refresh);
+      refresh();
+      sidebar.check();
+    }
     this.setClubRow(clubRow);
   }
 
-  codex(close:()=>void,profile?:StageProfile):void {this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close,profile);this.codexView.resize(this.width,this.height);}
-  private action(parent:Node,label:string,x:number,y:number,width:number,action:()=>void):void{const n=this.node(parent,label);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(width,66);const g=n.addComponent(Graphics);g.fillColor=new Color(C.green);g.strokeColor=new Color('#ffda83');g.lineWidth=2;g.roundRect(-width/2,-33,width,66,17);g.fill();g.stroke();this.bold(n,label,0,0,27,C.paper,width-16,60);n.on(Node.EventType.TOUCH_END,action);}
+  codex(close:()=>void,profile?:StageProfile):void {this.unsubscribeSidebar?.();this.unsubscribeSidebar=undefined;this.resultView=undefined;this.heroShowcase=undefined;this.heroMenu=false;this.root.active=true;for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.codexView=new CodexView(this.root,this.frames,close,profile);this.codexView.resize(this.width,this.height);}
+  private action(parent:Node,label:string,x:number,y:number,width:number,action:()=>void):Node{const n=this.node(parent,label);n.setPosition(x,y);n.addComponent(UITransform).setContentSize(width,66);const g=n.addComponent(Graphics);g.fillColor=new Color(C.green);g.strokeColor=new Color('#ffda83');g.lineWidth=2;g.roundRect(-width/2,-33,width,66,17);g.fill();g.stroke();this.bold(n,label,0,0,27,C.paper,width-16,60);n.on(Node.EventType.TOUCH_END,action);return n;}
 
   private previewHands(parent: Node, id: HeroId, weapon: EquippedWeapon, y: number, scale: number): void {
     const hands = this.node(parent, 'PreviewHands'); hands.setPosition(0, y); hands.setScale(scale, scale, 1);
@@ -354,7 +376,7 @@ export class CampaignView {
     this.campButton(p, 'NextWave', `第${run.wave + 1}关  出发 →`, 481, -293, 244, next, 'primary');
   }
 
-  supply(run: Run, buy: (id: string, replaceUid?: number) => void, refresh: () => void, skip: () => void, normal: () => void, manage: (action: 'combine' | 'recycle', uid: number) => void): void {
+  supply(run: Run, buy: (id: string, replaceUid?: number) => void, refresh: () => void, skip: () => void, normal: () => void, manage: (action: 'combine' | 'recycle', uid: number) => void, freeSupply?:FreeSupplyControl): void {
     this.resultView=undefined;this.heroShowcase=undefined;
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.heroMenu=false;this.campMode=true;this.campBackground=undefined;
@@ -372,6 +394,7 @@ export class CampaignView {
     this.sprite(p,this.frames['ui-coin'],414,274,34,34);
     const balance=this.bold(p,String(run.gold),482,274,32,'#ffe1a0',90,46);balance.node.name='SupplyBalance';
     if(major)this.campButton(p,'SupplyNormal','普通补给 ›',40,271,180,normal,'secondary');
+    const free=freeSupply?.status==='available';
     run.offers.forEach((id,i)=>{
       const card=supplyCard(run,id),n=this.node(p,'Supply-'+i);n.setPosition((i-(run.offers.length-1)/2)*(run.challenge?270:360),27);n.addComponent(UITransform).setContentSize(run.challenge?254:336,360);
       const width=run.challenge?254:336,color=card.major?'#e8bb65':card.weapon?TIER_COLORS[card.weapon.tier-1]:'#b8afdc';
@@ -385,9 +408,10 @@ export class CampaignView {
       else this.itemIcon(n,id,0,67,.95);
       this.bold(n,card.title,0,3,run.challenge?23:26,C.ink,run.challenge?236:302,40);
       const desc=this.text(n,card.desc.split('\n').slice(0,3).join('\n'),0,-59,18,'#58412e',run.challenge?234:300,80);if(run.challenge)desc.node.on(Node.EventType.TOUCH_END,()=>{const details=this.dialog(card.title,850,420,'SupplyDetailsClose');this.text(details,card.desc,0,35,24,'#fff0d2',770,220);});
-      const enabled=canBuySupply(run,id),sold=run.purchasedOffers.indexOf(id)>=0,full=card.weapon&&parseWeaponOffer(id)&&run.weapons.length===6;
-      const title=sold?'已购入':!enabled?(run.gold<card.price?'铜钱不足':'暂不可购'):`${card.price} ${full?'替换':'购买'}`;
-      this.campButton(n,'SupplyBuy-'+i,title,0,-137,run.challenge?230:296,()=>full?this.replacementDialog(run,id,buy):buy(id),'buy',enabled,!sold);
+      const enabled=canBuySupply(run,id,free),sold=run.purchasedOffers.includes(id),full=card.weapon&&parseWeaponOffer(id)&&run.weapons.length===6;
+      const price=free?0:card.price;
+      const title=sold?'已购入':!enabled?(run.gold<price?'铜钱不足':'暂不可购'):`${price} ${full?'替换':'购买'}`;
+      this.campButton(n,'SupplyBuy-'+i,title,0,-137,run.challenge?230:296,()=>full?this.replacementDialog(run,id,buy,free):buy(id),'buy',enabled,!sold);
     });
     const rail=this.node(p,'SupplyEquipment');rail.setPosition(0,-207);this.jadePanel(rail,1080,78,false);
     this.bold(rail,`武器 ${run.weapons.length}/6`,-445,0,21,'#e9d9a4',160,40);
@@ -400,6 +424,13 @@ export class CampaignView {
     this.campButton(rail,'OpenInventory',`道具 ${Object.keys(run.inventory).reduce((sum,id)=>sum+run.inventory[id],0)} ›`,424,0,178,()=>this.inventoryDialog(run),'secondary');
     const price=refreshPrice(run);
     this.campButton(p,'SupplyRefresh',`刷新 ${price}`,-420,-285,240,refresh,'secondary',run.gold>=price,true);
+    if(freeSupply){
+      const {status,open}=freeSupply;
+      const label=status==='opening'?'广告加载中':status==='used'?'本波已使用':'看广告0元购';
+      const hint=status==='available'?'任选 1 件免费':status==='unavailable'?'广告暂不可用':status==='used'?'其余补给已恢复原价':'本波限购 1 件';
+      this.campButton(p,'SupplyFreeAd',label,-195,-285,186,open,'gold',status==='ready'||status==='unavailable');
+      this.text(p,hint,37,-285,19,'#f9dfa3',260,38).node.name='SupplyFreeStatus';
+    }
     this.campButton(p,'SupplySkip','继续战斗',390,-285,300,skip,'gold');
   }
 
@@ -429,8 +460,8 @@ export class CampaignView {
 
   }
 
-  private replacementDialog(run:Run,id:string,buy:(id:string,uid?:number)=>void):void {
-    const card=supplyCard(run,id),p=this.dialog('替换武器',1100,620,'CancelReplacement'),marks:Node[]=[];let selected:EquippedWeapon|undefined;
+  private replacementDialog(run:Run,id:string,buy:(id:string,uid?:number)=>void,free=false):void {
+    const card=supplyCard(run,id),price=free?0:card.price,p=this.dialog('替换武器',1100,620,'CancelReplacement'),marks:Node[]=[];let selected:EquippedWeapon|undefined;
     const incoming=this.node(p,'IncomingWeapon');incoming.setPosition(-263,120);this.jadePanel(incoming,498,176,false);
     this.text(incoming,'换入',-194,60,17,'#c7d1b6',70,26);
     if(card.weapon){this.weaponIcon(incoming,card.weapon.id,card.weapon.tier,-173,-2,1.15);this.bold(incoming,weaponFor(card.weapon.id).name,53,49,25,'#fff0d2',300,36);this.tierBand(incoming,card.weapon.tier,54,5,284,card.from);}
@@ -440,11 +471,11 @@ export class CampaignView {
     const oldPreview=this.node(outgoing,'SelectedReplacement');
     this.text(oldPreview,'从下方选择一件旧武器',0,-2,22,'#c7d1b6',420,62);
     this.text(p,'选择要换下的武器',-350,8,18,'#dfd8b7',320,28);
-    const ledger=this.text(p,`当前 ${run.gold}  ·  购买 −${card.price}  ·  请选择换下武器`,0,-181,21,'#ead9ac',1010,48);ledger.node.name='ReplacementLedger';
+    const ledger=this.text(p,`当前 ${run.gold}  ·  购买 −${price}  ·  请选择换下武器`,0,-181,21,'#ead9ac',1010,48);ledger.node.name='ReplacementLedger';
     const updateConfirm=():void=>{
       const old=p.children.find(n=>n.name==='ConfirmReplacement');if(old){old.removeFromParent();old.destroy();}
-      const affordable=!!selected&&run.gold+recycleValue(run,selected.uid)>=card.price;
-      this.campButton(p,'ConfirmReplacement',selected&&!affordable?'铜钱不足':'确认替换',0,-253,350,()=>{if(selected&&canBuySupply(run,id)&&run.gold+recycleValue(run,selected.uid)>=card.price)buy(id,selected.uid);},'primary',affordable);
+      const affordable=!!selected&&run.gold+recycleValue(run,selected.uid)>=price;
+      this.campButton(p,'ConfirmReplacement',selected&&!affordable?'铜钱不足':'确认替换',0,-253,350,()=>{if(selected&&canBuySupply(run,id,free)&&run.gold+recycleValue(run,selected.uid)>=price)buy(id,selected.uid);},'primary',affordable);
     };
     run.weapons.forEach((w,i)=>{
       const n=this.node(p,'ReplaceWeapon-'+w.uid);n.setPosition((i-2.5)*166,-83);n.addComponent(UITransform).setContentSize(150,126);this.jadePanel(n,150,126,false);
@@ -457,10 +488,10 @@ export class CampaignView {
         for(const child of [...oldPreview.children]){child.removeFromParent();child.destroy();}
         this.weaponIcon(oldPreview,w.id,w.tier,-173,-2,1.15);
         this.bold(oldPreview,weaponFor(w.id).name,53,49,25,'#fff0d2',300,36);this.tierBand(oldPreview,w.tier,54,5,284);
-        const refund=recycleValue(run,w.uid),left=run.gold+refund-card.price;
+        const refund=recycleValue(run,w.uid),left=run.gold+refund-price;
         const lost=armoryDescription(w.id,w.tier)||weaponEffectText(w.id,weaponStatsFor(run,w)).split('\n')[0];
         this.text(oldPreview,`失去 ${lost}\n出售返还 +${refund} 铜钱`,54,-48,17,'#d8e1c3',310,48);
-        ledger.string=`当前 ${run.gold}  ＋  回收 ${refund}  −  购买 ${card.price}  ＝  余额 ${left}`;ledger.color=new Color(left<0?'#f3a796':'#ead9ac');updateConfirm();
+        ledger.string=`当前 ${run.gold}  ＋  回收 ${refund}  −  购买 ${price}  ＝  余额 ${left}`;ledger.color=new Color(left<0?'#f3a796':'#ead9ac');updateConfirm();
       });
     });
     updateConfirm();
@@ -470,10 +501,10 @@ export class CampaignView {
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}this.root.active=true;this.heroMenu=false;this.campMode=false;this.campBackground=undefined;this.codexView=undefined;
     this.resultView=new StageClearView(this.root,this.frames,run,kills,reward,next,menu,saved,this.battleAtlas,retrySave);this.resultView.resize(this.width,this.height);
   }
-  survivalResult(run: Run, kills: number, best: number, record: boolean, retry: () => void, menu: () => void, testing: boolean, warmupElapsed=0,won=false): void {
+  survivalResult(run: Run, kills: number, best: number, record: boolean, retry: () => void, menu: () => void, testing: boolean, warmupElapsed=0,won=false,revive?:AdAction): void {
     for(const child of [...this.root.children]){child.removeFromParent();child.destroy();}
     this.root.active=true;this.heroMenu=false;this.campMode=false;this.campBackground=undefined;
-    this.resultView=new ResultView(this.root,this.frames,run,kills,best,record,retry,menu,testing,warmupElapsed,won);
+    this.resultView=new ResultView(this.root,this.frames,run,kills,best,record,retry,menu,testing,warmupElapsed,won,revive);
     this.resultView.resize(this.width,this.height);
   }
   update(delta:number):void {if(!this.root.active)return;if(this.heroMenu)this.heroShowcase?.update(delta);this.resultView?.update(delta);}

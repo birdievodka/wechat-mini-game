@@ -34,6 +34,15 @@ const auto=new BattleMusic(),native=source();native.playing=false;let permit=fal
 auto.attach(native);auto.begin();auto.tryAutoplay();assert.equal(native.plays,1);assert.equal(native.playing,false);permit=true;auto.unlock();assert.equal(native.plays,2);assert.equal(native.playing,true);auto.unlock();assert.equal(native.plays,2,'gestures never restart an audible track');
 const denied=new BattleMusic(),throws=source();let blocked=true;throws.play=function(){this.plays++;if(blocked)throw Error('autoplay denied');};denied.attach(throws);denied.begin();assert.doesNotThrow(()=>denied.tryAutoplay());blocked=false;denied.unlock();assert.equal(throws.plays,2);
 const mutedAuto=new BattleMusic(),mutedSource=source();mutedAuto.setEnabled(false);mutedAuto.begin();mutedAuto.tryAutoplay();mutedAuto.attach(mutedSource);assert.equal(mutedSource.plays,0);mutedAuto.setEnabled(true);assert.equal(mutedSource.plays,1);
+const ads=new BattleMusic(),adSource=source();ads.attach(adSource);ads.begin();ads.unlock();ads.update(.5);
+ads.setAdPlaying(true);assert.equal(adSource.pauses,1);assert.equal(adSource.volume,0);
+ads.update(30);ads.resume();assert.equal(adSource.plays,1,'foreground resume cannot override an ad');
+ads.setAdPlaying(false);assert.equal(adSource.plays,2);assert.equal(adSource.currentTime,.5,'ad freezes the music clock');
+ads.setAdPlaying(true);ads.setEnabled(false);ads.setAdPlaying(false);assert.equal(adSource.plays,2,'closing an ad keeps user mute');
+ads.setAdPlaying(true);ads.setEnabled(true);ads.begin();const duringAd=source();ads.attach(duringAd);
+assert.equal(duringAd.plays,0,'a new clip attached during an ad is silent');
+ads.pause();ads.setAdPlaying(false);assert.equal(duringAd.plays,0,'closing an ad keeps the app pause');
+ads.resume();assert.equal(duringAd.plays,1);
 for(const id of ['brass-oath','brass-rally']){
  const file=fs.readFileSync('assets/music/'+id+'.m4a');assert.equal(file.toString('ascii',4,8),'ftyp');assert.ok(file.length>100000&&file.length<650000,'compact AAC scene loop');
 }

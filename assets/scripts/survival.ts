@@ -6,7 +6,7 @@ import { Run, heroMaxHearts, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BU
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 import {armoryDescription} from './armory-redesign';
 
-export const SURVIVAL_VERSION = 'stage-v11.0.20-game-club';
+export const SURVIVAL_VERSION = 'stage-v11.0.22-no-damage-numbers';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;
@@ -111,8 +111,10 @@ export function rollSupply(run: Run, random = Math.random): void {
   }
   run.offers = cards.slice(0, 3); run.offerPrices = prices; run.locked = []; run.purchasedOffers = [];
 }
-export function canBuySupply(run: Run, id: string): boolean {
-  if (run.purchasedOffers.indexOf(id) >= 0 || !(run.offers.indexOf(id) >= 0) || run.offerPrices[id] === undefined || run.gold < run.offerPrices[id] && !(parseWeaponOffer(id) && run.weapons.length === 6 && run.weapons.some(w=>run.gold+Math.floor((w.invested??15)*passiveBonuses(run.inventory).refund)>=run.offerPrices[id]))) return false;
+export function canBuySupply(run: Run, id: string, free = false): boolean {
+  const price = run.offerPrices[id];
+  if (run.purchasedOffers.includes(id) || !run.offers.includes(id) || price === undefined) return false;
+  if (!free && run.gold < price && !(parseWeaponOffer(id) && run.weapons.length === WEAPON_LIMIT && run.weapons.some(w=>run.gold+Math.floor((w.invested??15)*passiveBonuses(run.inventory).refund)>=price))) return false;
   const w = parseWeaponOffer(id);
   if(w&&run.challenge&&!run.unlockedWeaponIds?.includes(w.id))return false;
   if (w) return run.weapons.length < WEAPON_LIMIT || run.weapons.length === WEAPON_LIMIT;
@@ -121,9 +123,9 @@ export function canBuySupply(run: Run, id: string): boolean {
   if (id.startsWith('a:')) return AUGMENTS.some(a => id === 'a:' + a.id && !(run.augments.indexOf(a.id) >= 0) && (!a.needs || owns(run, a.needs)));
   return ITEMS.some(i => i.id === id && eligibleItem(run, id));
 }
-export function buySupply(run: Run, id: string, replaceUid?: number): boolean {
-  if (!canBuySupply(run, id)) return false;
-  const w = parseWeaponOffer(id), cost = run.offerPrices[id];
+export function buySupply(run: Run, id: string, replaceUid?: number, free = false): boolean {
+  if (!canBuySupply(run, id, free)) return false;
+  const w = parseWeaponOffer(id), cost = free ? 0 : run.offerPrices[id];
   if (w) {
     if (run.weapons.length >= WEAPON_LIMIT) {
       const old = run.weapons.find(v=>v.uid===replaceUid); if (!old) return false;

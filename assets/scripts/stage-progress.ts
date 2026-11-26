@@ -6,7 +6,7 @@ import {growthClears,signatureId} from './hero-growth';
 import {INITIAL_CONTENT,STAGES,STARTER_WEAPONS,VISIBLE_HERO_IDS,HERO_WEAPON_REWARDS,LEGACY_WEAPON_REWARDS,stageRewardWeapons} from './stage-data';
 export const PROFILE_KEY='taoyuan-stage-profile-v8';
 export interface ClearRecord {seconds:number;kills:number;hearts:number;clears:number;}
-export interface StageProfile {version:2;legacyWeapons:string[];pendingWeapons:string[];heroes:Record<string,Record<string,ClearRecord>>;discovered:{enemies:string[];weapons:string[];skills:string[]};preferences:Record<string,{stage:number;weapon:string;skill:string}>;}
+export interface StageProfile {version:2;legacyWeapons:string[];pendingWeapons:string[];adSkills?:string[];heroes:Record<string,Record<string,ClearRecord>>;discovered:{enemies:string[];weapons:string[];skills:string[]};preferences:Record<string,{stage:number;weapon:string;skill:string}>;}
 export interface ProfileStorage {getItem(key:string):string|null;setItem(key:string,value:string):void;}
 export type ContentKind='weapons'|'passives'|'skills';
 export const visibleHero=(id:string)=>VISIBLE_HERO_IDS.some(h=>h===id);
@@ -35,6 +35,7 @@ export function readProfile(storage:ProfileStorage):StageProfile {
    ? LEGACY_WEAPON_REWARDS.reduce<string[]>((all,ids,i)=>Object.values(p.heroes).some(h=>!!h[STAGES[i].id])?all.concat(ids):all,[])
    : raw.legacyWeapons;
  p.legacyWeapons=migrateList(earnedLegacy);
+ if(Array.isArray(raw.adSkills))for(const id of raw.adSkills)grantAdSkill(p,id);
  for(const hero of ['liubei','guanyu','zhangfei','zhaoyun','kongming']){const pref=raw.preferences?.[hero];if(pref)p.preferences[hero]={stage:Math.max(1,Math.min(highestStage(p,hero),Math.floor(pref.stage)||1)),weapon:STARTER_WEAPONS.some(w=>w===pref.weapon)?pref.weapon:hero==='guanyu'?'pole':hero==='zhangfei'?'cleaver':'sandal',skill:unlocked(p,'skills').includes(pref.skill)?pref.skill:'G01'};}
  p.pendingWeapons=migrateList(raw.pendingWeapons).filter(id=>unlocked(p,'weapons').includes(id));
  const known={enemies:new Set([...CHRONICLE_ENEMIES.map(e=>e.id),...CHAPTERS.map(c=>'boss-'+c.bossId)]),weapons:new Set(WEAPONS.map(w=>w.id)),skills:new Set(COMMON_SKILLS.map(s=>s.id))};
@@ -63,7 +64,14 @@ export function unlocked(p:StageProfile,kind:ContentKind):string[]{
   for(const s of STAGES){if(VISIBLE_HERO_IDS.some(h=>!!p.heroes[h]?.[s.id]))ids.push(...s.firstClear.weapons);for(const h of VISIBLE_HERO_IDS)if(p.heroes[h]?.[s.id])ids.push(HERO_WEAPON_REWARDS[h][Number(s.id.slice(1))-1]);}
   for(const h of VISIBLE_HERO_IDS)if(growthClears(p,h)>0)ids.push(signatureId(h,1));
  }else for(const s of STAGES)if(Object.values(p.heroes).some(h=>!!h[s.id]))ids.push(...s.firstClear[kind]);
+ if(kind==='skills'&&p.adSkills)ids.push(...p.adSkills);
  return Array.from(new Set(ids));
+}
+export function grantAdSkill(p:StageProfile,id:unknown):boolean {
+ if(typeof id!=='string'||!COMMON_SKILLS.some(s=>s.id===id&&s.unlocked)||p.adSkills?.includes(id))return false;
+ (p.adSkills??=[]).push(id);
+ discover(p,'skills',id);
+ return true;
 }
 export function pendingStageWeapons(p:StageProfile,hero:string,stage:number):string[]{const owned=unlocked(p,'weapons');return stageRewardWeapons(stage,hero).filter(id=>!owned.includes(id));}
 export function canChallenge(p:StageProfile,hero:string,stage:number,weapon:string,skill:string):boolean{return visibleHero(hero)&&Number.isInteger(stage)&&stage>=1&&stage<=highestStage(p,hero)&&STARTER_WEAPONS.some(w=>w===weapon)&&unlocked(p,'skills').includes(skill);}

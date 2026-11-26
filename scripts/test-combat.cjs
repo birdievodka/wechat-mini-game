@@ -51,14 +51,15 @@ for (const ratio of [1, 2, 3]) {
   const j=loadModule('joystick-input');
   const center=j.joystickCenter(667,375),sx=center.x+667,sy=center.y+375;
   const drag=j.JOYSTICK.travel+7;
-  assert.equal(j.joystickVector(48,0).x,1,'80%行程即到全速');
+  assert.equal(j.joystickVector(44,0).x,1,'短推到44设计像素即到全速');
+  assert.ok(j.joystickVector(43,0).x<1,'到达全速前仍可微调');
   assert.equal(j.joystickVector(3,0).x,0,'微小抖动仍在死区');
   assert.equal(j.joystickVector(Infinity,0).x,0,'无效触点不会污染移动');
-  assert.equal(j.joystickThumb(18,0).x,.3,'摇杆头跟随真实指位，不被移速曲线放大');
-  assert.ok(j.joystickVector(18,0).x>.4&&j.joystickVector(18,0).x<.5,'轻推更灵敏，仍保留模拟量');
+  assert.equal(j.joystickThumb(18,0).x,18/74,'摇杆头跟随实际拖动距离');
+  assert.ok(j.joystickVector(18,0).x>.5&&j.joystickVector(18,0).x<.6,'轻推更灵敏，仍保留模拟量');
   demo.origin=center;
   demo.touchStart(touch(sx,sy));
-  assert.equal(demo.touchId,1,'左下固定摇杆可激活');
+  assert.equal(demo.touchId,1,'左下摇杆可激活');
   assert.equal(demo.origin.x,center.x);assert.equal(demo.origin.y,center.y);
   demo.touchMove(touch(sx+drag,sy));assert.equal(demo.stick.x,1);assert.equal(demo.stick.y,0);
   demo.touchMove(touch(sx,sy+drag));assert.equal(demo.stick.y,1);
@@ -67,14 +68,22 @@ for (const ratio of [1, 2, 3]) {
   assert.ok(Math.abs(Math.hypot(demo.stick.x,demo.stick.y)-1)<1e-9);
   demo.touchEnd(touch(sx,sy,2));assert.equal(demo.touchId,1,'技能手指松开不能中断摇杆');
   demo.touchEnd(touch(sx,sy));assert.equal(demo.stick.x,0);assert.equal(demo.touchId,null);assert.equal(demo.stickThumb.x,0);assert.equal(demo.stickThumb.y,0);
-  demo.touchStart(touch(667,375));assert.equal(demo.touchId,null,'战场中央不再生成浮动摇杆');
-  demo.touchStart(touch(sx+36,sy));assert.equal(demo.origin.x,center.x,'偏心按下也不移动原点');assert.ok(demo.stick.x>0);
-  demo.touchStart(touch(sx-30,sy,2));assert.equal(demo.touchId,1);
-  demo.touchMove(touch(sx+2,sy+1));assert.equal(demo.stick.x,0,'中心死区不漂移');
+  demo.touchStart(touch(667,375));assert.equal(demo.touchId,null,'战场中央不接管摇杆');
+  const grab={x:60,y:38};
+  demo.touchStart(touch(grab.x,grab.y));assert.equal(demo.touchId,1,'旧圆形范围之外的左下角也能接管');
+  assert.equal(demo.origin.x,grab.x-667);assert.equal(demo.origin.y,grab.y-375);
+  assert.equal(demo.stick.x,0,'偏心按下以落指点为中立位');
+  const visual=j.joystickActiveCenter(demo.origin.x,demo.origin.y,667,375);
+  assert.equal(visual.x,-667+132);assert.equal(visual.y,-375+132);
+  const narrowVisual=j.joystickActiveCenter(-140,-220,500,375);
+  assert.ok(narrowVisual.x+j.JOYSTICK.radius<=-232,'窄屏保留中部武器栏空间');
+  demo.touchStart(touch(sx,sy,2));assert.equal(demo.touchId,1);assert.equal(demo.origin.x,grab.x-667);
+  demo.touchMove(touch(grab.x+2,grab.y+1));assert.equal(demo.stick.x,0,'落指点附近死区不漂移');
+  demo.touchMove(touch(grab.x+44,grab.y));assert.equal(demo.stick.x,1,'贴边抓取仍从实际落点测量行程');
   demo.touchMove(touch(sx+500,sy+300));assert.ok(Math.abs(Math.hypot(demo.stick.x,demo.stick.y)-1)<1e-9,'拖出底座仍限速');
   demo.touchEnd(touch(sx,sy));
   for(const [x,y]of [[70,700],[1270,700],[1230,100]]){demo.touchStart(touch(x,y));assert.equal(demo.touchId,null,'HUD及技能区不夺取摇杆');}
-  demo.resumeCountdown=1;demo.touchStart(touch(sx+drag,sy));assert.equal(demo.touchId,1,'倒数可提前按住摇杆');assert.equal(demo.stick.x,1);demo.touchEnd(touch(sx,sy));demo.resumeCountdown=0;
+  demo.resumeCountdown=1;demo.touchStart(touch(sx,sy));assert.equal(demo.touchId,1,'倒数可提前按住摇杆');demo.touchMove(touch(sx+drag,sy));assert.equal(demo.stick.x,1);demo.touchEnd(touch(sx,sy));demo.resumeCountdown=0;
 }
 demo.keyDown({ keyCode: 16 }); assert.equal(demo.keys.size, 0, 'Shift 不应覆盖触摸移动');
 demo.keyDown({ keyCode: codes.KEY_W }); assert.equal(demo.keys.size, 1);

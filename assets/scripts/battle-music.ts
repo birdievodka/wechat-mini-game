@@ -15,6 +15,7 @@ export class BattleMusic {
   private source?: MusicSource;
   private running = false;
   private paused = false;
+  private adPlaying = false;
   private unlocked = false;
   private gesture = false;
   private enabled = true;
@@ -43,6 +44,7 @@ export class BattleMusic {
     this.gesture=true;this.unlocked = true; this.sync();
   }
   setEnabled(enabled: boolean): void { this.enabled = enabled; this.sync(); }
+  setAdPlaying(playing: boolean): void { this.adPlaying = playing; this.sync(); }
   begin(): void {
     this.stop(); this.running = true; this.paused = false; this.sync();
   }
@@ -60,7 +62,7 @@ export class BattleMusic {
   }
   update(delta: number): void {
     if(!Number.isFinite(delta)||delta<0)return;
-    if (!this.running || this.paused) return;
+    if (!this.running || this.paused || this.adPlaying) return;
     this.elapsed = (this.elapsed + Math.max(0, delta)) % this.seconds;
     if (this.playing && this.source) {
       this.fade = Math.min(1, this.fade + Math.max(0, delta) / .45);
@@ -71,7 +73,7 @@ export class BattleMusic {
   }
   private sync(): void {
     if (!this.source) return;
-    const play = this.running && !this.paused && this.enabled && this.unlocked;
+    const play = this.running && !this.paused && !this.adPlaying && this.enabled && this.unlocked;
     if (play && !this.playing) {
       // Late download, unmute and resume all join the current round's musical phrase.
       this.source.currentTime = this.elapsed; this.source.volume = 0; this.fade = 0;

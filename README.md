@@ -55,7 +55,7 @@ npm run build:wechat
 | `stage-data.ts`、`stage-progress.ts`、`StageViews.ts` | 六关数值/奖励、永久进度与发现、选关/初始武器/通关界面 |
 | `stage-theme.ts`、`chronicle-save.ts`、`runtime-health.ts` | 六主题静态地面、旧档兼容与运行健康记录 |
 | `combat-math.ts`、`combat-effects.ts`、`combat-particles.ts` | 连续碰撞与有预算的程序特效 |
-| `world-rules.ts`、`joystick-input.ts`、`desktop-keyboard.ts` | 1.5倍地图/相机/出生、固定摇杆、电脑输入 |
+| `world-rules.ts`、`joystick-input.ts`、`desktop-keyboard.ts` | 1.5倍地图/相机/出生、随落指激活的左下摇杆、电脑输入 |
 
 所有源码位于assets/scripts；资源.meta随源文件保存。完整说明按skill索引阅读。**后续变更必须同任务更新对应skill参考，再skill:sync/check，不绕过来源指纹检查。**
 

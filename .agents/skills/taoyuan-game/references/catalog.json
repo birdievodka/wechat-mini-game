@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "game": {
     "name": "桃园小英雄",
-    "version": "stage-v11.0.20-game-club",
+    "version": "stage-v11.0.22-no-damage-numbers",
     "creator": "3.8.8"
   },
   "provenance": {
-    "fingerprint": "a3fdfe1c4d7b727840fde0ca6ae0e9ea5d08cd3b153afbdc6b17d0e865a19a2c",
+    "fingerprint": "f27964bd0396828e73e33c08481ff6e50ae1eeba5dc38fb7133d5c7eeb810a9e",
     "files": [
       {
         "path": ".agents/skills/cocos-game-vfx/agents/openai.yaml",
@@ -50,8 +50,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/art-ui-audio.md",
-        "bytes": 44022,
-        "sha256": "8578e7549163a40d380d82e240fbec464e15756d8c799a53e54a2668a6a9f12e"
+        "bytes": 44006,
+        "sha256": "387579b1e370eaeb2c176effe40b18ee0d188ec00c926e92770de52817622474"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/chapter-zhangjiao.md",
@@ -65,8 +65,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/common-skills.md",
-        "bytes": 6561,
-        "sha256": "2009aaecca9278090acc779ff807f298e749be23f2486ababe5fbb5de2e035aa"
+        "bytes": 6832,
+        "sha256": "cf9fc26844f8448f37830b04535a16bfb12f676bdca7928aa2ce1b146c30ea15"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/enemy-actions.md",
@@ -75,8 +75,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/engineering.md",
-        "bytes": 37691,
-        "sha256": "88b6d2cb624839133e125f5f0c415d236eb628f4ae7571fd19d3c3058b71527c"
+        "bytes": 42430,
+        "sha256": "c9bb47563def59f07d4f900bb3b26c718b7ae3dab3c643739b09234871c5405c"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/expansion-v4.md",
@@ -85,8 +85,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/gameplay.md",
-        "bytes": 9844,
-        "sha256": "2dbb6142cab71a84f4ffc6b7c950d9b9827b412e7410587cf34ae7a6d2ecf766"
+        "bytes": 11060,
+        "sha256": "5cc4ba2e99aff85e22bc1cc97aa1b057e0da6c6a7dd876aae3c70904ab690809"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/hero-arms.md",
@@ -115,8 +115,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/performance.md",
-        "bytes": 61371,
-        "sha256": "0afdf305493d155781ad85aa7a1ee0eafe8f1b9ce968d1859547869fd32c45a9"
+        "bytes": 66166,
+        "sha256": "6de209eadd773417d8e9c618c017d52be01444f7810311c511347646bbc30c74"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/pets.md",
@@ -135,8 +135,8 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/references/result-screen.md",
-        "bytes": 2716,
-        "sha256": "938699a7056f888c40aa2b45a6230b51b9be342032d6411933bf8c5748631bf6"
+        "bytes": 3272,
+        "sha256": "e06246b6fb6022476ba98b36268cb3b126c31e9826d4b0cd6d924a3145880129"
       },
       {
         "path": ".agents/skills/taoyuan-game/references/seven-bosses.md",
@@ -175,13 +175,13 @@
       },
       {
         "path": ".agents/skills/taoyuan-game/scripts/sync-catalog.cjs",
-        "bytes": 24298,
-        "sha256": "70b3de69063b91feaaad6a053743db4fad9e383ee338f1fc9af929875fd1e622"
+        "bytes": 24337,
+        "sha256": "9f75fb7377ffd66a230a15f07ac78e64364950aff43508f1fba851182e1ce4a9"
       },
       {
         "path": ".agents/skills/taoyuan-game/SKILL.md",
-        "bytes": 25219,
-        "sha256": "e352ed3b7d49056975c8154e8390c3e47d15da549d8b09fc88fe50d8b114665e"
+        "bytes": 26701,
+        "sha256": "a5f809ac187c9148ef3160280eee4fc92ee5fd53348a9cf72a9669e2c19ff5b4"
       },
       {
         "path": ".agents/skills/taoyuan-weapon-design/SKILL.md",
@@ -195,8 +195,8 @@
       },
       {
         "path": "AGENTS.md",
-        "bytes": 23002,
-        "sha256": "84434bd0b7f2d3047f59c71ec452fa8bf489a46fdc48e35ee043f8737a69f631"
+        "bytes": 24119,
+        "sha256": "04cb109d1fa509aefebfaddd0d6e4497a5f79f6263d3f1724f53fb6aef3b276a"
       },
       {
         "path": "art/audio/review-v1/browser-validation.json",
@@ -5445,13 +5445,23 @@
       },
       {
         "path": "assets/scripts/battle-music.ts",
-        "bytes": 3649,
-        "sha256": "17662e59f4089f1970c429051224d638bdc5ca5341bba54dda4fc87f5754081e"
+        "bytes": 3797,
+        "sha256": "df18fbf2c4b0320642a5847f73654a69229305de52b9308701d255ac3b97a322"
       },
       {
         "path": "assets/scripts/battle-music.ts.meta",
         "bytes": 171,
         "sha256": "aa4f12d81451bdf76add4e652f7e763befc0cbeda09abf53069f1698100ee2b8"
+      },
+      {
+        "path": "assets/scripts/BattleHudText.ts",
+        "bytes": 4883,
+        "sha256": "8787fbeaf272b789ee9014f5f8084d9064a32a70076fddbdb4ffb5c2c0d1d84d"
+      },
+      {
+        "path": "assets/scripts/BattleHudText.ts.meta",
+        "bytes": 142,
+        "sha256": "bd12329e486a17d3d8f7b04ff6cfd8c9e86172dc980a8e78ac4a0b8ef94226f6"
       },
       {
         "path": "assets/scripts/BattleNumber.ts",
@@ -5545,8 +5555,8 @@
       },
       {
         "path": "assets/scripts/CampaignView.ts",
-        "bytes": 59264,
-        "sha256": "df45c361d52eb2540248d042fcc1780ec59fa7ca23e8cb9c3b2b4c520be1cca4"
+        "bytes": 61142,
+        "sha256": "ae557ac82c1e0cb0c34ddd10b711951e94aaae34254c1e01f596828a16909faf"
       },
       {
         "path": "assets/scripts/CampaignView.ts.meta",
@@ -5684,6 +5694,16 @@
         "sha256": "4a61e66936ecb20d5ab7a0c045de39569c53d9d5bc07ae48522b267814f7cda1"
       },
       {
+        "path": "assets/scripts/douyin-sidebar.ts",
+        "bytes": 4530,
+        "sha256": "cf3c2914576c90787a8eab9cb4364dd36de014b27f1aaa9a8005a8140d0fb89d"
+      },
+      {
+        "path": "assets/scripts/douyin-sidebar.ts.meta",
+        "bytes": 171,
+        "sha256": "da59744964464bcf5c8af5606cd130a5ddbe1a3a005fa823b28a8b8c546fac56"
+      },
+      {
         "path": "assets/scripts/endless.ts",
         "bytes": 1039,
         "sha256": "57d02ce4385351ef60e3a04a70c56c0b923b202cec710885220b8d4c24207977"
@@ -5775,8 +5795,8 @@
       },
       {
         "path": "assets/scripts/GameBootstrap.ts",
-        "bytes": 277490,
-        "sha256": "cccaecc15ea1cb412bf282fbf48e7c61ff4780fec5fc558e69a2a67a1c185cd1"
+        "bytes": 284024,
+        "sha256": "fd4993e0444607a35f59e03b614643d4da4c28a88b31d1095def59147de67937"
       },
       {
         "path": "assets/scripts/GameBootstrap.ts.meta",
@@ -5885,8 +5905,8 @@
       },
       {
         "path": "assets/scripts/joystick-input.ts",
-        "bytes": 1133,
-        "sha256": "55227c6d69c3f8833edd92f511046eb5eb66cf55d92c526267c5ba7dfadd9715"
+        "bytes": 2009,
+        "sha256": "6d282940d4df2a4f339b756d0a0bdaca7c5cd47944879c2c34e425b3f3efbeda"
       },
       {
         "path": "assets/scripts/joystick-input.ts.meta",
@@ -6105,8 +6125,8 @@
       },
       {
         "path": "assets/scripts/ResultView.ts",
-        "bytes": 10443,
-        "sha256": "f08cd7d4d67da916ce4bb016b419f8f1b1d79e83af9b64c2d9d2c8429cc068b8"
+        "bytes": 11496,
+        "sha256": "3ff35938d52a0619c8c37a1743a48371046e49f3976c6965543662dacd4d5cc2"
       },
       {
         "path": "assets/scripts/ResultView.ts.meta",
@@ -6155,8 +6175,8 @@
       },
       {
         "path": "assets/scripts/SkillSelectView.ts",
-        "bytes": 5276,
-        "sha256": "0d50d6fcaf565f6593b5b89d2374331d7499d020d2fbd35d3fec35f6d9373810"
+        "bytes": 6231,
+        "sha256": "7955ec366f9ac56334661ef4f8e3fa12d7bbaf8288c5021a80b9fb1f31bb7fff"
       },
       {
         "path": "assets/scripts/SkillSelectView.ts.meta",
@@ -6165,8 +6185,8 @@
       },
       {
         "path": "assets/scripts/stage-data.ts",
-        "bytes": 10540,
-        "sha256": "e323d6324d6e87893a497421dc3212a221f7a24e921e720daccb3c0a1dc8c403"
+        "bytes": 11134,
+        "sha256": "1b8de653cbbbd2e33fa486a5024445050f9e19060d0d79c03ee5dde84196e464"
       },
       {
         "path": "assets/scripts/stage-data.ts.meta",
@@ -6175,8 +6195,8 @@
       },
       {
         "path": "assets/scripts/stage-progress.ts",
-        "bytes": 8280,
-        "sha256": "f3830df58c49bfac7f08be05045c59a40d9b8cd6c2c8209a7bc89ff66893973d"
+        "bytes": 8686,
+        "sha256": "35c7748b989dd335f1017621726a64ed773934a3f363e9b76fe75279704d70e6"
       },
       {
         "path": "assets/scripts/stage-progress.ts.meta",
@@ -6195,8 +6215,8 @@
       },
       {
         "path": "assets/scripts/StageViews.ts",
-        "bytes": 23746,
-        "sha256": "874d69b9bc074b6470d286abfdd96f48a3b920f6f22cbdb90f0498b4bac7f6d8"
+        "bytes": 25914,
+        "sha256": "809d16faabfeb294ca9cb34f014acf4a4d1ba0a6f069d70e07391fe19a756294"
       },
       {
         "path": "assets/scripts/StageViews.ts.meta",
@@ -6215,8 +6235,8 @@
       },
       {
         "path": "assets/scripts/survival.ts",
-        "bytes": 18123,
-        "sha256": "aa39a363db39b04e38d5ce611540ff6249aee18cf12e50c08532d96e3f4a20d5"
+        "bytes": 18199,
+        "sha256": "df8ff9925acae964477ce51ce73e878666aec987c6be6afdfa65bd3fe9266743"
       },
       {
         "path": "assets/scripts/survival.ts.meta",
@@ -6327,6 +6347,16 @@
         "path": "assets/scripts/weapons.ts.meta",
         "bytes": 171,
         "sha256": "41a2d23e153d58ab77ea60b85c7006d0988d2b60234602dd261bd938612be87b"
+      },
+      {
+        "path": "assets/scripts/wechat-ads.ts",
+        "bytes": 4460,
+        "sha256": "b1d43b254bac8c769edff8f76a7fa4e710ade3e1c79e130cb03eaa40f2f31527"
+      },
+      {
+        "path": "assets/scripts/wechat-ads.ts.meta",
+        "bytes": 171,
+        "sha256": "8f90ddfb957bc019e1cb522b1108c4fd0a450a64bc66502f64b78c4f335281e1"
       },
       {
         "path": "assets/scripts/world-prop-art.ts",
@@ -7054,6 +7084,11 @@
         "sha256": "dfd44f24594b87dacfe17f3ff6e79d5612218eb317949cecf49a8818fb2a9c34"
       },
       {
+        "path": "build-templates/bytedance-mini-game/douyin-startup.js",
+        "bytes": 834,
+        "sha256": "424440044fb139dabb6d510abb17f62d2cf4f336ab99af059dd0f6eefe7f5b10"
+      },
+      {
         "path": "build-templates/wechatgame/first-screen.js",
         "bytes": 5592,
         "sha256": "3a6669cc4bf91ceed736e85542d7d4c77efafb74001f2a748db2a90b362821d9"
@@ -7080,8 +7115,8 @@
       },
       {
         "path": "config/build-wechat.json",
-        "bytes": 631,
-        "sha256": "220b3deea4a63867fb65dc6326e48162fc2c8027017aa73ff69615a9e2c3c0a1"
+        "bytes": 666,
+        "sha256": "ef153aa02aef021b4a60bffc53a0cb3114811a06b6f8dd85676e6d95ecce06b8"
       },
       {
         "path": "config/cdn.json",
@@ -8145,8 +8180,8 @@
       },
       {
         "path": "package.json",
-        "bytes": 2540,
-        "sha256": "60e125b3fdb494ab9ec82b0706dd648087efcf40bb27e2c3503c25388a9bbb1c"
+        "bytes": 2730,
+        "sha256": "c264c328910157aeb6b1ebf46fa3040c4a13139f7c2377a1e47ef9be9b744681"
       },
       {
         "path": "project.config.json",
@@ -8155,8 +8190,8 @@
       },
       {
         "path": "README.md",
-        "bytes": 7885,
-        "sha256": "4823267a3741532dfbe01b839c745952a13bb920bed2ec2cfa317491af287179"
+        "bytes": 7903,
+        "sha256": "25fc4929843e87be79319440228062b3be0be014e868d69ddf5e79fb67a64c57"
       },
       {
         "path": "scripts/__pycache__/battle_score.cpython-313.pyc",
@@ -8179,14 +8214,19 @@
         "sha256": "7d7347ce4e8f99d2f4e265990d524433f7d6948c7d3ae8fa0705db06c21499d5"
       },
       {
+        "path": "scripts/build-douyin.cjs",
+        "bytes": 3051,
+        "sha256": "af8142f1b0e1c75c18dde0f51ea6f32cdb7a0b4e355e0b72e1d1af4ed9382929"
+      },
+      {
         "path": "scripts/build-review.cjs",
         "bytes": 769,
         "sha256": "0295ff43859f36ea067332f67a9fa48872e34067781d174e75a9f208d030ab75"
       },
       {
         "path": "scripts/build-wechat.cjs",
-        "bytes": 2818,
-        "sha256": "1db57482f4aa841ff6fb3bb87ab6712ba7b4564cfe683ad01e7ce36378a3f510"
+        "bytes": 3124,
+        "sha256": "6bf0b511b808b1d69d615bed2f8941eb090ef06d4158ab4f17124a9ecfaf33f2"
       },
       {
         "path": "scripts/capture-all-ground-review.mjs",
@@ -8275,8 +8315,8 @@
       },
       {
         "path": "scripts/capture-redesign-wechat.cjs",
-        "bytes": 5254,
-        "sha256": "6741e02c696279dd28a7af82c4a84dd42827bb6cf33a9b5cf7dae4bcead09429"
+        "bytes": 5282,
+        "sha256": "473fea78566859586012cb4538d7f0b53f991b94b271f1cbe9b4ded50c46f0fb"
       },
       {
         "path": "scripts/capture-sandal-review.mjs",
@@ -8334,9 +8374,14 @@
         "sha256": "ee22f95bf6399db93aa824d7ec09bb790a61361dda5a3e087cd00028c7e0acaf"
       },
       {
+        "path": "scripts/check-douyin-package.cjs",
+        "bytes": 4508,
+        "sha256": "a4b9ca50c27348209af6dad612bf8820416658b9186c5517792c1aef49a967a0"
+      },
+      {
         "path": "scripts/check-engine-imports.cjs",
-        "bytes": 1634,
-        "sha256": "b4a5f6cd60226a97bc6a3ee063eaf6ad12541e65768209afb0793314eab06d74"
+        "bytes": 1841,
+        "sha256": "34b4e378d910ce21b691a7da3ebfaab8b8fbbb100c8d7bce36c3a578519c8558"
       },
       {
         "path": "scripts/check-package-size.cjs",
@@ -8590,13 +8635,13 @@
       },
       {
         "path": "scripts/test-battle-balance.cjs",
-        "bytes": 8381,
-        "sha256": "395d2f19a8f4dc0c69f81a1b2d7a1221bb5b3262d3a7ce91806aa5e5f54c80b8"
+        "bytes": 8953,
+        "sha256": "99ffbb01b940f27c80154061c5c9e2248f0230e37d9aeecf6f02a69212981c48"
       },
       {
         "path": "scripts/test-battle-text.cjs",
-        "bytes": 6423,
-        "sha256": "a14f1becb4fcce943dea0714030cc9dab5e90fbfde284fe7a775930199f3eece"
+        "bytes": 9537,
+        "sha256": "f92700a96b1b44cd8450925cfc833a16d0c32101802c565fbd111117ccd92aa6"
       },
       {
         "path": "scripts/test-bosses.cjs",
@@ -8605,8 +8650,8 @@
       },
       {
         "path": "scripts/test-campaign.cjs",
-        "bytes": 91978,
-        "sha256": "6139b0ec2267617045fbe0cdd2d3dd25d8c6295d887ee481a07ba17cec1549d9"
+        "bytes": 92245,
+        "sha256": "de344d42acdee6a3e080688d38c9b73fb728c3eaa246f35ee2ec8085f538486e"
       },
       {
         "path": "scripts/test-chronicles.cjs",
@@ -8620,13 +8665,18 @@
       },
       {
         "path": "scripts/test-combat.cjs",
-        "bytes": 16248,
-        "sha256": "a7a7b67eaf0d065fdff95c20cef8af84a3fee3c5eba5ab39e97986710d159fed"
+        "bytes": 16959,
+        "sha256": "9cb0671525ab7455dcf7b4d601769f822b3ede02ca70a9068cd4eb1add9493bd"
       },
       {
         "path": "scripts/test-common-skills.cjs",
         "bytes": 12654,
         "sha256": "6215817893accaf0b4cf3da90236831c3bc67ad0f230169ace26efcf2bc19dd3"
+      },
+      {
+        "path": "scripts/test-douyin-sidebar.cjs",
+        "bytes": 5003,
+        "sha256": "128f2dab937dbcba1194e4e10c6ccc7e229f6d4cf25cd74405ca298d9141d61c"
       },
       {
         "path": "scripts/test-endless-settings.cjs",
@@ -8680,8 +8730,8 @@
       },
       {
         "path": "scripts/test-music.cjs",
-        "bytes": 4555,
-        "sha256": "cb81c181ea887dd1656798af5d9156d2b8cb738b8d8fb928cce8711b8a3d7e2e"
+        "bytes": 5437,
+        "sha256": "8710dd41574da49ff0ac2da7d2c57f59b068296c2e88c4f0a5bf4c0e154c88b3"
       },
       {
         "path": "scripts/test-native-audio-files.cjs",
@@ -8777,6 +8827,11 @@
         "path": "scripts/test-weapons.cjs",
         "bytes": 10586,
         "sha256": "ff0dcc9ddfe89b733aad325503fdc7958c8c1131692d19a9238341ea6f4146a6"
+      },
+      {
+        "path": "scripts/test-wechat-ads.cjs",
+        "bytes": 10577,
+        "sha256": "6000041ec998076d35c74f98f55168b326e624cf4bd6649fdd9596635dc8291c"
       },
       {
         "path": "scripts/test-wechat-text-measure.cjs",
@@ -9941,6 +9996,10 @@
       0.42
     ],
     "shooterWeight": 1.5,
+    "bossWaveRanged": {
+      "costShareMultiplier": 1.1,
+      "weightMultiplier": 1.2
+    },
     "yellowChargers": {
       "count": 3,
       "hp": 2400,
@@ -10418,15 +10477,18 @@
   },
   "controls": {
     "joystick": {
-      "radius": 96,
-      "knob": 36,
-      "travel": 60,
-      "activation": 140,
-      "insetX": 165,
+      "radius": 120,
+      "knob": 44,
+      "travel": 74,
+      "insetX": 182,
       "insetY": 160,
-      "deadzone": 0.06,
-      "fullSpeed": 0.8,
-      "response": 0.7
+      "activationWidth": 360,
+      "activationHeight": 324,
+      "edgePadding": 12,
+      "weaponHudClearance": 232,
+      "deadzone": 3,
+      "fullSpeed": 44,
+      "response": 0.62
     }
   },
   "startup": {
