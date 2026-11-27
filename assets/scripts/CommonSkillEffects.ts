@@ -1,5 +1,6 @@
 import {Graphics} from 'cc';
-import {METEOR_COUNT,SKY_VOLLEY_SIZE,SkyPoint} from './common-skills';
+import {pixel} from './vfx-materials';
+import {SKY_VOLLEY_SIZE,SkyPoint,isHeavyStar} from './common-skills';
 import {CombatParticles} from './combat-particles';
 import {drawGoldenSweep,drawSweepContact} from './sweep-effects';
 import * as art from './skill-vfx-v10';
@@ -59,11 +60,11 @@ export class CommonSkillEffects {
  private remove(v:Visual):void{v.active=false;const i=this.visuals.indexOf(v);if(i>=0)this.visuals.splice(i,1);}
  setCount(kind:string,count:number):void{for(const v of this.visuals)if(v.kind===kind)v.count=count;}
  endpoint(id:string,x:number,y:number):void{for(const v of this.visuals)if(v.id===id&&v.kind==='dash'){v.tx=x;v.ty=y;}}
- flight(token:number,x:number,y:number,angle:number,alive:boolean):void{
+ flight(token:number,x:number,y:number,angle:number,alive:boolean,heavy=false):void{
   let v=this.visuals.find(v=>v.kind==='flight'&&v.token===token);
   if(!alive){if(v)this.remove(v);return;}
   if(!v){v=this.play('G08','flight',x,y,angle,100,.6);if(!v)return;v.token=token;}
-  v.x=x;v.y=y;v.angle=angle;
+  v.x=x;v.y=y;v.angle=angle;v.count=heavy?1:0;
  }
  /** Haste accents only accompany real weapon releases, at most one accent per 70ms. */
  weaponStrike(x:number,y:number,angle:number):void{
@@ -89,27 +90,34 @@ export class CommonSkillEffects {
     for(let part=0;part<v.sky.length;part++){
      const point=v.sky[part],index=v.angle*SKY_VOLLEY_SIZE+part;
      if(Math.abs(point.x-cx)>hw+r+400||Math.abs(point.y-cy)>hh+r+400)continue;
-     if(meteor)art.drawMeteor(ground,air,point.x,point.y,r,v.age,v.life,pre,index,part!==0&&index!==METEOR_COUNT-1);
+     if(meteor)art.drawMeteor(ground,air,point.x,point.y,r,v.age,v.life,pre,index,part!==0&&!isHeavyStar(v.angle));
      else art.drawLightning(ground,air,point.x,point.y,r,v.age,v.life,pre,index,part!==0);
     }
     continue;
    }
    if(Math.abs(x-cx)>hw+r+400||Math.abs(y-cy)>hh+r+400)continue;
    if(v.kind==='sweep')drawGoldenSweep(ground,air,x,y,v.angle,r,v.age,v.life);
-   else if(v.kind==='sweep-hit')drawSweepContact(ground,air,x,y,v.angle,r,v.age,v.life);
-   else if(v.kind==='contact'||v.kind==='guard-hit')art.drawSkillContact(air,x,y,v.angle,v.age,v.life,v.id==='G19'||v.id==='G20'?10:v.id==='G12'||v.id==='G25'?9:1);
+   else if(v.kind==='sweep-hit'){
+    drawSweepContact(ground,air,x,y,v.angle,r,v.age,v.life);
+    pixel(air,'hit',x,y,r*2.3,v.angle,f*.86,v.age/v.life);
+   }
+   else if(v.kind==='contact'||v.kind==='guard-hit'){
+    art.drawSkillContact(air,x,y,v.angle,v.age,v.life,v.id==='G19'||v.id==='G20'?10:v.id==='G12'||v.id==='G25'?9:1);
+    pixel(air,v.kind==='guard-hit'?'block':v.id==='G12'?'splash':'hit',x,y,v.kind==='guard-hit'?104:63,v.kind==='guard-hit'?0:v.angle,f,v.age/v.life,Number(v.kind==='guard-hit'));
+   }
    else if(v.kind==='lock-hit')art.drawLockHit(air,x,y,v.age,v.life);
-   else if(v.kind==='flight'||v.kind==='arrow')art.drawFlight(air,x,y+24,v.angle,f);
+   else if(v.kind==='flight'||v.kind==='arrow')art.drawFlight(air,x,y+24,v.angle,f,v.count===1);
    else if(v.kind==='bow')art.drawBow(ground,air,x,y,v.angle,v.age,v.life);
    else if(v.kind==='dash')art.drawDash(ground,air,x,y,v.tx,v.ty,v.angle,v.age,v.life);
    else if(v.kind==='battle-haste')art.drawBattleHaste(ground,air,x,y,v.age,f);
    else if(v.kind==='haste-strike')art.drawHasteStrike(air,x,y,v.angle,v.age,v.life);
-   else if(v.kind==='fire-line')art.drawFireLine(ground,air,x,y,r,v.age,v.life);
+   else if(v.kind==='fire-line')art.drawFireLine(ground,air,x,y,r,v.angle,v.age,v.life);
+   else if(v.kind==='fire-beat')art.drawFireBeat(air,x,y,r,v.angle,v.age,v.life);
    else if(v.kind==='water')art.drawWave(ground,air,x,y,r,v.age,v.life);
    else if(v.kind==='gates')art.drawGates(ground,air,x,y,r,v.age,f);
    else if(v.kind==='lightning'||v.kind==='lightning-pre')art.drawLightning(ground,air,x,y,r,v.age,v.life,v.kind==='lightning-pre',v.angle);
    else if(v.kind==='meteor'||v.kind==='meteor-fall')art.drawMeteor(ground,air,x,y,r,v.age,v.life,v.kind==='meteor-fall',v.angle);
-   else if(v.kind==='rain')art.drawRain(ground,air,x,y,r,v.age,v.life);
+   else if(v.kind==='rain')art.drawRain(ground,air,x,y,r,v.angle,v.age,v.life);
    else if(v.kind==='sword-guard')art.drawGuard(ground,air,x,y,r,v.angle,v.age,f,v.count);
    else if(v.kind==='stun')art.drawStun(ground,air,x,y,r,v.age,v.life);
   }

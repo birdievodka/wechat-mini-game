@@ -4,7 +4,7 @@ import {PetRuntime,petName} from './pets';
 import {PetView,drawPetEffects} from './PetView';
 import {VfxMaterials} from './vfx-materials';
 import {drawWeaponField} from './weapon-vfx';
-import {drawEnemyZone,drawEnemyFlight,drawBirthDust,drawEliteAttack} from './enemy-vfx-v10';
+import {applyArrowArt,courierSpear,drawEnemyZone,drawEnemyFlight,drawBirthDust,drawEliteAttack} from './enemy-vfx-v10';
 import * as vfxBrush from './vfx-brush';
 import {ensurePetArt,petArtReady,releasePetArt} from './pet-art';
 import {trackGraphicsContent} from './graphics-content';
@@ -16,7 +16,10 @@ import {NativeAudioFiles} from './native-audio-files';
 import {NativeMusic} from './native-music';
 import {addPanelClose} from './panel-ui';
 import {HeroMount} from './HeroMount';
-import {drawGrowthAttack,drawMountDash} from './growth-effects';
+import {
+  drawGrowthAttack,drawSignatureEdge,drawSignatureFlight,drawSignatureJab,drawMountDash,
+  poseSignatureGrip,signatureDrive,SIGNATURE_CONTACT,SignatureGrip,
+} from './growth-effects';
 import {growthClears,growthTitle,signatureId,dashName,newMountDash,beginMountDash,stepMountDash} from './hero-growth';
 import {drawEnemyAction} from './enemy-action-effects';
 import {NpcActionRig,NpcRigAtlas} from './NpcActionRig';
@@ -59,7 +62,7 @@ import { RuntimeHealth, ReleaseHealth, HealthHost, SupplyStep } from './runtime-
 import {renderDiagnostics} from './render-diagnostics';
 import {ClipboardHost,copyRuntimeReport} from './runtime-report';
 import { BattleMusic, MUSIC_SCENES, MusicSource } from './battle-music';
-import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound, bossSound, skillSound, enemySound, soundAsset } from './weapon-sound';
+import { SoundId, SoundEvent, SOUND_CUES, GENERATED_SOUNDS, SFX_VOICES, SoundGate, weaponSound, bossSound, skillSound, skillAccentSound, enemySound, soundAsset } from './weapon-sound';
 import { movement, sweepEllipseTime, sectorHitsCircle } from './combat-math';
 import { JOYSTICK, canStartJoystick, joystickActiveCenter, joystickCenter, joystickVector, joystickThumb } from './joystick-input';
 import {ParticleSprites} from './ParticleSprites';
@@ -85,10 +88,14 @@ import {WeChatAds} from './wechat-ads';
 import type {AdAction,FreeSupplyStatus,SkillAdAction,WeChatAdHost} from './wechat-ads';
 declare const wx: (WeChatKeyboard & HealthHost & NativeSoundHost & ClipboardHost & WeChatAdHost & {
   getAccountInfoSync?:()=>{miniProgram?:{envVersion?:string}};
+  onAudioInterruptionBegin?:(fn:()=>void)=>void;
+  offAudioInterruptionBegin?:(fn:()=>void)=>void;
+  onAudioInterruptionEnd?:(fn:()=>void)=>void;
+  offAudioInterruptionEnd?:(fn:()=>void)=>void;
   showShareMenu?:(options:{fail:(error:{errMsg?:string})=>void})=>void;
   showToast?:(options:{title:string;icon:'none'})=>void;
 }) | undefined;
-declare const GameGlobal: {isIOSHighPerformanceMode?:boolean} | undefined;
+declare const GameGlobal: {isIOSHighPerformanceMode?:boolean;__taoyuanUploadBuild?:boolean} | undefined;
 import { HeroId, EnemyKind, Phase, Run, Stats, Upgrade, ITEMS, WAVE_NAMES, WAVE_SECONDS,
   createRun, heroFor, statsFor, gainXp, xpNeeded, damageTaken, regenPerSecond, buyItem, rollShop, rerollShop,
   availableUpgrades, randomSample, chooseUpgrade, waveRule, enemyKind, enemyStats, stipendFor, waveOutcome } from './campaign';
@@ -104,6 +111,8 @@ for(const {id} of CHRONICLE_ENEMIES)enemyStandingKeys.set(id,['enemy-'+id+'-fron
 for(const {bossId} of CHAPTERS)enemyStandingKeys.set(bossId,['boss-'+bossId,'boss-'+bossId]);
 for(const id of ['lvbu','xiahoudun','machao'])enemyStandingKeys.set(id,['mount-'+id+'-front','mount-'+id+'-back']);
 const HERO_ART_SCALE = .90;
+const signatureHeight=(growth:number):number=>growth>=2?29:20;
+const signatureTurn=(phase:number,angle:number):number=>(phase===0?1:-1)*(Math.cos(angle)<0?-1:1);
 // Orbit paths and their trails are in battlefield units, independent of rider size.
 const WORLD_UNITS_IN_HERO = 1 / HERO_ART_SCALE;
 const BOSS_ART_SCALE = .94;
@@ -153,7 +162,7 @@ export interface Enemy { npcRig?:NpcActionRig; gruntPose?:GruntPose;chargeGhosts
   vx: number; vy: number; speed: number; feedback: number;
 }
 interface Coin { value?:number; node: Node; art: Node; x: number; y: number; age: number; active: boolean; attracted: boolean; }
-interface Projectile { atlasArt?:Sprite; returning?:boolean;returnLeg?:boolean;ownerUid?:number; artTier?:Tier; node: Node; x: number; y: number; angle: number; remaining: number; damage: number; weaponId: WeaponId; stats: WeaponStats; hit: Set<Enemy>; fxClock?:number; bounceLeft?: number; bounced?: boolean; secondary?: boolean; group?: {hits: Map<Enemy,number>; max: number};
+interface Projectile { signatureForm?:'wave'|'thrust'; atlasArt?:Sprite; returning?:boolean;returnLeg?:boolean;ownerUid?:number; artTier?:Tier; node: Node; x: number; y: number; angle: number; remaining: number; damage: number; weaponId: WeaponId; stats: WeaponStats; hit: Set<Enemy>; fxClock?:number; bounceLeft?: number; bounced?: boolean; secondary?: boolean; group?: {hits: Map<Enemy,number>; max: number};
   launchX?:number;launchY?:number;sandalBounces?:number;pierceBurst?:Set<Enemy>;
 }
 interface FriendlyField {id:WeaponId;uid:number;x:number;y:number;radius:number;life:number;next:number;damage:number;stats:WeaponStats;hit:Map<Enemy,number>;group?:{hits:Map<Enemy,number>;max:number};}
@@ -173,6 +182,7 @@ interface Weapon { extraPhase?:number;extraCooldown?:number;
 export class GameBootstrap extends Component {
   private mount?:HeroMount;
   private mountDash=newMountDash();
+  private readonly signatureGrip:SignatureGrip={x:0,y:0,angle:0,offX:0,offY:0,offAngle:0};
   private dashButton?:Node;private dashLabel?:HudLabel;private dashDrawHero='';private dashDrawSecond=-1;
   private chapterEntry?:SavePoint;
   private savedPoint?:SavePoint;
@@ -655,6 +665,10 @@ private playerSlowUntil=0;
     );
     game.on(Game.EVENT_HIDE, this.onBackground, this);
     game.on(Game.EVENT_SHOW, this.onForeground, this);
+    if(typeof wx!=='undefined'&&wx?.onAudioInterruptionBegin&&wx.onAudioInterruptionEnd){
+      notifySafely(()=>wx?.onAudioInterruptionBegin?.(this.onMusicInterruption));
+      notifySafely(()=>wx?.onAudioInterruptionEnd?.(this.onMusicInterruptionEnd));
+    }
     this.observedCanvas=game.canvas??undefined;
     notifySafely(()=>this.observedCanvas?.addEventListener?.('webglcontextlost',this.onGraphicsContextLost));
     notifySafely(()=>this.observedCanvas?.addEventListener?.('webglcontextrestored',this.onGraphicsContextRestored));
@@ -1066,6 +1080,10 @@ private playerSlowUntil=0;
           if(w.equipped.id==='heavy-crossbow')w.duration=Math.max(w.duration,heavyCrossbowRelease);
           const aim = this.enemyHitCenter(target); w.aimX = aim.x; w.aimY = aim.y;
           w.angle = Math.atan2(target.y - this.py, target.x - this.px);
+          if(this.run.heroId==='zhangfei'&&w.strikes%3!==0&&this.isEvolvedSignature(w.equipped)){
+            const aimX=aim.x-this.px,aimY=aim.y-this.py-signatureHeight(this.run.growth||0);
+            if(aimX!==0||aimY!==0)w.angle=Math.atan2(aimY,aimX);
+          }
           w.damage = Math.round(w.stats.damage * (Math.random() < w.stats.crit ? w.stats.critMultiplier : 1));
           w.cooldown = w.stats.interval;
         }
@@ -1144,12 +1162,19 @@ private playerSlowUntil=0;
     const sway = Math.sin(this.walkPhase) * 1.4 * this.walkBlend;
     this.body.node.setPosition(sway, -1 + this.torsoBob);
     this.body.node.angle = this.lean + Math.sin(this.walkPhase) * 2.5 * this.walkBlend + pose.bodyAngle+(sweep*12+(cast?.body||0))*this.facing;
-    const main=this.weapons.find(w=>this.isEvolvedSignature(w.equipped)&&w.time<w.duration),action=main?Math.sin(main.time/main.duration*Math.PI):0,combo=main?((main.strikes||1)-1)%3:0;this.body.node.angle+=action*(combo===1?-5:combo===2?9:4)*this.facing;
+    const main=this.weapons.find(w=>this.isEvolvedSignature(w.equipped)&&w.time<w.duration);
+    const combo=main?((main.strikes||1)-1)%3:0;
+    const action=main?(combo===2?Math.sin(main.time/main.duration*Math.PI):signatureDrive(main.time/main.duration)):0;
+    const turn=main&&combo<2?signatureTurn(combo,main.angle):this.facing;
+    const thrust=main&&combo<2&&this.run.heroId==='zhangfei';
+    const bodyTurn=thrust?-Math.cos(main.angle)*14:turn*(combo===2?9:12);
+    this.body.node.angle+=action*bodyTurn;
+    if(thrust)this.body.node.setPosition(sway+Math.cos(main.angle)*action*7,-1+this.torsoBob);
     const squash = Math.cos(this.walkPhase * 2) * 0.025 * this.walkBlend - pose.breath+Math.abs(sweep)*.025+(cast?.squash||0);
     this.body.node.setScale(this.facing * (1 + squash), 1 - squash, 1);
     if(this.headPivot){
       this.headPivot.setPosition(sway+pose.headX+sweep*2*this.facing,18+this.torsoBob+pose.headY);
-      this.headPivot.angle=this.lean*.6+Math.sin(this.walkPhase)*1.8*this.walkBlend+(pose.headAngle-sweep*5+(cast?.head||0))*this.facing-action*(combo===2?3:1)*this.facing;
+      this.headPivot.angle=this.lean*.6+Math.sin(this.walkPhase)*1.8*this.walkBlend+(pose.headAngle-sweep*5+(cast?.head||0))*this.facing-action*(thrust?bodyTurn*.34:turn*3);
       this.headPivot.setScale(this.facing,1,1);
       const frame=pose.eyesClosed?this.headClosed:this.headOpen;if(frame&&this.head.spriteFrame!==frame)this.head.spriteFrame=frame;
     }
@@ -1260,7 +1285,8 @@ private playerSlowUntil=0;
     }else if(frame){
       if(!sprite){sprite=this.node2D(w.shoe,'WeaponSprite').addComponent(Sprite);sprite.sizeMode=Sprite.SizeMode.CUSTOM;}
       const n=sprite.node,layout=n.getComponent(UITransform)!;
-      sprite.spriteFrame=frame;layout.setAnchorPoint(.5,signature ? .22 : .5);layout.setContentSize(signature?90:78,signature?90:78);
+      sprite.spriteFrame=frame;const polearm=signature&&this.run.heroId!=='liubei';
+      layout.setAnchorPoint(.5,polearm?43/128:signature?.22:.5);layout.setContentSize(polearm?128:signature?90:78,polearm?128:signature?90:78);
       n.setPosition(0,signature?0:18);n.angle=!signature&&(['smg','shotgun','rocket'].indexOf(id)>=0||isExtraWeapon(id))?45:0;
     }else sprite=undefined;
     if(sprite){
@@ -1333,9 +1359,14 @@ private playerSlowUntil=0;
     const signature=this.isEvolvedSignature(w.equipped);const orbit = this.run.weapons.length>1&&!signature, anchor = orbitAnchor(index,this.run.weapons.length,this.age);
     const idleX = orbit ? anchor.x : side*(HERO_ARMS.heldX+(signature?8:0)), idleY = orbit ? anchor.y + this.torsoBob : HERO_ARMS.heldY+this.torsoBob+sway;
     const active = t < 1;
+    const phase=((w.strikes||1)-1)%3;
+    const relaxedOffY=HERO_ARMS.heldY+this.torsoBob;
+    const grip=signature&&active&&phase<2?this.signatureGrip:undefined;
+    if(grip)poseSignatureGrip(grip,this.run.heroId,t,w.angle,signatureTurn(phase,w.angle),side,
+      idleX,idleY,relaxedOffY,signatureHeight(this.run.growth||0)/HERO_ART_SCALE);
     const extend = active ? Math.sin(t * Math.PI) * (melee ? HERO_ARMS.meleeReach : HERO_ARMS.rangedReach) : 0;
-    const sweep = w.angle + (melee ? (t - .45) * w.stats.arc * Math.PI / 180 : 0);
-    const hx = idleX + Math.cos(sweep) * extend, hy = idleY + Math.sin(sweep) * extend;
+    const sweep = grip?.angle ?? (w.angle + (melee ? (t - .45) * w.stats.arc * Math.PI / 180 : 0));
+    const hx = grip?.x ?? idleX + Math.cos(sweep) * extend, hy = grip?.y ?? idleY + Math.sin(sweep) * extend;
     const arm = w.arm;
     if(this.presentSubstep&&!orbit){arm.clear();drawHeroSleeve(arm,side,{x:hx,y:hy},this.torsoBob,heroFor(this.run).color,this.run.heroId);}
     arm.node.active=!orbit;
@@ -1346,12 +1377,18 @@ private playerSlowUntil=0;
     w.fist.node.active=!orbit;if(!orbit)w.fist.update(this.run.heroId,side,true,w.equipped.id==='sandal');
     if(this.presentSubstep&&melee)w.trail.clear();
 
-    const release = w.equipped.id==='heavy-crossbow'?Math.min(w.duration,heavyCrossbowRelease):w.duration*.35;
-    if(signature&&melee){const phase=(this.run.growth||0)>=3?((w.strikes||1)-1)%3:((w.strikes||1)-1)%2;if(!w.strikeStarted&&oldTime<w.duration*.35&&w.time>=w.duration*.35)this.signatureStrike(w,phase);}
-    else if(melee&&isExtraWeapon(w.equipped.id))this.extraMelee(w,oldTime);else if(melee&&oldTime<w.duration*.7&&w.time>=w.duration*.2)this.meleeStrike(w);
+    const release = w.equipped.id==='heavy-crossbow'?Math.min(w.duration,heavyCrossbowRelease):w.duration*SIGNATURE_CONTACT;
     w.offhand.active = signature;
-    if(signature){const ox=-side*(HERO_ARMS.heldX+8),oy=HERO_ARMS.heldY+this.torsoBob+(active?Math.sin(t*Math.PI)*10:0);w.offhand.setPosition(ox,oy);w.offhand.angle=this.run.heroId==='liubei'?(active?w.angle*180/Math.PI-90+(w.strikes!%2?40:-40):side*12):0;if(this.presentSubstep)drawHeroSleeve(arm,-side,{x:ox,y:oy},this.torsoBob,heroFor(this.run).color,this.run.heroId);}
-    if (w.offhand.active&&!signature) w.offhand.setPosition(hx - w.side * (14 + extend), hy + 19);
+    if(signature){
+      const twin=this.run.heroId==='liubei',offDrive=active&&twin&&phase===2?Math.sin(t*Math.PI)*28:0;
+      const ox=grip?.offX ?? -side*(HERO_ARMS.heldX+8)+Math.cos(w.angle)*offDrive;
+      const oy=grip?.offY ?? relaxedOffY+Math.sin(w.angle)*offDrive+(active?Math.sin(t*Math.PI)*10:0);
+      w.offhand.setPosition(ox,oy);
+      w.offhand.angle=twin?(grip?grip.offAngle*180/Math.PI-90:active?w.angle*180/Math.PI-90+(w.strikes!%2?40:-40):side*12):0;
+      if(this.presentSubstep)drawHeroSleeve(arm,-side,{x:ox,y:oy},this.torsoBob,heroFor(this.run).color,this.run.heroId);
+    }
+    if(signature&&melee){if(!w.strikeStarted&&oldTime<release&&w.time>=release)this.signatureStrike(w,phase);}
+    else if(melee&&isExtraWeapon(w.equipped.id))this.extraMelee(w,oldTime);else if(melee&&oldTime<w.duration*.7&&w.time>=w.duration*.2)this.meleeStrike(w);
     if (oldTime < release && w.time >= release) {
       if (!melee) {
         const x = this.px + hx * HERO_ART_SCALE, yy = this.py + (hy + 15) * HERO_ART_SCALE;
@@ -1396,16 +1433,35 @@ private playerSlowUntil=0;
   }
 
   private signatureStrike(w:Weapon,phase:number):void {
-    if(w.strikeStarted)return;w.strikeStarted=true;const s=w.stats!,id=this.run.heroId,third=(this.run.growth||0)>=3&&phase===2,c=Math.cos(w.angle),sn=Math.sin(w.angle);let hits=0;
+    if(w.strikeStarted)return;
+    w.strikeStarted=true;
+    const s=w.stats!,id=this.run.heroId,third=phase===2,angle=w.angle,c=Math.cos(angle),sn=Math.sin(angle);
+    const damage=w.damage*(third&&(this.run.growth||0)>=3?1.5:1);
+    const y=this.py+signatureHeight(this.run.growth||0);
+    if(third&&id!=='guanyu'){
+      const wave=id==='liubei',start=wave?45:0,range=wave?280:390;
+      this.launchProjectile(this.px+c*start,y+sn*start,angle,w.equipped!,
+        {...s,range,speed:wave?650:3900,pierce:wave?2:79,pierceFactor:1,area:0,bounce:0},
+        damage,false,undefined,wave?'wave':'thrust');
+      return;
+    }
     this.playWeaponSound(w.equipped!.id,'attack');
-    for(const e of this.enemies){if(e.hp<=0||(e.born||0)>0||w.hit.has(e))continue;const p=this.enemyHitCenter(e),dx=p.x-this.px,dy=p.y-this.py-20,along=dx*c+dy*sn,across=-dx*sn+dy*c;
-      const radius=e.kind==='chief'?60:e.kind==='cavalry'?32:24;let hit=false;
-      if(id==='liubei'&&third)hit=along>=-radius&&along<=Math.min(260,s.range*1.3)+radius&&Math.abs(across)<=42+radius;
-      else if(id==='zhangfei'&&third)hit=Math.hypot(dx-c*45,dy-sn*45)<=125+radius;
-      else if(id==='zhangfei'&&phase===0)hit=along>=-radius&&along<=s.range+radius&&Math.abs(across)<25+radius;
-      else hit=sectorHitsCircle(dx,dy,s.range*(third?1.15:1),w.angle,third?Math.min(220,s.arc+45):id==='zhangfei'?120:s.arc,radius);
-      if(!hit)continue;w.hit.add(e);hits++;this.hitEnemy(e,Math.atan2(dy,dx),w.damage*(third?1.5:1),s.knockback,w.equipped!.id,false,false,w.equipped!.tier);if(id==='liubei'&&third&&hits>=3)break;
-    }if(hits)this.playWeaponSound(w.equipped!.id,'hit',third);
+    let connected=false;
+    for(const e of this.enemies){
+      if(e.hp<=0||(e.born||0)>0||w.hit.has(e)||bossBeastCharging(e))continue;
+      const p=this.enemyHitCenter(e),dx=p.x-this.px,dy=p.y-y,along=dx*c+dy*sn,across=-dx*sn+dy*c;
+      const radius=e.kind==='chief'?60:e.kind==='cavalry'?32:24;
+      const hit=id==='zhangfei'
+        ?along>=-radius&&along<=s.range+radius&&Math.abs(across)<=25+radius
+        :sectorHitsCircle(dx,dy,third?200:s.range,angle,third?180:s.arc,radius);
+      if(!hit)continue;
+      w.hit.add(e);
+      const before=e.hp;
+      this.hitEnemy(e,Math.atan2(dy,dx),damage,s.knockback,w.equipped!.id,false,false,w.equipped!.tier,undefined,
+        !third&&id==='zhangfei'?angle:undefined);
+      connected=connected||e.hp<before;
+    }
+    if(connected)this.playWeaponSound(w.equipped!.id,'hit',third);
   }
   private castMountDash():void {if(this.resourceBusy||this.phase!=='battle'||this.paused||this.backgrounded||this.trainingPanel?.root.active||this.resumeCountdown>0||this.playerHp<=0||this.commonSkill.dashing)return;if(this.trainingMode)this.mountDash.cooldown=0;if(beginMountDash(this.mountDash,this.run.heroId,this.run.growth||0,this.heading)){this.unlockAudio();this.playSound('dash');this.playerVx=this.playerVy=0;this.dashDrawHero='';this.drawDashButton();}}
   private drawDashButton():void {if(!this.dashButton||!this.dashLabel)return;const visible=(this.run.growth||0)>=4&&this.phase==='battle';this.dashButton.active=visible;if(!visible)return;const remain=Math.ceil(this.mountDash.cooldown);
@@ -1428,7 +1484,7 @@ private playerSlowUntil=0;
 
   private activeFriendlyShots():number {let count=this.pet.shotCount;for(const shot of this.projectiles)if(shot.remaining>0)count++;return count;}
 
-  private launchProjectile(x: number, y: number, angle: number, weapon: EquippedWeapon, stats: WeaponStats, damage: number, secondary = false, group?: {hits:Map<Enemy,number>;max:number}): void {
+  private launchProjectile(x: number, y: number, angle: number, weapon: EquippedWeapon, stats: WeaponStats, damage: number, secondary = false, group?: {hits:Map<Enemy,number>;max:number}, signatureForm?:Projectile['signatureForm']): void {
     if(this.activeFriendlyShots()>=160)return;
     let shot = this.projectiles.find(p => p.remaining <= 0);
     if (!shot) {
@@ -1443,10 +1499,14 @@ private playerSlowUntil=0;
         if(key){
           if(shot.atlasArt)this.battleSprites.set(shot.atlasArt,key);
           else shot.atlasArt=this.battleSprites.add(shot.node,key);
+          if(shot.atlasArt)applyArrowArt(shot.atlasArt,weapon.id,this.artFrames,true);
         }
       }else drawWeaponArt(shot.node.getComponent(Graphics)!,weapon.id,weapon.tier,true);
       shot.artTier=weapon.tier;
     }
+    shot.signatureForm=signatureForm;
+    if(shot.atlasArt)shot.atlasArt.node.active=!signatureForm;
+    if(!this.battleSprites.ready){const art=shot.node.getComponent(Graphics);if(art)art.enabled=!signatureForm;}
     const scale = weapon.id === 'sandal' || weapon.id === 'firecracker' ? .7 : 1;
     shot.node.setScale(scale, scale, 1); shot.weaponId = weapon.id; shot.stats = { ...stats }; shot.hit.clear();
     shot.returning=weapon.id==='hand-halberd'&&!secondary;shot.returnLeg=false;shot.ownerUid=weapon.uid;shot.secondary=secondary;shot.group=group;
@@ -1486,13 +1546,17 @@ private playerSlowUntil=0;
         if(x||y)shot.angle=Math.atan2(y,x);
       }
       const step = Math.min(shot.remaining, speed * dt, arrival);
-      const nx = shot.x + Math.cos(shot.angle) * step, ny = shot.y + Math.sin(shot.angle) * step;
+      const c=Math.cos(shot.angle),s=Math.sin(shot.angle);
+      const nx = shot.x+c*step,ny=shot.y+s*step;
       const contacts=this.projectileContacts;let contactCount=0;
       for (const e of this.enemies) {
         if (e.hp <= 0 || (e.born || 0) > 0 || shot.hit.has(e)||shot.pierceBurst?.has(e)||bossBeastCharging(e)) continue;
         if(shot.returnLeg&&shot.hit.size>shot.stats.pierce)break;
         const center = this.enemyHitCenter(e), large = e.bossSkin==='lvbu'?2.05:e.bossState?2:e.bossUnit?.kind==='elephant'?1.7:e.bossUnit?.kind==='rider'?1.4:e.kind === 'chief' ? 1.65 : e.kind === 'cavalry' ? 1.2 : 1;
-        const t = sweepEllipseTime(shot.x - (e.previousHitX ?? center.x), shot.y - (e.previousHitY ?? center.y), nx - center.x, ny - center.y, 33 * large, 47 * large);
+        const ax=shot.x-(e.previousHitX??center.x),ay=shot.y-(e.previousHitY??center.y),bx=nx-center.x,by=ny-center.y;
+        const t=shot.signatureForm
+          ?sweepEllipseTime(ax*c+ay*s,-ax*s+ay*c,bx*c+by*s,-bx*s+by*c,22*large,(shot.signatureForm==='wave'?42:22)+18*large)
+          :sweepEllipseTime(ax,ay,bx,by,33*large,47*large);
         if(t!==null){const slot=contacts[contactCount]||(contacts[contactCount]={e,t});slot.e=e;slot.t=t;contactCount++;}
       }
       for(let i=1;i<contactCount;i++){const item=contacts[i];let j=i-1;while(j>=0&&contacts[j].t>item.t){contacts[j+1]=contacts[j];j--;}contacts[j+1]=item;}
@@ -1527,7 +1591,7 @@ private playerSlowUntil=0;
       }
       shot.x += (nx - shot.x) * travel; shot.y += (ny - shot.y) * travel;
       shot.fxClock=(shot.fxClock||0)+dt;
-      if(shot.remaining>0&&shot.fxClock>=.045){this.combatFx.trail(shot.weaponId,shot.x,shot.y,shot.angle);shot.fxClock=0;}
+      if(!shot.signatureForm&&shot.remaining>0&&shot.fxClock>=.045){this.combatFx.trail(shot.weaponId,shot.x,shot.y,shot.angle);shot.fxClock=0;}
       if (!exploded && shot.remaining === 0 && !contactCount && (shot.weaponId === 'firecracker'||shot.weaponId==='rocket'||shot.weaponId==='oil-jar'||shot.weaponId==='thunder-bomb')) this.explodeProjectile(shot, shot.x, shot.y);
       shot.node.setPosition(shot.x, shot.y);
       if(shot.weaponId==='sandal')shot.node.angle+=dt*780;
@@ -1717,7 +1781,7 @@ private playerSlowUntil=0;
     if(e.feedback===0&&e.text)e.text.string='';
   }
 
-  private hitEnemy(e: Enemy, angle: number, damage = this.stats.damage, knockback = weaponStatsFor(this.run, this.run.weapons[0]).knockback, weaponId: WeaponId = this.run.weapons[0].id, audible = true, secondary = false,quality?:Tier,petSource?:string): void {
+  private hitEnemy(e: Enemy, angle: number, damage = this.stats.damage, knockback = weaponStatsFor(this.run, this.run.weapons[0]).knockback, weaponId: WeaponId = this.run.weapons[0].id, audible = true, secondary = false,quality?:Tier,petSource?:string,contactAngle?:number): void {
     if (e.hp <= 0||this.victoryPending||bossBeastCharging(e)) return;
     if(e.animal&&e.animal!=='tree') damage *= 1+this.perks.animalDamage;
     else if(!secondary) damage *= 1+(e.kind==='chief'||e.elite?this.perks.elite:0)+(e.hp<e.maxHp!*.3?this.perks.execute:0)+(Math.hypot(e.x-this.px,e.y-this.py)<180?this.perks.close:0);
@@ -1732,7 +1796,7 @@ private playerSlowUntil=0;
     e.vx = Math.cos(angle) * force; e.vy = Math.sin(angle) * force;
     this.drawEnemy(e);
     this.shake = Math.max(this.shake, e.hp <= 0 ? 0.055 : 0);
-    if(!mergeImpact||e.hp<=0){e.nextImpactAt=this.age+.035;const at=this.enemyHitCenter(e);this.combatFx.hit(petSource==='guanyu'?'pole':petSource==='zhangfei'?'cleaver':petSource?'peach':weaponId,at.x,at.y,angle,e.hp<=0);}
+    if(!mergeImpact||e.hp<=0){e.nextImpactAt=this.age+.035;const at=this.enemyHitCenter(e);this.combatFx.hit(petSource==='guanyu'?'pole':petSource==='zhangfei'?'cleaver':petSource?'peach':weaponId,at.x,at.y,contactAngle??angle,e.hp<=0);}
     if (audible) this.playWeaponSound(weaponId, 'hit');
     if (e.hp <= 0) {
       if(e.animal){e.dead=1.5; e.art.node.active=false; if(e.animalArt)e.animalArt.node.active=false; this.dropHeart(e.x,e.y,e.animal==='tree'?'peach':'heart'); return;}
@@ -1840,7 +1904,9 @@ private playerSlowUntil=0;
     let e = this.enemies.find(v => v.hp <= 0 && v.dead <= 0)
       || this.enemies.find(v=>v.hp<=0&&v.dead<=1.15&&!v.node.active);
     if (!e) { e = this.createEnemy(this.enemies.length); this.enemies.push(e); }
-    e.kind = kind;e.encounterChapter=encounterChapter;e.archetype=archetype;e.bossSkin=kind==='chief'?chapterFor(encounterChapter||this.run.chapter).bossId:undefined; this.spawnEnemy(e, this.testMode ? Math.floor(Math.random() * 8) : this.spawnSerial++); return e;
+    e.kind = kind;e.encounterChapter=encounterChapter;e.archetype=archetype;e.bossSkin=kind==='chief'?chapterFor(encounterChapter||this.run.chapter).bossId:undefined;
+    if(e.bossSkin)this.prefetchBossSounds(e.bossSkin);
+    this.spawnEnemy(e, this.testMode ? Math.floor(Math.random() * 8) : this.spawnSerial++); return e;
   }
 
   private spawnTestEnemy(): void {
@@ -1971,6 +2037,10 @@ private playerSlowUntil=0;
       if(this.battleSprites.ready){
         const n=Number(e.archetype?.slice(1)||0),key=e.bossSkin==='dongzhuo'?'enemy-coin':n===31||n===32?'enemy-bullet':n===28?'enemy-poison':n===17||e.bossSkin==='zhurong'?'enemy-knife':n===18?'enemy-axe':'enemy-arrow';
         if(shot.atlasArt)this.battleSprites.set(shot.atlasArt,key);else shot.atlasArt=this.battleSprites.add(shot.node,key);
+        if(shot.atlasArt){
+          applyArrowArt(shot.atlasArt,shot.style,this.artFrames);
+          shot.atlasArt.node.active=!courierSpear(shot.style);
+        }
       }else {const g=shot.node.getComponent(Graphics)!;g.clear();g.lineWidth=2;g.strokeColor=new Color('#6f392b');g.fillColor=new Color('#ffe5af');
       const n=Number(e.archetype?.slice(1)||0);
       if(e.bossSkin==='dongzhuo'){g.fillColor=new Color('#f7c35b');g.circle(0,0,9);g.fill();g.stroke();g.strokeColor=new Color('#a8752e');g.rect(-3,-3,6,6);g.stroke();}
@@ -1979,6 +2049,7 @@ private playerSlowUntil=0;
       else if(n===17||e.bossSkin==='zhurong'){g.fillColor=new Color('#e4edf0');g.moveTo(17,0);g.lineTo(-6,6);g.lineTo(-2,0);g.lineTo(-6,-4);g.close();g.fill();g.stroke();g.strokeColor=new Color('#8c4d30');g.lineWidth=4;g.moveTo(-12,0);g.lineTo(-3,0);g.stroke();}
       else if(n===18){g.strokeColor=new Color('#915c35');g.lineWidth=4;g.moveTo(-12,0);g.lineTo(8,0);g.stroke();g.fillColor=new Color('#d7e1de');g.moveTo(5,0);g.lineTo(2,12);g.lineTo(16,8);g.lineTo(16,-8);g.close();g.fill();g.stroke();}
       else {g.moveTo(-18,0);g.lineTo(15,0);g.stroke();g.moveTo(22,0);g.lineTo(11,5);g.lineTo(11,-5);g.close();g.fill();g.stroke();}
+        g.enabled=!courierSpear(shot.style);
       }shot.styleKey=shot.style;
     }
     shot.x = e.x; shot.y = e.y + 24; shot.angle = angle; shot.speed = speed; shot.damage = 1; shot.remaining = e.archetype?archetypeFor(e.archetype).range:650;
@@ -2071,8 +2142,12 @@ private playerSlowUntil=0;
   private prefetchSounds():void {
     for(const w of this.run.weapons)for(const event of ['attack','hit'] as const){const id=weaponSound(w.id,event);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
     const skill=skillSound(this.run.skillId);if(skill)this.loadSound(skill);
+    const accent=skillAccentSound(this.run.skillId);if(accent)this.loadSound(accent);
     for(const id of ['ui-buy','ui-refresh','ui-sell','ui-upgrade','victory','defeat','unlock','boss-arrive','wave-clear'] as const)this.loadSound(id);
-    const bosses=this.trainingMode?[]:stageBosses(this.run.chapter);for(const boss of bosses)for(let i=0;i<3;i++){const id=bossSound(boss,i);if(id&&id!=='sandal-hit-pcm')this.loadSound(id);}
+    if(!this.trainingMode)for(const boss of stageBosses(this.run.chapter))this.prefetchBossSounds(boss);
+  }
+  private prefetchBossSounds(boss:string):void {
+    for(let i=0;i<3;i++){const id=bossSound(boss,i);if(id)this.loadSound(id);}
   }
   private selectMusic(mode:'menu'|'battle'|'boss',restart=false):void {
     const track=MUSIC_SCENES[mode],path=track.id;
@@ -2129,7 +2204,16 @@ private playerSlowUntil=0;
     },18000);
   }
 
-  private unlockAudio(): void { this.audioUnlocked = true; this.music.unlock(); }
+  private unlockAudio(): void {
+    const firstGesture=!this.audioUnlocked;this.audioUnlocked=true;this.music.unlock();
+    // Autoplay can time out before a host accepts the first real touch.
+    if(firstGesture&&this.ready&&this.musicPlaybackRetries>0&&!this.musicLoaded&&!this.musicLoading){
+      this.musicPlaybackRetries=0;this.musicRetryAt=0;this.loadMusic();
+    }
+  }
+
+  private readonly onMusicInterruption=():void=>{if(!this.audioDisposed)this.music.setInterrupted(true);};
+  private readonly onMusicInterruptionEnd=():void=>{if(!this.audioDisposed)this.music.setInterrupted(false);};
 
   private playWeaponSound(weapon: WeaponId, event: SoundEvent, finisher = false): void {
     const name = weaponSound(weapon, event);
@@ -2208,17 +2292,34 @@ private playerSlowUntil=0;
     }
     for(const e of this.enemies){if(Math.abs(e.x-this.cameraX)>this.halfWidth+100||Math.abs(e.y-this.cameraY)>this.halfHeight+100)continue;if(e.hp>0&&(e.born||0)>0)drawBirthDust(this.spellFx,e.x,e.y,1-(e.born||0)/(e.bornTotal||1));else if(e.hp>0&&(e.slowUntil||0)>this.age)for(let i=0;i<2;i++){const a=this.age*2+i*Math.PI;vfxBrush.stream(this.friendlyGroundFx,e.x+Math.cos(a)*18,e.y+Math.sin(a)*8,a+Math.PI/2,12,2,'silver',.45);}}
     for(const e of this.enemies)if(e.hp>0&&(e.born||0)<=0&&e.miniCharge&&(e.stunUntil||0)<=this.age)drawYellowCharge(this.spellFx,e.x,e.y,e.miniCharge);
-    for(const e of this.enemies)if(e.hp>0&&e.archetype==='E01'&&!e.miniBoss&&!e.object&&(e.born||0)<=0&&(e.stunUntil||0)<=this.age&&Math.abs(e.x-this.cameraX)<this.halfWidth+90&&Math.abs(e.y-this.cameraY)<this.halfHeight+90)drawGruntAttack(this.spellFx,e.x,e.y,e.attack,e.attackAngle,archetypeFor('E01').range);
-    for(const e of this.enemies)if(e.hp>0&&e.archetype&&e.archetype!=='E01'&&!e.miniBoss&&!e.object&&(e.born||0)<=0&&(e.stunUntil||0)<=this.age&&Math.abs(e.x-this.cameraX)<this.halfWidth+110&&Math.abs(e.y-this.cameraY)<this.halfHeight+110){const d=archetypeFor(e.archetype);drawEnemyAction(this.spellFx,e.archetype,e.x,e.y,e.attack,e.attackAngle,d.windup,d.range);}
+    for(const e of this.enemies)if(e.hp>0&&e.archetype==='E01'&&!e.miniBoss&&!e.object&&(e.born||0)<=0&&(e.stunUntil||0)<=this.age&&Math.abs(e.x-this.cameraX)<this.halfWidth+90&&Math.abs(e.y-this.cameraY)<this.halfHeight+90)drawGruntAttack(this.spellFx,e.x,e.y,e.attack,e.attackAngle,archetypeFor('E01').range,e.weaponKind===1);
+    for(const e of this.enemies)if(e.hp>0&&e.archetype&&e.archetype!=='E01'&&!e.miniBoss&&!e.object&&(e.born||0)<=0&&(e.stunUntil||0)<=this.age&&Math.abs(e.x-this.cameraX)<this.halfWidth+110&&Math.abs(e.y-this.cameraY)<this.halfHeight+110){const d=archetypeFor(e.archetype);drawEnemyAction(this.spellFx,e.archetype,e.x,e.y,e.attack,e.attackAngle,e.archetype==='E34'?.9:readableWindup(e.archetype,d.windup),d.range);}
     for(const e of this.enemies)if(e.hp>0&&e.miniBoss&&!e.miniCharge&&!e.lvbu&&Math.abs(e.x-this.cameraX)<this.halfWidth+200&&Math.abs(e.y-this.cameraY)<this.halfHeight+200)drawEliteAttack(this.spellFx,this.run.chapter,e.x,e.y,e.attackAngle,e.attack,e.miniPhase||0);
-    for(const w of this.weapons)if(this.isEvolvedSignature(w.equipped)&&w.stats&&w.time<w.duration){const phase=(this.run.growth||0)>=3?((w.strikes||1)-1)%3:((w.strikes||1)-1)%2;drawGrowthAttack(this.fx,this.run.heroId,phase,w.time/w.duration,w.angle,w.stats.range,(this.run.growth||0)>=2?36:0,this.px,this.py);}
+    for(const w of this.weapons){
+      if(!this.isEvolvedSignature(w.equipped)||!w.stats||w.time>=w.duration)continue;
+      const phase=((w.strikes||1)-1)%3,t=w.time/w.duration,id=this.run.heroId;
+      const height=signatureHeight(this.run.growth||0);
+      if(phase===2)drawGrowthAttack(this.fx,id,phase,t,w.angle,w.stats.range,(height-20)*4,this.px,this.py,this.friendlyGroundFx);
+      else if(id==='zhangfei')drawSignatureJab(this.fx,t,this.px,this.py+height,w.angle,w.stats.range);
+      else{
+        const turn=signatureTurn(phase,w.angle),hand=w.node.position;
+        drawSignatureEdge(this.fx,id,t,this.px+hand.x*HERO_ART_SCALE,this.py+hand.y*HERO_ART_SCALE,
+          (w.node.angle+90)*Math.PI/180,turn,false);
+        if(id==='liubei'){
+          const off=w.offhand.position;
+          drawSignatureEdge(this.fx,id,t,this.px+off.x*HERO_ART_SCALE,this.py+off.y*HERO_ART_SCALE,
+            (w.offhand.angle+90)*Math.PI/180,-turn,true);
+        }
+      }
+    }
     this.petView?.draw(this.pet);drawPetEffects(this.friendlyGroundFx,this.fx,this.pet);
     drawMountDash(this.fx,this.run.heroId,this.px,this.py,this.mountDash.angle,this.mountDash.remaining);
     this.commonEffects.draw(this.friendlyGroundFx,this.fx,this.cameraX,this.cameraY,this.halfWidth,this.halfHeight,this.px,this.py);
     this.combatFx.draw(this.friendlyGroundFx,this.fx,this.cameraX,this.cameraY,this.halfWidth,this.halfHeight,true);
     this.particleSprites.draw(this.combatFx.particles,this.cameraX,this.cameraY,this.halfWidth,this.halfHeight);
     for(const shot of this.projectiles)if(shot.remaining>0 && Math.abs(shot.x-this.cameraX)<this.halfWidth+80 && Math.abs(shot.y-this.cameraY)<this.halfHeight+80)
-      this.combatFx.flight(this.fx,shot.weaponId,shot.x,shot.y,shot.angle,shot.stats.quality||1);
+      if(shot.signatureForm)drawSignatureFlight(this.fx,shot.signatureForm,shot.x,shot.y,shot.angle,shot.stats.range-shot.remaining);
+      else this.combatFx.flight(this.fx,shot.weaponId,shot.x,shot.y,shot.angle,shot.stats.quality||1);
     for(const shot of this.enemyShots)if(shot.remaining>0&&Math.abs(shot.x-this.cameraX)<this.halfWidth+80&&Math.abs(shot.y-this.cameraY)<this.halfHeight+80)drawEnemyFlight(this.spellFx,shot.style||'E11',shot.x,shot.y,shot.angle);
     this.vfxMaterials?.end();
   }
@@ -2595,6 +2696,7 @@ private playerSlowUntil=0;
 
   }
   private developmentToolsEnabled():boolean {
+    if(typeof GameGlobal!=='undefined'&&GameGlobal?.__taoyuanUploadBuild===true)return false;
     if(typeof wx==='undefined')return !!(sys.isBrowser&&(DEBUG||PREVIEW));
     try {
       const version=wx.getAccountInfoSync?.().miniProgram?.envVersion;
@@ -3214,20 +3316,21 @@ private playerSlowUntil=0;
       hit:(e,angle,damage,knockback,style)=>g.hitEnemy(e,angle,damage,knockback,style,false,true),
       impact:()=>{g.shake=Math.max(g.shake,.035);},
       canHeal:()=>g.trainingMode||g.playerHp<heroMaxHearts(g.run)&&g.run.skillHealChapter!==g.run.chapter,
-      heal:()=>{g.playerHp=Math.min(heroMaxHearts(g.run),g.playerHp+1);g.run.hearts=g.playerHp;g.run.skillHealChapter=g.run.chapter;g.refreshStats();g.drawPlayerHealth();},sound:style=>g.playWeaponSound(style,'hit'),audio:(id,event)=>g.skillAudio(id,event),
+      heal:()=>{g.playerHp=Math.min(heroMaxHearts(g.run),g.playerHp+1);g.run.hearts=g.playerHp;g.run.skillHealChapter=g.run.chapter;g.refreshStats();g.drawPlayerHealth();},sound:style=>g.playWeaponSound(style,'hit'),audio:(id,event,heavy)=>g.skillAudio(id,event,heavy),
     },this.commonEffects);
   }
   private enemyAim(e:Enemy):{x:number;y:number}{this.playerAim.x=this.px;this.playerAim.y=this.py;return this.playerAim;}
   private skillRequirement():number{return skillKillRequirement(this.run.skillId||DEFAULT_SKILL,this.perks.skillHaste+(this.run.heroId==='kongming'?.1:0));}
-  private skillAudio(id:string,event:'cast'|'release'|'pre'|'hit'|'block'):void {
+  private skillAudio(id:string,event:'cast'|'release'|'pre'|'hit'|'block',heavy=false):void {
     if(event==='block'){this.playSound('block');return;}
     if(event==='hit'){if(id==='G25')this.playSound('spirit-hit',.26);return;}
     if(event==='pre'){this.playSound(id==='G19'?'thunder-attack':'ritual-attack',.16);return;}
+    if(id==='G10'&&event==='release'){this.playSound('skill-G10-beat',.43);return;}
     const multi=['G08','G19','G20','G22'].indexOf(id)>=0;
     if (multi && event === 'cast') { this.quieterSkillReleases.delete(id); return; }
     if (!multi && event === 'release') return;
-    const cue=skillSound(id);if (!cue) return;
-    const gain = multi && this.quieterSkillReleases.has(id) ? .65 : 1;
+    const cue=(heavy?skillAccentSound(id):undefined)||skillSound(id);if (!cue) return;
+    const gain = !heavy && multi && this.quieterSkillReleases.has(id) ? .65 : 1;
     this.playSound(cue, SOUND_CUES[cue].volume * gain);
     if (multi) this.quieterSkillReleases.add(id);
   }
@@ -3343,6 +3446,10 @@ private playerSlowUntil=0;
     for(const [event,fn]of [[Node.EventType.TOUCH_START,this.touchStart],[Node.EventType.TOUCH_MOVE,this.touchMove],[Node.EventType.TOUCH_END,this.touchEnd],[Node.EventType.TOUCH_CANCEL,this.touchEnd],[Node.EventType.TOUCH_START,this.audioTouch]] as const)clean(()=>this.root?.off(event,fn,this,true));
     clean(()=>input.off(Input.EventType.KEY_DOWN,this.keyDown,this));clean(()=>input.off(Input.EventType.KEY_UP,this.keyUp,this));clean(()=>this.detachKeyboard?.());
     clean(()=>game.off(Game.EVENT_HIDE,this.onBackground,this));clean(()=>game.off(Game.EVENT_SHOW,this.onForeground,this));
+    if(typeof wx!=='undefined'){
+      clean(()=>wx?.offAudioInterruptionBegin?.(this.onMusicInterruption));
+      clean(()=>wx?.offAudioInterruptionEnd?.(this.onMusicInterruptionEnd));
+    }
     clean(()=>this.observedCanvas?.removeEventListener?.('webglcontextlost',this.onGraphicsContextLost));
     clean(()=>this.observedCanvas?.removeEventListener?.('webglcontextrestored',this.onGraphicsContextRestored));this.observedCanvas=undefined;
     clean(()=>this.stopSounds());clean(()=>this.nativeSfx?.destroy());this.nativeSfx=undefined;
@@ -3499,7 +3606,7 @@ private playerSlowUntil=0;
       e.attack=-1;if(e.object==='eye'&&e.attackCooldown<=0){this.addEnemyZone(e,this.px,this.py,85,1,{theme:'thunder'});e.attackCooldown=3.5;}
     }else if(e.kind==='chief')this.updateChronicleBoss(e,dt,dist,angle);
     else if(n===9||n===10){
-      if(e.attack<0&&e.attackCooldown<=0){e.attack=0;e.attackAngle=angle;e.fired=false;}if(e.attack>=0){const before=e.attack;e.attack+=dt;if(before<(d?.windup||.6)&&e.attack>=(d?.windup||.6)&&!e.fired){e.fired=true;if(n===10){let healed=0;for(const other of this.enemies)if(other!==e&&other.hp>0&&other.kind!=='chief'&&!other.animal&&Number(other.archetype?.slice(1)||0)<35&&Math.hypot(other.x-e.x,other.y-e.y)<200&&healed<3){other.hp=Math.min(other.maxHp!,other.hp+other.maxHp!*.04);healed++;}}}if(e.attack>=(d?.windup||.6)+.4){e.attack=-1;e.attackCooldown=3;}}
+      if(e.attack<0&&e.attackCooldown<=0){e.attack=0;e.attackAngle=angle;e.fired=false;}if(e.attack>=0){const before=e.attack;e.attack+=dt;if(before<(d?.windup||.6)&&e.attack>=(d?.windup||.6)&&!e.fired){e.fired=true;if(n===10){let healed=0;for(const other of this.enemies)if(other!==e&&other.hp>0&&other.kind!=='chief'&&!other.animal&&Number(other.archetype?.slice(1)||0)<35&&Math.hypot(other.x-e.x,other.y-e.y)<200&&healed<3){const before=other.hp;other.hp=Math.min(other.maxHp!,other.hp+other.maxHp!*.04);if(other.hp>before)this.combatFx.feedback('heal',other.x,other.y+28,0);healed++;}}}if(e.attack>=(d?.windup||.6)+.4){e.attack=-1;e.attackCooldown=3;}}
       if(e.attack<0&&dist>260){e.x+=dx/dist*e.speed*dt;e.y+=dy/dist*e.speed*dt;}
     }else{
       const mountedBow=n===22||n===23,charge=d?.kind==='cavalry'&&!mountedBow,ranged=d?.kind==='spearman'||mountedBow,range=d?.range||70,windup=n===34?.9:readableWindup(e.archetype||'E01',d?.windup||.32);
@@ -3519,9 +3626,9 @@ private playerSlowUntil=0;
           else if([29,33,34,36,37,38,39,40].indexOf(n)>=0){
             const radius=n===33?90:n===34?95:n===36?110:n===37?100:n===38?90:n===40?70:80;
             const delay=n===33?.9:n===36||n===38||n===40?1:n===39?windup:Math.max(.8,windup);
-            this.addEnemyZone(e,n===34?e.x:this.px,n===34?e.y:this.py,radius,delay,{duration:n===29?2:n===38?3:undefined,theme:n>=39?'thunder':'fire'});
+            this.addEnemyZone(e,n===34?e.x:this.px,n===34?e.y:this.py,radius,delay,{duration:n===29?2:n===38?3:undefined,theme:n===40?'chess-black':n===39?'thunder':'fire'});
             if(n===38)this.addEnemyZone(e,this.px+120,this.py,90,delay+.5,{duration:3,theme:'fire'});
-            if(n===40)this.addEnemyZone(e,this.px+120,this.py,70,1,{theme:'thunder'});
+            if(n===40)this.addEnemyZone(e,this.px+120,this.py,70,1,{theme:'chess-white'});
           }
         }else if((e.stagger||0)<=0){
           const slow=(e.slowUntil||0)>this.age?1-(e.slowFactor||0):1,aura=this.enemies.some(v=>v.hp>0&&v.archetype==='E09'&&Math.hypot(v.x-e.x,v.y-e.y)<180)?1.1:1;

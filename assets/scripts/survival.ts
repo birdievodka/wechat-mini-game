@@ -6,7 +6,7 @@ import { Run, heroMaxHearts, ITEMS, randomSample, weaponStatsFor, WARMUP_GOLD_BU
 import { WEAPONS, WEAPON_LIMIT, Tier, weaponFor, weaponOffer, parseWeaponOffer, TIER_NAMES, weaponEffectText } from './weapons';
 import {armoryDescription} from './armory-redesign';
 
-export const SURVIVAL_VERSION = 'stage-v11.0.22-no-damage-numbers';
+export const SURVIVAL_VERSION = 'stage-v11.1.6-package-size';
 export const SUPPLY_SECONDS = 30;
 export const MAJOR_SECONDS = 90;
 export const BOSS_EVERY_WAVES=3;

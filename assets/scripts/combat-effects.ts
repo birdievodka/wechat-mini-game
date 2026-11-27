@@ -4,7 +4,7 @@ import { WeaponId, weaponFor } from './weapons';
 import { HeroId } from './campaign';
 import * as brush from './vfx-brush';
 import {drawWeaponHit,drawWeaponSlash,drawWeaponMuzzle,drawWeaponFlight,drawWeaponBurst} from './weapon-vfx';
-import {material} from './vfx-materials';
+import {material,pixel} from './vfx-materials';
 
 // Warm paper highlights, jade wood, peach ink, fire and cyan steel. No fullscreen flash.
 const RGB = [[255,247,213],[247,194,83],[179,126,60],[74,187,102],[222,250,159],
@@ -140,6 +140,7 @@ export class CombatEffects {
     else if(s.kind==='burst')drawWeaponBurst(ground,g,id,x,y,r,t);
     else if(s.kind==='bolt'){
       const dx=s.tx-x,dy=s.ty-y,length=Math.hypot(dx,dy)||1;
+      pixel(g,'wind',x+dx*.52,y+dy*.52,Math.min(130,length*.68),Math.atan2(dy,dx),f*.75,t);
       for(let layer=0;layer<3;layer++){g.strokeColor=ink(layer===2?11:10,f*(layer===0?.28:1));g.lineWidth=layer===0?14:layer===1?5:1.8;
         for(let i=0;i<=9;i++){const offset=i===0||i===9?0:Math.sin(i*7.13+s.seed)*11,xx=x+dx*i/9-dy/length*offset,yy=y+dy*i/9+dx/length*offset;if(!i)g.moveTo(xx,yy);else g.lineTo(xx,yy);}g.stroke();}
       // Forks leave the same live arc simultaneously, staying between its two real endpoints.
@@ -149,13 +150,13 @@ export class CombatEffects {
       }
       brush.nib(g,s.tx,s.ty,Math.atan2(dy,dx)+.65,31*f,6*f,'violet',f);
     }else if(s.kind==='vortex'||s.kind==='suction'){
-      if(s.kind==='vortex'){for(let i=0;i<4;i++){const a=i*TAU/4+t*6;const outer=r*(1-.52*t),end=a+1.54;
+      if(s.kind==='vortex'){pixel(g,'vortex',x,y,r*2.4,0,f*.78,t);for(let i=0;i<4;i++){const a=i*TAU/4+t*6;const outer=r*(1-.52*t),end=a+1.54;
         brush.current(g,x+Math.cos(a)*outer,y+Math.sin(a)*outer,x+Math.cos(end)*outer*.27,y+Math.sin(end)*outer*.27,-outer*.59,outer*.21,'violet',f);
         brush.crescent(g,x,y,outer,a,1.2,5*f,'violet',f);brush.crescent(g,x,y,r*(.62-.4*t),a+.7,1,3*f,'violet',f,2);}}
       else {const a=Math.atan2(s.ty-y,s.tx-x),length=Math.hypot(s.tx-x,s.ty-y);brush.nib(g,x+(s.tx-x)*t,y+(s.ty-y)*t,a,Math.min(45,length*.3),7*f,'violet',f);}
     }else if(s.kind==='feedback'){
       if(s.tx===0)brush.contact(g,x,y,s.angle,r,t,'crimson');
-      else if(s.tx===1){material(g,'heal',x,y+22*t,65,65,0,f,1);for(let i=0;i<3;i++)brush.stream(g,x+(i-1)*17,y+10+t*35,Math.PI/2,14,3,'jade',f);}
+      else if(s.tx===1){if(!pixel(g,'heal',x,y,91,0,f,t,1))material(g,'heal',x,y+22*t,65,65,0,f,1);for(let i=0;i<3;i++)brush.stream(g,x+(i-1)*17,y+10+t*35,Math.PI/2,14,3,'jade',f);}
       else if(s.tx===2){brush.contact(g,x,y,s.angle,17,t,'silver',.75);}
       else {brush.dust(ground,x,y,r,t,.8);for(let i=0;i<3;i++)brush.stream(g,x,y,s.angle+(i-1)*.9,18,3,'gold',f*.6);}
     }

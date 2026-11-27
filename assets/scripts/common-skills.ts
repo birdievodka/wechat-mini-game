@@ -1,5 +1,15 @@
 import {GENERIC_SKILLS,GenericSkill} from './chronicles-data';
 export const SKY_VOLLEY_SIZE=3;
+export const FIRE_HALF_WIDTH=48;
+export const DASH_HALF_WIDTH=60;
+export const GUARD_SWORDS=6;
+export const GUARD_ANGULAR_SPEED=5.2;
+export const GUARD_WARDS=4;
+export const PRECISION_ARROWS=8;
+export const RAIN_VOLLEYS=4;
+export const RAIN_FIRST_IMPACT=.22;
+export const RAIN_INTERVAL=.25;
+export const isHeavyStar=(volley:number):boolean=>volley===METEOR_COUNT/SKY_VOLLEY_SIZE-1;
 export const THUNDER_COUNT=12;
 export const METEOR_COUNT=27;
 export interface SkyPoint {x:number;y:number;}

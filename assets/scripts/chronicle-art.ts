@@ -6,6 +6,7 @@ import {EXTRA_WEAPONS} from './extra-weapons';
 import {artScope,releaseArtTexture} from './asset-scope';
 import {ensureSheets,cancelArtGroups,makeSheetFrame,PackedFrame,Sheet} from './deferred-art';
 import {BOSS_ATLAS_SCALE} from './boss-atlas-scale';
+import {PIXEL_RECTS} from './pixelfx-layout';
 import {VFX_MATERIAL_KEYS} from './vfx-materials';
 import type {WeaponId} from './weapons';
 export const REDESIGN_WEAPONS:WeaponId[]=[
@@ -42,6 +43,11 @@ export async function loadChronicleArt(frames:Record<string,SpriteFrame>,alive:(
   keys.forEach((key,i)=>frames[key]=makeSheetFrame(texture,i,cols,rows,layout?.[i]));
  };
  await Promise.all([
+  (async()=>{
+   const texture=await load(presentation,'pixelfx');
+   if(!alive()){releaseArtTexture(frames,texture);return;}
+   for(const [key,x,y,w,h] of PIXEL_RECTS){const frame=new SpriteFrame();frame.texture=texture;frame.rect=new Rect(x,y,w,h);frames[key]=frame;}
+  })(),
   atlas(presentation,'vfx-materials',4,4,VFX_MATERIAL_KEYS.map(k=>'vfx-'+k)),
   atlas(presentation,'growth',6,4,Array.from({length:24},(_,i)=>i<18?'mount-'+['liubei','guanyu','zhangfei'][Math.floor(i/6)]+'-'+i%6:i<21?'growth-torso-'+['liubei','guanyu','zhangfei'][i-18]:'growth-held-'+['liubei','guanyu','zhangfei'][i-21])),
   atlas(ui,'weapons',5,5,EXTRA_WEAPONS.map(w=>'icon-'+w.id)),

@@ -177,7 +177,8 @@
     "width": 1254,
     "height": 1254,
     "rgbRmse": 0.5722,
-    "alpha": "identical"
+    "alpha": "identical",
+    "supersededBy": "assets/meadow/ground.jpg"
   },
   "assets/orchard/decor.png": {
     "sourceSha": "f60a340fff8caa90d5447b68b72aec3747278654cbfd9ccdf8df3b3a3286153d",

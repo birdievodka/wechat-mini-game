@@ -11,8 +11,9 @@ const profile=(id,n)=>{const p=P.newProfile();for(let i=1;i<=n;i++)P.recordClear
   g.clearBattle();g.profile=profile(id,n);g.run=C.createRun(id);g.selectedStage=Math.min(6,n+1);g.showMainMenu();const menuRig=g.screens.heroShowcase;assert.equal(menuRig.growth,n);assert.equal(menuRig.mount.sprite.node.active,n>=2);click(g.screens.root,'StartHero');assert.equal(g.run.growth,n);assert.equal(g.playerHp,C.heroMaxHearts(g.run));assert.equal(g.mount.sprite.node.active,n>=2);assert.equal(g.hero.scale.x,.90);assert.equal(g.hero.scale.y,.90);assert.equal(g.mount.sprite.node.parent,g.hero);assert.equal(g.dashButton.active,n>=4);assert.equal(g.dashButton.position.y,g.skillButton.position.y);assert.equal(g.screens.root.children.length,0,'战斗不保留成长菜单模型');g.animateWalk(.016,2,0,1,0);assert.ok(g.feet.every(f=>f.active===(n<2)));if(n>=5)assert.equal(g.body.spriteFrame,g.artFrames['growth-torso-'+id]);if(n)assert.equal(g.weapons[0].offhand.active,true);
  }
  // Verify the actual world renderer: starter markers and shop copies cannot draw a signature combo.
- const growthFx=load('growth-effects'),drawAttack=growthFx.drawGrowthAttack;
+ const growthFx=load('growth-effects'),drawAttack=growthFx.drawGrowthAttack,drawEdge=growthFx.drawSignatureEdge,drawJab=growthFx.drawSignatureJab;
  let draws=0;growthFx.drawGrowthAttack=()=>{draws++;};
+ growthFx.drawSignatureEdge=growthFx.drawSignatureJab=()=>{draws++;};
  try {
   for(const hero of ['liubei','guanyu','zhangfei']){
    for(const starter of ['sandal','pole','cleaver']){
@@ -23,14 +24,46 @@ const profile=(id,n)=>{const p=P.newProfile();for(let i=1;i<=n;i++)P.recordClear
    g.run=C.createStageRun(profile(hero,1),hero,2,W.starterFor(hero),'G01');
    g.run.weapons.push({...g.run.weapons[0],uid:2,signature:false});
    g.syncWeapons();for(const w of g.weapons)w.time=w.duration*.45;
-   draws=0;g.updateEffects(0);assert.equal(draws,1,hero+' only the evolved signature renders');
+   draws=0;g.updateEffects(0);assert.equal(draws,hero==='liubei'?2:1,hero+' only the evolved signature renders');
   }
- }finally{growthFx.drawGrowthAttack=drawAttack;}
+ }finally{growthFx.drawGrowthAttack=drawAttack;growthFx.drawSignatureEdge=drawEdge;growthFx.drawSignatureJab=drawJab;}
+ // Real auto-attack start, visible windup, one accepted contact and silent whiff for both opening beats.
+ for(const id of ['liubei','guanyu','zhangfei'])for(const facing of [-1,1]){
+  g.clearBattle();g.run=C.createStageRun(profile(id,1),id,2,W.starterFor(id),'G01');
+  g.stats=g.currentStats();g.playerHp=g.stats.maxHp;g.phase='battle';g.resumeCountdown=0;
+  g.spawnClock=999;g.cooldown=0;g.px=g.py=0;g.facing=facing;g.syncWeapons();
+  const w=g.weapons[0],enemy=g.spawnNext('soldier','E01');
+  Object.assign(enemy,{x:facing*105,y:0,born:0,hp:1e5,maxHp:1e5,speed:0,attackCooldown:999});
+  const impacts=()=>g.combatFx.stamps.filter(s=>s.kind==='hit'&&s.id===w.equipped.id&&s.age<s.duration);
+  g.simulate(1/120);
+  assert.equal(w.strikes,1);assert.equal(enemy.hp,1e5);assert.equal(impacts().length,0);
+  if(id==='zhangfei'){
+   const aim=g.enemyHitCenter(enemy);
+   assert.ok(Math.abs(w.angle-Math.atan2(aim.y-20,aim.x))<1e-6,'矛头锁向真实受击中心');
+  }
+  const tick=growthFx.SIGNATURE_CONTACT*w.duration;
+  g.updateWeapon(w,w.duration*.19-w.time);
+  const back=w.node.position.x;
+  g.updateWeapon(w,tick-w.time+.0001);
+  assert.ok(facing*(w.node.position.x-back)>20,'握点由蓄力到出手可辨');
+  assert.equal(enemy.hp,1e5-w.damage);assert.ok(enemy.flash>0);assert.equal(impacts().length,1);
+  if(id==='zhangfei'){
+   assert.ok(Math.abs(impacts()[0].angle-w.angle)<1e-6,'受击火花沿矛刺方向');
+   assert.ok(Math.abs(w.node.angle+90-w.angle*180/Math.PI)<.01,'矛杆与出手轴线重合');
+  }
+  g.updateEffects(0);g.updateEffects(0);g.updateWeapon(w,.03);
+  assert.equal(enemy.hp,1e5-w.damage);assert.equal(impacts().length,1);
+  g.updateWeapon(w,w.duration);w.cooldown=0;g.cooldown=0;
+  const remaining=enemy.hp;enemy.stagger=0;enemy.vx=enemy.vy=0;
+  g.simulate(1/120);assert.equal(w.strikes,2);
+  enemy.x=facing*540;g.updateWeapon(w,w.duration);
+  assert.equal(enemy.hp,remaining);assert.equal(impacts().length,1,'空挥不生成命中火花');
+ }
  // Sustained model counts one shared third strike, not old quality double-hit mechanics.
- for(const id of ['liubei','guanyu','zhangfei']){const r=C.createStageRun(profile(id,3),id,4,W.starterFor(id),'G01');r.weapons[0].tier=4;const w=r.weapons[0],s=C.weaponStatsFor(r,w),expected=s.damage/s.interval*(7/6)*(1+s.crit*(s.critMultiplier-1));assert.ok(Math.abs(C.weaponDps(r,w)-expected)<1e-8);const offer=S.upgradeOffer({...w,tier:3});r.offers=[offer];r.offerPrices={[offer]:10};assert.ok(S.supplyCard(r,offer).desc.includes('第三击1.5倍'),'商店本命不误报普通双刺或刃波');}
+ for(const id of ['liubei','guanyu','zhangfei']){const r=C.createStageRun(profile(id,3),id,4,W.starterFor(id),'G01');r.weapons[0].tier=4;const w=r.weapons[0],s=C.weaponStatsFor(r,w),expected=s.damage/s.interval*(7/6)*(1+s.crit*(s.critMultiplier-1));assert.ok(Math.abs(C.weaponDps(r,w)-expected)<1e-8);const offer=S.upgradeOffer({...w,tier:3});r.offers=[offer];r.offerPrices={[offer]:10};assert.ok(S.supplyCard(r,offer).desc.includes('第三击伤害 ×1.5'),'商店本命不误报普通双刺或刃波');}
  // Body-local growth is fixed per run; six slots still attack independently.
  for(const id of ['liubei','guanyu','zhangfei']){
-  g.clearBattle();g.run=C.createStageRun(profile(id,3),id,4,W.starterFor(id),'G01');g.stats=g.currentStats();g.playerHp=g.stats.maxHp;g.phase='battle';g.resumeCountdown=0;g.spawnClock=g.cooldown=999;g.run.weapons.push(...['smg','shotgun','thunder','rocket','peach'].map((id,i)=>({id,tier:1,uid:i+2,invested:20})));g.syncWeapons();const w=g.weapons[0];w.angle=0;w.damage=100;w.stats=C.weaponStatsFor(g.run,w.equipped);w.stats.range=200;w.stats.arc=160;const targets=[];for(let i=0;i<5;i++){const e=g.spawnNext('soldier','E01');Object.assign(e,{x:90+i*12,y:0,born:0,hp:1e5,maxHp:1e5,vx:0,vy:0});targets.push(e);}g.px=g.py=0;w.hit.clear();w.strikeStarted=false;g.signatureStrike(w,2);const touched=targets.filter(e=>e.hp<1e5);assert.equal(touched.length,id==='liubei'?3:5);assert.ok(touched.every(e=>Math.abs(1e5-e.hp-150)<.001),'交叉两刃/范围只判一次1.5倍');const hp=targets.map(e=>e.hp);g.signatureStrike(w,2);assert.deepEqual(targets.map(e=>e.hp),hp,'同次攻击不重复伤害');
+  g.clearBattle();g.run=C.createStageRun(profile(id,3),id,4,W.starterFor(id),'G01');g.stats=g.currentStats();g.playerHp=g.stats.maxHp;g.phase='battle';g.resumeCountdown=0;g.spawnClock=g.cooldown=999;g.run.weapons.push(...['smg','shotgun','thunder','rocket','peach'].map((id,i)=>({id,tier:1,uid:i+2,invested:20})));g.syncWeapons();const w=g.weapons[0];w.angle=0;w.damage=100;w.stats=C.weaponStatsFor(g.run,w.equipped);w.stats.range=200;w.stats.arc=160;const targets=[];for(let i=0;i<5;i++){const e=g.spawnNext('soldier','E01');Object.assign(e,{x:90+i*12,y:0,born:0,hp:1e5,maxHp:1e5,vx:0,vy:0});targets.push(e);}g.px=g.py=0;w.hit.clear();w.strikeStarted=false;g.signatureStrike(w,2);if(id!=='guanyu'){assert.ok(targets.every(e=>e.hp===1e5),'本命飞行第三击须等接触');assert.equal(g.projectiles.filter(p=>p.remaining>0&&p.signatureForm).length,1);for(let i=0;i<48;i++)g.updateProjectiles(1/120);}const touched=targets.filter(e=>e.hp<1e5);assert.equal(touched.length,id==='liubei'?3:5);assert.ok(touched.every(e=>Math.abs(1e5-e.hp-150)<.001),'剑气/扇斩/长刺只判一次1.5倍');const hp=targets.map(e=>e.hp);g.signatureStrike(w,2);assert.deepEqual(targets.map(e=>e.hp),hp,'同次攻击不重复伤害');
   w.strikes=0;g.cooldown=0;g.weapons.forEach(v=>{v.cooldown=0;v.time=v.duration;});g.protectionTime=999;g.simulate(.02);assert.equal(w.strikes,1);assert.ok(g.weapons.slice(1).filter(v=>v.strikes>0).length>=3,'普通武器独立出手');assert.equal(g.run.weapons.length,6);const strikes=w.strikes;for(let i=0;i<20;i++)g.updateWeapon(w,0);assert.equal(w.strikes,strikes,'绘制不推进连段');
   const upgrade=S.upgradeOffer(g.run.weapons[0]);g.run.offers=[upgrade];g.run.offerPrices={[upgrade]:10};g.run.purchasedOffers=[];g.run.gold=100;assert.equal(S.buySupply(g.run,upgrade),true);assert.equal(g.run.weapons[0].signature,true);assert.equal(g.run.weapons[0].tier,2);assert.equal(C.recycleValue(g.run,w.equipped.uid),Math.floor(10*load('passive-items').passiveBonuses({}).refund),'赠送基础部分没有退款');g.run.weapons.push({id:w.equipped.id,tier:2,uid:99,invested:40});assert.equal(C.combineWeapon(g.run,99),true);assert.equal(g.run.weapons.find(v=>v.uid===99).signature,true,'合成消耗本命时标记保留');assert.equal(g.run.weapons.filter(v=>v.signature).length,1);C.recycleWeapon(g.run,99);assert.equal(g.run.weapons.some(v=>v.signature),false,'卖掉本命不自动转移到枪');
  }

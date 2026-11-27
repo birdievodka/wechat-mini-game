@@ -102,12 +102,12 @@
     },
     {
       "source": "art/runtime-subpackages/sources/meadow/ground.png",
-      "dest": "assets/meadow/ground.png",
+      "dest": "assets/meadow/ground.jpg",
       "width": 1254,
       "height": 1254,
-      "bytes": 1260800,
+      "bytes": 161394,
       "sourceSha256": "7438883946f22cdbf9b394a76a34e84c4e00518f922887521754fac6a1216b8d",
-      "sha256": "df4c4099c91ab6d1a04137fdb7f012a2f4e53946833519ebb1ebaccfa461290b"
+      "sha256": "8e71de760029e466b311eb0b5fa9be10af67fe425a7a1a2e1042a410ea888035"
     },
     {
       "source": "art/runtime-subpackages/sources/orchard/decor.png",

@@ -1,8 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const crypto = require('node:crypto');
-const ts = require('typescript');
-const vm = require('node:vm');
 const out = {};
 Object.assign(out,require('./test-campaign.cjs').load('weapon-sound'));
 const { SOUND_CUES, GENERATED_SOUNDS, weaponSound, bossSound, SoundGate, SFX_VOICES, soundAsset } = out;
@@ -13,10 +11,21 @@ for(const name of ['zhangjiao','lvbu','dongzhuo','yuanshao','caocao','menghuo','
 assert.equal(bossSound('unknown',0),undefined);
 assert.equal(weaponSound('sandal', 'attack'), undefined, 'shoe never adds a whoosh');
 assert.equal(weaponSound('sandal', 'hit'), 'sandal-hit-pcm');
+for (const event of ['attack', 'hit']) {
+  assert.equal(weaponSound('serpent-spear', event), `heavy-${event}`);
+  assert.equal(weaponSound('twin-swords', event), weaponSound('serpent-spear', event));
+  assert.equal(weaponSound('qinggang', event), `blade-${event}`);
+}
 assert.equal(new Set(['sandal','pole','peach','cleaver','firecracker'].map(w => weaponSound(w,'hit'))).size,5);
 const hashes = new Set();
-for (const id of GENERATED_SOUNDS) {
-  const asset=soundAsset(id);
+const manifest = require('../art/audio/runtime-manifest.json');
+const checksum = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+const packed = new Map(manifest.physicalSounds.map(item => [item.bundle+'/'+item.name, item]));
+assert.equal(manifest.version, '0.3.0');
+assert.equal(manifest.recipeSha256, checksum(fs.readFileSync(manifest.recipe)));
+assert.deepEqual(new Set(manifest.sfx), new Set(Object.keys(SOUND_CUES)));
+for (const id of Object.keys(SOUND_CUES)) {
+  const asset=id==='sandal-hit-pcm'?{bundle:'battle',name:'audio/sandal-hit-pcm'}:soundAsset(id);
   const wav = fs.readFileSync(`assets/${asset.bundle}/${asset.name}.wav`), cue = SOUND_CUES[id];
   assert.equal(wav.toString('ascii',0,4),'RIFF'); assert.equal(wav.readUInt16LE(20),1);
   assert.equal(wav.readUInt16LE(22),1); assert.equal(wav.readUInt32LE(24),24000); assert.equal(wav.readUInt16LE(34),16);
@@ -25,10 +34,13 @@ for (const id of GENERATED_SOUNDS) {
   for(let i=44;i<wav.length;i+=2) { const v=wav.readInt16LE(i);max=Math.max(max,Math.abs(v));power+=v*v; }
   assert.ok(max>5000 && max<32760); assert.ok(Math.sqrt(power/((wav.length-44)/2))>500);
   assert.equal(wav.readInt16LE(44),0); assert.equal(wav.readInt16LE(wav.length-2),0);
-  hashes.add(crypto.createHash('sha256').update(wav).digest('hex'));
+  const hash=checksum(wav), record=packed.get(asset.bundle+'/'+asset.name);
+  assert.equal(hash,record.sha256);
+  assert.equal(wav.length,record.bytes);
+  hashes.add(hash);
 }
-assert.ok(GENERATED_SOUNDS.length>=80&&hashes.size>=50,'complete categorized effects; intentional theme reuse allowed');
-assert.equal(hashes.size,66,'86 logical cues use 66 unique physical PCM samples');
+assert.equal(hashes.size,manifest.physicalSounds.length,'the 21 boss cues and all other authored cues have distinct PCM');
+assert.equal(packed.size,Object.keys(SOUND_CUES).length);
 const gate = new SoundGate(2);
 assert.equal(gate.acquire('gun-hit'),0); assert.equal(gate.acquire('gun-hit'),undefined,'crowd hits do not stack identical sounds');
 assert.equal(gate.acquire('blade-hit'),1,'different weapon can sound in the same frame');

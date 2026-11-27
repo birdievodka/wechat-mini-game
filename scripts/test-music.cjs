@@ -43,6 +43,17 @@ ads.setAdPlaying(true);ads.setEnabled(true);ads.begin();const duringAd=source();
 assert.equal(duringAd.plays,0,'a new clip attached during an ad is silent');
 ads.pause();ads.setAdPlaying(false);assert.equal(duringAd.plays,0,'closing an ad keeps the app pause');
 ads.resume();assert.equal(duringAd.plays,1);
+const system=new BattleMusic(),systemSource=source();
+system.attach(systemSource);system.begin();system.unlock();system.update(1.75);
+system.setInterrupted(true);assert.equal(systemSource.pauses,1);
+system.update(80);system.setAdPlaying(true);system.setInterrupted(false);
+assert.equal(systemSource.plays,1,'ending a system interruption cannot override an ad');
+system.setAdPlaying(false);assert.equal(systemSource.plays,2);assert.equal(systemSource.currentTime,1.75);
+system.setInterrupted(true);system.pause();system.setInterrupted(false);
+assert.equal(systemSource.plays,2,'ending a system interruption cannot override background pause');
+system.resume();assert.equal(systemSource.plays,3);
+system.setInterrupted(true);system.setEnabled(false);system.setInterrupted(false);
+assert.equal(systemSource.plays,3,'ending a system interruption preserves mute');
 for(const id of ['brass-oath','brass-rally']){
  const file=fs.readFileSync('assets/music/'+id+'.m4a');assert.equal(file.toString('ascii',4,8),'ftyp');assert.ok(file.length>100000&&file.length<650000,'compact AAC scene loop');
 }

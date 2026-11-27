@@ -5,8 +5,8 @@ const {GENERATED_SOUNDS,SoundGate}=load('weapon-sound');
 function context(){return {src:'',volume:0,loop:false,autoplay:false,plays:0,stops:0,destroys:0,onPlay(fn){this.started=fn},offPlay(fn){assert.equal(this.started,fn);this.started=undefined},onError(fn){this.error=fn},offError(fn){assert.equal(this.error,fn);this.error=undefined},play(){this.plays++;this.started?.()},stop(){this.stops++},destroy(){this.destroys++}};}
 (async()=>{
  const voices=[],errors=[],pool=NativeSfx.create({createInnerAudioContext(){const c=context();voices.push(c);return c}},6,s=>errors.push(s));
- for(let i=0;i<10000;i++)pool.play(i%6,'cached://cue-'+i%66,.4);
- assert.equal(pool.played,10000,'actual native onPlay callbacks are observed');assert.equal(voices.length,6,'changing 66 sounds never creates extra native players');assert.equal(voices.reduce((n,c)=>n+c.plays,0),10000);
+ for(let i=0;i<10000;i++)pool.play(i%6,'cached://cue-'+i%GENERATED_SOUNDS.length,.4);
+ assert.equal(pool.played,10000,'actual native onPlay callbacks are observed');assert.equal(voices.length,6,'changing sound sources never creates extra native players');assert.equal(voices.reduce((n,c)=>n+c.plays,0),10000);
  pool.setVolume(0,.12);assert.equal(voices[0].volume,.12);pool.stopAll();assert.ok(voices.every(c=>c.stops>0));voices[0].error({errMsg:'fixture'});assert.equal(errors.length,1);for(let i=0;i<100;i++)voices[0].error({errMsg:'repeat'});assert.equal(errors.length,1,'native error storms do not synchronously flush storage for every event');assert.equal(pool.failures,101);
  const lateError=voices[0].error;
  pool.destroy();lateError({get errMsg(){throw Error('read a retired native event')}});
@@ -60,5 +60,5 @@ function context(){return {src:'',volume:0,loop:false,autoplay:false,plays:0,sto
   for(let i=0;i<10000;i++){g.soundGate.update(.5);g.playSound(GENERATED_SOUNDS[i%GENERATED_SOUNDS.length]);if(i%50===0)g.selectMusic(['menu','battle','boss'][i%3],true)}assert.equal(native.length,7,'200 music transitions plus ten thousand FX still seven contexts');
   g.onDestroy();assert.ok(native.every(c=>c.destroys===1));assert.equal(Object.keys(g.soundUrls).length,0);assert.equal(g.soundLoads.loading,0);
  }finally{cc.assetManager.loadBundle=baseLoad;cc.wechatHost=undefined;}
- console.log('通过：66音色万次切换固定6原生播放器、加载并发1、原生零AudioClip、200次音乐切换固定7源、销毁/中途失败无残留');
+ console.log('通过：全库音效万次切换固定6原生播放器、加载并发1、原生零AudioClip、200次音乐切换固定7源、销毁/中途失败无残留');
 })().catch(e=>{console.error(e);process.exitCode=1});

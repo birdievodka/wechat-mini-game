@@ -57,7 +57,7 @@ async function main(){
  const head=await png('assets/presentation/heroes.png',{left:40,top:29,width:379,height:363});
  const body=await png('assets/presentation/heroes.png',{left:66,top:939,width:310,height:232});
  const enemy=await png('assets/chronicle-units/troops-a-front.png',{left:0,top:0,width:128,height:128});
- const ground='data:image/jpeg;base64,'+(await sharp('assets/meadow/ground.png').resize(720,720).jpeg({quality:85}).toBuffer()).toString('base64');
+ const ground='data:image/jpeg;base64,'+(await sharp('assets/meadow/ground.jpg').resize(720,720).jpeg({quality:85}).toBuffer()).toString('base64');
  const cards=[],records=[];
  for(const s of skills){
   const [visual,issue,detail,time]=notes[s.id];assert.ok(visual);

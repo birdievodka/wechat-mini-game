@@ -110,7 +110,7 @@ export class StageClearView extends StageSurface {
   this.text(p,heroFor(run).name+' · '+growthTitle(run.heroId,growth),-420,-185,27,360,46,C.paper).node.name='ClearHeroTitle';
   const base=heroFor(run).hp,before=base+Math.min(2,reward.growthBefore||0),after=base+Math.min(2,growth);
   this.text(p,reward.firstHeroClear&&after>before?`♥  生命上限  ${before} → ${after}`:`♥  生命上限 ${after}`,-420,-225,23,360,40,C.gold).node.name='ClearHeartReward';
-  const feature=run.chapter===1?weaponFor(signatureId(run.heroId,growth) as WeaponId).name+'解锁':run.chapter===2?(run.heroId==='liubei'?'白马':run.heroId==='guanyu'?'赤兔':'黑猪')+' · 移速+30%':run.chapter===3?'本命三连解锁':run.chapter===4?dashName(run.heroId)+'解锁':run.chapter===5?'短甲进阶 · '+petName(run.heroId)+'加入':'桃园留名';
+  const feature=run.chapter===1?weaponFor(signatureId(run.heroId,growth) as WeaponId).name+'解锁':run.chapter===2?(run.heroId==='liubei'?'白马':run.heroId==='guanyu'?'赤兔':'黑猪')+' · 移速+30%':run.chapter===3?'本命第三击伤害 ×1.5':run.chapter===4?dashName(run.heroId)+'解锁':run.chapter===5?'短甲进阶 · '+petName(run.heroId)+'加入':'桃园留名';
   this.text(p,reward.firstHeroClear?feature:'成长已保存 · 重复挑战不叠加',-420,-257,19,360,32,C.muted).node.name='ClearGrowthFeature';
   const paper=this.box(p,'ClearRewards',185,34,800,456,C.paper);
   const fresh=reward.weapons.length+reward.passives.length+reward.skills.length;

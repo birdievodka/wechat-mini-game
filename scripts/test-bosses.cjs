@@ -28,7 +28,13 @@ function fixture(id,index=0){
  const boars=fixture('menghuo');assert.equal(boars.actors.filter(e=>e.bossUnit).length,4);assert.equal(boars.actors[1].hp,1500);boars.advance(.99);assert.ok(boars.actors.slice(1).every(e=>e.bossUnit.phase==='ready'));boars.advance(.7);assert.ok(boars.actors.slice(1).some(e=>e.x!==e.bossUnit.originX),'战猪真正移动');
  const wolves=fixture('menghuo',1);wolves.advance(1.85);const wolf=wolves.actors[1],locked=wolf.bossUnit.angle;wolves.state.y=300;wolves.advance(.4);assert.equal(wolf.bossUnit.angle,locked,'狼扑前锁向不追尾');assert.equal(wolf.bossUnit.phase,'windup');wolves.advance(.4);assert.equal(wolf.bossUnit.phase,'attack');
  const elephants=fixture('menghuo',2);assert.equal(elephants.actors[1].hp,3000);elephants.advance(2.1);assert.equal(elephants.actors[1].bossUnit.phase,'attack');assert.equal(elephants.actors[2].bossUnit.phase,'ready','第二象晚1.5秒，不同时封路');
- const dragons=fixture('simayi',1);dragons.advance(4);assert.equal(dragons.state.hits,0,'双龙中心通道确实安全');assert.equal(dragons.battle.hazards.filter(h=>h.active).length,2);const meteor=fixture('simayi',2);meteor.state.y=-180;meteor.advance(.89);assert.equal(meteor.state.hits,0);meteor.advance(.03);assert.equal(meteor.state.hits,1);assert.equal(meteor.battle.areaCount,3);
+ const stones=fixture('simayi',0);assert.equal(stones.battle.areaCount,4);
+ stones.advance(.15);stones.state.x=250;stones.advance(.23);
+ assert.equal(stones.battle.hazards[0].x,0);assert.equal(stones.battle.hazards[1].x,250,'later stones lock the new target location');
+ const dragons=fixture('simayi',1);dragons.state.y=480;dragons.advance(4);assert.equal(dragons.state.hits,0,'双龙外沿可绕');
+ const heads=dragons.battle.hazards.filter(h=>h.active);assert.equal(heads.length,2);assert.ok(Math.cos(heads[0].angle-heads[1].angle)<-.8,'双龙从相向两侧穿场');
+ const meteor=fixture('simayi',2);meteor.state.y=-200;meteor.advance(.99);assert.equal(meteor.state.hits,0);meteor.state.y=0;meteor.advance(.03);assert.equal(meteor.state.hits,1,'落地后0.43秒内碰到星坑仍命中');assert.equal(meteor.battle.areaCount,3);
+ const split=fixture('caocao',1),field=split.battle.hazards.find(h=>h.kind==='sword-field');field.sides[0].hp=0;split.state.y=-50;split.advance(2.16);assert.ok(field.active);assert.equal(field.hit,true);assert.ok(!field.contactLife,'击杀纸影关闭对应半域');
  console.log('通过：七Boss/21招、18新招蓄势无伤、落点/火池/缺口、雷符可拆、三轮箭墙/弩车、纸影/飞刃、三类兽群/阴阳双龙/星石');
  const g=await newGame();g.clearBattle();g.spawnClock=999;g.hurtPlayer=()=>{};g.px=g.py=0;
  for(const ch of CHAPTERS.filter(c=>c.bossId!=='lvbu')){

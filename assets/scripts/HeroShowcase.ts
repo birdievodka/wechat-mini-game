@@ -60,7 +60,7 @@ export class HeroShowcase {
     aspect(this.head,100);aspect(this.body,growth>=5?63:49);
     for(const p of this.props){for(const n of [...p.children]){n.removeFromParent();n.destroy();}p.getComponent(Graphics)?.clear();p.setScale(1,1,1);p.active=false;}
     const propHero=weapon==='sandal'?'liubei':weapon==='pole'?'guanyu':weapon==='cleaver'?'zhangfei':id;
-    if(growth>0){for(let i=0;i<2;i++){const p=this.props[i];p.active=i===1||id==='liubei';const sp=this.sprite(p,'GrowthHeld');sp.spriteFrame=this.frames['growth-held-'+id]||null;sp.node.getComponent(UITransform)!.setAnchorPoint(.5,.22);sp.node.getComponent(UITransform)!.setContentSize(90,90);}}else if(propHero==='liubei'){
+    if(growth>0){for(let i=0;i<2;i++){const p=this.props[i];p.active=i===1||id==='liubei';const sp=this.sprite(p,'GrowthHeld');sp.spriteFrame=this.frames['growth-held-'+id]||null;sp.node.getComponent(UITransform)!.setAnchorPoint(.5,id==='liubei'?.22:43/128);sp.node.getComponent(UITransform)!.setContentSize(id==='liubei'?90:128,id==='liubei'?90:128);}}else if(propHero==='liubei'){
       for(const p of this.props){p.active=true;p.setScale(.9,.9,1);drawWeaponArt(p.getComponent(Graphics)||p.addComponent(Graphics),'sandal');}
     }else if(propHero==='guanyu'){
       const p=this.props[1];p.active=true;drawWeaponArt(p.getComponent(Graphics)||p.addComponent(Graphics),'pole');

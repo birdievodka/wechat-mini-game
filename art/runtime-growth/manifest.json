@@ -1,14 +1,24 @@
 {
   "source": "art/runtime-growth/source.png",
   "sourceSha256": "6b71e1b44b7d53122c2b89341bd3c1e223362e2ba4a6f249ab0816e90985e7e9",
+  "heldSources": [
+    {
+      "path": "art/runtime-growth/guanyu-held.svg",
+      "sha256": "e41234253e7d829925a74a5c75d7fe1b5a25f681cf8d11d5cfcd8e9b2ef48961"
+    },
+    {
+      "path": "art/runtime-growth/zhangfei-held.svg",
+      "sha256": "7a4712b273253b927325dd027f580523d17ca115296cec6397d1ba59e82eece6"
+    }
+  ],
   "file": "assets/presentation/growth.png",
-  "sha256": "ca48cbb8abfa5c0e3a5bbd7dadc8918efad462bf90ea923c05e6905ccd35cbf5",
+  "sha256": "283ec86cb1ccc19086beb5eb6dbefc4ac6f7a6e309aa1dbb166e95f936575e51",
   "width": 768,
   "height": 512,
   "columns": 6,
   "rows": 4,
   "cell": 128,
-  "bytes": 132987,
+  "bytes": 133608,
   "bounds": [
     {
       "l": 22,

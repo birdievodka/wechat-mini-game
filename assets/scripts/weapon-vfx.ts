@@ -1,7 +1,7 @@
 import {Color,Graphics} from 'cc';
 import {WeaponId} from './weapons';
 import * as brush from './vfx-brush';
-import {material} from './vfx-materials';
+import {material,pixel} from './vfx-materials';
 
 export interface WeaponVfxProfile {style:brush.VfxStyle;family:'cloth'|'wood'|'blade'|'spear'|'petals'|'fire'|'gun'|'arrow'|'orbit'|'lightning'|'vortex'|'trap'|'wind'|'rune'|'machine';weight:number;}
 /** All 36 weapons use an explicit visual identity; no weapon mechanics are encoded here. */
@@ -72,7 +72,8 @@ export function drawWeaponHit(g:Graphics,id:WeaponId,x:number,y:number,a:number,
    brush.nib(g,x+Math.cos(b)*r*t,y+Math.sin(b)*r*t,b,r*(1.3+weight)*f,4*f,style,f);}
  }
  // Tiny contact grain, entirely optional when the shared material pool is full.
- material(g,'impact',x,y,r*1.14,r*.78,a,f*.57);
+ const key=family==='wood'||family==='cloth'||family==='trap'?'dirt':family==='wind'?'feather':family==='petals'?'petals':'hit';
+ if(!pixel(g,key,x,y,r*(key==='dirt'?1.9:2.3),a,f*.80,t))material(g,'impact',x,y,r*1.14,r*.78,a,f*.57);
 }
 
 export function drawWeaponMuzzle(g:Graphics,id:WeaponId,x:number,y:number,a:number,t:number):void {
@@ -139,6 +140,7 @@ export function drawWeaponFlight(g:Graphics,id:WeaponId,x:number,y:number,a:numb
 export function drawWeaponBurst(ground:Graphics,air:Graphics,id:WeaponId,x:number,y:number,r:number,t:number):void {
  const {style}=WEAPON_VFX[id],f=1-t;
  if(id==='peach'){
+  pixel(air,'petals',x,y,r*1.8,0,f*.86,t);
   brush.petals(air,x,y,r,t,.82);
   for(let i=0;i<5;i++)brush.crescent(ground,x,y,r*(.28+.67*t),i*TAU/5+t,.75,7*f,'peach',f);
  }else if(id==='star-lamps'){
@@ -153,10 +155,13 @@ export function drawWeaponBurst(ground:Graphics,air:Graphics,id:WeaponId,x:numbe
   if(id==='rocket'||id==='firecracker'||id==='oil-jar'){
    const bloom=Math.min(1,t*6+.18);
    brush.fireCrown(ground,air,x,y,r*(.48+.50*bloom),t*1.9,bloom*f);
+   pixel(air,id==='oil-jar'?'flame':'smoke',x,y,r*1.7,0,f*.88,t);
    for(let side=-1;side<=1;side+=2)brush.crescent(ground,x,y,r*(.22+.72*(1-f*f)),side*1.48,1.15,8*f,'earth',f);
    return;
   }
   if(id==='taiping-book'){
+   pixel(ground,'rune',x,y,r*1.6,0,f*.84,t);
+   pixel(air,'burst',x,y,r*1.4,0,f,t);
    const rad=r*(.72+.22*t);
    for(let i=0;i<4;i++){
     const a=Math.PI*.25+i*Math.PI*.5,c=Math.cos(a),s=Math.sin(a);
@@ -170,6 +175,7 @@ export function drawWeaponBurst(ground:Graphics,air:Graphics,id:WeaponId,x:numbe
   brush.groundStrike(ground,air,x,y,r,t,style);
   if(id==='thunder'||id==='thunder-bomb'){
    const flash=Math.max(0,1-2.8*t);
+   pixel(air,id==='thunder'?'lightning':'smoke',x,y,r*1.86,0,flash,t);
    if(flash>0)for(let i=0;i<3;i++){
     const offset=(i-1)*13,shift=i%2?-9:9;
     brush.stroke(air,x+offset+shift,y+64+10*i,x+offset-shift,y+34,4,style,flash);
@@ -183,6 +189,7 @@ export function drawWeaponField(ground:Graphics,air:Graphics,id:WeaponId,x:numbe
  const f=Math.min(1,life/.2);
  if(id==='oil-jar'){
   brush.fireCrown(ground,air,x,y,r,clock,f);
+  pixel(air,'whorl',x,y,r*.73,0,f*.73,(clock*3)%1);
  }else if(id==='caltrops'){
   for(let i=0;i<4;i++){const a=i*2.399,d=r*Math.sqrt((i+.5)/4)*.72,px=x+Math.cos(a)*d,py=y+Math.sin(a)*d;
    for(let j=0;j<3;j++)brush.nib(ground,px,py,a+j*TAU/3,15,3,'silver',f);}
@@ -192,6 +199,7 @@ export function drawWeaponField(ground:Graphics,air:Graphics,id:WeaponId,x:numbe
   for(let i=0;i<4;i++)brush.crescent(ground,x,y,r*(.9-.55*p),i*TAU/4+p,.91,4,'gold',f);
   brush.nib(air,x,y+40*(1-p),-1.57,22,7,'gold',f);
  }else{
+  pixel(ground,'rune',x,y,r*1.7,0,f*.73,(clock*2)%1);
   for(let i=0;i<8;i++){const a=i*TAU/8,c=Math.cos(a),s=Math.sin(a);
    const xx=x+c*r*.82,yy=y+s*r*.82;
    const b=a+TAU/8,q=(clock*.8+i/8)%1,tx=x+Math.cos(b)*r*.82,ty=y+Math.sin(b)*r*.82;

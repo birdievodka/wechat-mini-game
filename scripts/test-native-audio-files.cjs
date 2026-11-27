@@ -41,10 +41,37 @@ function clock(){let serial=0,now=0;const jobs=new Map();return {jobs,setTimeout
   const unstable={src:'',play(){},pause(){throw Error('native pause rejected');},stop(){stops++;},destroy(){},
     get volume(){return gain;},set volume(value){sets++;if(failVolume)throw Error('native volume rejected');gain=value;}};
   const guarded=NativeMusic.create({createInnerAudioContext:()=>unstable},()=>{});
-  guarded.src='battle.m4a';assert.doesNotThrow(()=>guarded.pause());assert.equal(stops,1,'pause failure falls back to stopping the same player');
+  guarded.src='battle.m4a';guarded.play();assert.doesNotThrow(()=>guarded.pause());assert.equal(stops,1,'pause failure falls back to stopping the same player');
   failVolume=true;for(let i=0;i<100;i++)guarded.volume=.17;
   assert.equal(sets,2,'failed native gain writes are backed off');assert.equal(guarded.volume,0,'failed gain never updates the cache');
   failVolume=false;guarded.src='menu.m4a';guarded.volume=.17;assert.equal(gain,.17);guarded.destroy();
+  const events={},seeks=[],reports=[];
+  const host={src:'',currentTime:0,paused:true,volume:0,plays:0,stops:0,
+    play(){this.plays++},pause(){this.paused=true;events.Pause?.()},
+    stop(){this.stops++;this.paused=true;this.currentTime=0;events.Stop?.()},
+    seek(time){assert.equal(this.paused,false,'never seek a paused decoder');seeks.push(time);this.currentTime=time},
+    destroy(){}};
+  for(const name of ['Play','Pause','Stop','Canplay','Error'])host['on'+name]=fn=>events[name]=fn;
+  let recoveries=0;
+  const player=NativeMusic.create({createInnerAudioContext:()=>host},msg=>reports.push(msg),()=>recoveries++);
+  player.src='oath.m4a';player.currentTime=8;player.play();events.Canplay();
+  assert.deepEqual(seeks,[],'canplay alone does not permit native seek');
+  assert.equal(host.plays,2,'ready callback retries an unconfirmed start once');
+  host.paused=false;events.Play();events.Canplay();events.Play();
+  assert.deepEqual(seeks,[8]);assert.equal(timers.jobs.size,0,'real onPlay clears the deadline');
+  player.pause();player.currentTime=8;player.play();host.paused=false;host.currentTime=8.5;
+  timers.tick(3000);
+  assert.equal(player.playing,true,'a moving native clock also confirms start');
+  assert.equal(recoveries,0);
+  player.stop();player.stop();
+  assert.equal(host.stops,1,'a scene switch must not enqueue redundant native stops');
+  player.src='rally.m4a';player.play();timers.tick(3000);
+  assert.equal(recoveries,1,'silent refusal reaches the bounded recovery path');
+  assert.match(reports[0],/code=start-timeout/);
+  events.Canplay();events.Play();assert.equal(player.playing,false,'late callbacks cannot revive an expired attempt');
+  player.src='rally.m4a';player.play();player.pause();timers.tick(3000);
+  assert.equal(recoveries,1,'intentional pause cancels the deadline');
+  player.destroy();timers.tick(3000);
   assert.equal(timers.jobs.size,0);
  }finally{cc.assetManager.loadBundle=original;cc.assetManager.utils=utils;for(const b of ['music','sfx-core','sfx','battle'])forgetGameBundle(b);delete cc.testTimers;}
  console.log('通过：分包UUID/版本地址解析、原草鞋WAV/音乐M4A、拒绝远程音频路径、缓存/超时/迟到/销毁不分配临时播放器、300秒音乐零重复音量命令、监听解绑');

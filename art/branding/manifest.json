@@ -24,7 +24,8 @@
     "output": "assets/hero-menu/logo.png",
     "styleReference": "assets/hero-menu/atlas.png",
     "prompt": "Use case: logo-brand\nAsset type: production transparent game title wordmark for a humorous chibi Chinese Three Kingdoms mobile game.\nPrimary request: create ONE standalone hand-painted Chinese title logo reading EXACTLY \"桃园小英雄\" in ONE horizontal line, five Chinese characters in this exact order: 桃 园 小 英 雄.\nInput image: style reference ONLY. Match the LOWER LEFT existing title logo in the reference sprite sheet: warm cream/gold brush calligraphy on a rugged dark chocolate-brown ink-brush swash. Do not reproduce the old text, other sheet cells, any people, weapons, buttons or UI.\nDesign: bold playful heroic brush lettering, legible full strokes, energetic but balanced, restrained warm gold edge/shadow, slightly irregular hand-painted ink backdrop with rough brush ends. All five characters equally readable, no missing or merged strokes. Similar visual weight and palette to the existing logo, whimsical friendly Three Kingdoms game, no heavy 3D metal.\nComposition: wide compact horizontal wordmark around 3:1 aspect ratio, generous transparent margin all around, no framing mockup. Brush swash remains behind the full title, characters do not touch canvas edges.\nText verbatim: 桃园小英雄\nConstraints: genuine TRANSPARENT alpha outside the brown brush swash. No white/black rectangular background, no checkerboard baked in, no extra text, subtitle, Roman lettering, watermark, emblem, red seal, character illustration, blossom, outer frame or decorative weapons. Single final production logo only.",
-    "processing": "Trim transparent margins, resize to 640×181, RGBA PNG with alpha preserved."
+    "processing": "Trim transparent margins, resize to 640×181, RGBA PNG with adaptive filtering.",
+    "outputSha256": "810b5957e7cdf442f4be0e166e4cc24469a6402fea2da48e6a5d762bdeeb2e38"
   },
   "heroAppearance": "approved-youth-v1"
 }

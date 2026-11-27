@@ -1,14 +1,14 @@
 import type {Enemy} from './GameBootstrap';
 import {bossBeastCharging} from './boss-battle';
 import {sweepEllipseTime} from './combat-math';
-import {commonSkillFor,METEOR_COUNT,THUNDER_COUNT,SKY_VOLLEY_SIZE,SkyPoint} from './common-skills';
+import {commonSkillFor,METEOR_COUNT,THUNDER_COUNT,SKY_VOLLEY_SIZE,SkyPoint,FIRE_HALF_WIDTH,DASH_HALF_WIDTH,GUARD_SWORDS,GUARD_ANGULAR_SPEED,GUARD_WARDS,PRECISION_ARROWS,RAIN_VOLLEYS,RAIN_FIRST_IMPACT,RAIN_INTERVAL,isHeavyStar} from './common-skills';
 import {CommonSkillEffects} from './CommonSkillEffects';
 import {WeaponId} from './weapons';
 interface Host {
  readonly x:number;readonly y:number;readonly angle:number;readonly age:number;
  enemies():Enemy[];move(dx:number,dy:number):void;protect(seconds:number):void;clearSlow():void;
  hit(e:Enemy,angle:number,damage:number,knockback:number,style:WeaponId):void;
- canHeal():boolean;heal():void;sound(style:WeaponId):void;impact?():void;audio?(id:string,event:'cast'|'release'|'pre'|'hit'|'block'):void;
+ canHeal():boolean;heal():void;sound(style:WeaponId):void;impact?():void;audio?(id:string,event:'cast'|'release'|'pre'|'hit'|'block',heavy?:boolean):void;
 }
 interface Group {hits:Map<Enemy,number>;maxTargets:number;maxHits:number;}
 interface Task {id:string;kind:string;x:number;y:number;angle:number;delay:number;life:number;age:number;power:number;group:Group;index:number;token:number;sky?:SkyPoint[];}
@@ -39,12 +39,12 @@ export class CommonSkillRuntime {
  speedFor(current:number,_base:number):number{return current;}
  private eligible(e:Enemy):boolean{return e.hp>0&&!e.animal&&!bossBeastCharging(e)&&(e.born||0)<=0;}
  private group(id:string):Group{const d=commonSkillFor(id);return {hits:new Map(),maxTargets:d.maxTargets,maxHits:d.maxHits};}
- private hit(e:Enemy,id:string,power:number,group:Group,angle:number,knockback=100):boolean {
+ private hit(e:Enemy,id:string,power:number,group:Group,angle:number,knockback=100,factor=commonSkillFor(id).factor):boolean {
   const d=commonSkillFor(id),count=group.hits.get(e)||0;
   if(!this.eligible(e)||count>=group.maxHits||!count&&group.hits.size>=group.maxTargets)return false;
   group.hits.set(e,count+1);
   const style:WeaponId=d.kind==='sweep'?'cleaver':d.kind==='fire-line'?'firecracker':d.kind==='lightning'||d.kind==='meteor'?'thunder':d.kind==='water'||d.kind==='gates'?'feather-fan':d.kind==='sword-guard'?'sword':'silver-spear';
-  const before=e.hp;this.h.hit(e,angle,Math.max(1,Math.round(power*d.factor)),knockback,style);
+  const before=e.hp;this.h.hit(e,angle,Math.max(1,Math.round(power*factor)),knockback,style);
   if(e.hp<before){
    if(d.kind==='sweep'){this.effects.play(id,'sweep-hit',e.x,e.y+34,angle,30,.19);if(group.hits.size===1)this.h.impact?.();}
    else{this.effects.play(id,d.kind==='gates'?'lock-hit':'contact',e.x,e.y+34,angle,24,.2);if(this.h.audio)this.h.audio(id,'hit');else this.h.sound(style);}
@@ -88,17 +88,17 @@ export class CommonSkillRuntime {
    this.sweepTime=.4;this.queue(id,'sweep',x,y,angle,0,.01,power,group);
   }else if(kind==='precision'){
    this.effects.stop('bow');this.effects.play(id,'bow',x,y,angle,d.radius,.9);
-   for(let i=0;i<8;i++)this.queue(id,'precision-shot',x,y,angle,i*.095,.01,power,group,i);
+   for(let i=0;i<PRECISION_ARROWS;i++)this.queue(id,'precision-shot',x,y,angle,i*.095,.01,power,group,i);
   }else if(kind==='fire-line'){
-   this.queue(id,kind,x,y,0,0,d.seconds,power,group);this.effects.play(id,kind,x,y,0,d.radius,d.seconds);
+   this.queue(id,kind,x,y,angle,0,d.seconds,power,group);this.effects.play(id,kind,x,y,angle,d.radius,d.seconds);
   }else if(kind==='water'||kind==='gates'){
    this.queue(id,kind,x,y,0,0,d.seconds,power,group);this.effects.play(id,kind,x,y,0,d.radius,kind==='water'?.8:d.seconds);
   }else if(kind==='rain'){
-   this.effects.play(id,kind,x,y,0,d.radius,d.seconds);
-   for(let i=0;i<4;i++)this.queue(id,'area',x,y,0,.22+i*.25,.01,power,group,i);
+   this.effects.play(id,kind,x,y,angle,d.radius,d.seconds);
+   for(let i=0;i<RAIN_VOLLEYS;i++)this.queue(id,'area',x,y,0,RAIN_FIRST_IMPACT+i*RAIN_INTERVAL,.01,power,group,i);
   }else if(kind==='sword-guard'){
-   this.guard={life:d.seconds,power,group,next:new Map(),previousX:x,previousY:y};this.shield=3;this.shieldTime=d.seconds;this.blockGrace=0;
-   this.effects.stop(kind);this.effects.play(id,kind,x,y,h.age*4,d.radius,d.seconds);this.effects.setCount(kind,3);
+   this.guard={life:d.seconds,power,group,next:new Map(),previousX:x,previousY:y};this.shield=GUARD_WARDS;this.shieldTime=d.seconds;this.blockGrace=0;
+   this.effects.stop(kind);this.effects.play(id,kind,x,y,h.age*GUARD_ANGULAR_SPEED,d.radius,d.seconds);this.effects.setCount(kind,GUARD_WARDS);
   }else if(kind==='stun'){
    for(const e of h.enemies())if(this.eligible(e)&&!e.object&&(e.x-x)**2+(e.y-y)**2<=d.radius*d.radius){
     const until=h.age+d.seconds;e.stunUntil=Math.max(e.stunUntil||0,until);e.moving=false;e.vx=e.vy=0;
@@ -128,17 +128,18 @@ export class CommonSkillRuntime {
  }
  interceptShot(x:number,y:number,tx:number,ty:number,_style?:string):boolean{
   if(!this.shield||this.blockGrace>0)return false;
-  const t=sweepEllipseTime(x-this.h.x,y-this.h.y-24,tx-this.h.x,ty-this.h.y-24,120,120);
+  const radius=commonSkillFor('G25').radius;
+  const t=sweepEllipseTime(x-this.h.x,y-this.h.y-24,tx-this.h.x,ty-this.h.y-24,radius,radius);
   return t!==null&&this.block(x+(tx-x)*t,y+(ty-y)*t);
  }
  enemyUpdated(_e:Enemy,_previousAttack:number):void{}
- private area(task:Task,range:number,x=task.x,y=task.y):void{
+ private area(task:Task,range:number,x=task.x,y=task.y,factor=commonSkillFor(task.id).factor):void{
   const d=commonSkillFor(task.id);
   for(const e of this.h.enemies()){
    if(!this.eligible(e))continue;const dx=e.x-x,dy=e.y-y;
    if(dx*dx+dy*dy>range*range)continue;
-   if(this.hit(e,task.id,task.power,task.group,Math.atan2(dy,dx),task.kind==='sweep'?300:d.kind==='water'?150:100)&&['water','gates'].indexOf(d.kind)>=0){
-    e.slowUntil=this.h.age+2;e.slowFactor=e.kind==='chief'?.1:d.kind==='water'?.3:.25;
+   if(this.hit(e,task.id,task.power,task.group,Math.atan2(dy,dx),task.kind==='sweep'?300:d.kind==='water'?150:100,factor)&&['water','gates'].indexOf(d.kind)>=0){
+    e.slowUntil=this.h.age+2;e.slowFactor=e.kind==='chief'?.1:d.kind==='water'?.40:.35;
    }
   }
  }
@@ -150,19 +151,20 @@ export class CommonSkillRuntime {
    const t=sweepEllipseTime(task.x-e.x,task.y-e.y,nx-e.x,ny-e.y,19,19);
    if(t!==null&&t<first){first=t;target=e;}
   }
-  if(target){task.x+=(nx-task.x)*first;task.y+=(ny-task.y)*first;this.hit(target,task.id,task.power,task.group,task.angle,45);task.life=-1;}
+  const heavy=task.index===PRECISION_ARROWS-1;
+  if(target){task.x+=(nx-task.x)*first;task.y+=(ny-task.y)*first;this.hit(target,task.id,task.power,task.group,task.angle,45,heavy?.42:commonSkillFor(task.id).factor);task.life=-1;}
   else{task.x=nx;task.y=ny;task.life-=distance;}
-  this.effects.flight(task.token,task.x,task.y,task.angle,task.life>0);
+  this.effects.flight(task.token,task.x,task.y,task.angle,task.life>0,heavy);
  }
  private updateGuard(dt:number):void{
   const guard=this.guard;if(!guard)return;guard.life-=dt;
   if(guard.life<=0){this.guard=undefined;this.shield=0;this.effects.stop('sword-guard');return;}
-  const radius=commonSkillFor('G25').radius,a=this.h.age*4;
+  const radius=commonSkillFor('G25').radius,a=this.h.age*GUARD_ANGULAR_SPEED;
   for(const e of this.h.enemies()){
    if(!this.eligible(e)||(guard.next.get(e)||0)>this.h.age)continue;
    let touched=false;
-   for(let i=0;i<4;i++){
-    const at=a+i*Math.PI/2,previous=at-dt*4;
+   for(let i=0;i<GUARD_SWORDS;i++){
+    const at=a+i*Math.PI*2/GUARD_SWORDS,previous=at-dt*GUARD_ANGULAR_SPEED;
     if(sweepEllipseTime(guard.previousX+Math.cos(previous)*radius-e.x,guard.previousY+Math.sin(previous)*radius-e.y,this.h.x+Math.cos(at)*radius-e.x,this.h.y+Math.sin(at)*radius-e.y,30,30)!==null){touched=true;break;}
    }
    if(touched&&this.hit(e,'G25',guard.power,guard.group,Math.atan2(e.y-this.h.y,e.x-this.h.x),70))guard.next.set(e,this.h.age+.45);
@@ -178,14 +180,14 @@ export class CommonSkillRuntime {
   const dash=this.dash;if(dash){
    const step=Math.min(Math.max(0,dash.life),dt),x=this.h.x,y=this.h.y;dash.life-=dt;
    this.h.move(Math.cos(dash.angle)*dash.distance/dash.duration*step,Math.sin(dash.angle)*dash.distance/dash.duration*step);
-   for(const e of this.h.enemies())if(this.eligible(e)&&sweepEllipseTime(x-e.x,y-e.y,this.h.x-e.x,this.h.y-e.y,50,50)!==null)this.hit(e,dash.id,dash.power,dash.group,dash.angle,150);
+   for(const e of this.h.enemies())if(this.eligible(e)&&sweepEllipseTime(x-e.x,y-e.y,this.h.x-e.x,this.h.y-e.y,DASH_HALF_WIDTH,DASH_HALF_WIDTH)!==null)this.hit(e,dash.id,dash.power,dash.group,dash.angle,150);
    this.effects.endpoint(dash.id,this.h.x,this.h.y);if(dash.life<=0)this.dash=undefined;
   }
   for(const task of this.tasks){
    const previousDelay=task.delay;task.delay-=dt;if(task.delay>0)continue;
    const activeDt=previousDelay>0?Math.min(dt,-task.delay):dt;task.age+=activeDt;const d=commonSkillFor(task.id);
    if(task.kind==='precision-shot'){
-    this.h.audio?.(task.id,'release');
+    this.h.audio?.(task.id,'release',task.index===PRECISION_ARROWS-1);
     const target=this.nearest(task.group,d.radius);task.x=this.h.x;task.y=this.h.y;task.angle=target?Math.atan2(target.y-task.y,target.x-task.x):this.h.angle;
     this.effects.aimBow(task.angle);task.kind='flight';task.life=d.radius;this.flight(task,activeDt);continue;
    }
@@ -208,18 +210,30 @@ export class CommonSkillRuntime {
      task.kind='sky-impact';
     }
     if(task.age+1e-9<task.life)continue;
-    if(audible)this.h.audio?.(task.id,'release');
-    for(const point of task.sky!)this.area(task,d.radius,point.x,point.y);
+    const heavy=star&&isHeavyStar(task.index);
+    if(audible)this.h.audio?.(task.id,'release',heavy);
+    for(const point of task.sky!)this.area(task,d.radius,point.x,point.y,heavy?.82:d.factor);
     this.effects.playSky(task.id,d.kind,task.sky!,task.index,d.radius,star?.75:d.seconds-THUNDER_WINDUP);
     task.life=-1;continue;
    }
    if(task.kind==='fire-line'){
-    while(task.index<4&&task.age>=.15+task.index*.75){for(const e of this.h.enemies())if(this.eligible(e)&&Math.abs(e.x-task.x)<=d.radius&&Math.abs(e.y-task.y)<=40)this.hit(e,task.id,task.power,task.group,e.y>=task.y?Math.PI/2:-Math.PI/2,30);task.index++;}
+    while(task.index<4&&task.age>=.15+task.index*.75){
+     this.h.audio?.(task.id,'release');
+     const c=Math.cos(task.angle),s=Math.sin(task.angle);
+     for(const e of this.h.enemies()){
+      if(!this.eligible(e))continue;
+      const dx=e.x-task.x,dy=e.y-task.y,along=dx*c+dy*s,across=-dx*s+dy*c;
+      if(Math.abs(along)<=d.radius&&Math.abs(across)<=FIRE_HALF_WIDTH)this.hit(e,task.id,task.power,task.group,task.angle+Math.sign(across)*Math.PI/2,30);
+     }
+     this.effects.play(task.id,'fire-beat',task.x,task.y,task.angle,d.radius,.42);
+     task.index++;
+    }
     if(task.age<task.life)continue;
    }else if(task.kind==='water'||task.kind==='gates'){
     this.area(task,task.kind==='water'?d.radius*Math.min(1,task.age/d.seconds):d.radius);if(task.age<task.life)continue;
    }else{
-    this.h.audio?.(task.id,'release');this.area(task,d.radius);
+    const heavy=d.kind==='rain'&&task.index===RAIN_VOLLEYS-1;
+    this.h.audio?.(task.id,'release',heavy);this.area(task,d.radius,task.x,task.y,heavy?.42:d.factor);
     if(d.kind!=='rain')this.effects.play(task.id,d.kind,task.x,task.y,task.angle,d.radius,d.kind==='sweep'?.4:.6);
    }
    task.life=-1;

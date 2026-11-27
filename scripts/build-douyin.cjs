@@ -41,6 +41,7 @@ fs.copyFileSync(path.join(root, 'build-templates', platform, 'douyin-startup.js'
 fs.writeFileSync(entry, `require('./douyin-startup.js');\n${rawEntry}`);
 fs.copyFileSync(path.join(root, 'art', 'runtime-youth', 'poster.jpg'), path.join(output, 'startup-poster.jpg'));
 
+fs.copyFileSync(path.join(root,'art/runtime-pixelfx/LICENSE'),path.join(output,'PIXELFX-LICENSE.txt'));
 const settingsPath = path.join(output, 'src', 'settings.json');
 const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
 settings.assets.downloadMaxConcurrency = 4;

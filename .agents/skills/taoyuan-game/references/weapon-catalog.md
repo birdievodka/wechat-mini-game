@@ -2,7 +2,7 @@
 
 由 `npm run skill:sync` 从当前代码生成，请修改源码后重新生成。机制、实际调用和已知差异见人工参考；配置字段不代表已接入效果。
 
-当前版本：`stage-v11.0.22-no-damage-numbers`；33种武器，6个槽位。
+当前版本：`stage-v11.1.6-package-size`；33种武器，6个槽位。
 
 ## 基础定义
 
@@ -134,7 +134,7 @@
 | 青莲飞剑 | spirit-attack | spirit-hit |
 | 五雷符 | thunder-attack | thunder-hit |
 | 吞天葫芦 | ritual-attack | ritual-hit |
-| 双股剑 | blade-attack | blade-hit |
+| 双股剑 | heavy-attack | heavy-hit |
 | 青龙偃月刀 | heavy-attack | heavy-hit |
 | 丈八蛇矛 | heavy-attack | heavy-hit |
 | 方天画戟 | heavy-attack | heavy-hit |

@@ -1,9 +1,26 @@
 const assert=require('node:assert/strict');
 const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-campaign.cjs');
 (async()=>{
- const musicMuted=storage.get('taoyuan-music-muted');cc.wechatHost={createInnerAudioContext(){return {src:'',volume:0,autoplay:false,loop:false,onPlay(fn){this.start=fn},play(){this.start?.()},pause(){},stop(){},destroy(){}}}};
+ const musicMuted=storage.get('taoyuan-music-muted'),interruptions=new Map();
+ cc.wechatHost={
+  createInnerAudioContext(){return {src:'',volume:0,autoplay:false,loop:false,onPlay(fn){this.start=fn},play(){this.start?.()},pause(){},stop(){},destroy(){}}},
+  onAudioInterruptionBegin(fn){interruptions.set('begin',fn)},onAudioInterruptionEnd(fn){interruptions.set('end',fn)},
+  offAudioInterruptionBegin(fn){assert.equal(fn,interruptions.get('begin'));interruptions.delete('begin')},
+  offAudioInterruptionEnd(fn){assert.equal(fn,interruptions.get('end'));interruptions.delete('end')},
+ };
  try{
-  storage.delete('taoyuan-music-muted');const boot=new GameBootstrap();await boot.start();finishStartup(boot);assert.equal(boot.phase,'menu');assert.equal(boot.audioUnlocked,false);assert.equal(boot.nativeMusic.playing,true,'WeChat menu attempts music without touching');boot.update(.08);assert.ok(boot.nativeMusic.volume>0);assert.equal(boot.musicSource,undefined,'native music never creates Cocos metadata/player pair');boot.onDestroy();
+  storage.delete('taoyuan-music-muted');const boot=new GameBootstrap();await boot.start();finishStartup(boot);
+  assert.equal(boot.phase,'menu');assert.equal(boot.audioUnlocked,false);assert.equal(boot.nativeMusic.playing,true,'WeChat menu attempts music without touching');
+  boot.update(.08);assert.ok(boot.nativeMusic.volume>0);assert.equal(boot.musicSource,undefined,'native music never creates Cocos metadata/player pair');
+  interruptions.get('begin')();assert.equal(boot.nativeMusic.playing,false);
+  interruptions.get('end')();assert.equal(boot.nativeMusic.playing,true);
+  boot.nativeMusic.failed({errCode:'start-timeout'});assert.equal(boot.musicLoaded,false);assert.ok(boot.musicRetryAt>Date.now());
+  boot.unlockAudio();assert.equal(boot.musicPlaybackRetries,0);assert.equal(boot.nativeMusic.playing,true,'first touch can immediately recover missed autoplay');
+  boot.restart(false);const battle=boot.nativeMusic.src;assert.match(battle,/brass-rally/);assert.equal(boot.nativeMusic.playing,true);
+  interruptions.get('begin')();boot.onBackground();interruptions.get('end')();boot.onForeground();assert.equal(boot.nativeMusic.playing,false);
+  boot.paused=false;boot.music.resume();assert.equal(boot.nativeMusic.playing,true);
+  boot.showShop();assert.equal(boot.nativeMusic.src,battle);assert.equal(boot.nativeMusic.playing,true,'shop preserves the current battle track');
+  boot.onDestroy();assert.equal(interruptions.size,0,'native interruption subscriptions are removed');
   storage.set('taoyuan-music-muted','true');const muted=new GameBootstrap();await muted.start();finishStartup(muted);assert.equal(muted.nativeMusic.playing,false,'saved music mute wins over autoplay');muted.onDestroy();
  }finally{delete cc.wechatHost;if(musicMuted===undefined)storage.delete('taoyuan-music-muted');else storage.set('taoyuan-music-muted',musicMuted);}
  const g=await newGame();g.showMainMenu();g.unlockAudio();
@@ -36,16 +53,26 @@ const {newGame,load,cc,GameBootstrap,finishStartup,storage}=require('./test-camp
   g.onForeground();assert.ok(g.musicSource.playing);g.showMainMenu();assert.ok(released.includes(boss),'scene switch releases prior decoded music');
  }finally{g.onDestroy();cc.assetManager.loadBundle=old;cc.assetManager.releaseAsset=release;forgetGameBundle('music');}
  // Real skill tasks emit each release, rather than a prerecorded future montage.
- for(const [id,count] of [['G08',8],['G19',1],['G20',9],['G22',4]]){
+ for(const [id,count,main,accent] of [
+  ['G08',8,'skill-G08','skill-G08-heavy'],['G10',4,'skill-G10-beat'],['G19',1,'skill-G19'],
+  ['G20',9,'skill-G20','skill-G20-heavy'],['G22',4,'skill-G22','skill-G22-heavy'],
+ ]){
   const s=await newGame();s.spawnClock=999;s.commonSkill.reset();const e=s.spawnNext('soldier');Object.assign(e,{x:180,y:0,born:0,hp:1e7,maxHp:1e7,speed:0});
-  const events=[],old=s.skillAudio.bind(s);s.skillAudio=(skill,event)=>{events.push([skill,event,s.age]);old(skill,event)};
+  s.stopSounds();
+  const events=[],played=[],old=s.skillAudio.bind(s);
+  s.skillAudio=(skill,event,heavy)=>{events.push([skill,event,s.age]);old(skill,event,heavy)};
+  for(const cue of [main,accent].filter(Boolean))s.clips[cue]={name:cue};
+  for(const source of s.soundSources){const play=source.play.bind(source);source.play=()=>{played.push(source.clip.name);play();};}
   assert.equal(s.commonSkill.cast(id,100),true);for(let i=0;i<400;i++){s.age+=1/120;s.soundGate.update(1/120);s.updateSkill(1/120)}
   assert.equal(events.filter(e=>e[0]===id&&e[1]==='release').length,count,id+' actual timed releases');
+  const expected=Array(count).fill(main);if(accent)expected[count-1]=accent;
+  assert.deepEqual(played.filter(cue=>cue===main||accent&&cue===accent),expected,id+' voice gate plays every release at simulation cadence');
   if(id==='G20'){
    const strikes=events.filter(e=>e[1]==='release');
    for(let i=1;i<strikes.length;i++)assert.ok(Math.abs(strikes[i][2]-strikes[i-1][2]-.14)<.01,'one landing sound for each of nine triple-meteor volleys');
   }
   s.commonSkill.reset();const n=events.length;for(let i=0;i<120;i++)s.updateSkill(1/120);assert.equal(events.length,n,'cancelled skill produces no future audio');
+  s.onDestroy();
  }
  const {SoundGate}=load('weapon-sound'),gate=new SoundGate(2);gate.acquire('gun-attack');gate.acquire('blade-hit');assert.notEqual(gate.acquire('player-hurt'),undefined);assert.equal(gate.acquire('wood-attack'),undefined,'low-priority movement cannot displace important feedback');
  console.log('通过：选人/战斗/购物音乐、后台迟到加载、旧解码资源释放、12技能中多段真实释放时序/取消、受伤声道抢占');

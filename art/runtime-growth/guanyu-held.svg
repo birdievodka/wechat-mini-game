@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><g transform="translate(64 85) rotate(-90) scale(0.56)">
+<g stroke-linejoin="round" stroke-linecap="round">
+ <path d="M-66-4Q-39-6 36-5L55-6 57 7Q30 6-67 6Z" fill="#62432f" stroke="#392720" stroke-width="3.7"/>
+ <path d="M-62-1Q-27-3 27-2L50-3" fill="none" stroke="#ad7846" stroke-width="2.1"/>
+ <path d="M-67-6-56-6-56 8-67 8Q-73 2-67-6Z" fill="#a77b47" stroke="#513723" stroke-width="2.6"/>
+ <path d="M-14-5 12-6 13 7-14 7Z" fill="#27483c" stroke="#3f3025" stroke-width="1.8"/>
+ <path d="M-13-3l7 10m0-12 7 12m0-12 8 12m-1-12 4 7" stroke="#83a271" stroke-width="1.15" fill="none"/>
+ <path d="M49-8
+   C54-10 58-14 59-17 L60-25 Q64-25 69-17
+   L73-17 75-21 80-16
+   C95-16 107-19 117-24 Q123-27 128-31
+   C125-13 117 1 102 11 C88 20 71 22 59 15
+   Q55 12 50 8Z"
+   fill="#5f7b73" stroke="#26342b" stroke-width="3.8"/>
+ <path d="M57-8
+   Q62-13 70-13 L81-12
+   C99-13 114-17 125-26
+   C121-14 111-5 99 0 Q79 10 61 9Z"
+   fill="#7e9e8d"/>
+ <path d="M51-8Q57-12 59-17L60-25Q64-25 69-17L73-17 75-21 80-16
+   C95-16 107-19 117-24Q123-27 128-31
+   C121-22 107-17 96-15L80-11 71-12 67-13 61-17 60-13 55-8Z" fill="#374f48"/>
+ <path d="M56 5
+   Q65 13 79 10 C100 6 116-9 128-31
+   C125-13 117 1 102 11 C88 20 71 22 59 15 Q55 12 52 8Z"
+   fill="#c9d8cb"/>
+ <path d="M58 12 C72 21 90 15 103 7 C117-3 122-15 127-28"
+   stroke="#fbf4db" stroke-width="2.2" fill="none"/>
+ <path d="M72 1Q78-6 85-3Q93 1 99-9M80-3l3-4 3 1M88-1l5-5" stroke="#405f55" stroke-width="1.5" fill="none"/>
+ <path d="M38-7 43-10 50-9 52-14 55-10
+   Q62-11 65-6L63-2 58-1 63 3 61 7 53 5
+   Q49 10 42 9L38 6Z" fill="#a58047" stroke="#4e3a29" stroke-width="2.6"/>
+ <path d="M41-3Q47-7 50-5L53-9 57-7 62-6M48 5l4-3 6 1" stroke="#e7c57a" stroke-width="1.8" fill="none"/>
+ <circle cx="54" cy="-6" r="1.35" fill="#55362d"/>
+ <path d="M43 8Q38 14 35 19L24 23 30 17 26 16Q32 12 35 8Z"
+   fill="#a54032" stroke="#572d24" stroke-width="1.55"/>
+ <path d="M39 11 34 17 29 19" stroke="#e17e51" stroke-width="1.2" fill="none"/>
+</g></g></svg>

@@ -9,9 +9,9 @@ function target(g,x,y){const e=g.spawnNext('soldier');Object.assign(e,{x,y,born:
 function step(g,t){for(let i=0;i<Math.ceil(t*120);i++){g.age+=1/120;g.updateSkill(1/120);g.combatFx.update(1/120);}}
 function recorder(){const g=new Graphics(),commands=[];for(const name of ['moveTo','lineTo','bezierCurveTo','ellipse','circle','arc','rect','roundRect'])g[name]=(...a)=>{assert.ok(a.every(x=>typeof x!=='number'||Number.isFinite(x)),name+' finite geometry');commands.push([name,...a]);};g.fill=()=>commands.push(['fill']);g.stroke=()=>commands.push(['stroke']);return {g,commands};}
 (async()=>{
- // This is a baseline-preservation test for this redesign, not a moving Git HEAD constraint.
+ // Keep the approved A-version contour/timing while allowing the authorized damage and target cap.
  const baseline=JSON.parse(fs.readFileSync('scripts/fixtures/skill-vfx-baseline.json','utf8'));
- assert.deepEqual(JSON.parse(JSON.stringify(COMMON_SKILLS.find(s=>s.id==='G03'))),{...baseline.sweep,killCharge:15},'G03的数值与机制保持既定A版基线');
+ assert.deepEqual(JSON.parse(JSON.stringify(COMMON_SKILLS.find(s=>s.id==='G03'))),{...baseline.sweep,killCharge:15,damage:'1.00S',factor:1,maxTargets:12,effect:'一圈金刃横扫，最多12敌，击退300。'},'G03保留A版半径、时序与击退，应用新伤害与人数');
  for(const [path,sha] of Object.entries(baseline.renderers))assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path)).digest('hex'),sha,path+' mechanism/renderer unchanged');
  for(const skill of COMMON_SKILLS){
   const g=await newGame();g.clearBattle();g.run.skillId=skill.id;g.playerHp=skill.kind==='heal'?4:5;g.px=g.py=g.heading=0;g.skillCharge=g.skillRequirement();

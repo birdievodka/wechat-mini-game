@@ -2,7 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const project = path.resolve(__dirname, '..');
-const root = path.join(project, 'build/wechatgame');
+const release = process.argv.includes('--release');
+const root = path.join(project, 'build', release ? 'wechat-release' : 'wechatgame');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'game.json'), 'utf8'));
 const bundles = config.subpackages || config.subPackages || [];
 const roots = bundles.map(b => b.root.replace(/\/$/, '') + '/');
@@ -27,7 +28,8 @@ for (const [name, bytes] of Object.entries(sizes)) console.log(`分包 ${name}: 
 for (const [name, bytes] of Object.entries(sizes)) assert.ok(bytes < 4 * 1024 * 1024, `${name} 超过4MiB`);
 assert.ok(main < 4 * 1024 * 1024, '微信主包超过4MiB，禁止继续预览');
 const migrated = ['arsenal','talismans','meadow','orchard','sfx','enemies','results','hidden-heroes','pets',
-  'boss-zhangjiao','boss-props','boss-lvbu','boss-dongzhuo','boss-yuanshao','boss-caocao','boss-menghuo','boss-simayi'];
+  'boss-zhangjiao','boss-props','boss-lvbu','boss-dongzhuo','boss-yuanshao','boss-caocao','boss-menghuo','boss-simayi']
+  .filter(name => !release || name !== 'meadow');
 for(const name of ['battle','campaign','chronicle-ui','chronicle-units','hero-menu','presentation','sfx-core','music',...migrated]){
   assert.ok(bundles.some(b=>b.name===name),'缺少必需本地分包 '+name);
   assert.ok(fs.existsSync(path.join(root,'subpackages',name,'game.js')),'缺少本地分包入口 '+name);
@@ -45,6 +47,11 @@ for(const src of tracks){
   assert.ok(dest&&fs.readFileSync(path.join(root,'subpackages/music/native',dest)).equals(fs.readFileSync(path.join(musicSource,src))),'音乐分包缺失或内容不一致 '+src);
 }
 const settings=JSON.parse(fs.readFileSync(path.join(root,'src/settings.json')));
+assert.equal(bundles.some(b=>b.name==='meadow'),!release,'演武分包声明与构建类型不符');
+assert.equal(settings.assets.subpackages.includes('meadow'),!release,'演武分包引擎配置与构建类型不符');
+assert.equal(settings.assets.projectBundles.includes('meadow'),!release,'演武分包项目配置与构建类型不符');
+assert.equal(fs.existsSync(path.join(root,'subpackages/meadow')),!release,'演武分包文件与构建类型不符');
+assert.equal(fs.readFileSync(path.join(root,'game.js'),'utf8').startsWith('GameGlobal.__taoyuanUploadBuild = true;'),release,'线上包入口标记与构建类型不符');
 assert.equal(settings.engine.debug,false,'微信发布包必须使用非调试引擎设置');
 assert.notEqual(config.debug,true,'微信游戏配置不得开启调试');
 assert.equal(settings.assets.downloadMaxConcurrency,4,'限制下载并发');
@@ -52,6 +59,14 @@ assert.deepEqual(settings.assets.remoteBundles||[],[],'微信运行包不可依�
 assert.ok(!settings.assets.server,'微信运行包不可配置资源 CDN');
 assert.ok(!fs.existsSync(path.join(root,'remote')),'构建不应导出远程资源');
 const sha=file=>require('node:crypto').createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const {physicalSounds}=require('../art/audio/runtime-manifest.json');
+for(const cue of physicalSounds){
+  const source=path.join(project,'assets',cue.bundle,cue.name+'.wav');
+  const {uuid}=JSON.parse(fs.readFileSync(source+'.meta'));
+  const native=path.join(root,'subpackages',cue.bundle,'native',uuid.slice(0,2));
+  const file=fs.readdirSync(native).find(asset=>asset.startsWith(uuid+'.')&&asset.endsWith('.wav'));
+  assert.ok(file&&sha(path.join(native,file))===cue.sha256,'微信分包缺少新版音效或字节不一致 '+cue.name);
+}
 const {files:encoded}=require('../art/runtime-subpackages/manifest.json');
 for(const file of encoded){
   assert.equal(sha(path.join(project,file.source)),file.sourceSha256,'压缩源图变更，重新生成 '+file.source);
@@ -62,7 +77,7 @@ for(const name of migrated){
   const source=fs.existsSync(direct)?direct:path.join(project,'assets/remote-content',name);
   const packaged=path.join(root,'subpackages',name);
   assert.ok(fs.readdirSync(packaged).some(file=>/^config(?:\.[^.]+)?\.json$/.test(file)), '微信分包缺少配置 '+name);
-  const imagesAndAudio=fs.readdirSync(source,{recursive:true}).filter(file=>/\.(png|wav)$/.test(file));
+  const imagesAndAudio=fs.readdirSync(source,{recursive:true}).filter(file=>/\.(png|jpg|wav)$/.test(file));
   assert.ok(imagesAndAudio.length,'微信分包缺少来源文件 '+name);
   for(const file of imagesAndAudio){
     const input=path.join(source,file),ext=path.extname(file);

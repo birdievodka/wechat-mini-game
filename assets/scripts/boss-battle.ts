@@ -7,7 +7,7 @@ export type HazardKind='lightning'|'chain'|'seal'|'wine'|'coin'|'blade'|'arrow'|
 export interface ReforgedState {phase:'idle'|'windup'|'cast'|'recover';time:number;index:number;gait:number;blend:number;moveSpeed:number;facing:number;back:boolean;originX:number;originY:number;sideX:number;sideY:number;serial:number;}
 export interface BossUnit {kind:BossUnitKind;owner:BossActor;age:number;delay:number;life:number;angle:number;originX:number;originY:number;targetX:number;targetY:number;lane:number;round:number;burst:number;attackAge:number;locked:boolean;hit:boolean;phase:'ready'|'approach'|'windup'|'attack'|'recover';gait:number;}
 export interface BossActor {x:number;y:number;hp:number;maxHp?:number;speed:number;attack:number;attackAngle:number;archetype?:string;bossSkin?:string;bossTimers?:number[];bossNext?:number;bossMove?:BossAction;stunUntil?:number;born?:number;bossState?:ReforgedState;bossUnit?:BossUnit;miniBoss?:boolean;miniPhase?:number;}
-export interface BossHazard {active:boolean;kind:HazardKind;source:BossActor;age:number;delay:number;duration:number;radius:number;width:number;x:number;y:number;originX:number;originY:number;angle:number;speed:number;distance:number;lane:number;hit:boolean;nextHit:number;contactLife:number;contactX:number;contactY:number;nodes?:BossActor[];lockAt?:number;locationLocked?:boolean;}
+export interface BossHazard {active:boolean;kind:HazardKind;source:BossActor;age:number;delay:number;duration:number;radius:number;width:number;x:number;y:number;originX:number;originY:number;angle:number;speed:number;distance:number;lane:number;hit:boolean;nextHit:number;contactLife:number;contactX:number;contactY:number;nodes?:BossActor[];sides?:Array<BossActor|undefined>;lockAt?:number;locationLocked?:boolean;}
 export interface BossHost {
  now():number;target():{x:number;y:number};bounds():{halfWidth:number;halfHeight:number};
  viewport?():{left:number;right:number;bottom:number;top:number};
@@ -31,10 +31,42 @@ export class BossBattle {
  get shotCount():number {let n=0;for(const h of this.hazards)if(h.active&&!area(h.kind))n++;return n;}
  private unitCount(kind?:BossUnitKind):number {let n=0;for(const e of this.host.actors())if(e.hp>0&&e.bossUnit&&(!kind||e.bossUnit.kind===kind))n++;return n;}
  private point(x:number,y:number,pad=65,visible=true):{x:number;y:number}{const b=this.host.bounds(),v=visible?this.host.viewport?.():undefined;return {x:clamp(x,Math.max(-b.halfWidth+pad,v?v.left+pad:-Infinity),Math.min(b.halfWidth-pad,v?v.right-pad:Infinity)),y:clamp(y,Math.max(-b.halfHeight+pad,v?v.bottom+pad:-Infinity),Math.min(b.halfHeight-pad,v?v.top-pad:Infinity))};}
+ private spacedPoint(x:number,y:number,radius:number,used:readonly {x:number;y:number}[],spacing:number):{x:number;y:number}|undefined {
+  for(let i=-1;i<8;i++){
+   const a=i*Math.PI/4,offset=i<0?0:spacing;
+   const p=this.point(x+Math.cos(a)*offset,y+Math.sin(a)*offset,radius);
+   if(used.every(other=>Math.hypot(p.x-other.x,p.y-other.y)>=spacing-1))return p;
+  }
+  return undefined;
+ }
+ /** An arrow rain marker can wait a beat when the next arrow gaps and ground circles overlap. */
+ private rainGap(x:number,y:number,radius:number,when:number,heading:number):boolean {
+  const here=this.host.target();
+  for(let i=0;i<12;i++){
+   const a=heading+i*Math.PI/6;
+   const p=this.point(here.x+Math.cos(a)*203,here.y+Math.sin(a)*203,24,false);
+   if(Math.hypot(p.x-x,p.y-y)<radius+18)continue;
+   let open=true;
+   for(const h of this.hazards){
+    if(!h.active)continue;
+    const arrival=h.age+when;
+    if(arrival<h.delay||arrival>h.delay+h.duration)continue;
+    if(area(h.kind)){
+     if(Math.hypot(p.x-h.x,p.y-h.y)<h.radius+18){open=false;break;}
+    }else if(h.kind==='arrow'||h.kind==='bolt'){
+     const travel=Math.max(h.distance,(arrival-h.delay)*h.speed),dx=Math.cos(h.angle),dy=Math.sin(h.angle);
+     const midX=h.originX+travel*dx,midY=h.originY+travel*dy;
+     if(sweepEllipseTime(midX-dx*99-p.x,midY-dy*99-p.y-24,midX+dx*99-p.x,midY+dy*99-p.y-24,h.width+20,h.width+24)!==null){open=false;break;}
+    }
+   }
+   if(open)return true;
+  }
+  return false;
+ }
  private add(source:BossActor,kind:HazardKind,x:number,y:number,delay:number,duration:number,options:Partial<BossHazard>={}):BossHazard|undefined {
   if(area(kind)?this.areaCount+this.host.normalZones()+this.host.otherBusy()>=6:this.shotCount+this.host.normalShots()>=80)return;
   let h=this.hazards.find(v=>!v.active);if(!h){if(this.hazards.length>=86)return;h={} as BossHazard;this.hazards.push(h);}
-  Object.assign(h,{active:true,source,kind,x,y,originX:x,originY:y,age:0,delay,duration,radius:75,width:18,angle:0,speed:0,distance:0,lane:0,hit:false,nextHit:0,contactLife:0,contactX:0,contactY:0,nodes:undefined,lockAt:undefined,locationLocked:undefined},options);return h;
+  Object.assign(h,{active:true,source,kind,x,y,originX:x,originY:y,age:0,delay,duration,radius:75,width:18,angle:0,speed:0,distance:0,lane:0,hit:false,nextHit:0,contactLife:0,contactX:0,contactY:0,nodes:undefined,sides:undefined,lockAt:undefined,locationLocked:undefined},options);return h;
  }
  private unit(source:BossActor,kind:BossUnitKind,x:number,y:number,delay:number,life:number,angle:number,lane=0):BossActor|undefined {
   if(this.unitCount()>=BOSS_UNIT_LIMIT||this.host.actors().filter(e=>e.hp>0).length>=80)return;
@@ -45,7 +77,7 @@ export class BossBattle {
  }
  canStart(e:BossActor,index:number):boolean {
   const id=e.bossSkin!,unitNeeds=id==='zhangjiao'&&index===2?3:id==='yuanshao'?(index===1?Math.max(0,2-this.machineCount()):4):id==='caocao'&&index>0?2:id==='menghuo'?(index===0?4:index===1?3:2):0;
-  const zones=id==='zhangjiao'?(index===0?1:3):id==='dongzhuo'?(index===0?1:index===2?3:0):id==='yuanshao'?(index===1?1:index===2?3:0):id==='caocao'&&index>0?1:id==='simayi'&&index!==1?3:0;
+  const zones=id==='zhangjiao'?(index===0?1:3):id==='dongzhuo'?(index===0?1:index===2?3:0):id==='yuanshao'?(index===1?1:index===2?3:0):id==='caocao'&&index>0?1:id==='simayi'&&index!==1?(index===0?4:3):0;
   let busy=this.host.otherBusy();for(const a of this.host.actors())if(a!==e&&a.hp>0&&a.bossState?.phase!=='idle'&&a.bossState)busy++;
   if(busy>=4||this.areaCount+this.host.normalZones()+this.host.otherBusy()+zones>6||this.unitCount()+unitNeeds>BOSS_UNIT_LIMIT)return false;
   if(this.host.actors().filter(a=>a.hp>0).length+unitNeeds>80)return false;
@@ -61,27 +93,69 @@ export class BossBattle {
   if(e.bossSkin==='zhangjiao'){
    if(index===0){const p=this.point(t.x,t.y);this.add(e,'lightning',p.x,p.y,a.windup,.55,{radius:76});}
    else if(index===1)scatter(70,.45,'lightning');
-   else {const nodes:BossActor[]=[];for(let i=0;i<3;i++){const b=angle+Math.PI/6+i*Math.PI*2/3,p=this.point(t.x+Math.cos(b)*220,t.y+Math.sin(b)*220);const unit=this.unit(e,'sigil',p.x,p.y,a.windup,7,angle);if(unit)nodes.push(unit);}if(nodes.length===3)for(let i=0;i<3;i++)this.add(e,'chain',nodes[i].x,nodes[i].y,a.windup+.9+i*1.5,.45,{nodes:[nodes[i],nodes[(i+1)%3]],radius:14});}
+   else {const nodes:BossActor[]=[];for(let i=0;i<3;i++){const b=angle+Math.PI/6+i*Math.PI*2/3,p=this.point(t.x+Math.cos(b)*220,t.y+Math.sin(b)*220);const unit=this.unit(e,'sigil',p.x,p.y,a.windup,7,angle);if(unit)nodes.push(unit);}if(nodes.length===3){
+    const edges=nodes.map((from,i)=>({from,to:nodes[(i+1)%3]}));
+    const distance=({from,to}:typeof edges[number])=>{
+     const dx=to.x-from.x,dy=to.y-from.y;
+     const p=clamp(((t.x-from.x)*dx+(t.y-from.y)*dy)/Math.max(1,dx*dx+dy*dy),0,1);
+     return (t.x-from.x-p*dx)**2+(t.y-from.y-p*dy)**2;
+    };
+    edges.sort((left,right)=>distance(left)-distance(right));
+    for(const [i,{from,to}] of edges.entries())this.add(e,'chain',from.x,from.y,a.windup+.9+i*1.5,.45,{nodes:[from,to],radius:14,lockAt:a.windup+i*1.5,locationLocked:true});
+   }}
   }else if(e.bossSkin==='dongzhuo'){
    if(index===0){const p=this.point(t.x,t.y,135);this.add(e,'seal',p.x,p.y,a.windup,.65,{radius:135});}
    else if(index===1)for(let i=0;i<4;i++){const side=[-210,-120,120,210][i],p=this.point(e.x+nx*side,e.y+ny*side);this.add(e,'coin',p.x,p.y+30,a.windup+i*.2,2.8,{radius:28,width:28,angle,speed:230,lane:i});}
-   else for(let i=0;i<3;i++){const p=this.point(t.x+nx*(i-1)*210+dx*(i===1?90:-45),t.y+ny*(i-1)*210+dy*(i===1?90:-45),80);this.add(e,'wine',p.x,p.y,a.windup+i*.45+.45,2,{radius:78,lane:i});}
+   else {
+    const used:{x:number;y:number}[]=[];
+    for(let i=0;i<3;i++){
+     const side=(i-1)*210,lead=i===1?90:-45;
+     const candidate=this.point(t.x+nx*side+dx*lead,t.y+ny*side+dy*lead,80);
+     const p=this.spacedPoint(candidate.x,candidate.y,80,used,154);
+     if(!p)continue;
+     used.push(p);this.add(e,'wine',p.x,p.y,a.windup+i*.45+.45,2,{radius:78,lane:i});
+    }
+   }
   }else if(e.bossSkin==='yuanshao'){
    if(index!==1){const shotAngle=angle+(s.serial%2?.22:-.22),c=Math.cos(shotAngle),d=Math.sin(shotAngle);for(let i=0;i<4;i++){const lane=[-170,-90,90,170][i],p=this.point(e.x-d*lane-c*20,e.y+c*lane-d*20,110);this.unit(e,'bowman',p.x,p.y,a.windup,index===2?5.5:4.2,shotAngle,lane);}
     if(index===0)for(let i=0;i<5;i++)this.add(e,'arrow',e.x+dx*42,e.y+30+dy*42,a.windup+i*.06,2.6,{angle:angle+(i-2)*.12,speed:340,width:9,radius:9});
-    else for(let i=0;i<3;i++){const p=this.point(t.x+nx*(i-1)*155,t.y+ny*(i-1)*155,100);this.add(e,'rain',p.x,p.y,a.windup+.7+i*.55,.4,{radius:92,lane:i});}
+    else for(let i=0;i<3;i++){
+     const p=this.point(t.x+nx*(i-1)*155,t.y+ny*(i-1)*155,100);
+     let delay=a.windup+.7+i*.55;
+     while(delay<a.windup+3.5&&!this.rainGap(p.x,p.y,92,delay,shotAngle))delay+=.55;
+     if(delay<a.windup+3.5)this.add(e,'rain',p.x,p.y,delay,.4,{radius:92,lane:i,lockAt:delay-.68,locationLocked:true});
+    }
    }else {for(let i=0;i<2;i++)this.unit(e,'cart',e.x+nx*(i?160:-160),e.y+ny*(i?160:-160),a.windup+i*.65,8.5,angle,i);const p=this.point(t.x,t.y,100);this.add(e,'rain',p.x,p.y,a.windup+.45,.4,{radius:94});}
   }else if(e.bossSkin==='caocao'){
    if(index===0)for(let i=0;i<5;i++)this.add(e,'blade',e.x+dx*50,e.y+30+dy*50,a.windup+(i===0?0:i<3?.5:1),2.4,{angle:angle+[0,-.32,.32,-.16,.16][i],speed:340,width:44,radius:44,lane:i});
-   else if(index===1){const sign=s.serial%2?1:-1,p=this.point(e.x+nx*160*sign,e.y+ny*160*sign);s.sideX=p.x-e.x;s.sideY=p.y-e.y;for(let i=0;i<2;i++)this.unit(e,'decoy',e.x+nx*(i?130:-130),e.y+ny*(i?130:-130),a.windup,5.5,angle,i);const target=this.point(t.x,t.y,145);this.add(e,'sword-field',target.x,target.y,a.windup+.8,.45,{radius:145});}
+   else if(index===1){
+    const sign=s.serial%2?1:-1,p=this.point(e.x+nx*160*sign,e.y+ny*160*sign);
+    s.sideX=p.x-e.x;s.sideY=p.y-e.y;
+    const sides=[-130,130].map(offset=>this.unit(e,'decoy',e.x+nx*offset,e.y+ny*offset,a.windup,5.5,angle));
+    const target=this.point(t.x,t.y,145);
+    this.add(e,'sword-field',target.x,target.y,a.windup+1.2,.45,{radius:145,angle,sides});
+   }
    else {for(let i=0;i<2;i++){const b=angle+(i?Math.PI:.1),p=this.point(t.x-Math.cos(b)*460,t.y-Math.sin(b)*460);this.unit(e,'rider',p.x,p.y,a.windup+i*1.3,5,b,i);}for(let i=0;i<3;i++)this.add(e,'blade',e.x+dx*50,e.y+30+dy*50,a.windup+.7+i*.9,2.4,{angle:angle+(i-1)*.18,speed:340,width:40,radius:40});const p=this.point(t.x,t.y,160);this.add(e,'sword-field',p.x,p.y,a.windup+2.3,.45,{radius:160});}
   }else if(e.bossSkin==='menghuo'){
    const kind:BossUnitKind=index===0?'boar':index===1?'wolf':'elephant',count=index===0?4:index===1?3:2;
-   for(let i=0;i<count;i++){const lane=(i-(count-1)/2)*(index===0?105:150),b=index===2?angle+(i?-.7:.7):angle,p=this.point(t.x-Math.cos(b)*430-Math.sin(b)*lane,t.y-Math.sin(b)*430+Math.cos(b)*lane,60,false);this.unit(e,kind,p.x,p.y,a.windup+(index===2?i*1.5:0),index===2?6.5:5.2,b,lane);}
+   for(let i=0;i<count;i++){const lane=(i-(count-1)/2)*(index===0?105:150),b=index===2?angle+(i?-.7:.7):angle,p=this.point(t.x-Math.cos(b)*430-Math.sin(b)*lane,t.y-Math.sin(b)*430+Math.cos(b)*lane,60,false);this.unit(e,kind,p.x,p.y,a.windup+(index===2?i*1.75:0),index===2?6.5:5.2,b,lane);}
   }else if(e.bossSkin==='simayi'){
-   if(index===0)scatter(78,.28,'stone');
-   else if(index===1)for(let i=0;i<2;i++){const side=i?175:-175,p=this.point(t.x-dx*450+nx*side,t.y-dy*450+ny*side);this.add(e,'dragon',p.x,p.y+30,a.windup,4.2,{angle,speed:260,width:40,radius:40,lane:i?1:-1});}
-   else scatter(92,.35,'meteor',.7);
+   if(index===0){
+    for(let i=0;i<4;i++)this.add(e,'stone',t.x,t.y,a.windup+i*.37,.43,{radius:78,lane:i,lockAt:i*.37});
+   }else if(index===1){
+    for(let i=0;i<2;i++){
+     const side=i?1:-1,start=this.point(t.x+dx*side*420+nx*side*205,t.y+dy*side*420+ny*side*205,100);
+     const dest=this.point(t.x-dx*side*350+nx*side*63,t.y-dy*side*350+ny*side*63,90);
+     const aim=Math.atan2(dest.y-start.y,dest.x-start.x);
+     this.add(e,'dragon',start.x,start.y+30,a.windup,4.2,{angle:aim,speed:290,width:40,radius:40,lane:side});
+    }
+   }else{
+    for(let i=0;i<3;i++){
+     const across=i===0?0:i===1?-175:175,forward=i===0?0:i===1?110:-95;
+     const p=this.point(t.x+nx*across+dx*forward,t.y+ny*across+dy*forward,92);
+     this.add(e,'meteor',p.x,p.y,a.windup+i*.40,.43,{radius:92,lane:i,lockAt:i*.18,locationLocked:true});
+    }
+   }
   }
   return true;
  }
@@ -155,7 +229,7 @@ export class BossBattle {
   u.gait=(u.gait+Math.hypot(e.x-oldX,e.y-oldY)/100)%1;
  }
  update(dt:number):void {
-  const t=this.host.target();for(const h of this.hazards){if(!h.active)continue;if(h.source.hp<=0||h.nodes?.some(n=>n.hp<=0)){h.active=false;continue;}if((h.source.stunUntil||0)>this.host.now())continue;
+  const t=this.host.target();for(const h of this.hazards){if(!h.active)continue;if(h.source.hp<=0||h.nodes?.some(n=>n.hp<=0)||h.sides?.every(n=>!n||n.hp<=0)){h.active=false;continue;}if((h.source.stunUntil||0)>this.host.now()&&h.age<h.delay)continue;
    const old=h.age;h.age+=dt;h.contactLife=Math.max(0,h.contactLife-dt);if(h.lockAt!==undefined&&!h.locationLocked&&h.age>=h.lockAt){const p=this.point(t.x,t.y,h.radius,false);h.x=h.originX=p.x;h.y=h.originY=p.y;h.locationLocked=true;}if(h.age<h.delay)continue;
    const end=h.delay+h.duration;if(old>=end){h.active=false;continue;}
    const elapsed=Math.min(h.age,end)-h.delay,step=Math.max(0,Math.min(h.age,end)-Math.max(old,h.delay));
@@ -171,8 +245,12 @@ export class BossBattle {
     if(old<h.delay)this.host.impact(h.kind,h.x,h.y);
     const due=h.kind==='wine'?elapsed>=h.nextHit:!h.hit;let hit=false;
     if(h.kind==='chain'&&h.nodes){const a=h.nodes[0],b=h.nodes[1];hit=sweepEllipseTime(a.x-t.x,a.y+26-(t.y+30),b.x-t.x,b.y+26-(t.y+30),h.radius+18,h.radius+22)!==null;}
-    else hit=Math.hypot(t.x-h.x,t.y-h.y)<=h.radius;
-    if(due){if(h.kind!=='chain'||hit)h.hit=true;h.nextHit=elapsed+1.2;if(hit&&this.host.hit(h.x,h.y)){h.contactLife=.22;h.contactX=t.x;h.contactY=t.y+30;}}
+    else {
+     const dx=t.x-h.x,dy=t.y-h.y;
+     const side=-dx*Math.sin(h.angle)+dy*Math.cos(h.angle)>=0?1:0;
+     hit=dx*dx+dy*dy<=h.radius*h.radius&&(!h.sides||(h.sides[side]?.hp||0)>0);
+    }
+    if(due){if(hit||h.kind!=='chain'&&!(h.kind==='meteor'&&h.source.bossSkin==='simayi'))h.hit=true;h.nextHit=elapsed+1.2;if(hit&&this.host.hit(h.x,h.y)){h.contactLife=.22;h.contactX=t.x;h.contactY=t.y+30;}}
    }
    if(h.age>=h.delay+h.duration)h.active=false;
   }

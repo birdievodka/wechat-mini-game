@@ -4,7 +4,7 @@ import {sectorHitsCircle,sweepEllipseTime} from './combat-math';
 export const LVBU_ACTIONS:BossAction[]=[
  {name:'赤兔破军',kind:'charge',cd:7.2,windup:.9,range:480,duration:.7,count:1,description:'刨地0.9秒 · 锁向冲480\n侧闪可躲 · 撞边提前勒马'},
  {name:'画戟回旋',kind:'sector',cd:5.2,windup:1,range:300,arc:300,duration:.42,count:1,description:'抬戟1秒 · 半径300/300°\n实体刃轨伤害 · 身后留缺口'},
- {name:'无双三连冲',kind:'charge',cd:13,windup:.9,range:420,duration:.62,count:3,delay:.65,description:'半血开启 · 三次独立冲420\n首次蓄0.9秒 · 折返各蓄0.65秒'},
+ {name:'无双三连冲',kind:'charge',cd:13,windup:.9,range:420,duration:.62,count:3,delay:.65,description:'半血开启 · 三次独立冲420\n首次蓄0.9秒 · 第二拍侧切 · 折返各蓄0.65秒'},
 ];
 export const LVBU_EVENT={release:1,brake:2};
 export interface LvbuActor {
@@ -90,7 +90,13 @@ export function updateLvbu(e:LvbuActor,s:LvbuState,dt:number,tx:number,ty:number
   }else if(s.phase==='dash'||s.phase==='sweep')brake(e,s);
   else if(s.index===2&&s.leg<2){
    s.leg++;s.phase='windup';s.time=0;s.windup=a.delay!;s.hit=false;e.attack=0;e.fired=false;
-   lock(e,s,Math.atan2(ty-e.y,tx-e.x),true);
+   const aim=Math.atan2(ty-e.y,tx-e.x);
+   if(s.leg===1){
+    const left=aim+.43,right=aim-.43;
+    const room=(a:number)=>Math.min(halfWidth-65-Math.abs(e.x+Math.cos(a)*aRange),halfHeight-85-Math.abs(e.y+Math.sin(a)*aRange));
+    const aRange=a.range!;
+    lock(e,s,room(left)>=room(right)?left:right,true);
+   }else lock(e,s,aim,true);
   }else{
    s.phase='idle';s.time=0;s.trailCount=0;e.attack=-1;e.fired=false;
    for(let i=0;i<3;i++)timers[i]=Math.max(.65,timers[i]);break;

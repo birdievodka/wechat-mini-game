@@ -17,7 +17,7 @@
     ]
   },
   "currentStyleReferences": [
-    "assets/meadow/ground.png",
+    "art/runtime-subpackages/sources/meadow/ground.png",
     "assets/presentation/heroes.png",
     "art/reviews/golden-sweep-v5.1/peak-fixture-wechat.jpg"
   ]

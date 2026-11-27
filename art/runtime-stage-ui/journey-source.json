@@ -9,7 +9,7 @@
   "transparent": "outer silhouette and central picture aperture; preserve alpha",
   "runtime": "paper/cloth/knot skin without old jade seal; scene/title/universal gate are live layers",
   "sourceSha256": "9842bfef59220dd9b3aa9ba15dbb67f7ec5ea1e79f781b458cdbdf9fa12b98cd",
-  "outputSha256": "cda7171b2fb82fa17355009286bc41fc1ff2edd4e8cded4d2c5ff40898946f58",
+  "outputSha256": "11c56438f17e9a634669eb10b7387996f2af7fbf19acba4e3d8da98c82340361",
   "previousSourceSha256": "dfd99bf33ab2c3b0b6aeec0703c07f6e971232b426ff61fbc099ea6e8685ae4e",
   "editSource": "built-in image_gen: exec-cbf2e02e-0146-4ae8-a288-60db9511fbf0.png"
 }

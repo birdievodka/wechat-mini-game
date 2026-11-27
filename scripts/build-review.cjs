@@ -6,3 +6,4 @@ require('./cocos-build-lock.cjs').acquire(root);
 const result=cp.spawnSync(editor,['--project',root,'--build',`configPath=${path.join(root,'config/build-camp-review.json')}`],{stdio:'inherit'});
 if(![0,36].includes(result.status))process.exit(result.status||1);
 fs.copyFileSync(path.join(root,'art/runtime-youth/poster.jpg'),path.join(root,'build/camp-review/startup-poster.jpg'));
+fs.copyFileSync(path.join(root,'art/runtime-pixelfx/LICENSE'),path.join(root,'build/camp-review/PIXELFX-LICENSE.txt'));

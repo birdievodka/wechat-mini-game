@@ -1,3 +1,4 @@
+import {pixel} from './vfx-materials';
 import {Color,Graphics} from 'cc';
 import {LvbuState,LVBU_ACTIONS} from './lvbu-boss';
 import * as brush from './vfx-brush';
@@ -80,6 +81,7 @@ export function drawLvbuEffects(ground:Graphics,air:Graphics,x:number,y:number,a
    wedge(air,bx,by,a+Math.PI,40+i*11,2+i*.4,i===1?3:1,.55);
   }
   hoofDust(ground,x,y,a,s.time,1,1);
+  pixel(air,'spirit',x-Math.cos(a)*42,y+33-Math.sin(a)*42,105,a,.78,s.time/.62,1);
   for(let i=0;i<s.trailCount;i++){
    ground.strokeColor=color(5,(3-i)*.16);ground.lineWidth=3-i*.5;ground.moveTo(s.trailX[i]-c*9,s.trailY[i]-d*9-6);ground.lineTo(s.trailX[i]+c*9,s.trailY[i]+d*9-6);ground.stroke();
   }
@@ -114,6 +116,7 @@ export function drawLvbuEffects(ground:Graphics,air:Graphics,x:number,y:number,a
   const t=1-s.brakeLife/.6,alpha=(1-t),power=s.index===2&&s.leg===2?1.3:1,b=s.brakeAngle;
   for(let i=-1;i<=1;i++)brush.crescent(ground,s.brakeX,s.brakeY,(26+58*t)*power,b+i*.87,.77,8*alpha,'earth',alpha);
   hoofDust(ground,s.brakeX,s.brakeY,b,t*.25,power,alpha);
+  pixel(air,'dirt',s.brakeX,s.brakeY,125,0,alpha,t,1);
   ground.strokeColor=color(0,alpha*.35);ground.lineWidth=2;
   for(let i=0;i<3;i++){const side=(i-1)*16,px=s.brakeX-Math.sin(b)*side,py=s.brakeY+Math.cos(b)*side-8;ground.moveTo(px-Math.cos(b)*35,py-Math.sin(b)*35);ground.lineTo(px+Math.cos(b)*20,py+Math.sin(b)*20);ground.stroke();}
   for(let i=0;i<5;i++){const angle=b+(i-2)*.45,travel=(18+t*35)*power;clod(ground,s.brakeX+Math.cos(angle)*travel,s.brakeY+Math.sin(angle)*travel+Math.sin(t*Math.PI)*18,4+i%3,alpha);}

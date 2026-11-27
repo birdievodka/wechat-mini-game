@@ -211,6 +211,11 @@ assert.deepEqual(Array.from(stageBosses(2)),['lvbu','dongzhuo']);
   g.artFrames['stage-ground-6']=theme;g.rebuildMeadow();
  }finally{g.ground.rect=rect;if(oldWorld)g.artFrames['world-ground']=oldWorld;}
  console.log('通过：六关本地地面不被纯色兜底遮盖、远程草图缺失不影响正式地面、确实缺图仍安全兜底、六关镜像同边连续/2px采样隔离/较大格减少重复');
- const manifest=require('../art/audio/runtime-manifest.json');assert.equal(manifest.physicalSounds.length,66);assert.equal(Object.keys(load('audio-catalog').SOUND_ASSETS).length,86);
+ const {physicalSounds}=require('../art/audio/runtime-manifest.json');
+ const bundled=physicalSounds.filter(cue=>cue.bundle==='sfx-core'||cue.bundle==='sfx');
+ const indexed=Object.values(load('audio-catalog').SOUND_ASSETS);
+ assert.equal(physicalSounds.length,91);assert.equal(bundled.length,90);
+ const assetKey=({bundle,name})=>bundle+'/'+name;
+ assert.deepEqual(new Set(indexed.map(assetKey)),new Set(bundled.map(assetKey)));
  console.log('通过：六关第四波静默预取与第五波直进、吕布和棋子第二波预取、吕布退场释放、分包集合与原子发布、后台重试、请求合并、超时及离开保护');
 })().catch(e=>{console.error(e);process.exit(1)});

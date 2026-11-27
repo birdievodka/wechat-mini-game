@@ -16,6 +16,7 @@ export class BattleMusic {
   private running = false;
   private paused = false;
   private adPlaying = false;
+  private interrupted = false;
   private unlocked = false;
   private gesture = false;
   private enabled = true;
@@ -28,7 +29,10 @@ export class BattleMusic {
   private duckAmount = 0;
 
   configure(seconds = MUSIC_SECONDS, volume = MUSIC_VOLUME): void { this.seconds = seconds; this.volume = volume; }
-  detach(): void { this.source?.stop(); this.source = undefined; this.playing = false; }
+  detach(): void {
+    const source = this.source; this.source = undefined; this.playing = false;
+    source?.stop();
+  }
   duck(amount = .5, seconds = .35): void { this.duckAmount = Math.max(this.duckAmount, amount); this.duckTime = Math.max(this.duckTime, seconds); }
 
   attach(source: MusicSource): void {
@@ -45,6 +49,7 @@ export class BattleMusic {
   }
   setEnabled(enabled: boolean): void { this.enabled = enabled; this.sync(); }
   setAdPlaying(playing: boolean): void { this.adPlaying = playing; this.sync(); }
+  setInterrupted(interrupted: boolean): void { this.interrupted = interrupted; this.sync(); }
   begin(): void {
     this.stop(); this.running = true; this.paused = false; this.sync();
   }
@@ -62,7 +67,7 @@ export class BattleMusic {
   }
   update(delta: number): void {
     if(!Number.isFinite(delta)||delta<0)return;
-    if (!this.running || this.paused || this.adPlaying) return;
+    if (!this.running || this.paused || this.adPlaying || this.interrupted) return;
     this.elapsed = (this.elapsed + Math.max(0, delta)) % this.seconds;
     if (this.playing && this.source) {
       this.fade = Math.min(1, this.fade + Math.max(0, delta) / .45);
@@ -72,14 +77,17 @@ export class BattleMusic {
     }
   }
   private sync(): void {
-    if (!this.source) return;
-    const play = this.running && !this.paused && !this.adPlaying && this.enabled && this.unlocked;
+    const source = this.source;
+    if (!source) return;
+    const play = this.running && !this.paused && !this.adPlaying && !this.interrupted && this.enabled && this.unlocked;
     if (play && !this.playing) {
       // Late download, unmute and resume all join the current round's musical phrase.
-      this.source.currentTime = this.elapsed; this.source.volume = 0; this.fade = 0;
-      try{this.source.play();this.playing = true;}catch(_){this.playing=false;}
+      source.currentTime = this.elapsed; source.volume = 0; this.fade = 0;
+      // A synchronous native error may detach this source during play().
+      this.playing = true;
+      try { source.play(); } catch (_) { if (this.source === source) this.playing = false; }
     } else if (!play && this.playing) {
-      this.source.pause(); this.source.volume = 0; this.playing = false;
+      this.playing = false; source.pause(); source.volume = 0;
     }
   }
 }

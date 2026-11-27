@@ -82,6 +82,16 @@ const progress=()=>JSON.stringify([...storage].filter(([k])=>k!=='taoyuan-runtim
  }
  const unchanged=JSON.stringify(g.run);for(const args of [['zhaoyun',3],['kongming',5],['liubei',-1],['liubei',7],['guanyu',NaN],['zhangfei',2.5]])g.setTrainingForm(...args);assert.equal(JSON.stringify(g.run),unchanged,'拒绝隐藏英雄和非法成长');
  click(forms.root,'TrainingResume');assert.equal(forms.showcase,undefined,'收起销毁预览引用');assert.equal(forms.root.children.length,0);g.openTrainingPanel();assert.equal(forms.formHero,'zhangfei');assert.equal(forms.choices[4],6,'再次打开定位当前形态');click(forms.root,'TrainingExit');assert.equal(progress(),formSaved);assert.equal(JSON.stringify(g.profile),profileSaved);
- const menuRun=JSON.stringify(g.run);g.setTrainingForm('guanyu',6);assert.equal(JSON.stringify(g.run),menuRun,'非演武场禁止形态修改');g.onDestroy();
+ const menuRun=JSON.stringify(g.run);g.setTrainingForm('guanyu',6);assert.equal(JSON.stringify(g.run),menuRun,'非演武场禁止形态修改');
+ assert.ok(find(g.screens.root,'演武场'),'开发包保留演武入口');
+ const hostGlobals=cc.gameGlobal;
+ try{
+  cc.gameGlobal={...hostGlobals,__taoyuanUploadBuild:true};
+  g.showMainMenu();
+  assert.equal(find(g.screens.root,'演武场'),undefined,'上传包在开发者工具内也不显示演武入口');
+  g.startTraining('liubei','G03');
+  assert.equal(g.phase,'menu');assert.equal(g.trainingMode,false);
+  click(g.screens.root,'StartHero');assert.equal(g.phase,'battle');assert.equal(g.trainingMode,false);
+ }finally{cc.gameGlobal=hostGlobals;g.onDestroy();}
  console.log('通过：演武入口/配置冻结、40兵和7场Boss配置/混合独立技能、33武器四阶六槽/12技能、无限生命仍有闪烁击退音效/实际近战与毒箭/格挡无敌和退闪/12技能无冷却连放/效果重置/清场、80上限、3英雄×7形态直选/动态预览/六槽与敌军保留/头像坐骑冲刺宠物一致/非法参数拒绝/收起释放、正式档与偏好隔离');
 })().catch(e=>{console.error(e);process.exitCode=1;});

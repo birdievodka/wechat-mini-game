@@ -69,6 +69,8 @@ npm run build:wechat
 
 `npm run build:wechat` 调用Creator CLI，退出码0或36都视为成功，再检查发布文件、包体和引擎依赖。输出 `build/wechatgame`，根 `project.config.json` 的 `miniprogramRoot` 指向这里；不要导入错误目录或只改源码却忘了重建。
 
+准备上传线上时执行 `npm run build:wechat:release`，在微信开发者工具导入独立目录 `build/wechat-release`。此包从文件树、微信分包声明和 Cocos 资源清单排除演武专用 `meadow`，入口禁用开发工具。普通预览继续用 `build/wechatgame`，保留演武用于调试。两种产物分别用 `node scripts/check-package-size.cjs` 和 `node scripts/check-package-size.cjs --release` 校验。
+
 当前项目检查阈值来自 `scripts/check-package-size.cjs`：主包和每个分包<4MiB，总资源安全预算<19.5MiB。2026-11-12当前AppID在开发者工具2.02.2609250预览实际拒绝超过20MB的源码包；旧30MiB门槛不足以保证这个项目可预览，已移除，预留至少0.5MiB打包余量。主包/分包4MiB是本项目保守门槛，不据此推断所有平台通用限制。
 
 实际构建还会把引擎相关发布依赖拆入战斗分包，`check-engine-imports.cjs` 验证所有运行时import都存在；不能只删大文件把启动页卡死。
@@ -310,3 +312,9 @@ GameBootstrap.start 在微信启动时调用 `wx.showShareMenu`，开发、体�
 `scripts/test-douyin-sidebar.cjs` 使用宿主桩验证启动、导航、热切换、持久化与正式营地开局。抖音端验收另用开发者工具模拟侧边栏或 021036 编译模式，并在有测试权限的抖音客户端验证冷/热启动、领奖与到账，同时核对首领分包、触控和音频。
 
 首个本地包有 25 个分包，主包约 2.37 MiB，总包约 18.81 MiB，按字节计算距普通整体包上限约 275 KB。开发者工具打开请求已返回成功，实际界面停在抖音登录。正式项目模拟器、上传校验和抖音真机体验仍需后台账号权限。
+
+## v11.1 特效验收
+
+WebGL、微信、抖音构建共享排他锁。工程帧用 `capture-pixelfx-review.mjs`，两组加速十分钟压力用 `profile-pixelfx-review.mjs`，均走独立 Chrome。平衡报告用四种敌军构型和归一化施法威力，另有真实行为回归。见 [验收记录](../../../../docs/pixelfx-v111.md#验收记录)。
+
+`stage-v11.1.2-plinkfx` 的 `npm run audio:pack` 锁定 PlinkFX 0.3.0，按 `art/audio/plinkfx/mix.json` 渲染并生成音效索引与 SHA-256。`test-weapon-sound` 核对全素材时长、有效电平及端点，`test-audio-scenes` 经声道门控验证实际出箭、灼烧和落地音的播放数。微信构建按 UUID 和 SHA-256 核对全部新版 WAV，原两曲继续按字节校验。

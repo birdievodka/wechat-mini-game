@@ -12,7 +12,7 @@ function installLvbuReview(){
  function show(index=0,time=.4,back=false){
   if(closed)return {error:'review closed'};clearTimeout(timer);timer=setTimeout(restore,120000);
   try{
-   g.clearBattle();g.run=JSON.parse(JSON.stringify(old.run));g.run.chapter=2;g.run.heroId='liubei';g.run.wave=2;g.run.bossEncounter=true;
+   g.clearBattle();g.run=JSON.parse(JSON.stringify(old.run));g.run.chapter=2;g.run.challenge=true;g.rebuildMeadow();g.run.heroId='liubei';g.run.wave=2;g.run.bossEncounter=true;
    g.phase='battle';g.testMode=true;g.trainingMode=false;g.update=function(){};g.paused=false;g.resumeCountdown=0;g.playerHp=5;g.hurtTime=g.protectionTime=0;g.px=index===3?200:0;g.py=index===3&&back?100:0;g.cameraX=g.cameraY=g.heading=g.age=0;g.facing=-1;
    g.setBattleVisible(true);g.screens.hide();g.applyHeroPresentation();g.syncWeapons();g.hero.setPosition(0,0);g.animateWalk(0,0,0,0,0);g.world.setPosition(0,0);g.battlefield.setPosition(0,0);g.terrain.setPosition(0,0);
    const e=g.spawnNext('chief',undefined,2);Object.assign(e,{x:index===3?(back?-250:-500):index===1?-155:-300,y:index===3&&back?-280:back?-130:0,born:0,bossNext:index,bossTimers:[999,999,999],hp:index===2?e.maxHp*.45:e.maxHp});if(index<3)e.bossTimers[index]=0;e.node.setPosition(e.x,e.y);e.born=0;

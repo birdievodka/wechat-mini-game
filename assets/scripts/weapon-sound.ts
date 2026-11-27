@@ -31,6 +31,10 @@ for(const id of GENERATED_SOUNDS){
 }
 export const bossSound=(boss:string,index:number):SoundId|undefined=>bossCues.get(boss)?.[index];
 export const skillSound=(id:string):SoundId|undefined=>skillCues.get(id);
+const SKILL_ACCENTS=new Map<string,SoundId>([
+  ['G08','skill-G08-heavy'],['G10','skill-G10-beat'],['G20','skill-G20-heavy'],['G22','skill-G22-heavy'],
+]);
+export const skillAccentSound=(id:string):SoundId|undefined=>SKILL_ACCENTS.get(id);
 export function enemySound(id?:string):SoundId {
   const n=Number(id?.slice(1)||0);
   return n>=35&&n<=38?'siege':n>=39?'thunder-attack':n>=28&&n<=34?'gun-attack':n>=11&&n<=18||n===22||n===23?'enemy-bow':'melee-commit';

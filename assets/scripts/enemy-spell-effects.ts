@@ -1,6 +1,6 @@
 import { Color, Graphics } from 'cc';
 import * as brush from './vfx-brush';
-import {material} from './vfx-materials';
+import {material,pixel} from './vfx-materials';
 
 export const LIGHTNING_AFTERGLOW = .55;
 interface LightningVisual { x: number; y: number; radius: number; age: number; delay: number; fired: boolean; }
@@ -54,6 +54,7 @@ export function drawLightningSpell(ground: Graphics, air: Graphics, z: Lightning
   if (!z.fired) {
     const p = Math.min(1, z.age / z.delay), rotation = z.age * .7;
     material(air,'lightning',x,y+35,38,80,0,p*.35,1);
+    pixel(ground,'rune',x,y,r*1.53,0,.66*p,p,1);
     const pulse = .5 + .5 * Math.sin(p * Math.PI * 6);
     ground.fillColor = red(22+p*30); ground.circle(x, y, r); ground.fill();
     // The outside edge never expands or rotates: this is the actual damage radius.
@@ -100,6 +101,7 @@ export function drawLightningSpell(ground: Graphics, air: Graphics, z: Lightning
     }
     return;
   }
+  if(z.fired&&z.age-z.delay<.29)pixel(air,'lightning',x,y,r*1.75,0,.65*(1-(z.age-z.delay)/.29),(z.age-z.delay)/.29,1);
 
   const t=Math.max(0,z.age-z.delay),progress=Math.min(1,t/LIGHTNING_AFTERGLOW),fade=1-progress;
   brush.bolt(ground,air,x,y,r,progress,'gold');

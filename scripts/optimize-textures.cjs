@@ -19,7 +19,12 @@ async function main() {
   fs.mkdirSync(archive, { recursive: true });
   const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath)) : {};
   const lossless=new Set(JSON.parse(fs.readFileSync(path.join(root,'art/runtime-youth/deferred-manifest.json'))).outputs.map(x=>x.file));
-  lossless.add('assets/chronicle-ui/stage-journey.png'); // adopted parchment alpha; rebuilt from its own generated source
+  // Adopted assets use their own pixel-preserving compression.
+  for (const file of [
+    'assets/chronicle-ui/stage-journey.png', 'assets/chronicle-ui/stage-switch.png',
+    'assets/hero-menu/logo.png', 'assets/presentation/vfx-materials.png',
+    'assets/remote-content/pets/pets.png',
+  ]) lossless.add(file);
   // These outputs have their own source and encoding step.
   const subpackages=JSON.parse(fs.readFileSync(path.join(root,'art/runtime-subpackages/manifest.json')));
   for(const image of subpackages.files)lossless.add(image.dest);

@@ -18,8 +18,11 @@ async function encode(source, dest, imageScale) {
   const width = Math.round(dimensions.width * imageScale);
   const height = Math.round(dimensions.height * imageScale);
   if (imageScale !== 1) image.resize(width, height, {fit: 'fill'});
-  const encoded = await image.png({palette: true, colours: 256, effort: 7, dither: 0}).toBuffer();
-  const output = imageScale === 1 && input.length <= encoded.length ? input : encoded;
+  const jpeg = dest.endsWith('.jpg');
+  const encoded = jpeg
+    ? await image.jpeg({quality: 92, chromaSubsampling: '4:4:4', mozjpeg: true}).toBuffer()
+    : await image.png({palette: true, colours: 256, effort: 7, dither: 0}).toBuffer();
+  const output = !jpeg && imageScale === 1 && input.length <= encoded.length ? input : encoded;
   const outputPath = path.join(root, dest);
   fs.mkdirSync(path.dirname(outputPath), {recursive: true});
   fs.writeFileSync(outputPath, output);
@@ -35,7 +38,8 @@ async function main() {
   }
   for (const bundle of optionalBundles) {
     for (const file of pngs(optionalSources + '/' + bundle)) {
-      files.push(await encode(optionalSources + '/' + bundle + '/' + file, 'assets/' + bundle + '/' + file, 1));
+      const output = bundle === 'meadow' && file === 'ground.png' ? 'ground.jpg' : file;
+      files.push(await encode(optionalSources + '/' + bundle + '/' + file, 'assets/' + bundle + '/' + output, 1));
     }
   }
   fs.writeFileSync(path.join(root, 'art/runtime-subpackages/manifest.json'), JSON.stringify({bossScale:scale,files}, null, 2) + '\n');
